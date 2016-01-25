@@ -19,7 +19,7 @@ class App_Controller extends CI_Controller
         parent::__construct(); 
         
     //print_r($this->session->userdata('user_data'));die;
-       // $this->role = get_user_role();
+       $this->role = get_user_role();
         
         $this->init();
 			
