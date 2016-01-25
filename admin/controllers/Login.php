@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(COREPATH."controllers/admin_controller.php");
+require_once(COREPATH."controllers/Admin_controller.php");
 
 class Login extends Admin_Controller 
 { 
@@ -36,7 +36,7 @@ class Login extends Admin_Controller
             
         }
         
-        $this->layout->view("login/index");
+        $this->load->view("login/index");
         
     }
     

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-require_once(COREPATH."controllers/admin_controller.php");
+require_once(COREPATH."controllers/Admin_controller.php");
 
 class Lession extends Admin_controller {
 	
@@ -39,7 +39,7 @@ class Lession extends Admin_controller {
          
 
         //init fncts
-       $this->load_settings_data();
+       //$this->load_settings_data();
         
         $this->simple_search_fields = array(
                                                 

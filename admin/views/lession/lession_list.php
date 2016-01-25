@@ -15,9 +15,9 @@
                     ?>
 				<div class="col-lg-12" style="margin-left: -10px;">
 					<ol class="breadcrumb">
-						<li><a href="<?=site_url('admin/home')?>">Home</a>
+						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>JQ SLIDER</span>
+						<li class="active"><span>Safety Lession</span>
 						</li>
 					</ol>
 					<div class="clearfix">
@@ -37,7 +37,7 @@
                     
 				</div>
 			</div>
-			<input type="hidden" name="page_name" class="page_name" value="offer" />
+			<input type="hidden" name="page_name" class="page_name" value="lession" />
 			<?php echo $grid;?>
 			<?php //echo '<pre>';print_r($this->session->all_userdata());die;?>
 		</div>

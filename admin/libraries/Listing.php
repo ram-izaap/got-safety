@@ -33,8 +33,7 @@ class Listing
         $this->_CI = get_instance();
         
         $this->_CI->load->library('pagination');
-        $this->_CI->load->library('parser');
-        $this->_CI->load->library('encrypt');
+        
         
 		$this->_CI->pagination->full_tag_open = '<ul class="pagination pull-right">';
         $this->_CI->pagination->full_tag_close = '</ul>';
