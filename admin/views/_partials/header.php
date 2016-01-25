@@ -456,6 +456,22 @@
 						</ul>
 					</li>
 					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Safety lessions</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('lession'); ?>">
+								Manage lessions </a>
+							</li>
+							
+						</ul>
+					</li>
+					
 				</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
