@@ -2221,11 +2221,20 @@ Page content
     width: 100%;
   }
   .page-content-wrapper .page-content {
+	width:80%;
+	display:inline-block;
     margin-left: 235px;
     margin-top: 0px;
     min-height: 600px;
     padding: 25px 20px 10px 20px;
   }
+  .form-group {
+    margin-bottom: 15px;
+    width:100%;
+    display:inline-block;
+
+    
+}
   .page-content-wrapper .page-content.no-min-height {
     min-height: auto;
   }

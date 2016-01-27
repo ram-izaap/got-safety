@@ -1,13 +1,13 @@
 <?php
 //require_once("libraries/models/App_model.php");
 safe_include(COREPATH."models/App_model.php");
-class Lession_model extends App_Model {
+class Attachment_model extends App_Model {
     
     
     function __construct()
     {
         parent::__construct();
-        $this->_table = 'lession';
+        $this->_table = 'lession_attachment';
 
     }
     
@@ -15,9 +15,12 @@ class Lession_model extends App_Model {
     
     function listing()
     {  
+		
+		$id  = $this->session->userdata('id');
+		
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
         
-       
+		$this->db->where('lession_id',$id);
         foreach ($this->criteria as $key => $value) 
         {
             if( !is_array($value) && strcmp($value, '') === 0 )

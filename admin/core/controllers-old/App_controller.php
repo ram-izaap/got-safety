@@ -38,24 +38,16 @@ class App_Controller extends CI_Controller
 
     public function init()
     { 
-       // $seg1 = $this->uri->segment(1,'');
-        $seg1 = $this->config->item('layout_name');
-		$ltype =  isset($seg1)?$seg1:'';
-        $this->load->config('layout');
-       
-		
-        switch ($ltype) 
-        {
-            case 'admin':
-				 
-                $layout = $this->config->item('default', 'layout');
+                       $layout = $this->config->item('admin', 'layout');
                 
+                
+
                 if( !$layout )
                             die('Layout not found.');
 
                 $this->layout->initialize($layout);
 
-                /*if( !is_logged_in() )
+                if( !is_logged_in() )
                 {
                     $seg2 = $this->uri->segment(2,'');
                     if($seg1 === 'admin' && $seg2 !== 'login')
@@ -65,27 +57,22 @@ class App_Controller extends CI_Controller
                     }
                 }
                 elseif(is_logged_in() && get_user_role())
-                {die('www');
-                    redirect('lession');                 
+                {
+                    if(get_user_role() != '1')
+                    {
+                        redirect('home');
+                    }
+                    else
+                    {
+                        $seg2 = $this->uri->segment(2,'');
+                        if(empty($seg2)){
+                            redirect('admin/contact_form');
+                        }
+                    }
+                    
                     
                    
-                }*/
-
-
-                break;
-            
-            default:
-                $layout = $this->config->item('frontend', 'layout');
-				 echo "678";exit;
-                if( !$layout )
-                            die('Layout not found.');
-                        
-                $this->layout->initialize($layout);
-
-                $this->load_settings_data();
-
-                break;
-        }
+                }
 
         
         

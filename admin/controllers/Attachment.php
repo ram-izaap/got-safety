@@ -3,7 +3,7 @@
 
 require_once(COREPATH."controllers/Admin_controller.php");
 
-class Lession extends Admin_controller {
+class Attachment extends Admin_controller {
 	
 	protected $_lession_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required|max_length[255]'),
@@ -20,16 +20,17 @@ class Lession extends Admin_controller {
     {
         parent::__construct();
         
-        $this->load->model('lession_model');
-		$this->load->library('form_validation');
-        $this->layout->add_javascripts(array('common'));
+       $this->load->model('attachment_model');
+       $this->load->library('form_validation');
+       $this->layout->add_javascripts(array('common'));
     }
 
 
     function index()
     { 
-        
-        
+
+        if(isset($_GET['id']))
+			$this->session->set_userdata('id',$_GET['id']);
 
         $this->load->library('listing');
          
@@ -39,7 +40,7 @@ class Lession extends Admin_controller {
         
         $this->simple_search_fields = array(
                                                 
-                                                'title' => 'Title'
+                                                'language' => 'Language'
                                             
         );
          
@@ -54,7 +55,7 @@ class Lession extends Admin_controller {
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('lession_model', 'listing');
+        $listing = $this->listing->get_listings('attachment_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -73,7 +74,7 @@ class Lession extends Admin_controller {
         
         
         
-        $this->layout->view("lession/lession_list");
+        $this->layout->view("attachment/attachment_list");
         
         
     }
@@ -119,22 +120,22 @@ class Lession extends Admin_controller {
            
 			if(empty($edit_id)){
 			
-			$update_data = $this->lession_model->insert("lession",$ins_data);
-           // $this->service_message->set_flash_message('record_insert_success');
+			$update_data = $this->attachment_model->insert("lession",$ins_data);
+            //$this->service_message->set_flash_message('record_insert_success');
 		}else {
 			
-			$update_data = $this->lession_model->update("lession",$ins_data,array("id" => $edit_id));
-           // $this->service_message->set_flash_message('record_update_success');
+			$update_data = $this->attachment_model->update("lession",$ins_data,array("id" => $edit_id));
+            //$this->service_message->set_flash_message('record_update_success');
 		}
 		redirect("lession");    
 
 		}	
 			
 			 if($edit_id) {
-                $edit_data = $this->lession_model->get_lession_data("lession",array("id" => $edit_id));
+                $edit_data = $this->attachment_model->get_lession_data("lession",array("id" => $edit_id));
                 
                 if(!isset($edit_data[0])) {
-                    //$this->service_message->set_flash_message('record_not_found_error');
+                   // $this->service_message->set_flash_message('record_not_found_error');
                     redirect("lession");   
                 }
                 $this->data['title']          = "EDIT LESSION";
@@ -142,7 +143,7 @@ class Lession extends Admin_controller {
                 $this->data['form_data']      = (array)$edit_data[0];
                 
             }
-            else if($this->input->post()) { 
+            else if($this->input->post()) {
                 $this->data['form_data'] = $_POST;
                 $this->data['title']     = "ADD LESSION";
                 $this->data['crumb']   = "Add";
@@ -200,16 +201,14 @@ class Lession extends Admin_controller {
 	*/
 
 	
-	function lession_delete()
+	function attachment_delete()
     {
-      
+       
         $id = ($_POST['id'])?$_POST['id']:"";
         if(!empty($id)) {
             
-            $this->db->query('delete from lession where id in ('.$id.')');
-            $this->db->query('delete from lession_attachment where lession_id in ('.$id.')');
-            
-           // $this->service_message->set_flash_message('record_delete_success');
+            $this->db->query('delete from lession_attachment where id in ('.$id.')');
+            //$this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
     } 

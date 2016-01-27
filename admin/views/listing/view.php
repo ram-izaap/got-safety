@@ -1,6 +1,6 @@
-<?php if ($message = $this->service_message->render()) :?>
+<?php /*if ($message = $this->service_message->render()) :?>
 <?php echo $message;?>
-<?php endif; ?>
+<?php endif; */?>
 
 <!-- button tool bar section start here -->
 

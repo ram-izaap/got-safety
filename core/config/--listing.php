@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
  * view - the path to the listing view that you want to display the data in
  * 
  * base_url - the url on which that pagination occurs. This may have to be modified in the 
@@ -35,24 +35,9 @@ $config['lession_index'] = array(
 	"base_url"	=> 	'/lession/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'attach_link', 'sortable' => FALSE, 'default_view'=>1),
-							'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
-						),
-	"default_order"	=> "id",
-	"default_direction" => "DESC"
-);
-
-
-$config['attachment_index'] = array(
-	"view"		=> 	'listing/listing',
-	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'attachment/filter',
-	"base_url"	=> 	'/attachment/index/',
-	"per_page"	=>	"20",
-	"fields"	=> array(   
-							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)
+                                                     
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

@@ -1,6 +1,8 @@
 <?php
-require_once(COREPATH."controllers/Admin_controller.php");
-class User_Model extends Admin_model {
+//safe_include(COREPATH."models/app_model.php");
+
+//require_once(COREPATH."controllers/Admin_controller.php");
+class User_Model extends CI_model {
     
     
     function __construct()
@@ -64,5 +66,28 @@ class User_Model extends Admin_model {
         $result = $this->db->get();
         return $result;
     }
+    
+    public function get_where($where = array(), $fields = '*',$table = NULL, $order_by = NULL)
+	{ 
+		if(!is_array($where)) return FALSE;
+		 
+		$this->db->select($fields);
+		 
+		foreach ($where as $f => $v)
+		{
+			if(is_array($v))
+			$this->db->where_in($f, $v);
+			else
+			$this->db->where($f, $v);
+		}
+		 
+		if( !is_null($order_by) )
+		$this->db->order_by($order_by);
+
+		$table = ($table)?$table:$this->_table;
+		 
+		return $this->db->get($table);
+	}
+    
 }
 ?>

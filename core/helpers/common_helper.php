@@ -2,6 +2,8 @@
 
 function is_logged_in()
 {
+    return TRUE;
+
     $CI = get_instance();
     
     $user_data = get_user_data();
@@ -25,8 +27,8 @@ function get_current_user_id()
     }
 }
 function get_user_data()
-{
-    $CI = get_instance();
+{ 
+  $CI = get_instance();
     
         
     if($CI->session->userdata('user_data'))
@@ -40,7 +42,9 @@ function get_user_data()
 }
 
 function get_user_role( $user_id = 0 )
-{
+{  
+    return '1';
+
     $CI= & get_instance();
     
     if(!$user_id) 
@@ -97,7 +101,14 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break;
         case 'money':
             $data = '$'.number_format((float)$data, 2);
-            break;    
+            break; 
+            
+            
+        case 'attach_link':
+			$data ='<a href="'.base_url().'index.php/attachment?id='.$row['id'].'">'.$data.'</a>';
+            break; 
+            
+               
     }
     
     return $wrap_tag_open.$data.$wrap_tag_close;

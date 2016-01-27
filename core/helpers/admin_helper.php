@@ -19,7 +19,7 @@ function getChannels()
 	return $channels;
 }
 
-function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_open = '', $wrap_tag_close = '')
+/*function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_open = '', $wrap_tag_close = '')
 {
      $CI = & get_instance();
      
@@ -171,7 +171,7 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
 	
 	return $wrap_tag_open.$data.$wrap_tag_close;
 }
-
+*/
 
 
 
@@ -464,7 +464,7 @@ function check_fraudulent_ip(){
 
     return 0;
 }
-
+/*
 function update_usermeta($key = '',$value = '',$user_id = '') {
     
     if(!$key || !$user_id)
@@ -522,7 +522,7 @@ function get_usermeta($key = '',$user_id = '') {
         return false;
     }
 }
-
+*/
 function update_ordermeta($key = '',$value = '',$order_id = '') {
     
     if(!$key || !$order_id)
@@ -644,7 +644,7 @@ function get_sales_rep($option = 'name')
 	}
 
 	return $reps;
-}
+}/*
 function str2USDate($str)
 {
     $intTime = strtotime($str);
@@ -887,7 +887,7 @@ function date_ranges($case = '')
         }
         return $str;
     }
-
+*/
    function get_commision_types()
    {
    		$commision_types = array(
@@ -978,14 +978,14 @@ function date_ranges($case = '')
 	
 	}
     
-    function xml_obj_to_array($xml_obj) {
+   /* function xml_obj_to_array($xml_obj) {
         
             $json = json_encode($xml_obj,TRUE);
             $arr = json_decode($json,TRUE);
         
         return $arr;                     
     }
-   
+   */
    function get_adminusers( $flag = FALSE )
     {
         $CI = & get_instance();

@@ -61,7 +61,7 @@
 
 								<?php foreach ($list as $item) : ?>
                                 
-								<?php $val = $this->uri->segment(2);?>
+								<?php $val = $this->uri->segment(1);?>
 								<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>">
                                 
 									<td class="dragHandle">

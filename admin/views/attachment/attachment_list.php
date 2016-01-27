@@ -3,7 +3,7 @@
 		<div class="col-lg-12">
 			<div class="row">
               <div class="col-lg-12" style="margin-left: -10px;">
-                <h1 class="pull-left"><b>Safety Lession</b></h1>
+                <h1 class="pull-left"><b>Lession attachment</b></h1>
                 </div>
                 
                 
@@ -17,7 +17,7 @@
 					<ol class="breadcrumb">
 						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>Safety Lession</span>
+						<li class="active"><span>Lession attachment</span>
 						</li>
 					</ol>
 					<div class="clearfix">
@@ -28,7 +28,7 @@
 	                        <a href="<?php echo site_url('lession/add_edit_lession');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New
 	                        </a>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-lession','lession/lession_delete');" class="btn btn-success">
+	                        <a onclick="return DeleteCheckedRow(this,'delete-attachment','attachment/attachment_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>
                            
@@ -37,7 +37,7 @@
                     
 				</div>
 			</div>
-			<input type="hidden" name="page_name" class="page_name" value="lession" />
+			<input type="hidden" name="page_name" class="page_name" value="attachment" />
 			<?php echo $grid;?>
 			<?php //echo '<pre>';print_r($this->session->all_userdata());die;?>
 		</div>

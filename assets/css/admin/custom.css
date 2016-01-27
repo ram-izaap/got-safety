@@ -58,3 +58,26 @@ Change Quick Sidebar Width
   margin-left: -370px;
 }
 */
+
+/* Manage list action css saran */
+
+.table a.table-link {
+    margin: 0 5px;
+    font-size: 1.125em;
+    width:100%;
+}
+.table a.table-link:hover {
+    text-decoration: none;
+    color: #1ABC9C;
+}
+.table a.table-link.danger { color: #f4786e }
+.table a.table-link.danger:hover { color: #dd191d }
+.theme-greenSea .table a.table-link:hover {
+  color: #6ff3ad; }
+  .theme-blue .table a.table-link:hover {
+  color: #7FC8BA; }
+  
+  .theme-red .table a.table-link:hover {
+  color: #dd191d; }
+  .theme-whbl .table a.table-link:hover {
+  color: #1ABC9C; }

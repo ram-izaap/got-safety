@@ -26,6 +26,7 @@ $config['base_path'] = $root.$host;
  
 $config['permitted_uri_chars'] = 'a-zA-Z 0-9~%.:_\-@&,()+=';
 
+$config['layout_name'] = 'admin';
 
 //$this->output->enable_profiler(true);
 

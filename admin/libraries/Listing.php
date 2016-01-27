@@ -33,6 +33,9 @@ class Listing
         $this->_CI = get_instance();
         
         $this->_CI->load->library('pagination');
+        $this->_CI->load->library('encrypt');
+        $this->_CI->load->library('parser');
+
         
         
 		$this->_CI->pagination->full_tag_open = '<ul class="pagination pull-right">';
@@ -90,7 +93,7 @@ class Listing
     
     public function render($callback, $criteria = array(), $variables=array())
     {
-        
+       
 		$result = call_user_func($callback, $criteria);
 
 		$config['base_url']   = base_url().ltrim($this->_base_url,'/');
@@ -115,7 +118,7 @@ class Listing
         foreach ($variables as $k => $v) {
             $data[$k] = $v;
         }
-       
+//print_r($this->_view);exit;       
         return $this->_CI->load->view($this->_view, $data, true);
     } 
 
@@ -189,7 +192,7 @@ class Listing
     }
 
     function get_listings($model = null, $method = null)
-    {
+    {  
     	if(is_null($model) || is_null($method))
     		return FALSE;
     	
@@ -201,7 +204,7 @@ class Listing
     	
     	//load helpers for searching and sorting 
     	$this->_CI->load->helper(array('search_helper', 'sort_helper'));
-    	
+
     	//retrieve the search conditions and if there was a previous search
     	$search_conditions = prepare_search_conditions($this->_CI->_search_conditions, $this->_CI->namespace.'_search_conditions');
     	
