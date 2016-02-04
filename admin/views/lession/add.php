@@ -1,6 +1,6 @@
 
 	<h3 class="page-title">
-			Product Edit 
+			<?php echo $title;?>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">

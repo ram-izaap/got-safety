@@ -28,8 +28,9 @@ class Lession extends Admin_controller {
 
     function index()
     { 
-        
-        
+                 
+		 $this->layout->add_javascripts(array('listing', 'rwd-table'));  
+
 
         $this->load->library('listing');
          

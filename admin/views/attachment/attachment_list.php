@@ -25,7 +25,7 @@
 						 <div class="pull-right top-page-ui">
 							 
 							  
-	                        <a href="<?php echo site_url('lession/add_edit_lession');?>" class="btn btn-success">
+	                        <a href="<?php echo site_url('attachment/add_edit_attachment');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New
 	                        </a>
 	                        <a onclick="return DeleteCheckedRow(this,'delete-attachment','attachment/attachment_delete');" class="btn btn-success">

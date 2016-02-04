@@ -12,12 +12,17 @@
 |
 |  Depending on how you set it up on your system you may not need to change this.
 */
-$config['base_url']	= (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'];
+//$config['base_url']	= (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'];
+ 
+$root = (empty($_SERVER['HTTPS'])?'http://':'https://').$_SERVER['HTTP_HOST'];
+$root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$config['base_url']    = "$root";
  
 $config['permitted_uri_chars'] = 'a-zA-Z 0-9~%.:_\-@&,()+=';
 
 $config['sess_cookie_name']		= 'ci_session_order_processing';
 
-
+$config['index_page'] = '';
+$config['uri_protocol']	= 'AUTO';
 //$this->output->enable_profiler(true);
 

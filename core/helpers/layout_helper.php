@@ -13,7 +13,7 @@ function include_img_path() {
   if (!$layout =& get_layout()) return;
   $CI =& get_instance();
 
-  $img_dir = base_path();
+  $img_dir = str_replace('admin','',base_url());
   $img_dir .= $CI->layout->get_img_dir();
 
   return $img_dir;
@@ -40,7 +40,7 @@ function include_javascripts()
         if (preg_match("/^(http)|(https)/i", $file_name)) {
             $href = $file_name;
         } else {
-            $href =  base_path();
+            $href =  str_replace('admin','',base_url());
             $href .= $CI->layout->get_js_dir() ? $CI->layout->get_js_dir() . '/' : '';
             $href .= $file_name . '.js';
         }
@@ -62,8 +62,7 @@ function include_stylesheets()
         		$href = $CI->layout->get_css_dir() ? $CI->layout->get_css_dir() . '/' : '';
         		$href .= $item['file_name'] . '.css';
         	} else {
-            		
-            		$href = base_path();
+            		$href = str_replace('admin','',base_url());
             		$href .= $CI->layout->get_css_dir() ? $CI->layout->get_css_dir() . '/' : '';
             		$href .= $item['file_name'] . '.css';
             }

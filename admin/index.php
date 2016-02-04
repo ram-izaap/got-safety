@@ -116,6 +116,8 @@ switch (ENVIRONMENT)
 	$application_folder = dirname(__FILE__);
 
 	$core_folder = '../core';
+	$asset_folder = '../assets';
+
 /*
  *---------------------------------------------------------------
  * VIEW FOLDER NAME
@@ -232,6 +234,7 @@ switch (ENVIRONMENT)
 	define('SYSDIR', trim(strrchr(trim(BASEPATH, '/'), '/'), '/'));
 
 	define('COREPATH', $core_folder.DIRECTORY_SEPARATOR);
+	define('ASSETPATH', $asset_folder.DIRECTORY_SEPARATOR);
 
 	
 	// The path to the "application" folder

@@ -460,6 +460,28 @@
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
+						<span class="title">Settings</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('lang'); ?>">
+								Language Setting </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('page'); ?>">
+								Page Setting </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
 						<span class="title">Safety lessions</span>
 						<span class="arrow "></span>
 						</a>
@@ -467,6 +489,39 @@
 							<li> 
 								<a href="<?php echo site_url('lession'); ?>">
 								Manage lessions </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Webinars</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('webinars'); ?>">
+								Webinars </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Add Pages</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('addpages'); ?>">
+								Page Managment </a>
 							</li>
 							
 						</ul>

@@ -1,6 +1,6 @@
 
 	<h3 class="page-title">
-			Product Edit 
+			<?php echo $title;?>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
@@ -23,24 +23,48 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
+			
+			
+			<div class="form-group">
+				<label class="col-md-2 control-label">Language: <span class="required">
+				* </span>
+				</label>
+				<div class="col-md-10">
+					<select name="language" class="table-group-action-input form-control input-medium">
+						<option value="">Select...</option>
+						<?php if(isset($get_menu)) { 
+							foreach($get_menu as $fkey => $fvalue){
+							  $selected = ($form_data['language'] == $fvalue['lang'])?"selected='selected'":"";   
+						?>
+						<option value="<?php echo $fvalue['lang']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
+						<?php } } ?>
+					</select>
+					 <span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
+				</div>
+			</div>
+			
+			
+
+				
+				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Title: <span class="required">
-					* </span>
+					<label class="col-md-2 control-label">Image:<span class="required">* </span>
 					</label>
 					<div class="col-md-10">
-						<input type="text" name="title" class="form-control" value="<?php echo set_value('title',$form_data['title']); ?>">
-						<span class="vstar" <?php echo form_error('title', '<span class="help-block">', '</span>'); ?></span>
+						<input id="image" name="f_name" type="file" class="file" />
+					<input id="team_image" name="slide_image" type="hidden" value="<?php echo set_value('slide_image',$form_data['slide_image']); ?>" />
+					
+					<span class="vstar"<?php echo form_error('f_name', '<span class="help-block">', '</span>'); ?> </span>
+					
+						<?php 	if($edit_id != "") { ?>
+								<a  target="_blank" href="http://localhost/got_safety/assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
+							
+						<?php } ?>
+						
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Content: <span class="required">
-					* </span>
-					</label>
-					<div class="col-md-10">
-						<textarea name="content" class="form-control"> <?php echo set_value('content',$form_data['content']); ?></textarea>
-					<span class="vstar" <?php echo form_error('content', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
+				
+				
 				
 				
 				<div class="form-group">

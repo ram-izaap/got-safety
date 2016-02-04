@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-abstract class App_model extends CI_Model
-{
+class App_model extends CI_Model
+{ 
 	protected $db;
 	protected $_CI;
 	protected $_table;
@@ -10,7 +10,7 @@ abstract class App_model extends CI_Model
 	protected $_fields = '';
 
 	public function __construct()
-	{
+	{ 
 		parent::__construct();
 		$this->_CI = get_instance();
 		if (!$this->_table) {

@@ -75,14 +75,14 @@ class App_Controller extends CI_Controller
                 break;
             
             default:
-                $layout = $this->config->item('frontend', 'layout');
-				 echo "678";exit;
+                $layout = $this->config->item('default', 'layout');
+				
                 if( !$layout )
                             die('Layout not found.');
                         
                 $this->layout->initialize($layout);
 
-                $this->load_settings_data();
+                //$this->load_settings_data();
 
                 break;
         }
@@ -107,7 +107,7 @@ class App_Controller extends CI_Controller
         exit();
     }
     
-    public function load_settings_data()
+   /* public function load_settings_data()
     {
         $this->load->model('settings_model');
         
@@ -135,7 +135,7 @@ class App_Controller extends CI_Controller
         return $this->settings;
 
 
-    }
+    } */
   
 }
 

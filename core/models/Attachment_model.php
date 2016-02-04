@@ -28,7 +28,7 @@ class Attachment_model extends App_Model {
 
             switch ($key)
             {
-                case 'title':
+                case 'language':
                     $this->db->like($key, $value);
                 break;
                  
@@ -40,15 +40,7 @@ class Attachment_model extends App_Model {
         return parent::listing();
     }
     
-    function get_menu($table_name,$where)
-    {
-		
-		 $result = $this->db->get_where($table_name,$where);
-        return $result->result_array();
-	}
-    
-    
-      function get_lession_data($table_name,$where)
+     function get_slideimage_detail($table_name,$where)
     {
 		
 		 $result = $this->db->get_where($table_name,$where);
@@ -69,7 +61,7 @@ class Attachment_model extends App_Model {
         return $this->db->update($table_name,$data);
     }
     
-    function get_header_info($table_name)
+    function get_menu($table_name)
     {
 		
 		$this->db->select("*");
@@ -78,7 +70,9 @@ class Attachment_model extends App_Model {
 		
 	}
 	
-	function delete($table_name,$where,$orcondition='')
+	
+	
+    function delete($table_name,$where,$orcondition='')
     {
         $this->db->where($where);
         if(!empty($orcondition)) {
@@ -87,6 +81,13 @@ class Attachment_model extends App_Model {
        return  $this->db->delete($table_name);
     }
     
+    
+     function language_check_exists($table_name,$where)
+    {
+		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
     
     
     
