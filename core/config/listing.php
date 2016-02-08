@@ -52,6 +52,7 @@ $config['attachment_index'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							//'type'=>array('name'=>'Type', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
                              'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",

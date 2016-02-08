@@ -44,11 +44,37 @@
 			</div>
 			
 			
+		<?php /*	<div class="form-group">
+				<label class="col-md-2 control-label">Type: <span class="required">
+				* </span>
+				</label>
+				<div class="col-md-10">
+					<select name="type" class="table-group-action-input form-control input-medium">
+						<option value="">Select...</option>
+						<?php 
+							if($form_data['type'] == 'Lesson') {
+								$selected = "selected='selected'";
+							}else if($form_data['type'] == 'Quiz') {
+								$selected = "selected='selected'";
+							}else {
+								$selected = "";
+							}
+							  //$selected = ($form_data['type'] == '')?"selected='selected'":"";   
+						?>
+						<option value="<?php echo "Lesson"; ?>" <?php if($form_data['type'] == 'Lesson') { ?>selected="selected";<?php } ?> ?>   <?php echo "Lesson";?></option>
+						<option value="<?php echo "Quiz"; ?>" <?php if($form_data['type'] == 'Quiz') { ?>selected="selected";<?php } ?> ?>   <?php echo "Quiz";?></option>
+						
+					</select>
+					 <span class="vstar" <?php echo form_error('type', '<span class="help-block">', '</span>'); ?></span>
+				</div>
+			</div>
+			
+			*/ ?>
 
 				
 				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Image:<span class="required">* </span>
+					<label class="col-md-2 control-label">Lesson:<span class="required">* </span>
 					</label>
 					<div class="col-md-10">
 						<input id="image" name="f_name" type="file" class="file" />
@@ -58,6 +84,24 @@
 					
 						<?php 	if($edit_id != "") { ?>
 								<a  target="_blank" href="http://localhost/got_safety/assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
+							
+						<?php } ?>
+						
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-md-2 control-label">Quiz:<span class="required">* </span>
+					</label>
+					<div class="col-md-10">
+						<input id="image" name="f_name_quiz" type="file" class="file" />
+					<input id="team_image2" name="slide_image2" type="hidden" value="<?php echo set_value('slide_image2',$form_data['slide_image2']); ?>" />
+					
+					<span class="vstar"<?php echo form_error('f_name_quiz', '<span class="help-block">', '</span>'); ?> </span>
+					
+						<?php 	if($edit_id != "") { ?>
+								<a  target="_blank" href="http://localhost/got_safety/assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
 							
 						<?php } ?>
 						

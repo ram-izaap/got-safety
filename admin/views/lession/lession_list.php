@@ -24,6 +24,9 @@
 						
 						 <div class="pull-right top-page-ui">
 							 
+							  <a href="<?php echo site_url('lession/lesson_content');?>" class="btn btn-success">
+	                            <i class="fa fa-plus-circle fa-lg"></i> Add Content
+	                        </a>
 							  
 	                        <a href="<?php echo site_url('lession/add_edit_lession');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New

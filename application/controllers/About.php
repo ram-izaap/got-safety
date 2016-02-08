@@ -15,8 +15,11 @@ class About extends App_Controller {
     public function index()
     {
 
-		$this->data['img_url']=$this->layout->get_img_dir();
-     	$this->layout->view('about/about','frontend');
+			$this->data['img_url']=$this->layout->get_img_dir();
+		
+		$this->data['info'] = $this->about_model->get_info("about_us");
+        
+		$this->layout->view('about/about','frontend');
         
     }
 

@@ -1,6 +1,6 @@
 <?php
 //require_once("libraries/models/App_model.php");
-safe_include(COREPATH."models/App_model.php");
+require_once(COREPATH."models/App_model.php");
 class Lession_model extends App_Model {
     
     
@@ -66,7 +66,7 @@ class Lession_model extends App_Model {
         return $this->db->update($table_name,$data);
     }
     
-    function get_header_info($table_name)
+    function get_info($table_name)
     {
 		
 		$this->db->select("*");
@@ -83,6 +83,21 @@ class Lession_model extends App_Model {
         }
        return  $this->db->delete($table_name);
     }
+    
+    
+    function get_lession_detail($table_name,$where)
+    {
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+		
+	}
+	
+	
+	function get_lession_attachment($table_name,$where)
+	{
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
     
     
     

@@ -515,17 +515,50 @@
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
-						<span class="title">Add Pages</span>
+						<span class="title">Page Managment</span>
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
 							<li> 
 								<a href="<?php echo site_url('addpages'); ?>">
-								Page Managment </a>
+								 Add Pages</a>
 							</li>
 							
 						</ul>
 					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">About Us</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('aboutus/about'); ?>">
+								 Update</a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Contact Us</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('contactus/contact'); ?>">
+								 Update</a>
+							</li>
+							
+						</ul>
+					</li>
+					
 					
 				</ul>
 			<!-- END SIDEBAR MENU -->

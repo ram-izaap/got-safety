@@ -6,9 +6,10 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Attachment extends Admin_controller {
 	
 	protected $_attachment_validation_rules = array(
-													//array('field' => 'language', 'label' => 'Language', 'rules' => 'trim|required'),
+													//array('field' => 'type', 'label' => 'Type', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
-                                                    array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim')
+                                                    array('field' => 'slide_image', 'label' => 'Lesson', 'rules' => 'trim'),
+                                                    array('field' => 'slide_image2', 'label' => 'Quiz', 'rules' => 'trim')
 													
 												);
 												
@@ -99,8 +100,14 @@ class Attachment extends Admin_controller {
 			$this->form_validation->set_rules($this->_attachment_validation_rules);
 			 if ( empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
 			{
-				$this->form_validation->set_rules('f_name', 'Image', 'required');
+				$this->form_validation->set_rules('f_name', 'lesson', 'required');
 			} 
+			
+			 if ( empty($_FILES['f_name_quiz']['name']) && empty($_POST['slide_image2']) )
+			{
+				$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
+			} 
+			
 			if(isset($_POST['language'])) {
 					$this->form_validation->set_rules('language', 'Language', 'trim|required|callback_language_unique_check['.$edit_id.']');
 			}
@@ -121,6 +128,15 @@ class Attachment extends Admin_controller {
 			}
 			
 			
+			if(!empty($_FILES['f_name_quiz']['tmp_name'])){ 
+			  $upload_data2 = $this->do_upload2();
+	
+              $filename2 = (isset($upload_data2['f_name_quiz']['file_name']))?$upload_data2['f_name_quiz']['file_name']:"";
+			}else{
+				$filename2 = (isset($_POST['slide_image2']))?$_POST['slide_image2']:"";
+			}
+			
+			
 			//print $filename;exit;
 			
 			if(isset($form['is_active'])) { 
@@ -135,8 +151,10 @@ class Attachment extends Admin_controller {
 			$ins_data = array();
             $ins_data['lession_id']       	= $id;
             $ins_data['language']          = $form['language'];
+           // $ins_data['type']          = $form['type'];
             $ins_data['is_active']  = $form['is_active'];
 			$ins_data['f_name']  = $filename;
+			$ins_data['f_name_quiz']  = $filename2;
            
 			//$this->header_model->update('cub_search_nav_bar',$ins_data);
 			if(empty($edit_id)){
@@ -164,6 +182,7 @@ class Attachment extends Admin_controller {
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
                 $this->data['form_data']['slide_image'] = $this->data['form_data']['f_name'];
+                $this->data['form_data']['slide_image2'] = $this->data['form_data']['f_name_quiz'];
                 
             }
             else if($this->input->post()) {
@@ -176,7 +195,7 @@ class Attachment extends Admin_controller {
             {
                 $this->data['title']     = "ADD ATTACHMENT";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("lession_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "");
+                $this->data['form_data'] = array("lession_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "","slide_image2" => "","f_name_quiz" => "");
                 
             }
 		    
@@ -212,6 +231,34 @@ class Attachment extends Admin_controller {
 		else
 		{
 			$data = array('f_name' => $this->upload->data());
+			return $data;
+			
+		}
+		
+	}
+	
+	
+	function do_upload2()
+	{
+		 
+		$config['upload_path'] = '../assets/images/admin/lession_attachment/quiz';
+
+		$config['allowed_types'] = 'pdf|doc';
+		$config['max_size']	= '10000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload('f_name_quiz'))
+		{ 
+			$error = array('error' => $this->upload->display_errors());
+
+			return $error;
+			
+		}
+		else
+		{
+			$data = array('f_name_quiz' => $this->upload->data());
 			return $data;
 			
 		}

@@ -11,7 +11,11 @@ class Lession extends Admin_controller {
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 												);
-												
+	protected $_lession_content_validation_rules =    array (
+                                                   
+                                                    array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required')
+                                                    
+                                                  );
 												
 											
 	
@@ -214,6 +218,56 @@ class Lession extends Admin_controller {
             return true;  
         }
     } 
+    
+    
+    function lesson_content()
+    {
+		
+		if(is_logged_in()) {
+			
+			
+			
+            $info = $this->lession_model->get_info("lesson_content");
+           
+            $this->data['form_data'] = $info;
+            
+			
+			$this->form_validation->set_rules($this->_lession_content_validation_rules);
+			
+        if($this->form_validation->run())
+        { 
+            $form = $this->input->post();
+            
+			
+			$ins_data = array();
+			
+			 
+            
+            $ins_data['content']  = $form['content'];
+            $edit_id                = $_POST['edit_id'];
+           
+			
+			
+			$social_data = $this->lession_model->update("lesson_content",$ins_data,array("id" => $edit_id));
+            //$this->service_message->set_flash_message('record_update_success');
+			
+			redirect("lession");    
+			
+		}	
+			$this->data['title']          = "Lesson Content";
+            $this->data['crumb']        = "Update";
+	
+		$this->layout->view('lession/lesson_content',$this->data);
+		
+		}
+        else
+        {
+            redirect("home");
+        } 
+		
+		
+		
+	}
     
     
    
