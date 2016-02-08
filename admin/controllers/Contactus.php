@@ -69,7 +69,7 @@ class Contactus extends Admin_Controller
 			$this->data['title']          = "Contact Us";
             $this->data['crumb']        = "Update";
 	
-		$this->layout->view('contact/contact_us',$this->data);
+		$this->layout->view('contact/contact_us');
 		
 		}
         else

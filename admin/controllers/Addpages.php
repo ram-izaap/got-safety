@@ -176,7 +176,7 @@ class Addpages extends Admin_controller {
             }
 		    
 		    //$this->layout->view('/admin/header/menu/add',$this->data,TRUE); 
-		    $this->layout->view('addpages/add',$this->data);
+		    $this->layout->view('addpages/add');
 		}
         else
         {

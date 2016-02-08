@@ -47,7 +47,8 @@ class Layout {
 
     public function view($file_name, $type = 'default')
     {
-        $this->initialize($this->CI->config->item($type, 'layout'));
+		$layout = $this->CI->config->item($type, 'layout');
+        $this->initialize($layout);
         $this->CI->data['content'] = $this->CI->load->view($file_name, $this->CI->data, TRUE);
         $this->CI->load->view($this->template, $this->CI->data);
 
@@ -83,11 +84,12 @@ class Layout {
 
                 if (method_exists($this, $method))
                 {
-                    $this->$method($val);
+                     $this->$method($val);
                 }
                 else
                 {
                     $this->$key = $val;
+                    
                 }
             }
         }
@@ -357,6 +359,11 @@ class Layout {
      *
      * @param string $css_dir
      */
+	function set_img_dir($img_dir)
+    {
+        $this->img_dir = trim($img_dir, ' /');
+    }
+    
     function get_img_dir()
     {
         $img = str_replace('admin','',base_url()).$this->img_dir;

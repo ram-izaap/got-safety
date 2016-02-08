@@ -437,11 +437,17 @@ function is_valid_product($product_id = 0)
 
 function is_valid_user($user_id = 0)
 {
+	
     $CI->db->load->model('user_model');
 
     $result = $CI->db->user_model->get_where(array('id' => $user_id));
 
     return $result->num_rows()?TRUE:FALSE;
+}
+
+function get_img_dir(){
+	$CI = & get_instance();
+	return $CI->layout->get_img_dir(); 
 }
 
 ?>

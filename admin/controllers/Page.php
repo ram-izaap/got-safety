@@ -157,7 +157,7 @@ class Page extends Admin_controller {
             }
 		
 		 
-		$this->layout->view('page/add',$this->data);
+		$this->layout->view('page/add');
 		
 		}
         else

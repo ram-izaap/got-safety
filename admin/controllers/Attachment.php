@@ -200,7 +200,7 @@ class Attachment extends Admin_controller {
             }
 		    
 		    //$this->layout->view('/admin/header/menu/add',$this->data,TRUE); 
-		    $this->layout->view('attachment/add',$this->data);
+		    $this->layout->view('attachment/add');
 		}
         else
         {

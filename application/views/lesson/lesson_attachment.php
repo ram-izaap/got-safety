@@ -4,9 +4,9 @@
 	<?php foreach($view_link as $data){ ?>
 		
 		
-	<a href="<?php echo $img_url.'/lession_attachment/'.$data['f_name'];?>" target="_blank"><button class="btn btn-default" type="button"> <?php echo $data['language']; ?> Lesson</button></a>
+	<a href="<?php echo get_img_dir().'assets/images/admin/lession_attachment/'.$data['f_name'];?>" target="_blank"><button class="btn btn-default" type="button"> <?php echo $data['language']; ?> Lesson</button></a>
 	
-	<a href="<?php echo $img_url.'/lession_attachment/quiz/'.$data['f_name_quiz'];?>" target="_blank">	<button class="btn btn-default" type="button"> <?php echo $data['language']; ?> Quiz</button></a>
+	<a href="<?php echo get_img_dir().'assets/images/admin/lession_attachment/quiz/'.$data['f_name_quiz'];?>" target="_blank">	<button class="btn btn-default" type="button"> <?php echo $data['language']; ?> Quiz</button></a>
 		
 		<?php } ?>
 			

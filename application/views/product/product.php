@@ -48,7 +48,7 @@
                               <div class="block clearfix">
                                 <div class="col-sm-6">
                                    <div class="block-image">
-                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/product/cover/cover-1.jpg" alt="Product name" width="" height="" class=""/>
+                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/product/cover/cover-1.jpg" alt="Product name" width="" height="" class=""/>
 
                                     <div class="block-price"><strong>$ 25.00</strong></div>
                                     <div data-cover="gs-english"></div>
@@ -67,7 +67,7 @@
                               <div class="block clearfix">
                                 <div class="col-sm-6">
                                    <div class="block-image">
-                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/product/cover/cover-2.jpg" alt="Product name" width="" height="" class=""/>
+                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/product/cover/cover-2.jpg" alt="Product name" width="" height="" class=""/>
 
                                     <div class="block-price"><strong>$ 25.00</strong></div>
                                     <div data-cover="gs-english"></div>
@@ -86,7 +86,7 @@
                               <div class="block clearfix">
                                 <div class="col-sm-6">
                                    <div class="block-image">
-                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/product/cover/cover-5.jpg" alt="Product name" width="" height="" class=""/>
+                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/product/cover/cover-5.jpg" alt="Product name" width="" height="" class=""/>
 
                                     <div class="block-price"><strong>$ 25.00</strong></div>
                                     <div data-cover="gs-no"></div>
@@ -105,7 +105,7 @@
                               <div class="block clearfix">
                                 <div class="col-sm-6">
                                    <div class="block-image">
-                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/product/cover/cover-4.jpg" alt="Product name" width="" height="" class=""/>
+                                    <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/product/cover/cover-4.jpg" alt="Product name" width="" height="" class=""/>
 
                                     <div class="block-price"><strong>$ 25.00</strong></div>
                                     <div data-cover="gs-spanish"></div>

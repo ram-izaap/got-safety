@@ -177,7 +177,7 @@ class Webinars extends Admin_controller {
             }
 		    
 		    //$this->layout->view('/admin/header/menu/add',$this->data,TRUE); 
-		    $this->layout->view('webinars/add',$this->data);
+		    $this->layout->view('webinars/add');
 		}
         else
         {

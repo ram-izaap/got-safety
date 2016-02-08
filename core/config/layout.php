@@ -17,8 +17,8 @@ $config['layout']['default']['javascripts'] = array(
  
 $config['layout']['default']['stylesheets'] = array('bootstrap.min', 'font-awesome.min', 'uniform.default','components','plugins','layout','darkblue','custom','login');
 
-$config['layout']['default']['description'] = '';
-$config['layout']['default']['keywords']    = '';
+$config['layout']['default']['description'] = 'GotSafety';
+$config['layout']['default']['keywords']    = 'GotSafety';
 
 $config['layout']['default']['http_metas'] = array(
 	'X-UA-Compatible' => 'IE=edge',
@@ -41,8 +41,8 @@ $config['layout']['frontend']['javascripts'] = array(
  
 $config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main');
 
-$config['layout']['frontend']['description'] = '';
-$config['layout']['frontend']['keywords']    = '';
+$config['layout']['frontend']['description'] = 'GotSafety';
+$config['layout']['frontend']['keywords']    = 'GotSafety';
 
 $config['layout']['frontend']['http_metas'] = array(
 	'X-UA-Compatible' => 'IE=edge',

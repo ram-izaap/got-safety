@@ -21,7 +21,7 @@ class App_Controller extends CI_Controller
     //print_r($this->session->userdata('user_data'));die;
        $this->role = get_user_role();
        
-        $this->init();
+        //$this->init();
 			
 
         //if($this->uri->segment(1,'')

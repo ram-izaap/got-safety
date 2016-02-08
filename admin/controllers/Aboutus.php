@@ -69,7 +69,7 @@ class Aboutus extends Admin_Controller
 			$this->data['title']          = "About Us";
             $this->data['crumb']        = "Update";
 	
-		$this->layout->view('about/about_us',$this->data);
+		$this->layout->view('about/about_us');
 		
 		}
         else

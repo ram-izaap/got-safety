@@ -156,7 +156,7 @@ class Lang extends Admin_controller {
             }
 		
 		 
-		$this->layout->view('lang/add',$this->data);
+		$this->layout->view('lang/add');
 		
 		}
         else

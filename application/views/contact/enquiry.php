@@ -1,8 +1,9 @@
  <div class="" data-form="suggestion">
                           <!-- -->
 
+
                             <h3>Send Suggestion</h3>
-                            <form role="form" action="<?php echo base_url("index.php/contact/enquiry"); ?>" method="POST">
+                            <form role="form" action="<?php //echo base_url("index.php/contact/enquiry"); ?>" method="POST">
                               <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">

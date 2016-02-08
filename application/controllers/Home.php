@@ -15,7 +15,7 @@ class Home extends App_Controller {
     public function index()
     {
 
-		$this->data['img_url']=$this->layout->get_img_dir();
+		
      	$this->layout->view('home/home','frontend');
         
     }

@@ -162,7 +162,7 @@ class Lession extends Admin_controller {
             }
 		
 		 
-		$this->layout->view('lession/add',$this->data);
+		$this->layout->view('lession/add');
 		
 		}
         else
@@ -257,7 +257,7 @@ class Lession extends Admin_controller {
 			$this->data['title']          = "Lesson Content";
             $this->data['crumb']        = "Update";
 	
-		$this->layout->view('lession/lesson_content',$this->data);
+		$this->layout->view('lession/lesson_content');
 		
 		}
         else

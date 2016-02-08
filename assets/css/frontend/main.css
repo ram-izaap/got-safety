@@ -115,7 +115,7 @@ header {background-color:#dfdfe1; padding:10px 0;}
 	/* Documentation:  */
 	.carousel-control.left, .carousel-control.right { background-image: none; } 
 	[data-role="testimonial"] { background: #fff; padding:20px; margin:170px 0 30px 0; position:relative}
-	[data-role="testimonial"]:before { content:""; width:160px; height:160px; background: url(../images/quote-top.png) no-repeat;  position:absolute; top:-62px; z-index:-0 }
+	[data-role="testimonial"]:before { content:""; width:160px; height:160px; background: url(../../images/frontend/quote-top.png) no-repeat;  position:absolute; top:-62px; z-index:-0 }
 	[data-role="testimonial"] h4 { color:#ed1c24; font:bold 42px "aileronbold", Helvetica, Arial, sans-serif; margin:0; position:relative; z-index:5 }
 	[data-role="testimonial"] blockquote { color:#ed1c24; text-align:right; font-weight:bold;}
 
@@ -189,11 +189,11 @@ transform: scale(1.2); margin-right:5px; }
 
 [data-nav*="gs-"] { }
 [data-nav*="gs-"] ul {  display:inline-block; width:100%;}
-[data-nav*="gs-"] li { list-style-type:none; border-bottom:1px dotted #292f2b; margin-left:-35px; background: url(../images/bullet-red.png) no-repeat left center;}
+[data-nav*="gs-"] li { list-style-type:none; border-bottom:1px dotted #292f2b; margin-left:-35px; background: url(../../images/frontend/bullet-red.png) no-repeat left center;}
 [data-nav*="gs-"] li.active, .[data-nav*="gs-"] li:hover { }
 [data-nav*="gs-"] li:last-child { border-color:transparent}
 [data-nav*="gs-"] a { color:#292f2b; font-size:16px; font-size:16px; display:block; text-decoration:none; padding:8px 5px 8px 15px}
-[data-nav*="gs-"] a:hover { color:#ed1c24; background: #f2f2f2 url(../images/bullet-red.png) no-repeat left center;  }
+[data-nav*="gs-"] a:hover { color:#ed1c24; background: #f2f2f2 url(../../images/frontend/bullet-red.png) no-repeat left center;  }
 
 
 

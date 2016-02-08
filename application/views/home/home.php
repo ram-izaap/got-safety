@@ -1,14 +1,8 @@
 
 
-
-  
-
-    
-
-
     <!-- // Static banner // -->
     <section class="static-banner">
-      <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/home-banner-min.jpg" alt="Safety" class="img-responsive" />
+      <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/home-banner-min.jpg" alt="Safety" class="img-responsive" />
       <div data-text="static">
         <div>
           <h3>Simplest way to keep track of your documentation and safety lessons online and on your phone!</h3>
@@ -87,7 +81,7 @@
                  </div>
 
                  <div class="video_modal">
-                    <a href="javascript:void(0);" data-toggle="modal" data-target=".bs-example-modal-lg"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/video-cover.jpg" class="img-responsive" alt="" /></a>
+                    <a href="javascript:void(0);" data-toggle="modal" data-target=".bs-example-modal-lg"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/video-cover.jpg" class="img-responsive" alt="" /></a>
 
                     <!-- // modal box content -->
                       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
