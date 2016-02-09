@@ -41,7 +41,7 @@
                   <li <?php  if($this->uri->segment(1) == '') { ?> class="active"; <?php }?> ><a href="<?php echo base_url("");?>"><i class="fa fa-home"> </i> Home <span class="sr-only">(current)</span></a></li>
 				  <li <?php  if($this->uri->segment(1) == 'about') { ?> class="active" <?php }?> ><a href="<?php echo base_url("index.php/about");?>"><i class="fa fa-lightbulb-o"></i> About Us </a></li>
 				  <li <?php  if($this->uri->segment(1) == 'product') { ?> class="active"; <?php }?>><a href="<?php echo base_url("index.php/product");?>"> <i class="fa fa-shopping-cart"></i> Products </a></li>
-				  <li><a href="javascript:void(0);"> <i class="fa fa-video-camera"></i> Webinars </a></li>
+				  <li <?php  if($this->uri->segment(1) == 'webinars') { ?> class="active"; <?php }?>><a href="<?php echo base_url("index.php/webinars");?>"> <i class="fa fa-video-camera"></i> Webinars </a></li>
 				  <li <?php  if($this->uri->segment(1) == 'contact') { ?> class="active"; <?php }?>><a href="<?php echo base_url("index.php/contact");?>"> <i class="fa fa-envelope"></i> Contact </a></li>
 				  <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("index.php/lesson");?>">Lesson </a></li>
                 </ul>

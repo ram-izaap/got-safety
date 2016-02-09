@@ -1,6 +1,6 @@
 <?php
 //require_once("libraries/models/App_model.php");
-safe_include(COREPATH."models/App_model.php");
+require_once(COREPATH."models/App_model.php");
 class Webinars_model extends App_Model {
     
     
@@ -85,6 +85,38 @@ class Webinars_model extends App_Model {
      function language_check_exists($table_name,$where)
     {
 		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
+	
+	function get_webinars_most($table_name,$where)
+    {
+		
+		$this->db->select('*');
+		$this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->order_by("id","desc");
+        $this->db->limit(0,1);
+		$result = $this->db->get()->result_array();
+		return $result;
+		
+	}
+	
+	function get_webinars_all($table_name,$where)
+    {
+		
+		$this->db->select('*');
+		$this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->order_by("id","ASC");
+		$result = $this->db->get()->result_array();
+		return $result;
+		
+	}
+	
+	
+	function get_webinars_attachment($table_name,$where)
+	{
 		 $result = $this->db->get_where($table_name,$where);
         return $result->result_array();
 	}
