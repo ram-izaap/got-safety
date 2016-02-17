@@ -117,3 +117,35 @@ $config['addpages_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+
+$config['user_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'user/filter',
+	"base_url"	=> 	'/user/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'name'=>array('name'=>'Name', 'data_type' => 'admin_client_list', 'sortable' => FALSE, 'default_view'=>1),
+							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['client_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'client/filter',
+	"base_url"	=> 	'/client/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);

@@ -21,6 +21,18 @@
         
         
 	</head>
+	<?php if( $this->session->userdata('admin_data') ==""){ ?>
+	<body>
+	
+		<section class="body_container">
+			
+			<?php echo $content; ?>
+						
+		</section>
+	
+		
+	<?php  } else { ?>
+	
 	<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-container-bg-solid">
 	
        
@@ -40,7 +52,7 @@
 			
 		</div>
 		
-		
+		<?php } ?>
 		
 		<!-- javascript
 	    ================================================== -->

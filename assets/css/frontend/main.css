@@ -247,6 +247,32 @@ background: #ffb347; background: -webkit-linear-gradient(to left, #ffb347 , #ffc
 
 
 
+
+/*Client Login Section Style Start*/
+
+[data-view="create-account"] .form-wrap{margin: 8% auto;    width: 60.6666%;background-color: #DFDFE1;padding: 18px;border-radius: 4px;}
+.client-login.active{color: #ed1c24;text-decoration: none;background: #fff;}
+[data-view="create-account"] .form-group input[type="password"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */color:#5C4B4C;}
+[data-view="create-account"] .form-group input[type="password"]::-moz-placeholder { /* Firefox 19+ */color:#5C4B4C;}
+[data-view="create-account"] .form-group input[type="password"]:-ms-input-placeholder { /* IE 10+ */color:#5C4B4C;}
+[data-view="create-account"] .form-group input[type="password"]:-moz-placeholder { /* Firefox 18- */color:#5C4B4C;}
+[data-form="register"] .form-group input, [data-form="register"] .form-group select, [data-form="register"] .form-group textarea { background-color:rgba(0, 0, 0, 0.1); border-radius: 0; border-color:transparent; box-shadow: 0 0 0 transparent; border-bottom:4px solid #494b4c; color:#494b4c;}
+[data-form="register"] .form-group input:focus, [data-form="register"] .form-group select:focus, [data-form="register"] .form-group textarea:focus { border-color:#494b4c;}
+[data-view="create-account"] input[type="checkbox"]{font-size: .6em;}
+[data-view="create-account"] .form-switch{text-align:center;}
+.switch a:hover{text-decoration:none;}
+.switch{text-align:center;}
+.switch a{    display: inline;color: #E31A22;font-size: 0.9em;padding: 0px 6px;text-transform: uppercase;}
+.switch .active{text-decoration:underline;}	
+.form-title{display: block;padding: 6px 0px 10px;}
+.forgot_pwd{text-align:right;}
+.forgot_pwd button ,.forgot_pwd button:hover{color: #000;text-decoration:none;}
+/*Client Login Section Style End*/
+
+
+
+
+
 @media screen  and (min-width: 900px)  and (max-width: 768px)  { 
 		* { display: none !important; } 
 	}

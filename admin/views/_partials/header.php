@@ -352,7 +352,7 @@
 							<i class="icon-lock"></i> Lock Screen </a>
 						</li>
 						<li>
-							<a href="login.html">
+							<a href="<?php echo base_url('index.php/login/logout');?>">
 							<i class="icon-key"></i> Log Out </a>
 						</li>
 					</ul>
@@ -361,7 +361,7 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="javascript:;" class="dropdown-toggle">
+					<a href="" class="dropdown-toggle">
 					<i class="icon-logout"></i>
 					</a>
 				</li>
@@ -554,6 +554,23 @@
 							<li> 
 								<a href="<?php echo site_url('contactus/contact'); ?>">
 								 Update</a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Client Management</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('user'); ?>">
+								 Add Client</a>
 							</li>
 							
 						</ul>

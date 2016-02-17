@@ -1,5 +1,5 @@
 	
-	(function ( $ ) {
+	(function ( $ ) { 
 		
 		var listing_form_data = {};
 		
@@ -278,9 +278,9 @@
 					});	
 				}
                 
-                if($('.drag_drop').length) {
+              /*  if($('.drag_drop').length) {
                     drag_drop();
-                }												
+                }	*/										
 			});
 			
 		};
@@ -288,3 +288,4 @@
 	}( jQuery ));
 	
 	
+

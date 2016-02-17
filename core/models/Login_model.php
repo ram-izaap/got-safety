@@ -7,13 +7,13 @@ class Login_Model extends CI_Model
    {
      parent::__construct();
    }
-   public function login($email, $password)
-   {
+   public function login($name, $password)
+   { 
      $this->load->model('admin_user_model'); 
 
      $pass = md5($password);
      
-     $user = $this->user_model->login_check($email,$pass);
+     $user = $this->login_model->login_check($name,$pass);
      
       if(count($user)>0)
       {      
@@ -24,6 +24,53 @@ class Login_Model extends CI_Model
       
       return false;
    }
+   
+   
+   
+   
+   public function user_login($name, $password)
+   {
+	   $pass = md5($password);
+	  // $where = array('name'=>$name,'password'=>$pass,"role"=>2);
+	   $where = array('name'=>$name,'password'=>$pass);
+		$this->db->select("*");
+        $this->db->from('users');
+        $this->db->where($where);
+        $this->db->where("(role = 2 OR role = 3)");
+        $result = $this->db->get()->row_array();
+        
+        if(count($result) > 0){
+			
+			 $this->session->set_userdata('user_detail', $result);
+        
+				$this->session->set_userdata(array(
+        
+                            'user_id'       => $result['id'],
+                            'user_name'      => $result['name'],
+                            'role'      => $result['role']
+                            
+                          
+                    ));
+			return 1;
+		}
+    return 2;
+        
+   }
+   
+   public function login_check($name,$pass)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('name', $name);
+        $this->db->where('password', $pass);
+
+        return $this->db->get()->row_array();
+         
+    }
+   
+   
+   
+   
    
    public function logout()
    {

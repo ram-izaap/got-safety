@@ -5,14 +5,15 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Login extends Admin_Controller 
 { 
     protected $_login_validation_rules =    array (
-                                                    array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|xss_clean'),
-                                                    array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|xss_clean|min_length[4]|max_length[20]|alpha_dash')
+                                                    array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
+                                                    array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
                                                   );
     function __construct()
     {
         parent::__construct();  
         
         $this->load->model('login_model');
+        $this->layout->add_javascripts(array('common'));
        
     }  
     public function index()
@@ -22,21 +23,24 @@ class Login extends Admin_Controller
     
     public function login()
     {
-       
+       // print_r($_POST);exit;
        $this->form_validation->set_rules($this->_login_validation_rules);
        
         if($this->form_validation->run())
-        {
+        {  
             $form = $this->input->post();
+           
 
-            if($this->login_model->login($form['email'], $form['password']))
+            if($this->login_model->login($form['name'], $form['password']))
             {
-                redirect("admin/dashboard");
+                redirect("home");
             }
             
         }
+         
         
-        $this->load->view("login/index");
+        $this->layout->view("login/index");
+        
         
     }
     
@@ -45,10 +49,10 @@ class Login extends Admin_Controller
 	   
 		$this->session->sess_destroy();
 	
-		$this->session->sess_create();
-		$this->service_message->set_flash_message('logout_success');
+		//$this->session->sess_create();
+		//$this->service_message->set_flash_message('logout_success');
 	
-		redirect('admin/login');
+		redirect('login');
 	}
     
 }

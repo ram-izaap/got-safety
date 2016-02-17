@@ -108,6 +108,19 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
 			$data ='<a href="'.base_url().'index.php/attachment?id='.$row['id'].'">'.$data.'</a>';
             break; 
             
+        case 'user_role':
+				if($data== '2'){
+					$data ="Client";
+				}else {
+					$data = "User";
+				}
+			$data = $data;
+            break; 
+            
+         case 'admin_client_list':
+			$data ='<a href="'.base_url().'index.php/client?id='.$row['id'].'">'.$data.'</a>';
+            break; 
+            
                
     }
     

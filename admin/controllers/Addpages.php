@@ -25,6 +25,7 @@ class Addpages extends Admin_controller {
        $this->load->model('addpages_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
+       
        //echo $this->layout->get_img_dir();
     }
 

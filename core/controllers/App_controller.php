@@ -55,7 +55,7 @@ class App_Controller extends CI_Controller
 
                 $this->layout->initialize($layout);
 
-                /*if( !is_logged_in() )
+                if( !is_logged_in() )
                 {
                     $seg2 = $this->uri->segment(2,'');
                     if($seg1 === 'admin' && $seg2 !== 'login')
@@ -69,7 +69,7 @@ class App_Controller extends CI_Controller
                     redirect('lession');                 
                     
                    
-                }*/
+                }
 
 
                 break;
