@@ -2083,7 +2083,7 @@ Page content
   letter-spacing: -1px;
   display: block;
   color: #666;
-  margin: 0px 0px 15px 0px;
+  margin: 0px 0px 40px 0px !important;
   font-weight: 300;
   /* subtitle */
 }
@@ -2171,7 +2171,7 @@ Page content
   position: relative;
   padding: 0px 20px;
   background-color: #ffffff;
-  margin: -25px -20px 0 -20px;
+  margin: -25px -20px 30px;
 }
 .page-container-bg-solid .page-bar .page-breadcrumb {
   padding: 11px 0;
@@ -2621,3 +2621,5 @@ Page Loading
   display: none;
   transition: all 2s;
 }
+
+.vstar {color:red;}
