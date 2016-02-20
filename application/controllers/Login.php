@@ -39,7 +39,7 @@ class Login extends App_Controller {
             else{ 
 				
 				// $this->service_message->set_flash_message('login_unsuccess');
-				redirect("login");
+				redirect("index.php/login");
 			}
             
         }

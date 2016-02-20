@@ -14,10 +14,17 @@ class Webinars extends App_Controller {
 
     public function index()
     {
+		$user_id = $this->session->userdata('user_id');
+		$role = $this->session->userdata('role');
 		
+		if($role == 2){
+			$user_id = $this->session->userdata('user_id');
+		}else{
+			$user_id = $this->session->userdata('created_user');
+		}
 		
-		$this->data['most_data'] = $this->webinars_model->get_webinars_most("webinars",array("is_active" => 1));
-		$this->data['all_data'] = $this->webinars_model->get_webinars_all("webinars",array("is_active" => 1));
+		$this->data['most_data'] = $this->webinars_model->get_webinars_most("webinars",array('created_user'=> $user_id,"is_active" => 1));
+		$this->data['all_data'] = $this->webinars_model->get_webinars_all("webinars",array('created_user'=> $user_id,"is_active" => 1));
 		
      	$this->layout->view('webinars/webinars','frontend');
         

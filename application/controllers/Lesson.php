@@ -14,9 +14,16 @@ class Lesson extends App_Controller {
 
     public function index()
     {
+		$user_id = $this->session->userdata('user_id');
+		$role = $this->session->userdata('role');
 		
+		if($role == 2){
+			$user_id = $this->session->userdata('user_id');
+		}else{
+			$user_id = $this->session->userdata('created_user');
+		}
 		
-		$this->data['list_data'] = $this->lession_model->get_lession_detail("lession",array("is_active" => 1));
+		$this->data['list_data'] = $this->lession_model->get_lession_detail("lession",array("created_user"=> $user_id,"is_active" => 1));
 		$this->data['lesson_content'] = $this->lession_model->get_info("lesson_content");
 		$this->data['img_url']=$this->layout->get_img_dir();
      	$this->layout->view('lesson/lesson','frontend');

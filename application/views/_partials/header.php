@@ -3,7 +3,7 @@
         <section class="container">
             <aside class="col-sm-4">
               <div class="row">
-                <a href="index.html" class="logo device-center">
+                <a href="<?php echo base_url();?>" class="logo device-center">
                   <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/logo.png" width="123" height="114" class="" alt="Got Safety">
                 </a>
               </div>
