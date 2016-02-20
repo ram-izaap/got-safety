@@ -3,7 +3,7 @@
 		<div class="col-lg-12">
 			<div class="row">
               <div class="col-lg-12" style="margin-left: -10px;">
-                <h1 class="pull-left"><b>Safety Lession</b></h1>
+                <h1 class="pull-left"><b>Safety Lesson</b></h1>
                 </div>
                 
                 
@@ -17,7 +17,7 @@
 					<ol class="breadcrumb">
 						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>Safety Lession</span>
+						<li class="active"><span>Safety Lesson</span>
 						</li>
 					</ol>
 					<div class="clearfix">

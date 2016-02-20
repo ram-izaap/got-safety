@@ -11,7 +11,7 @@
 					</li>
 					<li>
 						<a href="#"><?php echo $crumb;?></a>
-						<i class="fa fa-angle-right"></i>
+						
 					</li>
 					
 				</ul>
@@ -23,6 +23,31 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
+             <?php $role =  $this->session->userdata('admin_data')['role'];  
+              if($role == "1"){   ?>
+				  
+			 
+             
+            
+             <div class="form-group">
+				<label class="col-md-2 control-label">Client: <span class="required">
+				* </span>
+				</label>
+				<div class="col-md-10">
+					<select name="user_id" class="table-group-action-input form-control input-medium">
+						<option value="">Select...</option>
+						<?php if(isset($get_menu)) { 
+							foreach($get_menu as $fkey => $fvalue){
+							  $selected = ($form_data['created_user'] == $fvalue['id'])?"selected='selected'":"";   
+						?>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?>><?php echo $fvalue['name'];?></option>
+						<?php } } ?>
+					</select>
+					 <span class="vstar" <?php echo form_error('user_id', '<span class="help-block">', '</span>'); ?></span>
+				</div>
+			</div>
+			<?php } ?>
+             
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title: <span class="required">
 					* </span>
@@ -47,7 +72,7 @@
 					<label class="col-md-2 control-label">Is Active:
 					</label>
 					<div class="col-md-10">
-						<input type="checkbox" class="form-control" name="is_active" id="is_active" value="1" 
+						<input type="checkbox" class="" name="is_active" id="is_active" value="1" 
 						<?php echo set_checkbox('is_active',1,((isset($form_data['is_active']) && $form_data['is_active'] == 1)?true:false));?>/>
 					</div>
 				</div>

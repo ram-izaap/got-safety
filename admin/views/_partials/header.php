@@ -4,8 +4,8 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<a href="index.html">
-			<img src="images/logo.png" alt="logo" class="logo-default"/>
+			<a href="<?php echo base_url("index.php/home");?>">
+			<img src="<?php echo get_img_dir();?>/logo-footer.png" alt="logo" class="logo-default"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
 			</div>
@@ -70,7 +70,9 @@
 									<span class="label label-sm label-icon label-info">
 									<i class="fa fa-bullhorn"></i>
 									</span>
-									Application error. </span>
+	<div class="scroll-to-top" style="display: block;">
+		<i class="icon-arrow-up"></i>
+	</div>								Application error. </span>
 									</a>
 								</li>
 								<li>
@@ -320,8 +322,9 @@
 				<li class="dropdown dropdown-user">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<img alt="" class="img-circle" src="images/avatar3_small.jpg"/>
+				<?php 	$name =  $this->session->userdata('admin_data')['name']; ?> 
 					<span class="username username-hide-on-mobile">
-					Nick </span>
+					<?php echo $name;?> </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
@@ -393,7 +396,7 @@
 			<!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
 			<!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 			<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-					<li class="sidebar-search-wrapper">
+					<?php /*<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
 					<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
@@ -409,9 +412,9 @@
 						</div>
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
+				</li> */ ?>
                     
-					<li>
+				<?php /*	<li>
 						<a href="javascript:;">
 						<i class="icon-basket"></i>
 						<span class="title">eCommerce</span>
@@ -451,10 +454,10 @@
 							<li>
 								<a href="login.html">
 								Login Form </a>
-							</li>
+							</li>﻿﻿
 							
 						</ul>
-					</li>
+					</li> */ ?>
 					
 					
 					<li>
@@ -482,13 +485,13 @@
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
-						<span class="title">Safety lessions</span>
+						<span class="title">Safety lessons</span>
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
 							<li> 
 								<a href="<?php echo site_url('lession'); ?>">
-								Manage lessions </a>
+								Manage lessons </a>
 							</li>
 							
 						</ul>
@@ -559,7 +562,8 @@
 						</ul>
 					</li>
 					
-					
+				<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 					
 					<li>
 						<a href="javascript:;">
@@ -575,7 +579,23 @@
 							
 						</ul>
 					</li>
-					
+					<?php } else { ?>
+						
+						<li>
+							<a href="javascript:;">
+							<i class="icon-user"></i>
+							<span class="title">User Management</span>
+							<span class="arrow "></span>
+							</a>
+							<ul class="sub-menu">
+								<li> 
+									<a href="<?php echo site_url('user'); ?>">
+									 Add user</a>
+								</li>
+								
+							</ul>
+						</li>
+					<?php } ?>
 					
 				</ul>
 			<!-- END SIDEBAR MENU -->

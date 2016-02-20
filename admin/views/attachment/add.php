@@ -11,7 +11,7 @@
 					</li>
 					<li>
 						<a href="#"><?php echo $crumb;?></a>
-						<i class="fa fa-angle-right"></i>
+						
 					</li>
 					
 				</ul>
@@ -115,7 +115,7 @@
 					<label class="col-md-2 control-label">Is Active:
 					</label>
 					<div class="col-md-10">
-						<input type="checkbox" class="form-control" name="is_active" id="is_active" value="1" 
+						<input type="checkbox" class="" name="is_active" id="is_active" value="1" 
 						<?php echo set_checkbox('is_active',1,((isset($form_data['is_active']) && $form_data['is_active'] == 1)?true:false));?>/>
 					</div>
 				</div>

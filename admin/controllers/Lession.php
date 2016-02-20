@@ -90,6 +90,23 @@ class Lession extends Admin_controller {
 	public function add_edit_lession($edit_id = "")
     { 
 		
+		$user_id =  $this->session->userdata('admin_data')['id']; 
+		$role =  $this->session->userdata('admin_data')['role']; 
+		
+		if($role == '2'){
+			$user_id = $this->session->userdata('admin_data')['id'];
+		}else 
+		{
+			$user_id = '8';
+		}
+		
+		$this->data['get_menu'] = $this->lession_model->get_menu("users",array("role" => 2));
+			
+			if ( isset($_POST['user_id']) )
+			{
+				$this->form_validation->set_rules('user_id', 'Client', 'required');
+			} 
+			
 		if(is_logged_in()) {
 			 $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 			
@@ -100,16 +117,13 @@ class Lession extends Admin_controller {
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
-           // print_r($form);exit;
-            
-           // print_r($form);exit;
+           
 			if(isset($form['is_active'])) { 
 				$form['is_active'] = $form['is_active'];	
 			}
 			else { 
 				$form['is_active'] = "0";
 			}
-			
 			
 			$ins_data = array();
 			
@@ -119,6 +133,13 @@ class Lession extends Admin_controller {
             $ins_data['title']       	= $form['title'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['content']  = $form['content'];
+            
+            if($_POST['user_id'] == ""){
+				$ins_data['created_user']  = $user_id;
+			}else {
+				$ins_data['created_user']  = $form['user_id'];
+				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
+			}
             $ins_data['updated_date']  = date("Y-m-d H:i:s");
             
            
@@ -142,23 +163,23 @@ class Lession extends Admin_controller {
                     //$this->service_message->set_flash_message('record_not_found_error');
                     redirect("lession");   
                 }
-                $this->data['title']          = "EDIT LESSION";
+                $this->data['title']          = "EDIT LESSON";
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
                 
             }
             else if($this->input->post()) { 
                 $this->data['form_data'] = $_POST;
-                $this->data['title']     = "ADD LESSION";
+                $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
                 $this->data['form_data']['id'] = $edit_id != ''?$edit_id:'';
                 
             }
             else
             {
-                $this->data['title']     = "ADD LESSION";
+                $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","content" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => ""); 
             }
 		
 		 

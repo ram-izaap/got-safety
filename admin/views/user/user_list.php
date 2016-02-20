@@ -20,21 +20,23 @@
 						<li class="active"><span>Client</span>
 						</li>
 					</ol>
-					<div class="clearfix">
-						
-						 <div class="pull-right top-page-ui">
-							 
-							 
-	                        <a href="<?php echo site_url('user/add_edit_user');?>" class="btn btn-success">
-	                            <i class="fa fa-plus-circle fa-lg"></i> New
-	                        </a>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-user','user/user_delete');" class="btn btn-success">
-	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
-	                        </a>
-                           
-	                    </div>
-					</div>
-                    
+					
+					<?php if($this->session->userdata('admin_data')['role'] == 1) { ?>
+						<div class="clearfix">
+							
+							 <div class="pull-right top-page-ui">
+								 
+								 
+								<a href="<?php echo site_url('user/add_edit_user');?>" class="btn btn-success">
+									<i class="fa fa-plus-circle fa-lg"></i> New
+								</a>
+								<a onclick="return DeleteCheckedRow(this,'delete-user','user/user_delete');" class="btn btn-success">
+									<i class="fa fa-minus-circle fa-lg"></i> Delete
+								</a>
+							   
+							</div>
+						</div>
+                    <?php  }?>
 				</div>
 			</div>
 			<input type="hidden" name="page_name" class="page_name" value="user" />

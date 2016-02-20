@@ -11,7 +11,7 @@
 					</li>
 					<li>
 						<a href="#"><?php echo $crumb;?></a>
-						<i class="fa fa-angle-right"></i>
+						
 					</li>
 					
 				</ul>

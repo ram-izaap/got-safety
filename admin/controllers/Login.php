@@ -11,7 +11,7 @@ class Login extends Admin_Controller
     function __construct()
     {
         parent::__construct();  
-        
+         $this->load->library('service_message');
         $this->load->model('login_model');
         $this->layout->add_javascripts(array('common'));
        
@@ -32,7 +32,8 @@ class Login extends Admin_Controller
            
 
             if($this->login_model->login($form['name'], $form['password']))
-            {
+            { 
+				$this->service_message->set_flash_message('schedule_call_success');
                 redirect("home");
             }
             

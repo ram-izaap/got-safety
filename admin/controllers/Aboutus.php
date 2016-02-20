@@ -50,16 +50,11 @@ class Aboutus extends Admin_Controller
         { 
             $form = $this->input->post();
             
-			
 			$ins_data = array();
 			
-			 
-            
             $ins_data['content']  = $form['content'];
             $edit_id                = $_POST['edit_id'];
            
-			
-			
 			$social_data = $this->about_model->update("about_us",$ins_data,array("id" => $edit_id));
             //$this->service_message->set_flash_message('record_update_success');
 			

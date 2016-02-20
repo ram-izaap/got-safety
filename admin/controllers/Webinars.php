@@ -86,28 +86,38 @@ class Webinars extends Admin_controller {
 	public function add_edit_webinars($edit_id = "")
     {            
 		
+		$user_id =  $this->session->userdata('admin_data')['id']; 
+		$role =  $this->session->userdata('admin_data')['role']; 
+		
+		if($role == '2'){
+			$user_id = $this->session->userdata('admin_data')['id'];
+		}else 
+		{
+			$user_id = '8';
+		}
+		
+		
+		$this->data['get_menu'] = $this->webinars_model->get_menu_webinars("users",array("role" => 2));
+		//print_r($this->data['get_menu']);exit;
+			
+			if ( isset($_POST['user_id']) )
+			{
+				$this->form_validation->set_rules('user_id', 'Client', 'required');
+			} 
+		
 		if(is_logged_in()) {
 		  
-             //$this->layout->add_javascripts(array('product'));
-             
+            
 			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 			
 			
 			$this->form_validation->set_rules($this->_webinars_validation_rules);
-			/* if ( empty($_FILES['video_file']['name']) && empty($_POST['slide_image']) )
-			{
-				$this->form_validation->set_rules('video_file', 'Video', 'required');
-			} */
 			
-       
         if($this->form_validation->run())
         {
           
             $form = $this->input->post();
             
- 
-		//print_r($_FILES['f_name']['name']);exit;
-			
 			if(!empty($_FILES['video_file']['tmp_name'])){ 
 			  $upload_data = $this->do_upload();
 	
@@ -131,6 +141,12 @@ class Webinars extends Admin_controller {
             $ins_data['title']       	= Ucfirst($form['title']);
             $ins_data['link']          = $form['link'];
             $ins_data['is_active']  = $form['is_active'];
+            if($_POST['user_id'] == ""){
+				$ins_data['created_user']  = $user_id;
+			}else {
+				$ins_data['created_user']  = $form['user_id'];
+				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
+			}
             $ins_data['created_date']  = date("Y-m-d");
 			$ins_data['video_file']  = $filename;
            
@@ -172,11 +188,11 @@ class Webinars extends Admin_controller {
             {
                 $this->data['title']     = "ADD WEBINARS";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "");
+                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "");
                 
             }
 		    
-		    //$this->layout->view('/admin/header/menu/add',$this->data,TRUE); 
+		    
 		    $this->layout->view('webinars/add');
 		}
         else

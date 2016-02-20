@@ -83,7 +83,8 @@ class User extends Admin_Controller
 			
 			$this->form_validation->set_rules($this->_user_validation_rules);
 			
-			
+			$id =  $this->session->userdata('admin_data')['id'];
+            $role =  $this->session->userdata('admin_data')['role'];
        
         if($this->form_validation->run())
         { 
@@ -134,14 +135,22 @@ class User extends Admin_Controller
                     //$this->service_message->set_flash_message('record_not_found_error');
                     redirect("user");   
                 }
-                $this->data['title']          = "EDIT CLIENT";
+                if($role== 1) {
+					$this->data['title']          = "EDIT CLIENT";
+				} else {
+					$this->data['title']          = "EDIT";
+				}
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
                 
             }
             else if($this->input->post()) { 
                 $this->data['form_data'] = $_POST;
-                $this->data['title']     = "ADD CLIENT";
+                if($role== 1) {
+					$this->data['title']          = "ADD CLIENT";
+				} else {
+					$this->data['title']          = "ADD";
+				}
                 $this->data['crumb']   = "Add";
                 $this->data['form_data']['id'] = $edit_id != ''?$edit_id:'';
                 $this->data['form_data']['ori_password'] = "";
@@ -149,7 +158,11 @@ class User extends Admin_Controller
             }
             else
             {
-                $this->data['title']     = "ADD CLIENT";
+                if($role== 1) {
+					$this->data['title']          = "ADD CLIENT";
+				} else {
+					$this->data['title']          = "ADD";
+				}
                 $this->data['crumb']   = "Add";
                 $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => ""); 
             }
