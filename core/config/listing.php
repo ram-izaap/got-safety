@@ -36,7 +36,7 @@ $config['lession_index'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'title'=>array('name'=>'Title', 'data_type' => 'attach_link', 'sortable' => FALSE, 'default_view'=>1),
-							'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
                              'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",

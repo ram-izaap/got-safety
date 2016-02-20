@@ -15,8 +15,23 @@ class Lession_model extends App_Model {
     
     function listing()
     {  
+		$user_id =  $this->session->userdata('admin_data')['id']; 
+		$role =  $this->session->userdata('admin_data')['role']; 
+		
+		if($role == '2'){
+			$user_id = $this->session->userdata('admin_data')['id'];
+		}else 
+		{
+			$user_id = '8';
+		}
+		
+		
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
-        
+        if($role == '2'){
+        $this->db->where('created_user',$user_id);
+        }else {
+			$this->db->where('updated_user',$user_id);
+		}
        
         foreach ($this->criteria as $key => $value) 
         {

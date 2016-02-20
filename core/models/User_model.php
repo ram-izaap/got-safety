@@ -12,40 +12,18 @@ class User_Model extends App_Model {
         $this->_table = 'users';
     }
 
-   /* function listing()
-    {
-        $this->_fields = " *,IF(is_blocked='1','Inactive','Active') as status";
-        
-        //from
-        $this->db->from($this->_table);
-        
-        //joins
-        
-        
-        //where
-        foreach ($this->criteria as $key => $value) 
-        {
-            if( !is_array($value) && strcmp($value, '') === 0 )
-                continue;
-
-            switch ($key)
-            {
-                case 'user_name':
-                    $this->db->like($key, $value);
-                break;
-            }
-        }
-        
-        
-        return parent::listing();
-    } */
-    
     
      function listing()
     {  
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
         
-        $this->db->where('role',2);
+			$id =  $this->session->userdata('admin_data')['id'];
+            $role =  $this->session->userdata('admin_data')['role'];
+		if($role == 1){ 
+			$this->db->where('role',2);
+         } else { 
+			$this->db->where(array('role'=>2 ,'id' => $id));
+			 }
         
         foreach ($this->criteria as $key => $value) 
         {

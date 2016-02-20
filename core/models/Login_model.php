@@ -47,7 +47,8 @@ class Login_Model extends CI_Model
         
                             'user_id'       => $result['id'],
                             'user_name'      => $result['name'],
-                            'role'      => $result['role']
+                            'role'      => $result['role'],
+                            'created_user'      => $result['created_id']
                             
                           
                     ));
