@@ -118,13 +118,13 @@ class Webinars extends Admin_controller {
           
             $form = $this->input->post();
             
-			if(!empty($_FILES['video_file']['tmp_name'])){ 
+			/*if(!empty($_FILES['video_file']['tmp_name'])){ 
 			  $upload_data = $this->do_upload();
 	
               $filename = (isset($upload_data['video_file']['file_name']))?$upload_data['video_file']['file_name']:"";
 			}else{
 				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
-			}
+			} */
 			
 			
 			//print $filename;exit;
@@ -148,7 +148,7 @@ class Webinars extends Admin_controller {
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
 			}
             $ins_data['created_date']  = date("Y-m-d");
-			$ins_data['video_file']  = $filename;
+			//$ins_data['video_file']  = $filename;
            
 			//$this->header_model->update('cub_search_nav_bar',$ins_data);
 			if(empty($edit_id)){
@@ -175,7 +175,7 @@ class Webinars extends Admin_controller {
                 $this->data['title']          = "EDIT WEBINARS";
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
-                $this->data['form_data']['slide_image'] = $this->data['form_data']['video_file'];
+                //$this->data['form_data']['slide_image'] = $this->data['form_data']['video_file'];
                 
             }
             else if($this->input->post()) {

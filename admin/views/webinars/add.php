@@ -70,7 +70,7 @@
 				
 			
 				
-				<div class="form-group">
+			<?php /*	<div class="form-group">
 					<label class="col-md-2 control-label">Video:<span class="required"></span>
 					</label>
 					<div class="col-md-10">
@@ -85,7 +85,7 @@
 						<?php } ?>
 						
 					</div>
-				</div>
+				</div> */ ?>
 				
 				
 				
