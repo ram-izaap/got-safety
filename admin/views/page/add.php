@@ -6,11 +6,17 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?php echo base_url("index.php/home"); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#"><?php echo $crumb;?></a>
+						
+						<a href="<?php echo base_url("index.php/page"); ?>">Page</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					
+					<li>
+						<?php echo $crumb;?>
 						
 					</li>
 					
@@ -36,7 +42,7 @@
 				
 				<div class="form-group">
 					<label class="col-md-2 control-label">Dynamic Fields: <span class="required">
-					* </span>
+					 </span>
 					</label>
 					<div class="col-md-10">
 						<input type="text" name="dynamic_fields" class="form-control" value="<?php echo set_value('dynamic_fields',$form_data['dynamic_fields']); ?>">

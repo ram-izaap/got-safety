@@ -47,8 +47,8 @@ class Webinars extends Admin_controller {
         
         $str = '<a href="'.site_url('webinars/add_edit_webinars/{id}').'" class="table-link">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                       
+                        <i class="fa fa-pencil"></i>
                     </span>
                 </a>';
  

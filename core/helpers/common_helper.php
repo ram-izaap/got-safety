@@ -105,7 +105,7 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             
             
         case 'attach_link':
-			$data ='<a href="'.base_url().'index.php/attachment?id='.$row['id'].'">'.$data.'</a>';
+			$data ='<a href="'.base_url().'index.php/attachment?id='.$row['id'].'"><i class="fa fa-plus cen-align"></i></a>';
             break; 
             
         case 'user_role':
@@ -118,7 +118,7 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break; 
             
          case 'admin_client_list':
-			$data ='<a href="'.base_url().'index.php/client?id='.$row['id'].'">'.$data.'</a>';
+			$data ='<a href="'.base_url().'index.php/client?id='.$row['id'].'"><i class="fa fa-plus cen-align2"></i></a>';
             break; 
             
                

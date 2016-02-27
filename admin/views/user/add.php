@@ -6,11 +6,16 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?php echo base_url("index.php/home"); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#"><?php echo $crumb;?></a>
+						
+						<a href="<?php echo base_url("index.php/user"); ?>">Client</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<?php echo $crumb;?>
 						
 					</li>
 					
@@ -43,11 +48,11 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Password: <span class="required"> *
+					<label class="col-md-2 control-label">Password: <span class="required"> 
 					 </span>
 					</label>
 					<div class="col-md-10">
-						<input type="password" name="password" class="form-control" value="<?php echo set_value('password',$form_data['ori_password']); ?>">
+						<input type="password" name="password" class="form-control" value="">
 						<span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>

@@ -20,8 +20,8 @@
 			<ul class="nav navbar-nav pull-right">
 				<!-- BEGIN NOTIFICATION DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-				<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+			<?php /*	<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<i class="icon-bell"></i>
 					<span class="badge badge-default">
 					7 </span>
@@ -128,7 +128,7 @@
 							</ul>
 						</li>
 					</ul>
-				</li>
+				</li> 
 				<!-- END NOTIFICATION DROPDOWN -->
 				<!-- BEGIN INBOX DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -315,7 +315,7 @@
 							</ul>
 						</li>
 					</ul>
-				</li>
+				</li>*/ ?>
 				<!-- END TODO DROPDOWN -->
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -328,7 +328,7 @@
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
-						<li>
+						<?php /*<li>
 							<a href="extra_profile.html">
 							<i class="icon-user"></i> My Profile </a>
 						</li>
@@ -353,7 +353,7 @@
 						<li>
 							<a href="extra_lock.html">
 							<i class="icon-lock"></i> Lock Screen </a>
-						</li>
+						</li> */ ?>
 						<li>
 							<a href="<?php echo base_url('index.php/login/logout');?>">
 							<i class="icon-key"></i> Log Out </a>
@@ -469,12 +469,13 @@
 						<ul class="sub-menu">
 							<li> 
 								<a href="<?php echo site_url('lang'); ?>">
-								Language Setting </a>
+								Language </a>
+								
 							</li>
 							
 							<li> 
 								<a href="<?php echo site_url('page'); ?>">
-								Page Setting </a>
+								Page </a>
 							</li>
 							
 						</ul>
@@ -490,9 +491,21 @@
 						</a>
 						<ul class="sub-menu">
 							<li> 
+								<a href="<?php echo site_url('lession/lesson_content'); ?>">
+								Frontend Content </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('lession/add_edit_lession'); ?>">
+								Add lessons </a>
+							</li>
+							
+							<li> 
 								<a href="<?php echo site_url('lession'); ?>">
 								Manage lessons </a>
 							</li>
+							
+							
 							
 						</ul>
 					</li>
@@ -507,8 +520,12 @@
 						</a>
 						<ul class="sub-menu">
 							<li> 
+								<a href="<?php echo site_url('webinars/add_edit_Webinars'); ?>">
+								Add Webinars </a>
+							</li>
+							<li> 
 								<a href="<?php echo site_url('webinars'); ?>">
-								Webinars </a>
+								Manage Webinars </a>
 							</li>
 							
 						</ul>
@@ -523,15 +540,19 @@
 						</a>
 						<ul class="sub-menu">
 							<li> 
+								<a href="<?php echo site_url('addpages/add_edit_pages'); ?>">
+								 Add Page</a>
+							</li>
+							<li> 
 								<a href="<?php echo site_url('addpages'); ?>">
-								 Add Pages</a>
+								 Manage Pages</a>
 							</li>
 							
 						</ul>
 					</li>
 					
 					
-					<li>
+				<?php /*	<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
 						<span class="title">About Us</span>
@@ -560,7 +581,7 @@
 							</li>
 							
 						</ul>
-					</li>
+					</li> */ ?>
 					
 				<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>
@@ -573,8 +594,12 @@
 						</a>
 						<ul class="sub-menu">
 							<li> 
-								<a href="<?php echo site_url('user'); ?>">
+								<a href="<?php echo site_url('user/add_edit_user'); ?>">
 								 Add Client</a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('user'); ?>">
+								 Manage Clients</a>
 							</li>
 							
 						</ul>
@@ -590,7 +615,12 @@
 							<ul class="sub-menu">
 								<li> 
 									<a href="<?php echo site_url('user'); ?>">
-									 Add user</a>
+									  Client Management</a>
+								</li>
+								
+								<li> 
+									<a href="<?php echo site_url('client/add_edit_user'); ?>">
+									  Add User</a>
 								</li>
 								
 							</ul>

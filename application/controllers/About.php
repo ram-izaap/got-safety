@@ -12,19 +12,29 @@ class About extends App_Controller {
         //echo $this->layout->get_img_dir();
     }
 
-    public function index()
+  /*  public function index()
     {
 
-			$this->data['img_url']=$this->layout->get_img_dir();
+		$this->data['img_url']=$this->layout->get_img_dir();
 		
 		$this->data['info'] = $this->about_model->get_info("about_us");
         
 		$this->layout->view('about/about','frontend');
         
-    }
+    } */ 
 
 
-   
+    public function index()
+    {
+
+		$this->data['img_url']=$this->layout->get_img_dir();
+		
+		$this->data['info'] = $this->about_model->get_info("add_pages",array("page_id" => "4"));
+		//print_r($this->data['info']);exit;
+        
+		$this->layout->view('about/about','frontend');
+        
+    } 
    
 	
 }

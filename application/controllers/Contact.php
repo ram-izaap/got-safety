@@ -25,12 +25,24 @@ class Contact extends App_Controller {
         //echo $this->layout->get_img_dir();
     }
 
-    public function index()
+   /* public function index()
     {
 
 		$this->data['img_url']=$this->layout->get_img_dir();
 		
 		$this->data['info'] = $this->contact_model->get_info("contact_us");
+     	$this->layout->view('contact/contact','frontend');
+        
+    } */
+    
+    
+    
+     public function index()
+    {
+
+		$this->data['img_url']=$this->layout->get_img_dir();
+		
+		$this->data['info'] = $this->contact_model->get_info("add_pages",array("page_id" => "5"));
      	$this->layout->view('contact/contact','frontend');
         
     }

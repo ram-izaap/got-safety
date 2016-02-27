@@ -16,7 +16,7 @@
                           <ul>
 							  <?php  foreach($this->data['list_data'] as $list){ ?>
 								  
-								  <li><a onclick="get_lesson_list(<?php echo $list['id'];?>);"> <?php echo $list['title'];?></a></li>
+								  <li><a style="cursor:pointer" onclick="get_lesson_list(<?php echo $list['id'];?>);"> <?php echo $list['title'];?></a></li>
 								 
 								  
 							<?php } ?>
