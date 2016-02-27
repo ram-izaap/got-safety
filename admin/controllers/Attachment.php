@@ -93,6 +93,12 @@ class Attachment extends Admin_controller {
 		  
              //$this->layout->add_javascripts(array('product'));
              
+             $user_id =  $this->session->userdata('admin_data')['id']; 
+            
+             $get_menu = $this->attachment_model->get_language_list("users",array('id'=>$user_id));
+            
+             $this->data['lang_list'] = $get_menu[0]['language'];
+             
 			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 			
 			$this->data['get_menu'] = $this->attachment_model->get_menu("language");

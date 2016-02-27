@@ -54,6 +54,17 @@
 					 <span class="vstar" <?php echo form_error('user_id', '<span class="help-block">', '</span>'); ?></span>
 				</div>
 			</div>
+			
+			<div class="form-group">
+					<label class="col-md-2 control-label">All:
+					</label>
+					<div class="col-md-10">
+						<input type="checkbox" class="" name="all" id="all" value="1" 
+						<?php echo set_checkbox('all',1,((isset($form_data['all']) && $form_data['all'] == 1)?true:false));?>/>
+					</div>
+				</div>
+				
+			
 			<?php } ?>
 				
 				<div class="form-group">

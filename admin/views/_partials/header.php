@@ -467,11 +467,14 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
+							<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 							<li> 
 								<a href="<?php echo site_url('lang'); ?>">
 								Language </a>
 								
 							</li>
+							<?php } ?>
 							
 							<li> 
 								<a href="<?php echo site_url('page'); ?>">

@@ -57,6 +57,28 @@
 					</div>
 				</div>
 				
+				<?php $role =  $this->session->userdata('admin_data')['role'];  
+              if($role == "1"){   ?>
+					<div class="form-group">
+						<label class="col-md-2 control-label">Language: <span class="required"> 
+						 </span>
+						</label>
+						<div class="col-md-10">
+							<select name="language[]" id="language" multiple="multiple">
+					   <option>Select Language</option>
+					   <?php if(isset($get_menu)) { 
+								foreach($get_menu as $fkey => $fvalue){ 
+									$a= explode(',',$form_data['language']);
+									
+								  $selected = (in_array($fvalue['id'],$a))?"selected='selected'":"";   
+							?>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
+					   <?php } } ?>
+					 </select>
+							<span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
+						</div>
+					</div>
+				<?php } ?>
 				
 				<div class="form-group">
 					<label class="col-md-2 control-label">Is Active:

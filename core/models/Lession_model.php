@@ -102,7 +102,14 @@ class Lession_model extends App_Model {
     
     function get_lession_detail($table_name,$where)
     {
-		 $result = $this->db->get_where($table_name,$where);
+		// $result = $this->db->get_where($table_name,$where);
+        //return $result->result_array();
+        
+        $this->db->select();
+        $this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->or_where('all',1);
+        $result = $this->db->get();
         return $result->result_array();
 		
 	}

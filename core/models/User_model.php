@@ -159,6 +159,15 @@ class User_Model extends App_Model {
 		 $result = $this->db->get_where($table_name,$where);
         return $result->result_array();
 	}
+	
+	function get_language($table_name)
+    {
+		
+		$this->db->select("*");
+        $this->db->from($table_name);
+        return $result = $this->db->get()->result_array();
+		
+	}
     
     
 	

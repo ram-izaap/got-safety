@@ -24,7 +24,8 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
-			
+			<?php  $role =  $this->session->userdata('admin_data')['role'];  
+              if($role == "1"){   ?>
 			
 			<div class="form-group">
 				<label class="col-md-2 control-label">Language: <span class="required">
@@ -44,6 +45,32 @@
 				</div>
 			</div>
 			
+			<?php } ?>
+			
+			<?php  $role =  $this->session->userdata('admin_data')['role'];  
+              if($role == "2"){   ?>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Language: <span class="required">
+				* </span>
+				</label>
+				<div class="col-md-10">
+					<select name="language" class="table-group-action-input form-control input-medium">
+						<option value="">Select...</option>
+						<?php if(isset($get_menu)) { 
+							foreach($get_menu as $fkey => $fvalue){ 
+							  $selected = ($form_data['language'] == $fvalue['lang'])?"selected='selected'":"";   
+						?>
+						<?php
+						$a= explode(',',$lang_list);
+						if(in_array($fvalue['id'],$a)) { ?>
+						<option value="<?php echo $fvalue['lang']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
+						<?php } ?>
+						<?php  } } ?>
+					</select>
+					 <span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
+				</div>
+			</div>
+			<?php } ?>
 			
 		<?php /*	<div class="form-group">
 				<label class="col-md-2 control-label">Type: <span class="required">
