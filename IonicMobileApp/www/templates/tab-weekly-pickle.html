@@ -1,0 +1,27 @@
+<ion-view view-title="The Safety Pickle">
+
+  <ion-content>
+
+<div>
+<a href="#/home"><img src="img/logo.png" alt="The Safety Pickle" class="img-responsive" /></a>
+</div>
+    
+    <div class="padding paddingtop0">
+    <!-- Loop area -->
+    <div class="list card" ng-repeat="weekcard in weekpick">
+      <div class="item item-divider">Weekly Pickle</div>
+      <div class="item item-body" ng-click="GotoLink('{{weekcard.ArticleLink}}')">
+          <!-- Image path -->
+            <img src="{{weekcard.ImageLink}}" alt="image name" class="img-responsive" />
+            <h2 class="button button-energized button-block button-full">{{weekcard.Title}}</h2>
+            
+          <!-- Button name -->
+      </div>
+    </div>
+
+
+</div>
+ 
+
+  </ion-content>
+</ion-view>

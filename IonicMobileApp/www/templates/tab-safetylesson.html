@@ -1,0 +1,41 @@
+
+
+<ion-view view-title="The Safety Pickle">
+
+
+
+
+   <ion-content>
+
+<div>
+<a href="#/home"><img src="img/logo.png" alt="The Safety Pickle" class="img-responsive" /></a>
+</div>
+    
+
+    <div class="list card" ng-repeat="lessons in safety">
+      <div class="item item-divider">{{lessons.Title}}</div>
+      <div class="item item-body">
+        <div ng-if="lessons.ShowImage == '1'">          
+          <a ng-click="GotoLink('{{lessons.ArticleLink}}')" href="#" class="button button-block button-stable"> 
+		        <img src="img/logo.png">
+		      </a>
+        </div>
+
+        <div ng-if="lessons.ShowImage != '1'">          
+          <a ng-click="GotoLink('{{lessons.ArticleLink}}')" href="#" class="button button-block button-stable"> 
+            {{lessons.Title}}
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Loop area -->
+
+
+
+
+ 
+
+  </ion-content>
+</ion-view>

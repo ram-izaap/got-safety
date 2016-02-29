@@ -1,0 +1,59 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// custom scss variables
+$stable:                          #f5f5f5 !default;
+$balanced:                        #aadb72 !default;
+$activestage:					  #8fc550!important !default;
+$gray1:							  #e6e6e6 !default;
+
+$none:						      0 !default;
+$txt14:							  14px !default;
+$txt28:							  28px !default;
+
+$button-stable-bg:                $stable !default;
+$button-stable-text:              #333333 !default;
+$button-stable-border:            #d6d6d6 !default;
+$button-stable-active-bg:         #e5e5e5 !default;
+$button-stable-active-border:     #a2a2a2 !default;
+
+$font-family-sans-serif:          "Roboto", "Helvetica Neue", "Segoe UI", sans-serif !default;
+$font-family-light-sans-serif:    "Roboto-Light", "HelveticaNeue-Light", "Segoe UI-Light", sans-serif-light !default;
+$font-family-serif:               serif !default;
+$font-family-monospace:           monospace !default;
+$item-icon-font-size:             25px !default;
+$item-icon-color:                 #cccccc !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+.img-responsive{max-width:100%; height:auto;}
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated{background: $activestage;}
+.tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{font-size: $txt14;}
+.tab-item .icon {font-size: $txt28; height: $txt28;}
+
+.padding0{padding:$none;}
+.paddingtop0{padding-top:$none;}
+.pane, .view{background:$gray1!important;}
+
+.item-icon-right .icon { right: 2px;  color:$item-icon-color;}
+.underline-none{text-decoration:none;}

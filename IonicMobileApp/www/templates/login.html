@@ -1,0 +1,23 @@
+
+
+<ion-view view-title="The Safety Pickle" name="login-view">
+
+  <ion-content>
+<div>
+<a href="#/home"><img src="img/logo.png" alt="The Safety Pickle" class="img-responsive" /></a>
+</div>
+<div class="padding">
+<center><h1>Welcome to <br>The Safety Pickle</h1></center>
+
+      <div class="list list-inset">
+          <label class="item item-input">
+              <input type="text" placeholder="Username" ng-model="data.username">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder="Password" ng-model="data.password">
+          </label>
+      </div>
+      <button class="button button-block button-balanced" ng-click="login()">Login</button>
+      </div>
+  </ion-content>
+</ion-view>

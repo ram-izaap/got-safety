@@ -1,0 +1,24 @@
+<ion-view view-title="The Safety Pickle">
+
+
+  <ion-content>
+
+<div>
+<a href="#/home"><img src="img/logo.png" alt="The Safety Pickle" class="img-responsive" /></a>
+</div>  
+
+<div class="padding">
+    <!-- Loop area -->
+ 
+<div class="list">
+
+<a class="item item-icon-right" ng-repeat="chat in news" href="#/tab/subcategory/{{chat.ID}}/{{chat.ItemsShown}}"><i class="icon ion-ios-arrow-right"></i> {{chat.Title}} <span class="badge badge-assertive">{{chat.NewItems}}</span></a>
+</div>
+
+</div>
+  </ion-content>
+</ion-view>
+
+
+
+       
