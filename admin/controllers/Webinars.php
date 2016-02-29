@@ -47,8 +47,8 @@ class Webinars extends Admin_controller {
         
         $str = '<a href="'.site_url('webinars/add_edit_webinars/{id}').'" class="table-link">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                       
+                        <i class="fa fa-pencil"></i>
                     </span>
                 </a>';
  
@@ -118,13 +118,13 @@ class Webinars extends Admin_controller {
           
             $form = $this->input->post();
             
-			if(!empty($_FILES['video_file']['tmp_name'])){ 
+			/*if(!empty($_FILES['video_file']['tmp_name'])){ 
 			  $upload_data = $this->do_upload();
 	
               $filename = (isset($upload_data['video_file']['file_name']))?$upload_data['video_file']['file_name']:"";
 			}else{
 				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
-			}
+			} */
 			
 			
 			//print $filename;exit;
@@ -136,6 +136,12 @@ class Webinars extends Admin_controller {
 				$form['is_active'] = "0";
 			}
 			
+			if(isset($form['all'])) { 
+				$form['all'] = $form['all'];	
+			}
+			else { 
+				$form['all'] = "0";
+			}
 			
 			$ins_data = array();
             $ins_data['title']       	= Ucfirst($form['title']);
@@ -146,9 +152,10 @@ class Webinars extends Admin_controller {
 			}else {
 				$ins_data['created_user']  = $form['user_id'];
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
+				$ins_data['all']  = $form['all'];
 			}
             $ins_data['created_date']  = date("Y-m-d");
-			$ins_data['video_file']  = $filename;
+			//$ins_data['video_file']  = $filename;
            
 			//$this->header_model->update('cub_search_nav_bar',$ins_data);
 			if(empty($edit_id)){
@@ -175,7 +182,7 @@ class Webinars extends Admin_controller {
                 $this->data['title']          = "EDIT WEBINARS";
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
-                $this->data['form_data']['slide_image'] = $this->data['form_data']['video_file'];
+                //$this->data['form_data']['slide_image'] = $this->data['form_data']['video_file'];
                 
             }
             else if($this->input->post()) {
@@ -188,7 +195,7 @@ class Webinars extends Admin_controller {
             {
                 $this->data['title']     = "ADD WEBINARS";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "");
+                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "","all" => "");
                 
             }
 		    

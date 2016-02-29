@@ -9,7 +9,7 @@ tinymce.init({
          "save table contextmenu directionality emoticons template paste textcolor colorpicker"
    ],
    content_css: "css/content.css",
-   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons", 
+   toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code", 
    relative_urls : false,
     remove_script_host : true,
  convert_urls : true,

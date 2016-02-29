@@ -46,6 +46,13 @@ class Attachment_model extends App_Model {
 		 $result = $this->db->get_where($table_name,$where);
         return $result->result_array();
 	}
+	
+	 function get_language_list($table_name,$where)
+    {
+		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
     
     
     

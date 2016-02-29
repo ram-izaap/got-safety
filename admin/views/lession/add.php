@@ -6,11 +6,18 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?php echo base_url("index.php/home"); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
+					
 					<li>
-						<a href="#"><?php echo $crumb;?></a>
+						
+						<a href="<?php echo base_url("index.php/lession"); ?>">Lesson</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					
+					<li>
+						<?php echo $crumb;?>
 						
 					</li>
 					
@@ -46,7 +53,20 @@
 					 <span class="vstar" <?php echo form_error('user_id', '<span class="help-block">', '</span>'); ?></span>
 				</div>
 			</div>
+			
+			
+			<div class="form-group">
+					<label class="col-md-2 control-label">All:
+					</label>
+					<div class="col-md-10">
+						<input type="checkbox" class="" name="all" id="all" value="1" 
+						<?php echo set_checkbox('all',1,((isset($form_data['all']) && $form_data['all'] == 1)?true:false));?>/>
+					</div>
+				</div>
+				
 			<?php } ?>
+			
+			
              
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title: <span class="required">

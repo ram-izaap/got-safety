@@ -14513,3 +14513,12 @@ Transparent Button
   background: transparent;
   color: #888;
 }
+
+
+.cen-align { width:65%; text-align:center;}
+.cen-align2 { width:40%; text-align:center;}
+
+.main-box-header .perpage {
+    padding: 5px 1px !important;
+    width: 45px !important;
+}

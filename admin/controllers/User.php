@@ -7,7 +7,7 @@ class User extends Admin_Controller
 	protected $_user_validation_rules = array(
 													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
 													array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-													array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required'),
+													//array('field' => 'language', 'label' => 'Password', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 												);
@@ -17,6 +17,7 @@ class User extends Admin_Controller
         parent::__construct();  
         
         $this->load->model('user_model');
+        
        
     }  
     
@@ -43,8 +44,8 @@ class User extends Admin_Controller
         
         $str = '<a href="'.site_url('user/add_edit_user/{id}').'" class="table-link">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                        
+                        <i class="fa fa-pencil"></i>
                     </span>
                 </a>';
  
@@ -77,6 +78,7 @@ class User extends Admin_Controller
     
     public function add_edit_user($edit_id = "")
     { 
+		//print_r($_POST);exit;
 		
 		if(is_logged_in()) {
 			 $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
@@ -85,11 +87,21 @@ class User extends Admin_Controller
 			
 			$id =  $this->session->userdata('admin_data')['id'];
             $role =  $this->session->userdata('admin_data')['role'];
-       
+            
+		$this->data['get_menu'] = $this->user_model->get_language("language");
+		
+		$role =  $this->session->userdata('admin_data')['role'];  
+              if($role == "1"){ 
+				if (!isset($_POST['language']) )
+					{ 
+						$this->form_validation->set_rules('language', 'Language', 'required');
+					} 
+		}
+		
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
-           // print_r($form);exit;
+            //print_r($form);exit;
             
            // print_r($form);exit;
 			if(isset($form['is_active'])) { 
@@ -103,17 +115,29 @@ class User extends Admin_Controller
 			$ins_data = array();
 			
 			//print $filename;exit;
-			
+			 $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
 			
             $ins_data['name']       	= $form['name'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['email']  = $form['email'];
-            $ins_data['password']  = md5($form['password']);
-            $ins_data['ori_password']  = $form['password'];
+            if($form['password'] == "") { 
+	
+					$ins_data['password']  = $edit_data[0]['password'];
+            }else {
+				
+				$ins_data['password']  = md5($form['password']);
+			}
+            //$ins_data['ori_password']  = $form['password'];
             $ins_data['role']  = 2;
             $ins_data['created_date']  = date("Y-m-d H:i:s");
             $ins_data['created_id']  = 8;
             
+            if ( isset($_POST['language']) )
+			{
+            $ins_data['language']  = implode(",",$form["language"]);
+		}else {
+			$ins_data['language'] = $edit_data[0]['language'];
+		}
            
 			if(empty($edit_id)){
 			
@@ -164,7 +188,7 @@ class User extends Admin_Controller
 					$this->data['title']          = "ADD";
 				}
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => ""); 
+                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","language" => ""); 
             }
 		
 		 

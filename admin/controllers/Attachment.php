@@ -50,8 +50,8 @@ class Attachment extends Admin_controller {
         
         $str = '<a href="'.site_url('attachment/add_edit_attachment/{id}').'" class="table-link">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                        
+                        <i class="fa fa-pencil"></i>
                     </span>
                 </a>';
  
@@ -92,6 +92,12 @@ class Attachment extends Admin_controller {
 		if(is_logged_in()) {
 		  
              //$this->layout->add_javascripts(array('product'));
+             
+             $user_id =  $this->session->userdata('admin_data')['id']; 
+            
+             $get_menu = $this->attachment_model->get_language_list("users",array('id'=>$user_id));
+            
+             $this->data['lang_list'] = $get_menu[0]['language'];
              
 			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 			

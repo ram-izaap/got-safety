@@ -35,9 +35,10 @@ $config['lession_index'] = array(
 	"base_url"	=> 	'/lession/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'attach_link', 'sortable' => FALSE, 'default_view'=>1),
-							//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -126,9 +127,10 @@ $config['user_index'] = array(
 	"base_url"	=> 	'/user/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'name'=>array('name'=>'Name', 'data_type' => 'admin_client_list', 'sortable' => FALSE, 'default_view'=>1),
+							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
 							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),                             
+                             'id'=>array('name'=>'Add User', 'data_type' => 'admin_client_list', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

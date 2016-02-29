@@ -21,8 +21,8 @@
 							<li><a href="#">Select All</a></li>
 						<li><a  onclick="chk_all();">Select All</a></li>
 							<li><a onclick="unchk_all();">UnSelect All</a></li>
-						</ul>-->
-                        <input type="checkbox" onclick="select_all(this);" value="1"  id="check_all"  />
+						</ul>
+                        <input type="checkbox" onclick="select_all(this);" value="1"  id="check_all"  />-->
                         
 				</div></th>
 									<?php  $cols = 0; foreach ($fields as $field => $values):$cols++;?>

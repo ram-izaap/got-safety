@@ -15,7 +15,7 @@ class Home extends App_Controller {
     public function index()
     {
 
-		
+		//$this->data['info'] = $this->home_model->get_info("add_pages",array("page_id" => "6"));
      	$this->layout->view('home/home','frontend');
         
     }

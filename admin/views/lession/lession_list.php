@@ -19,14 +19,15 @@
 						</li>
 						<li class="active"><span>Safety Lesson</span>
 						</li>
+						
 					</ol>
 					<div class="clearfix">
 						
 						 <div class="pull-right top-page-ui">
 							 
-							  <a href="<?php echo site_url('lession/lesson_content');?>" class="btn btn-success">
+							<?php /*  <a href="<?php echo site_url('lession/lesson_content');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> Add Content
-	                        </a>
+	                        </a> */ ?>
 							  
 	                        <a href="<?php echo site_url('lession/add_edit_lession');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New

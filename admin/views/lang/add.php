@@ -6,11 +6,18 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?php echo base_url("index.php/home"); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
+					
 					<li>
-						<a href="#"><?php echo $crumb;?></a>
+						
+						<a href="<?php echo base_url("index.php/lang"); ?>">Language</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					
+					<li>
+						<?php echo $crumb;?>
 						
 					</li>
 					

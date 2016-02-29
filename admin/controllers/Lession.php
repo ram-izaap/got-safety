@@ -52,8 +52,8 @@ class Lession extends Admin_controller {
         
         $str = '<a href="'.site_url('lession/add_edit_lession/{id}').'" class="table-link">
                     <span class="fa-stack">
-                        <i class="fa fa-square fa-stack-2x"></i>
-                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                       
+                        <i class="fa fa-pencil"></i>
                     </span>
                 </a>';
  
@@ -125,6 +125,13 @@ class Lession extends Admin_controller {
 				$form['is_active'] = "0";
 			}
 			
+			if(isset($form['all'])) { 
+				$form['all'] = $form['all'];	
+			}
+			else { 
+				$form['all'] = "0";
+			}
+			
 			$ins_data = array();
 			
 			//print $filename;exit;
@@ -139,6 +146,7 @@ class Lession extends Admin_controller {
 			}else {
 				$ins_data['created_user']  = $form['user_id'];
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
+				$ins_data['all']  = $form['all'];
 			}
             $ins_data['updated_date']  = date("Y-m-d H:i:s");
             
@@ -179,7 +187,7 @@ class Lession extends Admin_controller {
             {
                 $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","all" => ""); 
             }
 		
 		 
