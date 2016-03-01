@@ -211,6 +211,7 @@ class User extends Admin_Controller
         if(!empty($id)) {
             
             $this->db->query('delete from users where id in ('.$id.')');
+             $this->db->query('delete from users where created_id in ('.$id.')');
             
            // $this->service_message->set_flash_message('record_delete_success');
             return true;  
