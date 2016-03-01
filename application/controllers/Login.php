@@ -99,11 +99,18 @@ class Login extends App_Controller {
                 if(!empty($add_user)) {
                     //$this->service_message->set_flash_message('signup_success');
                 }    
+                $url = "http://izaapinnovations.com/got_safety/admin/";
+                $msg = "Your Backend Login link as client ".$url."
+Client username: ".$form['name']."
+Password: ".$form['password']."
+
+
+Thanks you..";
                 
                 $this->email->from('admin@gotsafety.com', 'Gotsafety');
 				$this->email->to($form['email']);
 				$this->email->subject('Signup Successfully');
-				$this->email->message('Thank you');
+				$this->email->message($msg);
 				$this->email->send();
                 
                 redirect("index.php/login");
