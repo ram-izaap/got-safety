@@ -257,7 +257,7 @@ class Api extends App_Controller {
 	{
 		if($_POST){ 
 			
-			$id = $this->input->post("lession_id");
+			$id = $this->input->post("lesson_id");
 			
 			$data = $this->api_model->get_detail("lession_attachment",array("lession_id" => $id,"is_active" => 1));
 			
@@ -269,7 +269,7 @@ class Api extends App_Controller {
 					$f_name = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name'];
 					$f_name_quiz = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name_quiz'];
 				
-				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson attachment available","id" => $id, "lession_id" => $lession_id, "language" => $language, "f_name" => $f_name, "f_name_quiz" => $f_name_quiz));
+				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson attachment available","id" => $id, "lesson_id" => $lession_id, "language" => $language, "f_name" => $f_name, "f_name_quiz" => $f_name_quiz));
 				}
 				$user_response["lessonlist"] = $response;
 				echo json_encode($user_response);
