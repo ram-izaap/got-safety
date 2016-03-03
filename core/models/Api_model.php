@@ -106,10 +106,33 @@ class Api_model extends App_Model {
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where($where);
+		 $this->db->or_where('all',1);
 		$this->db->order_by('created_date','DESC');
 		$query = $this->db->get()->result_array();
 		return $query;
 	}
+	
+	
+	function get_lession_detail($table_name,$where)
+    {
+		// $result = $this->db->get_where($table_name,$where);
+        //return $result->result_array();
+        
+        $this->db->select();
+        $this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->or_where('all',1);
+        $result = $this->db->get();
+        return $result->result_array();
+		
+	}
+	
+	
+	function insert($table_name,$data)
+    {
+        return $this->db->insert($table_name,$data);
+    }
+   
     
     
 }

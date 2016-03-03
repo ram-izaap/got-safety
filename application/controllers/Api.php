@@ -2,6 +2,16 @@
 
 require_once(COREPATH."controllers/App_controller.php");
 class Api extends App_Controller {
+	
+				protected $_signup_validation_rules = array(
+													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+													array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+                                                    array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
+                                                    array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]')
+                                                   
+												);
+												
+	
     function __construct()
     {
         parent::__construct();
@@ -27,8 +37,9 @@ class Api extends App_Controller {
 				$user_id = $list['id'];
 				$user_name = $list['name'];
 				$created_id = $list['created_id'];
+				$role = $list['role'];
 				
-				$response[] = array("user_list" => array("httpCode" => 200 , "Message" => "User available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id));
+				$response[] = array("user_list" => array("httpCode" => 200 , "Message" => "User available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id,"role" => $role));
 			}
 			$user_response["userlist"] = $response;
 			echo json_encode($user_response);
@@ -54,8 +65,9 @@ class Api extends App_Controller {
 				$user_id = $list['id'];
 				$user_name = $list['name'];
 				$created_id = $list['created_id'];
+				$role = $list['role'];
 				
-				$response[] = array("client_list" => array("httpCode" => 200 , "Message" => "Client available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id));
+				$response[] = array("client_list" => array("httpCode" => 200 , "Message" => "Client available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id,"role" => $role));
 			}
 			$client_response["clientlist"] = $response;
 			echo json_encode($client_response);
@@ -307,7 +319,7 @@ class Api extends App_Controller {
 			}
 			
 			
-			$data = $this->api_model->get_detail("lession",array("created_user" => $created_id));
+			$data = $this->api_model->get_lession_detail("lession",array("created_user" => $created_id));
 			
 			if(count($data) > 0){
 				foreach($data as $list){
@@ -408,6 +420,69 @@ class Api extends App_Controller {
 		exit;
 		
 	} 
+	
+	
+	public function registration()
+	{
+		
+		if($_POST) {
+			
+			 $this->load->library('email');
+			
+			$name = $this->input->post("name");
+			$email = $this->input->post("email");
+			$password = $this->input->post("password");
+			$con_password = $this->input->post("con_password");
+			
+			$this->form_validation->set_rules($this->_signup_validation_rules);
+			
+			if($this->form_validation->run()) {   
+               
+                $form = $this->input->post();
+               
+                $ins_data                 = array();
+                $ins_data['name']        = $form['name'];
+                $ins_data['email']  = $form['email'];
+                $ins_data['role']  = 2;
+                $ins_data['password']  = md5($form['password']);
+                $ins_data['created_date']  =  date("Y-m-d H:i:s");
+                $ins_data['is_active']  = 1;
+                
+                $add_user    = $this->api_model->insert("users",$ins_data);
+                
+                $url = "http://izaapinnovations.com/got_safety/admin/";
+                $msg = "Your Backend Login link as client ".$url."
+						Client username: ".$form['name']."
+						Password: ".$form['password']."
+
+
+						Thanks you..";
+                
+                $this->email->from('admin@gotsafety.com', 'Gotsafety');
+				$this->email->to($form['email']);
+				$this->email->subject('Signup Successfully');
+				$this->email->message($msg);
+				$this->email->send();
+				
+				$response = array("response" => array("httpCode" => 200 , "Message" => "Register successfully" ));
+				echo json_encode($response);
+				exit;
+                
+            } else {
+				
+				$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid entry check again" ));
+				echo json_encode($response);
+				exit;
+			}
+            
+			
+			
+		}
+		
+		
+		
+		
+	}
 
 
 
