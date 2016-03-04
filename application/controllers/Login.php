@@ -48,7 +48,7 @@ class Login extends App_Controller {
             else{ 
 				
 				// $this->service_message->set_flash_message('login_unsuccess');
-				redirect("index.php/login");
+				redirect("login");
 			}
             
         }
@@ -113,7 +113,7 @@ Thanks you..";
 				$this->email->message($msg);
 				$this->email->send();
                 
-                redirect("index.php/login");
+                redirect("login");
             }
             
                 if($this->input->post()) {

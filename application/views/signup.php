@@ -24,9 +24,9 @@
                            <!-- Begin | Register Form -->
                             <form id="register-form" method="post" >
                               <div class="switch">
-                                 <a href="<?php echo base_url('index.php/login'); ?>" title="Login" id="register_login_btn">login</a>
+                                 <a href="<?php echo base_url('login'); ?>" title="Login" id="register_login_btn">login</a>
                                  or
-                                 <a href="<?php echo base_url('index.php/login/signup'); ?>"  id="login_register_btn" title="Register" class="active">Register</a>
+                                 <a href="<?php echo base_url('login/signup'); ?>"  id="login_register_btn" title="Register" class="active">Register</a>
                              </div>
                                 <div class="">
                                     <div id="div-register-msg">

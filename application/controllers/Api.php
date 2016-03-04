@@ -1,7 +1,9 @@
 <?php if(!defined("BASEPATH")) exit("No direct script access allowed");
 
-require_once(COREPATH."controllers/App_controller.php");
-class Api extends App_Controller {
+//require_once(COREPATH."controllers/App_controller.php");
+require_once(COREPATH."libraries/REST_Controller.php");
+
+class Api extends REST_Controller {
 	
 				protected $_signup_validation_rules = array(
 													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
@@ -16,6 +18,7 @@ class Api extends App_Controller {
     {
         parent::__construct();
         $this->load->model(array('api_model'));
+         $key  = $this->get('X-APP-KEY');
         
     }
 
@@ -304,12 +307,16 @@ class Api extends App_Controller {
 	
 	/**  Get particular user lesson details after login  **/
     
-	public function get_user_lesson_list()
+	public function get_user_lesson_list_post()
 	{
-		if($_POST){ 
+		
+			if((!$this->post('user_id')) && (!$this->post('created_id') )) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
 			
-			$user_id = $this->input->post("user_id");
-			$created_id = $this->input->post("created_id");
+			$user_id = $this->post("user_id");
+			$created_id = $this->post("created_id");
 			
 			if($created_id == '8'){
 				$created_id = $user_id;
@@ -321,29 +328,26 @@ class Api extends App_Controller {
 			
 			$data = $this->api_model->get_lession_detail("lession",array("created_user" => $created_id));
 			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$id = $list['id'];
-				$title = $list['title'];
-				$content = $list['content'];
-				$created_user = $list['created_user'];
-				
-				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson available","id" => $id, "title" => $title, "content" => $content, "created_user" => $created_user));
+					$user[$i]['id'] =$list['id']; 
+					//$id = $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['content'] = $list['content'];
+				$user[$i]['created_user'] = $list['created_user'];
+				$i=$i+1;
 				}
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				
+				return $this->response(array( "status" => "success","user"=> $user),200);
+				
 			}else{
-				$response[] = array("lesson_list" => array("httpCode" => 401 , "Message" => "No Lesson available" ));
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 		
 	} 
 	
