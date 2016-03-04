@@ -3,20 +3,21 @@ Header always set Access-Control-Allow-Methods "POST, GET, PUT, OPTIONS, PATCH, 
 Header always set Access-Control-Allow-Headers "X-Accept-Charset,X-Accept,Content-Type,Authorization,uid,authorizationToken"
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteBase /
-RewriteCond %{HTTPS} !=on
-RewriteCond $1 !^(index\.php|images|robots\.txt)
 
-RewriteCond %{HTTPS} =on
-RewriteCond $1 !^(index\.php|images|robots\.txt)
-RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond $1 !^(index\.php|images|robots\.txt)
 RewriteRule ^(.*)$ index.php/$1 [L]
+
 </IfModule>
+
+<IfModule mod_php5.c>
+ php_value memory_limit 300M
+</IfModule>
+
 
 <IfModule !mod_rewrite.c>
     ErrorDocument 404 /index.php
 </IfModule>
+

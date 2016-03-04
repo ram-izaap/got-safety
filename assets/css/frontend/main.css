@@ -309,6 +309,8 @@ color: #fff;}
 
 .content-bar{ max-height:801px;overflow-x:hidden;}
 
+.vstar {color:red !important;font-size:12px;}
+
 
 
 @media screen  and (min-width: 900px)  and (max-width: 768px)  { 

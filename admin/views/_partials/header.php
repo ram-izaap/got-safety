@@ -618,13 +618,10 @@
 							<ul class="sub-menu">
 								<li> 
 									<a href="<?php echo site_url('user'); ?>">
-									  Client Management</a>
-								</li>
-								
-								<li> 
-									<a href="<?php echo site_url('client/add_edit_user'); ?>">
 									  Add User</a>
 								</li>
+								
+								
 								
 							</ul>
 						</li>

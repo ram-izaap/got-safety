@@ -58,7 +58,7 @@ class Login_Model extends CI_Model
         
    }
    
-   public function login_check($name,$pass)
+	public function login_check($name,$pass)
     {
         $this->db->select('*');
         $this->db->from('users');
@@ -67,6 +67,12 @@ class Login_Model extends CI_Model
 
         return $this->db->get()->row_array();
          
+    }
+    
+    
+    function insert($table_name,$data)
+    {
+        return $this->db->insert($table_name,$data);
     }
    
    
