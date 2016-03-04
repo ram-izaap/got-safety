@@ -1,0 +1,54 @@
+<ion-view view-title="Safety lessons">
+  <ion-content>
+
+		<div class=" bar-header">
+		  <label class="item item-input item-select">
+				  <div class="input-label">
+		            language
+		          </div>
+			    <select>
+			      <option selected>English</option>
+			      <option>Spanish</option>
+			    </select>
+		  </label>
+		  
+		</div>
+		
+
+		<div class="bar bar-header item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-ios7-search placeholder-icon"></i>
+			    <input type="search" placeholder="Search">
+			  </label>			  
+		</div>
+		
+
+		<div class="padding">
+	    <!-- Loop area -->
+			 
+			<div class="list">
+			     <a class="item item-icon-right" ng-repeat="lesson in safety" >
+			     <i class="icon ion-ios-arrow-right"></i> {{lesson.lesson_list}}
+			     </a>
+			</div>
+<!--ng-repeat="lesson in safety"href="#/tab/lessonView"-->
+			  
+        </div>
+    
+
+    <!-- Loop area -->
+
+
+
+
+ 
+
+  </ion-content>
+</ion-view>
+
+
+<!-- use it for how much new thing posted <span class="badge badge-assertive">{{chat.NewItems}}</span>-->
+		</div>
+ 
+  </ion-content>
+</ion-view>

@@ -186,6 +186,28 @@ angular.module('starter.services', [])
 
 })
 
+
+.factory('safetyLessons', function($http, apiUrl) {
+
+  var safety = [];
+  return {
+    get: function() {
+
+        return $http.post(apiUrl+'/get_user_lesson_list',{ user_id:38, created_id:29 }).then(function(response)
+        {
+          console.log(response);
+           safety = response.data.result;
+
+          
+          return safety;
+          
+        });
+       
+    },
+  };
+})
+
+
 .factory('broadcast', function ($rootScope, $document) {
     var _events = {
         onPause: 'onPause',

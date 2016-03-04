@@ -6,8 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://safetypickle.com/api/v1');
+
+  angular.module('starter.constants',[])  
+  .constant('apiUrl', 'http://izaapinnovations.com/got_safety/api');
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.constants', 'starter.filters'])
 
@@ -92,8 +93,50 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('tab', {
       url: '/tab',
       abstract: true,
-      templateUrl: 'templates/tabs.html'
+      templateUrl: 'templates/menu.html'
     })
+
+
+  .state('tab.webinars', {
+    url: '/webinars',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/webinars.html',
+        controller: 'WebinarsCtrl'
+      }
+    }
+  })
+
+  .state('tab.webinars.webinarView', {
+    url: '/webinarView',
+    views: {
+      'webinarView': {
+        templateUrl: 'templates/webinarView.html',
+        controller: 'WebinarViewCtrl'
+      }
+    }
+  })
+
+
+  .state('tab.safetyLessons', {
+    url: '/safetyLessons',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/safetyLessons.html',
+        controller: 'safetyLessonsCtrl'
+      }
+    }
+  })
+
+  .state('tab.safetyLessons.lessonView', {
+    url: '/lessonView',
+    views: {
+      'lessonView': {
+        templateUrl: 'templates/lessonView.html',
+        controller: 'LessonViewCtrl'
+      }
+    }
+  })
 
   .state('tab.weekly-pickle', {
     url: '/weekly-pickle',
@@ -105,7 +148,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.safetylesson', {
+  /*.state('tab.safetylesson', {
     url: '/safetylesson',
     views: {
       'tab-safetylesson': {
@@ -123,7 +166,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 		    controller: 'NewsCtrl'
       }
     }
-  })
+  })*/
 
   .state('tab.subcategory', {
     url: '/subcategory/:newsId/:itemsShown',
@@ -137,7 +180,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/weekly-pickle');
+  //$urlRouterProvider.otherwise('/tab/weekly-pickle'); 
+  $urlRouterProvider.otherwise('/tab/webinars');
 
   //$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
   $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS
