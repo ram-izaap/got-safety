@@ -7,8 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 
 
-  angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://izaapinnovations.com/got_safety/api');
+angular.module('starter.constants',[])  
+  .constant('apiUrl', 'http://localhost/got_safety/api');
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.constants', 'starter.filters'])
 
@@ -181,7 +181,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/weekly-pickle'); 
-  $urlRouterProvider.otherwise('/tab/webinars');
+  $urlRouterProvider.otherwise('/tab/safetyLessons');
 
   //$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
   $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS

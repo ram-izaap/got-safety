@@ -73,7 +73,11 @@ angular.module('starter.controllers', [])
 .controller('safetyLessonsCtrl', function($scope,$http, safetyLessons, $ionicLoading) 
 { 
   $ionicLoading.show({ noBackdrop:true });
-  safetyLessons.get().then(function(data){ $scope.safety = data; $ionicLoading.hide();  });
+  safetyLessons.get().then(function(data)
+  { 
+    $scope.safety = data; $ionicLoading.hide();
+    alert(safety);
+    });
 })
 
 

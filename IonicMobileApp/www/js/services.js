@@ -193,13 +193,12 @@ angular.module('starter.services', [])
   return {
     get: function() {
 
-        return $http.post(apiUrl+'/get_user_lesson_list',{ user_id:38, created_id:29 }).then(function(response)
+        return $http.post(apiUrl+'/get_user_lesson_list',{ 'user_id':'38', 'created_id':'29', 'X-APP-KEY': 'test'}).then(function(response)
         {
-          console.log(response);
-           safety = response.data.result;
-
           
-          return safety;
+           safety = response.data.result;
+         return safety;
+         
           
         });
        
