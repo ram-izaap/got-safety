@@ -307,16 +307,16 @@ class Api extends REST_Controller {
 	
 	/**  Get particular user lesson details after login  **/
     
-	public function get_user_lesson_list_post()
+	public function get_user_lesson_list_get()
 	{
 		
-			if((!$this->post('user_id')) && (!$this->post('created_id') )) 
+			if((!$this->get('user_id')) && (!$this->get('created_id') )) 
     		{
     			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
     		}
 			
-			$user_id = $this->post("user_id");
-			$created_id = $this->post("created_id");
+			$user_id = $this->get("user_id");
+			$created_id = $this->get("created_id");
 			
 			if($created_id == '8'){
 				$created_id = $user_id;
