@@ -210,7 +210,6 @@ angular.module('starter.services', [])
   return {
               all: function() 
               {
-
                     return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
                     {
                         var l   = response.data;

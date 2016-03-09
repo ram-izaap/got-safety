@@ -71,7 +71,6 @@ angular.module('starter.controllers', [])
       $ionicLoading.show({ noBackdrop:true });
       safetyLessons.all().then(function(data)
       { 
-
         $scope.safety = data; 
         $ionicLoading.hide();
 
