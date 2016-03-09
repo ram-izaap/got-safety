@@ -8,7 +8,7 @@
 
 
 angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://localhost/got_safety/api');
+  .constant('apiUrl', 'http://localhost/got-safety/api');
 
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.constants', 'starter.filters'])
 
@@ -133,7 +133,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'lessonView': {
         templateUrl: 'templates/lessonView.html',
-        controller: 'LessonViewCtrl'
+        controller: 'safetyLessonsCtrl'
       }
     }
   })

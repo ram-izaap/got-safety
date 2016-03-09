@@ -29,11 +29,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('LessonViewCtrl', function($scope, $state, $http, News, $ionicLoading) 
-{
-    $ionicLoading.show({ noBackdrop:true });
-  News.all().then(function(data){  $scope.news = data; $ionicLoading.hide(); });   
-})
+
 
 
 
@@ -70,14 +66,31 @@ angular.module('starter.controllers', [])
 })
 */
 
-.controller('safetyLessonsCtrl', function($scope,$http, safetyLessons, $ionicLoading) 
+.controller('safetyLessonsCtrl', function($scope,$http, safetyLessons, $state, $ionicLoading) 
 { 
-  $ionicLoading.show({ noBackdrop:true });
-  safetyLessons.get().then(function(data)
-  { 
-    $scope.safety = data; $ionicLoading.hide();
-    alert(safety);
-    });
+      $ionicLoading.show({ noBackdrop:true });
+      safetyLessons.all().then(function(data)
+      { 
+
+        $scope.safety = data; 
+        $ionicLoading.hide();
+
+        $scope.detailView = function ()
+        {
+           $state.go('tab.safetyLessons.lessonView');
+        }
+        
+     });
+ 
+ })
+  
+
+
+
+.controller('LessonViewCtrl', function($scope, $state, $http, News, $ionicLoading) 
+{
+    $ionicLoading.show({ noBackdrop:true });
+  News.all().then(function(data){  $scope.news = data; $ionicLoading.hide(); });   
 })
 
 

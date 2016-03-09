@@ -187,7 +187,7 @@ angular.module('starter.services', [])
 })
 
 
-.factory('safetyLessons', function($http, apiUrl) {
+/*.factory('safetyLessons', function($http, apiUrl) {
 
   var safety = [];
   return {
@@ -197,14 +197,49 @@ angular.module('starter.services', [])
         {
           
            safety = response.data.result;
-         return safety;
-         
           
         });
        
-    },
+    },JSON.stringify
   };
+})*/
+
+.factory('safetyLessons', function($http, apiUrl) {
+
+  var safety = [];
+  return {
+              all: function() 
+              {
+
+                    return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var l   = response.data;
+                        var usr = l.user;
+                            
+                            if(usr.length > 0)
+                            {
+                               for(var j = 0; j < usr.length; j++)
+                               {
+                                if(j>1)
+                                break;
+                               //alert(usr[1].id);
+                                safety.push(usr[j]);
+                               }
+                            }
+                        
+                        return safety;                 
+                    });
+                 
+              },
+
+              
+
+        };
+ 
 })
+
+
+
 
 
 .factory('broadcast', function ($rootScope, $document) {
