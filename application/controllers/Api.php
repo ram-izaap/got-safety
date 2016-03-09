@@ -31,95 +31,80 @@ class Api extends REST_Controller {
     
     /**  get all users list  **/
     
-	public function get_user_list()
+	public function get_user_list_get()
 	{
 		$data = $this->api_model->get_user_list("users",array("role"=> 3,"is_active" => 1));
-		
+		$user = array();$i=0;
 		if(count($data) > 0){
 			foreach($data as $list){
-				$user_id = $list['id'];
-				$user_name = $list['name'];
-				$created_id = $list['created_id'];
-				$role = $list['role'];
-				
-				$response[] = array("user_list" => array("httpCode" => 200 , "Message" => "User available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id,"role" => $role));
+				$user[$i]['user_id'] = $list['id'];
+				$user[$i]['user_name'] = $list['name'];
+				$user[$i]['created_id'] = $list['created_id'];
+				$user[$i]['role'] = $list['role'];
+				$i=$i+1;
 			}
-			$user_response["userlist"] = $response;
-			echo json_encode($user_response);
-			exit;
-		}else{
-			$response[] = array("user_list" => array("httpCode" => 401 , "Message" => "No user available" ));
-			$user_response["userlist"] = $response;
-			echo json_encode($user_response);
-			exit;
-		}
+			return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+			}
 	} 
 	
 	
 	
 	/**  get all Client list  **/
     
-	public function get_client_list()
+	public function get_client_list_get()
 	{
 		$data = $this->api_model->get_user_list("users",array("role"=> 2,"is_active" => 1));
-		
+		$user = array();$i=0;
 		if(count($data) > 0){
 			foreach($data as $list){
-				$user_id = $list['id'];
-				$user_name = $list['name'];
-				$created_id = $list['created_id'];
-				$role = $list['role'];
-				
-				$response[] = array("client_list" => array("httpCode" => 200 , "Message" => "Client available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id,"role" => $role));
+				$user[$i]['user_id'] = $list['id'];
+				$user[$i]['user_name'] = $list['name'];
+				$user[$i]['created_id'] = $list['created_id'];
+				$user[$i]['role'] = $list['role'];
+				$i=$i+1;
 			}
-			$client_response["clientlist"] = $response;
-			echo json_encode($client_response);
-			exit;
+			return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+			}
 			
-		}else{
-			$response[] = array("client_list" => array("httpCode" => 401 , "Message" => "No client available" ));
-			$client_response["clientlist"] = $response;
-			echo json_encode($client_response);
-			exit;
-		}
 	} 
 	
 	
 	
 	/**  get particular user details  **/
     
-	public function get_user_detail()
+	public function get_user_detail_get()
 	{
-		if($_POST){ 
-			
-			$user_id = $this->input->post("user_id");
-			$role = $this->input->post("role");
+		
+			if((!$this->get('user_id')) && (!$this->get('role') )) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+    		
+			$user_id = $this->get("user_id");
+			$role = $this->get("role");
 			
 			$data = $this->api_model->get_user_detail("users",array("role"=> $role,"id" => $user_id));
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$user_id = $list['id'];
-					$user_name = $list['name'];
-					$created_id = $list['created_id'];
-					$is_active = $list['is_active'];
+					$user[$i]['user_id'] = $list['id'];
+					$user[$i]['user_name'] = $list['name'];
+					$user[$i]['created_id'] = $list['created_id'];
+					$user[$i]['is_active'] = $list['is_active'];
+					$user[$i]['role'] = $list['role'];
+					$i=$i+1;
 					
-					$response[] = array("user_list" => array("httpCode" => 200 , "Message" => "User details available","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id ,"is_active" => $is_active));
 				}
-				$user_response["userlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response[] = array("user_list" => array("httpCode" => 401 , "Message" => "No User available" ));
-				$user_response["userlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 	} 
 
 
@@ -166,64 +151,58 @@ class Api extends REST_Controller {
 
   /**  get all lesson list  **/
     
-	public function get_all_lesson_list()
+	public function get_all_lesson_list_get()
 	{
 		$data = $this->api_model->get_all_lesson_list("lession",array("is_active" => 1));
-		
+		$user = array();$i=0;
 		if(count($data) > 0){
 			foreach($data as $list){
-				$id = $list['id'];
-				$title = $list['title'];
-				$content = $list['content'];
-				$created_user = $list['created_user'];
 				
-				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson available","id" => $id, "title" => $title, "content" => $content, "created_user" => $created_user));
+				$user[$i]['id']= $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['content']  = $list['content'];
+				$user[$i]['created_user'] = $list['created_user'];
+				
+				$i=$i+1;
+				
 			}
-			$user_response["lessonlist"] = $response;
-			echo json_encode($user_response);
-			exit;
+			return $this->response(array( "status" => "success","user"=> $user),200);
 		}else{
-			$response[] = array("lesson_list" => array("httpCode" => 401 , "Message" => "No Lesson available" ));
-			$user_response["lessonlist"] = $response;
-			echo json_encode($user_response);
-			exit;
+			return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 		}
 	} 
 	
 	
 	/**  get particular lesson details  **/
     
-	public function get_lesson_details()
+	public function get_lesson_details_get()
 	{
-		if($_POST){ 
-			
-			$id = $this->input->post("id");
+		
+			if((!$this->get('id')) ) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+    		
+			$id = $this->get("id");
 			
 			$data = $this->api_model->get_detail("lession",array("id" => $id));
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$id = $list['id'];
-				$title = $list['title'];
-				$content = $list['content'];
-				$created_user = $list['created_user'];
+					$user[$i]['id']= $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['content']  = $list['content'];
+				$user[$i]['created_user'] = $list['created_user'];
 				
-				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson available","id" => $id, "title" => $title, "content" => $content, "created_user" => $created_user));
+				$i=$i+1;
+				
 				}
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response[] = array("lesson_list" => array("httpCode" => 401 , "Message" => "No Lesson available" ));
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 		
 	} 
 	
@@ -231,75 +210,69 @@ class Api extends REST_Controller {
 	
 	/**  Search lesson based on title  **/
     
-	public function search_lesson()
+	public function search_lesson_get()
 	{
-		if($_POST){ 
+			if((!$this->get('title')) ) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
 			
-			$title = $this->input->post("title");
+			$title = $this->get("title");
 			
 			$data = $this->api_model->search_result("lession",$title);
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$id = $list['id'];
-				$title = $list['title'];
-				$content = $list['content'];
-				$created_user = $list['created_user'];
+					$user[$i]['id'] = $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['content'] = $list['content'];
+				$user[$i]['created_user'] = $list['created_user'];
 				
-				$response[] = array("search_list" => array("httpCode" => 200 , "Message" => "Lesson available","id" => $id, "title" => $title, "content" => $content, "created_user" => $created_user));
+				$i=$i+1;
+				
 				}
-				$user_response["searchlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response[] = array("search_list" => array("httpCode" => 401 , "Message" => "No Lesson available" ));
-				$user_response["searchlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 		
 	} 
 	
 	
 	/**  Get lesson attachment list **/
 	
-	public function get_lesson_attachment()
+	public function get_lesson_attachment_get()
 	{
-		if($_POST){ 
-			
-			$id = $this->input->post("lesson_id");
+		
+			if((!$this->get('lesson_id')) ) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+    		
+			$id = $this->get("lesson_id");
 			
 			$data = $this->api_model->get_detail("lession_attachment",array("lession_id" => $id,"is_active" => 1));
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$id = $list['id'];
-					$lession_id = $list['lession_id'];
-					$language = $list['language'];
-					$f_name = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name'];
-					$f_name_quiz = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name_quiz'];
+					$user[$i]['id'] = $list['id'];
+					$user[$i]['lession_id'] = $list['lession_id'];
+					$user[$i]['language'] = $list['language'];
+					$user[$i]['f_name'] = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name'];
+					$user[$i]['f_name_quiz'] = get_img_dir().'assets/images/admin/lession_attachment/'.$list['f_name_quiz'];
+				$i=$i+1;
 				
-				$response[] = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson attachment available","id" => $id, "lesson_id" => $lession_id, "language" => $language, "f_name" => $f_name, "f_name_quiz" => $f_name_quiz));
 				}
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response[] = array("lesson_list" => array("httpCode" => 401 , "Message" => "No Lesson attachment available" ));
-				$user_response["lessonlist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 		
 	} 
 	
@@ -354,25 +327,22 @@ class Api extends REST_Controller {
 
 	/**  Lesson content frontend display **/
 	
-	public function get_lesson_content()
+	public function get_lesson_content_get()
 	{
 		
 			$data = $this->api_model->get_lession_content("lesson_content");
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
 					
-					$id = $list['id'];
-					$content = $list['content'];
+					$user[$i]['id']= $list['id'];
+					$user[$i]['content'] = $list['content'];
 				
-				$response = array("lesson_list" => array("httpCode" => 200 , "Message" => "Lesson content available","id" => $id,"content" => $content));
+				$i=$i+1;
 				}
-				echo json_encode($response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response = array("lesson_list" => array("httpCode" => 401 , "Message" => "No Lesson content available" ));
-				echo json_encode($response);
-				exit;
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
 	} 
@@ -381,12 +351,16 @@ class Api extends REST_Controller {
 	
 	/**  Get particular user Webinars details after login  **/
     
-	public function get_user_webinars_list()
+	public function get_user_webinars_list_get()
 	{
-		if($_POST){ 
+		
+		if((!$this->get('user_id')) && (!$this->get('created_id') )) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
 			
-			$user_id = $this->input->post("user_id");
-			$created_id = $this->input->post("created_id");
+			$user_id = $this->get("user_id");
+			$created_id = $this->get("created_id");
 			
 			if($created_id == '8'){
 				$created_id = $user_id;
@@ -397,31 +371,23 @@ class Api extends REST_Controller {
 			
 			
 			$data = $this->api_model->get_webinars_detail("webinars",array("created_user" => $created_id));
-			
+			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){
-					$id = $list['id'];
-				$title = $list['title'];
-				$link = $list['link'];
-				$created_user = $list['created_user'];
-				$created_date = $list['created_date'];
+					$user[$i]['id'] = $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['link'] = $list['link'];
+				$user[$i]['created_user'] = $list['created_user'];
+				$user[$i]['created_date'] = $list['created_date'];
 				
-				$response[] = array("webinars_list" => array("httpCode" => 200 , "Message" => "Webinars available","id" => $id, "title" => $title, "link" => $link, "created_user" => $created_user, "created_date" => $created_date));
+				$i=$i+1;
 				}
-				$user_response["webinarslist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				$response[] = array("webinars_list" => array("httpCode" => 401 , "Message" => "No Webinars available" ));
-				$user_response["webinarslist"] = $response;
-				echo json_encode($user_response);
-				exit;
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 		
 	} 
 	
