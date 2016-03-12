@@ -4,13 +4,10 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{lesson.tite}}">
-  <ion-content class="padding">
-    
-    <p>
-      {{lesson.content}}
-    </p>
-    <ion-nav-view name="lessonView">
-        		</ion-nav-view>
+<ion-view view-title="{{Lessons.title}}">
+  <ion-content>  
+      <div class="padding">        
+        <p ng-bind-html="Lessons.content"></p>
+        </div>     		
   </ion-content>
 </ion-view>

@@ -21,14 +21,25 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('WebinarsCtrl', function($scope, $state, $http, News, $ionicLoading) 
+.controller('WebinarsCtrl', function($scope, $state, $http, WebinarService, $ionicLoading) 
 {
-  $ionicLoading.show({ noBackdrop:true });
-  News.all().then(function(data){  $scope.news = data; $ionicLoading.hide(); });   
+  //$ionicLoading.show({ noBackdrop:true });
+      WebinarService.all().then(function(data)
+      { 
+        $scope.webinars = data; 
+        $ionicLoading.hide();
+      });
+
 })
 
 
+.controller('WebinarsViewCtrl', function($scope, $state, $stateParams, $http, WebinarService, $ionicLoading) 
+{
+  //$ionicLoading.show({ noBackdrop:true });
+      var WebinarId = $stateParams.id;
+      $scope.webinars = WebinarService.get(WebinarId);
 
+})
 
 
 
@@ -68,16 +79,12 @@ angular.module('starter.controllers', [])
 
 .controller('safetyLessonsCtrl', function($scope,$http, safetyLessons, $state, $ionicLoading) 
 { 
-      $ionicLoading.show({ noBackdrop:true });
+      //$ionicLoading.show({ noBackdrop:true });
       safetyLessons.all().then(function(data)
       { 
-        $scope.safety = data; 
+        $scope.Lessons = data; 
         $ionicLoading.hide();
 
-        $scope.detailView = function ()
-        {
-           $state.go('tab.safetyLessons.lessonView');
-        }
         
      });
  
@@ -86,11 +93,44 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('LessonViewCtrl', function($scope, $state, $http, News, $ionicLoading) 
+.controller('LessonViewCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
+{   
+    var LessonId = $stateParams.id;
+    $scope.Lessons = safetyLessons.get(LessonId);     
+ })
+
+
+.controller('DocumentaionCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
 {
-    $ionicLoading.show({ noBackdrop:true });
-  News.all().then(function(data){  $scope.news = data; $ionicLoading.hide(); });   
-})
+        
+ 
+ })
+
+.controller('BlogCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
+{
+      
+  
+ })
+
+.controller('FormsCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
+{
+     
+ })
+
+.controller('LogoutCtrl', function($scope, $stateParams) 
+{
+      
+ })
+
+
+.controller('SafetyStickersCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
+{
+ 
+ })
+
+
+
+
 
 
 

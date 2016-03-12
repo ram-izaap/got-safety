@@ -13,22 +13,22 @@
 		  </label>
 		  
 		</div>
+	
 		
 		<div class="bar bar-header item-input-inset">
 			  <label class="item-input-wrapper">
 			    <i class="icon ion-ios7-search placeholder-icon"></i>
 			    <input type="search" placeholder="Search">
-
 			  </label>			  
 		</div>
 
 
+
 		<div class="padding">
-	    
-			 
+	    			 
 			<div class="list">
 
-			     <a class="item item-icon-right" ng-repeat="lesson in safety" ng-click = "detailView()">{{lesson.title}}
+			     <a class="item item-icon-right" ng-repeat="lesson in Lessons" href="#/tab/lessonView/{{lesson.id}}">{{lesson.title}}
 			     <i class="icon ion-ios-arrow-right"></i> 
 			     </a>
 			
@@ -36,6 +36,15 @@
 
 		</div>
 		
+
+
+		<!--ion-list>
+      <ion-item class="item item-icon-right" ng-repeat="lesson in safety" href="#/tab/lessonView/{{lesson.id}}/{{lesson.content}}" type="item-text-wrap" >
+             
+      <p> {{lesson.title}}</p>
+         
+      </ion-item>
+    </ion-list-->
 		
 <!--div class="list card" ng-repeat="lessons in safety">
         href="#/tab/lessonView"

@@ -80,8 +80,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider) {
 
+    $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
+ 
   $stateProvider
 
   .state('login', {
@@ -107,14 +109,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.webinars.webinarView', {
-    url: '/webinarView',
+  .state('tab.webinarView', {
+    url: '/webinarView/:id',
     views: {
-      'webinarView': {
-        templateUrl: 'templates/webinarView.html',
-        controller: 'WebinarViewCtrl'
-      }
-    }
+      'menuContent': {
+                templateUrl: 'templates/webinarView.html',
+                controller: 'WebinarsViewCtrl'
+              }
+            }
   })
 
 
@@ -128,12 +130,68 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.safetyLessons.lessonView', {
-    url: '/lessonView',
+  .state('tab.lessonView', 
+  {
+    url: '/lessonView/:id',  
     views: {
-      'lessonView': {
-        templateUrl: 'templates/lessonView.html',
+      'menuContent': {
+      templateUrl: 'templates/lessonView.html',
+      controller: 'LessonViewCtrl'
+      }
+     } 
+
+  })
+
+
+  .state('tab.Documentation', {
+    url: '/Documentation',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Documentation.html',
         controller: 'safetyLessonsCtrl'
+      }
+    }
+  })
+
+
+  .state('tab.Forms', {
+    url: '/Forms',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Forms.html',
+        controller: 'FormsCtrl'
+      }
+    }
+  })
+
+
+  .state('tab.SafetyStickers', {
+    url: '/SafetyStickers',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/SafetyStickers.html',
+        controller: 'SafetyStickersCtrl'
+      }
+    }
+  })
+
+
+   .state('tab.Blog', {
+    url: '/Blog',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Blog.html',
+        controller: 'BlogCtrl'
+      }
+    }
+  })
+
+    .state('tab.Logout', {
+    url: '/Logout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/Logout.html',
+        controller: 'LogoutCtrl'
       }
     }
   })

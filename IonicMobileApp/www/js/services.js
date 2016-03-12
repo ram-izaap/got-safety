@@ -83,43 +83,153 @@ angular.module('starter.services', [])
   $httpProvider.interceptors.push('AuthInterceptor');
 })
 
-.factory('Weeklypickle', function($http, apiUrl) {
 
-  var wpickle = [];
+
+.factory('safetyLessons', function($http, apiUrl)
+ {
+
+  var lessons = [];
   return {
-    get: function() {
+              all: function() 
+              {
+                    return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var l   = response.data;
+                        var usr = l.user;
+                            
+                            if(usr.length > 0)
+                            {
+                               for(var j = 0; j < usr.length; j++)
+                               {
+                                  if(j>1)
+                                  break;
+                                 //alert(usr[1].id);
+                                  //safety.push(usr[j]);
+                                  lessons[j] = usr[j];
+                               }
+                            }
+                        
+                        return lessons;   
 
-		return $http.get(apiUrl+'/categories/1').then(function(response){
-			wpickle = JSON.parse(response.data.result);
-			
-			return wpickle;
-		});
-       
-    },
-  };
+                    });
+                 
+              },
+             
+              get: function( LessonId )
+             {
+      
+                 for (var i = 0; i < lessons.length; i++) 
+                  {
+                        if(lessons[i].id == LessonId)
+                        {
+                          return lessons[i];
+
+                        }
+                  
+                  };
+                
+              },
+
+             
+             
+
+
+
+          }; 
+
 })
 
-.factory('Safetylessonpickle', function($http, apiUrl) {
+
+
+
+.factory('WebinarService', function($http, apiUrl)
+ {
+
+  var webinars = [];
+  return {
+              all: function() 
+              {
+                    return $http.get(apiUrl+'/get_user_webinars_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var l   = response.data;
+                        var usr = l.user;
+                            
+                            if(usr.length > 0)
+                            {
+                               for(var j = 0; j < usr.length; j++)
+                               {
+                                if(j>1)
+                                break;
+                               //alert(usr[1].id);                               
+                             // webinars.push(usr[j]);
+                              webinars[j] = usr[j];
+                               }
+                            }
+                        
+                        return webinars; 
+                        
+
+                    });
+                 
+              },
+             
+              get: function( WebinarId)
+             {
+                  for (var i = 0; i < webinars.length; i++) 
+                  {
+                        if(webinars[i].id == WebinarId )
+                        {
+                         
+                           return webinars[i];
+
+                        }
+                    
+                  };
+                
+                 
+            },
+
+        }; 
+
+})
+
+
+
+
+
+.factory('broadcast', function ($rootScope, $document) {
+    var _events = {
+        onPause: 'onPause',
+        onResume: 'onResume'
+    };
+    $document.bind('resume', function () {
+        _publish(_events.onResume, null);
+    });
+    $document.bind('pause', function () {
+        _publish(_events.onPause, null);
+    });
+
+    function _publish(eventName, data) {
+        $rootScope.$broadcast(eventName, data)
+    }
+    return {
+        events: _events
+    }
+});
+/*.factory('safetyLessons', function($http, apiUrl) {
 
   var safety = [];
   return {
     get: function() {
 
-    		return $http.get(apiUrl+'/categories/2').then(function(response){
-    			var tmp = JSON.parse(response.data.result);
-    			
-    			if(tmp.length > 0){
-    				for(var j = 0; j < tmp.length; j++){
-    					if(j>1)
-    						break;
-    					
-    					safety.push(tmp[j]);
-    				}
-    			}	
-    			return safety;
-    		});
+        return $http.post(apiUrl+'/get_user_lesson_list',{ 'user_id':'38', 'created_id':'29', 'X-APP-KEY': 'test'}).then(function(response)
+        {
+          
+           safety = response.data.result;
+          
+        });
        
-    },
+    },JSON.stringify
   };
 })
 
@@ -187,76 +297,43 @@ angular.module('starter.services', [])
 })
 
 
-/*.factory('safetyLessons', function($http, apiUrl) {
+.factory('Weeklypickle', function($http, apiUrl) {
+
+  var wpickle = [];
+  return {
+    get: function() {
+
+    return $http.get(apiUrl+'/categories/1').then(function(response){
+      wpickle = JSON.parse(response.data.result);
+      
+      return wpickle;
+    });
+       
+    },
+  };
+})
+
+.factory('Safetylessonpickle', function($http, apiUrl) {
 
   var safety = [];
   return {
     get: function() {
 
-        return $http.post(apiUrl+'/get_user_lesson_list',{ 'user_id':'38', 'created_id':'29', 'X-APP-KEY': 'test'}).then(function(response)
-        {
+        return $http.get(apiUrl+'/categories/2').then(function(response){
+          var tmp = JSON.parse(response.data.result);
           
-           safety = response.data.result;
-          
+          if(tmp.length > 0){
+            for(var j = 0; j < tmp.length; j++){
+              if(j>1)
+                break;
+              
+              safety.push(tmp[j]);
+            }
+          } 
+          return safety;
         });
        
-    },JSON.stringify
+    },
   };
-})*/
-
-.factory('safetyLessons', function($http, apiUrl) {
-
-  var safety = [];
-  return {
-              all: function() 
-              {
-                    return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
-                    {
-                        var l   = response.data;
-                        var usr = l.user;
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                if(j>1)
-                                break;
-                               //alert(usr[1].id);
-                                safety.push(usr[j]);
-                               }
-                            }
-                        
-                        return safety;                 
-                    });
-                 
-              },
-
-              
-
-        };
- 
 })
-
-
-
-
-
-.factory('broadcast', function ($rootScope, $document) {
-    var _events = {
-        onPause: 'onPause',
-        onResume: 'onResume'
-    };
-    $document.bind('resume', function () {
-        _publish(_events.onResume, null);
-    });
-    $document.bind('pause', function () {
-        _publish(_events.onPause, null);
-    });
-
-    function _publish(eventName, data) {
-        $rootScope.$broadcast(eventName, data)
-    }
-    return {
-        events: _events
-    }
-});
+*/
