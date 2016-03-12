@@ -376,7 +376,7 @@ class Api extends REST_Controller {
 				foreach($data as $list){
 					$user[$i]['id'] = $list['id'];
 				$user[$i]['title'] = $list['title'];
-				$user[$i]['link'] = $list['link'];
+				$user[$i]['link'] = strip_tags($list['link']);
 				$user[$i]['created_user'] = $list['created_user'];
 				$user[$i]['created_date'] = $list['created_date'];
 				
