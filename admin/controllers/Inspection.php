@@ -181,7 +181,7 @@ class Inspection extends Admin_controller {
                 $edit_data = $this->inspection_model->get_slideimage_detail("inspection_reports",array("id" => $edit_id));
                
                 if(!isset($edit_data[0])) {
-                    $this->service_message->set_flash_message('record_not_found_error');
+                    //$this->service_message->set_flash_message('record_not_found_error');
                     redirect("inspection");   
                 }
                 $this->data['title']          = "EDIT INSPECTION";

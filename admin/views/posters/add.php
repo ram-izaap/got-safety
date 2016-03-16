@@ -12,7 +12,7 @@
 					
 					<li>
 						
-						<a href="<?php echo base_url("index.php/inspection"); ?>">Inspection Reports</a>
+						<a href="<?php echo base_url("index.php/posters"); ?>">Safety Posters</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					
@@ -30,8 +30,7 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
-			
-				<?php $role =  $this->session->userdata('admin_data')['role'];  
+             <?php $role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){   ?>
 				  
 			 
@@ -55,6 +54,7 @@
 				</div>
 			</div>
 			
+			
 			<div class="form-group">
 					<label class="col-md-2 control-label">All:
 					</label>
@@ -64,9 +64,10 @@
 					</div>
 				</div>
 				
-			
 			<?php } ?>
-				
+			
+			
+             
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title: <span class="required">
 					* </span>
@@ -76,36 +77,23 @@
 						<span class="vstar" <?php echo form_error('title', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
-				
-				
-			
-				
 				<div class="form-group">
-					<label class="col-md-2 control-label">File:<span class="required"> *</span>
+					<label class="col-md-2 control-label">Content: <span class="required">
+					* </span>
 					</label>
 					<div class="col-md-10">
-						<input id="image" name="pdf_file" type="file" class="file" />
-					<input id="slide_image" name="slide_image" type="hidden" value="<?php echo set_value('slide_image',$form_data['slide_image']); ?>" />
-					
-					<span class="vstar"<?php echo form_error('pdf_file', '<span class="help-block">', '</span>'); ?> </span>
-					
-						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/frontend/inspection_reports/<?php echo $form_data['pdf_file'];?>" > <?php echo $form_data['pdf_file'];?> </a>
-							
-						<?php } ?>
-						
+						<textarea name="content" class="form-control"> <?php echo set_value('content',$form_data['content']); ?></textarea>
+					<span class="vstar" <?php echo form_error('content', '<span class="help-block">', '</span>'); ?></span>
 					</div>
-				</div> 
-				
-				
+				</div>
 				
 				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Is Display:
+					<label class="col-md-2 control-label">Is Active:
 					</label>
 					<div class="col-md-10">
-						<input type="checkbox" class="" name="is_display" id="is_display" value="1" 
-						<?php echo set_checkbox('is_display',1,((isset($form_data['is_display']) && $form_data['is_display'] == 1)?true:false));?>/>
+						<input type="checkbox" class="" name="is_active" id="is_active" value="1" 
+						<?php echo set_checkbox('is_active',1,((isset($form_data['is_active']) && $form_data['is_active'] == 1)?true:false));?>/>
 					</div>
 				</div>
 				

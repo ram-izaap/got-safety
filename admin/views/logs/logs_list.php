@@ -3,7 +3,7 @@
 		<div class="col-lg-12">
 			<div class="row">
               <div class="col-lg-12" style="margin-left: -10px;">
-                <h1 class="pull-left"><b>Inspection Reports</b></h1>
+                <h1 class="pull-left"><b>300 Logs</b></h1>
                 </div>
                 
                 
@@ -17,7 +17,7 @@
 					<ol class="breadcrumb">
 						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>Inspection Reports</span>
+						<li class="active"><span>300 Logs</span>
 						</li>
 					</ol>
 					<div class="clearfix">
@@ -25,10 +25,10 @@
 						 <div class="pull-right top-page-ui">
 							 
 							  
-	                        <a href="<?php echo site_url('inspection/add_edit_inspection');?>" class="btn btn-success">
+	                        <a href="<?php echo site_url('logs/add_edit_logs');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New
 	                        </a>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-inspection','inspection/inspection_delete');" class="btn btn-success">
+	                        <a onclick="return DeleteCheckedRow(this,'delete-logs','logs/logs_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>
                            
@@ -37,7 +37,7 @@
                     
 				</div>
 			</div>
-			<input type="hidden" name="page_name" class="page_name" value="inspection" />
+			<input type="hidden" name="page_name" class="page_name" value="logs" />
 			<?php echo $grid;?>
 			<?php //echo '<pre>';print_r($this->session->all_userdata());die;?>
 		</div>

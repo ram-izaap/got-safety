@@ -12,7 +12,7 @@
 					
 					<li>
 						
-						<a href="<?php echo base_url("index.php/inspection"); ?>">Inspection Reports</a>
+						<a href="<?php echo base_url("index.php/forms"); ?>">Safety Forms</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					
@@ -90,7 +90,7 @@
 					<span class="vstar"<?php echo form_error('pdf_file', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/frontend/inspection_reports/<?php echo $form_data['pdf_file'];?>" > <?php echo $form_data['pdf_file'];?> </a>
+								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/frontend/safety_forms/<?php echo $form_data['pdf_file'];?>" > <?php echo $form_data['pdf_file'];?> </a>
 							
 						<?php } ?>
 						
