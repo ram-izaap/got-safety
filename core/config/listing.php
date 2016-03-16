@@ -151,3 +151,111 @@ $config['client_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+$config['inspection_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'inspection/filter',
+	"base_url"	=> 	'/inspection/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['osha_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'osha/filter',
+	"base_url"	=> 	'/osha/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['logs_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'logs/filter',
+	"base_url"	=> 	'/logs/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['records_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'records/filter',
+	"base_url"	=> 	'/records/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['forms_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'forms/filter',
+	"base_url"	=> 	'/forms/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['posters_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'posters/filter',
+	"base_url"	=> 	'/posters/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link2', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['attach_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'attach/filter',
+	"base_url"	=> 	'/attach/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							//'type'=>array('name'=>'Type', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
