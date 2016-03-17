@@ -484,6 +484,25 @@
 						</ul>
 					</li>
 					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Page Managment</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('addpages/add_edit_pages'); ?>">
+								 Add Page</a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('addpages'); ?>">
+								 Manage Pages</a>
+							</li>
+							
+						</ul>
+					</li>
+					
 					
 					
 					<li>
@@ -535,24 +554,7 @@
 					</li>
 					
 					
-					<li>
-						<a href="javascript:;">
-						<i class="icon-user"></i>
-						<span class="title">Page Managment</span>
-						<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-							<li> 
-								<a href="<?php echo site_url('addpages/add_edit_pages'); ?>">
-								 Add Page</a>
-							</li>
-							<li> 
-								<a href="<?php echo site_url('addpages'); ?>">
-								 Manage Pages</a>
-							</li>
-							
-						</ul>
-					</li>
+					
 					
 					
 				<?php /*	<li>
@@ -586,6 +588,140 @@
 						</ul>
 					</li> */ ?>
 					
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Inspection reports</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('inspection/add_edit_inspection'); ?>">
+								Add reports </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('inspection'); ?>">
+								Manage reports </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Cal / OSHA</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('osha/add_edit_osha'); ?>">
+								Add Documents </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('osha'); ?>">
+								Manage Documents </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">300 logs</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('logs/add_edit_logs'); ?>">
+								Add Documents </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('logs'); ?>">
+								Manage Documents </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Records</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('records/add_edit_records'); ?>">
+								Add Documents </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('records'); ?>">
+								Manage Documents </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Safety Forms</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
+								Add Documents </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('forms'); ?>">
+								Manage Documents </a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Safety Posters</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('posters/posters_content'); ?>">
+								Frontend Content </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('posters/add_edit_posters'); ?>">
+								Add Posters </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('posters'); ?>">
+								Manage Posters </a>
+							</li>
+							
+							
+							
+						</ul>
+					</li>
+					
+					
+					
+					
+					
 				<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>
 					
@@ -607,7 +743,8 @@
 							
 						</ul>
 					</li>
-					<?php } else { ?>
+					<?php } ?>
+					<?php /* } else { ?>
 						
 						<li>
 							<a href="javascript:;">
@@ -625,7 +762,7 @@
 								
 							</ul>
 						</li>
-					<?php } ?>
+					<?php } */ ?>
 					
 				</ul>
 			<!-- END SIDEBAR MENU -->

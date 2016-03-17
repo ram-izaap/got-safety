@@ -107,6 +107,11 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
         case 'attach_link':
 			$data ='<a href="'.base_url().'index.php/attachment?id='.$row['id'].'"><i class="fa fa-plus cen-align"></i></a>';
             break; 
+        
+        
+         case 'attach_link2':
+			$data ='<a href="'.base_url().'index.php/attach?id='.$row['id'].'"><i class="fa fa-plus cen-align"></i></a>';
+            break; 
             
         case 'user_role':
 				if($data== '2'){

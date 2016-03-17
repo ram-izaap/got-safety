@@ -101,7 +101,7 @@ class Api extends REST_Controller {
 				}
 				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				return $this->response(array( "status" => "error","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
 			}
 		
 		
@@ -110,25 +110,25 @@ class Api extends REST_Controller {
 
 	/**  Login  **/
     
-	public function login()
+	public function login_post()
 	{
-		if($_POST){ 
-			
-			$name = $this->input->post("name");
-			$password = $this->input->post("password");
+			if((!$this->post('name')) && (!$this->post('password') )) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+    		
+			$name = $this->post("name");
+			$password = $this->post("password");
 			
 			$data = $this->api_model->login($name,$password);
 			if($data == 0){
 				
-				$response = array("response" => array("httpCode" => 400 , "Message" => "User not in active" ));
-				echo json_encode($response);
-				exit;
+				
+				return $this->response(array( "status" => "error","msg"=> "User not in active"),404);
 				
 			}else if($data == -1){
 				
-				$response = array("response" => array("httpCode" => 401 , "Message" => "Username or password mismatch" ));
-				echo json_encode($response);
-				exit;
+				return $this->response(array( "status" => "error","msg"=> "Username or password mismatch"),404);
 				
 			}else {
 				$user_id = $data[0]['id'];
@@ -136,15 +136,11 @@ class Api extends REST_Controller {
 				$role 	= $data[0]['role'];
 				$created_id 	= $data[0]['created_id'];
 				
-				$response[] = array("user_list" => array("httpCode" => 200 , "Message" => "Login Successfully","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id ));
-				echo json_encode($response);
-				exit;
+				return $this->response(array("status" => "success" , "msg" => "Login Successfully","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id ,"role" => $role  ),200);
+				
 			}
 			
-		}
-		$response = array("response" => array("httpCode" => 400 , "Message" => "Invalid method type" ));
-		echo json_encode($response);
-		exit;
+		
 	} 
 
 
