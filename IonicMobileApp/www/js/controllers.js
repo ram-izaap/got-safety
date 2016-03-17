@@ -8,8 +8,8 @@ angular.module('starter.controllers', [])
 
       $ionicLoading.show({ noBackdrop:true });
 
-      AuthService.login($scope.data.username, $scope.data.password).then(function(authenticated) {
-        $state.go('tab.weekly-pickle', {}, {reload: true});
+      AuthService.login($scope.data.name, $scope.data.password).then(function(authenticated) {
+        $state.go('tab.safetyLessons', {}, {reload: true});
         $ionicLoading.hide();
       }, 
       function(err) {
@@ -89,14 +89,33 @@ angular.module('starter.controllers', [])
      });
  
  })
+
   
 
 
 
-.controller('LessonViewCtrl', function($scope, $stateParams, $http, safetyLessons, $ionicLoading) 
+.controller('LessonViewCtrl', function($scope, $stateParams,$window, $http, safetyLessons, $ionicLoading) 
 {   
     var LessonId = $stateParams.id;
-    $scope.Lessons = safetyLessons.get(LessonId);     
+    $scope.Lessons = safetyLessons.GetLesson(LessonId);    
+    
+     
+      safetyLessons.GetAttachment().then(function(data)
+      { 
+        $scope.Attachment = data; 
+        $ionicLoading.hide();     
+        
+     });
+
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };
+
+  
+      
  })
 
 

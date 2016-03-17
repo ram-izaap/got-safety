@@ -6,8 +6,45 @@
 -->
 <ion-view view-title="{{Lessons.title}}">
   <ion-content>  
+  
+  
+  <!--select the language-->
+
+    <div class=" bar-header">
+        <label class="item item-input item-select">
+            <div class="input-label">
+                  language
+                </div>
+            <select>
+              <option selected>English</option>
+              <option>Spanish</option>
+            </select>
+        </label>
+        
+    </div>
+      
+       <!--attachment list-->
+       
+        <div class="list">
+
+               <a class="item item-icon-right" ng-repeat="Attachments in Attachment"  ng-click="OpenLink('{{Attachments.f_name}}')">{{Attachments.language}}              
+               </a>
+
+          
+        </div>
+
+
+
+      <!--displaying lesson-->
+
       <div class="padding">        
-        <p ng-bind-html="Lessons.content"></p>
-        </div>     		
+        <p ng-bind-html="Lessons.content"></p>  
+      </div>    
+
+     
+     	
+  
+         
+
   </ion-content>
 </ion-view>

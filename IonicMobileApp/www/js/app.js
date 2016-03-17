@@ -81,7 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider) {
-
+     //youtube vedio access
     $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
  
   $stateProvider
@@ -239,7 +239,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/weekly-pickle'); 
-  $urlRouterProvider.otherwise('/tab/safetyLessons');
+  $urlRouterProvider.otherwise('/login');
 
   //$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
   $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS

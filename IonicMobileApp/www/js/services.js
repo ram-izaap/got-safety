@@ -37,11 +37,11 @@ angular.module('starter.services', [])
     window.localStorage.removeItem(LOCAL_TOKEN_KEY);
   }
 
-  var login = function(name, pw) {
+  var login = function(usrname, pwd) {
 
     return $q(function(resolve, reject) {
 
-      $http.post(apiUrl+'/auth', { username:name, password:pw },{ ignoreAuthModule: true }).then(function(response){
+      $http.post(apiUrl+'/login', { name:usrname, password:pwd , 'X-APP-KEY':'test'},{ ignoreAuthModule: true }).then(function(response){
         storeUserCredentials(response.data);
         resolve('Login success.');
       },
@@ -88,14 +88,20 @@ angular.module('starter.services', [])
 .factory('safetyLessons', function($http, apiUrl)
  {
 
-  var lessons = [];
+  var lessons           = [];
+  var Attachment        = [];
+  var SpanishAttachment = [];
+  var EnglishAttachment = [];
+  
+
+
   return {
               all: function() 
               {
                     return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
                     {
-                        var l   = response.data;
-                        var usr = l.user;
+                        var lessons_array   = response.data;
+                        var usr             = lessons_array.user;
                             
                             if(usr.length > 0)
                             {
@@ -115,7 +121,7 @@ angular.module('starter.services', [])
                  
               },
              
-              get: function( LessonId )
+              GetLesson: function( LessonId )
              {
       
                  for (var i = 0; i < lessons.length; i++) 
@@ -130,9 +136,84 @@ angular.module('starter.services', [])
                 
               },
 
-             
-             
 
+              GetAttachment: function() 
+              {
+                    
+                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var attachment_array   = response.data;
+                       
+                        var usr                = attachment_array.user;
+                        
+
+                           if(usr.length > 0)
+                            {
+                               for(var j = 0; j < usr.length; j++)
+                               {
+                                  if(j>1)
+                                  break;
+                                 //alert(usr[0].language);
+                                  Attachment[j] = usr[j];
+                               }
+                            } 
+ 
+                        return Attachment;  
+
+                    });
+                 
+              },
+
+
+           /*   GetEnglishAttachment: function() 
+              {
+                    
+                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var attachment_array   = response.data;
+                       
+                        var usr                = attachment_array.user;
+                        
+                       
+
+                           if(usr.length > 0)
+                            {
+                               
+                                //alert(usr[0].language);
+                                  EnglishAttachment[0] = usr[0];
+                      
+                            } 
+ 
+                        return EnglishAttachment;  
+
+                    });
+                 
+              },
+
+
+               GetSpanishAttachment: function() 
+              {
+                    
+                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
+                    {
+                        var attachment_array   = response.data;
+                       
+                        var usr                = attachment_array.user;
+                        
+                       
+                           if(usr.length > 0)
+                            {
+                               
+                                //alert(usr[0].language);
+                                  SpanishAttachment[1] = usr[1];
+                      
+                            } 
+ 
+                        return SpanishAttachment;  
+
+                    });
+                 
+              },*/
 
 
           }; 
