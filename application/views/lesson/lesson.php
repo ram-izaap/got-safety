@@ -11,19 +11,7 @@
                      <!-- Left Bar -->
                      <div class="col-md-3 left-bar">
 
-                        <div class="list-categories bg-red row">
-                            <h3>Menu Categories</h3>
-                          <ul>
-                            <li class="active"><a href="javascript:void(0);">Safety Lessons </a></li>
-                            <li><a href="javascript:void(0);">Inspection Reports </a></li>
-                            <li><a href="javascript:void(0);">Cal / OSHA Documentation </a></li>
-                            <li><a href="javascript:void(0);">300 Logs </a></li>
-                            <li><a href="javascript:void(0);">Training Records </a></li>
-                            <li><a href="javascript:void(0);">Accident Reporting </a></li>
-                            <li><a href="javascript:void(0);">Safety Forms </a></li>
-                            <li><a href="javascript:void(0);">Safety Posters </a></li>
-                          </ul>
-                        </div>
+                         <?php $this->load->view('_partials/left_menu','frontend'); ?> 
 
                      </div>
 

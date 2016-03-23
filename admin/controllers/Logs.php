@@ -12,7 +12,11 @@ class Logs extends Admin_controller {
 													
 												);
 												
-												
+	protected $_logs_content_validation_rules =    array (
+                                                   
+                                                    array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required')
+                                                    
+                                                  );											
 											
 	
 
@@ -85,7 +89,7 @@ class Logs extends Admin_controller {
 	
 	public function add_edit_logs($edit_id = "")
     {            
-		//print_r($_POST);exit;
+		
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
 		
@@ -165,12 +169,12 @@ class Logs extends Admin_controller {
            
 			if(empty($edit_id)){
 			      
-                     $social_data = $this->logs_model->insert("cal_osha",$ins_data);
+                     $social_data = $this->logs_model->insert("logs",$ins_data);
                     // $this->service_message->set_flash_message('record_insert_success');
 		      }
               else 
               {  echo 
-                    $social_data = $this->logs_model->update("cal_osha",$ins_data,array("id" => $edit_id));
+                    $social_data = $this->logs_model->update("logs",$ins_data,array("id" => $edit_id));
                     //$this->service_message->set_flash_message('record_update_success');
 		      }
 		      redirect("logs");    
@@ -178,7 +182,7 @@ class Logs extends Admin_controller {
 		}	
 			
 			 if($edit_id) {
-                $edit_data = $this->logs_model->get_slideimage_detail("cal_osha",array("id" => $edit_id));
+                $edit_data = $this->logs_model->get_slideimage_detail("logs",array("id" => $edit_id));
                
                 if(!isset($edit_data[0])) {
                     //$this->service_message->set_flash_message('record_not_found_error');
@@ -255,6 +259,45 @@ class Logs extends Admin_controller {
         }
     } 
     
+    
+    function logs_content()
+    {
+		
+		if(is_logged_in()) {
+			
+            $info = $this->logs_model->get_info_content("display_content",array("id" => 3));
+           
+            $this->data['form_data'] = $info;
+            
+			$this->form_validation->set_rules($this->_logs_content_validation_rules);
+			
+        if($this->form_validation->run())
+        { 
+            $form = $this->input->post();
+            
+			$ins_data = array();
+			
+            $ins_data['content']  = $form['content'];
+            $edit_id                = $_POST['edit_id'];
+           
+			$social_data = $this->logs_model->update("display_content",$ins_data,array("id" => $edit_id));
+            //$this->service_message->set_flash_message('record_update_success');
+			
+			redirect("logs");    
+			
+		}	
+			$this->data['title']          = "300 Logs Content";
+            $this->data['crumb']        = "Update";
+	
+		$this->layout->view('logs/logs_content');
+		
+		}
+        else
+        {
+            redirect("home");
+        } 
+		
+	}
   
    
     

@@ -145,6 +145,15 @@ class Inspection_model extends App_Model {
 	}
     
     
+    function get_info_content($table_name,$where)
+    {
+		
+		$this->db->select("*");
+        $this->db->from($table_name);
+        $this->db->where($where);
+        return $result = $this->db->get()->result_array();
+		
+	}
     
     
 }

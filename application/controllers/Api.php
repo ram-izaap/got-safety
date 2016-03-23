@@ -452,13 +452,187 @@ class Api extends REST_Controller {
 	}
 
 
+ /**  Get user poster list after login **/
+
+	public function get_user_posters_list_get()
+	{
+		
+			if((!$this->get('user_id')) && (!$this->get('created_id') )) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+			
+			$user_id = $this->get("user_id");
+			$created_id = $this->get("created_id");
+			
+			if($created_id == '8'){
+				$created_id = $user_id;
+				
+			}else {
+				$created_id = $created_id;
+			}
+			
+			
+			$data = $this->api_model->get_lession_detail("posters",array("created_user" => $created_id));
+			
+			$user = array();$i=0;
+			if(count($data) > 0){
+				foreach($data as $list){
+					$user[$i]['id'] =$list['id']; 
+					//$id = $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['content'] = $list['content'];
+				$user[$i]['created_user'] = $list['created_user'];
+				$i=$i+1;
+				}
+				
+				return $this->response(array( "status" => "success","user"=> $user),200);
+				
+			}else{
+				
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				
+			}
+		
+	} 
+	
+	
+	/**  Get posters attachment list **/
+	
+	public function get_posters_attachment_get()
+	{
+		
+			if((!$this->get('poster_id')) ) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+    		
+			$id = $this->get("poster_id");
+			
+			$data = $this->api_model->get_detail("posters_attachment",array("poster_id" => $id,"is_active" => 1));
+			$user = array();$i=0;
+			if(count($data) > 0){
+				foreach($data as $list){
+					$user[$i]['id'] = $list['id'];
+					$user[$i]['poster_id'] = $list['poster_id'];
+					$user[$i]['language'] = $list['language'];
+					$user[$i]['poster1'] = get_img_dir().'assets/images/frontend/posters_attachment/'.$list['f_name'];
+					$user[$i]['poster2'] = get_img_dir().'assets/images/admin/posters_attachment/'.$list['f_name_quiz'];
+				$i=$i+1;
+				
+				}
+				return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+
+			}
+		
+	} 
 
 
 
+	/**  posters content frontend display **/
+	
+	public function get_content_get()
+	{
+		
+		if((!$this->get('type')) ) 
+		{
+			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+		}
+				
+			$id = $this->get("type");
+			$data = $this->api_model->get_content("display_content",array("id" => $id));
+			$user = array();$i=0;
+			if(count($data) > 0){
+				foreach($data as $list){
+					
+					$user[$i]['id']= $list['id'];
+					$user[$i]['content'] = $list['content'];
+				
+				$i=$i+1;
+				}
+				return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+			}
+		
+	} 
 
 
-
-
+	
+	/**  Get particular user other pages details after login  **/
+    
+	public function get_user_menu_list_get()
+	{
+		
+		if((!$this->get('user_id')) && (!$this->get('created_id')) && (!$this->get('type')) ) 
+    		{
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    		}
+			
+			$user_id = $this->get("user_id");
+			$created_id = $this->get("created_id");
+			$type = $this->get("type");
+			
+			if($type == "1") {
+				$table = "inspection_reports";
+				$folder = "inspection_reports";
+			}
+			else if($type == "2"){
+				
+				$table = "cal_osha";
+				$folder = "call_osha";
+			}
+			else if($type == "3"){
+				
+				$table = "logs";
+				$folder = "logs";
+			}
+			else if($type == "4"){
+				
+				$table = "records";
+				$folder = "records";
+			}
+			else if($type == "5"){
+				
+				$table = "safety_forms";
+				$folder = "safety_forms";
+			}
+			else {
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+			}
+			
+			
+			if($created_id == '8'){
+				$created_id = $user_id;
+				
+			}else {
+				$created_id = $created_id;
+			}
+			
+			
+			$data = $this->api_model->get_menu_detail($table,array("created_user" => $created_id,"is_display" => 1));
+			$user = array();$i=0;
+			if(count($data) > 0){
+				foreach($data as $list){
+					$user[$i]['id'] = $list['id'];
+				$user[$i]['title'] = $list['title'];
+				$user[$i]['created_user'] = $list['created_user'];
+				$user[$i]['created_date'] = $list['created_date'];
+				$user[$i]['url'] = get_img_dir().'assets/images/frontend/'.$folder.'/'.$list['pdf_file'];
+				
+				$i=$i+1;
+				}
+				return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+			}
+		
+		
+		
+	} 
 
 
    

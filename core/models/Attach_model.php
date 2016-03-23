@@ -20,7 +20,7 @@ class Attach_model extends App_Model {
 		
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
         
-		$this->db->where('lession_id',$id);
+		$this->db->where('poster_id',$id);
         foreach ($this->criteria as $key => $value) 
         {
             if( !is_array($value) && strcmp($value, '') === 0 )

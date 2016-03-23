@@ -208,7 +208,7 @@ class Posters extends Admin_controller {
         if(!empty($id)) {
             
             $this->db->query('delete from posters where id in ('.$id.')');
-            $this->db->query('delete from posters_attachment where lession_id in ('.$id.')');
+            $this->db->query('delete from posters_attachment where poster_id in ('.$id.')');
             
            // $this->service_message->set_flash_message('record_delete_success');
             return true;  
@@ -221,30 +221,22 @@ class Posters extends Admin_controller {
 		
 		if(is_logged_in()) {
 			
-			
-			
-            $info = $this->posters_model->get_info("posters_content");
+            $info = $this->posters_model->get_info_content("display_content",array("id" => 6));
            
             $this->data['form_data'] = $info;
             
-			
 			$this->form_validation->set_rules($this->_posters_content_validation_rules);
 			
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
             
-			
 			$ins_data = array();
 			
-			 
-            
             $ins_data['content']  = $form['content'];
             $edit_id                = $_POST['edit_id'];
            
-			
-			
-			$social_data = $this->posters_model->update("posters_content",$ins_data,array("id" => $edit_id));
+			$social_data = $this->posters_model->update("display_content",$ins_data,array("id" => $edit_id));
             //$this->service_message->set_flash_message('record_update_success');
 			
 			redirect("posters");    

@@ -12,7 +12,11 @@ class Osha extends Admin_controller {
 													
 												);
 												
-												
+	protected $_osha_content_validation_rules =    array (
+                                                   
+                                                    array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required')
+                                                    
+                                                  );											
 											
 	
 
@@ -254,6 +258,47 @@ class Osha extends Admin_controller {
             return true;  
         }
     } 
+    
+    
+    function osha_content()
+    {
+		
+		if(is_logged_in()) {
+			
+            $info = $this->osha_model->get_info_content("display_content",array("id" => 2));
+           
+            $this->data['form_data'] = $info;
+            
+			$this->form_validation->set_rules($this->_osha_content_validation_rules);
+			
+        if($this->form_validation->run())
+        { 
+            $form = $this->input->post();
+            
+			
+			$ins_data = array();
+			
+            $ins_data['content']  = $form['content'];
+            $edit_id                = $_POST['edit_id'];
+			
+			$social_data = $this->osha_model->update("display_content",$ins_data,array("id" => $edit_id));
+            //$this->service_message->set_flash_message('record_update_success');
+			
+			redirect("osha");    
+			
+		}	
+			$this->data['title']          = "Cal / Osha Content";
+            $this->data['crumb']        = "Update";
+	
+		$this->layout->view('osha/osha_content');
+		
+		}
+        else
+        {
+            redirect("home");
+        } 
+		
+	}
     
   
    

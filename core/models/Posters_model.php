@@ -25,7 +25,6 @@ class Posters_model extends App_Model {
 			$user_id = '8';
 		}
 		
-		
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
         if($role == '2'){
         $this->db->where('created_user',$user_id);
@@ -60,15 +59,14 @@ class Posters_model extends App_Model {
 	}
     
     
-      function get_lession_data($table_name,$where)
+    function get_lession_data($table_name,$where)
     {
 		
 		 $result = $this->db->get_where($table_name,$where);
         return $result->result_array();
 	}
     
-    
-    
+
     function insert($table_name,$data)
     {
         return $this->db->insert($table_name,$data);
@@ -86,6 +84,16 @@ class Posters_model extends App_Model {
 		
 		$this->db->select("*");
         $this->db->from($table_name);
+        return $result = $this->db->get()->result_array();
+		
+	}
+	
+	function get_info_content($table_name,$where)
+    {
+		
+		$this->db->select("*");
+        $this->db->from($table_name);
+        $this->db->where($where);
         return $result = $this->db->get()->result_array();
 		
 	}

@@ -144,7 +144,15 @@ class Records_model extends App_Model {
         return $result->result_array();
 	}
     
-    
+    function get_info_content($table_name,$where)
+    {
+		
+		$this->db->select("*");
+        $this->db->from($table_name);
+        $this->db->where($where);
+        return $result = $this->db->get()->result_array();
+		
+	}
     
     
 }

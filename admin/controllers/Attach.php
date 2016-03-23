@@ -104,12 +104,12 @@ class Attach extends Admin_controller {
 			$this->form_validation->set_rules($this->_attach_validation_rules);
 			 if ( empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
 			{
-				$this->form_validation->set_rules('f_name', 'lesson', 'required');
+				$this->form_validation->set_rules('f_name', '5 X 9', 'required');
 			} 
 			
 			 if ( empty($_FILES['f_name_quiz']['name']) && empty($_POST['slide_image2']) )
 			{
-				$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
+				$this->form_validation->set_rules('f_name_quiz', '5 X 11', 'required');
 			} 
 			
 			if(isset($_POST['language'])) {
@@ -153,7 +153,7 @@ class Attach extends Admin_controller {
 			$id  = $this->session->userdata('id');
 			
 			$ins_data = array();
-            $ins_data['lession_id']       	= $id;
+            $ins_data['poster_id']       	= $id;
             $ins_data['language']          = $form['language'];
            // $ins_data['type']          = $form['type'];
             $ins_data['is_active']  = $form['is_active'];
@@ -199,7 +199,7 @@ class Attach extends Admin_controller {
             {
                 $this->data['title']     = "ADD ATTACHMENT";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("lession_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "","slide_image2" => "","f_name_quiz" => "");
+                $this->data['form_data'] = array("poster_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "","slide_image2" => "","f_name_quiz" => "");
                 
             }
 		    $this->data['img_url']=$this->layout->get_img_dir();
@@ -289,7 +289,7 @@ class Attach extends Admin_controller {
         
         $id  = $this->session->userdata('id');
         
-        $get_data = $this->attach_model->language_check_exists("posters_attachment",array("language" => $language,"lession_id" => $id,"id !=" => $edit_id));
+        $get_data = $this->attach_model->language_check_exists("posters_attachment",array("language" => $language,"poster_id" => $id,"id !=" => $edit_id));
        
        
         if(count($get_data) >0) {

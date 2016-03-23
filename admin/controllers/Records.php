@@ -12,7 +12,11 @@ class Records extends Admin_controller {
 													
 												);
 												
-												
+	protected $_records_content_validation_rules =    array (
+                                                   
+                                                    array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required')
+                                                    
+                                                  );										
 											
 	
 
@@ -256,6 +260,45 @@ class Records extends Admin_controller {
     } 
     
   
+	
+	function records_content()
+    {
+		
+		if(is_logged_in()) {
+			
+            $info = $this->records_model->get_info_content("display_content",array("id" => 4));
+           
+            $this->data['form_data'] = $info;
+            
+			$this->form_validation->set_rules($this->_records_content_validation_rules);
+			
+        if($this->form_validation->run())
+        { 
+            $form = $this->input->post();
+            
+			$ins_data = array();
+			
+            $ins_data['content']  = $form['content'];
+            $edit_id              = $_POST['edit_id'];
+           
+			$social_data = $this->records_model->update("display_content",$ins_data,array("id" => $edit_id));
+            //$this->service_message->set_flash_message('record_update_success');
+			
+			redirect("records");    
+			
+		}	
+			$this->data['title']          = "Records Content";
+            $this->data['crumb']        = "Update";
+	
+		$this->layout->view('records/records_content');
+		
+		}
+        else
+        {
+            redirect("home");
+        } 
+		
+	}
    
     
 }

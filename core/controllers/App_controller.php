@@ -31,7 +31,7 @@ class App_Controller extends CI_Controller
         
         $this->load->model("user_model");
 
-        
+        $this->data['img_url']=$this->layout->get_img_dir();  
 
    }
 

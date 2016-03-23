@@ -118,7 +118,16 @@ class Api_model extends App_Model {
 		// $result = $this->db->get_where($table_name,$where);
         //return $result->result_array();
         
-        $this->db->select();
+        $this->db->select(); function get_webinars_detail($table_name,$where)
+    {
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where($where);
+		 $this->db->or_where('all',1);
+		$this->db->order_by('created_date','DESC');
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
         $this->db->from($table_name);
         $this->db->where($where);
         $this->db->or_where('all',1);
@@ -133,6 +142,25 @@ class Api_model extends App_Model {
         return $this->db->insert($table_name,$data);
     }
    
+   /**  Get all content to dispaly in frontend **/
+	
+	function get_content($table_name,$where)
+	{
+		$result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
+	
+	
+	 function get_menu_detail($table_name,$where)
+    {
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where($where);
+		 $this->db->or_where('all',1);
+		$this->db->order_by('created_date','DESC');
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
     
     
 }

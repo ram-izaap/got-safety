@@ -101,7 +101,7 @@
 
 				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Lesson:<span class="required">* </span>
+					<label class="col-md-2 control-label">5 X 9:<span class="required">* </span>
 					</label>
 					<div class="col-md-10">
 						<input id="image" name="f_name" type="file" class="file" />
@@ -119,7 +119,7 @@
 				
 				
 				<div class="form-group">
-					<label class="col-md-2 control-label">Quiz:<span class="required">* </span>
+					<label class="col-md-2 control-label">5 X 11:<span class="required">* </span>
 					</label>
 					<div class="col-md-10">
 						<input id="image" name="f_name_quiz" type="file" class="file" />
