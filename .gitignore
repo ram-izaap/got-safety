@@ -7,3 +7,4 @@ core/config/database.php
 core/config/database.php
 core/config/database.php
 .htaccess
+*.php

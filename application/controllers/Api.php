@@ -110,15 +110,16 @@ class Api extends REST_Controller {
 
 	/**  Login  **/
     
-	public function login_post()
+	public function login_get()
 	{
-			if((!$this->post('name')) && (!$this->post('password') )) 
+			$name = $this->input->get('name');
+			$password = $this->input->get('password');
+
+			if($name=='' || $password=='')
     		{
     			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
     		}
     		
-			$name = $this->post("name");
-			$password = $this->post("password");
 			
 			$data = $this->api_model->login($name,$password);
 			if($data == 0){

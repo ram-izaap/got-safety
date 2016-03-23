@@ -187,6 +187,7 @@ class REST_Controller extends CI_Controller {
 		$use_key = ! (isset($this->methods[$controller_method]['key']) AND $this->methods[$controller_method]['key'] == FALSE);
 
 		// Get that useless shitty key out of here
+		/*
 		if (config_item('rest_enable_keys') AND $use_key AND $this->_allow === FALSE)
 		{
           if (config_item('rest_enable_logging') AND $log_method)
@@ -196,7 +197,7 @@ class REST_Controller extends CI_Controller {
           
     			$this->response(array('status' => 'error', 'msg' => 'Invalid API Key.','error_code' => '403'), 403);
 		}
-
+     	*/
 		// Sure it exists, but can they do anything with it?
 		if ( ! method_exists($this, $controller_method))
 		{

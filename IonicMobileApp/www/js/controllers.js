@@ -1,21 +1,25 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService, $ionicLoading) {
+.controller('LoginCtrl', function($scope, $state, $ionicPopup, UserLogin, $ionicLoading) 
+{
     
     $scope.data = {};
  
-    $scope.login = function(data) {
+    $scope.login = function(data) 
+    {
 
-      $ionicLoading.show({ noBackdrop:true });
-
-      AuthService.login($scope.data.name, $scope.data.password).then(function(authenticated) {
-        $state.go('tab.safetyLessons', {}, {reload: true});
-        $ionicLoading.hide();
-      }, 
-      function(err) {
-        $ionicPopup.alert( { title: 'Login failed!', template: 'Please check your credentials!' } );
-        $ionicLoading.hide();
-      });
+          //$ionicLoading.show({ noBackdrop:true });
+          UserLogin.login($scope.data.username, $scope.data.pwd).then(function(response)
+          {
+                  // console.log($scope.data.pwd);                   
+                  $state.go('tab.safetyLessons', {}, {reload: true});
+                  //$ionicLoading.hide();                      
+          }, 
+          function(err) 
+          {
+            $ionicPopup.alert( { title: 'Login failed!', template: 'Please check your credentials!' } );
+            //$ionicLoading.hide();
+          });
 
     };
 })
@@ -112,10 +116,7 @@ angular.module('starter.controllers', [])
        
          window.open( link, '_blank','location=yes');
         
-         };
-
-  
-      
+         };   
  })
 
 

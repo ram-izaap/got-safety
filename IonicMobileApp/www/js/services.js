@@ -1,21 +1,25 @@
 angular.module('starter.services', [])
 
 .service('AuthService', function($q, $http, apiUrl) {
-  var LOCAL_TOKEN_KEY = 'user_credentials';
+  
   var isAuthenticated = true;
+  var LOCAL_TOKEN_KEY = 'user_credentials';
+ 
 
   function loadUserCredentials() 
   {
-    var uc = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+     var uc = window.localStorage.getItem(LOCAL_TOKEN_KEY);
     if (uc) 
     {
       useCredentials(uc);
+
     }
   }
+ 
 
   function storeUserCredentials(uc) 
   {
-    window.localStorage.setItem(LOCAL_TOKEN_KEY, uc);
+    window.localStorage.setItem( LOCAL_TOKEN_KEY,uc);
     useCredentials(uc);
   }
 
@@ -23,6 +27,7 @@ angular.module('starter.services', [])
   {
     isAuthenticated = true;
     console.log(uc);
+    
   
     // Set the uc as header for your requests!
     $http.defaults.headers.common.uid = uc.uid;
@@ -34,14 +39,15 @@ angular.module('starter.services', [])
     isAuthenticated = false;
     $http.defaults.headers.common.uid = undefined;
     $http.defaults.headers.common.authorizationToken = undefined;
-    window.localStorage.removeItem(LOCAL_TOKEN_KEY);
+    window.localStorage.removeItem(uc);
   }
-
-  var login = function(usrname, pwd) {
-
+ 
+  var login = function(username, pwd) {
+  
     return $q(function(resolve, reject) {
 
-      $http.post(apiUrl+'/login', { name:usrname, password:pwd , 'X-APP-KEY':'test'},{ ignoreAuthModule: true }).then(function(response){
+      $http.post(apiUrl+'/login', { 'name':'username', 'password':'pwd'},{ ignoreAuthModule: true }).then(function(response){
+       
         storeUserCredentials(response.data);
         resolve('Login success.');
       },
@@ -84,6 +90,39 @@ angular.module('starter.services', [])
 })
 
 
+.factory('UserLogin', function($q, $http, apiUrl)
+{ 
+  var login = function(name , password ) 
+  {
+   return $q(function(resolve, reject)
+    {
+         // var credentials = { 'username': name,'pwd': password,'X-APP-KEY' :'test'};
+        
+          $http.get(apiUrl+'/login?name=' + name + '&password=' + password).then(function(response)
+          {           
+                var res = response.data;
+                var status = res.status;  
+                
+                if(status == 'success')  
+                   resolve('Login success.');
+                 else
+                  reject();
+                             
+          },
+          function()
+          {
+            reject('Login Failed.');
+          });
+    
+    });
+ 
+ };
+
+ return{
+  login: login
+}; 
+
+})
 
 .factory('safetyLessons', function($http, apiUrl)
  {
@@ -98,7 +137,7 @@ angular.module('starter.services', [])
   return {
               all: function() 
               {
-                    return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
+                    return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29').then(function(response)
                     {
                         var lessons_array   = response.data;
                         var usr             = lessons_array.user;
@@ -110,7 +149,7 @@ angular.module('starter.services', [])
                                   if(j>1)
                                   break;
                                  //alert(usr[1].id);
-                                  //safety.push(usr[j]);
+                                  //safety.push(usr[j]);&X-APP-KEY=test
                                   lessons[j] = usr[j];
                                }
                             }
@@ -140,7 +179,7 @@ angular.module('starter.services', [])
               GetAttachment: function() 
               {
                     
-                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
+                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29').then(function(response)
                     {
                         var attachment_array   = response.data;
                        
@@ -153,7 +192,7 @@ angular.module('starter.services', [])
                                {
                                   if(j>1)
                                   break;
-                                 //alert(usr[0].language);
+                                 //alert(usr[0].language);&X-APP-KEY=test
                                   Attachment[j] = usr[j];
                                }
                             } 
@@ -230,7 +269,7 @@ angular.module('starter.services', [])
   return {
               all: function() 
               {
-                    return $http.get(apiUrl+'/get_user_webinars_list?created_id=8&user_id=29&X-APP-KEY=test').then(function(response)
+                    return $http.get(apiUrl+'/get_user_webinars_list?created_id=8&user_id=29').then(function(response)
                     {
                         var l   = response.data;
                         var usr = l.user;
@@ -241,8 +280,7 @@ angular.module('starter.services', [])
                                {
                                 if(j>1)
                                 break;
-                               //alert(usr[1].id);                               
-                             // webinars.push(usr[j]);
+                               //alert(usr[1].id); &X-APP-KEY=test                              
                               webinars[j] = usr[j];
                                }
                             }
