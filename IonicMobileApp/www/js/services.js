@@ -102,6 +102,7 @@ angular.module('starter.services', [])
           {           
                 var res = response.data;
                 var status = res.status;  
+               
                 
                 if(status == 'success')  
                    resolve('Login success.');

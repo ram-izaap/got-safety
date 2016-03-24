@@ -1,12 +1,19 @@
 <ion-view view-title="Webinars">
   <ion-content>
 
-		
+		<!--search box for webinars -->
+		<div class="bar bar-header item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-search placeholder-icon"></i>
+			    <input type="search" placeholder="Search" ng-model = "SearchQuery">
+			  </label>			  
+		</div>
+
 		<div class="padding">
 	    			 
 			<div class="list">
 
-			     <a class="item item-icon-right" ng-repeat="webinar in webinars" href="#/tab/webinarView/{{webinar.id}}">{{webinar.title}}
+			     <a class="item item-icon-right" ng-repeat="webinar in webinars | filter : SearchQuery" href="#/tab/webinarView/{{webinar.id}}">{{webinar.title}}
 			     <i class="icon ion-ios-arrow-right"></i> 
 			     </a>
 			
