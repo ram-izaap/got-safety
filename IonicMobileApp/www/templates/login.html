@@ -1,32 +1,22 @@
-
-
-  <ion-view view-title="The Got Safety" name="login-view">
-
+<ion-view view-title="" name="login-view">
     <ion-content>
-   
-    <!--logo for gotsafety -->
-   
-    <!--div>
-    <a href="#/home"><img src="img/logo.png" alt="The Safety Pickle" class="img-responsive" /></a>
-    </div-->
-  <div class="padding">
-       <center><h1>Welcome to <br>The Got Safety</h1></center>
-
-        <div class="list list-inset">
+   	    <!--logo for gotsafety -->
+    	<div class="logo test">
+	    	<a href="#/home"><img src="img/logo.png" alt="Got Safety" class="img-responsive" /></a>
+	    </div>
+  		
+  		<div class="padding">
+        	<div class="list list-inset home-login">
+            	<label class="item item-input">
+                	<input type="text" placeholder="Username" ng-model="data.username">
+            	</label>
            
-            <label class="item item-input">
-                <input type="text" placeholder="Username" ng-model="data.username">
-            </label>
-           
-            <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="data.pwd">
-            </label>
-        
-        </div>
+            	<label class="item item-input">
+                	<input type="password" placeholder="Password" ng-model="data.pwd">
+            	</label>
+        	</div>
        
-        <button class="button button-block button-balanced" ng-click="login()">Login</button>
-  </div>
-   
-
+        	<button class="button button-block button-balanced" ng-click="login()">Login</button>
+  		</div>
     </ion-content>
   </ion-view>

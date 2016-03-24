@@ -1,2 +1,9 @@
 /* Empty. Add your own CSS if you like */
+
+.logo { text-align:center; padding:3em 0  }
+.logo img { display: inline-block; max-width:220px; }
 .img-responsive{max-width:100%; height:auto;}
+
+/*Homoe Login*/
+.home-login {}
+.home-login imput {}
