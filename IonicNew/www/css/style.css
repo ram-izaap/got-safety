@@ -63,17 +63,44 @@ p {
 
 /* Login
 ==================================*/
-.app-icon {
+/*.app-icon {
     background-color: #fff;
-    background: url('../img/crown.jpg') center;
+    background: url('../img/logo.png') center;
     background-size: cover;
     border-radius: 50%;
     height: 125px;
     margin: 0 auto;
     width: 125px;
+    background-size: 125px;
+}*/
+
+.app-icon img { 
+    max-width:180px; 
 }
 
 .social-login {
     position: fixed;
     bottom: 0;
+}
+
+.hairline { height:3px; background: #e6797e; margin: 0 1.2em; }
+
+.home-login .item-input { 
+    padding:6px 16px; 
+    min-height:inherit
+}
+.home-login input {  
+    font-size:20px; text-align: 
+    center; color:#e6797e; 
+    height:inherit ;
+    line-height: 62px;
+    padding:0;
+    }
+
+.button-login {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    height: inherit;
+    padding: 15px 30px 0;
 }

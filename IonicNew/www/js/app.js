@@ -104,12 +104,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.profile', {
-        url: '/profile',
+    .state('app.lessons', {
+        url: '/lessons',
         views: {
             'menuContent': {
-                templateUrl: 'templates/profile.html',
-                controller: 'ProfileCtrl'
+                templateUrl: 'templates/lessons.html',
+                controller: 'LessonsCtrl'
             },
             'fabContent': {
                 template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
