@@ -186,7 +186,7 @@
   opacity: 0.7; }
 
 .bar.bar-header .button + .title {
-  text-align: left;
+  text-align: center;
   left: 35px;
   line-height: 46px; }
 

@@ -121,7 +121,7 @@ angular.module('starter.controllers', [])
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-
+    //$scope.$parent.hideHeader();
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({

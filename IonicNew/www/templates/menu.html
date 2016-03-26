@@ -12,13 +12,13 @@
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right">
-        <ion-header-bar class="dark-bg expanded">
+        <!--<ion-header-bar class="dark-bg expanded">
             <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span>
             <h2>Thronester</h2>
-        </ion-header-bar>
-        <ion-content class="stable-bg has-expanded-header">
+        </ion-header-bar> -->
+        <ion-content class="nav-ui-bg no-header custom-nav">
             <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.activity">
+                <!-- <ion-item nav-clear menu-close ui-sref="app.activity">
                     Activity
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.login">
@@ -32,7 +32,50 @@
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.gallery">
                     Gallery
+                </ion-item> -->
+
+                <ion-item nav-clear menu-close ui-sref="app.lessons" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Safety Lessons
+                    <i class="icon ion-chevron-right"  icon-direction="right"></i>
                 </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Documentation
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Forms
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Webinars
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Blog
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Safety Stickers
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
+                <ion-item nav-clear menu-close ui-sref="app.login" class="item item-icon-left item-icon-right">
+                    <i class="icon ion-chatbubble-working" icon-direction="left"></i>
+                    Logout
+                    <i class="icon ion-chevron-right" icon-direction="right"></i>
+                </ion-item>
+
             </ion-list>
         </ion-content>
     </ion-side-menu>
