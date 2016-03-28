@@ -84,18 +84,14 @@ p {
 }
 
 .hairline { height:3px; background: #e6797e; margin: 0 1.2em; }
+.home-login {  padding:1.5em 0}
+.home-login .item-input { padding:6px 16px;  min-height:inherit }
+.home-login input { font-size:20px; text-align: center; color:#e6797e; height:inherit; line-height: 62px; padding:0; transform:scale(1.8) }
 
-.home-login .item-input { 
-    padding:6px 16px; 
-    min-height:inherit
-}
-.home-login input {  
-    font-size:20px; text-align: 
-    center; color:#e6797e; 
-    height:inherit ;
-    line-height: 62px;
-    padding:0;
-    }
+.home-login ::-webkit-input-placeholder {color:rgba(237, 28, 36, 0.6); opacity: 1;}
+.home-login :-moz-placeholder {color: rgba(237, 28, 36, 0.6); }
+.home-login ::-moz-placeholder {color: rgba(237, 28, 36, 0.6);}
+.home-login :-ms-input-placeholder {color:rgba(237, 28, 36, 0.6);}
 
 .button-login {
     border-radius: 50%;
@@ -128,9 +124,27 @@ p {
 
 .nav-ui-bg { background-color: #ed1c24; padding-top:44px;}
 .custom-nav { padding-left:1em}
-.custom-nav .item{ border-bottom:1px solid #ddd; color:#ddd; text-transform:capitalize; font-size:18px}
+.custom-nav .item{ border-bottom:1px solid #ddd; color:#fffbf3; text-transform:capitalize; font-size:18px}
+.custom-nav .item:last-child { border-color: transparent }
 .custom-nav [icon-direction="left"] { }
-.custom-nav [icon-direction="right"] {  font-size:16px}
+.custom-nav [icon-direction="right"] {  font-size:16px; color:rgba(0, 0, 0, 0.3);}
+.custom-nav .icon-lessons:before { content: ''; background: url(../img/icons/icon-lessons.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-document:before { content: ''; background: url(../img/icons/icon-document.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-form:before { content: ''; background: url(../img/icons/icon-form.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-webinars:before { content: ''; background: url(../img/icons/icon-webinars.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-blog:before { content: ''; background: url(../img/icons/icon-blog.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-sticker:before { content: ''; background: url(../img/icons/icon-sticker.png) no-repeat; background-size:28px; height:32px;}
+.custom-nav .icon-logout:before { content: ''; background: url(../img/icons/icon-logout.png) no-repeat; background-size:28px; height:32px;}
+
+.lessons-view .item h2 { color:#ed1c24; font-weight:bold; font-size:1.6em; padding-bottom:1em}
+.lessons-view .item b { color: #ed1c24; }
+.lessons-view .item-text-wrap { line-height: 1.6em;}
+.lessons-view .item img { margin:1.6em 0; box-shadow: 0px 2px 30px 0 rgba(0, 0, 0, 0.26);}
+.lessons-view { margin:0.8em;}
+.lessons-view ol > li { color:#333333; font-weight:bold; line-height:2em; padding-left:2.0em; position:relative}
+.lessons-view ol > li:before { content:''; position:absolute; left:.8em; width:8px; height:8px; background-color:#ed1c24; top:.8em; border-radius:100%; -webkit-border-radius:100%; -moz-border-radius:100%;}
+
+
 
 
 
