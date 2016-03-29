@@ -132,16 +132,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                 templateUrl: 'templates/lessons-view.html',
                 controller: 'LessonsCtrl'
             }
-            /*'fabContent': {
-                template: '<button id="fab-gallery" class="button button-fab button-fab-top-right expanded button-energized-900 drop"><i class="icon ion-heart"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-gallery').classList.toggle('on');
-                    }, 800);
-                }
-            }*/
+        }
+    })
+
+    .state('app.webinars', {
+        url: '/webinars',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/webinars.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    })
+
+    .state('app.webinars-view', {
+        url: '/webinars-view',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/webinars-view.html',
+                controller: 'LessonsCtrl'
+            }
         }
     });
+
+
+
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
