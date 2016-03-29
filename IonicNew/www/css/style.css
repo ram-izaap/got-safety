@@ -145,6 +145,39 @@ p {
 .lessons-view ol > li:before { content:''; position:absolute; left:.8em; width:8px; height:8px; background-color:#ed1c24; top:.8em; border-radius:100%; -webkit-border-radius:100%; -moz-border-radius:100%;}
 
 
+/* 
+
+    .bar .title {
+    overflow: hidden;
+    margin-left: 0px;
+    -webkit-animation-name: title_scroller;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-fill-mode: both;
+    -webkit-transition-timing-function: linear;
+    animation-name: title_scroller;
+    animation-duration: 6s;
+    animation-delay: 2s;
+    animation-direction: alternate;
+    animation-iteration-count:infinite;
+    animation-fill-mode: both;
+    transition-timing-function: linear;
+    }
+
+    @keyframes title_scroller {
+    0% { margin-left: 0; }
+    100% { margin-left: -200px; }
+    }
+
+    @-webkit-keyframes title_scroller {
+    0% { margin-left: 0; }
+    100% { margin-left: -200px; }
+    }
+*/
+
+
 
 
 
