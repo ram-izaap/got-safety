@@ -7,11 +7,11 @@ angular.module('starter.controllers', [])
  
     $scope.login = function(data) 
     {
-
+      
           //$ionicLoading.show({ noBackdrop:true });
           UserLogin.login($scope.data.username, $scope.data.pwd).then(function(response)
           {
-                  // console.log($scope.data.pwd);                   
+                  //console.log($scope.data.pwd);                                     
                   $state.go('tab.safetyLessons', {}, {reload: true});
                   //$ionicLoading.hide();                      
           }, 

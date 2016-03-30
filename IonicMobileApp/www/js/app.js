@@ -10,7 +10,7 @@
 angular.module('starter.constants',[])  
   .constant('apiUrl', 'http://localhost/got-safety/api');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.constants', 'starter.filters'])
+angular.module('starter', ['ionic', 'ngResource','starter.controllers', 'starter.services', 'starter.constants', 'starter.filters'])
 
 //.constant('apiUrl', 'http://safetypickle.com/api/v1')
 
