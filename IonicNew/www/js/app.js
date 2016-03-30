@@ -121,7 +121,43 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }*/
         }
     })
-    ;
+    
+
+
+
+    .state('app.lessons-view', {
+        url: '/lessons-view',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/lessons-view.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    })
+
+    .state('app.webinars', {
+        url: '/webinars',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/webinars.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    })
+
+    .state('app.webinars-view', {
+        url: '/webinars-view',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/webinars-view.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    });
+
+
+
+
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
