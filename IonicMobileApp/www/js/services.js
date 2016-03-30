@@ -90,23 +90,33 @@ angular.module('starter.services', [])
 })
 
 
-.factory('UserLogin', function($q, $http, apiUrl)
+/*.factory('UserLogin', function($q, $http, apiUrl)
 { 
   var login = function(name , password ) 
-  {
+  {  
    return $q(function(resolve, reject)
     {
          // var credentials = { 'username': name,'pwd': password,'X-APP-KEY' :'test'};
-        
-          $http.get(apiUrl+'/login?name=' + name + '&password=' + password).then(function(response)
-          {           
-                var res = response.data;
-                var status = res.status;  
+         //$http.get(apiUrl+'/login?name=' + name + '&password=' + password).then(function(response)
+         //$http.post(apiUrl+'/login',{'name':name, 'password':password}).then(function(response)
+        //var name="user1";
+        //var password="user123";
+       var credentials = {'name':name, 'password':password};
+          
+          $http({
+                url: apiUrl+'/login',
+                method: "POST",
+                data: credentials               
+                }).then(function(response){     
+    
+                var res    = JSON.stringify(response.data);
+                alert(res);              
+                var status = res.status;
                
-                
+            
                 if(status == 'success')  
-                   resolve('Login success.');
-                 else
+                  resolve('Login success.');        
+                else
                   reject();
                              
           },
@@ -122,6 +132,18 @@ angular.module('starter.services', [])
  return{
   login: login
 }; 
+
+})*/
+
+
+
+.factory('UserLogin', function($http, apiUrl){
+
+   var LoginResource = $resource("/rest/path/login");
+    var serviceObject = {loginUser: function (name, password){
+        return LoginResource.save({}, {name: name, password: password}).$promise; //this promise will be fulfilled when the response is retrieved for this call
+    }};
+    return serviceObject;
 
 })
 

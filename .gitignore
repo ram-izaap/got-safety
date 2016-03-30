@@ -9,3 +9,5 @@ core/config/database.php
 .htaccess
 *.php
 *.php
+*.htaccess
+application/controllers/Api.php
