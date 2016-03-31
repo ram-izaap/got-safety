@@ -153,7 +153,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                 controller: 'LessonsCtrl'
             }
         }
-    });
+    })
+
+    .state('app.forms', {
+        url: '/forms',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/forms.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    })
+    
+    .state('app.documentation', {
+        url: '/documentation',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/documentation.html',
+                controller: 'LessonsCtrl'
+            }
+        }
+    })
+    ;
 
 
 
