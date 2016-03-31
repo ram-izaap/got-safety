@@ -4,9 +4,45 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+angular.module('starter.constants',[])  
+  .constant('apiUrl', 'http://localhost/got-safety/api');
 
-.run(function($ionicPlatform) {
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services'])
+
+    .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
+
+    .directive("navigateTo", function($ionicGesture, broadcast){
+        return{
+            restrict: 'A',
+            link: function($scope, $element, $attr){
+              var tapHandler = function(e){
+
+                if (ionic.Platform.isAndroid() && $attr.navigateTo.indexOf("youtube.com") != -1) {
+                  var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_system','location=yes');
+                } else {
+                  var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_blank','location=yes');
+                }
+                
+                inAppBrowser.addEventListener('exit', function(event) { inAppBrowser.close(); });
+
+              };
+
+              var tapGesture = $ionicGesture.on('tap', tapHandler, $element);
+
+              $scope.$on(broadcast.events.onPause, function (event) {
+                  inAppBrowser.close();
+              });
+
+              $scope.$on('$destroy', function(){
+                $ionicGesture.off(tapGesture, 'tap', tapHandler);
+              });
+            }
+        };
+    })
+
+
+
+.run(function($ionicPlatform,$http,$rootScope, $state, AuthService, AUTH_EVENTS) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -20,7 +56,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider) {
+
+      //youtube vedio access
+    $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
 
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);

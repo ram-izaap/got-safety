@@ -87,12 +87,35 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('LoginCtrl', function($scope, $timeout, $stateParams, ionicMaterialInk) {
+.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, UserLogin, $ionicLoading, ionicMaterialInk) {
     $scope.$parent.clearFabs();
     $timeout(function() {
         $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
+
+    $scope.data = {};
+    $scope.login = function(data) 
+    {
+      
+          //$ionicLoading.show({ noBackdrop:true });
+          UserLogin.login($scope.data.username, $scope.data.pwd).then(function(response)
+          {
+            alert(response);
+                  //console.log($scope.data.pwd);                                     
+                  $state.go('tab.safetyLessons', {}, {reload: true});
+                  //$ionicLoading.hide();                      
+          }, 
+          function(err) 
+          {
+            $ionicPopup.alert( { title: 'Login failed!', template: 'Please check your credentials!' } );
+            //$ionicLoading.hide();
+          });
+
+    };
+
+
+
     
 })
 
