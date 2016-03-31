@@ -566,7 +566,7 @@ class Api extends REST_Controller {
 		
 		if((!$this->get('type')) ) 
 		{
-			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 200);
 		}
 				
 			$id = $this->get("type");
@@ -582,7 +582,7 @@ class Api extends REST_Controller {
 				}
 				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
 			}
 		
 	} 
@@ -596,7 +596,7 @@ class Api extends REST_Controller {
 		
 		if((!$this->get('user_id')) && (!$this->get('created_id')) && (!$this->get('type')) ) 
     		{
-    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
+    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 200);
     		}
 			
 			$user_id = $this->get("user_id");
@@ -628,7 +628,7 @@ class Api extends REST_Controller {
 				$folder = "safety_forms";
 			}
 			else {
-				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
 			}
 			
 			
@@ -654,10 +654,8 @@ class Api extends REST_Controller {
 				}
 				return $this->response(array( "status" => "success","user"=> $user),200);
 			}else{
-				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
 			}
-		
-		
 		
 	} 
 
