@@ -11,6 +11,7 @@ angular.module('starter.controllers', [])
           //$ionicLoading.show({ noBackdrop:true });
           UserLogin.login($scope.data.username, $scope.data.pwd).then(function(response)
           {
+            alert(response);
                   //console.log($scope.data.pwd);                                     
                   $state.go('tab.safetyLessons', {}, {reload: true});
                   //$ionicLoading.hide();                      
@@ -23,6 +24,29 @@ angular.module('starter.controllers', [])
 
     };
 })
+
+
+
+/*.controller('LoginCtrl', function($scope, $state, $ionicPopup, UserLogin, $ionicLoading) 
+{
+  $scope.data = {};
+    
+    $scope.login = function(data) 
+    {
+          //$ionicLoading.show({ noBackdrop:true });
+          UserLogin.loginUser($scope.data.username, $scope.data.pwd).then( function(loginResult)
+          { 
+            $state.go('tab.safetyLessons', {}, {reload: true});
+            console.log(loginResult);
+          },
+          function(err)
+          {
+           console.error(err);
+          });
+
+    };
+})
+*/
 
 
 .controller('WebinarsCtrl', function($scope, $state, $http, WebinarService, $ionicLoading) 

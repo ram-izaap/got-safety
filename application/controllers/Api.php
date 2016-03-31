@@ -16,9 +16,20 @@ class Api extends REST_Controller {
 	
     function __construct()
     {
+    	/*$postdata = file_get_contents("php://input");
+	    if (isset($postdata)) 
+		{
+			$request = json_decode($postdata, true);
+			if( is_array($request) )
+				$_POST = $request;
+		}*/
+
         parent::__construct();
+
+        
+
         $this->load->model(array('api_model'));
-         $key  = $this->get('X-APP-KEY');
+        $key  = $this->get('X-APP-KEY');
         
     }
 
@@ -112,36 +123,52 @@ class Api extends REST_Controller {
     
 	public function login_post()
 	{
-			$name = $this->post('name');
-			$password = $this->post('password');
-			//echo $name;exit;
-			if($name=='' || $password=='')
-    		{
-    			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 404);
-    		}
 
+		$output = array();
+		try
+		{
+			$name 		= $this->post('name');
+			$password 	= $this->post('password');
 
-			$data = $this->api_model->login($name,$password);
-			if($data == 0){
+			if( strcmp('', trim($name) ) === 0 || strcmp('', trim($password) ) === 0 )
+				throw new Exception("Required fields missing in your request");
 				
+
+			$data = $this->api_model->login( $name, $password );
+
+			switch ( $data ) 
+			{
+				case 0:
+					throw new Exception("User not in active");					
+					break;
+
+				case -1:
+					throw new Exception("Username or password mismatch");					
+					break;
 				
-				return $this->response(array( "status" => "error","msg"=> "User not in active"),404);
-				
-			}else if($data == -1){
-				
-				return $this->response(array( "status" => "error","msg"=> "Username or password mismatch"),404);
-				
-			}else {
-				$user_id = $data[0]['id'];
-				$user_name 	= $data[0]['name'];
-				$role 	= $data[0]['role'];
-				$created_id 	= $data[0]['created_id'];
-				
-				return $this->response(array("status" => "success" , "msg" => "Login Successfully","user_id" => $user_id, "user_name" => $user_name, "created_id" => $created_id ,"role" => $role  ),200);
-				
+				default:
+					
+					break;
 			}
-			
-		
+
+			$udata  = $data[0];
+
+			$output['message'] = "Login Successfully";
+			$output['user_id'] = $udata['id'];
+			$output['user_name'] = $udata['name'];
+			$output['created_id'] = $udata['created_id'];
+			$output['role'] = $udata['role'];
+
+			$output['status'] = 'success';
+		}
+		catch( Exception $e)
+		{
+			$output['message'] = $e->getMessage();
+			$output['status'] = 'error';
+		}
+
+		$this->response( $output, 200);
+
 	} 
 
 

@@ -90,7 +90,7 @@ angular.module('starter.services', [])
 })
 
 
-/*.factory('UserLogin', function($q, $http, apiUrl)
+.factory('UserLogin', function($q, $http, apiUrl)
 { 
   var login = function(name , password ) 
   {  
@@ -109,8 +109,7 @@ angular.module('starter.services', [])
                 data: credentials               
                 }).then(function(response){     
     
-                var res    = JSON.stringify(response.data);
-                alert(res);              
+                var res    = response.data;                          
                 var status = res.status;
                
             
@@ -133,19 +132,22 @@ angular.module('starter.services', [])
   login: login
 }; 
 
-})*/
+})
 
 
 
-.factory('UserLogin', function($http, apiUrl){
-
-   var LoginResource = $resource("/rest/path/login");
-    var serviceObject = {loginUser: function (name, password){
-        return LoginResource.save({}, {name: name, password: password}).$promise; //this promise will be fulfilled when the response is retrieved for this call
-    }};
+/*.factory('UserLogin', function($resource)
+{
+    var LoginResource = $resource('http://localhost/got-safety/api/login');
+    var serviceObject = {loginUser: function (name, password)
+      {
+        
+        return LoginResource.save({}, {name: name, password: password}).$promise; 
+       //this promise will be fulfilled when the response is retrieved for this call
+      }};
     return serviceObject;
 
-})
+})*/
 
 .factory('safetyLessons', function($http, apiUrl)
  {
@@ -160,10 +162,12 @@ angular.module('starter.services', [])
   return {
               all: function() 
               {
+                 
                     return $http.get(apiUrl+'/get_user_lesson_list?created_id=8&user_id=29').then(function(response)
                     {
                         var lessons_array   = response.data;
                         var usr             = lessons_array.user;
+
                             
                             if(usr.length > 0)
                             {
@@ -172,7 +176,7 @@ angular.module('starter.services', [])
                                   if(j>1)
                                   break;
                                  //alert(usr[1].id);
-                                  //safety.push(usr[j]);&X-APP-KEY=test
+                                 
                                   lessons[j] = usr[j];
                                }
                             }

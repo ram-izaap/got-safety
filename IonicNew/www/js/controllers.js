@@ -93,6 +93,7 @@ angular.module('starter.controllers', [])
         $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
+    
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
@@ -114,7 +115,7 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('LessonsCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('LessonsCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicPopup) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -135,8 +136,39 @@ angular.module('starter.controllers', [])
         });
     }, 700);
 
-    // Set Ink
+      // Set Ink
     ionicMaterialInk.displayEffect();
+
+  
+
+    $scope.showPopup = function() 
+    {
+              $scope.data = {};
+
+              // An elaborate, custom popup
+              var myPopup = $ionicPopup.show({
+                
+                title:      'search safety lessons',
+                subTitle:   'Are you want to download or view?',
+                scope:       $scope,
+                buttons:    [
+                              { text: 'download',
+                                type: 'button-assertive' },
+                              {
+                                text: '<b>view</b>',
+                                type: 'button-positive'
+                                
+                              }
+                            ]
+              });
+  $timeout(function() {
+     myPopup.close(); //close the popup after 3 seconds for some reason
+  }, 3000);
+ };
+
+
+
+  
 
 
 
