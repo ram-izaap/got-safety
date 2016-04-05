@@ -576,7 +576,7 @@ class Api extends REST_Controller {
 				foreach($data as $list){
 					
 					$user[$i]['id']= $list['id'];
-					$user[$i]['content'] = $list['content'];
+					$user[$i]['content'] = strip_tags($list['content']);
 				
 				$i=$i+1;
 				}
@@ -603,26 +603,26 @@ class Api extends REST_Controller {
 			$created_id = $this->get("created_id");
 			$type = $this->get("type");
 			
-			if($type == "1") {
+			if($type == "report") {
 				$table = "inspection_reports";
 				$folder = "inspection_reports";
 			}
-			else if($type == "2"){
+			else if($type == "document"){
 				
 				$table = "cal_osha";
 				$folder = "call_osha";
 			}
-			else if($type == "3"){
+			else if($type == "log"){
 				
 				$table = "logs";
 				$folder = "logs";
 			}
-			else if($type == "4"){
+			else if($type == "record"){
 				
 				$table = "records";
 				$folder = "records";
 			}
-			else if($type == "5"){
+			else if($type == "forms"){
 				
 				$table = "safety_forms";
 				$folder = "safety_forms";

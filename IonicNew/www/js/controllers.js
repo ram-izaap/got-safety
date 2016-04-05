@@ -3,11 +3,10 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout) {
-    // Form data for the login modal
-    $scope.loginData = {};
-    $scope.isExpanded = false;
-    $scope.hasHeaderFabLeft = false;
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, AuthService,$state) {
+    
+    $scope.isExpanded        = false;
+    $scope.hasHeaderFabLeft  = false;
     $scope.hasHeaderFabRight = false;
 
     var navIcons = document.getElementsByClassName('ion-navicon');
@@ -38,12 +37,14 @@ angular.module('starter.controllers', [])
         }
     };
 
-    $scope.setExpanded = function(bool) {
+    $scope.setExpanded = function(bool) 
+    {
         $scope.isExpanded = bool;
     };
 
-    $scope.setHeaderFab = function(location) {
-        var hasHeaderFabLeft = false;
+    $scope.setHeaderFab = function(location) 
+    {
+        var hasHeaderFabLeft  = false;
         var hasHeaderFabRight = false;
 
         switch (location) {
@@ -55,101 +56,111 @@ angular.module('starter.controllers', [])
                 break;
         }
 
-        $scope.hasHeaderFabLeft = hasHeaderFabLeft;
+        $scope.hasHeaderFabLeft  = hasHeaderFabLeft;
         $scope.hasHeaderFabRight = hasHeaderFabRight;
     };
 
-    $scope.hasHeader = function() {
+    $scope.hasHeader = function() 
+    {
         var content = document.getElementsByTagName('ion-content');
-        for (var i = 0; i < content.length; i++) {
-            if (!content[i].classList.contains('has-header')) {
+        for (var i = 0; i < content.length; i++) 
+        {
+            if (!content[i].classList.contains('has-header'))
+             {
                 content[i].classList.toggle('has-header');
-            }
+             }
         }
 
     };
 
-    $scope.hideHeader = function() {
+    $scope.hideHeader = function() 
+    {
         $scope.hideNavBar();
         $scope.noHeader();
     };
 
-    $scope.showHeader = function() {
+    $scope.showHeader = function() 
+    {
         $scope.showNavBar();
         $scope.hasHeader();
     };
 
-    $scope.clearFabs = function() {
+    $scope.clearFabs = function() 
+    {
         var fabs = document.getElementsByClassName('button-fab');
-        if (fabs.length && fabs.length > 1) {
+        if (fabs.length && fabs.length > 1) 
+        {
             fabs[0].remove();
         }
     };
+
+
+    //logout function
+    $scope.logout = function() 
+    {
+    AuthService.logout();
+    $state.go('app.login');
+    };
+
+
+
 })
 
-.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, UserLogin, $ionicLoading, ionicMaterialInk) {
+.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk) {
+    
+
+    $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $timeout(function() {
+    $timeout(function() 
+    {
         $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
 
+    //login function begins
     $scope.data = {};
     $scope.login = function(data) 
     {
       
           //$ionicLoading.show({ noBackdrop:true });
-          UserLogin.login($scope.data.username, $scope.data.pwd).then(function(response)
+          AuthService.login($scope.data.username, $scope.data.pwd).then(function(response)
           {
-            alert(response);
-                  //console.log($scope.data.pwd);                                     
-                  $state.go('tab.safetyLessons', {}, {reload: true});
+                                                               
+                  $state.go('app.safetyLessons', {}, {reload: true});
                   //$ionicLoading.hide();                      
           }, 
           function(err) 
           {
-            $ionicPopup.alert( { title: 'Login failed!', template: 'Please check your credentials!' } );
-            //$ionicLoading.hide();
+
+            $ionicPopup.alert( { title: 'Login failed!', template: 'Wrong Username or Password!' } );
+           // $ionicLoading.hide();
+          
           });
 
     };
 
 
-
+   
     
 })
 
-.controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
 
-    // Delay expansion
-    $timeout(function() {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
-    }, 300);
 
-    // Set Motion
-    ionicMaterialMotion.fadeSlideInRight();
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-})
-
-.controller('LessonsCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicPopup) {
+.controller('safetyLessonsCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, safetyLessons, $ionicPopup, $ionicLoading) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+
     //$scope.$parent.hideHeader();
+
+
     // Set Motion
-    $timeout(function() {
+   $timeout(function() {
         ionicMaterialMotion.slideUp({
-            selector: '.slide-up'
+           selector: '.slide-up'
         });
     }, 300);
 
@@ -162,7 +173,7 @@ angular.module('starter.controllers', [])
       // Set Ink
     ionicMaterialInk.displayEffect();
 
-  
+
 
     $scope.showPopup = function() 
     {
@@ -189,48 +200,413 @@ angular.module('starter.controllers', [])
   }, 3000);
  };
 
+      // list of safety lessonss
+      safetyLessons.all().then(function(data)
+      { 
+        $scope.Lessons = data; 
+        $ionicLoading.hide();
 
-
-  
-
-
+        
+     });
 
 })
 
-.controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+
+.controller('LessonViewCtrl', function($scope, $stateParams, $window, $http, safetyLessons, $ionicLoading) 
+{   
+    var LessonId   = $stateParams.id;
+    $scope.Lessons = safetyLessons.GetLesson(LessonId);    
+    
+     
+      safetyLessons.GetAttachment().then(function(data)
+      { 
+        $scope.Attachment = data; 
+        $ionicLoading.hide();     
+        
+     });
+
+        //open pdf in  browser
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+ })
+
+
+.controller('WebinarsCtrl', function($scope, $state, $timeout,$http, WebinarService, $ionicLoading,ionicMaterialMotion) 
+{
+
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab('right');
+    //$scope.$parent.setHeaderFab('left');
+   // $scope.$parent.setExpanded(false);
+    //$scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
 
     $timeout(function() {
-        ionicMaterialMotion.fadeSlideIn({
-            selector: '.animate-fade-slide-in .item'
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
         });
-    }, 200);
+    }, 700);
 
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
+      //webinars list
+      $ionicLoading.show({ noBackdrop:true });
+      WebinarService.all().then(function(data)
+      { 
+        $scope.webinars = data; 
+        $ionicLoading.hide();
+      });
+
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('WebinarsViewCtrl', function($scope, $state, $stateParams, $http, WebinarService, $ionicLoading) 
+{
+      //single webinar view
+      $ionicLoading.show({ noBackdrop:true });
+      var WebinarId   = $stateParams.id;
+      $scope.webinars = WebinarService.get(WebinarId);
+
+})
+
+
+.controller('DocumentationCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,DocumentationService) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    //documentations list
+    DocumentationService.all().then(function(data)
+      { 
+        $scope.Documentations = data; 
+        $ionicLoading.hide();
+      })
+
+     //documentation content
+     DocumentationService.content().then(function(data)
+    { 
+        $scope.content = data; 
+        $ionicLoading.hide();
+    });
+
+        //open pdf in browser
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+
+})
+
+
+.controller('InspectionReportCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,InspectionReportService) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    //Inspection Report list
+    InspectionReportService.all().then(function(data)
+      { 
+        $scope.Reports = data; 
+        $ionicLoading.hide();
+      })
+
+     //IspectionReport content
+     InspectionReportService.content().then(function(data)
+    { 
+        $scope.content = data; 
+        $ionicLoading.hide();
+    });
+
+        //open pdf in browser
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+
+})
+
+
+
+.controller('300LogsCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,LogService) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    //Logs list
+    LogService.all().then(function(data)
+      { 
+        $scope.Logs = data; 
+        $ionicLoading.hide();
+      })
+
+     //Logs content
+     LogService.content().then(function(data)
+    { 
+        $scope.content = data; 
+        $ionicLoading.hide();
+    });
+
+        //open pdf in browser
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+
+})
+
+
+.controller('TrainingRecordCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,TrainingRecordService) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    //Logs list
+    TrainingRecordService.all().then(function(data)
+      { 
+        $scope.Records = data; 
+        $ionicLoading.hide();
+      })
+
+     //Logs content
+     TrainingRecordService.content().then(function(data)
+    { 
+        $scope.content = data; 
+        $ionicLoading.hide();
+    });
+
+        //open pdf in browser
+        $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+
+})
+
+
+
+
+.controller('FormsCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion, FormService) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+   // $scope.$parent.setHeaderFab('left');
+   //$scope.$parent.setExpanded(false);
+    //$scope.$parent.setHeaderFab(false);
+
+      $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+    // Set Ink
+    ionicMaterialInk.displayEffect();
+
+    //forms list
+    FormService.all().then(function(data)
+    { 
+        $scope.Forms = data; 
+        $ionicLoading.hide();
+    });
+
+
+    //forms content
+    FormService.content().then(function(data)
+    { 
+        $scope.content = data; 
+        $ionicLoading.hide();
+    });
+
+
+        //open pdf in content
+        $scope.OpenLink = function(link)
+        {
+       
+          window.open( link, '_blank','location=yes');
+        
+        };   
+
+})
+
+
+
+.controller('SafetyPostersCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, SafetyPosters, $ionicPopup, $ionicLoading) {
+    // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
+    $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
+    //$scope.$parent.hideHeader();
+    // Set Motion
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
 
-    // Activate ink for controller
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+      // Set Ink
     ionicMaterialInk.displayEffect();
 
-    ionicMaterialMotion.pushDown({
-        selector: '.push-down'
-    });
-    ionicMaterialMotion.fadeSlideInRight({
-        selector: '.animate-fade-slide-in .item'
-    });
+
+
+    $scope.showPopup = function() 
+    {
+              $scope.data = {};
+
+              // An elaborate, custom popup
+              var myPopup = $ionicPopup.show({
+                
+                title:      'search safety lessons',
+                subTitle:   'Are you want to download or view?',
+                scope:       $scope,
+                buttons:    [
+                              { text: 'download',
+                                type: 'button-assertive' },
+                              {
+                                text: '<b>view</b>',
+                                type: 'button-positive'
+                                
+                              }
+                            ]
+              });
+  $timeout(function() {
+     myPopup.close(); //close the popup after 3 seconds for some reason
+  }, 3000);
+ };
+
+      // list of safety posters
+      SafetyPosters.all().then(function(data)
+      { 
+        $scope.Posters = data; 
+        $ionicLoading.hide();
+
+        
+     });
 
 })
 
-;
+
+.controller('SafetyPosterViewCtrl', function($scope, $stateParams, $window, $http, SafetyPosters, $ionicLoading) 
+{   
+    var PosterId   = $stateParams.id;
+    $scope.Posters = SafetyPosters.GetPoster(PosterId);    
+    
+     //safety poster attachment
+      SafetyPosters.GetAttachment().then(function(data)
+      { 
+        $scope.Attachment = data; 
+        $ionicLoading.hide();     
+        
+     });
+
+        //open pdf in  browser
+         $scope.OpenLink = function(link)
+         {
+       
+         window.open( link, '_blank','location=yes');
+        
+         };   
+ });

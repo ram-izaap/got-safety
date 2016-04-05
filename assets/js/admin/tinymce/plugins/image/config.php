@@ -6,7 +6,7 @@ session_start();
 define('LIBRARY_FOLDER_PATH', '../../../../../images/admin/');
 
 /** Full URL to the folder that images will be used as library and upload. Include trailing slash and protocol (i.e. http://) */
-define('LIBRARY_FOLDER_URL', 'http://localhost/got_safety/assets/images/admin/');
+define('LIBRARY_FOLDER_URL', 'http://localhost/got-safety/assets/images/admin/');
 
 /** The extensions for to use in validation */
 define('ALLOWED_IMG_EXTENSIONS', 'gif,jpg,jpeg,png,jpe');

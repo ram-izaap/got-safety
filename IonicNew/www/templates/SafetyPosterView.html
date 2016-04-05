@@ -1,0 +1,43 @@
+<ion-view view-title="{{Posters.title}}">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        
+        <!-- Search bar -->
+        <div class="bar-header item-input-inset search">
+          <label class="item-input-wrapper">
+            <input type="search" placeholder="Search" data-width="full" ng-model = "SearchQuery">
+            <i class="icon ion-ios-search-strong placeholder-icon"></i>
+          </label>
+          
+        </div>
+
+        <!-- Lesons View -->
+
+        <div class="card lessons-view animate-fade-slide-in-left">
+          <div class="item item-text-wrap">
+
+            
+             <!--attachment list-->
+       
+                     
+                      <div class="list lessons animate-fade-slide-in-left">
+
+                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery"  class="item item-icon-right" ng-click="OpenLink('{{Attachments.poster1}}')"> 
+                              <i class="icon ion-chevron-right"></i>
+                             {{Attachments.language}}              
+                            </a>  
+                      
+                    </div>
+
+
+
+                    <!--displaying poster-->
+
+                    <div class="padding">        
+                      <p ng-bind-html="Posters.content"></p>  
+                    </div>    
+
+          </div>
+        </div>
+
+    </ion-content>
+</ion-view>

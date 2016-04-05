@@ -1,4 +1,4 @@
-<ion-view view-title="Webinars">
+<ion-view view-title="{{webinars.title}}">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         
         <!-- Search bar -->
@@ -12,17 +12,17 @@
           </button> -->
         </div>
 
-        <!-- Lesons  View -->
+        <!-- Webinars  View -->
 
         <div class="card lessons-view animate-fade-slide-in-left">
           <div class="item item-text-wrap">
 
-            <h2>Jobsite Safety General Vs Sub-Contractor Responsibilities</h2>
+            <h2>{{webinars.title}}</h2>
 
               <div class="row">
                 <div class="col">
                   <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/2m5Sbvs2jnQ?rel=0" frameborder="0" allowfullscreen></iframe>
+                    <iframe src={{webinars.link}} frameborder="0" allowfullscreen></iframe>
                   </div>
                 </div>
               </div>

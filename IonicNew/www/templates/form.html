@@ -1,0 +1,44 @@
+<ion-view view-title="Forms">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        
+        <!-- Search bar -->
+        <div class="bar-header item-input-inset search">
+          <label class="item-input-wrapper">
+            <input type="search" placeholder="Search" data-width="full" ng-model = "SearchQuery">
+            <i class="icon ion-ios-search-strong placeholder-icon"></i>
+          </label>
+          <!-- <button class="button button-clear">
+            Cancel
+          </button> -->
+        </div>
+
+        <!-- Lesons  Name -->
+
+        <div class="card box">
+          <div class="item item-text-wrap" ng-repeat = "contents in conten | filter : SearchQuery">
+           <h2>Forms</h2>
+            
+            <p class="red">{{contents.content}}</p>
+
+          </div>
+        </div>
+
+
+
+        <div class="list forms animate-fade-slide-in-left">
+
+          <!--ion-item nav-clear menu-close ui-sref="app.default" class="item item-icon-left item-icon-right">
+              <i class="icon icon-pdf" icon-direction="left"></i>
+              <b> Emergency Contact Information Procedure </b>
+              <i class="icon ion-chevron-right" icon-direction="right"></i>
+          </ion-item-->
+
+          <a class="item item-icon-right" ng-repeat="Form in Forms | filter : SearchQuery"  ng-click="OpenLink('{{Form.url}}')">{{Form.title}}
+           <i class="icon ion-ios-arrow-right"></i> 
+           </a>
+        
+
+        </div>
+
+    </ion-content>
+</ion-view>

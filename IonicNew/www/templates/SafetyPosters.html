@@ -1,30 +1,25 @@
-<ion-view view-title="Webinars">
+<ion-view view-title="Safety Posters">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         
         <!-- Search bar -->
         <div class="bar-header item-input-inset search">
+          
           <label class="item-input-wrapper">
             <input type="search" placeholder="Search" data-width="full" ng-model = "SearchQuery">
             <i class="icon ion-ios-search-strong placeholder-icon"></i>
           </label>
-          <!-- <button class="button button-clear">
-            Cancel
-          </button> -->
+      
         </div>
 
-      
+        <!-- Poster List -->
+        <div class="list lessons animate-fade-slide-in-left">
 
-
-    <div class="list webinars animate-fade-slide-in-left">
-
-          <a href="#/app/webinarView/{{webinar.id}}"  class="item item-icon-right" ng-repeat="webinar in webinars | filter : SearchQuery"> 
+          <a href="#/app/SafetyPosterView/{{poster.id}}"  class="item item-icon-right" ng-repeat="poster in Posters | filter : SearchQuery"> 
             <i class="icon ion-chevron-right"></i>
-            {{webinar.title}}
+            {{poster.title}}
           </a>  
-    
-    </div>
 
-
+          
           
         </div>
 
