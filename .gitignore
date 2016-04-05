@@ -11,5 +11,3 @@ core/config/database.php
 *.php
 *.htaccess
 application/controllers/Api.php
-*.js
-*.js
