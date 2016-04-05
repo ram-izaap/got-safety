@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
           function(err) 
           {
 
-            $ionicPopup.alert( { title: 'Login failed!', template: 'Wrong Username or Password!' } );
+            $ionicPopup.alert( { title: 'Login failed!', template: 'Invalid Username or Password!' } );
            // $ionicLoading.hide();
           
           });

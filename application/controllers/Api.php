@@ -336,7 +336,7 @@ class Api extends REST_Controller {
 				$i=$i+1;
 				}
 				
-				return $this->response(array( "status" => "success","user"=> $user),200);
+				return $this->response(array( "status" => "success","lessons"=> $user),200);
 				
 			}else{
 				

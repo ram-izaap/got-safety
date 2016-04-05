@@ -133,19 +133,15 @@ angular.module('starter.services', [])
 
                     return $http.get(apiUrl+'/get_user_lesson_list?created_id='+C_id+'&user_id='+U_id+'').then(function(response)
                     {
-                        var lessons_array   = response.data;
-                        var usr             = lessons_array.user;
-
+                        var lessons_data   = response.data;
+                        var lessons_array  = lessons_data.lessons;
                             
-                            if(usr.length > 0)
+                            if(lessons_array.length > 0)
                             {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                  if(j>usr.length)
-                                  break;
-                                 //alert(usr[1].id);
-                                 
-                                  lessons[j] = usr[j];
+                               for(var j = 0; j < lessons_array.length; j++)
+                               {                              
+                                  //alert(usr[1].id);
+                                  lessons[j] = lessons_array[j];
                                }
                             }
                         
@@ -186,10 +182,7 @@ angular.module('starter.services', [])
                            if(usr.length > 0)
                             {
                                for(var j = 0; j < usr.length; j++)
-                               {
-                                  if(j>usr.length)
-                                  break;
-                                
+                               {                               
                                   Attachment[j] = usr[j];
                                }
                             } 
@@ -278,10 +271,7 @@ angular.module('starter.services', [])
                             if(usr.length > 0)
                             {
                                for(var j = 0; j < usr.length; j++)
-                               {
-                                
-                                    if(j>usr.length)
-                                    break;                                                          
+                               {                                                          
                                     webinars[j] = usr[j];
                                }
                             }
@@ -337,9 +327,7 @@ angular.module('starter.services', [])
                             if(usr.length > 0)
                             {
                                for(var j = 0; j < usr.length; j++)
-                               {
-                                  if(j>usr.length)
-                                  break;                             
+                               {                             
                                   // alert(usr[0].id);                               
                                   Documentations[j] = usr[j];
                                }
@@ -402,8 +390,6 @@ angular.module('starter.services', [])
                             {
                                for(var j = 0; j < usr.length; j++)
                                {
-                                    if(j>usr.length)
-                                    break;
                                     // alert(usr[0].id);                               
                                     Reports[j] = usr[j];
                                }
@@ -467,8 +453,6 @@ angular.module('starter.services', [])
                             {
                                for(var j = 0; j < usr.length; j++)
                                {
-                                    if(j>usr.length)
-                                    break;
                                     // alert(usr[0].id);                               
                                     Records[j] = usr[j];
                                }
@@ -531,11 +515,8 @@ angular.module('starter.services', [])
                             {
                                for(var j = 0; j < usr.length; j++)
                                {
-                                if(j>usr.length)
-                                break;
-                               
-                              // alert(usr[0].id);                               
-                              Logs[j] = usr[j];
+                                  // alert(usr[0].id);                               
+                                  Logs[j] = usr[j];
                                }
                             }
                         
@@ -595,10 +576,9 @@ angular.module('starter.services', [])
                             {
                                for(var j = 0; j < usr.length; j++)
                                {
-                                if(j>usr.length)
-                                break;                              
-                                // alert(usr[0].id);                               
-                              Forms[j] = usr[j];
+                            
+                                  // alert(usr[0].id);                               
+                                  Forms[j] = usr[j];
                                }
                             }
                         
@@ -618,11 +598,10 @@ angular.module('starter.services', [])
                     {
                       
                         var content_res   = response.data;
-                        var user           = content_res.user;
-                        var content         = user;
+                        var user          = content_res.user;
+                        var content       = user;
                         
-
-                        return content;
+                      return content;
                       
                        
                     });
@@ -661,10 +640,7 @@ angular.module('starter.services', [])
                             {
                                for(var j = 0; j < usr.length; j++)
                                {
-                                  if(j>usr.length)
-                                  break;
-                                 //alert(usr[1].id);
-                                 
+                                 //alert(usr[1].id);                               
                                   posters [j] = usr[j];
                                }
                             }
@@ -695,8 +671,6 @@ angular.module('starter.services', [])
               {
                 var Posterid = window.localStorage.getItem("posterid");
 
-                  
-                    
                     return $http.get(apiUrl+'/get_posters_attachment?poster_id='+Posterid).then(function(response)
                     {
                         var attachment_array   = response.data;
@@ -707,10 +681,7 @@ angular.module('starter.services', [])
                            if(usr.length > 0)
                             {
                                for(var j = 0; j < usr.length; j++)
-                               {
-                                  if(j>usr.length)
-                                  break;
-                                
+                               {                               
                                   Attachment[j] = usr[j];
                                }
                             } 
