@@ -259,3 +259,34 @@ $config['attach_index'] = array(
 	"default_direction" => "DESC"
 );
 
+
+$config['employee_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'employee/filter',
+	"base_url"	=> 	'/employee/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'employee_name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'employee_email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['signoff_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'signoff/filter',
+	"base_url"	=> 	'/signoff/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => FALSE, 'default_view'=>1),
+                             'topic'=>array('name'=>'Topic', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),                             
+                             'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);

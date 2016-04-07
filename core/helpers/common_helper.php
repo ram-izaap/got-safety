@@ -126,6 +126,16 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
 			$data ='<a href="'.base_url().'index.php/client?id='.$row['id'].'"><i class="fa fa-plus cen-align2"></i></a>';
             break; 
             
+           case 'find_employee':
+			
+			$CI = & get_instance();    
+            $CI->load->model('signoff_model');
+            $name = $CI->signoff_model->get_employee_name($data);
+            $data = $name->employee_name;
+            break; 
+            
+            
+            
                
     }
     
