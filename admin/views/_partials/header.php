@@ -528,6 +528,10 @@
 							</li>
 							
 							
+							<li> 
+								<a href="<?php echo site_url('signoff'); ?>">
+								Manage Training records </a>
+							</li>
 							
 						</ul>
 					</li>
@@ -793,6 +797,27 @@
 							</ul>
 						</li>
 					<?php } */ ?>
+					
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Employee Management</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('employee/add_edit_employee'); ?>">
+								 Add Employee</a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('employee'); ?>">
+								 Manage Employee</a>
+							</li>
+							
+						</ul>
+					</li>
+					
+					
 					
 				</ul>
 			<!-- END SIDEBAR MENU -->
