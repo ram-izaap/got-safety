@@ -43,34 +43,44 @@
 					</select>
 					 <span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
 				</div>
-			</div>
+		  </div>
+
+
+                <!-- dropdown for file type-->
+				<div class="form-group">
+					
+					<label class="col-md-2 control-label">Type: <span class="required">
+					* </span>
+					</label>
+					<div class="col-md-10">
+		                						
+							<select name= "type" class="table-group-action-input form-control input-medium">
+							  
+							   <option value=""> select...</option>
+							   <option value="1">Pdf</option>
+							   <option value="2">Audio</option>
+							   <option value="3">Video</option>
+							
+							</select>
+					
+					<span class="vstar" <?php echo form_error('type', '<span class="help-block">', '</span>'); ?></span>				
+												
+					</div>
+		      
+		      </div>
+			
+
+			
+			
 			
 			<?php } ?>
+
 			
-			<?php  $role =  $this->session->userdata('admin_data')['role'];  
-              if($role == "2"){   ?>
-			<div class="form-group">
-				<label class="col-md-2 control-label">Language: <span class="required">
-				* </span>
-				</label>
-				<div class="col-md-10">
-					<select name="language" class="table-group-action-input form-control input-medium">
-						<option value="">Select...</option>
-						<?php if(isset($get_menu)) { 
-							foreach($get_menu as $fkey => $fvalue){ 
-							  $selected = ($form_data['language'] == $fvalue['lang'])?"selected='selected'":"";   
-						?>
-						<?php
-						$a= explode(',',$lang_list);
-						if(in_array($fvalue['id'],$a)) { ?>
-						<option value="<?php echo $fvalue['lang']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
-						<?php } ?>
-						<?php  } } ?>
-					</select>
-					 <span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
-				</div>
-			</div>
-			<?php } ?>
+			
+			
+              
+			
+			
 			
 		<?php /*	<div class="form-group">
 				<label class="col-md-2 control-label">Type: <span class="required">
@@ -111,7 +121,7 @@
 					<span class="vstar"<?php echo form_error('f_name', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="http://localhost/got_safety/assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
+								<a  target="_blank" href="http://localhost/got-safety/assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
 							
 						<?php } ?>
 						
@@ -129,7 +139,7 @@
 					<span class="vstar"<?php echo form_error('f_name_quiz', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="http://localhost/got_safety/assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
+								<a  target="_blank" href="http://localhost/got-safety/assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
 							
 						<?php } ?>
 						

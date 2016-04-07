@@ -106,7 +106,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk) {
+.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk,$ionicHistory) {
     
 
     $scope.$parent.showHeader();
@@ -122,18 +122,18 @@ angular.module('starter.controllers', [])
     $scope.login = function(data) 
     {
       
-          //$ionicLoading.show({ noBackdrop:true });
+          $ionicLoading.show({ noBackdrop:true });
           AuthService.login($scope.data.username, $scope.data.pwd).then(function(response)
           {
-                                                               
-                  $state.go('app.safetyLessons', {}, {reload: true});
-                  //$ionicLoading.hide();                      
+                  $ionicLoading.hide();   
+                  $ionicHistory.currentView($ionicHistory.backView());                    
+                  $state.go('app.safetyLessons');
+                                       
           }, 
           function(err) 
           {
-
+            $ionicLoading.hide();
             $ionicPopup.alert( { title: 'Login failed!', template: 'Invalid Username or Password!' } );
-           // $ionicLoading.hide();
           
           });
 
@@ -150,17 +150,13 @@ angular.module('starter.controllers', [])
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
+    $scope.$parent.setHeaderFab('left');
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
 
-    //$scope.$parent.hideHeader();
-
-
-    // Set Motion
-   $timeout(function() {
+      $timeout(function() {
         ionicMaterialMotion.slideUp({
-           selector: '.slide-up'
+            selector: '.slide-up'
         });
     }, 300);
 
@@ -169,10 +165,6 @@ angular.module('starter.controllers', [])
             startVelocity: 3000
         });
     }, 700);
-
-      // Set Ink
-    ionicMaterialInk.displayEffect();
-
 
 
     $scope.showPopup = function() 
@@ -240,9 +232,9 @@ angular.module('starter.controllers', [])
 
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    //$scope.$parent.setHeaderFab('left');
-   // $scope.$parent.setExpanded(false);
-    //$scope.$parent.setHeaderFab(false);
+    $scope.$parent.setHeaderFab('left');
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
 
       $timeout(function() {
         ionicMaterialMotion.slideUp({

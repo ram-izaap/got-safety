@@ -53,6 +53,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+
+        $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+          
+          if (!AuthService.isAuthenticated()) 
+          {
+              if (next.name !== 'app.login') 
+              {
+                event.preventDefault();
+                $state.go('app.login');
+              }
+          }
+          
+
+        });
+
     });
 })
 
