@@ -7,6 +7,8 @@ class Lession extends Admin_controller {
 	
 	protected $_lession_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required|max_length[255]'),
+													array('field' => 'from', 'label' => 'From date', 'rules' => 'trim|required'),
+													array('field' => 'to', 'label' => 'To date', 'rules' => 'trim|required'),
 													array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
@@ -89,6 +91,7 @@ class Lession extends Admin_controller {
 	
 	public function add_edit_lession($edit_id = "")
     { 
+		//$this->output->enable_profiler(true);
 		
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
@@ -138,6 +141,8 @@ class Lession extends Admin_controller {
 			
 			
             $ins_data['title']       	= $form['title'];
+            $ins_data['from']       	= $form['from'];
+            $ins_data['to']       	= $form['to'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['content']  = $form['content'];
             
@@ -187,7 +192,7 @@ class Lession extends Admin_controller {
             {
                 $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","all" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","all" => "","from" => "","to" => "","created_user" => ""); 
             }
 		
 		 

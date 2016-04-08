@@ -7,7 +7,7 @@ class User extends Admin_Controller
 	protected $_user_validation_rules = array(
 													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
 													array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-													//array('field' => 'language', 'label' => 'Password', 'rules' => 'trim|required'),
+													array('field' => 'employee_limit', 'label' => 'No.of employee', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 												);
@@ -120,6 +120,7 @@ class User extends Admin_Controller
             $ins_data['name']       	= $form['name'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['email']  = $form['email'];
+            $ins_data['employee_limit']  = $form['employee_limit'];
             if($form['password'] == "") { 
 	
 					$ins_data['password']  = $edit_data[0]['password'];
@@ -188,7 +189,7 @@ class User extends Admin_Controller
 					$this->data['title']          = "ADD";
 				}
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","language" => ""); 
+                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","language" => "","employee_limit" => ""); 
             }
 		
 		 

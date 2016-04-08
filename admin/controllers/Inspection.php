@@ -293,12 +293,12 @@ class Inspection extends Admin_controller {
 
 	
 	function inspection_delete()
-    {
+    { 
        
         $id = ($_POST['id'])?$_POST['id']:"";
         if(!empty($id)) {
             
-            $this->db->query('delete from inspection_records where id in ('.$id.')');
+            $this->db->query('delete from inspection_reports where id in ('.$id.')');
             //$this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
