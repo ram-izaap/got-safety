@@ -12,10 +12,10 @@ $config['layout']['default']['css_dir']   = "assets/css/admin";
 $config['layout']['default']['img_dir']   = "assets/images/admin";
 
 $config['layout']['default']['javascripts'] = array(
-  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min', 'jquery.cokie.min', 'jquery.uniform.min', 'jquery.validate.min', 'metronic', 'layout', 'demo', 'login','tinymce/tinymce.min','tinymce','common','listing'
+  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min', 'jquery.cokie.min', 'jquery.uniform.min', 'jquery.validate.min', 'metronic', 'layout', 'demo', 'login','tinymce/tinymce.min','tinymce','common','listing','date','jquery-ui'
 );
  
-$config['layout']['default']['stylesheets'] = array('bootstrap.min', 'font-awesome.min', 'uniform.default','components','plugins','layout','darkblue','custom','login');
+$config['layout']['default']['stylesheets'] = array('bootstrap.min', 'font-awesome.min', 'uniform.default','components','plugins','layout','darkblue','custom','login','jquery-ui');
 
 $config['layout']['default']['description'] = 'GotSafety';
 $config['layout']['default']['keywords']    = 'GotSafety';
