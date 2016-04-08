@@ -57,6 +57,17 @@
 					</div>
 				</div>
 				
+				<div class="form-group">
+					<label class="col-md-2 control-label">No.of Employee : <span class="required">
+					* </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="employee_limit" class="form-control" value="<?php echo set_value('employee_limit',$form_data['employee_limit']); ?>"<?php if($this->session->userdata('admin_data')['role'] == 2){ echo "readonly"; } ?>>
+						<span class="vstar" <?php echo form_error('employee_limit', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+				
+				
 				<?php $role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){   ?>
 					<div class="form-group">
