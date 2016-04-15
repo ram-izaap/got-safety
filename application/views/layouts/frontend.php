@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		
 	    <link rel="icon" href="<?php echo include_img_path();?>/favicon.ico" type="image/x-icon">
 		<?php include_title(); ?>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
