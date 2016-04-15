@@ -92,9 +92,15 @@ class Login extends App_Controller {
                 $ins_data['role']  = 2;
                 $ins_data['password']  = md5($form['password']);
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
-                 $ins_data['is_active']  = 1;
-                 $ins_data['language']  = 1;
-                
+				$ins_data['is_active']  = 1;
+				$ins_data['language']  = 1;
+				$ins_data['created_id']  = 8;
+				
+			 	$folder = $ins_data['name'];
+			 	
+				mkdir('./admin/views/sample/files/'.$folder.'', 0755,true);
+			
+
                 $add_user    = $this->login_model->insert("users",$ins_data);
                
                 if(!empty($add_user)) {
