@@ -21,6 +21,18 @@ class Home_model extends App_Model {
         return $result = $this->db->get()->result_array();
 		
 	}
+	
+	function get_all($table_name,$where)
+    {
+		
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where_not_in('name', $where);
+		$result = $this->db->get()->result_array();
+		return $result;
+		
+	}
+	
     
     
     

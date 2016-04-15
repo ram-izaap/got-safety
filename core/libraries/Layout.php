@@ -288,7 +288,7 @@ class Layout {
      * @param array $stylesheets
      */
     function add_stylesheets($stylesheets)
-    {
+    {  
         $stylesheets = empty($stylesheets) ? array() : (array) $stylesheets;
 
         foreach ($stylesheets as $item)
@@ -309,6 +309,7 @@ class Layout {
      */
     function add_stylesheet($file_name, $media = 'all')
     {
+		
         $this->stylesheets[] = array(
             'file_name' => $file_name,
             'media' => $media,

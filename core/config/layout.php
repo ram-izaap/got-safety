@@ -12,10 +12,10 @@ $config['layout']['default']['css_dir']   = "assets/css/admin";
 $config['layout']['default']['img_dir']   = "assets/images/admin";
 
 $config['layout']['default']['javascripts'] = array(
-  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min', 'jquery.cokie.min', 'jquery.uniform.min', 'jquery.validate.min', 'metronic', 'layout', 'demo', 'login','tinymce/tinymce.min','tinymce','common','listing','date','jquery-ui'
+  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min', 'jquery.cokie.min', 'jquery.uniform.min', 'jquery.validate.min', 'metronic', 'layout', 'demo', 'login','tinymce/tinymce.min','tinymce','common','listing','date','jquery-ui','jquery-ui.min','elfinder.min'
 );
  
-$config['layout']['default']['stylesheets'] = array('bootstrap.min', 'font-awesome.min', 'uniform.default','components','plugins','layout','darkblue','custom','login','jquery-ui');
+$config['layout']['default']['stylesheets'] = array('bootstrap.min', 'font-awesome.min', 'uniform.default','components','plugins','layout','darkblue','custom','login','jquery-ui','elfinder.full','theme');
 
 $config['layout']['default']['description'] = 'GotSafety';
 $config['layout']['default']['keywords']    = 'GotSafety';
@@ -24,7 +24,7 @@ $config['layout']['default']['http_metas'] = array(
 	'X-UA-Compatible' => 'IE=edge',
     'Content-Type' => 'text/html; charset=utf-8',
 	'viewport'     => 'width=device-width, initial-scale=1.0',
-    'author' => 'Order Processing - Admin',
+    'author' => 'Got Safety - Admin',
 );
 
                                      
