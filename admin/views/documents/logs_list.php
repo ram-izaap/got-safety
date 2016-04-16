@@ -25,10 +25,10 @@
 						 <div class="pull-right top-page-ui">
 							 
 							  
-	                        <a href="<?php echo site_url('logs/add_edit_logs');?>" class="btn btn-success">
+	                        <a href="<?php echo site_url('documents/add_edit_logs');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New
 	                        </a>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-logs','logs/logs_delete');" class="btn btn-success">
+	                        <a onclick="return DeleteCheckedRow(this,'delete-documents','documents/documents_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>
                            
@@ -37,7 +37,7 @@
                     
 				</div>
 			</div>
-			<input type="hidden" name="page_name" class="page_name" value="logs" />
+			<input type="hidden" name="page_name" class="page_name" value="documents" />
 			<?php echo $grid;?>
 			<?php //echo '<pre>';print_r($this->session->all_userdata());die;?>
 		</div>

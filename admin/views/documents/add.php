@@ -6,13 +6,13 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="<?php echo base_url("index.php/home"); ?>">Home</a>
+						<a href="<?php echo base_url("home"); ?>">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					
 					<li>
 						
-						<a href="<?php echo base_url("index.php/logs"); ?>">300 Logs</a>
+						<a href="<?php echo base_url("documents"); ?>">300 Logs</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					

@@ -655,16 +655,16 @@
 						<ul class="sub-menu">
 							
 							<li> 
-								<a href="<?php echo site_url('logs/logs_content'); ?>">
+								<a href="<?php echo site_url('documents/logs_content'); ?>">
 								Frontend Content </a>
 							</li>
 							
 							<li> 
-								<a href="<?php echo site_url('logs/add_edit_logs'); ?>">
+								<a href="<?php echo site_url('documents/add_edit_logs'); ?>">
 								Add Documents </a>
 							</li>
 							<li> 
-								<a href="<?php echo site_url('logs'); ?>">
+								<a href="<?php echo site_url('documents'); ?>">
 								Manage Documents </a>
 							</li>
 							

@@ -57,9 +57,9 @@
 							<select name= "type" class="table-group-action-input form-control input-medium">
 							  
 							   <option value=""> select...</option>
-							   <option value="1">Pdf</option>
-							   <option value="2">Audio</option>
-							   <option value="3">Video</option>
+							   <option value="1" <?php if($form_data['type'] == '1') { ?>selected="selected";<?php } ?> >Pdf</option>
+							   <option value="2" <?php if($form_data['type'] == '2') { ?>selected="selected";<?php } ?> >Audio</option>
+							   <option value="3" <?php if($form_data['type'] == '3') { ?>selected="selected";<?php } ?> >Video</option>
 							
 							</select>
 					
