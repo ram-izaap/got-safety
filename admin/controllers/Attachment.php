@@ -6,7 +6,7 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Attachment extends Admin_controller {
 	
 	protected $_attachment_validation_rules = array(
-													//array('field' => 'type', 'label' => 'Type', 'rules' => 'trim|required'),
+													array('field' => 'type', 'label' => 'Type', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
                                                     array('field' => 'slide_image', 'label' => 'Lesson', 'rules' => 'trim'),
                                                     array('field' => 'slide_image2', 'label' => 'Quiz', 'rules' => 'trim')
@@ -157,7 +157,7 @@ class Attachment extends Admin_controller {
 			$ins_data = array();
             $ins_data['lession_id']       	= $id;
             $ins_data['language']          = $form['language'];
-           // $ins_data['type']          = $form['type'];
+           $ins_data['type']          = $form['type'];
             $ins_data['is_active']  = $form['is_active'];
 			$ins_data['f_name']  = $filename;
 			$ins_data['f_name_quiz']  = $filename2;
@@ -201,7 +201,7 @@ class Attachment extends Admin_controller {
             {
                 $this->data['title']     = "ADD ATTACHMENT";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("lession_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "","slide_image2" => "","f_name_quiz" => "");
+                $this->data['form_data'] = array("lession_id" => "","language" => '',"is_active" => "","slide_image" => "","f_name" => "","slide_image2" => "","f_name_quiz" => "","type" => "");
                 
             }
 		    

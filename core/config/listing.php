@@ -182,11 +182,11 @@ $config['osha_index'] = array(
 );
 
 
-$config['logs_index'] = array(
+$config['documents_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'logs/filter',
-	"base_url"	=> 	'/logs/index/',
+	"advance_search_view" => 'documents/filter',
+	"base_url"	=> 	'/documents/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),

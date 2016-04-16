@@ -3,7 +3,7 @@
 
 require_once(COREPATH."controllers/Admin_controller.php");
 
-class Logs extends Admin_controller {
+class Documents extends Admin_controller {
 	
 	protected $_logs_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
@@ -78,7 +78,7 @@ class Logs extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
         
-        $this->layout->view("logs/logs_list");
+        $this->layout->view("documents/logs_list");
         
         
     }
@@ -186,7 +186,7 @@ class Logs extends Admin_controller {
                
                 if(!isset($edit_data[0])) {
                     //$this->service_message->set_flash_message('record_not_found_error');
-                    redirect("logs");   
+                    redirect("documents");   
                 }
                 $this->data['title']          = "EDIT 300 LOGS";
                 $this->data['crumb']        = "Edit";
@@ -209,7 +209,7 @@ class Logs extends Admin_controller {
             }
 		    
 		    $this->data['img_url']=$this->layout->get_img_dir();
-		    $this->layout->view('logs/add');
+		    $this->layout->view('documents/add');
 		}
         else
         {
@@ -247,7 +247,7 @@ class Logs extends Admin_controller {
 	
 
 	
-	function logs_delete()
+	function documents_delete()
     {
        
         $id = ($_POST['id'])?$_POST['id']:"";
@@ -283,13 +283,13 @@ class Logs extends Admin_controller {
 			$social_data = $this->logs_model->update("display_content",$ins_data,array("id" => $edit_id));
             //$this->service_message->set_flash_message('record_update_success');
 			
-			redirect("logs");    
+			redirect("documents");    
 			
 		}	
 			$this->data['title']          = "300 Logs Content";
             $this->data['crumb']        = "Update";
 	
-		$this->layout->view('logs/logs_content');
+		$this->layout->view('documents/logs_content');
 		
 		}
         else
