@@ -98,7 +98,7 @@ class Login extends App_Controller {
 				
 			 	$folder = $ins_data['name'];
 			 	
-				mkdir('./admin/views/sample/files/'.$folder.'', 0755,true);
+				mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
 			
 
                 $add_user    = $this->login_model->insert("users",$ins_data);

@@ -658,6 +658,88 @@ class Api extends REST_Controller {
 			}
 		
 	} 
+ 
+	/* Get employee list based on client id   */
+
+	public function get_employee_get()
+	{
+		
+		if((!$this->get('client_id')) ) 
+		{
+			return $this->response(array('status' => 'error','msg' => 'Required fields missing in your request','error_code' => 1), 200);
+		}
+				
+			$id = $this->get("client_id");
+			$data = $this->api_model->get_content("employee",array("created_user" => $id));
+			$user = array();$i=0;
+			if(count($data) > 0){
+				foreach($data as $list){
+					
+					$user[$i]['id']= $list['id'];
+					$user[$i]['employee_name']= $list['employee_name'];
+					$user[$i]['employee_email']= $list['employee_email'];
+					
+				$i=$i+1;
+				}
+				return $this->response(array( "status" => "success","user"=> $user),200);
+			}else{
+				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
+			}
+		
+	} 
+	
+	
+	
+	
+	public function training_post()
+	{
+
+		$output = array();
+		$ins_data = array();
+		try
+		{
+			$ins_data['topic'] 		    = $this->post('topic');
+			$ins_data['employee_id'] 	= $this->post('employee_id');
+			$ins_data['client_id']   	= $this->post('client_id');
+			$ins_data['created_date']   = date("Y-m-d H:i:s");
+
+			if( strcmp('', trim($this->post('topic')) ) === 0 || strcmp('', trim($this->post('employee_id')) ) === 0 || strcmp('', trim($this->post('client_id')) ) === 0 )
+				throw new Exception("Required fields missing in your request");
+				
+
+			$data = $this->api_model->insert("sign_off",$ins_data);
+
+			switch ( $data ) 
+			{
+				
+				case 1:
+					throw new Exception("Success");					
+					break;
+				
+				default:
+					
+					break;
+			}
+
+			$udata  = $data[0];
+
+			$output['message'] = "Training completed successfully";
+			$output['topic'] = $udata['topic'];
+			$output['employee_id'] = $udata['employee_id'];
+			$output['client_id'] = $udata['client_id'];
+			$output['created_date'] = date("Y-m-d H:i:s");
+
+			$output['status'] = 'success';
+		}
+		catch( Exception $e)
+		{
+			$output['message'] = $e->getMessage();
+			$output['status'] = 'error';
+		}
+
+		$this->response( $output, 200);
+
+	} 
 
 
    
