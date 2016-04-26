@@ -113,7 +113,7 @@ class Api_model extends App_Model {
 	}
 	
 	
-	function get_lession_detail($table_name,$where)
+	/*function get_lession_detail($table_name,$where)
     {
 		// $result = $this->db->get_where($table_name,$where);
         //return $result->result_array();
@@ -133,6 +133,28 @@ class Api_model extends App_Model {
         $this->db->or_where('all',1);
         $result = $this->db->get();
         return $result->result_array();
+		
+	} */
+	
+	
+	
+	
+	
+	function get_lession_detail($table_name,$where)
+    {
+		// $result = $this->db->get_where($table_name,$where);
+        //return $result->result_array();
+        $date = date('Y-m-d');
+       /* $this->db->select();
+        $this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->or_where('all',1);
+        $this->db->where('to >=',$date);
+        
+        $result = $this->db->get();
+        return $result->result_array();  */
+        
+      return  $this->db->query("select * from lession WHERE ( created_user = '".$where."' OR status = '1' ) AND to_date >= '".$date."'")->result_array(); 
 		
 	}
 	
@@ -161,6 +183,23 @@ class Api_model extends App_Model {
 		$query = $this->db->get()->result_array();
 		return $query;
 	}
+	
+	function get_poster_detail($table_name,$where)
+    {
+		// $result = $this->db->get_where($table_name,$where);
+        //return $result->result_array();
+        
+        $this->db->select();
+        $this->db->from($table_name);
+        $this->db->where($where);
+        $this->db->or_where('all',1);
+        $result = $this->db->get();
+        return $result->result_array();
+		
+	}
+	
+	
+	
     
     
 }

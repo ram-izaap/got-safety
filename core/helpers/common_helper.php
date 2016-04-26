@@ -135,6 +135,15 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break; 
             
             
+            case 'find_client':
+			
+			$CI = & get_instance();    
+            $CI->load->model('employee_model');
+            $name = $CI->employee_model->get_client_name($data);
+            $data = $name->name;
+            break; 
+            
+            
             
                
     }

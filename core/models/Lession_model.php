@@ -30,10 +30,10 @@ class Lession_model extends App_Model {
         $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
         if($role == '2'){
         $this->db->where('created_user',$user_id);
-        $this->db->where('to >=',$date);
+        $this->db->where('to_date >=',$date);
         }else {
 			$this->db->where('updated_user',$user_id);
-			$this->db->where('to >=',$date);
+			$this->db->where('to_date >=',$date);
 		}
        
         foreach ($this->criteria as $key => $value) 
