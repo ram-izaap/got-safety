@@ -322,8 +322,10 @@ class Api extends REST_Controller {
 				$created_id = $created_id;
 			}
 			
+			$date = date('Y-m-d');
 			
-			$data = $this->api_model->get_lession_detail("lession",array("created_user" => $created_id));
+			//$data = $this->api_model->get_lession_detail("lession",array("created_user" => $created_id));
+			$data = $this->api_model->get_lession_detail("lession",$created_id);
 			
 			$user = array();$i=0;
 			if(count($data) > 0){
@@ -500,7 +502,7 @@ class Api extends REST_Controller {
 			}
 			
 			
-			$data = $this->api_model->get_lession_detail("posters",array("created_user" => $created_id));
+			$data = $this->api_model->get_poster_detail("posters",array("created_user" => $created_id));
 			
 			$user = array();$i=0;
 			if(count($data) > 0){
@@ -703,33 +705,22 @@ class Api extends REST_Controller {
 			$ins_data['client_id']   	= $this->post('client_id');
 			$ins_data['created_date']   = date("Y-m-d H:i:s");
 
-			if( strcmp('', trim($this->post('topic')) ) === 0 || strcmp('', trim($this->post('employee_id')) ) === 0 || strcmp('', trim($this->post('client_id')) ) === 0 )
+			if( strcmp('', trim($this->post('topic')) ) === 0 || strcmp('', trim($this->post('employee_id')) ) === 0 || strcmp('', trim($this->post('client_id')) ) === 0 ) {
 				throw new Exception("Required fields missing in your request");
+			}
 				
 
 			$data = $this->api_model->insert("sign_off",$ins_data);
-
-			switch ( $data ) 
-			{
-				
-				case 1:
-					throw new Exception("Success");					
-					break;
-				
-				default:
-					
-					break;
-			}
-
-			$udata  = $data[0];
+			
+		
+			//$udata  = $data[0];
 
 			$output['message'] = "Training completed successfully";
-			$output['topic'] = $udata['topic'];
-			$output['employee_id'] = $udata['employee_id'];
-			$output['client_id'] = $udata['client_id'];
-			$output['created_date'] = date("Y-m-d H:i:s");
-
+			$output['topic'] = $this->post('topic');
+			$output['employee_id'] = $this->post('employee_id');
+			$output['client_id'] = $this->post('client_id');
 			$output['status'] = 'success';
+			
 		}
 		catch( Exception $e)
 		{
@@ -740,6 +731,11 @@ class Api extends REST_Controller {
 		$this->response( $output, 200);
 
 	} 
+	
+	
+	
+	
+
 
 
    
