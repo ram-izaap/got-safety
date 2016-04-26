@@ -111,6 +111,7 @@ class User extends Admin_Controller
 				$form['is_active'] = "0";
 			}
 			
+				
 			
 			$ins_data = array();
 			
@@ -141,6 +142,9 @@ class User extends Admin_Controller
 		}
            
 			if(empty($edit_id)){
+				
+				$folder = $form['name'];
+				mkdir('./views/repository/files/'.$folder.'', 0755,true);
 			
 			$update_data = $this->user_model->insert("users",$ins_data);
            // $this->service_message->set_flash_message('record_insert_success');

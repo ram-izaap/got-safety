@@ -6,7 +6,7 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Employee extends Admin_controller {
 	
 	protected $_employee_validation_rules = array(
-													//array('field' => 'employee_name', 'label' => 'Name', 'rules' => 'trim|required'),
+													//array('field' => 'emp_id', 'label' => 'Employee ID', 'rules' => 'trim|required|callback_language_unique_check['.$edit_id.']'),
 													array('field' => 'employee_email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
                                                    
@@ -36,7 +36,9 @@ class Employee extends Admin_controller {
         
         $this->simple_search_fields = array(
                                                 'employee_name' => 'Name',
-                                                'employee_email' => 'Email'
+                                                'employee_email' => 'Email',
+                                                'emp_id' => 'Employee ID',
+                                                'name' => 'Client'
                                                 
                                             
         );
@@ -95,12 +97,26 @@ class Employee extends Admin_controller {
 		}
 		
 		
+		if ( isset($_POST['user_id']) ){
+			
+			$this->session->set_userdata('client_id',$_POST['user_id']);
+			
+		}else {
+			
+			$this->session->set_userdata('client_id',$user_id);
+		}
+		
 		$this->data['get_menu'] = $this->employee_model->get_menu_client("users",array("role" => 2));
 		//print_r($this->data['get_menu']);exit;
 			
 			if ( isset($_POST['user_id']) && $edit_id =="" )
 			{ 
 				$this->form_validation->set_rules('user_id', 'Client', 'required|callback_max_limit_unique_check');
+			}
+			
+			if ( isset($_POST['emp_id']) )
+			{ 
+				$this->form_validation->set_rules('emp_id', 'Employee ID', 'required|callback_employee_id_unique_check['.$edit_id.']');
 			}
 			
 			if($role == 2) {
@@ -146,6 +162,7 @@ class Employee extends Admin_controller {
 				
 			}
             $ins_data['created_date']  = date("Y-m-d H:i:s");
+            $ins_data['emp_id']  = $form['emp_id'];
 			//$ins_data['video_file']  = $filename;
            
 			//$this->header_model->update('cub_search_nav_bar',$ins_data);
@@ -186,7 +203,7 @@ class Employee extends Admin_controller {
             {
                 $this->data['title']     = "ADD EMPLOYEE";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("employee_name" => "","employee_email" => '',"is_active" => "");
+                $this->data['form_data'] = array("employee_name" => "","employee_email" => '',"is_active" => "","emp_id" => "");
                 
             }
 		    
@@ -240,6 +257,47 @@ class Employee extends Admin_controller {
         
        	return TRUE;
     } 
+    
+    
+    
+     function employee_id_unique_check($emp_id,$edit_id) 
+     {
+        $client_id  = $this->session->userdata('client_id');
+        //print_r($client_id);exit;
+        
+        $get_data = $this->employee_model->employee_id_check_exists("employee",array("emp_id" => $emp_id,"created_user" => $client_id,"id !=" => $edit_id));
+       
+       //print_r($get_data);exit;
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('employee_id_unique_check', 'Employee ID already added');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
+    
+    
+    
+    public function bulk_upload()
+    {            
+		if(!empty($_FILES['employee']['tmp_name'])){ 
+		
+		$data['result'] = $this->employee_model->upload_csv();
+		
+		if($data['result']){
+		
+		redirect("employee");
+		
+		}
+	}
+		
+		$this->layout->view('employee/bulk_upload');
+    
+	}
+	
+
     
    
     

@@ -90,7 +90,8 @@ class Attachment extends Admin_controller {
     {            
 		
 		if(is_logged_in()) {
-		  
+		  $this->data['img_url']=$this->layout->get_img_dir();  
+
              //$this->layout->add_javascripts(array('product'));
              
              $user_id =  $this->session->userdata('admin_data')['id']; 
