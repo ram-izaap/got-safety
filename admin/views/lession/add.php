@@ -59,8 +59,8 @@
 					<label class="col-md-2 control-label">All:
 					</label>
 					<div class="col-md-10">
-						<input type="checkbox" class="" name="all" id="all" value="1" 
-						<?php echo set_checkbox('all',1,((isset($form_data['all']) && $form_data['all'] == 1)?true:false));?>/>
+						<input type="checkbox" class="" name="status" id="all" value="1" 
+						<?php echo set_checkbox('status',1,((isset($form_data['status']) && $form_data['status'] == 1)?true:false));?>/>
 					</div>
 				</div>
 				
@@ -94,8 +94,8 @@
 					* </span>
 					</label>
 					<div class="col-md-10">
-						<input type="text" id="to" name="to" class="form-control" value="<?php echo set_value('to',$form_data['to']); ?>">
-						<span class="vstar" <?php echo form_error('to', '<span class="help-block">', '</span>'); ?></span>
+						<input type="text" id="to" name="to_date" class="form-control" value="<?php echo set_value('to_date',$form_data['to_date']); ?>">
+						<span class="vstar" <?php echo form_error('to_date', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
 				

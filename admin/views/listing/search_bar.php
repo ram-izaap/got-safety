@@ -21,7 +21,7 @@
     <form method="post" id="simple_search_form">
     <div class="col-lg-2">
     <div class="col-xs-12 input-group">
-      <?php echo form_dropdown('search_type', $simple_search_fields, $search_conditions['search_type'], 'class="form-control custom-input input-sm"');?>
+      <?php echo form_dropdown('search_type', $simple_search_fields, $search_conditions['search_type'], 'class="form-control custom-input input-sm" id = "search_field"');?>
       
     </div>
     </div>
@@ -63,13 +63,9 @@
         <?php echo form_dropdown('per_page_options', $per_page_options, $per_page, 'aria-controls="table-example" class="form-control custom-input input-sm perpage"');?>
       </span>
       <span class="col-xs-3">Entries </span>
-      
+     
     </div>
     </div>
-    
-    
-    
-    
     
   </div>
   <!-- -->

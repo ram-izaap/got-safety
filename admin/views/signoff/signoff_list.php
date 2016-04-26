@@ -6,8 +6,6 @@
                 <h1 class="pull-left"><b>Sign off</b></h1>
                 </div>
                 
-                
-                 
                  <?php /*
                     if ($message = $this->service_message->render()) :
         		               echo $message;
@@ -20,6 +18,13 @@
 						<li class="active"><span>Sign off</span>
 						</li>
 					</ol>
+					
+					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
+						
+						<a href="<?php echo base_url('signoff/bulk_export'); ?>" >Search Export </a>
+						
+					<?php } ?> 
+                
 					<div class="clearfix">
 						
 						 <div class="pull-right top-page-ui">
