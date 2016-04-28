@@ -49,7 +49,7 @@ class Documents extends Admin_controller {
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('logs/add_edit_logs/{id}').'" class="table-link">
+        $str = '<a href="'.site_url('documents/add_edit_logs/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -177,7 +177,7 @@ class Documents extends Admin_controller {
                     $social_data = $this->logs_model->update("logs",$ins_data,array("id" => $edit_id));
                     //$this->service_message->set_flash_message('record_update_success');
 		      }
-		      redirect("logs");    
+		      redirect("documents");    
 		
 		}	
 			

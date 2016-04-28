@@ -19,7 +19,7 @@ class Repository extends Admin_controller {
 
 
     function index()
-    {
+    { 
 		$user_name = $this->session->userdata('admin_data')['name'];
 		$data = $this->home_model->get_all("users",$user_name);
 		

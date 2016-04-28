@@ -24,8 +24,7 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
-			<?php  $role =  $this->session->userdata('admin_data')['role'];  
-              if($role == "1"){   ?>
+			
 			
 			<div class="form-group">
 				<label class="col-md-2 control-label">Language: <span class="required">
@@ -72,16 +71,6 @@
 
 			
 			
-			
-			<?php } ?>
-
-			
-			
-			
-              
-			
-			
-			
 		<?php /*	<div class="form-group">
 				<label class="col-md-2 control-label">Type: <span class="required">
 				* </span>
@@ -121,7 +110,7 @@
 					<span class="vstar"<?php echo form_error('f_name', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="http://localhost/got-safety/assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
+								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/admin/lession_attachment/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name'];?> </a>
 							
 						<?php } ?>
 						
@@ -139,7 +128,7 @@
 					<span class="vstar"<?php echo form_error('f_name_quiz', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="http://localhost/got-safety/assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
+								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
 							
 						<?php } ?>
 						

@@ -8,7 +8,7 @@ class Lession extends Admin_controller {
 	protected $_lession_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required|max_length[255]'),
 													array('field' => 'from', 'label' => 'From date', 'rules' => 'trim|required'),
-													array('field' => 'to', 'label' => 'To date', 'rules' => 'trim|required'),
+													array('field' => 'to_date', 'label' => 'To date', 'rules' => 'trim|required'),
 													array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
@@ -128,11 +128,11 @@ class Lession extends Admin_controller {
 				$form['is_active'] = "0";
 			}
 			
-			if(isset($form['all'])) { 
-				$form['all'] = $form['all'];	
+			if(isset($form['status'])) { 
+				$form['status'] = $form['status'];	
 			}
 			else { 
-				$form['all'] = "0";
+				$form['status'] = "0";
 			}
 			
 			$ins_data = array();
@@ -142,7 +142,7 @@ class Lession extends Admin_controller {
 			
             $ins_data['title']       	= $form['title'];
             $ins_data['from']       	= $form['from'];
-            $ins_data['to']       	= $form['to'];
+            $ins_data['to_date']       	= $form['to_date'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['content']  = $form['content'];
             
@@ -151,7 +151,7 @@ class Lession extends Admin_controller {
 			}else {
 				$ins_data['created_user']  = $form['user_id'];
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
-				$ins_data['all']  = $form['all'];
+				$ins_data['status']  = $form['status'];
 			}
             $ins_data['updated_date']  = date("Y-m-d H:i:s");
             
@@ -192,7 +192,7 @@ class Lession extends Admin_controller {
             {
                 $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","all" => "","from" => "","to" => "","created_user" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => ""); 
             }
 		
 		 

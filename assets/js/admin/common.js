@@ -165,3 +165,27 @@ function DeleteCheckedRow(e,cls,url,divid='')
               }
         });
 }
+
+function get_export()
+{
+	search_value = $('#exmaplePrependButton').val();
+	search_field = $('#search_field').val();
+	
+	url = base_url+'signoff/bulk_export_set/';
+	
+	$.ajax({
+          type: "POST",
+          url: url,
+          data: {search_field:search_field,search_value:search_value},
+          success: function(res){  
+			  
+            alert(res);
+          },
+         
+        }); 
+        
+        
+        
+             
+	
+}

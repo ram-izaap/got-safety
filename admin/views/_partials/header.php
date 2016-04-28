@@ -459,7 +459,8 @@
 						</ul>
 					</li> */ ?>
 					
-					
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -467,24 +468,23 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							<?php $role =  $this->session->userdata('admin_data')['role'];
-					if($role == 1){ ?>
+							
 							<li> 
 								<a href="<?php echo site_url('lang'); ?>">
 								Language </a>
 								
 							</li>
-							<?php } ?>
 							
-							<li> 
+							
+						<?php /*	<li> 
 								<a href="<?php echo site_url('page'); ?>">
 								Page </a>
 							</li>
-							
+						*/ ?>	
 						</ul>
 					</li>
 					
-					<li>
+				<?php /*	<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
 						<span class="title">Page Managment</span>
@@ -501,9 +501,9 @@
 							</li>
 							
 						</ul>
-					</li>
+					</li> <?php */ ?>
 					
-					
+					<?php } ?>
 					
 					<li>
 						<a href="javascript:;">
@@ -512,10 +512,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 							<li> 
 								<a href="<?php echo site_url('lession/lesson_content'); ?>">
 								Frontend Content </a>
 							</li>
+					<?php } ?>
 							
 							<li> 
 								<a href="<?php echo site_url('lession/add_edit_lession'); ?>">
@@ -601,12 +604,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							
+							<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 							<li> 
 								<a href="<?php echo site_url('inspection/inspection_content'); ?>">
 								Frontend Content </a>
 							</li>
-							
+					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('inspection/add_edit_inspection'); ?>">
 								Add reports </a>
@@ -627,12 +631,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							
+						<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>	
 							<li> 
 								<a href="<?php echo site_url('osha/osha_content'); ?>">
 								Frontend Content </a>
 							</li>
-							
+					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('osha/add_edit_osha'); ?>">
 								Add Documents </a>
@@ -653,12 +658,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 							<li> 
 								<a href="<?php echo site_url('documents/logs_content'); ?>">
 								Frontend Content </a>
 							</li>
-							
+						<?php } ?>	
 							<li> 
 								<a href="<?php echo site_url('documents/add_edit_logs'); ?>">
 								Add Documents </a>
@@ -680,12 +686,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>		
 							<li> 
 								<a href="<?php echo site_url('records/records_content'); ?>">
 								Frontend Content </a>
 							</li>
-							
+					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('records/add_edit_records'); ?>">
 								Add Documents </a>
@@ -706,12 +713,13 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
-							
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>		
 							<li> 
 								<a href="<?php echo site_url('forms/forms_content'); ?>">
 								Frontend Content </a>
 							</li>
-							
+					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
 								Add Documents </a>
@@ -732,12 +740,14 @@
 						<span class="arrow "></span>
 						</a>
 						<ul class="sub-menu">
+						<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>
 							<li> 
 								<a href="<?php echo site_url('posters/posters_content'); ?>">
 								Frontend Content </a>
 							</li>
 							
-							<li> 
+					<?php } ?>		<li> 
 								<a href="<?php echo site_url('posters/add_edit_posters'); ?>">
 								Add Posters </a>
 							</li>
@@ -812,6 +822,11 @@
 							<li> 
 								<a href="<?php echo site_url('employee'); ?>">
 								 Manage Employee</a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('employee/bulk_upload'); ?>">
+								 Bulk Upload </a>
 							</li>
 							
 						</ul>

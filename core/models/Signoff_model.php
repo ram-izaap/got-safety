@@ -16,13 +16,18 @@ class Signoff_model extends App_Model {
     {  
 		$user_id =  $this->session->userdata('admin_data')['id'];
 		
-       $this->_fields = "ld.*";
+       $this->_fields = "ld.*,u.name";
        $this->db->from('sign_off ld');
        $this->db->join('employee l','l.id=ld.employee_id');
+       $this->db->join('users u','u.id=ld.client_id');
        if($user_id !=8){
 			$this->db->where('client_id' ,$user_id);
 		}
+		
+		 $this->session->set_userdata('search_field',$this->criteria['search_type']);
+		 $this->session->set_userdata('search_value',$this->criteria['search_text']);
       
+     
         foreach ($this->criteria as $key => $value) 
         {
             if( !is_array($value) && strcmp($value, '') === 0 )
@@ -30,15 +35,21 @@ class Signoff_model extends App_Model {
 
             switch ($key)
             {
-                case 'employee_name':
+                case 'l.employee_name':
                      $this->db->like('l.employee_name', $value);
                 break;
                 
-                case 'topic':
+                case 'ld.topic':
                     $this->db->like('ld.topic', $value);
                 break;
-                case 'created_date':
+                case 'ld.created_date':
                     $this->db->like('ld.created_date', $value);
+                break;
+                case 'u.name':
+                    $this->db->like('u.name', $value);
+                break;
+                case 'ld.emp_id':
+                    $this->db->like('ld.emp_id', $value);
                 break;
                  
                
@@ -105,6 +116,22 @@ class Signoff_model extends App_Model {
 		$this->db->from('employee');
         $this->db->where("id" ,$employee_id);
 		$result = $this->db->get()->row();
+		return $result;
+		
+	}
+	
+	function get_serach_data($search_field,$search_value)
+	{
+		
+		$result = $this->db->query("select * from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id WHERE $search_field LIKE '%$search_value%'")->result_array();
+		 
+		/*$this->db->select('*');
+		$this->db->from('sign_off ld');
+       $this->db->join('employee l','l.id=ld.employee_id');
+       $this->db->join('users u','u.id=ld.client_id');
+		$this->db->like($search_field,$search_value);
+		$result = $this->db->get()->result_array();*/
+		
 		return $result;
 		
 	}

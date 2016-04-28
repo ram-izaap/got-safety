@@ -27,9 +27,12 @@ class Signoff extends Admin_controller {
         //$this->load_settings_data();
         
         $this->simple_search_fields = array(
-                                                'employee_name' => 'Employee Name',
-                                                'created_date' => 'Date',
-                                                'topic' => 'Topic'
+                                                'l.employee_name' => 'Employee Name',
+                                                'ld.emp_id' => 'Employee ID',
+                                                'ld.created_date' => 'Date',
+                                                'ld.topic' => 'Topic',
+                                                'u.name' => 'Client'
+                                                
                                                 
                                             
         );
@@ -70,7 +73,8 @@ class Signoff extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
+      
+       
         $this->layout->view("signoff/signoff_list");
         
         
@@ -89,6 +93,64 @@ class Signoff extends Admin_controller {
             return true;  
         }
     } 
+    
+    
+   
+    
+    function bulk_export()
+    {
+		
+		$this->load->library('pdf');
+		
+		$search_field  = $this->session->userdata('search_field');
+		$search_value  = $this->session->userdata('search_value');
+		
+		 $stylesheet = file_get_contents(base_url()."views/pdf.css");
+		// print $stylesheet;exit;
+		
+		if($search_field != "" && $search_value !="" ) {
+		
+		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
+		
+		$html ='<table class="table-bor">
+  <tr>
+    <th>Topic</th>
+    <th>Employee Name</th>		
+    <th>Employee ID</th>
+    <th>Client </th>
+    <th>Date </th>
+  </tr>';
+ foreach($this->data['result'] as $data ) {  
+  $html .= '<tr>
+    <td>'.$data['topic'].'</td>'.
+    '<td>'.$data['employee_name'].'</td>'.		
+    '<td>'.$data['emp_id'].'</td>'.
+    '<td>'.$data['name'].'</td>'.
+    '<td>'.$data['created_date'].'</td>'.
+  '</tr>';
+    }  
+    
+    
+  
+$html .= '</table>';
+		
+		$pdf = $this->pdf->load(); 
+		$pdf->WriteHTML($stylesheet,1);	
+        $pdf->WriteHTML($html,2);
+        
+        $micro = microtime();
+        
+        $filename = "Export-".date("Y-m-d H:i:s").".pdf";
+       
+        $pdf->Output($filename,"D");
+        
+       
+	}else {
+		redirect("signoff");
+		
+	}	
+		
+	}
     
   
    

@@ -76,6 +76,18 @@
 				
 				
 				<div class="form-group">
+					<label class="col-md-2 control-label">Employee ID: <span class="required">
+					* </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="emp_id" class="form-control" value="<?php echo set_value('emp_id',$form_data['emp_id']); ?>">
+						<span class="vstar" <?php echo form_error('emp_id', '<span class="help-block">', '</span>'); ?></span>
+						<p style="color:black;">( Ex: EMP4  or  EMP-04 )</p>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
 					<label class="col-md-2 control-label">Is Active:
 					</label>
 					<div class="col-md-10">
