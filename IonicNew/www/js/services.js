@@ -696,4 +696,40 @@ angular.module('starter.services', [])
 
           }; 
 
-});
+})
+
+
+ .factory('employeeDetails', function($http, apiUrl)
+  {
+    var employees = [];
+    
+    return{
+
+          employee:function()
+          {
+             var C_id = window.localStorage.getItem("Createdid");
+             return $http.get(apiUrl+'/get_employee?client_id='+C_id).then(function(response)
+             {
+                  var emp = response.data;
+                  var usr = emp.user;               
+                    
+                
+                 
+                  if(usr.length > 0)
+                  {
+                          for(var j=0; j<usr.length; j++)
+                          {                               
+                                employees[j] = usr[j];
+                             
+                          }
+                    }
+                                             
+                   return employees;       
+                })
+             
+        },
+       
+
+    }
+
+  });

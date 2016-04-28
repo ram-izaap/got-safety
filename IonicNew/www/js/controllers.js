@@ -138,10 +138,32 @@ angular.module('starter.controllers', [])
           });
 
     };
-
-
-   
+ 
     
+})
+
+
+
+
+.controller('signoffCtrl', function($scope,employeeDetails)
+{
+      employeeDetails.employee().then(function(data)
+      {
+        $scope.items = data;
+      });
+    
+
+      $scope.onItemSelected = function()
+      {
+        
+        console.log('selected='+$scope.employee_name);
+        console.log('selected='+$scope.id);
+          
+      }
+
+
+
+      
 })
 
 
@@ -416,7 +438,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('TrainingRecordCtrl', function($scope, $stateParams,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,TrainingRecordService) {
+.controller('TrainingRecordCtrl', function($scope, $stateParams,$state,$ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion,TrainingRecordService) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -439,6 +461,12 @@ angular.module('starter.controllers', [])
 
     // Set Ink
     ionicMaterialInk.displayEffect();
+
+    $scope.signoff = function() 
+    {
+   
+    $state.go('app.signoff');
+    };
 
     //Logs list
     TrainingRecordService.all().then(function(data)

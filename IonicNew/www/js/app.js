@@ -7,7 +7,7 @@
 angular.module('starter.constants',[])  
   .constant('apiUrl', 'http://localhost/got-safety/api');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','ion-autocomplete'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
@@ -39,6 +39,45 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         };
     })
+
+.directive('typeahead', function($timeout) {
+  return {
+    restrict: 'AEC',
+    scope: {
+    items: '=',
+    prompt:'@',
+    title: '@',
+    subtitle:'@',
+    model: '=',
+    onSelect:'&',
+    key:'='
+  },
+  
+  link:function(scope,elem,attrs){
+     scope.handleSelection=function(selectedItem){
+      console.log(selectedItem);
+     scope.model=selectedItem.employee_name;
+     scope.key=selectedItem.id;
+     scope.current=0;
+     scope.selected=true;        
+     $timeout(function(){
+       scope.onSelect();
+      },200);
+    };
+    scope.current=0;
+    scope.selected=true;
+    scope.isCurrent=function(index){
+     return scope.current==index;
+    };
+    scope.setCurrent=function(index){
+     scope.current=index;
+    };
+  },
+    templateUrl: 'templates/templateurl.html'
+  }
+})
+    
+
 
 
 
@@ -99,6 +138,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             'menuContent': {
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
+            }
+           
+        }
+    })
+
+
+
+    .state('app.signoff', {
+        url: '/signoff',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/signoff.html',
+                controller: 'signoffCtrl'
             }
            
         }
