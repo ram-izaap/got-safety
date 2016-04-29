@@ -152,12 +152,14 @@ angular.module('starter.controllers', [])
         $scope.items = data;
       });
     
-
-      $scope.onItemSelected = function()
+     // $scope.key = '';
+      $scope.onItemSelected = function(key)
       {
+
         
         console.log('selected='+$scope.employee_name);
         console.log('selected='+$scope.id);
+        console.log('selected='+$scope.key);
           
       }
 

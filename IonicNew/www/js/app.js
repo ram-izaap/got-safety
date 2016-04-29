@@ -53,23 +53,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     key:'='
   },
   
-  link:function(scope,elem,attrs){
-     scope.handleSelection=function(selectedItem){
-      console.log(selectedItem);
-     scope.model=selectedItem.employee_name;
-     scope.key=selectedItem.id;
-     scope.current=0;
-     scope.selected=true;        
-     $timeout(function(){
-       scope.onSelect();
-      },200);
+  link:function(scope,elem,attrs)
+  {
+     scope.handleSelection = function(selectedItem)
+     {
+        console.log(selectedItem);
+         scope.model    = selectedItem.employee_name;
+         scope.key      = selectedItem.id;
+         scope.current  = 0;
+         scope.selected = true;        
+         $timeout(function()
+         {
+           scope.onSelect();
+          },200);
     };
-    scope.current=0;
-    scope.selected=true;
-    scope.isCurrent=function(index){
+    scope.current   = 0;
+    scope.selected  = true;
+    scope.isCurrent = function(index)
+    {
      return scope.current==index;
     };
-    scope.setCurrent=function(index){
+    scope.setCurrent = function(index)
+    {
      scope.current=index;
     };
   },
