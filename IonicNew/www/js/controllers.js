@@ -151,9 +151,10 @@ angular.module('starter.controllers', [])
       {
         $scope.items = data;
       });
+
     
-     // $scope.key = '';
-      $scope.onItemSelected = function(key)
+     
+      $scope.onItemSelected = function()
       {
 
         

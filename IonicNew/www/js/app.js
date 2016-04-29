@@ -78,7 +78,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
      scope.current=index;
     };
   },
-    templateUrl: 'templates/templateurl.html'
+    templateUrl: 'templates/templateurl.html',
+    controller:'signoffCtrl'
   }
 })
     
