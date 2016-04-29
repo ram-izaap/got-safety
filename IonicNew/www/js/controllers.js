@@ -147,20 +147,21 @@ angular.module('starter.controllers', [])
 
 .controller('signoffCtrl', function($scope,employeeDetails)
 {
+
+
       employeeDetails.employee().then(function(data)
       {
         $scope.items = data;
       });
 
-    
+     $scope.emp = {};
+     $scope.id  = '';
      
-      $scope.onItemSelected = function()
+      $scope.onItemSelected = function(emp,id)
       {
-
-        
-        console.log('selected='+$scope.employee_name);
-        console.log('selected='+$scope.id);
-        console.log('selected='+$scope.key);
+     
+        console.log('selected='+$scope.emp.name);
+        console.log('selected='+$scope.id.key);
           
       }
 
