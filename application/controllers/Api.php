@@ -342,7 +342,7 @@ class Api extends REST_Controller {
 				
 			}else{
 				
-				return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),404);
+				return $this->response(array( "status" => "errror","msg" => "No lessons listed"),200);
 				
 			}
 		
