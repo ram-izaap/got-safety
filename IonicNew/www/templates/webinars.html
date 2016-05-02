@@ -17,7 +17,7 @@
 
     <div class="list webinars animate-fade-slide-in-left">
 
-          <a href="#/app/webinarView/{{webinar.id}}"  class="item item-icon-right" ng-repeat="webinar in webinars | filter : SearchQuery"> 
+          <a href="#/app/webinarView/{{webinar.id}}"  class="item item-icon-right" ng-repeat="webinar in webinars | filter : SearchQuery | limitTo:3"> 
             <i class="icon ion-chevron-right"></i>
             {{webinar.title}}
           </a>  

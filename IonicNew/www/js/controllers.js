@@ -147,23 +147,48 @@ angular.module('starter.controllers', [])
 
 .controller('signoffCtrl', function($scope,employeeDetails)
 {
-
-
+      //list of employee and their id from service
       employeeDetails.employee().then(function(data)
       {
-        $scope.items = data;
+        $scope.items =data;
+
       });
 
-     $scope.emp = {};
-     $scope.id  = '';
-     
-      $scope.onItemSelected = function(emp,id)
+      //Autosuggest of employee name
+      $scope.emp = {};
+      $scope.userid ='';
+      $scope.onItemSelected = function(emp)
       {
-     
-        console.log('selected='+$scope.emp.name);
-        console.log('selected='+$scope.id.key);
+        
+         $scope.UserId = $scope.emp.id;
+         $scope.UserName = $scope.emp.name;
+        
+        console.log('selected='+$scope.UserId);
+        console.log('selected='+$scope.UserName);
+      
           
       }
+
+      //signature pad functions
+       var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)'
+      });
+     
+      var saveButton   = document.getElementById('save');
+      var cancelButton = document.getElementById('clear');
+
+      saveButton.addEventListener('click', function (event)
+      {
+        var sign = signaturePad.toDataURL('image/png');
+
+        window.open(sign);
+      });
+
+      cancelButton.addEventListener('click', function (event) 
+      {
+        signaturePad.clear();
+      });
 
 
 

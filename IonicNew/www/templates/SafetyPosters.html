@@ -14,7 +14,7 @@
         <!-- Poster List -->
         <div class="list lessons animate-fade-slide-in-left">
 
-          <a href="#/app/SafetyPosterView/{{poster.id}}"  class="item item-icon-right" ng-repeat="poster in Posters | filter : SearchQuery"> 
+          <a href="#/app/SafetyPosterView/{{poster.id}}"  class="item item-icon-right" ng-repeat="poster in Posters | filter : SearchQuery | limitTo:3"> 
             <i class="icon ion-chevron-right"></i>
             {{poster.title}}
           </a>  

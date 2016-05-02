@@ -14,7 +14,7 @@
         <!-- Lesons  Name -->
         <div class="list lessons animate-fade-slide-in-left">
 
-          <a href="#/app/lessonView/{{lesson.id}}"  class="item item-icon-right" ng-repeat="lesson in Lessons | filter : SearchQuery"> 
+          <a href="#/app/lessonView/{{lesson.id}}"  class="item item-icon-right" ng-repeat="lesson in Lessons | filter : SearchQuery | limitTo:3"> 
             <i class="icon ion-chevron-right"></i>
             {{lesson.title}}
           </a>  

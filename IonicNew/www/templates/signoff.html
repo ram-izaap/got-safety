@@ -4,17 +4,25 @@
     <form>
        <h4>Name and Signature Required / Nombre y Firma Requerida</h4>   
       
-       <typeahead items="items" prompt="type your name" title="employee_name"  model="emp.name" key ="id"  on-select="onItemSelected()">
+       <typeahead items="items" prompt="type your name" title="employee_name"  model="emp.name" key ="emp.id"  on-select="onItemSelected()">
        </typeahead>
-      
-      
+   
+       <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
                      
-       <canvas id='signatureCanvas' width='300' height='180' style='border: 1px solid black;'>     	
+       <canvas id='signature-pad' width='300' height='180' style='border: 1px solid black;'>     	
        </canvas>
+       
+       <button class="button button-clear button-positive" id = "save">
+         save
+       </button>
 
-       <button class="button button-clear button-dark">
+       <button class="button button-clear button-assertive" id = "clear">
      		Clear 
-    	</button>
+    	</button></br></br>
+
+      <button class="button button-small button-assertive">
+         Submit
+      </button>
 
 		 </form>
 

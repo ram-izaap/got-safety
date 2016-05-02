@@ -23,7 +23,7 @@
                      
                       <div class="list lessons animate-fade-slide-in-left">
 
-                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery"  class="item item-icon-right" ng-click="OpenLink('{{Attachments.f_name}}')"> 
+                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery | limitTo:3"  class="item item-icon-right" ng-click="OpenLink('{{Attachments.f_name}}')"> 
                               <i class="icon ion-chevron-right"></i>
                              {{Attachments.language}}              
                             </a>  
