@@ -19,11 +19,33 @@
 
             
              <!--attachment list-->
-       
+              <div class="container">
+                <div class="clearfix">
+
+                  <header class="p2 bright-blue bg-blue">
+                    <div class="container sm-table">
+                      <div class="sm-table-cell py4">
+                        <h1 class="h0 mt0 mb0 white inline">AngularJS PDF Viewer</h1>
+                        <a class="h0 button dark-gray" href="//github.com/winkerVSbecks/angular-pdf-viewer">github</a>
+                      </div>
+                    </div>
+                  </header>
+                  
+                  <pdf-viewer
+                    delegate-handle="my-pdf-container"
+                    url="pdfUrl"
+                    scale="1"
+                    show-toolbar="true"
+                    headers="{'x-you-know-whats-awesome': 'EVERYTHING'}"></pdf-viewer>
+                    
+
+                </div>
+              </div>
+                             
                      
                       <div class="list lessons animate-fade-slide-in-left">
 
-                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery | limitTo:3"  class="item item-icon-right" ng-click="OpenLink('{{Attachments.f_name}}')"> 
+                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery | limitTo:3"  class="item item-icon-right"  ng-click="loadNewFile('{{Attachments.f_name}}')"> 
                               <i class="icon ion-chevron-right"></i>
                              {{Attachments.language}}              
                             </a>  

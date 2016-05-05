@@ -7,9 +7,11 @@
 angular.module('starter.constants',[])  
   .constant('apiUrl', 'http://localhost/got-safety/api');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','ion-autocomplete'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','ion-autocomplete','pdf'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
+
+
 
     .directive("navigateTo", function($ionicGesture, broadcast){
         return{
@@ -83,8 +85,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
    
   }
 })
-    
-
 
 
 
@@ -297,3 +297,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
   $ionicConfigProvider.tabs.style("standard");
 
 });
+
+
+
+
+
+
+
+
+
+
+

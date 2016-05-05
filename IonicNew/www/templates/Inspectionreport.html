@@ -29,10 +29,12 @@
 
           <a class="item item-icon-right" ng-repeat="Report in Reports | filter : SearchQuery"  ng-click="OpenLink('{{Report.url}}')">{{Report.title}}
            <i class="icon ion-ios-arrow-right"></i> 
-           </a>
-        
-
+           </a>       
         </div>
+
+        <button class="button button-full button-positive" ng-click = "signoff()">
+                   Sign Off
+        </button>
 
     </ion-content>
 </ion-view>

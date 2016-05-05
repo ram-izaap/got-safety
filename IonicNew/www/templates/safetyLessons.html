@@ -17,11 +17,12 @@
           <a href="#/app/lessonView/{{lesson.id}}"  class="item item-icon-right" ng-repeat="lesson in Lessons | filter : SearchQuery | limitTo:3"> 
             <i class="icon ion-chevron-right"></i>
             {{lesson.title}}
-          </a>  
-
-          
-          
+          </a>           
         </div>
+
+        <button class="button button-full button-positive" ng-click = "signoff()">
+                   Sign Off
+        </button>
 
     </ion-content>
 </ion-view>

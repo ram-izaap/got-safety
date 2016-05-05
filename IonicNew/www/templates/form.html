@@ -36,9 +36,10 @@
           <a class="item item-icon-right" ng-repeat="Form in Forms | filter : SearchQuery"  ng-click="OpenLink('{{Form.url}}')">{{Form.title}}
            <i class="icon ion-ios-arrow-right"></i> 
            </a>
-        
-
         </div>
 
+        <button class="button button-full button-positive" ng-click = "signoff()">
+                   Sign Off
+        </button>
     </ion-content>
 </ion-view>

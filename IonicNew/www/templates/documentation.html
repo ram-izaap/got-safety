@@ -28,9 +28,11 @@
           <a class="item item-icon-right" ng-repeat="Documentation in Documentations | filter : SearchQuery"  ng-click="OpenLink('{{Documentation.url}}')">{{Documentation.title}}
            <i class="icon ion-ios-arrow-right"></i> 
            </a>
-        
-
         </div>
 
+        <button class="button button-full button-positive" ng-click = "signoff()">
+                   Sign Off
+        </button>
+        
     </ion-content>
 </ion-view>

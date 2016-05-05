@@ -1,4 +1,4 @@
-<ion-view view-title="SignOff TrainingRecords">
+<ion-view view-title="SignOff">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
 
     <form>
@@ -9,7 +9,7 @@
    
        <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
                      
-       <canvas id='signature-pad' width='300' height='180' style='border: 1px solid black;'>     	
+       <canvas id='signature-pad' width='300' height='180' style='border: 1px solid black;'>      
        </canvas>
        
        <button class="button button-clear button-positive" id = "save">
@@ -17,14 +17,14 @@
        </button>
 
        <button class="button button-clear button-assertive" id = "clear">
-     		Clear 
-    	</button></br></br>
+        Clear 
+      </button></br></br>
 
-      <button class="button button-small button-assertive">
+      <button class="button button-small button-assertive" ng-click = "save(data)">
          Submit
       </button>
 
-		 </form>
+     </form>
 
 
 

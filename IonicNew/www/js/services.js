@@ -96,6 +96,8 @@ angular.module('starter.services', [])
 })
 
 
+
+
 .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
   return {
     responseError: function (response) {
@@ -111,6 +113,8 @@ angular.module('starter.services', [])
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
 })
+
+
 
 
   //service for safety lessons
@@ -702,12 +706,12 @@ angular.module('starter.services', [])
  .factory('employeeDetails', function($http, apiUrl)
   {
     var employees = [];
-    
+    var C_id      = window.localStorage.getItem("Createdid");
     return{
 
           employee:function()
           {
-             var C_id = window.localStorage.getItem("Createdid");
+             
              return $http.get(apiUrl+'/get_employee?client_id='+C_id).then(function(response)
              {
                   var emp = response.data;
@@ -728,8 +732,20 @@ angular.module('starter.services', [])
                 })
              
         },
-       
+       SaveSign:function()
+       { 
+          var Empid  = window.localStorage.getItem("empid");
+          var signed = {'client_id': C_id, 'employee_id': Empid, topic:'title'};
+          
+          return $http.post(apiUrl+'/training',signed ).then(function(response)
+          {
+             var result = response.data.message;
+             return result;
+          })
+
+       }
 
     }
 
   });
+
