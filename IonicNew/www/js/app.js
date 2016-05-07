@@ -7,7 +7,7 @@
 angular.module('starter.constants',[])  
   .constant('apiUrl', 'http://localhost/got-safety/api');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','ion-autocomplete','pdf'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
@@ -81,7 +81,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     };
 
   },
-    templateUrl: 'templates/templateurl.html'
+    templateUrl: 'templates/typeahead_template.html'
    
   }
 })

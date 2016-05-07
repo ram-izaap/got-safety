@@ -8,7 +8,8 @@
        </typeahead>
    
        <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
-                     
+       
+       <h4>Draw your signature/Dibuja tu firma </h4>             
        <canvas id='signature-pad' width='300' height='180' style='border: 1px solid black;'>      
        </canvas>
        
@@ -20,8 +21,10 @@
         Clear 
       </button></br></br>
 
+     <h6> Signing and Clicking this button indicates that I have received and understand this training material / Firmar y hacer clic en este botón indica que he recibido y entender este material de formación.</h6>
+
       <button class="button button-small button-assertive" ng-click = "save(data)">
-         Submit
+        I AGREE / ESTOY DE ACUERDO
       </button>
 
      </form>

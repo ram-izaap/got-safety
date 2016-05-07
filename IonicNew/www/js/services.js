@@ -168,8 +168,7 @@ angular.module('starter.services', [])
                   
                   };
                  window.localStorage.setItem("lessonid", LessonId);
-              },
-
+              },          
 
               GetAttachment: function() 
               {
@@ -734,8 +733,9 @@ angular.module('starter.services', [])
         },
        SaveSign:function()
        { 
-          var Empid  = window.localStorage.getItem("empid");
-          var signed = {'client_id': C_id, 'employee_id': Empid, topic:'title'};
+          var Empid        = window.localStorage.getItem("empid");
+          var lessonTitle  = window.localStorage.getItem("Title");
+          var signed       = {'client_id': C_id, 'employee_id': Empid, topic:lessonTitle};
           
           return $http.post(apiUrl+'/training',signed ).then(function(response)
           {
