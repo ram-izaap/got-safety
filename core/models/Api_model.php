@@ -11,7 +11,43 @@ class Api_model extends App_Model {
 
     }
     
+    function login($name = "",$password = "")
+	{
+		$where=array('name'=>$name,'password'=>md5($password));
+		
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where("(role = 2 OR role = 3)");
+		$this->db->where($where);
+		return $this->db->get()->row_array();
+		
+	}
     
+    function get_lessons( $client_id  = 0 )
+    {
+			
+	    $date = date('Y-m-d');		
+    	$sql = "SELECT * FROM lession 
+    				WHERE ( created_user = '{$client_id}' OR visible_to_all = '1' ) 
+    				 AND to_date >= '{$date}'";
+
+    	return $this->db->query( $sql )->result_array();
+		
+	}
+
+	function get_attachments( $lesson_id = 0 )
+    {
+		$result = $this->db->get_where('lession_attachment', array("lession_id" => $lesson_id,"is_active" => 1) );
+        return $result->result_array();
+	}
+
+	function get_employees( $client_id = 0 )
+    {
+		$result = $this->db->get_where('employee', array("created_user" => $client_id,"is_active" => 1) );
+        return $result->result_array();
+	}
+
+
     /**  get all users list  **/
     
     function get_user_list($table_name,$where)
@@ -34,31 +70,7 @@ class Api_model extends App_Model {
 	/** Login **/
 
 
-	function login($name = "",$password = "")
-	{
-		$where=array('name'=>$name,'password'=>md5($password));
-		
-		$this->db->select('*');
-		$this->db->from('users');
-		$this->db->where($where);
-		$query = $this->db->get()->result_array();
-		
-		
-		if(count($query)>0){
-			
-			if($query[0]["is_active"] == 1){
-				
-				return $query;
-			}
-			/* User blocked */
-			return 0;
-			
-		}
-		/* password,name mismatch */
-		return -1;
-		
-		
-	}
+	
 	
 	/** Get all lesson list **/
 	
@@ -83,11 +95,7 @@ class Api_model extends App_Model {
 	
 	 /**  get particular details  **/
     
-    function get_detail($table_name,$where)
-    {
-		$result = $this->db->get_where($table_name,$where);
-        return $result->result_array();
-	}
+    
 	
 	/**  Get lession content to dispaly in frontend **/
 	
@@ -140,23 +148,7 @@ class Api_model extends App_Model {
 	
 	
 	
-	function get_lession_detail($table_name,$where)
-    {
-		// $result = $this->db->get_where($table_name,$where);
-        //return $result->result_array();
-        $date = date('Y-m-d');
-       /* $this->db->select();
-        $this->db->from($table_name);
-        $this->db->where($where);
-        $this->db->or_where('all',1);
-        $this->db->where('to >=',$date);
-        
-        $result = $this->db->get();
-        return $result->result_array();  */
-        
-      return  $this->db->query("select * from lession WHERE ( created_user = '".$where."' OR status = '1' ) AND to_date >= '".$date."'")->result_array(); 
-		
-	}
+	
 	
 	
 	function insert($table_name,$data)

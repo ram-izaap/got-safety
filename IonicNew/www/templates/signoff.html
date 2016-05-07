@@ -4,7 +4,7 @@
     <form>
        <h4>Name and Signature Required / Nombre y Firma Requerida</h4>   
       
-       <typeahead items="items" prompt="type your name" title="employee_name"  model="emp.name" key ="emp.id"  on-select="onItemSelected()">
+       <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )">
        </typeahead>
    
        <input type="hidden" value = "{{userid}}"  ng-model="emp.id">

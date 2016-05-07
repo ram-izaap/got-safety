@@ -1,751 +1,617 @@
 angular.module('starter.services', [])
+
 //service for authentication
 .service('AuthService', function($q, $http, apiUrl) {
-  
-  var isAuthenticated = true;
-  var LOCAL_TOKEN_KEY = 'user_credentials';
- 
 
-  function loadUserCredentials() 
-  {   
-    var uc = window.localStorage.getItem(LOCAL_TOKEN_KEY);
-    if (uc) 
-    {
-      useCredentials(uc);
+    var isAuthenticated = true;
+    var LOCAL_TOKEN_KEY = 'user_credentials';
 
+
+    function loadUserCredentials() {
+        var uc = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+        if (uc) {
+            useCredentials(uc);
+
+        }
     }
-  }
- 
 
-  function storeUserCredentials(uc) 
-  {
-    window.localStorage.setItem( LOCAL_TOKEN_KEY,uc);
-    useCredentials(uc);
-  }
 
-  function useCredentials(uc) 
-  {
-    isAuthenticated = true;
-    console.log(uc);
-    
-  
-    // Set the uc as header for your requests!
-    $http.defaults.headers.common.uid = uc.uid;
-    $http.defaults.headers.common.authorizationToken = uc.authorizationToken;
-  }
+    function storeUserCredentials(uc) {
+        window.localStorage.setItem(LOCAL_TOKEN_KEY, uc);
+        useCredentials(uc);
+    }
 
-  function destroyUserCredentials() 
-  {
-    isAuthenticated = false;
-    $http.defaults.headers.common.uid = undefined;
-    $http.defaults.headers.common.authorizationToken = undefined;
-    window.localStorage.removeItem( LOCAL_TOKEN_KEY);
-  }
- 
-  var login = function(name, password)
-  {
-  
-    return $q(function(resolve, reject) 
-    {
+    function useCredentials(uc) {
+        isAuthenticated = true;
+        console.log(uc);
 
-          $http.post(apiUrl+'/login', { 'name': name, 'password': password},{ ignoreAuthModule: true }).then(function(response)
-          {
-                      
-                       var res       = response.data;
-                       var UserId    = res.user_id;
-                       var CreatedId = res.created_id;
+
+        // Set the uc as header for your requests!
+        $http.defaults.headers.common.uid = uc.uid;
+        $http.defaults.headers.common.authorizationToken = uc.authorizationToken;
+    }
+
+    function destroyUserCredentials() {
+        isAuthenticated = false;
+        $http.defaults.headers.common.uid = undefined;
+        $http.defaults.headers.common.authorizationToken = undefined;
+        window.localStorage.removeItem(LOCAL_TOKEN_KEY);
+    }
+
+    var login = function(name, password) {
+
+        return $q(function(resolve, reject) {
+
+            $http.post(apiUrl + 'user/login', {
+                    'name': name,
+                    'password': password
+                }, {
+                    ignoreAuthModule: true
+                })
+                .then(function(response) 
+                {
+                    var user_data = response.data;
+                    console.log(user_data);
+                    if( user_data.status != undefined && user_data.status == 'SUCCESS' )
+                    {
 
                       //store userid and created id in localstorage
-                      window.localStorage.setItem("Userid", UserId);
-                      window.localStorage.setItem("Createdid", CreatedId);
-                                       
-                       var status = res.status;
-                      
-                      storeUserCredentials(response.data); 
-                      
-                      if(status=='success')
-                        resolve('Login success.');
-                      else
-                        reject();    
-                 
-        },
-        function()
-        {
-            reject('Login Failed.');
-          
+                      window.localStorage.setItem("user_id", user_data.id);
+                      window.localStorage.setItem("client_id", user_data.created_id);
+
+                      storeUserCredentials( user_data );
+
+                      resolve('SUCCESS');
+                    }
+                    else if( user_data.message != undefined )
+                    {
+                      reject( user_data.message );
+                    }
+                    else
+                    {
+                      reject( 'Unknown Error.' );
+                    }
+
+                    },
+                    function() 
+                    {
+                      reject( 'There is some connectivity issue .Please try again later.' );
+                    }
+                );
+
+
         });
 
-      
-    });
-  
-  };
+    };
 
-  var logout = function() 
-  {
-    destroyUserCredentials();
-  };
+    var logout = function() {
+        destroyUserCredentials();
+    };
 
-  loadUserCredentials();
+    loadUserCredentials();
 
-  return {
-    login: login,
-    logout: logout,
-    isAuthenticated: function() {return isAuthenticated;}
-  };
+    return {
+        login: login,
+        logout: logout,
+        isAuthenticated: function() {
+            return isAuthenticated;
+        }
+    };
 
+})
+
+.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
+    return {
+        responseError: function(response) {
+            $rootScope.$broadcast({
+                401: AUTH_EVENTS.notAuthenticated
+            }[response.status], response);
+            return $q.reject(response);
+
+        }
+    };
+})
+
+.config(function($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
 })
 
 
 
 
-.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
-  return {
-    responseError: function (response) {
-      $rootScope.$broadcast({
-        401: AUTH_EVENTS.notAuthenticated
-      }[response.status], response);
-      return $q.reject(response);
+//service for safety lessons
+.factory('safetyLessons', function($http, apiUrl) {
 
-    }
-  };
-})
-
-.config(function ($httpProvider) {
-  $httpProvider.interceptors.push('AuthInterceptor');
-})
+    var lessons = [];
+    var Attachment = [];
+    //var SpanishAttachment = [];
+    //var EnglishAttachment = [];
 
 
 
+    return {
 
-  //service for safety lessons
-.factory('safetyLessons', function($http, apiUrl)
- {
+        all: function() {
+            var client_id = window.localStorage.getItem("client_id");
 
-  var lessons           = [];
-  var Attachment        = [];
-  //var SpanishAttachment = [];
-  //var EnglishAttachment = [];
-  
- 
+            return $http.get(apiUrl + 'lesson/list?client_id=' + client_id).then(function(response) {
+                var data = response.data;
 
-  return {
+                if( data.lessons != undefined )
+                {
+                    lessons = data.lessons;
+                }
 
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+                return lessons;
 
-                    return $http.get(apiUrl+'/get_user_lesson_list?created_id='+C_id+'&user_id='+U_id+'').then(function(response)
-                    {
-                        var lessons_data   = response.data;
-                        var lessons_array  = lessons_data.lessons;
-                            
-                            if(lessons_array.length > 0)
-                            {
-                               for(var j = 0; j < lessons_array.length; j++)
-                               {                              
-                                  //alert(usr[1].id);
-                                  lessons[j] = lessons_array[j];
-                               }
-                            }
-                        
-                        return lessons;   
-                       
-                    });
-                 
-              },
-             
-              GetLesson: function( LessonId )
-             {
-      
-                 for (var i = 0; i < lessons.length; i++) 
-                  {
-                        if(lessons[i].id == LessonId)
-                        {
-                          return lessons[i];
+            });
 
-                        }
-                  
-                  };
-                 window.localStorage.setItem("lessonid", LessonId);
-              },          
+        },
 
-              GetAttachment: function() 
-              {
-                var Lessonid = window.localStorage.getItem("lessonid");
-                var U_id     = window.localStorage.getItem("Userid");   
-                    
-                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id='+Lessonid+'&user_id='+U_id+'').then(function(response)
-                    {
-                        var attachment_array   = response.data;
-                       
-                        var usr                = attachment_array.user;
-                        
+        getLesson: function(LessonId) {
 
-                           if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {                               
-                                  Attachment[j] = usr[j];
-                               }
-                            } 
- 
-                        return Attachment;  
+            for (var i = 0; i < lessons.length; i++) {
+                if (lessons[i].id == LessonId) {
+                    return lessons[i];
 
-                    });
-                 
-              },
+                }
 
+            };
+            window.localStorage.setItem("lessonid", LessonId);
+        },
 
-           /*   GetEnglishAttachment: function() 
-              {
-                    
-                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
-                    {
-                        var attachment_array   = response.data;
-                       
-                        var usr                = attachment_array.user;
-                        
-                       
+        getAttachment: function( lesson_id ) {
+            
 
-                           if(usr.length > 0)
-                            {
-                               
-                                //alert(usr[0].language);
-                                  EnglishAttachment[0] = usr[0];
-                      
-                            } 
- 
-                        return EnglishAttachment;  
+            return $http.get(apiUrl + 'lesson/attachment?lesson_id=' + lesson_id ).then(function(response) {
+                var data = response.data;
 
-                    });
-                 
-              },
+                if( data.attachments == undefined )
+                {
+                  return [];
+                }
 
+                return data.attachments;
 
-               GetSpanishAttachment: function() 
-              {
-                    
-                    return $http.get(apiUrl+'/get_lesson_attachment?lesson_id=13&user_id=29&X-APP-KEY=test').then(function(response)
-                    {
-                        var attachment_array   = response.data;
-                       
-                        var usr                = attachment_array.user;
-                        
-                       
-                           if(usr.length > 0)
-                            {
-                               
-                                //alert(usr[0].language);
-                                  SpanishAttachment[1] = usr[1];
-                      
-                            } 
- 
-                        return SpanishAttachment;  
+            });
 
-                    });
-                 
-              },*/
-
-
-          }; 
+        }
+    };
 
 })
 
 
 
- //service for webinars
-.factory('WebinarService', function($http, apiUrl)
- {
+//service for webinars
+.factory('WebinarService', function($http, apiUrl) {
 
-  var webinars = [];
-  return {
-              all: function() 
-              {
+    var webinars = [];
+    return {
+        all: function() {
 
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
 
-                   return $http.get(apiUrl+'/get_user_webinars_list?created_id='+C_id+'&user_id='+U_id+'').then(function(response)
-                   {
-                        var webinars_array   = response.data;
-                        var usr              = webinars_array.user;
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {                                                          
-                                    webinars[j] = usr[j];
-                               }
-                            }
-                        
-                        return webinars; 
-                        
+            return $http.get(apiUrl + '/get_user_webinars_list?created_id=' + C_id + '&user_id=' + U_id + '').then(function(response) {
+                var webinars_array = response.data;
+                var usr = webinars_array.user;
 
-                  });
-                 
-              },
-             
-              get: function( WebinarId)
-              {
-                  for (var i = 0; i < webinars.length; i++) 
-                  {
-                        if(webinars[i].id == WebinarId )
-                        {
-                         
-                           return webinars[i];
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        webinars[j] = usr[j];
+                    }
+                }
 
-                        }
-                    
-                  };
-                
-                 
-              },
+                return webinars;
 
-        }; 
+
+            });
+
+        },
+
+        get: function(WebinarId) {
+            for (var i = 0; i < webinars.length; i++) {
+                if (webinars[i].id == WebinarId) {
+
+                    return webinars[i];
+
+                }
+
+            };
+
+
+        },
+
+    };
 
 })
 
 
 //service for documentation
-.factory('DocumentationService', function($http, apiUrl)
- {
+.factory('DocumentationService', function($http, apiUrl) {
 
-  var Documentations = [];
-  
-  return {
-              //list of documentation
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+    var Documentations = [];
 
-                    return $http.get(apiUrl+'/get_user_menu_list?created_id='+C_id+'&user_id='+U_id+'&type=document').then(function(response)
-                    {
-                      
-                        var doc_arr   = response.data;                      
-                        var usr = doc_arr.user;
-                       // alert(usr.length);
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {                             
-                                  // alert(usr[0].id);                               
-                                  Documentations[j] = usr[j];
-                               }
-                            }
-                        
-                        return Documentations; 
-                        
+    return {
+        //list of documentation
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
 
-                    });
-                 
-              },
-             
-           
+            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=document').then(function(response) {
 
-           //documentation content
-           content: function()
-           { 
-                  
-                 return $http.get(apiUrl+'/get_content?type=5').then(function(response)
-                 {
-                      
-                        var content_res    = response.data;
-                        var user           = content_res.user;
-                        var content          = user;
-                        
+                var doc_arr = response.data;
+                var usr = doc_arr.user;
+                // alert(usr.length);
 
-                        return content;
-                      
-                       
-                 });
-               
-           },
-         
-     }; 
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        // alert(usr[0].id);                               
+                        Documentations[j] = usr[j];
+                    }
+                }
+
+                return Documentations;
+
+
+            });
+
+        },
+
+
+
+        //documentation content
+        content: function() {
+
+            return $http.get(apiUrl + '/get_content?type=5').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+
+                return content;
+
+
+            });
+
+        },
+
+    };
 
 })
 
 
 //service for InspectionReport
-.factory('InspectionReportService', function($http, apiUrl)
- {
+.factory('InspectionReportService', function($http, apiUrl) {
 
-  var Reports = [];
-  
-  return {
-              //list of reports
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+    var Reports = [];
 
-                    return $http.get(apiUrl+'/get_user_menu_list?created_id='+C_id+'&user_id='+U_id+'&type=report').then(function(response)
-                    {
-                      
-                        var doc_arr   = response.data;                      
-                        var usr = doc_arr.user;
-                       // alert(usr.length);
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                    // alert(usr[0].id);                               
-                                    Reports[j] = usr[j];
-                               }
-                            }
-                        
-                        return Reports; 
-                        
+    return {
+        //list of reports
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
 
-                    });
-                 
-              },
-             
-       
+            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=report').then(function(response) {
 
-           //Report content
-           content: function()
-           { 
-                  
-                 return $http.get(apiUrl+'/get_content?type=1').then(function(response)
-                 {
-                      
-                        var content_res   = response.data;
-                        var user          = content_res.user;
-                        var content         = user;
-                        
+                var doc_arr = response.data;
+                var usr = doc_arr.user;
+                // alert(usr.length);
 
-                        return content;
-                      
-                       
-                 });
-               
-           },
-         
-     }; 
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        // alert(usr[0].id);                               
+                        Reports[j] = usr[j];
+                    }
+                }
+
+                return Reports;
+
+
+            });
+
+        },
+
+
+
+        //Report content
+        content: function() {
+
+            return $http.get(apiUrl + '/get_content?type=1').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+
+                return content;
+
+
+            });
+
+        },
+
+    };
 
 })
 
 
 
 //service for Training records
-.factory('TrainingRecordService', function($http, apiUrl)
- {
+.factory('TrainingRecordService', function($http, apiUrl) {
 
-  var Records = [];
-  
-  return {
-              //list of records
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+    var Records = [];
 
-                    return $http.get(apiUrl+'/get_user_menu_list?created_id='+C_id+'&user_id='+U_id+'&type=record').then(function(response)
-                    {
-                      
-                        var doc_arr   = response.data;                      
-                        var usr = doc_arr.user;
-                       // alert(usr.length);
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                    // alert(usr[0].id);                               
-                                    Records[j] = usr[j];
-                               }
-                            }
-                        
-                        return Records; 
-                        
+    return {
+        //list of records
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
 
-                    });
-                 
-              },
-             
-       
+            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=record').then(function(response) {
 
-           //records content
-           content: function()
-           { 
-                  
-                 return $http.get(apiUrl+'/get_content?type=4').then(function(response)
-                 {
-                      
-                        var content_res   = response.data;
-                        var user          = content_res.user;
-                        var content       = user;
-                        
+                var doc_arr = response.data;
+                var usr = doc_arr.user;
+                // alert(usr.length);
 
-                        return content;
-                      
-                       
-                 });
-               
-           },
-         
-     }; 
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        // alert(usr[0].id);                               
+                        Records[j] = usr[j];
+                    }
+                }
+
+                return Records;
+
+
+            });
+
+        },
+
+
+
+        //records content
+        content: function() {
+
+            return $http.get(apiUrl + '/get_content?type=4').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+
+                return content;
+
+
+            });
+
+        },
+
+    };
 
 })
 
 
 //service for 300logs
-.factory('LogService', function($http, apiUrl)
- {
+.factory('LogService', function($http, apiUrl) {
 
-  var Logs = [];
-  
-  return {
-              //list of logs
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
+    var Logs = [];
 
-                    return $http.get(apiUrl+'/get_user_menu_list?created_id='+C_id+'&user_id='+U_id+'&type=log').then(function(response)
-                    {
-                      
-                        var doc_arr   = response.data;                      
-                        var usr = doc_arr.user;
-                       // alert(usr.length);
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                  // alert(usr[0].id);                               
-                                  Logs[j] = usr[j];
-                               }
-                            }
-                        
-                        return Logs; 
-                        
+    return {
+        //list of logs
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
 
-                    });
-                 
-              },
-             
+            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=log').then(function(response) {
 
-           //log content
-           content: function()
-           { 
-                  
-                 return $http.get(apiUrl+'/get_content?type=3').then(function(response)
-                 {
-                      
-                        var content_res   = response.data;
-                        var user          = content_res.user;
-                        var content        = user;
-                        
+                var doc_arr = response.data;
+                var usr = doc_arr.user;
+                // alert(usr.length);
 
-                        return content;
-                      
-                       
-                 });
-               
-           },
-         
-     }; 
-
-})
-
-
-
-
-.factory('FormService', function($http, apiUrl)
- {
-
-  var Forms = [];
-  
-  return {
-              all: function() 
-              {
-                  var C_id = window.localStorage.getItem("Createdid");
-                  var U_id = window.localStorage.getItem("Userid");
-
-                    return $http.get(apiUrl+'/get_user_menu_list?created_id='+C_id+'&user_id='+U_id+'&type=forms').then(function(response)
-                    {
-                      
-                        var Forms_arr   = response.data;                 
-                        var usr = Forms_arr.user;
-                       // alert(usr.length);
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                            
-                                  // alert(usr[0].id);                               
-                                  Forms[j] = usr[j];
-                               }
-                            }
-                        
-                        return Forms; 
-                       
-
-                    });
-                 
-              },
-             
-             
-
-              content: function()
-             { 
-                  
-                 return $http.get(apiUrl+'/get_content?type=5').then(function(response)
-                    {
-                      
-                        var content_res   = response.data;
-                        var user          = content_res.user;
-                        var content       = user;
-                        
-                      return content;
-                      
-                       
-                    });
-              
-              },
-         
-
-        }; 
-
-})
-
-
-  //service for safety posters 
-.factory('SafetyPosters', function($http, apiUrl)
- {
-
-  var posters           = [];
-  var Attachment        = [];
- 
- 
-
-  return {
-
-              all: function() 
-              {
-                   var C_id = window.localStorage.getItem("Createdid");
-                   var U_id = window.localStorage.getItem("Userid");
-
-                    return $http.get(apiUrl+'/get_user_posters_list?created_id='+C_id+'&user_id='+U_id+'').then(function(response)
-                    {
-                        var posters_array   = response.data;
-                        var usr             = posters_array.user;
-
-                            
-                            if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {
-                                 //alert(usr[1].id);                               
-                                  posters [j] = usr[j];
-                               }
-                            }
-                        
-                        return posters;   
-                       
-                    });
-                 
-              },
-             
-              GetPoster: function( PosterId )
-             {
-      
-                 for (var i = 0; i < posters.length; i++) 
-                  {
-                        if(posters[i].id == PosterId)
-                        {
-                          return posters[i];
-
-                        }
-                  
-                  };
-                 window.localStorage.setItem("posterid", PosterId);
-              },
-
-
-              GetAttachment: function() 
-              {
-                var Posterid = window.localStorage.getItem("posterid");
-
-                    return $http.get(apiUrl+'/get_posters_attachment?poster_id='+Posterid).then(function(response)
-                    {
-                        var attachment_array   = response.data;
-                       
-                        var usr                = attachment_array.user;
-                        
-
-                           if(usr.length > 0)
-                            {
-                               for(var j = 0; j < usr.length; j++)
-                               {                               
-                                  Attachment[j] = usr[j];
-                               }
-                            } 
- 
-                        return Attachment;  
-
-                    });
-                 
-              },
-
-
-
-          }; 
-
-})
-
-
- .factory('employeeDetails', function($http, apiUrl)
-  {
-    var employees = [];
-    var C_id      = window.localStorage.getItem("Createdid");
-    return{
-
-          employee:function()
-          {
-             
-             return $http.get(apiUrl+'/get_employee?client_id='+C_id).then(function(response)
-             {
-                  var emp = response.data;
-                  var usr = emp.user;               
-                    
-                
-                 
-                  if(usr.length > 0)
-                  {
-                          for(var j=0; j<usr.length; j++)
-                          {                               
-                                employees[j] = usr[j];
-                             
-                          }
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        // alert(usr[0].id);                               
+                        Logs[j] = usr[j];
                     }
-                                             
-                   return employees;       
-                })
-             
-        },
-       SaveSign:function()
-       { 
-          var Empid        = window.localStorage.getItem("empid");
-          var lessonTitle  = window.localStorage.getItem("Title");
-          var signed       = {'client_id': C_id, 'employee_id': Empid, topic:lessonTitle};
-          
-          return $http.post(apiUrl+'/training',signed ).then(function(response)
-          {
-             var result = response.data.message;
-             return result;
-          })
+                }
 
-       }
+                return Logs;
+
+
+            });
+
+        },
+
+
+        //log content
+        content: function() {
+
+            return $http.get(apiUrl + '/get_content?type=3').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+
+                return content;
+
+
+            });
+
+        },
+
+    };
+
+})
+
+
+
+
+.factory('FormService', function($http, apiUrl) {
+
+    var Forms = [];
+
+    return {
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
+
+            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=forms').then(function(response) {
+
+                var Forms_arr = response.data;
+                var usr = Forms_arr.user;
+                // alert(usr.length);
+
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+
+                        // alert(usr[0].id);                               
+                        Forms[j] = usr[j];
+                    }
+                }
+
+                return Forms;
+
+
+            });
+
+        },
+
+
+
+        content: function() {
+
+            return $http.get(apiUrl + '/get_content?type=5').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+                return content;
+
+
+            });
+
+        },
+
+
+    };
+
+})
+
+
+//service for safety posters 
+.factory('SafetyPosters', function($http, apiUrl) {
+
+    var posters = [];
+    var Attachment = [];
+
+
+
+    return {
+
+        all: function() {
+            var C_id = window.localStorage.getItem("Createdid");
+            var U_id = window.localStorage.getItem("Userid");
+
+            return $http.get(apiUrl + '/get_user_posters_list?created_id=' + C_id + '&user_id=' + U_id + '').then(function(response) {
+                var posters_array = response.data;
+                var usr = posters_array.user;
+
+
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        //alert(usr[1].id);                               
+                        posters[j] = usr[j];
+                    }
+                }
+
+                return posters;
+
+            });
+
+        },
+
+        GetPoster: function(PosterId) {
+
+            for (var i = 0; i < posters.length; i++) {
+                if (posters[i].id == PosterId) {
+                    return posters[i];
+
+                }
+
+            };
+            window.localStorage.setItem("posterid", PosterId);
+        },
+
+
+        GetAttachment: function() {
+            var Posterid = window.localStorage.getItem("posterid");
+
+            return $http.get(apiUrl + '/get_posters_attachment?poster_id=' + Posterid).then(function(response) {
+                var attachment_array = response.data;
+
+                var usr = attachment_array.user;
+
+
+                if (usr.length > 0) {
+                    for (var j = 0; j < usr.length; j++) {
+                        Attachment[j] = usr[j];
+                    }
+                }
+
+                return Attachment;
+
+            });
+
+        },
+
+
+
+    };
+
+})
+
+
+.factory('employeeDetails', function($http, apiUrl) {
+    var employees = [];
+
+    return {
+
+        getEmployees: function( client_id ) {
+
+            return $http.get(apiUrl + 'user/employees?client_id=' + client_id).then(function(response) {
+                var data = response.data;
+
+                if( data.employees == undefined )
+                {
+                    employees = [];
+                }
+
+                employees = data.employees;
+
+                return employees;
+            })
+
+        },
+        saveSign: function( lesson_id, employee_id ) 
+        {
+            var Empid = window.localStorage.getItem("empid");
+            var lessonTitle = window.localStorage.getItem("Title");
+            var signed = {
+                'employee_id': employee_id,
+                'lesson_id': lesson_id
+            };
+
+            return $http.post(apiUrl + 'lesson/training', signed).then(function(response) {
+                var result = response.data;
+                return result;
+            })
+
+        }
 
     }
 
-  });
-
+});

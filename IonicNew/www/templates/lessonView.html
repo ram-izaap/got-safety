@@ -1,73 +1,32 @@
-<ion-view view-title="{{Lessons.title}}">
-    <ion-content ng-class="{expanded:$scope.isExpanded}">
-        
-        <!-- Search bar -->
-        <div class="bar-header item-input-inset search">
-          <label class="item-input-wrapper">
-            <input type="search" placeholder="Search" data-width="full" ng-model = "SearchQuery">
-            <i class="icon ion-ios-search-strong placeholder-icon"></i>
-          </label>
-          <!-- <button class="button button-clear">
-            Cancel
-          </button> -->
-        </div>
+<ion-view view-title="{{lesson.title}}">
+   <ion-content ng-class="{expanded:$scope.isExpanded}">
+     
+      <!-- Search bar -->
+      <div class="bar-header item-input-inset search">
+         <label class="item-input-wrapper">
+          <input type="search" placeholder="Search" data-width="full" ng-model = "SearchQuery">
+          <i class="icon ion-ios-search-strong placeholder-icon"></i>
+         </label>
+      </div>
 
-        <!-- Lesons View -->
+      <!-- Lesons View -->
+      <div class="card lessons-view animate-fade-slide-in-left">
+         <div class="item item-text-wrap">
 
-        <div class="card lessons-view animate-fade-slide-in-left">
-          <div class="item item-text-wrap">
-
-            
-             <!--attachment list-->
-              <div class="container">
-                <div class="clearfix">
-
-                  <header class="p2 bright-blue bg-blue">
-                    <div class="container sm-table">
-                      <div class="sm-table-cell py4">
-                        <h1 class="h0 mt0 mb0 white inline">AngularJS PDF Viewer</h1>
-                        <a class="h0 button dark-gray" href="//github.com/winkerVSbecks/angular-pdf-viewer">github</a>
-                      </div>
-                    </div>
-                  </header>
-                  
-                  <pdf-viewer
-                    delegate-handle="my-pdf-container"
-                    url="pdfUrl"
-                    scale="1"
-                    show-toolbar="true"
-                    headers="{'x-you-know-whats-awesome': 'EVERYTHING'}"></pdf-viewer>
-                    
-
-                </div>
-              </div>
-                             
-                     
-                      <div class="list lessons animate-fade-slide-in-left">
-
-                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery | limitTo:3"  class="item item-icon-right"  ng-click="loadNewFile('{{Attachments.f_name}}')"> 
-                              <i class="icon ion-chevron-right"></i>
-                             {{Attachments.language}}              
-                            </a>  
-                      
-                    </div>
-                
-               
-
-
-                    <!--displaying lesson-->
-
-                    <div class="padding">        
-                      <p ng-bind-html="Lessons.content"></p>  
-                    </div>    
-
-                    <button class="button button-full button-positive" ng-click = "signoff(data)">
-                   Sign Off
-                   </button>
-
-
-          </div>
-        </div>
-
-    </ion-content>
+            <div class="list lessons animate-fade-slide-in-left">
+               <a ng-repeat="attachment in attachments | filter : SearchQuery | limitTo:3"  class="item item-icon-right"  ng-click="loadNewFile('{{attachment.f_name}}')"> 
+                <i class="icon ion-chevron-right"></i>
+                {{attachment.language}}              
+               </a>  
+            </div>
+            <!--displaying lesson-->
+            <div class="padding">
+              <p ng-bind-html="lesson.content"></p>
+            </div>
+            <button class="button button-full button-positive" ng-click = "signoff()">
+            Sign Off
+            </button>
+         </div>
+      </div>
+   </ion-content>
 </ion-view>
