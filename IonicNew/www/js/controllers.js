@@ -338,6 +338,7 @@ angular.module('starter.controllers', [])
     var WebinarId = $stateParams.id;
     $scope.webinars = WebinarService.get(WebinarId);
 
+
     $scope.signoff = function() {
 
         $state.go('app.signoff');
@@ -371,10 +372,12 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
+
     $scope.signoff = function() {
 
         $state.go('app.signoff');
     };
+
 
     //documentations list
     DocumentationService.all().then(function(data) {
@@ -422,10 +425,12 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
+
     $scope.signoff = function() {
 
         $state.go('app.signoff');
     };
+
 
     //Inspection Report list
     InspectionReportService.all().then(function(data) {
@@ -474,10 +479,12 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
+
     $scope.signoff = function() {
 
         $state.go('app.signoff');
     };
+
 
     //Logs list
     LogService.all().then(function(data) {
@@ -525,11 +532,13 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
+
     //signoff button redirect
     $scope.signoff = function() {
 
         $state.go('app.signoff');
     };
+
 
     //Logs list
     TrainingRecordService.all().then(function(data) {
@@ -584,10 +593,12 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
     });
 
+
     $scope.signoff = function() {
 
         $state.go('app.signoff');
     };
+
 
     //forms content
     FormService.content().then(function(data) {
@@ -680,6 +691,7 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
 
     });
+
 
 
 
