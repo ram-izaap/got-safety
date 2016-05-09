@@ -2,26 +2,48 @@
     <ion-content ng-class="{expanded:$scope.isExpanded}">
 
     <form>
-       <h4>Name and Signature Required / Nombre y Firma Requerida</h4>   
       
-       <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )">
-       </typeahead>
+
+      <div class="card">
+        <div class="item item-text-wrap person_name">
+            
+            <p> 
+              <b> Name and Signature Required / Nombre y Firma Requerida </b> 
+            </p>
+            
+            <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )"> </typeahead>
+            
+              <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
+
+              <p> <b> Draw your signature/Dibuja tu firma </b> </p>
+
+              <div class="sign-pad">
+                <canvas id='signature-pad'></canvas>
+              </div>
+
+              <div class="button-bar custom-buton-bar">               
+                <button class="button button-clear button-positive" id = "save"> save </button>
+                <button class="button button-clear button-assertive" id = "clear"> Clear  </button>
+              </div>
+
+              <div>
+                <small>
+                  Signing and Clicking this button indicates that I have received and understand this training material / Firmar y hacer clic en este botón indica que he recibido y entender este material de formación.        
+                </small>
+              </div>
+              
+
+        </div>  
+      </div>
+
    
-       <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
        
-       <h4>Draw your signature/Dibuja tu firma </h4>             
-       <canvas id='signature-pad' width='300' height='180' style='border: 1px solid black;'>      
-       </canvas>
        
-       <button class="button button-clear button-positive" id = "save">
-         save
-       </button>
+       
+       
 
-       <button class="button button-clear button-assertive" id = "clear">
-        Clear 
-      </button></br></br>
+      </br></br>
 
-     <h6> Signing and Clicking this button indicates that I have received and understand this training material / Firmar y hacer clic en este botón indica que he recibido y entender este material de formación.</h6>
 
       <button class="button button-small button-assertive" ng-click = "save(data)">
         I AGREE / ESTOY DE ACUERDO
