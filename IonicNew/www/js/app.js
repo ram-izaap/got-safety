@@ -1,91 +1,48 @@
 // Ionic Starter App
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter.constants', [])
-    .constant('apiUrl', 'http://localhost/got-safety/service/');
+angular.module('starter.constants',[])  
+  .constant('apiUrl', 'http://localhost/got_safety/api');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services', 'pdf'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','TreeWidget'])
 
-.constant('AUTH_EVENTS', {
-    notAuthenticated: 'auth-not-authenticated'
-})
+    .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
-
-
-.directive("navigateTo", function($ionicGesture, broadcast) {
-    return {
-        restrict: 'A',
-        link: function($scope, $element, $attr) {
-            var tapHandler = function(e) {
+    .directive("navigateTo", function($ionicGesture, broadcast){
+        return{
+            restrict: 'A',
+            link: function($scope, $element, $attr){
+              var tapHandler = function(e){
 
                 if (ionic.Platform.isAndroid() && $attr.navigateTo.indexOf("youtube.com") != -1) {
-                    var inAppBrowser = window.open(encodeURI($attr.navigateTo), '_system', 'location=yes');
+                  var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_system','location=yes');
                 } else {
-                    var inAppBrowser = window.open(encodeURI($attr.navigateTo), '_blank', 'location=yes');
+                  var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_blank','location=yes');
                 }
+                
+                inAppBrowser.addEventListener('exit', function(event) { inAppBrowser.close(); });
 
-                inAppBrowser.addEventListener('exit', function(event) {
-                    inAppBrowser.close();
-                });
+              };
 
-            };
+              var tapGesture = $ionicGesture.on('tap', tapHandler, $element);
 
-            var tapGesture = $ionicGesture.on('tap', tapHandler, $element);
+              $scope.$on(broadcast.events.onPause, function (event) {
+                  inAppBrowser.close();
+              });
 
-            $scope.$on(broadcast.events.onPause, function(event) {
-                inAppBrowser.close();
-            });
-
-            $scope.$on('$destroy', function() {
+              $scope.$on('$destroy', function(){
                 $ionicGesture.off(tapGesture, 'tap', tapHandler);
-            });
-        }
-    };
-})
-
-.directive('typeahead', function($timeout) {
-    return {
-        restrict: 'AEC',
-        scope: {
-            items: '=',
-            prompt: '@',
-            title: '@',
-            subtitle: '@',
-            model: '=',
-            onSelect: '&',
-            details: '='
-        },
-
-        link: function(scope, elem, attrs) {
-            scope.handleSelection = function(selectedItem) {
-                scope.model = selectedItem.employee_name;
-                scope.details = selectedItem;
-                scope.current = 0;
-                scope.selected = true;
-                $timeout(function() {
-                    scope.onSelect( );
-                }, 200);
-            };
-            scope.current = 0;
-            scope.selected = true;
-            scope.isCurrent = function(index) {
-                return scope.current == index;
-            };
-            scope.setCurrent = function(index) {
-                scope.current = index;
-            };
-
-        },
-        templateUrl: 'templates/typeahead_template.html'
-
-    }
-})
+              });
+            }
+        };
+    })
 
 
 
-.run(function($ionicPlatform, $http, $rootScope, $state, AuthService, AUTH_EVENTS) {
+.run(function($ionicPlatform,$http,$rootScope, $state, AuthService, AUTH_EVENTS) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -97,24 +54,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             StatusBar.styleDefault();
         }
 
-        $rootScope.$on('$stateChangeStart', function(event, next, nextParams, fromState) {
-
-            if (!AuthService.isAuthenticated()) {
-                if (next.name !== 'app.login') {
-                    event.preventDefault();
-                    $state.go('app.login');
-                }
-            }
-
+        $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+          
+          if (!AuthService.isAuthenticated()) 
+          {
+              if (next.name !== 'app.login') 
+              {
+                event.preventDefault();
+                $state.go('app.login');
+              }
+          }
+          
 
         });
 
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $sceDelegateProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider) {
 
-    //youtube vedio access
+      //youtube vedio access
     $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
 
     // Turn off caching for demo simplicity's sake
@@ -133,7 +92,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         controller: 'AppCtrl'
     })
 
-
+   
     .state('app.login', {
         url: '/login',
         views: {
@@ -141,69 +100,57 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl'
             }
-
+           
         }
     })
 
 
 
-    .state('app.signoff', {
-        url: '/signoff:id',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/signoff.html',
-                controller: 'signoffCtrl'
-            }
+     .state('app.safetyLessons', {
+    url: '/safetyLessons',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/safetyLessons.html',
+        controller: 'safetyLessonsCtrl'
+      }
+    }
+  })
 
-        }
-    })
+    
+  .state('app.lessonView', 
+  {
+    url: '/lessonView/:id',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/lessonView.html',
+      controller: 'LessonViewCtrl'
+      }
+     } 
 
-
-
-    .state('app.safetyLessons', {
-        url: '/safetyLessons',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/safetyLessons.html',
-                controller: 'safetyLessonsCtrl'
-            }
-        }
-    })
-
-
-    .state('app.lessonView', {
-        url: '/lessonView/:id',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/lessonView.html',
-                controller: 'LessonViewCtrl'
-            }
-        }
-
-    })
+  })
 
 
-    .state('app.webinars', {
-        url: '/webinars',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/webinars.html',
-                controller: 'WebinarsCtrl'
-            }
-        }
-    })
+  .state('app.webinars', {
+    url: '/webinars',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/webinars.html',
+        controller: 'WebinarsCtrl'
+      }
+    }
+  })
 
-    .state('app.webinarView', {
-        url: '/webinarView/:id',
-        views: {
-            'menuContent': {
+  .state('app.webinarView', {
+    url: '/webinarView/:id',
+    views: {
+      'menuContent': {
                 templateUrl: 'templates/webinarView.html',
                 controller: 'WebinarsViewCtrl'
+              }
             }
-        }
-    })
+  })
 
-
+   
 
     .state('app.forms', {
         url: '/forms',
@@ -214,7 +161,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         }
     })
-
+    
     .state('app.documentation', {
         url: '/documentation',
         views: {
@@ -225,7 +172,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.report', {
+       .state('app.report', {
         url: '/report',
         views: {
             'menuContent': {
@@ -235,7 +182,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.logs', {
+       .state('app.logs', {
         url: '/logs',
         views: {
             'menuContent': {
@@ -245,7 +192,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.records', {
+         .state('app.records', {
         url: '/records',
         views: {
             'menuContent': {
@@ -255,47 +202,52 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.SafetyPosters', {
-        url: '/SafetyPosters',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/SafetyPosters.html',
-                controller: 'SafetyPostersCtrl'
-            }
-        }
-    })
+       .state('app.SafetyPosters', {
+    url: '/SafetyPosters',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/SafetyPosters.html',
+        controller: 'SafetyPostersCtrl'
+      }
+    }
+  })
 
+    
+  .state('app.SafetyPosterView', 
+  {
+    url: '/SafetyPosterView/:id',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/SafetyPosterView.html',
+      controller: 'SafetyPosterViewCtrl'
+      }
+     } 
 
-    .state('app.SafetyPosterView', {
-        url: '/SafetyPosterView/:id',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/SafetyPosterView.html',
-                controller: 'SafetyPosterViewCtrl'
-            }
-        }
+  })
+  
+  
+  .state('app.repositorytree', 
+  {
+    url: '/repositorytree',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/repository_tree.html',
+      controller: 'OptionsTreeController'
+      }
+     } 
 
-    })
+  })
+
 
 
 
 
     // if none of the above states are matched, use this as the fallback
-    var user_id = window.localStorage.getItem("user_id");
-
-    if( user_id )
-    {
-        $urlRouterProvider.otherwise('/app/safetyLessons');
-    }
-    else
-    {
-        $urlRouterProvider.otherwise('/app/login');
-    }
-    
+    $urlRouterProvider.otherwise('/app/login');
 
     //$ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
-    $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS
-    $ionicConfigProvider.navBar.alignTitle("center");
-    $ionicConfigProvider.tabs.style("standard");
+  $ionicConfigProvider.tabs.position("bottom"); //Places them at the bottom for all OS
+  $ionicConfigProvider.navBar.alignTitle("center");
+  $ionicConfigProvider.tabs.style("standard");
 
 });

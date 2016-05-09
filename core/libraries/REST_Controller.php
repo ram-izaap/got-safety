@@ -2178,9 +2178,9 @@ abstract class REST_Controller extends CI_Controller {
         // If we want to allow any domain to access the API
         if ($this->config->item('allow_any_cors_domain') === true)
         {
-            //header('Access-Control-Allow-Origin: *');
-            //header('Access-Control-Allow-Headers: ' . $allowed_headers);
-            //header('Access-Control-Allow-Methods: ' . $allowed_methods);
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Headers: ' . $allowed_headers);
+            header('Access-Control-Allow-Methods: ' . $allowed_methods);
         }
         // We're going to allow only certain domains access
         else
