@@ -21,7 +21,7 @@
 					
 					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
 						
-						<a href="<?php echo base_url('signoff/bulk_export'); ?>" >Search Export </a>
+						<a class="pull-right" href="<?php echo base_url('signoff/bulk_export'); ?>" >Search Export </a>
 						
 					<?php } ?> 
                 
