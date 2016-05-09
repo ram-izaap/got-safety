@@ -1,4 +1,4 @@
-<ion-view view-title="{{Posters.title}}">
+<ion-view view-title="{{poster.title}}">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         
         <!-- Search bar -->
@@ -46,9 +46,9 @@
                      
                       <div class="list lessons animate-fade-slide-in-left">
 
-                            <a ng-repeat="Attachments in Attachment | filter : SearchQuery"  class="item item-icon-right" ng-click="loadNewFile('{{Attachments.poster1}}')"> 
+                            <a ng-repeat="attachment in attachments | filter : SearchQuery"  class="item item-icon-right" ng-click="loadNewFile('{{attachment.poster1}}')"> 
                               <i class="icon ion-chevron-right"></i>
-                             {{Attachments.language}}              
+                             {{attachment.language}}              
                             </a>  
                       
                     </div>
@@ -58,7 +58,7 @@
                     <!--displaying poster-->
 
                     <div class="padding">        
-                      <p ng-bind-html="Posters.content"></p>  
+                      <p ng-bind-html="poster.content"></p>  
                     </div>    
 
 

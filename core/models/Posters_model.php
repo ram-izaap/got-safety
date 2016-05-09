@@ -116,7 +116,7 @@ class Posters_model extends App_Model {
         $this->db->select();
         $this->db->from($table_name);
         $this->db->where($where);
-        $this->db->or_where('all',1);
+        $this->db->or_where('visible_to_all',1);
         $result = $this->db->get();
         return $result->result_array();
 		

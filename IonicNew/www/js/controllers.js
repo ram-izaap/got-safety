@@ -212,22 +212,25 @@ angular.module('starter.controllers', [])
 .controller('LessonViewCtrl', function($scope, $stateParams, $state, $window, $http, safetyLessons, $ionicLoading) {
     
     var lesson_id = $stateParams.id;
-    $scope.lesson = safetyLessons.getLesson( lesson_id );
+    $scope.lesson = safetyLessons.getLessonId( lesson_id );
 
     console.log($scope.lesson);
-    safetyLessons.getAttachment( lesson_id ).then(function(data) {
+    safetyLessons.getAttachment( lesson_id ).then(function(data) 
+    {
         $scope.attachments = data;
         console.log($scope.attachments);
 
     });
 
-    $scope.signoff = function() {
+    $scope.signoff = function()
+    {
         $state.go('app.signoff',{id:lesson_id});
     };
 
 
     //open pdf in  browser
-    $scope.OpenLink = function(link) {
+    $scope.OpenLink = function(link)
+    {
 
         window.open(link, '_blank', 'location=yes');
 
@@ -239,14 +242,14 @@ angular.module('starter.controllers', [])
 
     var lesson_id = $stateParams.id,
         client_id = window.localStorage.getItem('client_id'),
-        user_id = window.localStorage.getItem('user_id');
+        user_id   = window.localStorage.getItem('user_id');
       
     //list of employee and their id from service
     employeeDetails.getEmployees( client_id ).then(function( response ) {
         $scope.employees = response;
     });
 
-    //Autosuggest of employee name
+    //Autosuggest(typeahead) of employee name
     $scope.default_th_search = '';
     $scope.sel_employee = {};
     
@@ -289,7 +292,7 @@ angular.module('starter.controllers', [])
           return false; 
         }
         
-        employeeDetails.saveSign( lesson_id, $scope.sel_employee.id ).then(function(result) {
+        employeeDetails.trainingComplete( lesson_id, $scope.sel_employee.id ).then(function(result) {
             alert(result.message);
         });
     }
@@ -332,11 +335,9 @@ angular.module('starter.controllers', [])
 
 .controller('WebinarsViewCtrl', function($scope, $state, $stateParams, $http, WebinarService, $ionicLoading) {
     //single webinar view
-    $ionicLoading.show({
-        noBackdrop: true
-    });
+    //$ionicLoading.show({     noBackdrop: true  });
     var WebinarId = $stateParams.id;
-    $scope.webinars = WebinarService.get(WebinarId);
+    $scope.webinar = WebinarService.getwebinarId(WebinarId);
 
 
     $scope.signoff = function() {
@@ -619,7 +620,7 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('SafetyPostersCtrl', function($scope, $stateParams, $state, $timeout, ionicMaterialMotion, ionicMaterialInk, SafetyPosters, $ionicPopup, $ionicLoading) {
+.controller('safetyPostersCtrl', function($scope, $stateParams, $state, $timeout, ionicMaterialMotion, ionicMaterialInk, safetyPosters, $ionicPopup, $ionicLoading) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
@@ -671,8 +672,8 @@ angular.module('starter.controllers', [])
 
 
     // list of safety posters
-    SafetyPosters.all().then(function(data) {
-        $scope.Posters = data;
+    safetyPosters.all().then(function(data) {
+        $scope.posters = data;
         $ionicLoading.hide();
 
 
@@ -681,24 +682,21 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('SafetyPosterViewCtrl', function($scope, $stateParams, $state, $window, $http, SafetyPosters, $ionicLoading) {
-    var PosterId = $stateParams.id;
-    $scope.Posters = SafetyPosters.GetPoster(PosterId);
+.controller('safetyPosterViewCtrl', function($scope, $stateParams, $state, $window, $http, safetyPosters, $ionicLoading) {
+    var poster_id =  $stateParams.id;
+    $scope.poster = safetyPosters.getPosterId( poster_id );
 
     //safety poster attachment
-    SafetyPosters.GetAttachment().then(function(data) {
-        $scope.Attachment = data;
-        $ionicLoading.hide();
+     console.log($scope.poster);
+    safetyPosters.getAttachment( poster_id ).then(function(data) {
+        $scope.attachments = data;
+        console.log($scope.attachments);
 
     });
 
+    
 
 
-
-    $scope.signoff = function() {
-
-        $state.go('app.signoff');
-    };
 
     //open pdf in  browser
     $scope.OpenLink = function(link) {

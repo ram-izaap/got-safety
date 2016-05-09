@@ -35,10 +35,38 @@ class Api_model extends App_Model {
 		
 	}
 
-	function get_attachments( $lesson_id = 0 )
+	function get_lesson_attachments( $lesson_id = 0 )
     {
 		$result = $this->db->get_where('lession_attachment', array("lession_id" => $lesson_id,"is_active" => 1) );
         return $result->result_array();
+	}
+
+	 function get_posters( $client_id  = 0 )
+    {
+			
+	    $date = date('Y-m-d');		
+    	$sql = "SELECT * FROM posters 
+    				WHERE ( created_user = '{$client_id}' OR visible_to_all = '1' )";
+
+    	return $this->db->query( $sql )->result_array();
+		
+	}
+
+	function get_poster_attachments( $poster_id = 0 )
+    {
+		$result = $this->db->get_where('posters_attachment', array("poster_id" => $poster_id,"is_active" => 1) );
+        return $result->result_array();
+	}
+
+	 function get_webinars( $client_id  = 0 )
+    {
+			
+	    $date = date('Y-m-d');		
+    	$sql = "SELECT * FROM webinars 
+    				WHERE ( created_user = '{$client_id}' OR visible_to_all = '1' )";
+
+    	return $this->db->query( $sql )->result_array();
+		
 	}
 
 	function get_employees( $client_id = 0 )
@@ -114,7 +142,7 @@ class Api_model extends App_Model {
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where($where);
-		 $this->db->or_where('all',1);
+		 $this->db->or_where('visible_to_all',1);
 		$this->db->order_by('created_date','DESC');
 		$query = $this->db->get()->result_array();
 		return $query;
@@ -170,7 +198,7 @@ class Api_model extends App_Model {
 		$this->db->select('*');
 		$this->db->from($table_name);
 		$this->db->where($where);
-		 $this->db->or_where('all',1);
+		 $this->db->or_where('visible_to_all',1);
 		$this->db->order_by('created_date','DESC');
 		$query = $this->db->get()->result_array();
 		return $query;

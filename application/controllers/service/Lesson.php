@@ -50,7 +50,7 @@ class Lesson extends REST_Controller {
 			$output = array();
 
 			$lesson_id = $this->get('lesson_id');
-			$attachments = $this->api_model->get_attachments( $lesson_id );
+			$attachments = $this->api_model->get_lesson_attachments( $lesson_id );
 
 			$output['status'] 	= 'SUCCESS';
 			$output['attachments'] 	= $attachments;

@@ -55,7 +55,7 @@ angular.module('starter.services', [])
                     if( user_data.status != undefined && user_data.status == 'SUCCESS' )
                     {
 
-                      //store userid and created id in localstorage
+                      //store userid and clientid in localstorage
                       window.localStorage.setItem("user_id", user_data.id);
                       window.localStorage.setItem("client_id", user_data.created_id);
 
@@ -124,8 +124,7 @@ angular.module('starter.services', [])
 
     var lessons = [];
     var Attachment = [];
-    //var SpanishAttachment = [];
-    //var EnglishAttachment = [];
+   
 
 
 
@@ -148,7 +147,7 @@ angular.module('starter.services', [])
 
         },
 
-        getLesson: function(LessonId) {
+       getLessonId: function(LessonId) {
 
             for (var i = 0; i < lessons.length; i++) {
                 if (lessons[i].id == LessonId) {
@@ -156,9 +155,9 @@ angular.module('starter.services', [])
 
                 }
 
-            };
-            window.localStorage.setItem("lessonid", LessonId);
-        },
+           };
+           // window.localStorage.setItem("lessonid", LessonId);
+       }, 
 
         getAttachment: function( lesson_id ) {
             
@@ -185,46 +184,45 @@ angular.module('starter.services', [])
 //service for webinars
 .factory('WebinarService', function($http, apiUrl) {
 
-    var webinars = [];
+
+
     return {
+
         all: function() {
+            var client_id = window.localStorage.getItem("client_id");
 
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+            return $http.get(apiUrl + 'webinars/list?client_id=' + client_id).then(function(response) {
+                var data =response.data;
+               // alert(data);
 
-            return $http.get(apiUrl + '/get_user_webinars_list?created_id=' + C_id + '&user_id=' + U_id + '').then(function(response) {
-                var webinars_array = response.data;
-                var usr = webinars_array.user;
-
-                if (usr.length > 0) {
-                    for (var j = 0; j < usr.length; j++) {
-                        webinars[j] = usr[j];
-                    }
+                if( data.webinars != undefined )
+                {
+                    webinars = data.webinars;
                 }
 
                 return webinars;
-
 
             });
 
         },
 
-        get: function(WebinarId) {
-            for (var i = 0; i < webinars.length; i++) {
-                if (webinars[i].id == WebinarId) {
+       getwebinarId: function(webinarId) {
 
+            for (var i = 0; i < webinars.length; i++) {
+                if (webinars[i].id == webinarId) {
                     return webinars[i];
 
                 }
 
-            };
-
-
-        },
-
+           };
+           // window.localStorage.setItem("lessonid", LessonId);
+       }
     };
 
 })
+
+
+
 
 
 //service for documentation
@@ -238,7 +236,7 @@ angular.module('starter.services', [])
             var C_id = window.localStorage.getItem("Createdid");
             var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=document').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=document').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.user;
@@ -263,7 +261,7 @@ angular.module('starter.services', [])
         //documentation content
         content: function() {
 
-            return $http.get(apiUrl + '/get_content?type=5').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_content?type=5').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -293,7 +291,7 @@ angular.module('starter.services', [])
             var C_id = window.localStorage.getItem("Createdid");
             var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=report').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=report').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.user;
@@ -318,7 +316,7 @@ angular.module('starter.services', [])
         //Report content
         content: function() {
 
-            return $http.get(apiUrl + '/get_content?type=1').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_content?type=1').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -349,7 +347,7 @@ angular.module('starter.services', [])
             var C_id = window.localStorage.getItem("Createdid");
             var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=record').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=record').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.user;
@@ -374,7 +372,7 @@ angular.module('starter.services', [])
         //records content
         content: function() {
 
-            return $http.get(apiUrl + '/get_content?type=4').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_content?type=4').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -404,7 +402,7 @@ angular.module('starter.services', [])
             var C_id = window.localStorage.getItem("Createdid");
             var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=log').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=log').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.user;
@@ -428,7 +426,7 @@ angular.module('starter.services', [])
         //log content
         content: function() {
 
-            return $http.get(apiUrl + '/get_content?type=3').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_content?type=3').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -458,7 +456,7 @@ angular.module('starter.services', [])
             var C_id = window.localStorage.getItem("Createdid");
             var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + '/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=forms').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=forms').then(function(response) {
 
                 var Forms_arr = response.data;
                 var usr = Forms_arr.user;
@@ -483,7 +481,7 @@ angular.module('starter.services', [])
 
         content: function() {
 
-            return $http.get(apiUrl + '/get_content?type=5').then(function(response) {
+            return $http.get('http://localhost/got-safety/api/get_content?type=5').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -503,29 +501,25 @@ angular.module('starter.services', [])
 
 
 //service for safety posters 
-.factory('SafetyPosters', function($http, apiUrl) {
+.factory('safetyPosters', function($http, apiUrl) {
 
     var posters = [];
     var Attachment = [];
+   
 
 
 
     return {
 
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+            var client_id = window.localStorage.getItem("client_id");
 
-            return $http.get(apiUrl + '/get_user_posters_list?created_id=' + C_id + '&user_id=' + U_id + '').then(function(response) {
-                var posters_array = response.data;
-                var usr = posters_array.user;
+            return $http.get(apiUrl + 'Poster/list?client_id=' + client_id).then(function(response) {
+                var data = response.data;
 
-
-                if (usr.length > 0) {
-                    for (var j = 0; j < usr.length; j++) {
-                        //alert(usr[1].id);                               
-                        posters[j] = usr[j];
-                    }
+                if( data.posters != undefined )
+                {
+                    posters = data.posters;
                 }
 
                 return posters;
@@ -534,7 +528,7 @@ angular.module('starter.services', [])
 
         },
 
-        GetPoster: function(PosterId) {
+       getPosterId: function(PosterId) {
 
             for (var i = 0; i < posters.length; i++) {
                 if (posters[i].id == PosterId) {
@@ -542,34 +536,26 @@ angular.module('starter.services', [])
 
                 }
 
-            };
-            window.localStorage.setItem("posterid", PosterId);
-        },
+           };
+           // window.localStorage.setItem("lessonid", LessonId);
+       }, 
 
+        getAttachment: function( poster_id ) {
+            
 
-        GetAttachment: function() {
-            var Posterid = window.localStorage.getItem("posterid");
+            return $http.get(apiUrl + 'Poster/attachment?poster_id=' + poster_id ).then(function(response) {
+                var data = response.data;
 
-            return $http.get(apiUrl + '/get_posters_attachment?poster_id=' + Posterid).then(function(response) {
-                var attachment_array = response.data;
-
-                var usr = attachment_array.user;
-
-
-                if (usr.length > 0) {
-                    for (var j = 0; j < usr.length; j++) {
-                        Attachment[j] = usr[j];
-                    }
+                if( data.attachments == undefined )
+                {
+                  return [];
                 }
 
-                return Attachment;
+                return data.attachments;
 
             });
 
-        },
-
-
-
+        }
     };
 
 })

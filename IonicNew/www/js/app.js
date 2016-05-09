@@ -5,12 +5,16 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter.constants', [])
     .constant('apiUrl', 'http://localhost/got-safety/service/');
+   // angular.module('starter.constant', [])
+     
 
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services', 'pdf'])
 
 .constant('AUTH_EVENTS', {
     notAuthenticated: 'auth-not-authenticated'
 })
+
+
 
 
 
@@ -255,23 +259,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
         }
     })
 
-    .state('app.SafetyPosters', {
-        url: '/SafetyPosters',
+    .state('app.safetyPosters', {
+        url: '/safetyPosters',
         views: {
             'menuContent': {
-                templateUrl: 'templates/SafetyPosters.html',
-                controller: 'SafetyPostersCtrl'
+                templateUrl: 'templates/safetyPosters.html',
+                controller: 'safetyPostersCtrl'
             }
         }
     })
 
 
-    .state('app.SafetyPosterView', {
-        url: '/SafetyPosterView/:id',
+    .state('app.safetyPosterView', {
+        url: '/safetyPosterView/:id',
         views: {
             'menuContent': {
-                templateUrl: 'templates/SafetyPosterView.html',
-                controller: 'SafetyPosterViewCtrl'
+                templateUrl: 'templates/safetyPosterView.html',
+                controller: 'safetyPosterViewCtrl'
             }
         }
 
