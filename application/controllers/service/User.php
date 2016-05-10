@@ -75,6 +75,59 @@ class User extends REST_Controller {
 		
 	} 
    
+
+   	public function docs_get()
+	{
+		
+		try
+		{
+			$output = array();
+
+			$client_id 	= $this->get('client_id');
+			$type 		= $this->get("type");
+
+			switch ( $type ) 
+			{
+				case 'report':
+					$table = "inspection_reports";
+					$folder = "inspection_reports";
+					break;
+				case 'document':
+					$table = "cal_osha";
+					$folder = "call_osha";
+					break;
+				default:
+					$table = "inspection_reports";
+					$folder = "inspection_reports";
+					break;
+			}
+
+
+			$docs = $this->api_model->get_docs( $table, array("created_user" => $client_id,"is_display" => 1) );
+
+			$updated_docs = array();
+			foreach ($docs as $k => $row) 
+			{
+				$row['url'] = get_img_dir().'assets/images/frontend/'.$folder.'/'.$row['pdf_file'];
+				$updated_docs[$k] = $row;
+			}
+			
+			$output['status'] 	= 'SUCCESS';
+			$output['docs'] 	= $updated_docs;
+
+			$this->response( $output, 200);
+		}
+		catch( Exception $e)
+		{
+
+			$output['message'] = $e->getMessage();
+			$output['status'] = 'ERROR';
+
+			$this->response($output,200);
+		}
+		
+		
+	}
 	
 }
 ?>
