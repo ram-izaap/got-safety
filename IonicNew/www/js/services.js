@@ -51,7 +51,7 @@ angular.module('starter.services', [])
                 .then(function(response) 
                 {
                     var user_data = response.data;
-                    console.log(user_data);
+                    //console.log(user_data);
                     if( user_data.status != undefined && user_data.status == 'SUCCESS' )
                     {
 
@@ -122,7 +122,7 @@ angular.module('starter.services', [])
 //service for safety lessons
 .factory('safetyLessons', function($http, apiUrl) {
 
-    var lessons = [];
+    var lessons    = [];
     var Attachment = [];
    
 
@@ -184,7 +184,7 @@ angular.module('starter.services', [])
 //service for webinars
 .factory('WebinarService', function($http, apiUrl) {
 
-
+    var webinars = [];
 
     return {
 
@@ -192,7 +192,7 @@ angular.module('starter.services', [])
             var client_id = window.localStorage.getItem("client_id");
 
             return $http.get(apiUrl + 'webinars/list?client_id=' + client_id).then(function(response) {
-                var data =response.data;
+                var data = response.data;
                // alert(data);
 
                 if( data.webinars != undefined )
