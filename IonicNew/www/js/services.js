@@ -600,4 +600,32 @@ angular.module('starter.services', [])
 
     }
 
+})
+
+/* Repository Tree  */
+
+.factory('RepositoryService', function($http, apiUrl)
+ {
+
+  return {
+              //list of reports
+              all: function() 
+              {
+                   
+
+                    return $http.get(apiUrl+'Api/repository?client_name=client').then(function(response)
+                    {
+                      var data = response.data;
+                      
+                     
+                        return data; 
+                        
+
+                    });
+                 
+              },
+             
+       
+     }; 
+
 });

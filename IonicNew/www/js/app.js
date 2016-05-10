@@ -7,7 +7,7 @@
 angular.module('starter.constants',[])  
   .constant('apiUrl', 'http://localhost/got-safety/service/');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf','TreeWidget'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
@@ -273,6 +273,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
       'menuContent': {
       templateUrl: 'templates/SafetyPosterView.html',
       controller: 'safetyPosterViewCtrl'
+      }
+     } 
+
+  })
+  
+  
+   .state('app.repositorytree', 
+  {
+    url: '/repositorytree',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/repository_tree.html',
+      controller: 'OptionsTreeController'
       }
      } 
 

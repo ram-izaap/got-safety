@@ -642,7 +642,7 @@ class Api extends REST_Controller {
 			}
 			
 			
-			$data = $this->api_model->get_menu_detail($table, array("created_user" => $created_id,"is_display" => 1));
+			$data = $this->api_model->get_menu_detail($table,array("created_user" => $created_id,"is_display" => 1));
 			$user = array();$i=0;
 			if(count($data) > 0){
 				foreach($data as $list){

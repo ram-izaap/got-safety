@@ -41,7 +41,19 @@ class Api_model extends App_Model {
         return $result->result_array();
 	}
 
-	 function get_posters( $client_id  = 0 )
+	function get_docs( $table_name, $where =array() )
+    {
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where($where);
+		 $this->db->or_where('visible_to_all',1);
+		$this->db->order_by('created_date','DESC');
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
+
+
+	function get_posters( $client_id  = 0 )
     {
 			
 	    $date = date('Y-m-d');		
@@ -74,6 +86,44 @@ class Api_model extends App_Model {
 		$result = $this->db->get_where('employee', array("created_user" => $client_id,"is_active" => 1) );
         return $result->result_array();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**  get all users list  **/
@@ -193,7 +243,7 @@ class Api_model extends App_Model {
 	}
 	
 	
-	 function get_menu_detail($table_name,$where)
+	function get_menu_detail($table_name,$where)
     {
 		$this->db->select('*');
 		$this->db->from($table_name);
