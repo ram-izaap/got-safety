@@ -135,6 +135,13 @@ p { color: #555; margin: 0 0 25px;}
 [data-id="name-filter"] .items:not(.ng-hide) .item { padding: 5px;}
 [data-id="name-filter"] .items:not(.ng-hide) .item .title:after { content: '»'; float:right; color:#ccc;}
 
+pdf-viewer-toolbar + canvas { max-width:100%; }
+
+
+.pdf-back i, .pdf-next i, .pdf-zoomin i, .pdf-zoomout i{ font-size:24px; line-height:48px }
+
+.pdf-pagin { background:#fff; margin-bottom:15px; padding:2px 5px; font-weight:bold; display:inline-block; max-width:120px; float:right }
+.pdf-pagin input { display: inline-block; margin:0px; width:inherit; padding:0; }
 
 
 /* 
