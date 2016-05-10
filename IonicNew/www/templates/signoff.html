@@ -11,7 +11,7 @@
               <b> Name and Signature Required / Nombre y Firma Requerida </b> 
             </p>
             
-            <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )"> </typeahead>
+            <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )" data-id="name-filter"> </typeahead>
             
               <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
 
@@ -31,28 +31,14 @@
                   Signing and Clicking this button indicates that I have received and understand this training material / Firmar y hacer clic en este botón indica que he recibido y entender este material de formación.        
                 </small>
               </div>
-              
+
+              </br></br>
+
+              <button class="button button-full button-danger" ng-click = "save(data)"> I Agree / Estoy De Acuerdo </button>
+
 
         </div>  
       </div>
-
-   
-<<<<<<< HEAD
-    
-=======
->>>>>>> 1d7b0a6a048d4bb9ae27acd8e3a0f9ea09025d9e
-       
-       
-       
-       
-
-      </br></br>
-
-
-      <button class="button button-small button-assertive" ng-click = "save(data)">
-        I AGREE / ESTOY DE ACUERDO
-      </button>
-
      </form>
 
 
