@@ -87,6 +87,7 @@ angular.module("pdf", []).service("pdfDelegate", delegateService(["prev", "next"
 }]), angular.module("pdf").directive("pdfViewerToolbar", ["pdfDelegate", function(e) {
     return {
         restrict: "E",
+        template: '<div class="clearfix pdf-wrapper"><div class="button-bar bar-assertive"><a href=""ng-click="prev()"class="button pdf-back"><i class="ion-arrow-left-c"></i></a><a href=""ng-click="next()"class="button pdf-next"><i class="ion-arrow-right-c"></i></a> <a href=""ng-click="zoomIn()"class="button pdf-zoomin"><i class="ion-ios-plus-outline"></i></a><a href=""ng-click="zoomOut()"class="button pdf-zoomout"><i class="ion-ios-minus-outline"></i></a></div><div class="pdf-pagin">Page <input type="text" class="field-dark" min=1 ng-model="currentPage" ng-change="goToPage()" style="width: 10%">  / {{pageCount}}</div></div>',
         scope: {
             pageCount: "="
         },
