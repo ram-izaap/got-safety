@@ -222,11 +222,39 @@ angular.module('starter.services', [])
 })
 
 
+.factory('DocumentationService', function($http, apiUrl) {
+  
+  //var documents = [];
+    return {
 
+            all: function()
+            {
+                var client_id = window.localStorage.getItem("client_id");
+
+                return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=document' ).then(function(response) {
+                    var data = response.data.docs;
+                    
+                     if( data.docs != undefined )
+                    {
+                        documents = data.docs;
+                    }
+
+                    return documents;
+                   
+                });
+
+            }
+
+     
+
+        }
+    
+
+})
 
 
 //service for documentation
-.factory('DocumentationService', function($http, apiUrl) {
+.factory('DService', function($http, apiUrl) {
 
     var Documentations = [];
 

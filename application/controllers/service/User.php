@@ -89,18 +89,33 @@ class User extends REST_Controller {
 			switch ( $type ) 
 			{
 				case 'report':
-					$table = "inspection_reports";
+					$table  = "inspection_reports";
 					$folder = "inspection_reports";
 					break;
 				case 'document':
-					$table = "cal_osha";
+					$table  = "cal_osha";
 					$folder = "call_osha";
 					break;
+
+				case 'log':
+					$table  = "logs";
+					$folder = "logs";
+					break;
+
+				case 'record':
+					$table  = "records";
+					$folder = "records";
+					break;
+
+				case 'forms':
+					$table  = "safety_forms";
+					$folder = "safety_forms";
+					break;
 				default:
-					$table = "inspection_reports";
-					$folder = "inspection_reports";
+					return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
 					break;
 			}
+
 
 
 			$docs = $this->api_model->get_docs( $table, array("created_user" => $client_id,"is_display" => 1) );
@@ -121,7 +136,7 @@ class User extends REST_Controller {
 		{
 
 			$output['message'] = $e->getMessage();
-			$output['status'] = 'ERROR';
+			$output['status']  = 'ERROR';
 
 			$this->response($output,200);
 		}

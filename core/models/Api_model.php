@@ -70,6 +70,7 @@ class Api_model extends App_Model {
         return $result->result_array();
 	}
 
+
 	 function get_webinars( $client_id  = 0 )
     {
 			
