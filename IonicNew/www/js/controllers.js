@@ -241,6 +241,7 @@ angular.module('starter.controllers', [])
 .controller('signoffCtrl', function($scope, $stateParams, $state, employeeDetails, $ionicPopup) {
 
     var lesson_id = $stateParams.id,
+
         client_id = window.localStorage.getItem('client_id'),
         user_id   = window.localStorage.getItem('user_id');
       
@@ -684,7 +685,7 @@ angular.module('starter.controllers', [])
 
 .controller('safetyPosterViewCtrl', function($scope, $stateParams, $state, $window, $http, safetyPosters, $ionicLoading) {
     var poster_id =  $stateParams.id;
-    $scope.poster = safetyPosters.getPosterId( poster_id );
+    $scope.poster =  safetyPosters.getPosterId( poster_id );
 
     //safety poster attachment
      console.log($scope.poster);

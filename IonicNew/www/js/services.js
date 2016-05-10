@@ -537,7 +537,7 @@ angular.module('starter.services', [])
                 }
 
            };
-           // window.localStorage.setItem("lessonid", LessonId);
+        
        }, 
 
         getAttachment: function( poster_id ) {
@@ -582,7 +582,7 @@ angular.module('starter.services', [])
             })
 
         },
-        saveSign: function( lesson_id, employee_id ) 
+        trainingComplete: function( lesson_id, employee_id ) 
         {
             var Empid = window.localStorage.getItem("empid");
             var lessonTitle = window.localStorage.getItem("Title");
