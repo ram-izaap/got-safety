@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://localhost/got-safety/service/');
+  .constant('apiUrl', 'http://localhost/got_safety/service/');
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf','TreeWidget'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
@@ -273,6 +273,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
       'menuContent': {
       templateUrl: 'templates/SafetyPosterView.html',
       controller: 'safetyPosterViewCtrl'
+      }
+     } 
+
+  })
+  
+  
+   .state('app.repositorytree', 
+  {
+    url: '/repositorytree',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/repository_tree.html',
+      controller: 'OptionsTreeController'
       }
      } 
 

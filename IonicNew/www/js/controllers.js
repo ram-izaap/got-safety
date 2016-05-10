@@ -705,4 +705,106 @@ angular.module('starter.controllers', [])
         window.open(link, '_blank', 'location=yes');
 
     };
-});
+})
+
+
+
+.controller('OptionsTreeController', ['$scope','RepositoryService', function ($scope,RepositoryService) {
+    function init() {
+		RepositoryService.all().then(function(data)
+		{
+			$scope.treeNodes = data; 
+			
+			  
+			
+		});
+        /*$scope.treeNodes = [
+    {
+        "name": "dummy.pdf",
+        "ext": "pdf",
+        "url": "admin/views/repository/files/client/dummy.pdf"
+    },
+    {
+        "name": "page1.png",
+        "ext": "png",
+        "url": "admin/views/repository/files/client/page1.png"
+    },
+    {
+        "name": "page2.png",
+        "ext": "png",
+        "url": "admin/views/repository/files/client/page2.png"
+    },
+    {
+        "name": "test",
+        "children": [
+            {
+                "name": "AllergyBeGone-WorkProgressReport.xlsx",
+                "ext": "xlsx",
+                "url": "admin/views/repository/files/client/test/AllergyBeGone-WorkProgressReport.xlsx"
+            },
+            {
+                "name": "SampleAudio_0.4mb.mp3",
+                "ext": "mp3",
+                "url": "admin/views/repository/files/client/test/SampleAudio_0.4mb.mp3"
+            },
+            {
+                "name": "dummy.pdf",
+                "ext": "pdf",
+                "url": "admin/views/repository/files/client/test/dummy.pdf"
+            },
+            {
+                "name": "page1.png",
+                "ext": "png",
+                "url": "admin/views/repository/files/client/test/page1.png"
+            },
+            {
+                "name": "test1.1",
+                "children": [
+                    {
+                        "name": "dummy.pdf",
+                        "ext": "pdf",
+                        "url": "admin/views/repository/files/client/test/test1.1/dummy.pdf"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "test2",
+        "children": [
+            {
+                "name": "dummy.pdf",
+                "ext": "pdf",
+                "url": "admin/views/repository/files/client/test2/dummy.pdf"
+            },
+            {
+                "name": "page1.png",
+                "ext": "png",
+                "url": "admin/views/repository/files/client/test2/page1.png"
+            }
+        ]
+    }
+]; */
+
+        $scope.options = { multipleSelect: true, showIcon: false };
+
+        $scope.options1 = { showIcon: true, expandOnClick: true };
+
+    }
+    init();
+
+    $scope.$on('selection-changed', function (e, nodes) {
+        if (nodes.length > 0) {
+            $scope.selectedNodes = nodes;
+        } else {
+            $scope.selectedNode = nodes;
+        }
+    });
+
+    $scope.$on('expanded-state-changed', function (e, node) {
+        // node - the node on which the expanded state changed
+        // to see the current state check the expanded property
+        $scope.exapndedNode = node;
+        //console.log(node.expanded);
+    });
+}]);
