@@ -375,23 +375,18 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 
 
-    $scope.signoff = function() {
-
-        $state.go('app.signoff');
-    };
-
 
     //documentations list
     DocumentationService.all().then(function(data) {
-        $scope.Documentations = data;
+        $scope.documentations = data;
         $ionicLoading.hide();
     })
 
     //documentation content
-    DocumentationService.content().then(function(data) {
+   /* DocumentationService.content().then(function(data) {
         $scope.content = data;
         $ionicLoading.hide();
-    });
+    });*/
 
     //open pdf in browser
     $scope.OpenLink = function(link) {

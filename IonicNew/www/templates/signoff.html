@@ -13,7 +13,6 @@
             
             <typeahead items="employees" prompt="type your name" title="employee_name"  model="default_th_search" details="sel_employee" on-select="onItemSelected( sel_employee )" data-id="name-filter"> </typeahead>
             
-              <input type="hidden" value = "{{userid}}"  ng-model="emp.id">
 
               <p> <b> Draw your signature/Dibuja tu firma </b> </p>
 
@@ -37,8 +36,6 @@
               <button class="button button-full button-danger" ng-click = "save(data)"> I Agree / Estoy De Acuerdo </button>
         </div>  
       </div>
-
-
         </div>  
       </div>
      </form>

@@ -1,4 +1,4 @@
-<ion-view view-title="Documentation">
+<ion-view view-title=" Cal/OSHA Documentation">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         
         <!-- Search bar -->
@@ -49,7 +49,7 @@
 
         <div class="list forms animate-fade-slide-in-left">
 
-          <a class="item item-icon-right" ng-repeat="Documentation in Documentations | filter : SearchQuery"  ng-click="loadNewFile('{{Documentation.url}}')">{{Documentation.title}}
+          <a class="item item-icon-right" ng-repeat="documentation in documentations | filter : SearchQuery"  ng-click="loadNewFile('{{documentation.url}}')">{{documentation.title}}
            <i class="icon ion-ios-arrow-right"></i> 
            </a>
         </div>
