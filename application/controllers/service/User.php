@@ -143,6 +143,12 @@ class User extends REST_Controller {
 		
 		
 	}
+
+
+	public function docs_content_get()
+	{
+		
+	}
 	
 }
 ?>

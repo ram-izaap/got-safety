@@ -379,7 +379,6 @@ angular.module('starter.controllers', [])
     //documentations list
     DocumentationService.all().then(function(data) {
         $scope.documentations = data;
-        console.log($scope.documentations);
         $ionicLoading.hide();
     })
 

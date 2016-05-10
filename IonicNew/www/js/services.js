@@ -224,7 +224,7 @@ angular.module('starter.services', [])
 
 .factory('DocumentationService', function($http, apiUrl) {
   
-  //var documents = [];
+  var documents = [];
     return {
 
             all: function()
@@ -232,18 +232,18 @@ angular.module('starter.services', [])
                 var client_id = window.localStorage.getItem("client_id");
 
                 return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=document' ).then(function(response) {
-                    var data = response.data.docs;
+                    var data = response.data;
                     
                      if( data.docs != undefined )
-                    {
+                     {
                         documents = data.docs;
-                    }
+                     }
 
                     return documents;
                    
                 });
 
-            }
+            },
 
      
 
