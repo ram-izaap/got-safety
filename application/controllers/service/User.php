@@ -147,8 +147,21 @@ class User extends REST_Controller {
 
 	public function docs_content_get()
 	{
+
+		try
+		{
+			$output = array();
+			$type 	= $this->get("type");
+
+			
+
+		}
 		
 	}
 	
+
+
+
+
 }
 ?>
