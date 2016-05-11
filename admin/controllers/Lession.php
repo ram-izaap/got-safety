@@ -151,7 +151,7 @@ class Lession extends Admin_controller {
 			}else {
 				$ins_data['created_user']  = $form['user_id'];
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
-				$ins_data['status']  = $form['status'];
+				$ins_data['visible_to_all']  = $form['visible_to_all'];
 			}
             $ins_data['updated_date']  = date("Y-m-d H:i:s");
             
