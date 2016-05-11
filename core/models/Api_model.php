@@ -52,6 +52,16 @@ class Api_model extends App_Model {
 		return $query;
 	}
 
+	
+   /**  Get all content to dispaly in frontend **/
+	
+	function get_content($table_name,$where)
+	{
+		$result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
+
+
 
 	function get_posters( $client_id  = 0 )
     {
@@ -235,13 +245,6 @@ class Api_model extends App_Model {
         return $this->db->insert($table_name,$data);
     }
    
-   /**  Get all content to dispaly in frontend **/
-	
-	function get_content($table_name,$where)
-	{
-		$result = $this->db->get_where($table_name,$where);
-        return $result->result_array();
-	}
 	
 	
 	function get_menu_detail($table_name,$where)

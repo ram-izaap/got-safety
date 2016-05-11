@@ -14,7 +14,7 @@
         <!-- Lesons  Name -->
         <div class="list lessons animate-fade-slide-in-left">
 
-          <a ui-sref="app.lessonView({id:{{lesson.id}} })"  class="item item-icon-right" ng-repeat="lesson in lessons | filter : SearchQuery"> 
+          <a ui-sref="app.lessonView({ id:{{lesson.id}} })"  class="item item-icon-right" ng-repeat="lesson in lessons | filter : SearchQuery"> 
             <i class="icon ion-chevron-right"></i>
             {{lesson.title}}
           </a>           

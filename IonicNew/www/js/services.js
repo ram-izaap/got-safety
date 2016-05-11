@@ -136,6 +136,7 @@ angular.module('starter.services', [])
             return $http.get(apiUrl + 'lesson/list?client_id=' + client_id).then(function(response) {
                 var data = response.data;
 
+
                 if( data.lessons != undefined )
                 {
                     lessons = data.lessons;
