@@ -6,7 +6,7 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, pdfDelegate, AuthService, $state) {
 
     //pdf viewer
-    $scope.pdfUrl = 'pdf/mypdf.pdf';
+    $scope.pdfUrl = 'http://britishisles.scbwi.org/wp-content/blogs.dir/15/files/2015/03/digital-dummy-creation.pdf';//pdf/mypdf.pdf';
     //http://localhost:8100/got-safety/assets/images/admin/lession_attachment/English_ATV_Safety.pdf
 
     $scope.loadNewFile = function(url) {
@@ -298,6 +298,35 @@ angular.module('starter.controllers', [])
         });
     }
 
+
+
+})
+
+.controller('pdfViewCtrl', function($scope, $stateParams, $timeout, $state, ionicMaterialMotion, ionicMaterialInk, safetyLessons, $ionicPopup, $ionicLoading) {
+    // Set Header
+    $scope.$parent.showHeader();
+    $scope.$parent.clearFabs();
+    $scope.$parent.setHeaderFab('left');
+    $scope.isExpanded = false;
+    $scope.$parent.setExpanded(false);
+    $scope.$parent.setHeaderFab(false);
+    $scope.initNavMenu();
+
+    $timeout(function() {
+        ionicMaterialMotion.slideUp({
+            selector: '.slide-up'
+        });
+    }, 300);
+
+    $timeout(function() {
+        ionicMaterialMotion.fadeSlideInRight({
+            startVelocity: 3000
+        });
+    }, 700);
+
+
+
+    
 
 
 })

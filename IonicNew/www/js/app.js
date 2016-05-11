@@ -182,6 +182,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
   })
 
+  .state('app.pdfView', 
+  {
+    url: '/pdfView/:attachment_id',  
+    views: {
+      'menuContent': {
+      templateUrl: 'templates/pdfView.html',
+      controller: 'pdfViewCtrl'
+      }
+     } 
+
+  })
+
 
   .state('app.webinars', {
     url: '/webinars',

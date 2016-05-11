@@ -14,7 +14,7 @@
          <div class="item item-text-wrap">
 
             <div class="list lessons animate-fade-slide-in-left">
-               <a ng-repeat="attachment in attachments | filter : SearchQuery"  class="item item-icon-right"  ng-click="loadNewFile('{{attachment.f_name}}')"> 
+               <a ng-repeat="attachment in attachments | filter : SearchQuery"  class="item item-icon-right"  ui-sref="app.pdfView({attachment_id:{{attachment.id}} })" > 
                 <i class="icon ion-chevron-right"></i>
                 {{attachment.language}}              
                </a>  
