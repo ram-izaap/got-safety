@@ -79,6 +79,8 @@ class Lesson extends REST_Controller {
 			$insert_data = array();
 			$insert_data['lesson_id'] 		= $this->post('lesson_id');
 			$insert_data['employee_id'] 	= $this->post('employee_id');
+			$insert_data['emp_id'] 			= $this->post('emp_id');
+			$insert_data['client_id'] 		= $this->post('client_id');
 			$insert_data['created_date']   	= date("Y-m-d H:i:s");
 
 			foreach ($insert_data as $key => $val) 
