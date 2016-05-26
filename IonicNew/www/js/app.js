@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://izaapinnovations.com/got_safety/service/');
+  .constant('apiUrl', 'http://localhost/got_safety/service/');
 
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf','TreeWidget'])
 

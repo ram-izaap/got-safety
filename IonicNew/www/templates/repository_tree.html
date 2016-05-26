@@ -10,6 +10,11 @@
 				</div>
 			  </div>
 		</div>
+		
+		<div>
+			<label>Selected node: </label>
+			<span ng-if="selectedNode" ng-bind="selectedNode.name"></span><span ng-if="!selectedNode"> </span>
+		</div>
     
 	</ion-content>
 </ion-view>

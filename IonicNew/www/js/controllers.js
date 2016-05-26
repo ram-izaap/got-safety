@@ -6,9 +6,9 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, pdfDelegate, AuthService, $state) {
 
     //pdf viewer
-    $scope.pdfUrl = 'http://britishisles.scbwi.org/wp-content/blogs.dir/15/files/2015/03/digital-dummy-creation.pdf';//pdf/mypdf.pdf';
-    //http://localhost:8100/got-safety/assets/images/admin/lession_attachment/English_ATV_Safety.pdf
-
+    //$scope.pdfUrl = 'http://britishisles.scbwi.org/wp-content/blogs.dir/15/files/2015/03/digital-dummy-creation.pdf';//pdf/mypdf.pdf';
+    $scope.pdfUrl = 'http://localhost/got_safety/assets/images/frontend/logs/1dummy.pdf';
+    
     $scope.loadNewFile = function(url) {
         pdfDelegate
             .$getByHandle('my-pdf-container')
@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
     var lesson_id = $stateParams.id;
     $scope.lesson = safetyLessons.getLessonId( lesson_id );
 
-    console.log($scope.lesson);
+    //console.log($scope.lesson);
     safetyLessons.getAttachment( lesson_id ).then(function(data) 
     {
         $scope.attachments = data;
@@ -241,8 +241,9 @@ angular.module('starter.controllers', [])
 .controller('signoffCtrl', function($scope, $stateParams, $state, employeeDetails, $ionicPopup) {
 
     var lesson_id = $stateParams.id,
-
-        client_id = window.localStorage.getItem('client_id'),
+    
+   
+		client_id = window.localStorage.getItem('client_id'),
         user_id   = window.localStorage.getItem('user_id');
       
     //list of employee and their id from service
@@ -282,7 +283,7 @@ angular.module('starter.controllers', [])
 
     //submit button functionality
     $scope.save = function(data) 
-    {
+    {  var sign = signaturePad.toDataURL('image/png');
         if( $scope.sel_employee.id == undefined )
         {
           $ionicPopup.alert({
@@ -293,7 +294,7 @@ angular.module('starter.controllers', [])
           return false; 
         }
         
-        employeeDetails.trainingComplete( lesson_id, $scope.sel_employee.id ).then(function(result) {
+        employeeDetails.trainingComplete( lesson_id, $scope.sel_employee.id , $scope.sel_employee.emp_id , client_id ).then(function(result) {
             alert(result.message);
         });
     }
@@ -412,10 +413,10 @@ angular.module('starter.controllers', [])
     })
 
     //documentation content
-   /* DocumentationService.content().then(function(data) {
+    DocumentationService.content().then(function(data) {
         $scope.content = data;
         $ionicLoading.hide();
-    });*/
+    });
 
     //open pdf in browser
     $scope.OpenLink = function(link) {
@@ -739,77 +740,9 @@ angular.module('starter.controllers', [])
 		{
 			$scope.treeNodes = data; 
 			
-			  
-			
 		});
-        /*$scope.treeNodes = [
-    {
-        "name": "dummy.pdf",
-        "ext": "pdf",
-        "url": "admin/views/repository/files/client/dummy.pdf"
-    },
-    {
-        "name": "page1.png",
-        "ext": "png",
-        "url": "admin/views/repository/files/client/page1.png"
-    },
-    {
-        "name": "page2.png",
-        "ext": "png",
-        "url": "admin/views/repository/files/client/page2.png"
-    },
-    {
-        "name": "test",
-        "children": [
-            {
-                "name": "AllergyBeGone-WorkProgressReport.xlsx",
-                "ext": "xlsx",
-                "url": "admin/views/repository/files/client/test/AllergyBeGone-WorkProgressReport.xlsx"
-            },
-            {
-                "name": "SampleAudio_0.4mb.mp3",
-                "ext": "mp3",
-                "url": "admin/views/repository/files/client/test/SampleAudio_0.4mb.mp3"
-            },
-            {
-                "name": "dummy.pdf",
-                "ext": "pdf",
-                "url": "admin/views/repository/files/client/test/dummy.pdf"
-            },
-            {
-                "name": "page1.png",
-                "ext": "png",
-                "url": "admin/views/repository/files/client/test/page1.png"
-            },
-            {
-                "name": "test1.1",
-                "children": [
-                    {
-                        "name": "dummy.pdf",
-                        "ext": "pdf",
-                        "url": "admin/views/repository/files/client/test/test1.1/dummy.pdf"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "test2",
-        "children": [
-            {
-                "name": "dummy.pdf",
-                "ext": "pdf",
-                "url": "admin/views/repository/files/client/test2/dummy.pdf"
-            },
-            {
-                "name": "page1.png",
-                "ext": "png",
-                "url": "admin/views/repository/files/client/test2/page1.png"
-            }
-        ]
-    }
-]; */
-
+      
+   
         $scope.options = { multipleSelect: true, showIcon: false };
 
         $scope.options1 = { showIcon: true, expandOnClick: true };
@@ -819,9 +752,39 @@ angular.module('starter.controllers', [])
 
     $scope.$on('selection-changed', function (e, nodes) {
         if (nodes.length > 0) {
+			
             $scope.selectedNodes = nodes;
         } else {
+			
             $scope.selectedNode = nodes;
+            
+            if($scope.selectedNode.ext != undefined && $scope.selectedNode.ext != ""){
+				
+				if($scope.selectedNode.ext == 'pdf'){
+					
+					//alert($scope.selectedNode.name);
+					
+					 //var inAppBrowser = window.open($scope.selectedNode.url,'_system','location=yes');
+					
+					window.open($scope.selectedNode.url, '_system', 'location=yes');
+				}
+				else if($scope.selectedNode.ext == 'mp3') {
+					alert($scope.selectedNode.name);
+				}
+				else if($scope.selectedNode.ext == 'mp4') {
+					alert($scope.selectedNode.name);
+				}
+				else {
+					
+					alert("others images");
+				}
+				
+				//inAppBrowser.addEventListener('exit', function(event) { inAppBrowser.close(); });
+				
+			} 
+            
+           
+            
         }
     });
 

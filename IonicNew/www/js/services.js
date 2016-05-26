@@ -23,7 +23,7 @@ angular.module('starter.services', [])
 
     function useCredentials(uc) {
         isAuthenticated = true;
-        console.log(uc);
+        //console.log(uc);
 
 
         // Set the uc as header for your requests!
@@ -200,7 +200,7 @@ angular.module('starter.services', [])
                 {
                     webinars = data.webinars;
                 }
-
+				
                 return webinars;
 
             });
@@ -246,15 +246,31 @@ angular.module('starter.services', [])
 
             },
 
-     
+		//documentation content
+        content: function() {
 
-        }
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=2').then(function(response) {
+
+                var content_res = response.data;
+                var user = content_res.user;
+                var content = user;
+
+
+                return content;
+
+
+            });
+
+        },
+			
+
+        };
     
 
 })
 
 
-//service for documentation
+/*service for documentation
 .factory('DService', function($http, apiUrl) {
 
     var Documentations = [];
@@ -262,13 +278,13 @@ angular.module('starter.services', [])
     return {
         //list of documentation
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+           var client_id = window.localStorage.getItem("client_id");
+            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=document').then(function(response) {
+            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=document').then(function(response) {
 
                 var doc_arr = response.data;
-                var usr = doc_arr.user;
+                var usr = doc_arr.docs;
                 // alert(usr.length);
 
                 if (usr.length > 0) {
@@ -290,7 +306,7 @@ angular.module('starter.services', [])
         //documentation content
         content: function() {
 
-            return $http.get('http://localhost/got-safety/api/get_content?type=5').then(function(response) {
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=2').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -306,7 +322,7 @@ angular.module('starter.services', [])
 
     };
 
-})
+}) */
 
 
 //service for InspectionReport
@@ -317,13 +333,13 @@ angular.module('starter.services', [])
     return {
         //list of reports
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+             var client_id = window.localStorage.getItem("client_id");
+            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=report').then(function(response) {
+            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=report').then(function(response) {
 
                 var doc_arr = response.data;
-                var usr = doc_arr.user;
+                var usr = doc_arr.docs;
                 // alert(usr.length);
 
                 if (usr.length > 0) {
@@ -345,7 +361,7 @@ angular.module('starter.services', [])
         //Report content
         content: function() {
 
-            return $http.get('http://localhost/got-safety/api/get_content?type=1').then(function(response) {
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=1').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -373,13 +389,13 @@ angular.module('starter.services', [])
     return {
         //list of records
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+             var client_id = window.localStorage.getItem("client_id");
+            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=record').then(function(response) {
+            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=record').then(function(response) {
 
                 var doc_arr = response.data;
-                var usr = doc_arr.user;
+                var usr = doc_arr.docs;
                 // alert(usr.length);
 
                 if (usr.length > 0) {
@@ -401,7 +417,7 @@ angular.module('starter.services', [])
         //records content
         content: function() {
 
-            return $http.get('http://localhost/got-safety/api/get_content?type=4').then(function(response) {
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=4').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -428,13 +444,14 @@ angular.module('starter.services', [])
     return {
         //list of logs
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+            var client_id = window.localStorage.getItem("client_id");
+            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=log').then(function(response) {
+            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=log' ).then(function(response) {
 
                 var doc_arr = response.data;
-                var usr = doc_arr.user;
+                
+                var usr = doc_arr.docs;
                 // alert(usr.length);
 
                 if (usr.length > 0) {
@@ -455,7 +472,7 @@ angular.module('starter.services', [])
         //log content
         content: function() {
 
-            return $http.get('http://localhost/got-safety/api/get_content?type=3').then(function(response) {
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=3').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -473,7 +490,7 @@ angular.module('starter.services', [])
 
 })
 
-
+/* Forms */
 
 
 .factory('FormService', function($http, apiUrl) {
@@ -482,13 +499,13 @@ angular.module('starter.services', [])
 
     return {
         all: function() {
-            var C_id = window.localStorage.getItem("Createdid");
-            var U_id = window.localStorage.getItem("Userid");
+            var client_id = window.localStorage.getItem("client_id");
+            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get('http://localhost/got-safety/api/get_user_menu_list?created_id=' + C_id + '&user_id=' + U_id + '&type=forms').then(function(response) {
+            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=forms').then(function(response) {
 
                 var Forms_arr = response.data;
-                var usr = Forms_arr.user;
+                var usr = Forms_arr.docs;
                 // alert(usr.length);
 
                 if (usr.length > 0) {
@@ -510,12 +527,12 @@ angular.module('starter.services', [])
 
         content: function() {
 
-            return $http.get('http://localhost/got-safety/api/get_content?type=5').then(function(response) {
+            return $http.get('http://localhost/got_safety/service/api/get_content?type=5').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
                 var content = user;
-
+				
                 return content;
 
 
@@ -611,13 +628,18 @@ angular.module('starter.services', [])
             })
 
         },
-        trainingComplete: function( lesson_id, employee_id ) 
+        trainingComplete: function( lesson_id, employee_id , emp_id , client_id ) 
         {
-            var Empid = window.localStorage.getItem("empid");
-            var lessonTitle = window.localStorage.getItem("Title");
+            //var Empid = window.localStorage.getItem("empid");
+            //var topic = window.localStorage.getItem("Title");
+           
             var signed = {
                 'employee_id': employee_id,
-                'lesson_id': lesson_id
+                'emp_id'     : emp_id,
+                'lesson_id'  : lesson_id,
+                'client_id'  : client_id
+                
+                
             };
 
             return $http.post(apiUrl + 'lesson/training', signed).then(function(response) {
@@ -642,11 +664,10 @@ angular.module('starter.services', [])
               {
                    
 
-                    return $http.get(apiUrl+'Api/repository?client_name=client').then(function(response)
+                    return $http.get(apiUrl+'repository/repository?client_name=client').then(function(response)
                     {
                       var data = response.data;
                       
-                     
                         return data; 
                         
 
