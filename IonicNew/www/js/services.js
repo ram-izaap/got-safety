@@ -628,7 +628,7 @@ angular.module('starter.services', [])
             })
 
         },
-        trainingComplete: function( lesson_id, employee_id , emp_id , client_id ) 
+        trainingComplete: function( lesson_id, employee_id , emp_id , client_id ,sign) 
         {
             //var Empid = window.localStorage.getItem("empid");
             //var topic = window.localStorage.getItem("Title");
@@ -637,7 +637,8 @@ angular.module('starter.services', [])
                 'employee_id': employee_id,
                 'emp_id'     : emp_id,
                 'lesson_id'  : lesson_id,
-                'client_id'  : client_id
+                'client_id'  : client_id,
+                'sign'  : sign,
                 
                 
             };

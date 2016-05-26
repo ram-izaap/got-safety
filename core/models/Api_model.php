@@ -245,7 +245,11 @@ class Api_model extends App_Model {
         return $this->db->insert($table_name,$data);
     }
    
-	
+	function update($table_name,$data,$where)
+    {
+		$this->db->where($where);
+        return $this->db->update($table_name,$data);
+    }
 	
 	function get_menu_detail($table_name,$where)
     {

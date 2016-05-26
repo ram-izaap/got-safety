@@ -238,7 +238,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('signoffCtrl', function($scope, $stateParams, $state, employeeDetails, $ionicPopup) {
+.controller('signoffCtrl', function($scope, $stateParams, $state, employeeDetails, $ionicPopup,$ionicHistory) {
 
     var lesson_id = $stateParams.id,
     
@@ -268,14 +268,7 @@ angular.module('starter.controllers', [])
         penColor: 'rgb(0, 0, 0)'
     });
 
-    var saveButton = document.getElementById('save');
     var cancelButton = document.getElementById('clear');
-
-    saveButton.addEventListener('click', function(event) {
-        var sign = signaturePad.toDataURL('image/png');
-
-        window.open(sign);
-    });
 
     cancelButton.addEventListener('click', function(event) {
         signaturePad.clear();
@@ -283,19 +276,29 @@ angular.module('starter.controllers', [])
 
     //submit button functionality
     $scope.save = function(data) 
-    {  var sign = signaturePad.toDataURL('image/png');
+    {  
+		var sign = signaturePad.toDataURL('image/png');
+		
+		var error = '';
+		
         if( $scope.sel_employee.id == undefined )
-        {
-          $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Please select employee.'
-                });
-
-          return false; 
-        }
+			error += "Please select employee.<br/>";
+          
+        if(signaturePad.isEmpty()) 
+			error += "Please Sign!";
         
-        employeeDetails.trainingComplete( lesson_id, $scope.sel_employee.id , $scope.sel_employee.emp_id , client_id ).then(function(result) {
-            alert(result.message);
+        if(error){
+			$ionicPopup.alert({ title: 'Error',	template: error });
+			return false; 
+		}
+        
+        employeeDetails.trainingComplete( lesson_id, $scope.sel_employee.id , $scope.sel_employee.emp_id , client_id , sign).then(function(result) {
+			
+            var alertPopup = $ionicPopup.alert({ title: 'success',	template: result.message });
+            
+            alertPopup.then(function(res) {
+				$ionicHistory.goBack();
+		   });
         });
     }
 
