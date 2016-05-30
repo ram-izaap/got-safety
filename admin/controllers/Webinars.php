@@ -136,11 +136,11 @@ class Webinars extends Admin_controller {
 				$form['is_active'] = "0";
 			}
 			
-			if(isset($form['all'])) { 
-				$form['all'] = $form['all'];	
+			if(isset($form['visible_to_all'])) { 
+				$form['visible_to_all'] = $form['visible_to_all'];	
 			}
 			else { 
-				$form['all'] = "0";
+				$form['visible_to_all'] = "0";
 			}
 			
 			$ins_data = array();
@@ -152,7 +152,7 @@ class Webinars extends Admin_controller {
 			}else {
 				$ins_data['created_user']  = $form['user_id'];
 				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
-				$ins_data['all']  = $form['all'];
+				$ins_data['visible_to_all']  = $form['visible_to_all'];
 			}
             $ins_data['created_date']  = date("Y-m-d");
 			//$ins_data['video_file']  = $filename;
@@ -195,7 +195,7 @@ class Webinars extends Admin_controller {
             {
                 $this->data['title']     = "ADD WEBINARS";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "","all" => "");
+                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "","visible_to_all" => "");
                 
             }
 		    

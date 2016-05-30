@@ -59,8 +59,8 @@
 					<label class="col-md-2 control-label">All:
 					</label>
 					<div class="col-md-10">
-						<input type="checkbox" class="" name="all" id="all" value="1" 
-						<?php echo set_checkbox('all',1,((isset($form_data['all']) && $form_data['all'] == 1)?true:false));?>/>
+						<input type="checkbox" class="" name="visible_to_all" id="visible_to_all" value="1" 
+						<?php echo set_checkbox('visible_to_all',1,((isset($form_data['visible_to_all']) && $form_data['visible_to_all'] == 1)?true:false));?>/>
 					</div>
 				</div>
 				

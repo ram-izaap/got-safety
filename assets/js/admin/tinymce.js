@@ -11,7 +11,7 @@ tinymce.init({
    content_css: "css/content.css",
    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code", 
    relative_urls : false,
-    remove_script_host : true,
+    remove_script_host : false,
  convert_urls : true,
    style_formats: [
         {title: 'Bold text', inline: 'b'},
