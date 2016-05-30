@@ -5,3 +5,9 @@ table, th, td {
 th, td {
     padding: 5px;
 }
+.convert-pdf th{font-size:16px;  }
+.convert-pdf,.convert-pdf td{font-family: "Open Sans", sans-serif; font-size:14px; color:#444;}
+.convert-pdf th{background-color:#DEDEDE;}
+.convert-pdf tr:nth-child(even){background-color:#f7f7f7;}
+.convert-pdf tr:nth-child(odd){background-color:#F2F2F2;}
+

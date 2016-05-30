@@ -18,17 +18,18 @@
 						<li class="active"><span>Sign off</span>
 						</li>
 					</ol>
-					
-					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
-						
-						<a class="pull-right" href="<?php echo base_url('signoff/bulk_export'); ?>" >Search Export </a>
-						
-					<?php } ?> 
+				 
                 
 					<div class="clearfix">
 						
 						 <div class="pull-right top-page-ui">
-							
+								
+					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
+						
+						<a class="pull-right search-export" href="<?php echo base_url('signoff/bulk_export'); ?>" ><i class="fa fa-cloud-download" aria-hidden="true"></i>
+Search Export </a>
+						
+					<?php } ?>
 	                        <a onclick="return DeleteCheckedRow(this,'delete-signoff','employee/employee_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>

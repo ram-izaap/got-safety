@@ -56,13 +56,13 @@
     </div>
     </div>-->
     
-    <div class="col-lg-2">
+    <div class="col-lg-4">
     <div class="col-xs-12 input-group">
-      <span class="col-xs-3">Show</span>
-      <span class="col-xs-6">
+      <span class="col-xs-3 label-show">Show</span>
+      <span class="col-xs-3">
         <?php echo form_dropdown('per_page_options', $per_page_options, $per_page, 'aria-controls="table-example" class="form-control custom-input input-sm perpage"');?>
       </span>
-      <span class="col-xs-3">Entries </span>
+      <span class="col-xs-3 label-show">Entries </span>
      
     </div>
     </div>

@@ -49,7 +49,62 @@
 .elfinder-contextmenu .ui-state-hover .elfinder-contextmenu-arrow { background-image:url('../img/arrows-active.png'); }
 
 
+.search-export{background-color:#364150;
+line-height: 34px;
+padding: 0px 8px;
+margin: 0 10px;
+color: #fff;
+text-transform: capitalize;}
+.search-export:hover,.btn-back:hover{color: #fff;
+background-color: #3b9c96;
+border-color: #307f7a;text-decoration: none;}
+.label-show{line-height:30px;}
+.view-details-signup li {
+    list-style: none;
+    line-height: 30px;padding: 0 14px;
+}
+.view-details-signup li:nth-child(odd){background-color:#f7f7f7;}
+.view-details-signup li span:first-child{padding-right: 10px;
+min-width: 112px;
+display: inline-block;}
+.view-details-signup {
+    width: 500px;
+background-color: rgb(255, 255, 255);
+margin: 0px auto;
+border-radius: 6px !important;
+padding: 0px;
+}
+.title-head{text-align: center;
+font-size: 15px;
+background-color: rgb(51, 51, 51) !important;
+color: rgb(255, 255, 255);
+min-height: 36px;
+line-height: 36px !important;}
+.btn-back{background: #364150;
+line-height: 34px;
+padding: 0px 34px;
+margin: 20px 10px;
+color: #fff;
+text-transform: capitalize;
+float: right;
+margin-right: 21%;}
+.file-option{min-height: 48px;}
+.csv-format{background-color: #d8d8cd; text-align:center;
+color: rgb(0, 0, 0);
+font-size: 14px;
+padding: 10px;}
+.csv-format i{font-size: 16px;}
+.btn-csv:hover{text-decoration: none;}
 
+.form-control.btn {
+    background-color: #444 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    line-height: 18px !important;
+}
+.form-control.btn:hover{background-color:#357ebd!important;}
+.upload-file {margin: 0 auto;width:716px;margin-top: 24%;}
 
 
 

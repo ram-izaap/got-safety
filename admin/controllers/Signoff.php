@@ -12,6 +12,7 @@ class Signoff extends Admin_controller {
        $this->load->model('signoff_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
+        $this->data['img_url']=$this->layout->get_img_dir();
     }
 
 
@@ -30,7 +31,7 @@ class Signoff extends Admin_controller {
                                                 'l.employee_name' => 'Employee Name',
                                                 'ld.emp_id' => 'Employee ID',
                                                 'ld.created_date' => 'Date',
-                                                'ld.topic' => 'Topic',
+                                                'le.title' => 'Topic',
                                                 'u.name' => 'Client'
                                                 
                                                 
@@ -39,13 +40,8 @@ class Signoff extends Admin_controller {
          
         $this->_narrow_search_conditions = array("start_date");
         
-        /*$str = '<a href="'.site_url('signoff/view_detail/{id}').'" class="table-link">
-                    <span class="fa-stack">
-                       
-                        <i class="fa fa-pencil"></i>
-                    </span>
-                </a>'; */
-            $str = '<a href="#" class="table-link">
+       
+            $str = '<a href="'.site_url('signoff/view_detail/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -112,7 +108,7 @@ class Signoff extends Admin_controller {
 		
 		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
 		
-		$html ='<table class="table-bor">
+		$html ='<table class="table-bor convert-pdf">
   <tr>
     <th>Topic</th>
     <th>Employee Name</th>		
@@ -122,7 +118,7 @@ class Signoff extends Admin_controller {
   </tr>';
  foreach($this->data['result'] as $data ) {  
   $html .= '<tr>
-    <td>'.$data['topic'].'</td>'.
+    <td>'.$data['title'].'</td>'.
     '<td>'.$data['employee_name'].'</td>'.		
     '<td>'.$data['emp_id'].'</td>'.
     '<td>'.$data['name'].'</td>'.
@@ -149,6 +145,19 @@ $html .= '</table>';
 		redirect("signoff");
 		
 	}	
+		
+	}
+	
+	
+	
+	function view_detail($id = "")
+	{
+		$search_field = "ld.id";
+		$search_value = $id;
+		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
+		//print_r($this->data['result']);exit;
+		
+		$this->layout->view("signoff/signoff_view");
 		
 	}
     

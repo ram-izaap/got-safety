@@ -144,6 +144,13 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break; 
             
             
+            case 'find_topic':
+            
+            $data = $data;
+            break; 
+            
+            
+            
             
                
     }

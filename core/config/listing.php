@@ -287,7 +287,7 @@ $config['signoff_index'] = array(
 	"fields"	=> array(   
 							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => FALSE, 'default_view'=>1),
 							 'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'topic'=>array('name'=>'Topic', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),                             
+                             'title'=>array('name'=>'Topic', 'data_type' => 'find_topic', 'sortable' => FALSE, 'default_view'=>1),                             
                              'client_id'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => FALSE, 'default_view'=>1),                             
                              'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
