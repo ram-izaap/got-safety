@@ -193,14 +193,6 @@ pdf-viewer-toolbar + canvas { max-width:100%; }
 */
 
 
-/* 31.05/2016 */
-.list a.item-content:hover{text-decoration:none;-webkit-transition: color 1ms ease-in-out;
--moz-transition: color 1ms ease-in-out;
--ms-transition: color 1ms ease-in-out;
--o-transition: color 1ms ease-in-out;
-transition: color 1ms ease-in-out; color:#040707;
--webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s; -ms-transition-duration: 0.2s;}
-
 
 
 
