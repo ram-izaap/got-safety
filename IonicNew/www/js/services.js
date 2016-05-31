@@ -1,7 +1,7 @@
 angular.module('starter.services', [])
 
 //service for authentication
-.service('AuthService', function($q, $http, apiUrl) {
+.service('AuthService', function($q, $http, AppConfig) {
 
     var isAuthenticated = true;
     var LOCAL_TOKEN_KEY = 'user_credentials';
@@ -14,7 +14,6 @@ angular.module('starter.services', [])
 
         }
     }
-
 
     function storeUserCredentials(uc) {
         window.localStorage.setItem(LOCAL_TOKEN_KEY, uc);
@@ -42,7 +41,7 @@ angular.module('starter.services', [])
 
         return $q(function(resolve, reject) {
 
-            $http.post(apiUrl + 'user/login', {
+            $http.post(AppConfig.apiUrl + 'user/login', {
                     'name': name,
                     'password': password
                 }, {
@@ -78,7 +77,6 @@ angular.module('starter.services', [])
                       reject( 'There is some connectivity issue .Please try again later.' );
                     }
                 );
-
 
         });
 
@@ -117,23 +115,19 @@ angular.module('starter.services', [])
 })
 
 
-
-
 //service for safety lessons
-.factory('safetyLessons', function($http, apiUrl) {
+.factory('safetyLessons', function($http, AppConfig) {
 
     var lessons    = [];
     var Attachment = [];
    
-
-
 
     return {
 
         all: function() {
             var client_id = window.localStorage.getItem("client_id");
 
-            return $http.get(apiUrl + 'lesson/list?client_id=' + client_id).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'lesson/list?client_id=' + client_id).then(function(response) {
                 var data = response.data;
 
 
@@ -157,13 +151,12 @@ angular.module('starter.services', [])
                 }
 
            };
-           // window.localStorage.setItem("lessonid", LessonId);
        }, 
 
         getAttachment: function( lesson_id ) {
             
 
-            return $http.get(apiUrl + 'lesson/attachment?lesson_id=' + lesson_id ).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'lesson/attachment?lesson_id=' + lesson_id ).then(function(response) {
                 var data = response.data;
 
                 if( data.attachments == undefined )
@@ -180,10 +173,8 @@ angular.module('starter.services', [])
 
 })
 
-
-
 //service for webinars
-.factory('WebinarService', function($http, apiUrl) {
+.factory('WebinarService', function($http, AppConfig) {
 
     var webinars = [];
 
@@ -192,7 +183,7 @@ angular.module('starter.services', [])
         all: function() {
             var client_id = window.localStorage.getItem("client_id");
 
-            return $http.get(apiUrl + 'webinars/list?client_id=' + client_id).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'webinars/list?client_id=' + client_id).then(function(response) {
                 var data = response.data;
                // alert(data);
 
@@ -216,14 +207,13 @@ angular.module('starter.services', [])
                 }
 
            };
-           // window.localStorage.setItem("lessonid", LessonId);
        }
     };
 
 })
 
 
-.factory('DocumentationService', function($http, apiUrl) {
+.factory('DocumentationService', function($http, AppConfig) {
   
   var documents = [];
     return {
@@ -232,7 +222,7 @@ angular.module('starter.services', [])
             {
                 var client_id = window.localStorage.getItem("client_id");
 
-                return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=document' ).then(function(response) {
+                return $http.get(AppConfig.apiUrl + 'user/docs?client_id=' + client_id + '&type=document' ).then(function(response) {
                     var data = response.data;
                     
                      if( data.docs != undefined )
@@ -246,10 +236,9 @@ angular.module('starter.services', [])
 
             },
 
-		//documentation content
         content: function() {
 
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=2').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'api/get_content?type=2').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -266,67 +255,11 @@ angular.module('starter.services', [])
 
         };
     
-
 })
 
 
-/*service for documentation
-.factory('DService', function($http, apiUrl) {
-
-    var Documentations = [];
-
-    return {
-        //list of documentation
-        all: function() {
-           var client_id = window.localStorage.getItem("client_id");
-            //var U_id = window.localStorage.getItem("Userid");
-
-            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=document').then(function(response) {
-
-                var doc_arr = response.data;
-                var usr = doc_arr.docs;
-                // alert(usr.length);
-
-                if (usr.length > 0) {
-                    for (var j = 0; j < usr.length; j++) {
-                        // alert(usr[0].id);                               
-                        Documentations[j] = usr[j];
-                    }
-                }
-
-                return Documentations;
-
-
-            });
-
-        },
-
-
-
-        //documentation content
-        content: function() {
-
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=2').then(function(response) {
-
-                var content_res = response.data;
-                var user = content_res.user;
-                var content = user;
-
-
-                return content;
-
-
-            });
-
-        },
-
-    };
-
-}) */
-
-
 //service for InspectionReport
-.factory('InspectionReportService', function($http, apiUrl) {
+.factory('InspectionReportService', function($http, AppConfig) {
 
     var Reports = [];
 
@@ -336,7 +269,7 @@ angular.module('starter.services', [])
              var client_id = window.localStorage.getItem("client_id");
             //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=report').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'user/docs?client_id=' + client_id + '&type=report').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.docs;
@@ -356,12 +289,10 @@ angular.module('starter.services', [])
 
         },
 
-
-
         //Report content
         content: function() {
 
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=1').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'api/get_content?type=1').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -380,9 +311,8 @@ angular.module('starter.services', [])
 })
 
 
-
 //service for Training records
-.factory('TrainingRecordService', function($http, apiUrl) {
+.factory('TrainingRecordService', function($http, AppConfig) {
 
     var Records = [];
 
@@ -392,7 +322,7 @@ angular.module('starter.services', [])
              var client_id = window.localStorage.getItem("client_id");
             //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=record').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'user/docs?client_id=' + client_id + '&type=record').then(function(response) {
 
                 var doc_arr = response.data;
                 var usr = doc_arr.docs;
@@ -412,12 +342,10 @@ angular.module('starter.services', [])
 
         },
 
-
-
         //records content
         content: function() {
 
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=4').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'api/get_content?type=4').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -437,7 +365,7 @@ angular.module('starter.services', [])
 
 
 //service for 300logs
-.factory('LogService', function($http, apiUrl) {
+.factory('LogService', function($http, AppConfig) {
 
     var Logs = [];
 
@@ -445,9 +373,8 @@ angular.module('starter.services', [])
         //list of logs
         all: function() {
             var client_id = window.localStorage.getItem("client_id");
-            //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=log' ).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'user/docs?client_id=' + client_id + '&type=log' ).then(function(response) {
 
                 var doc_arr = response.data;
                 
@@ -468,11 +395,10 @@ angular.module('starter.services', [])
 
         },
 
-
         //log content
         content: function() {
 
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=3').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'api/get_content?type=3').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -490,10 +416,8 @@ angular.module('starter.services', [])
 
 })
 
-/* Forms */
 
-
-.factory('FormService', function($http, apiUrl) {
+.factory('FormService', function($http, AppConfig) {
 
     var Forms = [];
 
@@ -502,7 +426,7 @@ angular.module('starter.services', [])
             var client_id = window.localStorage.getItem("client_id");
             //var U_id = window.localStorage.getItem("Userid");
 
-            return $http.get(apiUrl + 'user/docs?client_id=' + client_id + '&type=forms').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'user/docs?client_id=' + client_id + '&type=forms').then(function(response) {
 
                 var Forms_arr = response.data;
                 var usr = Forms_arr.docs;
@@ -523,11 +447,9 @@ angular.module('starter.services', [])
 
         },
 
-
-
         content: function() {
 
-            return $http.get('http://localhost/got_safety/service/api/get_content?type=5').then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'api/get_content?type=5').then(function(response) {
 
                 var content_res = response.data;
                 var user = content_res.user;
@@ -545,22 +467,18 @@ angular.module('starter.services', [])
 
 })
 
-
 //service for safety posters 
-.factory('safetyPosters', function($http, apiUrl) {
+.factory('safetyPosters', function($http, AppConfig) {
 
     var posters = [];
     var Attachment = [];
    
-
-
-
     return {
 
         all: function() {
             var client_id = window.localStorage.getItem("client_id");
 
-            return $http.get(apiUrl + 'Poster/list?client_id=' + client_id).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'Poster/list?client_id=' + client_id).then(function(response) {
                 var data = response.data;
 
                 if( data.posters != undefined )
@@ -589,7 +507,7 @@ angular.module('starter.services', [])
         getAttachment: function( poster_id ) {
             
 
-            return $http.get(apiUrl + 'Poster/attachment?poster_id=' + poster_id ).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'Poster/attachment?poster_id=' + poster_id ).then(function(response) {
                 var data = response.data;
 
                 if( data.attachments == undefined )
@@ -607,14 +525,14 @@ angular.module('starter.services', [])
 })
 
 
-.factory('employeeDetails', function($http, apiUrl) {
+.factory('employeeDetails', function($http, AppConfig) {
     var employees = [];
 
     return {
 
         getEmployees: function( client_id ) {
 
-            return $http.get(apiUrl + 'user/employees?client_id=' + client_id).then(function(response) {
+            return $http.get(AppConfig.apiUrl + 'user/employees?client_id=' + client_id).then(function(response) {
                 var data = response.data;
 
                 if( data.employees == undefined )
@@ -630,9 +548,7 @@ angular.module('starter.services', [])
         },
         trainingComplete: function( lesson_id, employee_id , emp_id , client_id ,sign) 
         {
-            //var Empid = window.localStorage.getItem("empid");
-            //var topic = window.localStorage.getItem("Title");
-           
+            
             var signed = {
                 'employee_id': employee_id,
                 'emp_id'     : emp_id,
@@ -643,7 +559,7 @@ angular.module('starter.services', [])
                 
             };
 
-            return $http.post(apiUrl + 'lesson/training', signed).then(function(response) {
+            return $http.post(AppConfig.apiUrl + 'lesson/training', signed).then(function(response) {
                 var result = response.data;
                 return result;
             })
@@ -654,29 +570,24 @@ angular.module('starter.services', [])
 
 })
 
-/* Repository Tree  */
-
-.factory('RepositoryService', function($http, apiUrl)
+.factory('RepositoryService', function($http, AppConfig)
  {
 
-  return {
+    return {
               //list of reports
-              all: function() 
-              {
-                   
+        all: function() 
+        {
+               
+            return $http.get(AppConfig.apiUrl+'repository/repository?client_name=client').then(function(response)
+            {
+              var data = response.data;
+              
+                return data; 
 
-                    return $http.get(apiUrl+'repository/repository?client_name=client').then(function(response)
-                    {
-                      var data = response.data;
-                      
-                        return data; 
-                        
-
-                    });
-                 
-              },
+            });
              
-       
+        },
+             
      }; 
 
 });

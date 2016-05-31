@@ -1,37 +1,29 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter.constants',[])  
-  .constant('apiUrl', 'http://localhost/got_safety/service/');
 
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf','TreeWidget'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 
-
-
-    .directive("navigateTo", function($ionicGesture, broadcast){
+    .directive("navigateTo", function($ionicGesture, $rootScope){
         return{
             restrict: 'A',
             link: function($scope, $element, $attr){
               var tapHandler = function(e){
 
+              var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_system','location=yes');
+                /*
                 if (ionic.Platform.isAndroid() && $attr.navigateTo.indexOf("youtube.com") != -1) {
                   var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_system','location=yes');
                 } else {
                   var inAppBrowser = window.open(encodeURI($attr.navigateTo),'_blank','location=yes');
                 }
-                
+                */
                 inAppBrowser.addEventListener('exit', function(event) { inAppBrowser.close(); });
 
               };
 
               var tapGesture = $ionicGesture.on('tap', tapHandler, $element);
 
-              $scope.$on(broadcast.events.onPause, function (event) {
+              $rootScope.$broadcast("onPause", function (event) {
                   inAppBrowser.close();
               });
 
@@ -111,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$sceDelegateProvider,AppConfig,pdfUrls) {
 
       //youtube vedio access
     $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
@@ -184,7 +176,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
 
   .state('app.pdfView', 
   {
-    url: '/pdfView/:attachment_id',  
+    url: '/pdfView/:file_name/:filetype',  
     views: {
       'menuContent': {
       templateUrl: 'templates/pdfView.html',

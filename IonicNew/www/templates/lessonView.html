@@ -13,12 +13,26 @@
       <div class="card lessons-view animate-fade-slide-in-left">
          <div class="item item-text-wrap">
 
-            <div class="list lessons animate-fade-slide-in-left">
-               <a ng-repeat="attachment in attachments | filter : SearchQuery"  class="item item-icon-right"  ui-sref="app.pdfView({attachment_id:{{attachment.id}} })" > 
-                <i class="icon ion-chevron-right"></i>
-                {{attachment.language}}              
-               </a>  
+            <div ng-repeat="attachment in attachments | filter : SearchQuery" >
+                <ion-item class="item-stable item-icon-right sm-icon"
+                          ng-click="toggleGroup(attachment)"
+                          ng-class="{active: isGroupShown(attachment)}">
+                    <i class="icon" ng-class="isGroupShown(attachment) ? 'ion-minus' : 'ion-plus'"></i>
+                  {{attachment.language}}  
+                </ion-item>
+                <div ng-if="attachment.type=='1'" class="list lessons animate-fade-slide-in-left">
+                  <a  class="item item-icon-right"  href="#/app/pdfView/{{attachment.f_name}}/lesson" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> Lesson </a> 
+
+                   <a ng-if="attachment.f_name_quiz!=''" class="item item-icon-right"  href="#/app/pdfView/{{attachment.f_name_quiz}}/lesson" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> Quiz </a>  
+                </div>
+
+                <div ng-if="attachment.type!='1'" class="list lessons animate-fade-slide-in-left">
+                  <a  class="item item-icon-right" navigate-To="{{pdfpath + attachment.f_name}}" href="#" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> Lesson </a> 
+
+                   <a ng-if="attachment.f_name_quiz!=''" class="item item-icon-right" navigate-To="{{pdfpath + attachment.f_name_quiz}}"  href="#" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> Quiz </a>  
+                </div> 
             </div>
+
             <!--displaying lesson-->
             <div class="padding">
               <p ng-bind-html="lesson.content"></p>

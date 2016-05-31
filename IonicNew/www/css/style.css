@@ -145,7 +145,21 @@ pdf-viewer-toolbar + canvas { max-width:100%; }
 .pdf-pagin { background:#fff; margin-bottom:15px; padding:2px 5px; font-weight:bold; display:inline-block; max-width:120px; float:right }
 .pdf-pagin input { display: inline-block; margin:0px; width:inherit; padding:0; }
 
+.sm-icon .ion-plus::before,.sm-icon .ion-minus::before{font-size:16px;}
 
+ .item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
+}
+ .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.item-accordion.ng-hide-add,
+.item-accordion.ng-hide-remove {
+  display: block !important;
+}
 /* 
 
     .bar .title {

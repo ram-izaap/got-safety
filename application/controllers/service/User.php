@@ -119,16 +119,9 @@ class User extends REST_Controller {
 
 
 			$docs = $this->api_model->get_docs( $table, array("created_user" => $client_id,"is_display" => 1) );
-
-			$updated_docs = array();
-			foreach ($docs as $k => $row) 
-			{
-				$row['url'] = get_img_dir().'assets/images/frontend/'.$folder.'/'.$row['pdf_file'];
-				$updated_docs[$k] = $row;
-			}
 			
 			$output['status'] 	= 'SUCCESS';
-			$output['docs'] 	= $updated_docs;
+			$output['docs'] 	= $docs;
 
 			$this->response( $output, 200);
 		}

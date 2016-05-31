@@ -10,58 +10,30 @@
           
         </div>
 
-        <!-- Lesons View -->
-
         <div class="card lessons-view animate-fade-slide-in-left">
+
           <div class="item item-text-wrap">
 
-            
-             <!--attachment list-->
-            
+            <div ng-repeat="attachment in attachments | filter : SearchQuery" >
+                <ion-item class="item-stable item-icon-right sm-icon"
+                          ng-click="toggleGroup(attachment)"
+                          ng-class="{active: isGroupShown(attachment)}">
+                    <i class="icon" ng-class="isGroupShown(attachment) ? 'ion-minus' : 'ion-plus'"></i>
+                  {{attachment.language}}  
+                </ion-item>
 
-            <div class="container">
-                <div class="clearfix">
+                <div class="list lessons animate-fade-slide-in-left">
+                  <a  class="item item-icon-right"  href="#/app/pdfView/{{attachment.f_name}}/posters" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> {{attachment.language + ' 5x9'}} </a> 
 
-                  <header class="p2 bright-blue bg-blue">
-                    <div class="container sm-table">
-                      <div class="sm-table-cell py4">
-                        <h1 class="h0 mt0 mb0 white inline">AngularJS PDF Viewer</h1>
-                        <a class="h0 button dark-gray" href="//github.com/winkerVSbecks/angular-pdf-viewer">github</a>
-                      </div>
-                    </div>
-                  </header>
-                  
-                  <pdf-viewer
-                    delegate-handle="my-pdf-container"
-                    url="pdfUrl"
-                    scale="1"
-                    show-toolbar="true"
-                    headers="{'x-you-know-whats-awesome': 'EVERYTHING'}"></pdf-viewer>
-                    
-
+                   <a ng-if="attachment.f_name_quiz!=''" class="item item-icon-right"  href="#/app/pdfView/{{attachment.f_name_quiz}}/posters" ng-show="isGroupShown(attachment)" > <i class="icon ion-chevron-right"></i> {{attachment.language + ' 5x11'}}  </a>  
                 </div>
-              </div>
 
-
+            </div>
                      
-                      <div class="list lessons animate-fade-slide-in-left">
 
-                            <a ng-repeat="attachment in attachments | filter : SearchQuery"  class="item item-icon-right" ng-click="loadNewFile('{{attachment.poster1}}')"> 
-                              <i class="icon ion-chevron-right"></i>
-                             {{attachment.language}}              
-                            </a>  
-                      
-                    </div>
-
-
-
-                    <!--displaying poster-->
-
-                    <div class="padding">        
-                      <p ng-bind-html="poster.content"></p>  
-                    </div>    
-
-
+            <div class="padding">        
+              <p ng-bind-html="poster.content"></p>  
+            </div>    
 
           </div>
         </div>

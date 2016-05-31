@@ -11,7 +11,6 @@
        
         </div>
 
-        <!-- Lesons  Name -->
 
        <div class="card box">
           <div class="item item-text-wrap" ng-repeat = "contents in content | filter : SearchQuery">
@@ -22,34 +21,9 @@
           </div>
         </div>
 
-
-        <div class="container">
-                <div class="clearfix">
-
-                  <header class="p2 bright-blue bg-blue">
-                    <div class="container sm-table">
-                      <div class="sm-table-cell py4">
-                        <h1 class="h0 mt0 mb0 white inline">AngularJS PDF Viewer</h1>
-                        <a class="h0 button dark-gray" href="//github.com/winkerVSbecks/angular-pdf-viewer">github</a>
-                      </div>
-                    </div>
-                  </header>
-                  
-                  <pdf-viewer
-                    delegate-handle="my-pdf-container"
-                    url="pdfUrl"
-                    scale="1"
-                    show-toolbar="true"
-                    headers="{'x-you-know-whats-awesome': 'EVERYTHING'}"></pdf-viewer>
-                    
-
-                </div>
-              </div>
-
-
         <div class="list forms animate-fade-slide-in-left">
 
-          <a class="item item-icon-right" ng-repeat="documentation in documentations | filter : SearchQuery"  ng-click="loadNewFile('{{documentation.url}}')">{{documentation.title}}
+          <a class="item item-icon-right" ng-repeat="documentation in documentations | filter : SearchQuery"  ng-if="documentation.pdf_file !=''" href="#/app/pdfView/{{documentation.pdf_file}}/docs">{{documentation.title}}
            <i class="icon ion-ios-arrow-right"></i> 
            </a>
         </div>

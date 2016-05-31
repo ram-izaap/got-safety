@@ -3,20 +3,9 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, pdfDelegate, AuthService, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, AuthService, $state) {
 
-    //pdf viewer
-    //$scope.pdfUrl = 'http://britishisles.scbwi.org/wp-content/blogs.dir/15/files/2015/03/digital-dummy-creation.pdf';//pdf/mypdf.pdf';
-    $scope.pdfUrl = 'http://localhost/got_safety/assets/images/frontend/logs/1dummy.pdf';
-    
-    $scope.loadNewFile = function(url) {
-        pdfDelegate
-            .$getByHandle('my-pdf-container')
-            .load(url);
-    };
-
-
-    $scope.isExpanded = false;
+    $scope.isExpanded = true;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
 
@@ -101,7 +90,6 @@ angular.module('starter.controllers', [])
         }
     };
 
-
     //logout function
     $scope.logout = function() {
         AuthService.logout();
@@ -114,12 +102,10 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk, $ionicHistory) {
 
-    //Hide Headers and Disable animations
     $scope.$parent.hideHeader();
     $scope.$parent.clearFabs();
     ionicMaterialInk.displayEffect();
 
-    //login function begins
     $scope.data = {};
     $scope.login = function(data) 
     {
@@ -147,7 +133,6 @@ angular.module('starter.controllers', [])
 
 
 })
-
 
 
 .controller('safetyLessonsCtrl', function($scope, $stateParams, $timeout, $state, ionicMaterialMotion, ionicMaterialInk, safetyLessons, $ionicPopup, $ionicLoading) {
@@ -193,7 +178,7 @@ angular.module('starter.controllers', [])
             }]
         });
         $timeout(function() {
-            myPopup.close(); //close the popup after 3 seconds for some reason
+            myPopup.close(); 
         }, 3000);
     };
 
@@ -209,10 +194,12 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('LessonViewCtrl', function($scope, $stateParams, $state, $window, $http, safetyLessons, $ionicLoading) {
+.controller('LessonViewCtrl', function($scope, $stateParams, $state, $window, $http, safetyLessons, $ionicLoading,pdfUrls) {
     
     var lesson_id = $stateParams.id;
     $scope.lesson = safetyLessons.getLessonId( lesson_id );
+
+    $scope.pdfpath = pdfUrls['lesson'];
 
     //console.log($scope.lesson);
     safetyLessons.getAttachment( lesson_id ).then(function(data) 
@@ -228,12 +215,15 @@ angular.module('starter.controllers', [])
     };
 
 
-    //open pdf in  browser
-    $scope.OpenLink = function(link)
-    {
-
-        window.open(link, '_blank', 'location=yes');
-
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+          $scope.shownGroup = null;
+        } else {
+          $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
     };
 })
 
@@ -306,8 +296,24 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('pdfViewCtrl', function($scope, $stateParams, $timeout, $state, ionicMaterialMotion, ionicMaterialInk, safetyLessons, $ionicPopup, $ionicLoading) {
+.controller('pdfViewCtrl', function($scope,pdfDelegate, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $ionicPopup, $ionicHistory,pdfUrls) {
     // Set Header
+    if(!$stateParams.file_name)
+        $ionicHistory.goBack();
+
+    if($stateParams.filetype == 'repositary')
+        $scope.pdfUrl = $stateParams.file_name;
+    else    
+        $scope.pdfUrl = pdfUrls[$stateParams.filetype] + $stateParams.file_name;
+
+    //$scope.pdfUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/149125/material-design-2.pdf';
+    
+    $timeout(function() {
+         pdfDelegate.$getByHandle('my-pdf-container').load($scope.pdfUrl);
+         pdfDelegate.$getByHandle('my-pdf-container').zoomIn(0.5);
+         pdfDelegate.$getByHandle('my-pdf-container').zoomTo(5);
+    }, 10000);
+     
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
     $scope.$parent.setHeaderFab('left');
@@ -327,11 +333,6 @@ angular.module('starter.controllers', [])
             startVelocity: 3000
         });
     }, 700);
-
-
-
-    
-
 
 })
 
@@ -369,7 +370,6 @@ angular.module('starter.controllers', [])
 
 .controller('WebinarsViewCtrl', function($scope, $state, $stateParams, $http, WebinarService, $ionicLoading) {
     //single webinar view
-    //$ionicLoading.show({     noBackdrop: true  });
     var WebinarId = $stateParams.id;
     $scope.webinar = WebinarService.getwebinarId(WebinarId);
 
@@ -407,8 +407,6 @@ angular.module('starter.controllers', [])
     // Set Ink
     ionicMaterialInk.displayEffect();
 
-
-
     //documentations list
     DocumentationService.all().then(function(data) {
         $scope.documentations = data;
@@ -420,13 +418,6 @@ angular.module('starter.controllers', [])
         $scope.content = data;
         $ionicLoading.hide();
     });
-
-    //open pdf in browser
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
-    };
 
 })
 
@@ -474,16 +465,8 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
     });
 
-    //open pdf in browser
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
-    };
 
 })
-
-
 
 .controller('300LogsCtrl', function($scope, $stateParams, $ionicLoading, $state, $timeout, ionicMaterialInk, ionicMaterialMotion, LogService) {
     // Set Header
@@ -528,12 +511,6 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
     });
 
-    //open pdf in browser
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
-    };
 
 })
 
@@ -582,26 +559,14 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
     });
 
-    //open pdf in browser
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
-    };
 
 })
-
-
-
 
 .controller('FormsCtrl', function($scope, $stateParams, $state, $ionicLoading, $timeout, ionicMaterialInk, ionicMaterialMotion, FormService) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    // $scope.$parent.setHeaderFab('left');
-    //$scope.$parent.setExpanded(false);
-    //$scope.$parent.setHeaderFab(false);
-
+   
     $timeout(function() {
         ionicMaterialMotion.slideUp({
             selector: '.slide-up'
@@ -637,16 +602,7 @@ angular.module('starter.controllers', [])
     });
 
 
-    //open pdf in content
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
-    };
-
 })
-
-
 
 
 .controller('safetyPostersCtrl', function($scope, $stateParams, $state, $timeout, ionicMaterialMotion, ionicMaterialInk, safetyPosters, $ionicPopup, $ionicLoading) {
@@ -656,7 +612,6 @@ angular.module('starter.controllers', [])
     $scope.isExpanded = true;
     $scope.$parent.setExpanded(false);
     $scope.$parent.setHeaderFab(false);
-    //$scope.$parent.hideHeader();
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -672,8 +627,6 @@ angular.module('starter.controllers', [])
 
     // Set Ink
     ionicMaterialInk.displayEffect();
-
-
 
     $scope.showPopup = function() {
         $scope.data = {};
@@ -698,8 +651,6 @@ angular.module('starter.controllers', [])
         }, 3000);
     };
 
-
-
     // list of safety posters
     safetyPosters.all().then(function(data) {
         $scope.posters = data;
@@ -715,29 +666,28 @@ angular.module('starter.controllers', [])
     var poster_id =  $stateParams.id;
     $scope.poster =  safetyPosters.getPosterId( poster_id );
 
-    //safety poster attachment
-     console.log($scope.poster);
     safetyPosters.getAttachment( poster_id ).then(function(data) {
         $scope.attachments = data;
-        console.log($scope.attachments);
 
     });
 
-    
-
-
-
-    //open pdf in  browser
-    $scope.OpenLink = function(link) {
-
-        window.open(link, '_blank', 'location=yes');
-
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+          $scope.shownGroup = null;
+        } else {
+          $scope.shownGroup = group;
+        }
     };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
+
 })
 
 
 
-.controller('OptionsTreeController', ['$scope','RepositoryService', function ($scope,RepositoryService) {
+.controller('OptionsTreeController', ['$scope','$state','RepositoryService', function ($scope,$state,RepositoryService) {
+    
     function init() {
 		RepositoryService.all().then(function(data)
 		{
@@ -745,7 +695,6 @@ angular.module('starter.controllers', [])
 			
 		});
       
-   
         $scope.options = { multipleSelect: true, showIcon: false };
 
         $scope.options1 = { showIcon: true, expandOnClick: true };
@@ -762,31 +711,25 @@ angular.module('starter.controllers', [])
             $scope.selectedNode = nodes;
             
             if($scope.selectedNode.ext != undefined && $scope.selectedNode.ext != ""){
-				
+
 				if($scope.selectedNode.ext == 'pdf'){
-					
-					//alert($scope.selectedNode.name);
-					
-					 //var inAppBrowser = window.open($scope.selectedNode.url,'_system','location=yes');
-					
-					window.open($scope.selectedNode.url, '_system', 'location=yes');
+
+                    $state.go('app.pdfView', { file_name: $scope.selectedNode.url, filetype:'repositary'});
 				}
 				else if($scope.selectedNode.ext == 'mp3') {
-					alert($scope.selectedNode.name);
+
+                    window.open(encodeURI($scope.selectedNode.url),'_system','location=yes');
 				}
 				else if($scope.selectedNode.ext == 'mp4') {
-					alert($scope.selectedNode.name);
+
+                    window.open(encodeURI($scope.selectedNode.url),'_system','location=yes');
 				}
 				else {
 					
 					alert("others images");
 				}
-				
-				//inAppBrowser.addEventListener('exit', function(event) { inAppBrowser.close(); });
-				
+								
 			} 
-            
-           
             
         }
     });
