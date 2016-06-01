@@ -6,7 +6,8 @@ angular.module('starter.services', [])
     var isAuthenticated = true;
     var LOCAL_TOKEN_KEY = 'user_credentials';
 
-
+    $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    
     function loadUserCredentials() {
         var uc = window.localStorage.getItem(LOCAL_TOKEN_KEY);
         if (uc) {
@@ -30,14 +31,14 @@ angular.module('starter.services', [])
 
 
         // Set the uc as header for your requests!
-        $http.defaults.headers.common.uid = uc.uid;
-        $http.defaults.headers.common.authorizationToken = uc.authorizationToken;
+        //$http.defaults.headers.common.uid = uc.uid;
+        //$http.defaults.headers.common.authorizationToken = uc.authorizationToken;
     }
 
     function destroyUserCredentials() {
         isAuthenticated = false;
-        $http.defaults.headers.common.uid = undefined;
-        $http.defaults.headers.common.authorizationToken = undefined;
+        //$http.defaults.headers.common.uid = undefined;
+        //$http.defaults.headers.common.authorizationToken = undefined;
         window.localStorage.removeItem(LOCAL_TOKEN_KEY);
 
         window.localStorage.removeItem("user_id");
@@ -75,11 +76,11 @@ angular.module('starter.services', [])
                       reject( 'Unknown Error.' );
                     }
 
-                    },
-                    function() 
-                    {
-                      reject( 'There is some connectivity issue .Please try again later.' );
-                    }
+                },
+                function() 
+                {
+                  reject( 'There is some connectivity issue .Please try again later.' );
+                }
                 );
 
         });
