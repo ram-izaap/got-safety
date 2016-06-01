@@ -9,3 +9,4 @@ core/config/database.php
 .htaccess
 *.htaccess
 application/controllers/Api.php
+IonicNew/resources
