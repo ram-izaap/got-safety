@@ -98,7 +98,9 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk, $ionicHistory) {
+.controller('LoginCtrl', function($scope, $timeout, $state, $ionicPopup, AuthService, $ionicLoading, ionicMaterialInk, $ionicHistory,AppConfig) {
+
+    alert(AppConfig.apiUrl);
 
     $scope.$parent.hideHeader();
     $scope.$parent.clearFabs();
@@ -115,7 +117,7 @@ angular.module('starter.controllers', [])
         AuthService.login($scope.data.username, $scope.data.pwd).then(function(response) {
 
                 $ionicLoading.hide();
-                $ionicHistory.currentView($ionicHistory.backView());//$ionicHistory.currentView(null);
+                $ionicHistory.currentView($ionicHistory.backView());
                 $state.go('app.safetyLessons');
             },
             function(err_msg) {

@@ -4,7 +4,7 @@
   <description>
         Simplest way to keep track of your documentation and safety lessons online and on your phone!
     </description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">
+    <author email="you@example.com" href="http://example.com.com/">
       Gotsafety
     </author>
   <content src="index.html"/>
@@ -15,6 +15,8 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="android-minSdkVersion" value="16" />
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
