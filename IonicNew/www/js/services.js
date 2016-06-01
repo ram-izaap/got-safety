@@ -16,6 +16,10 @@ angular.module('starter.services', [])
     }
 
     function storeUserCredentials(uc) {
+         window.localStorage.setItem("user_id", uc.id);
+         window.localStorage.setItem("client_id", uc.created_id);
+         window.localStorage.setItem("client_name", uc.client_name);
+
         window.localStorage.setItem(LOCAL_TOKEN_KEY, uc);
         useCredentials(uc);
     }
@@ -35,6 +39,10 @@ angular.module('starter.services', [])
         $http.defaults.headers.common.uid = undefined;
         $http.defaults.headers.common.authorizationToken = undefined;
         window.localStorage.removeItem(LOCAL_TOKEN_KEY);
+
+        window.localStorage.removeItem("user_id");
+        window.localStorage.removeItem("client_id");
+        window.localStorage.removeItem("client_name");
     }
 
     var login = function(name, password) {
@@ -53,11 +61,7 @@ angular.module('starter.services', [])
                     //console.log(user_data);
                     if( user_data.status != undefined && user_data.status == 'SUCCESS' )
                     {
-
-                      //store userid and clientid in localstorage
-                      window.localStorage.setItem("user_id", user_data.id);
-                      window.localStorage.setItem("client_id", user_data.created_id);
-
+                     
                       storeUserCredentials( user_data );
 
                       resolve('SUCCESS');
@@ -575,10 +579,10 @@ angular.module('starter.services', [])
 
     return {
               //list of reports
-        all: function() 
+        all: function(client_name) 
         {
                
-            return $http.get(AppConfig.apiUrl+'repository/repository?client_name=client').then(function(response)
+            return $http.get(AppConfig.apiUrl+'repository/repository?client_name='+client_name).then(function(response)
             {
               var data = response.data;
               

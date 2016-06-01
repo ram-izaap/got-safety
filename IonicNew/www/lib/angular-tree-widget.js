@@ -33,7 +33,7 @@
 
                                             //expanded all the nodes
                                             if (node.expanded === undefined && node.children != undefined) {
-                                                node.expanded = true;
+                                                node.expanded = false;
                                             }
                                             if (parent != undefined) {
                                                 node.parentId = parent.nodeId;

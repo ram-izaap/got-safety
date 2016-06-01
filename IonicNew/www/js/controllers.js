@@ -34,10 +34,8 @@ angular.module('starter.controllers', [])
     $scope.noHeader = function() {
         var content = document.getElementsByTagName('ion-content');
         for (var i = 0; i < content.length; i++) {
-          console.log('lllll');
             if (content[i].classList.contains('has-header')) {
                 content[i].classList.toggle('has-header');
-                console.log('kkkkkk');
             }
         }
     };
@@ -205,7 +203,6 @@ angular.module('starter.controllers', [])
     safetyLessons.getAttachment( lesson_id ).then(function(data) 
     {
         $scope.attachments = data;
-        console.log($scope.attachments);
 
     });
 
@@ -686,10 +683,12 @@ angular.module('starter.controllers', [])
 
 
 
-.controller('OptionsTreeController', ['$scope','$state','RepositoryService', function ($scope,$state,RepositoryService) {
+.controller('OptionsTreeController', ['$scope','$ionicModal','$state','RepositoryService', function ($scope,$ionicModal,$state,RepositoryService) {
     
+    $scope.client_name = window.localStorage.getItem('client_name');
+
     function init() {
-		RepositoryService.all().then(function(data)
+		RepositoryService.all( $scope.client_name ).then(function(data)
 		{
 			$scope.treeNodes = data; 
 			
@@ -697,12 +696,13 @@ angular.module('starter.controllers', [])
       
         $scope.options = { multipleSelect: true, showIcon: false };
 
-        $scope.options1 = { showIcon: true, expandOnClick: true };
+        $scope.options1 = { showIcon: true, expandOnClick: false };
 
     }
     init();
 
     $scope.$on('selection-changed', function (e, nodes) {
+
         if (nodes.length > 0) {
 			
             $scope.selectedNodes = nodes;
@@ -713,7 +713,6 @@ angular.module('starter.controllers', [])
             if($scope.selectedNode.ext != undefined && $scope.selectedNode.ext != ""){
 
 				if($scope.selectedNode.ext == 'pdf'){
-
                     $state.go('app.pdfView', { file_name: $scope.selectedNode.url, filetype:'repositary'});
 				}
 				else if($scope.selectedNode.ext == 'mp3') {
@@ -724,9 +723,36 @@ angular.module('starter.controllers', [])
 
                     window.open(encodeURI($scope.selectedNode.url),'_system','location=yes');
 				}
-				else {
-					
-					alert("others images");
+				else 
+                {
+                   $scope.modal = $ionicModal.fromTemplate('<div class="image-modal transparent"><i class="imageclose icon ion-close-circled" ng-click = "closeModal()"></i><ion-pane class="transparent item-icon-right"><img ng-src="'+$scope.selectedNode.url+'" class="fullscreen-image"/></ion-pane></div>', {
+                        scope: $scope,
+                        animation: 'slide-in-up'
+                    });
+
+                    $scope.openModal = function() {
+                      $scope.modal.show();
+                    };
+
+                    $scope.closeModal = function() {
+                      $scope.modal.hide();
+                      
+                    };
+
+                    //Cleanup the modal when we're done with it!
+                    $scope.$on('$destroy', function() {
+                      $scope.modal.remove();
+                    });
+                    // Execute action on hide modal
+                    $scope.$on('modal.hide', function() {
+                      $scope.modal.remove();
+                    });
+                    // Execute action on remove modal
+                    $scope.$on('modal.removed', function() {
+                      // Execute action
+                    });      
+                    $scope.openModal();
+
 				}
 								
 			} 
@@ -734,10 +760,5 @@ angular.module('starter.controllers', [])
         }
     });
 
-    $scope.$on('expanded-state-changed', function (e, node) {
-        // node - the node on which the expanded state changed
-        // to see the current state check the expanded property
-        $scope.exapndedNode = node;
-        //console.log(node.expanded);
-    });
+   
 }]);
