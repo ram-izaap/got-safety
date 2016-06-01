@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput', 'starter.constants', 'starter.services','pdf','TreeWidget'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services','ionic-material', 'ionMdInput', 'starter.constants', 'pdf','TreeWidget'])
 
     .constant('AUTH_EVENTS', {  notAuthenticated: 'auth-not-authenticated' })
 

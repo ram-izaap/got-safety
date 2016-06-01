@@ -1,6 +1,3 @@
-/* global angular, document, window */
-'use strict';
-
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $ionicPopover, $timeout, AuthService, $state) {
@@ -18,11 +15,6 @@ angular.module('starter.controllers', [])
       }
     };
     
-
-    ////////////////////////////////////////
-    // Layout Methods
-    ////////////////////////////////////////
-
     $scope.hideNavBar = function() {
         document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
