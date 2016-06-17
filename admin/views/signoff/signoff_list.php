@@ -30,7 +30,7 @@
 Search Export </a>
 						
 					<?php } ?>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-signoff','employee/employee_delete');" class="btn btn-success">
+	                        <a onclick="return DeleteCheckedRow(this,'delete-signoff','signoff/signoff_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>
                            

@@ -65,7 +65,7 @@
 					  
 					 <li <?php  if($this->uri->segment(1) == 'posters') { ?> class="active"; <?php }?>><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> */ ?>
 					  
-					  <li class="dropdown"><a role="button" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);"><i class="fa fa-user"></i> Client Area <span class="caret"></span></a>
+					 <?php /* <li class="dropdown"><a role="button" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);"><i class="fa fa-user"></i> Client Area <span class="caret"></span></a>
 						   <ul class="dropdown-menu">
 							  <li><a href="<?php echo base_url("lesson");?>">Safety Lessons</a></li>
 							  <li><a href="<?php echo base_url("menu/inspection");?>">Inspection Reports </a></li>
@@ -76,7 +76,7 @@
 							  <li><a href="<?php echo base_url("menu/forms");?>">Safety Forms </a></li>
 							  <li><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> 
 						   </ul>
-					</li>
+					</li> */ ?>
 				  
 				  <?php } ?>
 				  <?php if($this->session->userdata('user_id') == "") { ?>

@@ -128,7 +128,7 @@
 					<span class="vstar"<?php echo form_error('f_name_quiz', '<span class="help-block">', '</span>'); ?> </span>
 					
 						<?php 	if($edit_id != "") { ?>
-								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/admin/lession_attachment/quiz/<?php echo $form_data['f_name'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
+								<a  target="_blank" href="<?php echo $img_url; ?>assets/images/admin/lession_attachment/<?php echo $form_data['f_name_quiz'];?>" height="70px;" width="100px;"> <?php echo $form_data['f_name_quiz'];?> </a>
 							
 						<?php } ?>
 						
