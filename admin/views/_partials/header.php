@@ -514,10 +514,10 @@
 						<ul class="sub-menu">
 					<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>
-							<li> 
+							<?php /*<li> 
 								<a href="<?php echo site_url('lession/lesson_content'); ?>">
 								Frontend Content </a>
-							</li>
+							</li> */?>
 					<?php } ?>
 							
 							<li> 
@@ -688,10 +688,10 @@
 						<ul class="sub-menu">
 					<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>		
-							<li> 
+							<?php /*<li> 
 								<a href="<?php echo site_url('records/records_content'); ?>">
 								Frontend Content </a>
-							</li>
+							</li>*/ ?>
 					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('records/add_edit_records'); ?>">

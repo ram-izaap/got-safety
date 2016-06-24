@@ -173,8 +173,12 @@ class Employee_model extends App_Model {
 						$this->db->where("name" ,$csv_line[0]);
 						$result = $this->db->get()->result_array();
 						//print_r($result);exit;
-						$client_id = $result[0]['id'];
 						
+						if(count($result)>0){
+						$client_id = $result[0]['id'];
+						}else{
+							$client_id = "";
+						}
 						//echo $client_id;exit;
 						
 						$this->db->select('*');
