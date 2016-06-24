@@ -174,6 +174,7 @@ class Employee_model extends App_Model {
 						$result = $this->db->get()->result_array();
 						//print_r($result);exit;
 						$client_id = $result[0]['id'];
+						
 						//echo $client_id;exit;
 						
 						$this->db->select('*');

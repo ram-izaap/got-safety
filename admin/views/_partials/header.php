@@ -595,7 +595,7 @@
 						</ul>
 					</li> */ ?>
 					
-					
+				<?php /*	
 					
 					<li>
 						<a href="javascript:;">
@@ -676,7 +676,7 @@
 							
 						</ul>
 					</li>
-					
+					*/ ?>
 					
 					
 					<li>
@@ -732,7 +732,7 @@
 						</ul>
 					</li>
 					
-					
+				<?php /*	
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -761,7 +761,7 @@
 							
 						</ul>
 					</li>
-					
+					*/ ?>
 					
 					
 					

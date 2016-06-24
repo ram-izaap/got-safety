@@ -57,7 +57,7 @@
 	
 		$.fn.init_grid = function( options ) { 
 			
-			$("#"+options.data_tbl).find("thead").find('a').each(function(index,elm){ 
+			$("#"+options.data_tbl).find("thead").find('a').each(function(index,elm){  
 				tmp = "javascript:$.fn.display_grid('"+$(this).attr('href')+"', '"+options.data_tbl+"');";
 				$(this).attr({'href':'javascript:void(0);', 'onclick': tmp}).css({'cursor':'pointer'});
 				

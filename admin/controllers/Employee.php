@@ -283,6 +283,7 @@ class Employee extends Admin_controller {
     
     public function bulk_upload()
     {            
+		
 		if(!empty($_FILES['employee']['tmp_name'])){ 
 		
 		$data['result'] = $this->employee_model->upload_csv();

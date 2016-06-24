@@ -125,7 +125,7 @@ $config['user_index'] = array(
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'user/filter',
 	"base_url"	=> 	'/user/index/',
-	"per_page"	=>	"20",
+	"per_page"	=>	"4",
 	"fields"	=> array(   
 							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
 							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
