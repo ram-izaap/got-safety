@@ -227,12 +227,12 @@ class Login extends App_Controller {
 		            $ins_data['last_updated'] = date('Y-m-d H:i:s');
 		            $this->payment_model->insert("authorize_subscription",$ins_data);
 		            //Create Customer Profile Table Fields
+                    $up_data['userid'] = $userid;
 		            $up_data['customerid'] = $res['customer_id'];
 		            $up_data['profileid'] = $res['profileid'];
 		            $up_data['payment_pro_id'] = $res['paymentprofileid'];
 		            $up_data['ship_pro_id'] = $res['shippingprofileid'];
-		            //$up_data['id'] = $userid;
-		            $this->payment_model->update("users",$up_data,array("id" => $userid));
+		            $this->payment_model->insert("client_subscription",$up_data);
 		            //Create Auth Transaction Table Fields
 		            $trans_data['userid']= $userid;
 		            $trans_data['description']= $ins['description'];
