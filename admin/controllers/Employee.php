@@ -6,12 +6,10 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Employee extends Admin_controller {
 	
 	protected $_employee_validation_rules = array(
-													//array('field' => 'emp_id', 'label' => 'Employee ID', 'rules' => 'trim|required|callback_language_unique_check['.$edit_id.']'),
-													array('field' => 'employee_email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-                                                    array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
-                                                   
-													
-												);
+				//array('field' => 'emp_id', 'label' => 'Employee ID', 'rules' => 'trim|required|callback_language_unique_check['.$edit_id.']'),
+				array('field' => 'employee_email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+                array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
+               );
 					
     function __construct() 
     {
@@ -36,13 +34,10 @@ class Employee extends Admin_controller {
         //$this->load_settings_data();
         
         $this->simple_search_fields = array(
-                                                'employee_name' => 'Name',
-                                                'employee_email' => 'Email',
-                                                'emp_id' => 'Employee ID',
-                                                'name' => 'Client'
-                                                
-                                            
-        );
+                        'employee_name' => 'Name',
+                        'employee_email' => 'Email',
+                        'emp_id' => 'Employee ID',
+                        'name' => 'Client');
          
         $this->_narrow_search_conditions = array("start_date");
         

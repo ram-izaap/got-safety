@@ -73,6 +73,12 @@ class Login_Model extends CI_Model
     
     function insert($table_name,$data)
     {
+      if($table_name=="users")
+      {
+        $this->db->insert($table_name,$data);
+        return $this->db->insert_id();
+      }
+      else
         return $this->db->insert($table_name,$data);
     }
    

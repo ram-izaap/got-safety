@@ -44,7 +44,7 @@
 	
 </div>
 <div class="copyright">
-	 2014 © Metronic. Admin Dashboard Template.
+	 <?php echo date("Y");?> &copy; Got Safety. Admin Dashboard.
 </div>
 
 </body>

@@ -13,8 +13,16 @@
 
 
                <aside class="col-sm-12 bg-white inner-full">
+               <?php if($this->session->flashdata('signup_succ')==TRUE)
+                    {?>
+                     <div style="margin:0 auto;width:500px;padding:10px;background:#abe7ed;
+                     text-align:center;border:5px solid #abe7ed;color: #27a4b0;margin-top:20px;">
+                      <?php echo $this->session->flashdata('signup_succ');?>
+                      </div>
+                      <?php 
+                      }?>
                  <div class="inner-content form-wrap">
-                      
+                     
                     
                         
                         <div class="" data-form="register">
@@ -36,7 +44,7 @@
                                       <div class="row">
                                         <div class="col-sm-6">
                                           <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Name" onfocus="(this.value == 'Name') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Name')">
+                                            <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Username" onfocus="(this.value == 'Username') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Username')">
                                             <span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
                                           </div>
                                         </div>

@@ -62,7 +62,31 @@ $(function(){
             });
     });
 	
-	
+	$("input[name='pay_method']").click(function(){
+    val = $(this).val();
+    if(val==1)
+    {
+      $(".auth_div").hide();
+      $(".paypal_div").show();
+    }
+    else
+    {
+      $(".auth_div").show();
+      $(".paypal_div").hide();
+    }
+  });
+
+    val = $("input[name='pay_method']:checked").val();
+    if(val==1)
+    {
+      $(".auth_div").hide();
+      $(".paypal_div").show();
+    }
+    else
+    {
+      $(".auth_div").show();
+      $(".paypal_div").hide();
+    }
 
 });
 

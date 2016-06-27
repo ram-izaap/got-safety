@@ -24,14 +24,15 @@
                             <!-- Begin # Login Form -->
                             <form id="login-form" method="POST">
                             <div class="switch">
-                             <a class="active">login</a>
-                            
+                             <a class="active">login</a> or 
+                             <a href="<?php echo base_url('login/signup');?>">REGISTER</a>
                             </div> 
                             
                             <div class="">
                                     <div id="div-login-msg">
                                         <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                        <span class="form-title" id="text-login-msg">Login</span>
+                                        <span class="form-title" id="text-login-msg">Login</span> or
+
                                     </div>
                                       <div class="row">
                                         <div class="col-sm-12">
