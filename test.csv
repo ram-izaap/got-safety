@@ -1,6 +1,6 @@
-Client,Name,Email,Employee_ID
-client,sample,test@gmail.com,EMP10
-client,sample2,test@gmail.com,EMP15
-client,sample3,test@gmail.com,EMP17
-tester,sample3,test@gmail.com,EMP17
-client,sample44,test@gmail.com,EMP25
+Name,Email,Employee_ID
+sample,test@gmail.com,EMP10
+sample2,test@gmail.com,EMP15
+sample3,test@gmail.com,EMP17
+sample35,test@gmail.com,EMP27
+sample444,test@gmail.com,EMP26
