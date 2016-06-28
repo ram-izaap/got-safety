@@ -1,7 +1,7 @@
 <?php
 
 class Listing
-{ 
+{  
     const DIRECTION_ASC  = 'ASC';
     const DIRECTION_DESC = 'DESC';
 
@@ -11,7 +11,7 @@ class Listing
     private $_init_scripts = '';
     public $_per_page    = 20;
     private $_per_page_options    = array(20, 50, 100);
-    public $_uri_segment = 3;
+    public $_uri_segment = 4;
     public $_base_url    = '';
 
     private $_order_segment    = 1;
@@ -94,20 +94,19 @@ class Listing
         
 		$result = call_user_func($callback, $criteria);
 
-		$config['base_url']   = base_url().$this->_base_url;
+		$config['base_url']   = base_url().ltrim($this->_base_url,'/');
 	    $config['per_page']   = $this->_get_per_page();
         $config['cur_page']   = $this->_get_offset();
         $config['uri_segment']= $this->_uri_segment;
         $config['total_rows'] = $result['count'];
 
         $this->_CI->pagination->initialize($config);
-
         $data['order']             = $this->_get_order();
         $data['direction']         = $this->_get_direction();
         $data['default_direction'] = $this->_default_direction;
         $data['cur_page']          = $this->_get_offset();
         $data['per_page']          = $this->_get_per_page();
-        $data['base_url']          = base_url().$this->_base_url;
+        $data['base_url']          = base_url().ltrim($this->_base_url,'/');
         $data['list']              = $result['list'];
         $data['count']             = $result['count'];
         $data['pagination']        = $this->_CI->pagination->create_links();
@@ -340,13 +339,12 @@ class Listing
     }
 
     public static function reverse_direction($direction = null)
-    { 
+    {
         $direction = strtoupper($direction);
-        
 
         if ($direction == self::DIRECTION_ASC) {
             return self::DIRECTION_DESC;
-        }  else if ($direction == self::DIRECTION_DESC) { 
+        }  else if ($direction == self::DIRECTION_DESC) {
             return self::DIRECTION_ASC;  
         }   
 
@@ -375,12 +373,11 @@ class Listing
     function _get_direction()
     {
         $direction = $this->_CI->uri->segment($this->_uri_segment + $this->_dir_segment);
-        if (!$direction && $this->_CI->session->userdata($this->_CI->namespace.'_direction')) {  
+        if (!$direction && $this->_CI->session->userdata($this->_CI->namespace.'_direction')) {
             $direction = $this->_CI->session->userdata($this->_CI->namespace.'_direction');
         }
-        if (self::is_valid_direction($direction)) { 
+        if (self::is_valid_direction($direction)) {
         	$this->_CI->session->set_userdata($this->_CI->namespace.'_direction', $direction);
-        	
             return $direction;
         }
         return $this->_default_direction;

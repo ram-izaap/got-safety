@@ -3,7 +3,7 @@
 		<div class="col-lg-12">
 			<div class="row">
               <div class="col-lg-12" style="margin-left: -10px;">
-                <h1 class="pull-left"><b>Sign off</b></h1>
+                <h1 class="pull-left"><b>Training Records</b></h1>
                 </div>
                 
                  <?php /*
@@ -15,7 +15,7 @@
 					<ol class="breadcrumb">
 						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>Sign off</span>
+						<li class="active"><span>Training Records</span>
 						</li>
 					</ol>
 				 

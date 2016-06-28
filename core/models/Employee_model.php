@@ -168,7 +168,7 @@ class Employee_model extends App_Model {
 				for ($i = 1, $j = count($csv_line) ; $i < $j; $i++) 
 				  { //print $csv_line[0];exit;
 					  
-						$this->db->select('id');
+						/*$this->db->select('id');
 						$this->db->from('users');
 						$this->db->where("name" ,$csv_line[0]);
 						$result = $this->db->get()->result_array();
@@ -178,12 +178,14 @@ class Employee_model extends App_Model {
 						$client_id = $result[0]['id'];
 						}else{
 							$client_id = "";
-						}
+						}*/
 						//echo $client_id;exit;
+						$client_id =  $this->session->userdata('admin_data')['id'];
+						//print_r($client_id);exit;
 						
 						$this->db->select('*');
 						$this->db->from('employee');
-						$this->db->where("emp_id" ,$csv_line[3]);
+						$this->db->where("emp_id" ,$csv_line[2]);
 						$this->db->where("created_user" ,$client_id);
 						$result_employee = $this->db->get()->result_array();
 						//print_r(count($result_employee));exit;
@@ -191,9 +193,9 @@ class Employee_model extends App_Model {
 						if(count($result_employee) == 0) {
 						$insert_csv = array();
 						$insert_csv['client'] = $client_id;
-						$insert_csv['name'] = $csv_line[1];
-						$insert_csv['email'] = $csv_line[2];
-						$insert_csv['employee_id'] = $csv_line[3];
+						$insert_csv['name'] = $csv_line[0];
+						$insert_csv['email'] = $csv_line[1];
+						$insert_csv['employee_id'] = $csv_line[2];
 					}else {
 						
 						$insert_csv = array();

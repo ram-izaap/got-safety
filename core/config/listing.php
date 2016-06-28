@@ -35,10 +35,10 @@ $config['lession_index'] = array(
 	"base_url"	=> 	'/lession/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link', 'sortable' => FALSE, 'default_view'=>1)                             
+						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -52,9 +52,9 @@ $config['attachment_index'] = array(
 	"base_url"	=> 	'/attachment/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
 							//'type'=>array('name'=>'Type', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -68,8 +68,8 @@ $config['lang_index'] = array(
 	"base_url"	=> 	'/lang/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'lang'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'lang'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -82,8 +82,8 @@ $config['webinars_index'] = array(
 	"base_url"	=> 	'/webinars/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -97,8 +97,8 @@ $config['page_index'] = array(
 	"base_url"	=> 	'/page/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -112,8 +112,8 @@ $config['addpages_index'] = array(
 	"base_url"	=> 	'/addpages/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'page_title'=>array('name'=>'Page Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'page_title'=>array('name'=>'Page Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -124,13 +124,13 @@ $config['user_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'user/filter',
-	"base_url"	=> 	'/user/index/',
+	"base_url"	=> 	'user/index/',
 	"per_page"	=>	"4",
 	"fields"	=> array(   
-							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),                             
-                             'id'=>array('name'=>'Add User', 'data_type' => 'admin_client_list', 'sortable' => FALSE, 'default_view'=>1)                             
+							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),                             
+                             'id'=>array('name'=>'Add User', 'data_type' => 'admin_client_list', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -144,9 +144,9 @@ $config['client_index'] = array(
 	"base_url"	=> 	'/client/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -159,8 +159,8 @@ $config['inspection_index'] = array(
 	"base_url"	=> 	'/inspection/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -174,8 +174,8 @@ $config['osha_index'] = array(
 	"base_url"	=> 	'/osha/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -189,8 +189,8 @@ $config['documents_index'] = array(
 	"base_url"	=> 	'/documents/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -204,8 +204,8 @@ $config['records_index'] = array(
 	"base_url"	=> 	'/records/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -219,8 +219,8 @@ $config['forms_index'] = array(
 	"base_url"	=> 	'/forms/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_display'=>array('name'=>'Is Dispaly', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -234,10 +234,10 @@ $config['posters_index'] = array(
 	"base_url"	=> 	'/posters/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),
+						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link2', 'sortable' => FALSE, 'default_view'=>1)                             
+						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link2', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -251,9 +251,9 @@ $config['attach_index'] = array(
 	"base_url"	=> 	'/attach/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
 							//'type'=>array('name'=>'Type', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -267,11 +267,11 @@ $config['employee_index'] = array(
 	"base_url"	=> 	'/employee/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'employee_name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-							'employee_email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-							'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-							'created_user'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => FALSE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							'employee_name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							'employee_email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							'created_user'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => TRUE, 'default_view'=>1),
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -285,11 +285,11 @@ $config['signoff_index'] = array(
 	"base_url"	=> 	'/signoff/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => FALSE, 'default_view'=>1),
-							 'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
-                             'title'=>array('name'=>'Topic', 'data_type' => 'find_topic', 'sortable' => FALSE, 'default_view'=>1),                             
-                             'client_id'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => FALSE, 'default_view'=>1),                             
-                             'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
+							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => TRUE, 'default_view'=>1),
+							 'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             'title'=>array('name'=>'Topic', 'data_type' => 'find_topic', 'sortable' => TRUE, 'default_view'=>1),                             
+                             'client_id'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => TRUE, 'default_view'=>1),                             
+                             'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

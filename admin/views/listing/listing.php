@@ -28,6 +28,7 @@
 									<?php  $cols = 0; foreach ($fields as $field => $values):$cols++;?>
 									<?php if($values['default_view'] == '0') continue; ?>
 									<th>
+										<input type="hidden" value="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>"> 
 									<a href="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>" data-original-title="Click to sort" data-toggle="tooltip" data-placement="top" title="Click to sort">
 										<?php echo $values['name'];?> 
 									</a>

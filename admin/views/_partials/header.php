@@ -715,10 +715,10 @@
 						<ul class="sub-menu">
 					<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>		
-							<li> 
+							<?php /*<li> 
 								<a href="<?php echo site_url('forms/forms_content'); ?>">
 								Frontend Content </a>
-							</li>
+							</li>*/?>
 					<?php } ?>		
 							<li> 
 								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
@@ -807,7 +807,8 @@
 							</ul>
 						</li>
 					<?php } */ ?>
-					
+				<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 2){ ?>	
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -832,7 +833,7 @@
 						</ul>
 					</li>
 					
-					
+					<?php } ?>
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
