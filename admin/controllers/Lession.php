@@ -46,7 +46,8 @@ class Lession extends Admin_controller {
         
         $this->simple_search_fields = array(
                                                 
-                                                'title' => 'Title'
+                                                'l.title' => 'Title',
+                                                'a.language'=> 'Language'
                                             
         );
          

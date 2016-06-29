@@ -27,13 +27,21 @@ class Lession_model extends App_Model {
 		}
 		
 		
-        $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
+        //$this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
+        
+        
+        
+        $this->_fields = "l.*,l.id as id, IF(l.is_active='1','Active','Inactive') as is_active";
+       $this->db->from('lession l');
+       $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
+       $this->db->group_by('l.id');
+       
         if($role == '2'){
-        $this->db->where('created_user',$user_id);
-        $this->db->where('to_date >=',$date);
+        $this->db->where('l.created_user',$user_id);
+        $this->db->where('l.to_date >=',$date);
         }else {
-			$this->db->where('updated_user',$user_id);
-			$this->db->where('to_date >=',$date);
+			$this->db->where('l.updated_user',$user_id);
+			$this->db->where('l.to_date >=',$date);
 		}
        
         foreach ($this->criteria as $key => $value) 
@@ -43,8 +51,16 @@ class Lession_model extends App_Model {
 
             switch ($key)
             {
-                case 'title':
+                /*case 'title':
                     $this->db->like($key, $value);
+                break; */
+                
+                case 'l.title':
+                     $this->db->like('l.title', $value);
+                break;
+                
+                case 'a.language':
+                    $this->db->like('a.language', $value);
                 break;
                  
                
