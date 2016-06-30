@@ -24,6 +24,7 @@ class Payment extends App_Controller
      
      protected $payment_method;
      
+     
      function __construct()
      {
         parent::__construct();
@@ -70,6 +71,7 @@ class Payment extends App_Controller
      {
         
      }
+     
      
      //paypal set express checkout
      function paypal()
