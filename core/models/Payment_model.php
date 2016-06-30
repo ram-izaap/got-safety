@@ -19,7 +19,6 @@ class Payment_model extends App_Model
     }
 	function get_pay_info($table_name,$where)
     {
-		
 		$result = $this->db->get_where($table_name,$where);
         return $result->result_array();
 	}

@@ -23,7 +23,7 @@ function get_current_user_id()
     $current_user = get_user_data();
     
     if(!empty($current_user)) {
-        return $current_user['id'];
+        return $current_user['user_id'];
     }
 }
 function get_user_data()
@@ -31,9 +31,8 @@ function get_user_data()
   $CI = get_instance();
     
         
-    if($CI->session->userdata('user_data'))
-    {
-        return $CI->session->userdata('user_data');
+    if($CI->session->userdata('user_detail')){
+        return $CI->session->userdata('user_detail');
     }
     else
     {
@@ -492,6 +491,26 @@ function is_valid_user($user_id = 0)
 function get_img_dir(){
 	$CI = & get_instance();
 	return $CI->layout->get_img_dir(); 
+}
+
+function api_credentials($payment_mode)
+{
+    $CI = & get_instance();
+    
+    $api_credentials = $CI->db->query("select * from payment_api_credentials where payment_mode='".$payment_mode."'")->row_array();
+    
+   if($payment_mode == 'sandbox') { 
+    $api = array(
+			'Sandbox' => (isset($api_credentials['payment_mode']) && ($api_credentials['payment_mode']=='sandbox'))?true:false, 			
+			'APIUsername' => $api_credentials['api_username'], 	
+			'APIPassword' => $api_credentials['api_password'], 	
+			'APISignature' => $api_credentials['api_signature'], 	
+			'APISubject' => '', 									
+			'APIVersion' => $api_credentials['api_version']		
+		);
+   }
+   
+   return $api;     
 }
 
 ?>

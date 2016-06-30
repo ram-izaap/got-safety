@@ -161,14 +161,13 @@
 	                      </div>
 	                    </div>
 	                   </div>
-	                   <div class="row">
+	                    <div class="row">
 	                   		<div class="col-sm-12">
 	                   			<input type="submit" class="btn btn-block client-login btn-danger" name="submit" value="Pay & Register">
 	                   		</div>
-	                   </div>
-
-								</form>
-							</div>
+	                    </div>
+						</form>
+					</div>
 				</div>
 			</aside>
 		</div>

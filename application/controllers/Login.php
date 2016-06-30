@@ -49,32 +49,29 @@ class Login extends App_Controller {
 			
 		$this->form_validation->set_rules($this->_login_validation_rules);
        
-        if($this->form_validation->run())
-        {
-            $form = $this->input->post();
-           
+        if($this->form_validation->run()){
+            $form      = $this->input->post();
             $user_data = $this->login_model->user_login($form['name'], $form['password']);
             
-            if($user_data == 1)
-            { 
+            if($user_data == 1){ 
 				  //$this->service_message->set_flash_message('login_success');
-                redirect(" ");
+                redirect("");
             }
-            else{ 
-				
+            else
+            { 
 				// $this->service_message->set_flash_message('login_unsuccess');
 				redirect("login");
 			}
             
         }
         
-         if($this->input->post()) {
-                   
-                    $this->data['form_data']      = $_POST; 
-                }
+         if($this->input->post()) {  
+            $this->data['form_data']      = $_POST; 
+         }
         
-		}else { 
-			
+		}
+        else 
+        { 
 			$this->data['form_data'] = array("name" => "","password" => "");
 		}
 		
@@ -85,10 +82,7 @@ class Login extends App_Controller {
     
     function signup()
 	{
-		if($_POST) 
-		{
-			 
-          
+		if($_POST) {
             $this->load->library('email');
             
             $this->form_validation->set_rules($this->_signup_validation_rules);
@@ -106,7 +100,7 @@ class Login extends App_Controller {
 				$ins_data['language']  = 1;
 				$ins_data['created_id']  = 8;
 			 	$folder = $ins_data['name'];	
-			 	$this->session->set_userdata($ins_data);
+			 	$this->session->set_userdata("signup_data",$ins_data);
 				/*mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
                 echo $add_user    = $this->login_model->insert("users",$ins_data);
                 exit;
@@ -124,7 +118,8 @@ class Login extends App_Controller {
 				$this->email->subject('Signup Successfully');
 				$this->email->message($msg);
 				$this->email->send();*/
-               	redirect('login/payment');
+               //	redirect('login/payment');
+               redirect("payment");
             }
             if($this->input->post())
             {

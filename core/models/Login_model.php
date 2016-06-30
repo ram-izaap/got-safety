@@ -73,6 +73,8 @@ class Login_Model extends CI_Model
     
     function insert($table_name,$data)
     {
+        
+       $data['password'] = md5($data['password']); 
       if($table_name=="users")
       {
         $this->db->insert($table_name,$data);
