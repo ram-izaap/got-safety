@@ -66,9 +66,6 @@
 						{
 							foreach ($grid as $val)
 							{
-								$status="";
-								if( $val['status'] == "settledSuccessfully")
-									$status = "Settled";
 								?>
 								<tr>
 									<td><?php echo $val['name'];?></td>
@@ -76,7 +73,7 @@
 									<td><?php echo $val['sub_id'];?></td>
 									<td><?php echo $val['invoice_no'];?></td>
 									<td><?php echo $val['trans_id'];?></td>
-									<td><?php echo $status;?></td>
+									<td><?php echo $val['status'];?></td>
 									<td><?php echo "$".number_format($val['amount'],2);?></td>
 									<td><?php echo date('d-m-Y H:i:s',strtotime($val['date']));?></td>
 								</tr>

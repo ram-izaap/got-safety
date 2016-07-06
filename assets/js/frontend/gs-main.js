@@ -76,6 +76,16 @@ $(function(){
     }
   });
 
+
+
+  $("input[name='plan']").click(function(){
+      val = $(this).val();
+      value = val.split("-");
+      $("input[name='plan_name']").val(value[0]);
+      $("input[name='plan_cost']").val(value[1]);
+  });
+
+
     val = $("input[name='pay_method']:checked").val();
     if(val==1)
     {
