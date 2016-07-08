@@ -105,16 +105,25 @@ class Attachment extends Admin_controller {
 			$this->data['get_menu'] = $this->attachment_model->get_menu("language");
 			
 			$this->form_validation->set_rules($this->_attachment_validation_rules);
-			 if ( empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
+			 /*Changed By Ram*/
+			if($this->input->post('type')=="2" || $this->input->post('type')=="3")
 			{
-				$this->form_validation->set_rules('f_name', 'lesson', 'required');
-			} 
-			
-			 if ( empty($_FILES['f_name_quiz']['name']) && empty($_POST['slide_image2']) )
+				$this->form_validation->set_rules('l_url', 'lesson url', 'required');
+				$this->form_validation->set_rules('q_url', 'quiz url', 'required');
+			}
+			if($this->input->post('type')=="1")
 			{
-				$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
-			} 
-			
+				if ( empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
+				{
+					$this->form_validation->set_rules('f_name', 'lesson', 'required');
+				} 
+				
+				if ( empty($_FILES['f_name_quiz']['name']) && empty($_POST['slide_image2']) )
+				{
+					$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
+				} 
+			}	
+			 /*End Changed By Ram*/		
 			if(isset($_POST['language'])) {
 					$this->form_validation->set_rules('language', 'Language', 'trim|required|callback_language_unique_check['.$edit_id.']');
 			}
@@ -158,13 +167,24 @@ class Attachment extends Admin_controller {
 			$ins_data = array();
             $ins_data['lession_id']       	= $id;
             $ins_data['language']          = $form['language'];
-           $ins_data['type']          = $form['type'];
+          	$ins_data['type']          = $form['type'];
             $ins_data['is_active']  = $form['is_active'];
-			$ins_data['f_name']  = $filename;
-			$ins_data['f_name_quiz']  = $filename2;
+            /*Changed By Ram*/
+            if($this->input->post('type')=="1")
+            {
+				$ins_data['f_name']  = $filename;
+				$ins_data['f_name_quiz']  = $filename2;
+			}
+			else
+			{
+				$ins_data['f_name']  = $form['l_url'];
+				$ins_data['f_name_quiz']  = $form['q_url'];
+			}
+			 /*End Changed By Ram*/
            
 			//$this->header_model->update('cub_search_nav_bar',$ins_data);
-			if(empty($edit_id)){
+			if(empty($edit_id))
+			{
 			      
                      $social_data = $this->attachment_model->insert("lession_attachment",$ins_data);
                     // $this->service_message->set_flash_message('record_insert_success');

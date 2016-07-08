@@ -183,9 +183,30 @@ function get_export()
           },
          
         }); 
-        
-        
-        
-             
-	
 }
+function mediatype(val)
+{
+	$(".media-opt,.non-media-opt").hide();
+	if(val==1)
+	{
+		$(".non-media-opt").show();
+		$(".media-opt").hide();
+	}
+	else if(val==2 || val==3)
+	{
+		$(".non-media-opt").hide();
+		$(".media-opt").show();
+	}
+}
+val= $("select[name='type']").val();
+$(".media-opt,.non-media-opt").hide();
+	if(val==1)
+	{
+		$(".non-media-opt").show();
+		$(".media-opt").hide();
+	}
+	else if(val==2 || val==3)
+	{
+		$(".non-media-opt").hide();
+		$(".media-opt").show();
+	}
