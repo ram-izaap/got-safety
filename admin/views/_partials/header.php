@@ -852,6 +852,74 @@
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
+						<span class="title">Plans</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+						   <li> 
+								<a href="<?php echo site_url('plan/add_plan'); ?>">
+								Add Plans </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('plan'); ?>">
+								Manage Plans </a>
+							</li>							
+						</ul>
+					</li>
+
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Category</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+						   <li> 
+								<a href="<?php echo site_url('category/add_category'); ?>">
+								Add Category </a>
+							</li>
+							
+							<li> 
+								<a href="<?php echo site_url('category'); ?>">
+								Manage Category </a>
+							</li>							
+						</ul>
+					</li>
+
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Attribute</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+						  <li> 
+							<a href="<?php echo site_url('attribute/attribute_value'); ?>">
+							Manage Attribute </a>
+						  </li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
+						<span class="title">Product</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+						  <li> 
+							<a href="<?php echo site_url('product/add_product'); ?>">
+							Add Product </a>
+						  </li>
+						  <li> 
+							<a href="<?php echo site_url('product'); ?>">
+							Manage Product </a>
+						  </li>
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:;">
+						<i class="icon-user"></i>
 						<span class="title">Payment Info</span>
 						<span class="arrow "></span>
 						</a>

@@ -74,6 +74,16 @@
                                     
                                       
                                 </div>
+                                <?php foreach ($plan_data as $key=>$value): ?>
+                                <div data-view="git-group">
+                                  <div class="gif-listing">
+                                    <label><input type="radio" name="plan_type" id="plan_type" value="<?php echo $value['id']; ?>" <?php echo set_radio('plan_type', $value['id'])?>/><h5><?php echo $value['plan_type']; ?></h5></label>
+                                      <p><?php echo $value['plan_amount']; ?></p>
+                                    <p><?php echo $value['plan_desc']; ?></p>
+                                   </div>
+                                   </div>
+                                <?php endforeach; ?>
+                   <span class="vstar" <?php echo form_error('plan_type', '<span class="help-block">', '</span>'); ?></span>
                                 <div class="">
                                     <div>
                                         <input type="submit" value="REGISTER" class="btn btn-danger btn-block client-login">

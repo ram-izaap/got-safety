@@ -14,7 +14,8 @@ class Login extends App_Controller {
 			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
 			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
             array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
-            array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]')
+            array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
+            array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
            
 		);
 	protected $_auth_validation_rules =    array (
@@ -40,6 +41,7 @@ class Login extends App_Controller {
         
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker'));
         $this->load->model(array('login_model'));
+        $this->load->model('plan_model');
        
     }
 
@@ -95,6 +97,7 @@ class Login extends App_Controller {
                 $ins_data['email']  = $form['email'];
                 $ins_data['role']  = 2;
                 $ins_data['password']  = $form['password'];
+                $ins_data['plan_type']  = $form['plan_type'];
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
 				$ins_data['is_active']  = 1;
 				$ins_data['language']  = 1;
@@ -130,8 +133,9 @@ class Login extends App_Controller {
         else
         { 
             
-            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-        }		
+            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "",,"plan_type" =>"");        
+        }
+        $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));		
 		$this->layout->view('signup','frontend');
 		
 	}

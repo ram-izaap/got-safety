@@ -184,6 +184,231 @@ function get_export()
          
         }); 
 }
+
+/* Save Attribute */
+
+function add_attr_name()
+{
+    $('#attr_form').modal('show');
+    $('.modal-title').text('Add Attribute');
+    $(".err").hide();
+}
+
+$('#save_attr_name').on("click",function(event) {
+
+    var url=base_url+'attribute/add_edit_attr/',
+    attr_name = $("input[name='attr_name']").val(),
+    edit_id = $("input[name='edit_id']").val();
+
+    if(attr_name=='')
+    {
+        $(".err").show();
+        event.preventDefault();
+        return false;
+    }
+
+    else
+    {
+        if(edit_id!='')
+           save_method = 'update';
+        else
+           save_method='add';	
+
+
+        var data = 'attr_name='+ attr_name +'&edit_id=' + edit_id+'&save_method=' + save_method; 
+
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: data,
+            dataType: "JSON",
+            success: function(data)
+            {
+                if(data.status)
+                {
+                    $('#attr_form').modal('hide');
+                    window.location.href= base_url+'attribute';
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error adding / update data');
+                window.location.href= base_url+'attribute';
+            }
+        });
+    }
+});
+
+
+function edit_attr_name(id)
+{
+    save_method='list';
+    var data = 'save_method=' + save_method;
+
+    $(".err").hide();
+
+    $.ajax({
+        url : base_url+'attribute/add_edit_attr/'+id, 
+        type: "POST",
+        dataType: "JSON",
+        data:data,
+
+        success: function(data)
+        {
+        	
+            $('input[name="attr_name"]').val(data.attr_name);
+            $('input[name="edit_id"]').val(data.id);
+            $('.modal-title').text('Edit Attribute');
+            $('#attr_form').modal('show');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+/* Save Attribute Values */
+
+$(".add_attr_val").on("click",function()
+{
+
+    var id = $(this).attr("id1"),
+        attr_id = $(this).attr("attr_id"),
+        attr_val = $(this).attr("attr_val"),
+        url = base_url+'attribute/get_attribute/';
+      
+        var data = 'attr_id=' + attr_id;
+
+       $(".err").hide();
+       $(".err1").hide();
+
+       $(".modal-title").text("Edit Attribute Value");    
+
+    $('.attr_names').html('');
+     $.ajax({
+        url : url,
+        type: "POST",
+        dataType: "JSON",
+        data:data,
+        success: function(data)
+        {
+            $('.attr_names').append("<option value=''>Select Attribute</option>");
+            
+            $.each(data, function(index,item) {
+                if(item.id==attr_id)
+                    var selected1="selected";
+                else
+                    var selected1='';
+                $('.attr_names').append("<option value='"+item.id+"' "+selected1+">"+item.attr_name+"</option>");
+            });
+            
+            $("input[name='edit_id']").val(id);
+            $("input[name='attr_val']").val(attr_val);
+            $('#attr_form').modal('show');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+
+        }
+    });
+});
+
+$('#save_attr_value').on("click",function(event) {
+
+    var url = base_url+'attribute/add_edit_attr_val/',
+        attr_name = $(".attr_names option:selected").val(),
+        attr_val = $("input[name='attr_val']").val(),
+        edit_id = $("input[name='edit_id']").val();
+        
+
+    if(attr_name=='' && attr_val=='') 
+    {
+        $(".err").show();
+        $(".err1").show();
+        event.preventDefault();
+        return false;
+    }
+    else if(attr_name=='')
+    {
+       $(".err").show();
+       $(".err1").hide();
+        event.preventDefault();
+        return false;
+    }
+    else if(attr_val=='')
+    {
+       $(".err").hide();
+       $(".err1").show();
+        event.preventDefault();
+        return false;
+    }
+
+    else
+    {
+        if(edit_id!='')
+           save_method = 'update';
+        else
+           save_method='add';   
+
+        var data = 'attr_name='+ attr_name +'&attr_val=' + attr_val +'&edit_id=' + edit_id+'&save_method=' + save_method; 
+
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: data,
+            dataType: "JSON",
+            success: function(data)
+            {
+                if(data.status)
+                {
+                    $('#attr_form').modal('hide');
+                    window.location.href= base_url+'attribute/attribute_value';
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error adding / update data');
+                window.location.href= base_url+'attribute/attribute_value';
+            }
+        });
+    }
+});
+
+/* Select Attribute to load the Attribute Value in Product Add Page */
+
+$('.sel_attr_type').on("change",function() {
+  var type = $(this).val(),
+      edit_id = $("input[name='edit_id']").val(),
+      url = base_url+'product/get_attributes/'+type+'/'+edit_id;
+      
+      $("#attr_list").hide();
+
+      if(type!='')
+      {
+          $.ajax({
+                url : url,
+                type: "GET",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    console.log(data.content);
+                    if(data.status=='success')
+                    {
+                        $("#attr_list").show();
+                       $("#attr_list").html(data.content);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error get data from ajax');
+                }
+          });
+      }
+  });
+
+  
 function mediatype(val)
 {
 	$(".media-opt,.non-media-opt").hide();
