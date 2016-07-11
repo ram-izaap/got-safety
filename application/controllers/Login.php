@@ -133,7 +133,7 @@ class Login extends App_Controller {
         else
         { 
             
-            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "",,"plan_type" =>"");        
+            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","plan_type" =>"");        
         }
         $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));		
 		$this->layout->view('signup','frontend');
