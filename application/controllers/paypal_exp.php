@@ -208,7 +208,7 @@ class Paypal_exp extends Cart_controller {
 			$this->remove_session();
 			$this->session->unset_userdata('express_check_token');
 
-			/*$so_id = 0;
+			$so_id = 0;
 
 			if(!empty($response['REQUESTDATA']['PAYMENTREQUEST_0_CUSTOM']))
 			{
@@ -218,7 +218,7 @@ class Paypal_exp extends Cart_controller {
 
 
 			if(!$so_id)
-				redirect('');*/
+				redirect('');
 				
 			$this->session->set_flashdata('so_id1', $so_id);
 	    	$this->session->set_flashdata('message', 'Your Order has been processed successfully.');
@@ -259,6 +259,7 @@ class Paypal_exp extends Cart_controller {
 	  			$custom['so_id'] 	= $payment['so_id'];
 	  			$custom['email'] 	= $payment['email'];
 	  			$custom['country'] 	= $payment['country'];
+	  			$params['custom']   = $custom;
 	  		}	
 
   		return 	$params;

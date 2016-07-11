@@ -237,131 +237,50 @@ class Paypal_lib
 			$response = $_POST;
 			parse_str($response['custom'], $custom);
 			
-			$so_id = isset($custom['so_id'])?(int)$custom['so_id']:0;
-			actionLogAdd('sales_order','IPN Call from Paypal.'.json_encode($response),$so_id);
+			$this->CI->load->model('checkout_model');
+			$this->CI->load->library('email_manager');
+
+
+			$so_id = isset($custom['so_id'])?(int)$custom['so_id']:0;            
+            $this->checkout_model->addaction_loginfo('sales_order', 'IPN Call from Paypal.'.json_encode($response), $so_id);
 
 			if( !isset($custom['so_id']) )
 				throw new Exception('Invalid sales order id');
 			
 			$so_id = $custom['so_id'];
 			
-			$payment_settings 		= get_settings($this->_sales_channel_id, 'payment');
 			$this->environment 		= isset($payment_settings['mode'])?$payment_settings['mode']:'';
 			
 			
-			$this->CI->load->model('sales_order_model');
-			$this->CI->load->library('email_manager');
 			
 			if ($this->validate_ipn($so_id) && (($this->environment == 'live' && $response['payment_status'] == 'Completed') || $this->environment == 'sandbox'))
 			{
-				$this->CI->load->model('address_model');
-				$this->CI->load->model('shipment_model');
-				$this->CI->load->model('product_model');
-				//load order manager
-				$this->CI->load->library('order_manager');
-				
-				$shipment_details = $this->CI->shipment_model->get_where(array('sales_order_id' => $so_id));
-			
-				if(!$shipment_details->num_rows())
-				{
-					$billing_address = array(
-							'name' 			=> $response['address_name'],
-							'first_name'	=> $response['first_name'],
-							'last_name'		=> $response['last_name'],
-							'company'		=> '',
-							'email' 		=> $custom['email'],
-							'address1' 		=> $response['address_street'],
-							'address2' 		=> '',
-							'city' 			=> $response['address_city'],
-							'state' 		=> $response['address_state'],
-							'country' 		=> $response['address_country_code'],
-							'zip' 			=> $response['address_zip'],
-							'phone' 		=> '',
-							'user_id' 		=> $custom['user_id'],
-							'created_id' 	=> $custom['user_id'],
-							'updated_id' 	=> $custom['user_id'],
-							'created_time' 	=> date('Y-m-d H:i:s', local_to_gmt()),
-							'updated_time' 	=> date('Y-m-d H:i:s', local_to_gmt()),
-							'type'			=> 'B'
-					);
-			
-					list($bill_contact, $ship_add) = $this->CI->address_model->create_or_update_address($billing_address);
-			
-					$order_status = 'ACCEPTED';
-			
-					$this->CI->load->helper('shipping');
-					$blocked_countries = get_shipping_blocked_countries(true, $this->_sales_channel_id);
-					if(in_array($custom['country'], $blocked_countries))
-					{
-						$order_status = 'HOLD';
-					}
-			
-					//update sales_order
-					$txn = array(
-							'order_status' => $order_status,
-							'txn_id' => $response['txn_id'],
-							'billing_address_id' => $bill_contact
-					);
-					$this->CI->sales_order_model->update(array('id' => $so_id), $txn);
-			
-					
-					//create double entry
-					$this->CI->load->library('account_manager');
-					$this->CI->account_manager->sales_order_initial_entry( $so_id );
-					 
-					$params = array();
-					$params['amount'] 		= $response['mc_gross'];
-					$params['orders_id'] 	= array($so_id);
-					$params['payment_mode'] = 'paypal';
-					$this->CI->account_manager->initialize($params);
-				
-					$this->CI->account_manager->make_payment();			
-			
-					//Update status 'HOLD' while Mismatch shipping/billing and total amount greater 200
-					$bill_adddress = $this->CI->address_model->check_mismatch_address_by_sales_order($so_id,'B');
-			        $ship_adddress = $this->CI->address_model->check_mismatch_address_by_sales_order($so_id,'S');
-
-			        $bill_adddress = strtolower(implode('-',$bill_adddress));
-			        $ship_adddress = strtolower(implode('-',$ship_adddress));
-
-					if($response['mc_gross'] >= 250 && strcmp($bill_adddress,$ship_adddress)!==0){
-
-						$this->CI->sales_order_model->update(array('id' => $so_id), array('order_status'=>'HOLD'));
-						actionLogAdd('sales_order','The sales Order # '.$so_id.' has mismatched shipping/billing address or order amount greater than $200 and status has been set as HOLD',$so_id);
-					}					
-			        else
-			        {  
-
-						$auto_order = $this->CI->order_manager->check_auto_order_status_by_sales_order($so_id);
-				
-						//create purchase orders
-						if($auto_order === TRUE)
-						{
-							if($this->CI->order_manager->create_shipments_and_purchase_orders($so_id) === FALSE)
-								throw new Exception($this->error_message);
-				
-							$this->CI->email_manager->send_po_email($so_id);
-						}
-						else
-						{
-							actionLogAdd('sales_order','Auto Process for this sales Order # '.$so_id.'has been disabled and status has been set as HOLD',$so_id);
-							$this->CI->sales_order_model->update(array('id' => $so_id), array('order_status' => 'HOLD'));
-						}
-					}
-
-					//send order email to customer
-					$this->CI->email_manager->send_order_mail($so_id);
-			
-				}
-			
-			
+				$order_status = 'COMPLETED';
+		
+				//update sales_order
+				$txn = array(
+						'order_status' => $order_status,
+						'paid_status' => 'Y',
+						'txn_id' => $response['txn_id']
+				);
+				$this->db->where('id', $so_id);
+                $this->db->update('sales_order', $txn);
+				$this->CI->email_manager->send_order_mail($so_id);
 			}
-			
+						
 			else if($this->validate_ipn() && $this->environment == 'live' && $response['payment_status'] == 'Failed')
 			{
-				$this->CI->sales_order_model->update(array('id' => $so_id), array('order_status' => 'FAILED'));
+				$txn = array(
+							'order_status' => 'FAILED',
+							'paid_status' => 'N'
+				);
+
+				$this->db->where('id', $so_id);
+                $this->db->update('sales_order', $txn);
+
 				$this->CI->email_manager->send_order_mail($so_id, 'FAILED');
-				actionLogAdd('sales_order','IPN validation failed.Notification email on "Unsuccessful-Payment" sent to customer.',$so_id);
+				$this->checkout_model->addaction_loginfo('sales_order', 'IPN validation failed.Notification email on "Unsuccessful-Payment" sent to customer.', $so_id);
+
 			}
 			
 			return TRUE;

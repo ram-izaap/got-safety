@@ -54,10 +54,49 @@ class Checkout extends Cart_controller {
         $this->data['payment_information'] = $this->load->view("checkout/payment_information",$this->data,true);
 
         $this->data['order_information'] = $this->load->view("checkout/order_information",$this->data,true);
+
+         if(is_logged_in() && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 
+         { 
+            $userid = $this->session->userdata("user_id");
+
+            $billing_address = $this->checkout_model->get_address1(array("type"=>"ba","userid"=>$userid));
+
+            $billing_info = array(
+               'name' => $billing_address['name'],
+               'company_name' => $billing_address['company_name'],
+               'email' => $billing_address['email'],
+               'phone' => $billing_address['phone'],
+               'address' => $billing_address['address'],
+               'state' => $billing_address['state'],
+               'city' => $billing_address['city'],
+               'country' => $billing_address['country'],
+               'zip_code' => $billing_address['zip_code'],
+               'type' => 'ba'
+            );
+
+            $this->session->set_userdata('billing_info', $billing_info);
+
+            $shipping_address = $this->checkout_model->get_address1(array("type"=>"sa","userid"=>$userid));
+
+            $shipping_info = array(
+               'name' => $shipping_address['name'],
+               'company_name' => $shipping_address['company_name'],
+               'email' => $shipping_address['email'],
+               'phone' => $shipping_address['phone'],
+               'address' => $shipping_address['address'],
+               'state' => $shipping_address['state'],
+               'city' => $shipping_address['city'],
+               'country' => $shipping_address['country'],
+               'zip_code' => $shipping_address['zip_code'],
+               'type' => "sa"
+
+           );
+
+          $this->session->set_userdata('shipping_info', $shipping_info);
+         }
         
         $this->layout->view("checkout/checkout","frontend");
 
-        
     } 
 
     function save_billing_address()

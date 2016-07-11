@@ -8,6 +8,7 @@ class Cart_controller extends App_Controller {
     {
         parent::__construct();
         $this->load->helper("admin_helper");
+        $this->load->library('email_manager');
     }
 
     function submit_order()
@@ -182,6 +183,7 @@ class Cart_controller extends App_Controller {
       $data = array();
       $data['customer_id']            = $user_id;
       $data['order_status']            = "PENDING";
+      $data['cart_total']         = $this->cart->total();
       $data['total_amount']         = $total_amount;
       $data['total_items']         = $this->cart->total_items();
       $data['payment_type']         = $payment_type;
@@ -289,6 +291,9 @@ class Cart_controller extends App_Controller {
         $update_data['paid_status']     = $this->is_paid?'Y':'N';
         $this->db->where('id', $so_id);
         $this->db->update('sales_order', $update_data);
+
+        $this->email_manager->send_order_mail($so_id);
+
     }
 
     function remove_session()

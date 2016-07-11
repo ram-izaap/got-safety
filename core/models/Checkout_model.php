@@ -73,6 +73,14 @@ class Checkout_model extends CI_Model {
         return $address;
     }
 
+    function get_address1($where)
+    {
+        $this->db->order_by("created_date","DESC");
+        $this->db->limit(1);
+        $result = $this->db->get_where("address",$where)->row_array();
+        return $result;
+    }
+
     
 
  }

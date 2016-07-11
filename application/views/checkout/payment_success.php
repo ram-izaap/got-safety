@@ -61,7 +61,7 @@
 		            </table>
 					<?php if(count($so_details)):?>
 						<?php 
-							$sub_total = (float)$so_details['total_amount'];
+							$sub_total = (float)$so_details['cart_total'];
 							$flag = 1;
 						?>
 		                <div class="floatR">
