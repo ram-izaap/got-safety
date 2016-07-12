@@ -678,7 +678,7 @@
 					</li>
 					*/ ?>
 					
-					
+				<?php /*	
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -692,7 +692,7 @@
 								<a href="<?php echo site_url('records/records_content'); ?>">
 								Frontend Content </a>
 							</li>*/ ?>
-					<?php } ?>		
+					<?php /*} ?>		
 							<li> 
 								<a href="<?php echo site_url('records/add_edit_records'); ?>">
 								Add Documents </a>
@@ -705,7 +705,7 @@
 						</ul>
 					</li>
 					
-					
+					 */ ?>
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -719,14 +719,19 @@
 								<a href="<?php echo site_url('forms/forms_content'); ?>">
 								Frontend Content </a>
 							</li>*/?>
-					<?php } ?>		
+						
 							<li> 
 								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
-								Add Documents </a>
+								Add Forms </a>
 							</li>
 							<li> 
 								<a href="<?php echo site_url('forms'); ?>">
-								Manage Documents </a>
+								Manage Forms </a>
+							</li>
+							<?php } ?>	
+							<li> 
+								<a href="<?php echo site_url('submittedforms'); ?>">
+								Submitted Safety Forms </a>
 							</li>
 							
 						</ul>
@@ -849,6 +854,8 @@
 							
 						</ul>
 					</li>
+					
+				<?php /*	
 					<li>
 						<a href="javascript:;">
 						<i class="icon-user"></i>
@@ -947,7 +954,7 @@
 							
 						</ul>
 					</li>
-					
+					*/?>
 					
 					
 				</ul>

@@ -3,7 +3,7 @@
 		<div class="col-lg-12">
 			<div class="row">
               <div class="col-lg-12" style="margin-left: -10px;">
-                <h1 class="pull-left"><b>Training Records</b></h1>
+                <h1 class="pull-left"><b>Submitted Safety Forms</b></h1>
                 </div>
                 
                  <?php /*
@@ -15,7 +15,7 @@
 					<ol class="breadcrumb">
 						<li><a href="<?=site_url('home')?>">Home</a>
 						</li>
-						<li class="active"><span>Training Records</span>
+						<li class="active"><span>Submitted Safety Forms</span>
 						</li>
 					</ol>
 				 
@@ -24,13 +24,8 @@
 						
 						 <div class="pull-right top-page-ui">
 								
-					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
-						
-						<a class="pull-right search-export" href="<?php echo base_url('signoff/bulk_export_excel'); ?>" ><i class="fa fa-cloud-download" aria-hidden="true"></i>
-Search Export </a>
-						
-					<?php } ?>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-signoff','signoff/signoff_delete');" class="btn btn-success">
+					
+	                        <a onclick="return DeleteCheckedRow(this,'delete-submittedforms','submittedforms/submittedforms_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
 	                        </a>
                            
@@ -39,7 +34,7 @@ Search Export </a>
                     
 				</div>
 			</div>
-			<input type="hidden" name="page_name" class="page_name" value="signoff" />
+			<input type="hidden" name="page_name" class="page_name" value="submittedforms" />
 			<?php echo $grid;?>
 			<?php //echo '<pre>';print_r($this->session->all_userdata());die;?>
 		</div>

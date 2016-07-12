@@ -16,14 +16,14 @@
 			</label>
 			<div class="col-md-10">
 				<select name="language" class="table-group-action-input form-control input-medium">
-					<option value="">Select...</option>	
+						<option value="">Select...</option>
 						<?php if(isset($get_menu)) { 
-								foreach($get_menu as $fkey => $fvalue){
-								$selected = ($form_data['language'] == $fvalue['lang'])?"selected='selected'":"";   
-								?>
-								<option value="<?php echo $fvalue['lang']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
-							<?php } } ?>
-				</select>
+							foreach($get_menu as $fkey => $fvalue){
+							  $selected = ($form_data['language'] == $fvalue['id'])?"selected='selected'":"";   
+						?>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?>><?php echo $fvalue['lang'];?></option>
+						<?php } } ?>
+					</select>
 				<span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
 			</div>
 		</div>

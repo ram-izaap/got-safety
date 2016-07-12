@@ -31,7 +31,7 @@
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
 			
-				<?php $role =  $this->session->userdata('admin_data')['role'];  
+			<?php /*	<?php $role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){   ?>
 				  
 			 
@@ -65,7 +65,7 @@
 				</div>
 				
 			
-			<?php } ?>
+			<?php } ?> */  ?>
 				
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title: <span class="required">

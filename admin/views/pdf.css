@@ -6,8 +6,24 @@ th, td {
     padding: 5px;
 }
 .convert-pdf th{font-size:16px;  }
-.convert-pdf,.convert-pdf td{font-family: "Open Sans", sans-serif; font-size:14px; color:#444;}
+.convert-pdf,.convert-pdf td{font-family: "Open Sans", sans-serif; font-size:14px; }
 .convert-pdf th{background-color:#DEDEDE;}
 .convert-pdf tr:nth-child(even){background-color:#f7f7f7;}
 .convert-pdf tr:nth-child(odd){background-color:#F2F2F2;}
 
+
+
+/*@media print { table th td {
+    border: 1px solid black;
+    border-collapse: collapse;color:#444444 !important;
+}
+th, td {
+    padding: 5px;
+}
+.convert-pdf th{font-size:16px;  color:#444444 !important;}
+.convert-pdf td{font-family: 'Open Sans', sans-serif; font-size:14px; color:#444444 !important;}
+.convert-pdf th{background-color:red;color:#444444 !important;}
+.convert-pdf tr:nth-child(even){background-color:#f7f7f7;}
+.convert-pdf tr:nth-child(odd){background-color:#F2F2F2;} }
+
+*/
