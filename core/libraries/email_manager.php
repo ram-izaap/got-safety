@@ -34,11 +34,14 @@ class Email_manager
 	
 	}
 	
+	
+
+
 	public function send_email($to, $toname, $from, $from_name, $subject, $message, $cc = array(),$attachments = array())
 	{
-		$this->_CI->config->load('email_config');
+		/*$this->_CI->config->load('email_config');*/
 	
-		$this->_CI->load->library('email', $this->_CI->config->item('email'));
+		$this->_CI->load->library('email');
 
 		$this->_CI->email->clear(TRUE);
 		
@@ -46,13 +49,14 @@ class Email_manager
 	
 		$this->_CI->email->from($from,$from_name);
 		$this->_CI->email->to($to);
-		$this->_CI->email->cc( array_merge($cc, $this->_cc) );
-		$this->_CI->email->bcc($this->_bcc);
+		//$this->_CI->email->cc( array_merge($cc, $this->_cc) );
+		//$this->_CI->email->bcc($this->_bcc);
 
 		$this->_CI->email->subject($subject);
 		$this->_CI->email->message($message);
-		foreach ($attachments as $file)
-			$this->_CI->email->attach($file);
+		
+		/*foreach ($attachments as $file)
+			$this->_CI->email->attach($file);*/
 		
 		if ( ! $this->_CI->email->Send())
 			return FALSE;
@@ -65,21 +69,22 @@ class Email_manager
 		
 		if(!$so_id)
 			return FALSE;
-	
+
 		//get sales_order details
 		$this->_CI->load->model('checkout_model');
 
-		$result = $this->db->get_where("sales_order",array('id' => $so_id) );
-        
-        if(!$result->num_rows())
-            return FALSE;
+		$result = $this->_CI->db->get_where("sales_order",array('id' => $so_id) );
+
+		if(!$result->num_rows())
+           return FALSE;
         
         $so_details = $result->row_array();
 		
-		$records = $this->checkout_model->get_product_details_by_sales_order($so_id);
+		$records = $this->_CI->checkout_model->get_product_details_by_sales_order($so_id);
+        
         if(!count($records))
            return FALSE;
-        
+
         $product_details = array();
         foreach ($records as $record)
         {
@@ -92,14 +97,15 @@ class Email_manager
                 $product_details[$record['product_id']]['quantity'] = $record['quantity'];
         }
         
+
         $data['so_details']         = $so_details;
         $data['status']				= $status;
         $data['product_details']    = $product_details;
-        $data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
-        $data['shipping'] = $this->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
+        $data['billing'] = $this->_CI->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
+        $data['shipping'] = $this->_CI->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
 
         
-        //$data['mail_type']			= 'customer';
+        $data['mail_type']			= 'customer';
 		$data['so_id']				= $so_id;
 		$data['message'] 			= $this->_CI->load->view('checkout/order-confirmation', $data, TRUE);
 		
@@ -114,9 +120,10 @@ class Email_manager
 			$mail_title = "Order Info - #{$so_id} - Failed";
 		}
 
-		$this->send_email($data['billing']['email'], '', 'gavaskarizaap@gmail.com', 'gavaskar', "Order Confirmation Mail", $message);
+
+		$this->send_email("itgavaskar@gmail.com", 'gavas', 'gavaskarizaap@gmail.com', 'gavaskar', "Order Confirmation Mail", $message);
 		 
-		$this->checkout_model->addaction_loginfo('sales_order', 'Order confirmation mail has been sent to customer', $so_id);
+		$this->_CI->checkout_model->addaction_loginfo('sales_order', 'Order confirmation mail has been sent to customer', $so_id);
 
 	}
 
