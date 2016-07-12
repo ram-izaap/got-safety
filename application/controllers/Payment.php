@@ -368,7 +368,7 @@ class Payment extends App_Controller
 					'desc' => $plan_details['plan_desc'], 								
 					'amt' => $plan_details['plan_amount'], 								
 					'number' => '', 							
-					'qty' => '', 								
+				//	'qty' => '', 								
 					'taxamt' => '0', 							
 					'itemurl' => '', 							
 					'itemweightvalue' => '', 					
@@ -499,14 +499,14 @@ class Payment extends App_Controller
 		
 		$Payments = array();
 		$Payment  = array(
-						'amt' => '15', 							
-						'currencycode' => 'USD', 					
+						'amt' => '', 							
+						'currencycode' => '', 					
 						'itemamt' => '', 						  
-						'shippingamt' => '0.00', 					
+						'shippingamt' => '', 					
 						'shipdiscamt' => '', 					
 						'insuranceoptionoffered' => '', 		
 						'handlingamt' => '', 					
-						'taxamt' => '0.00', 						 
+						'taxamt' => '', 						 
 						'desc' => '', 							
 						'custom' => '', 						
 						'invnum' => '', 						

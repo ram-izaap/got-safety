@@ -5,10 +5,7 @@
 		<div class="row" data-row="default">
 			<aside class="col-sm-12 bg-white inner-full">
 				<div class="inner-content form-wrap" style="width:90%;">
-						<h4>Choose Plan</h4>
-							<input type="radio" value="Silver-50" name="plan" checked>&nbsp;&nbsp;Silver($50.00)<br>
-							<input type="radio"  value="Gold-100" name="plan" >&nbsp;&nbsp;Gold($100.00)<br>
-							<input type="radio" value="Diamond-150" name="plan"  >&nbsp;&nbsp;Diamond($150.00)<br>
+						
 						<h4>Choose Payment Gateway</h4>
 						<p>
 						<?php 
