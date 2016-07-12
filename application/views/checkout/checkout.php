@@ -13,26 +13,21 @@
           <h3>Checkout
           </h3>
           <hr>
-          <div class="billing-details">
+          <div class="checkout-details">
             <div id="billing_address" > 
               <?php echo $billing_information; ?>
             </div>
-            
             <div id="billing_list">
             </div>
             <div id="billing_form" style="display:none;">
             </div>
-
-            
             <div id="shipping_address"> 
               <?php echo $shipping_information; ?>
             </div>
-
             <div id="shipping_list">
             </div>
             <div id="shipping_form" style="display:none;">
             </div> 
-            
             <div id="order_information"> 
               <?php echo $order_information; ?>
             </div> 

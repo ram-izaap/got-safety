@@ -15,7 +15,6 @@ $('#attr_price').on('click', '.add_to_cart', function(event) {
 
             if (data.status == 'success') {
                 $("#add_to_cart").html(data.content);
-                $("#add_to_cart").hide();
                 $(".cart_item").find(".subtotal").html("$" + data.subtotal);
                 $(".cart_item").find(".items").html("" + data.total_items + " items <i class='fa fa-shopping-cart'></i>");
                 $("#add_cart_modal").modal("show");
@@ -38,7 +37,6 @@ $(document).ready(function() {
         success: function(data) {
             if (data.status == 'success') {
                 $("#add_to_cart").html(data.content);
-                $("#add_to_cart").hide();
                 $(".cart_item").find(".subtotal").html("$" + data.subtotal);
                 $(".cart_item").find(".items").html("" + data.total_items + " items <i class='fa fa-shopping-cart'></i>");
             }
@@ -54,8 +52,9 @@ $(document).ready(function() {
 $(document).on('click','.btn-delete',function(){
    var rowid = $(this).attr("rowid"), 
        from = $(this).attr("from"),
-       remove = $(this).attr("remove")
+       remove = $(this).attr("remove"),
        url = base_url + 'cart/remove_cart/'+rowid+'/'+remove;
+
 
     if(rowid!='')
     {
@@ -70,7 +69,6 @@ $(document).on('click','.btn-delete',function(){
                     location.reload();
 
                   $("#add_to_cart").html(data.content);
-                  $("#add_to_cart").hide();
                   $(".cart_item").find(".subtotal").html("$" + data.subtotal);
                   $(".cart_item").find(".items").html("" + data.total_items + " items <i class='fa fa-shopping-cart'></i>");
                 }
@@ -85,9 +83,9 @@ $(document).on('click','.btn-delete',function(){
 
 
 
-$(".cart_item").hover(function(){
+/*$(".cart_item").hover(function(){
     $("#add_to_cart").toggleClass("show-content","skip-content",2000);
-});
+});*/
 
 
 

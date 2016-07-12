@@ -133,11 +133,12 @@ class Cart extends App_Controller {
             $this->cart->update($data);
         }
         
-        redirect('cart/cart_list','frontend');
+        redirect('cart');
     }
 
-    function remove_cart($rowid,$remove)
+    function remove_cart($rowid,$remove='')
     {
+
         if($remove=="all")
         {
             $this->cart->destroy();
@@ -148,6 +149,7 @@ class Cart extends App_Controller {
            $data = array('rowid' => $rowid,'qty' => 0);
            $this->cart->update($data);
         }
+
             
         $this->data['img_url'] = get_img_dir();
         $content = $this->load->view("cart/mini_cart",$this->data,TRUE);

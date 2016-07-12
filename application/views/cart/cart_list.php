@@ -21,16 +21,11 @@
                 <table width="100%" class="c-table">
                   <thead>
                     <tr>
-                      <th width="60%">Product
-                      </th>
-                      <th width="8%">Quantity
-                      </th>
-                      <th width="8%">Price
-                      </th>
-                      <th width="10%">Sub Total
-                      </th>
-                      <th width="4%">
-                      </th>
+                      <th width="70%">Product</th>
+                      <th width="7%">Quantity</th>
+                      <th width="7%">Price</th>
+                      <th width="13%">Sub Total</th>
+                      <th width="3%"></th>
                     </tr>
                   </thead>
                   <tbody>

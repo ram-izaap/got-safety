@@ -191,7 +191,7 @@
               </div>
             </div>
           </div>
-          <div id="add_to_cart" class="skip-content">
+          <div id="add_to_cart">
           </div>
           <div class="" data-nav="gs-attendance">
             <ul>

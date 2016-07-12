@@ -209,7 +209,8 @@ html {
 }
 body {
   font-family: "aileronregular", Helvetica, Arial, sans-serif;
-  font-size: 24px;
+  /*font-size: 24px;*/
+  font-size: 14px;
   line-height: 1.42857143;
   color: #292f2b;
   background-color: #fafafa;

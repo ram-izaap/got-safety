@@ -82,7 +82,7 @@
                 </div>
               </div>
             </div>
-            <div id="add_to_cart" style="display:none;">
+            <div id="add_to_cart">
             </div>
             <div class="" data-nav="gs-attendance">
               <ul>
