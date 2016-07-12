@@ -1,4 +1,5 @@
 $('#attr_price').on('click', '.add_to_cart', function(event) {
+
     event.preventDefault();
     var pid = $("input[name='p_id']").val(),
         attr_val_id = $(".sel_label_size option:selected").val(),
@@ -82,10 +83,13 @@ $(document).on('click','.btn-delete',function(){
     }
 });
 
-$(".cart_item").on("mouseover", function() {
-    $("#add_to_cart").fadeIn();
+
+
+$(".cart_item").hover(function(){
+    $("#add_to_cart").toggleClass("show-content","skip-content",2000);
 });
 
-$(".cart_item").on("mouseleave", function() {
-    $("#add_to_cart").fadeOut();
-});
+
+
+
+
