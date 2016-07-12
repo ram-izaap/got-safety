@@ -45,17 +45,8 @@ class Checkout extends Cart_controller {
             $this->data['p_count'] = $this->product1_model->get_product_count("products",array("cat" =>$value['id'],"is_active"=>1));
             $this->data['cat_data'][$key]['p_count'] = $this->data['p_count']->cnt;
         }
-        $this->data['title'] = "Checkout";
 
-        $this->data['billing_information'] = $this->load->view("checkout/billing_information",$this->data,true);
-
-        $this->data['shipping_information'] = $this->load->view("checkout/shipping_information",$this->data,true);
-
-        $this->data['payment_information'] = $this->load->view("checkout/payment_information",$this->data,true);
-
-        $this->data['order_information'] = $this->load->view("checkout/order_information",$this->data,true);
-
-         if(is_logged_in() && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 
+        if(is_logged_in() && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 
          { 
             $userid = $this->session->userdata("user_id");
 
@@ -94,6 +85,16 @@ class Checkout extends Cart_controller {
 
           $this->session->set_userdata('shipping_info', $shipping_info);
          }
+         
+        $this->data['title'] = "Checkout";
+
+        $this->data['billing_information'] = $this->load->view("checkout/billing_information",$this->data,true);
+
+        $this->data['shipping_information'] = $this->load->view("checkout/shipping_information",$this->data,true);
+
+        $this->data['payment_information'] = $this->load->view("checkout/payment_information",$this->data,true);
+
+        $this->data['order_information'] = $this->load->view("checkout/order_information",$this->data,true);
         
         $this->layout->view("checkout/checkout","frontend");
 

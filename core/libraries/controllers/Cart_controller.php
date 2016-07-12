@@ -341,14 +341,14 @@ class Cart_controller extends App_Controller {
                 $product_details[$record['product_id']]['quantity'] = $record['quantity'];
         }
         
-        $data['product_details']    = $product_details;
-        $data['so_details']         = $so_details;
+        $this->data['product_details']    = $product_details;
+        $this->data['so_details']         = $so_details;
 
-        $data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
-        $data['shipping'] = $this->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
+        $this->data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
+        $this->data['shipping'] = $this->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
 
         
-        $this->load->view('/checkout/payment_success', $data);
+        $this->layout->view('/checkout/payment_success', 'frontend');
     }
 
 }

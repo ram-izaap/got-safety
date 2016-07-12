@@ -212,6 +212,7 @@ class Attribute extends Admin_controller {
         if(!empty($id)) {
             
             $this->db->query('delete from attribute_value where id in ('.$id.')');
+            $this->db->query('delete from product_variation where attr_val_id in ('.$id.') ');
             return true;  
         }
     }  
