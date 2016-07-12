@@ -77,11 +77,12 @@
 							  <li><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> 
 						   </ul>
 					</li> */ ?>
-				  <li <?php  if($this->uri->segment(1) == 'product') { ?> class="active"; <?php }?>><a href="<?php echo base_url("product");?>"> <i class="fa fa-video-camera"></i> Product </a></li>
-          <li <?php  if($this->uri->segment(1) == 'cart') { ?> class="active"; <?php }?>><a href="<?php echo base_url("cart");?>"> <i class="fa fa-video-camera"></i> Cart </a></li>
-          <li <?php  if($this->uri->segment(1) == 'checkout') { ?> class="active"; <?php }?>><a href="<?php echo base_url("checkout");?>"> <i class="fa fa-video-camera"></i> Checkout </a></li>
+				  
 
 				  <?php } ?>
+          <li <?php  if($this->uri->segment(1) == 'product') { ?> class="active"; <?php }?>><a href="<?php echo base_url("product");?>"> <i class="fa fa-video-camera"></i> Product </a></li>
+          <li <?php  if($this->uri->segment(1) == 'cart') { ?> class="active"; <?php }?>><a href="<?php echo base_url("cart");?>"> <i class="fa fa-video-camera"></i> Cart </a></li>
+          <li <?php  if($this->uri->segment(1) == 'checkout') { ?> class="active"; <?php }?>><a href="<?php echo base_url("checkout");?>"> <i class="fa fa-video-camera"></i> Checkout </a></li>
 				  <?php if($this->session->userdata('user_id') == "") { ?>
 				   <li <?php  if($this->uri->segment(1) == 'contact') { ?> class="active"; <?php }?>><a href="<?php echo base_url("contact");?>"> <i class="fa fa-envelope"></i> Contact </a></li>
 				  <?php } ?>
