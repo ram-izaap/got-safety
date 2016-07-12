@@ -18,9 +18,12 @@ class Attachment_model extends App_Model {
 		
 		$id  = $this->session->userdata('id');
 		
-        $this->_fields = "*,id as id, IF(is_active='1','Active','Inactive') as is_active";
+        $this->_fields = "a.id as id,l.id as lid,a.language,l.lang, IF(a.is_active='1','Active','Inactive') as is_active";
         
-		$this->db->where('lession_id',$id);
+        $this->db->from('language l');
+        $this->db->join('lession_attachment a','a.language=l.id', 'right');
+        $this->db->group_by('a.id');
+		$this->db->where('a.lession_id',$id);
         foreach ($this->criteria as $key => $value) 
         {
             if( !is_array($value) && strcmp($value, '') === 0 )
@@ -28,8 +31,11 @@ class Attachment_model extends App_Model {
 
             switch ($key)
             {
-                case 'language':
+               /* case 'lang':
                     $this->db->like($key, $value);
+                break; */
+                case 'l.lang':
+                    $this->db->like('l.lang', $value);
                 break;
                  
                

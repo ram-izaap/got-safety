@@ -52,7 +52,7 @@ $config['attachment_index'] = array(
 	"base_url"	=> 	'/attachment/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'language'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							'lang'=>array('name'=>'Language', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
 							//'type'=>array('name'=>'Type', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
                              'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
@@ -288,6 +288,40 @@ $config['signoff_index'] = array(
 							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => TRUE, 'default_view'=>1),
 							 'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
                              'title'=>array('name'=>'Topic', 'data_type' => 'find_topic', 'sortable' => TRUE, 'default_view'=>1),                             
+                             'client_id'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => TRUE, 'default_view'=>1),                             
+                             'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+
+/*$config['submittedforms_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'submittedforms/filter',
+	"base_url"	=> 	'/submittedforms/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							 'title'=>array('name'=>'Title', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+							 'client_id'=>array('name'=>'Client Name', 'data_type' => 'find_client', 'sortable' => TRUE, 'default_view'=>1), 'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+*/
+
+$config['submittedforms_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'submittedforms/filter',
+	"base_url"	=> 	'/submittedforms/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							 'employee_id'=>array('name'=>'Employee Name', 'data_type' => 'find_employee', 'sortable' => TRUE, 'default_view'=>1),
+							 'emp_id'=>array('name'=>'Employee ID', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                             
                              'client_id'=>array('name'=>'Client', 'data_type' => 'find_client', 'sortable' => TRUE, 'default_view'=>1),                             
                              'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
 						),

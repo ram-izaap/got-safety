@@ -31,13 +31,10 @@ class Lession_model extends App_Model {
         
         
         
-        $this->_fields = "l.*,l.id as id,a.language,la.id as laid,la.lang, IF(l.is_active='1','Active','Inactive') as is_active";
+        $this->_fields = "l.*,l.id as id, IF(l.is_active='1','Active','Inactive') as is_active";
        $this->db->from('lession l');
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
-       $this->db->join('language la','la.id=a.language','left');
-       $this->db->group_by('l.id'); 
-       
-       
+       $this->db->group_by('l.id');
        
         if($role == '2'){
         $this->db->where('l.created_user',$user_id);
@@ -62,8 +59,8 @@ class Lession_model extends App_Model {
                      $this->db->like('l.title', $value);
                 break;
                 
-                case 'la.lang':
-                    $this->db->like('la.lang', $value);
+                case 'a.language':
+                    $this->db->like('a.language', $value);
                 break;
                  
                

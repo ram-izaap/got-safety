@@ -1,7 +1,7 @@
 <?php
 //require_once("libraries/models/App_model.php");
 require_once(COREPATH."models/App_model.php");
-class Signoff_model extends App_Model {
+class Submittedforms_model extends App_Model {
     
     
     function __construct()
@@ -16,11 +16,11 @@ class Signoff_model extends App_Model {
     {  
 		$user_id =  $this->session->userdata('admin_data')['id'];
 		
-       $this->_fields = "ld.*,u.name,le.title";
-       $this->db->from('sign_off ld');
+       $this->_fields = "ld.*,u.name";
+       $this->db->from('submitted_forms ld');
        $this->db->join('employee l','l.id=ld.employee_id');
        $this->db->join('users u','u.id=ld.client_id');
-       $this->db->join('lession le','le.id=ld.lesson_id');
+       
        
        if($user_id !=8){
 			$this->db->where('client_id' ,$user_id);
@@ -41,9 +41,7 @@ class Signoff_model extends App_Model {
                      $this->db->like('l.employee_name', $value);
                 break;
                 
-                case 'le.title':
-                    $this->db->like('le.title', $value);
-                break;
+               
                 case 'ld.created_date':
                     $this->db->like('ld.created_date', $value);
                 break;
@@ -122,36 +120,25 @@ class Signoff_model extends App_Model {
 		
 	}
 	
-	function get_serach_data($search_field,$search_value)
+	
+	function get_user_details( $id = "" )
 	{
-		
-		//$result = $this->db->query("select * from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field LIKE '%$search_value%'")->result_array();
-		 
-		 $result = $this->db->query("select le.title,l.employee_name,l.emp_id,u.name as client,ld.created_date from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field LIKE '%$search_value%'");
-		 
-		/*$this->db->select('*');
-		$this->db->from('sign_off ld');
-       $this->db->join('employee l','l.id=ld.employee_id');
-       $this->db->join('users u','u.id=ld.client_id');
-		$this->db->like($search_field,$search_value);
-		$result = $this->db->get()->result_array();*/
-		
+		$this->db->select('*');
+		$this->db->from('users');
+        $this->db->where("id" ,$id);
+		$result = $this->db->get()->row();
 		return $result;
 		
 	}
 	
 	
+	
 	function view_details($search_field,$search_value)
 	{
 		
-		$result = $this->db->query("select * from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field = $search_value")->row_array();
-		 
-		/*$this->db->select('*');
-		$this->db->from('sign_off ld');
-       $this->db->join('employee l','l.id=ld.employee_id');
-       $this->db->join('users u','u.id=ld.client_id');
-		$this->db->like($search_field,$search_value);
-		$result = $this->db->get()->result_array();*/
+		$result = $this->db->query("select * from submitted_forms as sf JOIN employee as l ON l.id = sf.employee_id JOIN users as u ON u.id = sf.client_id WHERE $search_field = $search_value")->row_array();
+		
+		//$result = $this->db->query("select * from submitted_forms as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field LIKE '%$search_value%'")->result_array();
 		
 		return $result;
 		

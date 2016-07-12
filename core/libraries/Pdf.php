@@ -10,6 +10,7 @@ class pdf {
  
     function load($param=NULL)
     {
+		
         include_once APPPATH.'/third_party/mpdf/mpdf.php';
          
         if ($params == NULL)

@@ -29,11 +29,6 @@ class Forms_model extends App_Model {
 		
         $this->_fields = "*,id as id, IF(is_display='1','Active','Inactive') as is_display";
         
-        if($role == '2'){
-        $this->db->where('created_user',$user_id);
-        }else {
-			$this->db->where('updated_user',$user_id);
-		}
         
 		
         foreach ($this->criteria as $key => $value) 
