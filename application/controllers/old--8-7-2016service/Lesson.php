@@ -15,16 +15,6 @@ class Lesson extends REST_Controller {
         
     }
 
-    public function languages_get(){
-
-    	$lang = $this->api_model->get_where(array(),"*","language")->result_array();
-
-    	$output['status'] 		= 'success';
-		$output['languages'] 	= $lang;
-
-    	$this->response($output,200);
-    }
-
     public function list_get()
 	{
 		
@@ -33,8 +23,7 @@ class Lesson extends REST_Controller {
 			$output = array();
 
 			$client_id = $this->get('client_id');
-			$language_id = $this->get('language');
-			$lessons = $this->api_model->get_lessons( $client_id, $language_id );
+			$lessons = $this->api_model->get_lessons( $client_id );
 
 			$output['status'] 	= 'SUCCESS';
 			$output['lessons'] 	= $lessons;

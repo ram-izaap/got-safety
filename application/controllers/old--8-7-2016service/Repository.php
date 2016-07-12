@@ -121,7 +121,7 @@ class Repository extends REST_Controller {
 		
 		$a = $this->dir_to_json($dir);
 		if($a == 'null' ){
-			return $this->response(array( "status" => "errror","msg" => "Sorry no repositary found!! Try Again...","error_code" => 2 ),200);
+			return $this->response(array( "status" => "errror","msg" => "Unknown Error Occurred!! Try Again...","error_code" => 2 ),200);
 		}
 		echo $a;exit;
 		
