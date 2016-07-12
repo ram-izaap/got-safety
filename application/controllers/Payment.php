@@ -227,7 +227,7 @@ class Payment extends App_Controller
                 //'trialOccurrences' => 0,
                 ),
             'amount' => $post['amount'],
-            //'trialAmount' => 0.00, 
+            //'trialAmount' => 0.00,
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => $post['c_number'],
@@ -278,10 +278,8 @@ class Payment extends App_Controller
         $returnUrl = base_url()."payment/success";
         $ipn_url   = base_url()."payment/notify";
         
-        $plan_details = $this->session->userdata('signup_data');
-        
-        $plan_details = $plan_details['plan_details'];
-        
+        $plan_details = $this->session->userdata('plan_details');
+        //$plan_details = $plan_details['plan_details'];
         
 		$SECFields = array(
 							'token' => '', 								
@@ -334,12 +332,12 @@ class Payment extends App_Controller
 						'amt' => $plan_details['plan_amount'], 							
 						'currencycode' => 'USD', 					
 						'itemamt' => $plan_details['plan_amount'], 						  
-						'shippingamt' => '0.00', 					
-						'shipdiscamt' => '0.00', 				   
+						'shippingamt' => '', 					
+						'shipdiscamt' => '', 				   
 						'insuranceoptionoffered' => '', 		
 						'handlingamt' => '', 					
-						'taxamt' => '0.00', 						 
-						'desc' => $plan_details['plan_desc'], 							
+						'taxamt' => '', 						 
+						'desc' => '', 							
 						'custom' => '', 						
 						'invnum' => '', 						
 						'notifyurl' => $ipn_url, 						
@@ -365,11 +363,11 @@ class Payment extends App_Controller
 		$PaymentOrderItems = array();
 		$Item = array(
 					'name' => ucfirst($plan_details['plan_type']), 								
-					'desc' => $plan_details['plan_desc'], 								
+					'desc' => strip_tags($plan_details['plan_desc']), 								
 					'amt' => $plan_details['plan_amount'], 								
 					'number' => '', 							
-				//	'qty' => '', 								
-					'taxamt' => '0', 							
+					'qty' => '', 								
+					'taxamt' => '', 							
 					'itemurl' => '', 							
 					'itemweightvalue' => '', 					
 					'itemweightunit' => '', 					
@@ -452,17 +450,15 @@ class Payment extends App_Controller
         
         if($payment_session['payment_method'] == 'paypal') {
            
-            $token           = (isset($_REQUEST['token']))?$_REQUEST['token']:"";
-             
+            $token           = (isset($_REQUEST['token']))?$_REQUEST['token']:""; 
     		$PayPalResult    = $this->paypal_pro->GetExpressCheckoutDetails($token);
     		
     		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
     			$errors = array('Errors'=>$PayPalResult['ERRORS']);
     			$this->load->view('payment/paypal/error',$errors);
     		}
-    		else 
+    		else
     		{
-    		  
               $this->session->set_userdata("Paypal_express",$PayPalResult);
     		  $this->Do_express_checkout_payment($token);
     		}
@@ -481,7 +477,9 @@ class Payment extends App_Controller
 	   
         $ipn_url   = base_url()."payment/notify";
 	    $paypal_express = $this->session->userdata('Paypal_express');
-       
+        
+        $plan_details = $this->session->userdata('plan_details');
+        
 		$DECPFields = array(
 							'token' => $token, 								
 							'payerid' => $paypal_express['PAYERID'], 							
@@ -499,14 +497,14 @@ class Payment extends App_Controller
 		
 		$Payments = array();
 		$Payment  = array(
-						'amt' => '', 							
-						'currencycode' => '', 					
+						'amt' => $plan_details['plan_amount'], 							
+						'currencycode' => 'USD', 					
 						'itemamt' => '', 						  
-						'shippingamt' => '', 					
+						'shippingamt' => '0.00', 					
 						'shipdiscamt' => '', 					
 						'insuranceoptionoffered' => '', 		
 						'handlingamt' => '', 					
-						'taxamt' => '', 						 
+						'taxamt' => '0.00', 						 
 						'desc' => '', 							
 						'custom' => '', 						
 						'invnum' => '', 						
@@ -601,6 +599,8 @@ class Payment extends App_Controller
 	{
 	   
 	    $paypal_token = $this->session->userdata('Paypal_express');
+        
+        $plan_details = $this->session->userdata('plan_details');
        
 		$CRPPFields   = array('token' => $token);
 						
@@ -624,7 +624,7 @@ class Payment extends App_Controller
     							'billingperiod' => 'Month', 						
     							'billingfrequency' => '1', 					 
     							'totalbillingcycles' => '12', 				  
-    							'amt' => '15', 							 
+    							'amt' => $plan_details['plan_amount'], 							 
     							'currencycode' => 'USD', 					
     							'shippingamt' => '0', 					
     							'taxamt' => '0' 							

@@ -98,12 +98,13 @@ class Login extends App_Controller {
                 $ins_data['role']          = 2;
                 $ins_data['password']      = $form['password'];
                 $ins_data['plan_type']     = $form['plan_type'];
-                $ins_data['plan_details']  = get_plan_details($form['plan_type']);
+               // $ins_data['plan_details']  = get_plan_details($form['plan_type']);
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
 				$ins_data['is_active']     = 1;
 				$ins_data['language']      = 1;
 				$ins_data['created_id']    = 8;
 			 	$folder                    = $ins_data['name'];	
+                $this->session->set_userdata("plan_details",get_plan_details($form['plan_type']));
 			 	$this->session->set_userdata("signup_data",$ins_data);
 				/*mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
                 echo $add_user    = $this->login_model->insert("users",$ins_data);
