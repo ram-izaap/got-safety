@@ -513,4 +513,10 @@ function api_credentials($payment_mode)
    return $api;     
 }
 
+function get_plan_details($plan_id)
+{
+    $CI = & get_instance();
+    return $plan = $CI->db->query("select * from plan where id='".$plan_id."'")->row_array();
+}
+
 ?>

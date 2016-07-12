@@ -227,7 +227,7 @@ class Payment extends App_Controller
                 //'trialOccurrences' => 0,
                 ),
             'amount' => $post['amount'],
-            //'trialAmount' => 0.00,
+            //'trialAmount' => 0.00, 
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => $post['c_number'],
@@ -277,6 +277,12 @@ class Payment extends App_Controller
         $cancelUrl = base_url()."payment/cancel";
         $returnUrl = base_url()."payment/success";
         $ipn_url   = base_url()."payment/notify";
+        
+        $plan_details = $this->session->userdata('signup_data');
+        
+        $plan_details = $plan_details['plan_details'];
+        
+        
 		$SECFields = array(
 							'token' => '', 								
 							'maxamt' => '', 						
@@ -325,15 +331,15 @@ class Payment extends App_Controller
 		
 		$Payments = array();
 		$Payment = array(
-						'amt' => '15', 							
+						'amt' => $plan_details['plan_amount'], 							
 						'currencycode' => 'USD', 					
-						'itemamt' => '15', 						  
+						'itemamt' => $plan_details['plan_amount'], 						  
 						'shippingamt' => '0.00', 					
 						'shipdiscamt' => '0.00', 				   
 						'insuranceoptionoffered' => '', 		
 						'handlingamt' => '', 					
 						'taxamt' => '0.00', 						 
-						'desc' => '', 							
+						'desc' => $plan_details['plan_desc'], 							
 						'custom' => '', 						
 						'invnum' => '', 						
 						'notifyurl' => $ipn_url, 						
@@ -358,9 +364,9 @@ class Payment extends App_Controller
 				
 		$PaymentOrderItems = array();
 		$Item = array(
-					'name' => 'Plan Subscription', 								
-					'desc' => '', 								
-					'amt' => '15', 								
+					'name' => ucfirst($plan_details['plan_type']), 								
+					'desc' => $plan_details['plan_desc'], 								
+					'amt' => $plan_details['plan_amount'], 								
 					'number' => '', 							
 					'qty' => '', 								
 					'taxamt' => '0', 							
@@ -454,7 +460,7 @@ class Payment extends App_Controller
     			$errors = array('Errors'=>$PayPalResult['ERRORS']);
     			$this->load->view('payment/paypal/error',$errors);
     		}
-    		else
+    		else 
     		{
     		  
               $this->session->set_userdata("Paypal_express",$PayPalResult);
