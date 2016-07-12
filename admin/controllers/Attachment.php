@@ -41,7 +41,7 @@ class Attachment extends Admin_controller {
         //$this->load_settings_data();
         
         $this->simple_search_fields = array(
-                                                'language' => 'Language'
+                                                'l.lang' => 'Language'
                                                 
                                             
         );

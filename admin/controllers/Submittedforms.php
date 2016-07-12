@@ -3,13 +3,13 @@
 
 require_once(COREPATH."controllers/Admin_controller.php");
 
-class Signoff extends Admin_controller {
+class Submittedforms extends Admin_controller {
 	
     function __construct() 
     {
         parent::__construct();
         
-       $this->load->model('signoff_model');
+       $this->load->model('submittedforms_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
         $this->data['img_url']=$this->layout->get_img_dir();
@@ -31,7 +31,6 @@ class Signoff extends Admin_controller {
                                                 'l.employee_name' => 'Employee Name',
                                                 'ld.emp_id' => 'Employee ID',
                                                 'ld.created_date' => 'Date',
-                                                'le.title' => 'Topic',
                                                 'u.name' => 'Client'
                                                 
                                                 
@@ -41,7 +40,7 @@ class Signoff extends Admin_controller {
         $this->_narrow_search_conditions = array("start_date");
         
        
-            $str = '<a href="'.site_url('signoff/view_detail/{id}').'" class="table-link">
+            $str = '<a href="'.site_url('submittedforms/view_detail/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -50,7 +49,7 @@ class Signoff extends Admin_controller {
  
         $this->listing->initialize(array('listing_action' => $str));
 
-        $listing = $this->listing->get_listings('signoff_model', 'listing');
+        $listing = $this->listing->get_listings('submittedforms_model', 'listing');
 
         if($this->input->is_ajax_request())
             $this->_ajax_output(array('listing' => $listing), TRUE);
@@ -71,98 +70,36 @@ class Signoff extends Admin_controller {
         
       
        
-        $this->layout->view("signoff/signoff_list");
+        $this->layout->view("submittedforms/submittedforms_list");
         
         
     }
     
     
 	
-	function signoff_delete()
+	function submittedforms_delete()
     {
        
         $id = ($_POST['id'])?$_POST['id']:"";
         if(!empty($id)) {
             
-            $this->db->query('delete from sign_off where id in ('.$id.')');
+            $this->db->query('delete from submitted_forms where id in ('.$id.')');
             //$this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
     } 
     
     
-   
-    
-   /* function bulk_export()
-    {
-		
-		$this->load->library('pdf');
-		
-		$search_field  = $this->session->userdata('search_field');
-		$search_value  = $this->session->userdata('search_value');
-		
-		$stylesheet = file_get_contents(base_url()."views/pdf.css");
-		// print $stylesheet;exit;
-		//http://localhost/got_safety/admin/views/pdf_test.css
-		if($search_field != "" && $search_value !="" ) {
-		
-		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
-		
-		$html = $this->load->view('signoff/sign_export',$this->data,true);
-		
-		$pdf = $this->pdf->load(); 
-		$pdf->WriteHTML($stylesheet,1);	
-        $pdf->WriteHTML($html,2);
-        
-        $micro = microtime();
-        
-        $filename = "Export-".date("Y-m-d H:i:s").".pdf";
-       
-        $pdf->Output($filename,"D");
-        
-       
-	}else {
-		redirect("signoff");
-		
-	}	
-		
-	}
-	*/
-	
-	
-	
-	function bulk_export_excel()
-    {
-		
-		$this->load->library('export');
-		
-		$search_field  = $this->session->userdata('search_field');
-		$search_value  = $this->session->userdata('search_value');
-		
-		if($search_field != "" && $search_value !="" ) {
-		
-		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
-		
-		$this->export->to_excel($this->data['result'], 'Signoff'); 
-        
-       
-		}else {
-			redirect("signoff");
-			
-		}	
-		
-	}
-	
-	
 	
 	function view_detail($id = "")
 	{
-		$search_field = "ld.id";
+		$search_field = "sf.id";
 		$search_value = $id;
-		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
-		//print_r($this->data['result']);exit;
+		$this->data['result'] = $this->submittedforms_model->view_details($search_field,$search_value);
+		//$this->data['user_result'] = $this->submittedforms_model->get_user_details($this->data['result']['user_id']);
+		//print_r($this->data['user_result']->name);exit;
 		
-		$this->layout->view("signoff/signoff_view");
+		$this->layout->view("submittedforms/submittedforms_view");
 		
 	}
     

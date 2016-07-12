@@ -32,7 +32,7 @@ class Lession extends Admin_controller {
     }
 
 
-    function index()
+     function index()
     { 
                  
 		 $this->layout->add_javascripts(array('listing', 'rwd-table'));  
@@ -47,7 +47,7 @@ class Lession extends Admin_controller {
         $this->simple_search_fields = array(
                                                 
                                                 'l.title' => 'Title',
-                                                'la.lang'=> 'Language'
+                                                'a.language'=> 'Language'
                                             
         );
          
@@ -85,6 +85,7 @@ class Lession extends Admin_controller {
         
         
     }
+    
     
     
     

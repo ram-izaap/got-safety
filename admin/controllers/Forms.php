@@ -104,10 +104,7 @@ class Forms extends Admin_controller {
 		$this->data['get_menu'] = $this->forms_model->get_menu_osha("users",array("role" => 2));
 		//print_r($this->data['get_menu']);exit;
 			
-			if ( isset($_POST['user_id']) )
-			{
-				$this->form_validation->set_rules('user_id', 'Client', 'required');
-			} 
+			
 		
 		if(is_logged_in()) {
 		  
@@ -147,23 +144,12 @@ class Forms extends Admin_controller {
 				$form['is_display'] = "0";
 			}
 			
-			if(isset($form['visible_to_all'])) { 
-				$form['visible_to_all'] = $form['visible_to_all'];	
-			}
-			else { 
-				$form['visible_to_all'] = "0";
-			}
+			
 			
 			$ins_data = array();
             $ins_data['title']       	= Ucfirst($form['title']);
             $ins_data['is_display']  = $form['is_display'];
-            if($_POST['user_id'] == ""){
-				$ins_data['created_user']  = $user_id;
-			}else {
-				$ins_data['created_user']  = $form['user_id'];
-				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
-				$ins_data['visible_to_all']  = $form['visible_to_all'];
-			}
+           
             $ins_data['created_date']  = date("Y-m-d");
 			$ins_data['pdf_file']  = $filename;
            
