@@ -403,3 +403,22 @@ $config['product_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+$config['order_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'order/filter',
+	"base_url"	=> 	'/order/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'id'=>array('name'=>'Order No', 'data_type' => 'integer', 'sortable' => FALSE, 'default_view'=>1),
+							'order_status'=>array('name'=>'Order Status', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'created_date'=>array('name'=>'Order Date', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'name'=>array('name'=>'name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+                            'total_amount'=>array('name'=>'Total Amount', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+                            'total_items'=>array('name'=>'Total Items', 'data_type' => 'integer', 'sortable' => FALSE, 'default_view'=>1),
+                            'payment_type'=>array('name'=>'Payment Mode', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)                              
+                          ),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);

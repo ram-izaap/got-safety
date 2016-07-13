@@ -79,6 +79,7 @@ class Cart extends App_Controller {
         $product->options = array('product_id'=>$product->id1,'Description' => $product->desc, 'Additional Information' => $product->add_info,'Product Image' =>$product->img,'Attribute Name'=>$product->attr_name,'Attribute Value'=>$product->attr_val,'Price'=>$product->price);
         $found = false;
 
+
         foreach ($this->cart->contents() as $id => $item)  
         {
             if ($product->id == $item['id'] && $product->attr_val == $item['attr_val']) 

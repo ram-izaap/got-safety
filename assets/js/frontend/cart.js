@@ -6,9 +6,6 @@ $('#attr_price').on('click', '.add_to_cart', function(event) {
         qty = $("input[name='quantity']").val(),
         url = base_url + 'cart/add/' + pid + '/' + attr_val_id + '/' + qty;
 
-        alert(qty);
-        return false;
-
     $.ajax({
         url: url,
         type: "GET",

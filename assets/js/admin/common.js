@@ -200,8 +200,10 @@ function add_attr_name()
 }
 
 $('#save_attr_name').on("click",function(event) {
+   
+   $("#attribute_index").attr("onsubmit", "javascript:return false");
 
-    var url=base_url+'attribute/add_edit_attr/',
+   var url=base_url+'attribute/add_edit_attr/',
     attr_name = $("input[name='attr_name']").val(),
     edit_id = $("input[name='edit_id']").val();
 
@@ -321,6 +323,8 @@ $(".add_attr_val").on("click",function()
 });
 
 $('#save_attr_value').on("click",function(event) {
+
+   $("#attribute_attribute_value").attr("onsubmit", "javascript:return false");
 
     var url = base_url+'attribute/add_edit_attr_val/',
         attr_name = $(".attr_names option:selected").val(),

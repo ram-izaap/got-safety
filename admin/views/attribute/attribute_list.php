@@ -56,7 +56,7 @@
             <h3 class="modal-title">Add Attribute</h3>
         </div>
         <div class="modal-body">
-		   <form role="form" name="attribute_cat" id="attribute_cat" method="POST">
+		   <form name="attribute_cat" id="attribute_cat" method="POST" action="#">
 		     <input type="hidden" name="edit_id">
 		      
 		      <div class="form-group">

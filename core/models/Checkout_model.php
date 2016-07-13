@@ -33,6 +33,12 @@ class Checkout_model extends CI_Model {
         $this->db->insert('log', $loginfo_details);
     }
 
+    function get_order_log($where)
+    {
+        $result = $this->db->get_where("log",$where)->row_array();
+        return $result;
+    }
+
      function get_product_details_by_sales_order($so_id, $order_details_only = FALSE)
     {
         $so_ids = is_array($so_id)?$so_id:array($so_id);
