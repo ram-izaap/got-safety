@@ -35,7 +35,7 @@
                         $end_val = end($product_variation[$value['id']]);
                         $end_val = key($product_variation[$value['id']]);
                       ?>  
-                      <?php if(count($product_variation[$value['id']])==1){ ?>
+                      <?php if(count($product_variation[$value['id']])==1 || $product_variation[$value['id']][$cur_val]==$product_variation[$value['id']][$end_val]){ ?>
                       <div class="block-price">
                         <strong>
                           <?php echo $product_variation[$value['id']][$cur_val]; ?>

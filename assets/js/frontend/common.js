@@ -6,6 +6,7 @@ $('.sel_label_size').on("change",function() {
 
     var type = $('option:selected', this).attr('variationid'),
     url = base_url+'product/get_price/'+type;
+
       $("#attr_price").html('');
       if(type!='')
       {
@@ -15,7 +16,6 @@ $('.sel_label_size').on("change",function() {
                 dataType: "JSON",
                 success: function(data)
                 {
-                    console.log(data.content);
                     if(data.status=='success')
                        $("#attr_price").html(data.content);
                 },
@@ -25,6 +25,7 @@ $('.sel_label_size').on("change",function() {
                 }
           });
       }
+      
   });
 
 

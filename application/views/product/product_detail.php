@@ -80,7 +80,7 @@
             <div class="col-sm-5 col-md-5">
               <div class="product-poster">
                 <img src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" alt="<?php echo $product_dtl['name']; ?>" style="width:210px;height:300px;" class="">                         
-                <?php if(count($attr_dtl)==1){ ?>
+                <?php if(count($attr_dtl)==1 || $attr_dtl[$cur_val]['price']==$attr_dtl[$end_val]['price']){ ?>
                 <div class="block-price">
                   <strong>
                     <?php echo $attr_dtl[$cur_val]['price']; ?>
@@ -107,14 +107,14 @@
                 <p>SKU:<?php echo $product_dtl['sku']; ?>
                 </p>
 
-                <form name="product_attribute" id="product_attribute" method="post">
+                <form name="product_attribute" id="product_attribute" method="post" action="#" onsubmit="javascript:return false;">
                     <input type="hidden" name="p_id" value="<?php echo $product_dtl['id']; ?>">
                     <?php if(count($attr_dtl) >0) : ?>
                     <label>
                       <?php echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
                     </label>
                     <select name="label_size" class="sel_label_size" id="label_size">
-                      <option value="">Choose an option
+                      <option value="" variationid=''>Choose an option
                       </option>
                       <?php foreach($attr_dtl as $key=>$value): ?>
                       <option value="<?php echo $value['id']; ?>" variationid="<?php echo $value['id1']; ?>">

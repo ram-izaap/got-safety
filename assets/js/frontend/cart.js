@@ -6,13 +6,15 @@ $('#attr_price').on('click', '.add_to_cart', function(event) {
         qty = $("input[name='quantity']").val(),
         url = base_url + 'cart/add/' + pid + '/' + attr_val_id + '/' + qty;
 
+        alert(qty);
+        return false;
+
     $.ajax({
         url: url,
         type: "GET",
         dataType: "JSON",
 
         success: function(data) {
-
             if (data.status == 'success') {
                 $("#add_to_cart").html(data.content);
                 $(".cart_item").find(".subtotal").html("$" + data.subtotal);
@@ -81,11 +83,6 @@ $(document).on('click','.btn-delete',function(){
     }
 });
 
-
-
-/*$(".cart_item").hover(function(){
-    $("#add_to_cart").toggleClass("show-content","skip-content",2000);
-});*/
 
 
 
