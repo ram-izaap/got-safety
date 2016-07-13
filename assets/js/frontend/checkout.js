@@ -463,8 +463,15 @@ function submit_order()
     type: "POST",
     data: data,
     dataType: "JSON",
+    
+    beforeSend: function() {
+       $("#preloader").css("display",'block');
+    },
+
     success: function(data)
     {
+       $("#preloader").css("display",'none');
+
         if(data.status=="success" && data.message == 'success')
         {
            location.href = rurl1;
@@ -473,6 +480,7 @@ function submit_order()
     },
     error: function (jqXHR, textStatus, errorThrown)
     {
+        $("#preloader").css("display",'none');
         alert('Error adding / update data');
     }
  });

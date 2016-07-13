@@ -3,6 +3,11 @@
   <!-- rwo default --> 
   <div class="row" data-row="default">
     <aside class="col-sm-12 bg-white inner-full">
+    
+    <div id="preloader" style="display:none; padding-top: 323.5px;"> Processing...
+      <div><img src="<?php echo site_url(); ?>assets/images/frontend/preloader-screen.gif" id="preloader_image"></div>
+    </div>
+
       <div class="inner-content">
         <!-- Left Bar -->
         <?php 

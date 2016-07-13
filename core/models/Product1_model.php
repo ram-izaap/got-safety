@@ -27,7 +27,7 @@ class Product1_model extends CI_Model {
         else
             $where='';
 
-        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id $where");
+        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id $where order by c.price");
         return $result->result_array();
     }
 
@@ -46,7 +46,7 @@ class Product1_model extends CI_Model {
     
     function get_attr_by_id($pid)
     {
-        $result = $this->db->query("select a.attr_name,b.id ,c.id as id1,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."'");
+        $result = $this->db->query("select a.attr_name,b.id ,c.id as id1,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."' order by d.price");
         return $result->result_array();
     }
 }

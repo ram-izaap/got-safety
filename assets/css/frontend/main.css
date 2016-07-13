@@ -541,6 +541,32 @@ header .container { max-width: 320px; }
 #add_cart_modal .modal-header button.close {padding: 0;cursor: pointer;background: transparent;border: 0;-webkit-appearance: none;}
 #add_cart_modal .modal-header .close {float: right;font-size: 21px;font-weight: bold;line-height: 1;color: #000000;text-shadow: 0 1px 0 #ffffff;opacity: 0.2;filter: alpha(opacity=20);}
 .vstar {color: red;}
+#preloader {
+  background: #000;
+  position:fixed;
+  left:0px; 
+  top:0px; 
+  width:100%; 
+  height:100%; 
+  text-align:center;
+  color:#fff;
+  z-index:9999;
+  opacity:0.8;
+}
+#preloader div {
+  margin:auto;
+  text-align:center;
+  overflow:hidden;
+  height:100px;
+}
+#preloader_image {
+  position: relative;
+  left:0px;
+  top:10px;
+}
+
+
+/* My Custom CSS gavas end */
 
 /* Order Success */
 .invoice-title h2, .invoice-title h3 {    display: inline-block;}
