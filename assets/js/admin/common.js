@@ -424,7 +424,7 @@ function mediatype(val)
 	}
 	else if(val==2 || val==3)
 	{
-		$(".non-media-opt").hide();
+		$(".non-media-opt").show();
 		$(".media-opt").show();
 	}
 }
@@ -437,6 +437,6 @@ $(".media-opt,.non-media-opt").hide();
 	}
 	else if(val==2 || val==3)
 	{
-		$(".non-media-opt").hide();
+		$(".non-media-opt").show();
 		$(".media-opt").show();
 	}

@@ -68,7 +68,7 @@ class Login extends App_Controller {
         }
         
          if($this->input->post()) {  
-            $this->data['form_data']      = $_POST; 
+            $this->data['form_data'] = $_POST; 
          }
         
 		}

@@ -36,10 +36,8 @@ class Login extends Admin_Controller
 				$this->service_message->set_flash_message('schedule_call_success');
                 redirect("home");
             }
-            
         }
-         
-        
+      
         $this->layout->view("login/index");
         
         

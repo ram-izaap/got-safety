@@ -17,8 +17,8 @@ class Home extends Admin_Controller
     
     public function index()
     { 
-        
-         $this->layout->view("home");
+    
+       	$this->layout->view("home");
         
     }
     

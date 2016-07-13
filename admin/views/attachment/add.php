@@ -103,7 +103,7 @@
 				</label>
 				<div class="col-md-10">
 					<input type="text" class="form-control" name="l_url" 
-					value="<?php echo set_value('l_url',$form_data['f_name']);?>">
+					value="<?php echo set_value('l_url',$form_data['l_url']);?>">
 					<span class="vstar"<?php echo form_error('l_url', '<span class="help-block">', '</span>'); ?> </span>
 				</div>
 			</div>
@@ -112,7 +112,7 @@
 				</label>
 				<div class="col-md-10">
 					<input type="text" class="form-control" name="q_url"
-					value="<?php echo set_value('q_url',$form_data['f_name_quiz']);?>">
+					value="<?php echo set_value('q_url',$form_data['q_url']);?>">
 					<span class="vstar"<?php echo form_error('q_url', '<span class="help-block">', '</span>'); ?> </span>
 				</div>
 			</div>
