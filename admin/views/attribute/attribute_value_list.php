@@ -31,9 +31,9 @@
 	                        <a href="<?php echo site_url('attribute');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> Attribute List
 	                        </a>
-	                        <a onclick="return DeleteCheckedRow(this,'delete-attribute','attribute/attr_delete1');" class="btn btn-success">
+	                        <!--<a onclick="return DeleteCheckedRow(this,'delete-attribute','attribute/attr_delete1');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
-	                        </a>
+	                        </a>-->
                            
 	                    </div>
 					</div>

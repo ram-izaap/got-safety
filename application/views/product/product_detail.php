@@ -89,7 +89,7 @@
                 <?php } else if(count($attr_dtl) > 1){ ?>
                 <div class="block-price">
                   <strong>
-                    <?php echo $attr_dtl[$cur_val]['price'] .'-'.$attr_dtl[$end_val]['price']; ?>
+                    <?php echo ($attr_dtl[$cur_val]['price'] < $attr_dtl[$end_val]['price'])?$attr_dtl[$cur_val]['price'] .'-'.$attr_dtl[$end_val]['price']:$attr_dtl[$end_val]['price'] .'-'.$attr_dtl[$cur_val]['price']; ?>
                   </strong>
                 </div>
                 <?php }?>

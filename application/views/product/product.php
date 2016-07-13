@@ -44,7 +44,7 @@
                       <?php } else if(count($product_variation[$value['id']]) > 1){ ?>
                       <div class="block-price">
                         <strong>
-                          <?php echo $product_variation[$value['id']][$cur_val] .'-'.$product_variation[$value['id']][$end_val]; ?>
+                          <?php echo ($product_variation[$value['id']][$cur_val] < $product_variation[$value['id']][$end_val])?$product_variation[$value['id']][$cur_val] .'-'.$product_variation[$value['id']][$end_val]:$product_variation[$value['id']][$end_val] .'-'.$product_variation[$value['id']][$cur_val]; ?>
                         </strong>
                       </div>
                       <?php }?>
