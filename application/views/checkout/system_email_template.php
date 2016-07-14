@@ -7,6 +7,7 @@
 <body bgcolor="#F4F4F4">
 
 <style type="text/css">
+body{background-image:url('<?php echo site_url(); ?>assets/images/frontend/emailtemplate/bg.gif');background-repeat:repeat-y no-repeat;background-position:top center;margin:0;padding:0;}
 .bodytbl{margin:0;padding:0;-webkit-text-size-adjust:none;}
 table{font-family:Helvetica, Arial, sans-serif;font-size:12px;color:#787878;}
 div{line-height:18px;color:#787878;}
@@ -46,7 +47,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 						<div class="intro"><div></div><a name="top"></a></div>
 					</td>
 				</tr>
-				<tr><td width="630"><img src="http://hhcdn.s3.amazonaws.com/email/img/top.gif" style="display:block;" alt="" title="" width="630" height="10" border="0"></td></tr>
+				<tr><td width="630"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/top.gif" style="display:block;" alt="" title="" width="630" height="10" border="0"></td></tr>
 			</table>
 
 			<table width="100%" cellspacing="0" cellpadding="0">
@@ -58,14 +59,12 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 									<!-- Top Label start -->
 									<table width="600" cellspacing="0" cellpadding="0">
 										<tr>
-											<td width="10" align="left"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_l.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
-											<td width="40" align="left">
-												<img src="http://hhcdn.s3.amazonaws.com/images/logo.png" style="display:block;" alt="" title="" height="32" border="0" style="max-height:32px;">
-											</td>
+											<td width="10" align="left"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_l.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
+											
 											<td align="right" class="bold">
 												<div>1-8001-4931-34501<br><a href="mailto:info@gotsafety.com">info@gotsafety.com</a></div>
 											</td>
-											<td width="10" align="right"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_r.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
+											<td width="10" align="right"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_r.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
 										</tr>
 									</table>
 									<!-- Top Label end -->
@@ -79,7 +78,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 						<table width="100" align="center" cellspacing="0" cellpadding="0" class="header" bgcolor="#FCFCFC">
 							<tr>
 								<td class="tbox">&nbsp;</td>
-								<td align="center" height="25" width="600" valign="top"><img src="http://hhcdn.s3.amazonaws.com/email/img/bottom.gif" style="display:block;" alt="" title="" width="600" height="25" border="0"></td>
+								<td align="center" height="25" width="600" valign="top"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/bottom.gif" style="display:block;" alt="" title="" width="600" height="25" border="0"></td>
 								<td class="tbox">&nbsp;</td>
 							</tr>
 							<tr>
@@ -121,19 +120,19 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 
 
 <table width="600" cellspacing="0" cellpadding="0">
-	<tr><td align="center" height="20" valign="bottom"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_top.gif" style="display:block;" alt="" title="" width="600" height="10" border="0"></td></tr>
+	<tr><td align="center" height="20" valign="bottom"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_top.gif" style="display:block;" alt="" title="" width="600" height="10" border="0"></td></tr>
 	<tr>
 		<td class="box" valign="top" bgcolor="#FCFCFC">
 			<table width="600" cellspacing="0" cellpadding="0">
 				<tr>
-					<td width="10" align="left" rowspan="3"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_l_f.gif" style="display:block;" width="10" height="240" alt="" border="0"></td>
+					<td width="10" align="left" rowspan="3"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_l_f.gif" style="display:block;" width="10" height="240" alt="" border="0"></td>
 					<td width="40" height="40" align="left" valign="middle">
 
 					</td>
 					<td align="left" colspan="3" class="bold">
 						<div>Contact Us</div>
 					</td>
-					<td width="10" align="right" rowspan="3"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_r_f.gif" style="display:block;" width="10" height="240" alt="" border="0"></td>
+					<td width="10" align="right" rowspan="3"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_r_f.gif" style="display:block;" width="10" height="240" alt="" border="0"></td>
 				</tr>
 				<tr>
 					<td width="40" colspan="2">&nbsp;</td>
@@ -162,7 +161,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 			</table>
 		</td>
 	</tr>
-	<tr><td align="center" height="20" valign="top"><img src="http://hhcdn.s3.amazonaws.com/email/img/sep_bottom.gif" style="display:block;" alt="" title="" width="600" height="25" border="0"></td></tr>
+	<tr><td align="center" height="20" valign="top"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_bottom.gif" style="display:block;" alt="" title="" width="600" height="25" border="0"></td></tr>
 	<tr><td class="copy" align="center" height="40" valign="top"><div>&copy;Got Safety., All rights reserved</div></td></tr>
 </table>
 <!-- Footer end -->

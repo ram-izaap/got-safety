@@ -35,7 +35,13 @@ class Cart extends App_Controller {
         }
 
         $this->data['img_url'] = get_img_dir();
-        $this->layout->view("cart/cart_list","frontend");
+        
+        if(count($this->cart->contents()) > 0)
+           $this->layout->view("cart/cart_list","frontend");
+        else
+          redirect('');
+
+        
     }
 
     function add($product_id,$attr_id,$qty)

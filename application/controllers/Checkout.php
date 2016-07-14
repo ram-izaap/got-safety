@@ -100,8 +100,12 @@ class Checkout extends Cart_controller {
         $this->data['payment_information'] = $this->load->view("checkout/payment_information",$this->data,true);
 
         $this->data['order_information'] = $this->load->view("checkout/order_information",$this->data,true);
-        
-        $this->layout->view("checkout/checkout","frontend");
+
+        if(count($this->cart->contents()) > 0)
+           $this->layout->view("checkout/checkout","frontend");
+        else
+          redirect('');
+
 
     } 
 

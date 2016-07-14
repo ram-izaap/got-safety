@@ -39,9 +39,9 @@ class Email_manager
 
 	public function send_email($to, $toname, $from, $from_name, $subject, $message, $cc = array(),$attachments = array())
 	{
-		/*$this->_CI->config->load('email_config');*/
+		$this->_CI->config->load('email_config');
 	
-		$this->_CI->load->library('email');
+		$this->_CI->load->library('email',$this->_CI->config->item('email'));
 
 		$this->_CI->email->clear(TRUE);
 		
