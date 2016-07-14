@@ -48,8 +48,8 @@
                         </strong>
                       </div>
                       <?php }?>
-                      <div data-cover="gs-english">
-                      </div>
+                     <?php /* <div data-cover="gs-english">
+                      </div> */ ?>
                       </div> 
                   </div>
                   <div class="col-sm-6">

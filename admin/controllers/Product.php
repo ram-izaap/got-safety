@@ -77,7 +77,7 @@ class Product extends Admin_controller {
     
     public function add_product($edit_id = "")
     { 
-
+		//print_r($_FILES['img']['name']);exit;
        if(is_logged_in()) {
 
         $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;

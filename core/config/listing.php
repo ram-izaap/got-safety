@@ -395,7 +395,7 @@ $config['product_index'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-							'desc'=>array('name'=>'Description', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'desc'=>array('name'=>'Description', 'data_type' => 'shot_desc', 'sortable' => FALSE, 'default_view'=>1),
 							'cat_name'=>array('name'=>'Category', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
 							'sku'=>array('name'=>'SKU', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             

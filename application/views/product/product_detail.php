@@ -254,6 +254,11 @@
         </p>
       </div>
       <div class="modal-footer">
+		  <a class="btn btn-lg btn-danger" href="<?php echo base_url();?>product">
+        <i class="fa fa-hand-o-right">
+        </i>
+        Continue Shopping
+      </a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Ok
         </button>
       </div>

@@ -149,6 +149,15 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             break; 
             
             
+            case 'shot_desc':
+            if(strlen($data)>35) {
+				$result = substr(ucfirst(strip_tags($data)), 0, 50) . "....";
+			}else {
+				$result = $data;
+			}
+            $data = $result;
+            break;
+            
             
             
                

@@ -147,3 +147,6 @@
   </table>
   <?php endif; ?>
 </div>
+<div class="col-md-12">
+<a href="<?php echo site_url('product'); ?>" class="btn-back">Back</a>
+</div>
