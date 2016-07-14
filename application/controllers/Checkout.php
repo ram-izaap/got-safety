@@ -50,12 +50,14 @@ class Checkout extends Cart_controller {
          { 
             $userid = $this->session->userdata("user_id");
 
+            $email = $this->session->userdata("email1");
+
             $billing_address = $this->checkout_model->get_address1(array("type"=>"ba","userid"=>$userid));
 
             $billing_info = array(
                'name' => $billing_address['name'],
                'company_name' => $billing_address['company_name'],
-               'email' => $billing_address['email'],
+               'email' => $email,
                'phone' => $billing_address['phone'],
                'address' => $billing_address['address'],
                'state' => $billing_address['state'],

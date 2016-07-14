@@ -205,7 +205,9 @@ class Paypal_exp extends Cart_controller {
 			}
 
 			//remove the session data
-			$this->remove_session();
+			
+			//$this->remove_session();
+			
 			$this->session->unset_userdata('express_check_token');
 
 			$so_id = 0;

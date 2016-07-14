@@ -46,7 +46,7 @@
                     jsmith@email.com
                   </address>
                 </div>-->
-                <div class="col-xs-6 text-right">
+                <div class="col-xs-6">
                   <address>
                     <strong>Order Date:
                     </strong>

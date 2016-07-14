@@ -116,14 +116,12 @@ class Cart_controller extends App_Controller {
                 $this->after_payment($so_id);
             }
 
-            $this->remove_session();
             break;
        }
 
        $message = 'success';
        $status = 'success';
        $this->session->set_flashdata('message', 'Your Order has been processed successfully. Thank You.');
-       $this->session->set_flashdata('so_id1', $so_id);
        echo json_encode(array('status' => $status, 'message' => $message));
 
     } 
@@ -310,10 +308,10 @@ class Cart_controller extends App_Controller {
     function success( $so_id = 0 )
     {
 
-        if( !$so_id && !$this->session->flashdata('so_id1') )
+        if( !$so_id && !$this->session->userdata('so_id') )
             redirect('');
         
-        $so_id = $so_id?$so_id:$this->session->flashdata('so_id1');
+        $so_id = $so_id?$so_id:$this->session->userdata('so_id');
         
         $this->load->model('checkout_model');
         
@@ -347,7 +345,8 @@ class Cart_controller extends App_Controller {
         $this->data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
         $this->data['shipping'] = $this->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
 
-        
+        $this->remove_session();
+
         $this->layout->view('/checkout/payment_success', 'frontend');
     }
 

@@ -23,7 +23,7 @@
                     
                     <div class="form-group">
                       <div class="col-xs-12">
-                        <input type="text"  value="<?php echo $this->session->userdata['billing_info']['email']; ?>" placeholder="E - Mail" class="form-control input-lg" id="email" name="email">
+                        <input type="text"  <?php echo (isset($this->session->userdata['email1']) && $this->session->userdata['email1']!='')?("readonly=readonly"):'';?> value="<?php echo $this->session->userdata['billing_info']['email']; ?>" placeholder="E - Mail" class="form-control input-lg" id="email" name="email">
                       </div>
                     </div>
                     <span class="vstar err_email"></span>

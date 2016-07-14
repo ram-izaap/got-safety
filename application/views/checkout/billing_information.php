@@ -90,37 +90,37 @@
               <div class="panel-body">
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Name')" onfocus="(this.value == 'Name') &amp;&amp; (this.value = '')" placeholder="Name" class="form-control input-lg" id="name" name="name">
+                    <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="name">
                   </div>
                 </div>
                 <span class="vstar err_name"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Company Name')" onfocus="(this.value == 'Company Name') &amp;&amp; (this.value = '')" placeholder="Company Name" class="form-control input-lg" id="company_name" name="company_name">
+                    <input type="text" placeholder="Company Name" class="form-control input-lg" id="company_name" name="company_name">
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'E - Mail')" onfocus="(this.value == 'E - Mail') &amp;&amp; (this.value = '')" placeholder="E - Mail" class="form-control input-lg" id="email" name="email">
+                    <input type="text" <?php echo (isset($this->session->userdata['email1']) && $this->session->userdata['email1']!='')?("readonly=readonly"):'';?> placeholder="E - Mail" class="form-control input-lg" id="email" name="email">
                   </div>
                 </div>
                 <span class="vstar err_email"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Phone Number')" onfocus="(this.value == 'Phone Number') &amp;&amp; (this.value = '')" placeholder="Phone Number" class="form-control input-lg" id="phone" name="phone">
+                    <input type="text"  placeholder="Phone Number" class="form-control input-lg" id="phone" name="phone">
                   </div>
                 </div>
                 <span class="vstar err_phone"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Address')" onfocus="(this.value == 'Address') &amp;&amp; (this.value = '')" placeholder="Address" class="form-control input-lg" id="address" name="address">
+                    <input type="text"  placeholder="Address" class="form-control input-lg" id="address" name="address">
                   </div>
                 </div>
                  <span class="vstar err_add"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'City')" onfocus="(this.value == 'City') &amp;&amp; (this.value = '')" placeholder="City" class="form-control input-lg" id="city" name="city">
+                    <input type="text"  placeholder="City" class="form-control input-lg" id="city" name="city">
                   </div>
                 </div>
                 <span class="vstar err_city"></span> 
@@ -154,7 +154,7 @@
                 <span class="vstar err_country"></span>  
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Zip Code')" onfocus="(this.value == 'Zip Code') &amp;&amp; (this.value = '')" placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="zip_code">
+                    <input type="text"  placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="zip_code">
                   </div>
                 </div>
                 <span class="vstar err_zip"></span>                           

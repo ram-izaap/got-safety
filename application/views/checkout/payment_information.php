@@ -46,19 +46,19 @@
               <span class="vstar err_card_type"></span>
               <div class="form-group">
                 <div class="col-md-12">
-                  <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Name')" onfocus="(this.value == 'Name') &amp;&amp; (this.value = '')" placeholder="Name on Card" class="form-control input-lg" id="cc_name" name="cc_name">
+                  <input type="text" placeholder="Name on Card" class="form-control input-lg" id="cc_name" name="cc_name">
                 </div>
               </div>
               <span class="vstar err_cc_name"></span>
               <div class="form-group">
                 <div class="col-md-12">
-                  <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Card Number')" onfocus="(this.value == 'Card Number') &amp;&amp; (this.value = '')" placeholder="Card Number" class="form-control input-lg" id="cc_number" name="cc_number">
+                  <input type="text" placeholder="Card Number" class="form-control input-lg" id="cc_number" name="cc_number">
                 </div>
               </div>
               <span class="vstar err_cc_number"></span>
               <div class="form-group">
                 <div class="col-md-12">
-                  <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Card CVV')" onfocus="(this.value == 'Card CVV') &amp;&amp; (this.value = '')" placeholder="Card CVV" class="form-control input-lg" id="cc_ccd" name="cc_ccd">
+                  <input type="text" placeholder="Card CVV" class="form-control input-lg" id="cc_ccd" name="cc_ccd">
                 </div>
               </div>
               <span class="vstar err_cc_ccd"></span>

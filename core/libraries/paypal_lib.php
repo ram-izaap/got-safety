@@ -242,14 +242,19 @@ class Paypal_lib
 
 
 			$so_id = isset($custom['so_id'])?(int)$custom['so_id']:0;            
-            $this->checkout_model->addaction_loginfo('sales_order', 'IPN Call from Paypal.'.json_encode($response), $so_id);
+            $this->CI->checkout_model->addaction_loginfo('sales_order', 'IPN Call from Paypal.'.json_encode($response), $so_id);
 
 			if( !isset($custom['so_id']) )
 				throw new Exception('Invalid sales order id');
 			
 			$so_id = $custom['so_id'];
 			
-			$this->environment 		= isset($payment_settings['mode'])?$payment_settings['mode']:'';
+			$result = $this->CI->db->get("payment_api_credentials")->row_array();
+
+			if(!isset($result['payment_mode']))
+			    return FALSE;
+
+			$this->environment 		= isset($result['payment_mode'])?$result['payment_mode']:'';
 			
 			
 			
@@ -263,8 +268,8 @@ class Paypal_lib
 						'paid_status' => 'Y',
 						'txn_id' => $response['txn_id']
 				);
-				$this->db->where('id', $so_id);
-                $this->db->update('sales_order', $txn);
+				$this->CI->db->where('id', $so_id);
+                $this->CI->db->update('sales_order', $txn);
 				$this->CI->email_manager->send_order_mail($so_id);
 			}
 						
@@ -275,11 +280,11 @@ class Paypal_lib
 							'paid_status' => 'N'
 				);
 
-				$this->db->where('id', $so_id);
-                $this->db->update('sales_order', $txn);
+				$this->CI->db->where('id', $so_id);
+                $this->CI->db->update('sales_order', $txn);
 
 				$this->CI->email_manager->send_order_mail($so_id, 'FAILED');
-				$this->checkout_model->addaction_loginfo('sales_order', 'IPN validation failed.Notification email on "Unsuccessful-Payment" sent to customer.', $so_id);
+				$this->CI->checkout_model->addaction_loginfo('sales_order', 'IPN validation failed.Notification email on "Unsuccessful-Payment" sent to customer.', $so_id);
 
 			}
 			
@@ -361,7 +366,9 @@ class Paypal_lib
 		else if (strcmp ($res, "INVALID") == 0) 
 		{
 			if($so_id)
-				actionLogAdd('sales_order', 'IPN validation is failed.'.$this->error_message, $so_id);
+				//actionLogAdd('sales_order', 'IPN validation is failed.'.$this->error_message, $so_id);
+				$this->CI->checkout_model->addaction_loginfo('sales_order', 'IPN validation is failed.'.$this->error_message, $so_id);
+
 			
 			return FALSE;
 		}

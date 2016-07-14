@@ -92,37 +92,37 @@
               <div class="panel-body">
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Name')" onfocus="(this.value == 'Name') &amp;&amp; (this.value = '')" placeholder="Name" class="form-control input-lg" id="name" name="sa_name">
+                    <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="sa_name">
                   </div>
                 </div>
                 <span class="vstar err_sa_name"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Company Name')" onfocus="(this.value == 'Company Name') &amp;&amp; (this.value = '')" placeholder="Company Name" class="form-control input-lg" id="company_name" name="sa_company_name">
+                    <input type="text" placeholder="Company Name" class="form-control input-lg" id="company_name" name="sa_company_name">
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'E - Mail')" onfocus="(this.value == 'E - Mail') &amp;&amp; (this.value = '')" placeholder="E - Mail" class="form-control input-lg" id="email" name="sa_email">
+                    <input type="text"  placeholder="E - Mail" class="form-control input-lg" id="email" name="sa_email">
                   </div>
                 </div>
                 <span class="vstar err_sa_email"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Phone Number')" onfocus="(this.value == 'Phone Number') &amp;&amp; (this.value = '')" placeholder="Phone Number" class="form-control input-lg" id="phone" name="sa_phone">
+                    <input type="text" placeholder="Phone Number" class="form-control input-lg" id="phone" name="sa_phone">
                   </div>
                 </div>
                 <span class="vstar err_sa_phone"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Address')" onfocus="(this.value == 'Address') &amp;&amp; (this.value = '')" placeholder="Address" class="form-control input-lg" id="address" name="sa_address">
+                    <input type="text" placeholder="Address" class="form-control input-lg" id="address" name="sa_address">
                   </div>
                 </div>
                  <span class="vstar err_sa_add"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'City')" onfocus="(this.value == 'City') &amp;&amp; (this.value = '')" placeholder="City" class="form-control input-lg" id="city" name="sa_city">
+                    <input type="text" placeholder="City" class="form-control input-lg" id="city" name="sa_city">
                   </div>
                 </div>
                 <span class="vstar err_sa_city"></span> 
@@ -156,7 +156,7 @@
                 <span class="vstar err_sa_country"></span>  
                 <div class="form-group">
                   <div class="col-xs-12">
-                    <input type="text" onblur="(this.value == '') &amp;&amp; (this.value = 'Zip Code')" onfocus="(this.value == 'Zip Code') &amp;&amp; (this.value = '')" placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="sa_zip_code">
+                    <input type="text" placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="sa_zip_code">
                   </div>
                 </div>
                 <span class="vstar err_sa_zip"></span>
