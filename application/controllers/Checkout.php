@@ -46,8 +46,9 @@ class Checkout extends Cart_controller {
             $this->data['cat_data'][$key]['p_count'] = $this->data['p_count']->cnt;
         }
 
-        if(is_logged_in() && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 
+        if($this->session->userdata("email1")!='' && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 
          { 
+
             $userid = $this->session->userdata("user_id");
 
             $email = $this->session->userdata("email1");
@@ -57,7 +58,7 @@ class Checkout extends Cart_controller {
             $billing_info = array(
                'name' => $billing_address['name'],
                'company_name' => $billing_address['company_name'],
-               'email' => $email,
+               'email' => $this->session->userdata("email1"),
                'phone' => $billing_address['phone'],
                'address' => $billing_address['address'],
                'state' => $billing_address['state'],
@@ -68,6 +69,8 @@ class Checkout extends Cart_controller {
             );
 
             $this->session->set_userdata('billing_info', $billing_info);
+
+            
 
             $shipping_address = $this->checkout_model->get_address1(array("type"=>"sa","userid"=>$userid));
 
