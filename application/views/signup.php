@@ -84,14 +84,30 @@
                                   <input type="radio" id="radio1" name="radios" value="all" checked>
                                   <label for="radio1">
                                     <span class="title">Basic</span>
-                                    <span class="price">55.00</span>
+                                    <span class="price">59.00</span>
                                     <span class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</span>
                                   </label>
 
-    <input type="radio" id="radio2" name="radios"value="false">
-       <label for="radio2">Galaxy S IV</label>
-    <input type="radio" id="radio3" name="radios" value="true">
-       <label for="radio3">Nexus S</label>
+                                  <input type="radio" id="radio2" name="radios"value="false">
+                                  <label for="radio2">
+                                    <span class="title">Personal</span>
+                                    <span class="price">99.00</span>
+                                    <span class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</span>
+                                  </label>
+
+                                  <input type="radio" id="radio3" name="radios" value="true">
+                                  <label for="radio3">
+                                  <span class="title">Premium</span>
+                                    <span class="price">199.00</span>
+                                    <span class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</span>
+                                  </label>
+
+                                  <input type="radio" id="radio4" name="radios" value="true">
+                                  <label for="radio4">
+                                  <span class="title">Premium +</span>
+                                    <span class="price">299.00</span>
+                                    <span class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</span>
+                                  </label>
                                   <!-- Loop section // -->
 
                                 </div>
