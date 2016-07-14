@@ -31,7 +31,7 @@
                             <div class="">
                                     <div id="div-login-msg">
                                         <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                        <span class="form-title" id="text-login-msg">Login</span> or
+                                        <span class="form-title" id="text-login-msg">Login</span>
 
                                     </div>
                                       <div class="row">

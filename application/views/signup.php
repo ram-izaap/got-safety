@@ -74,6 +74,29 @@
                                     
                                       
                                 </div>
+                                <!-- Stativ verse -->
+                                <h3>Choose Plan</h3>
+                                <hr />
+
+                                <div class="plan-wrapper">
+                                  
+                                  <!-- // Loop section -->
+                                  <input type="radio" id="radio1" name="radios" value="all" checked>
+                                  <label for="radio1">
+                                    <span class="title">Basic</span>
+                                    <span class="price">55.00</span>
+                                    <span class="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</span>
+                                  </label>
+
+    <input type="radio" id="radio2" name="radios"value="false">
+       <label for="radio2">Galaxy S IV</label>
+    <input type="radio" id="radio3" name="radios" value="true">
+       <label for="radio3">Nexus S</label>
+                                  <!-- Loop section // -->
+
+                                </div>
+                                <!-- Stativ verse -->
+
                                 <?php foreach ($plan_data as $key=>$value): ?>
                                 <div data-view="git-group">
                                   <div class="gif-listing">

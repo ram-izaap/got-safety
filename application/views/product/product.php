@@ -42,9 +42,9 @@
                         </strong>
                       </div>
                       <?php } else if(count($product_variation[$value['id']]) > 1){ ?>
-                      <div class="block-price">
+                      <div class="block-price multi_price">
                         <strong>
-                          <?php echo ($product_variation[$value['id']][$cur_val] < $product_variation[$value['id']][$end_val])?$product_variation[$value['id']][$cur_val] .'-'.$product_variation[$value['id']][$end_val]:$product_variation[$value['id']][$end_val] .'-'.$product_variation[$value['id']][$cur_val]; ?>
+                          <?php echo ($product_variation[$value['id']][$cur_val] < $product_variation[$value['id']][$end_val])?$product_variation[$value['id']][$cur_val] .' - '.$product_variation[$value['id']][$end_val]:$product_variation[$value['id']][$end_val] .' - '.$product_variation[$value['id']][$cur_val]; ?>
                         </strong>
                       </div>
                       <?php }?>
@@ -54,8 +54,8 @@
                   </div>
                   <div class="col-sm-6">
                     <h4>
-                      <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $value['id']; ?>">“
-                        <?php echo $value['name']; ?>”
+                      <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $value['id']; ?>">
+                        <?php echo $value['name']; ?>
                       </a>
                     </h4>
                     <p class="text-right">
