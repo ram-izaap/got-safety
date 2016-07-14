@@ -328,11 +328,11 @@
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
-						<?php /*<li>
+						<li>
 							<a href="extra_profile.html">
 							<i class="icon-user"></i> My Profile </a>
 						</li>
-						<li>
+						<?php /*<li>
 							<a href="page_calendar.html">
 							<i class="icon-calendar"></i> My Calendar </a>
 						</li>

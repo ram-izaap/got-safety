@@ -121,11 +121,10 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
 			$data = $data;
             break; 
             
-         case 'admin_client_list':
+        case 'admin_client_list':
 			$data ='<a href="'.base_url().'index.php/client?id='.$row['id'].'"><i class="fa fa-plus cen-align2"></i></a>';
-            break; 
-            
-           case 'find_employee':
+            break;           
+        case 'find_employee':
 			
 			$CI = & get_instance();    
             $CI->load->model('signoff_model');

@@ -68,9 +68,9 @@ class Payment extends Admin_controller
         $ins = $this->input->post();
         $ins['description'] = $this->input->post('desc');
         $ins['amount'] = $this->input->post('amount');
-        $a = $this->create_auth_cust_profile( $ins );
+        //$a = $this->create_auth_cust_profile( $ins );
         $res['customer_id'] = $a['cus_id'];
-        $res['profileid'] = $a['profileid'];
+        $res['profile_id'] = $a['profileid'];
         $res['paymentprofileid'] = $a['paymentprofileid'];
         $res['shippingprofileid'] = $a['shippingprofileid'];
         $b =  $this->create_auth_subscription($res,$ins);
@@ -83,14 +83,15 @@ class Payment extends Admin_controller
             $ins_data['userid'] = $userid;
             $ins_data['subscription_id'] = $b['subs_id'];
             $ins_data['name'] = $ins['description'];
-            $ins_data['startDate'] = date("Y-m-d");
+            $ins_data['profile_start_date'] = date("Y-m-d");
+            $ins_data['next_billing_date'] = date("Y-m-d",strtotime("+31 days"));
             $ins_data['amount'] = $ins['amount'];
             $ins_data['invoice_no'] = $b['invoice_no'];
             $ins_data['description'] = $ins['description'];
             $ins_data['sub_status'] = 0;
             $ins_data['created_date'] = date('Y-m-d H:i:s');
             $ins_data['last_updated'] = date('Y-m-d H:i:s');
-            $this->payment_model->insert("authorize_subscription",$ins_data);
+            $this->payment_model->insert("payment_recurring_profiles",$ins_data);
             //Create Customer Profile Table Fields
             $up_data['customerid'] = $a['cus_id'];
             $up_data['profileid'] = $a['profileid'];

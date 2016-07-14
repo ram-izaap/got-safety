@@ -104,7 +104,7 @@ class Login extends App_Controller {
 				$ins_data['language']      = 1;
 				$ins_data['created_id']    = 8;
 			 	$folder                    = $ins_data['name'];	
-                $this->session->set_userdata("plan_details",get_plan_details($form['plan_type']));
+            //    $this->session->set_userdata("plan_details",get_plan_details($form['plan_type']));
 			 	$this->session->set_userdata("signup_data",$ins_data);
 				/*mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
                 echo $add_user    = $this->login_model->insert("users",$ins_data);

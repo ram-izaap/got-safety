@@ -80,13 +80,13 @@ class Payment extends App_Controller
 		        $ins['description'] = $this->input->post('plan_name');
 		    	$ins['amount'] = $this->input->post('plan_cost');
 		       	/*$a = $this->create_auth_cust_profile( $ins );
-		      	$res['customer_id'] = $a['cus_id'];
+		      	
 		      	$res['profileid'] = $a['profileid'];
 		        $res['paymentprofileid'] = $a['paymentprofileid'];
 		        $res['shippingprofileid'] = $a['shippingprofileid'];*/
-		        $res['profileid']=time();
-		        $res['paymentprofileid']=time();
-		        $res['shippingprofileid']=time();
+		        $res['profileid']=uniqid();
+		        //$res['paymentprofileid']=time();
+		        //$res['shippingprofileid']=time();
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
 		        $c = $this->create_auth_transaction($res,$ins);
@@ -122,34 +122,31 @@ class Payment extends App_Controller
 		            //Load Models
 		            $this->load->model('payment_model');
 		            //Create Subscription Table Fields 
-		            $ins_data['userid'] = $userid;
+		            $ins_data['user_id'] = $userid;
+		            $ins_data['profile_id'] = $res['profileid'];
+		            $ins_data['plan_id'] = $ins['plan_id'];         
+		            $ins_data['customer_id'] = $ins['customer_id'];
+		            $ins_data['profile_start_date'] = date("Y-m-d");
+		            $ins_data['next_billing_date'] = date("Y-m-d",strtotime("+32 days"));
 		            $ins_data['subscription_id'] = $b['subs_id'];
-		            $ins_data['name'] = $ins['description'];
-		            $ins_data['startDate'] = date("Y-m-d");
-		            $ins_data['amount'] = $ins['amount'];
 		            $ins_data['invoice_no'] = $b['invoice_no'];
-		            $ins_data['description'] = $ins['description'];
-		            $ins_data['sub_status'] = 0;
-		            $ins_data['created_date'] = date('Y-m-d H:i:s');
-		            $ins_data['last_updated'] = date('Y-m-d H:i:s');
-		            $this->payment_model->insert("authorize_subscription",$ins_data);
-		            //Create Customer Profile Table Fields
-                    $up_data['userid'] = $userid;
-		            $up_data['customerid'] = $res['customer_id'];
-		            $up_data['profileid'] = $res['profileid'];
-		            $up_data['payment_pro_id'] = $res['paymentprofileid'];
-		            $up_data['ship_pro_id'] = $res['shippingprofileid'];
-		            $up_data['date_created'] = date("Y-m-d H:i:s");
-		            $this->payment_model->insert("client_subscription",$up_data);
+					$ins_data['amount'] = $ins['amount'];
+		            $ins_data['profile_status'] = "Active";
+		            $ins_data['payment_status'] = "Completed";
+		            $ins_data['last_payment_date'] = date('Y-m-d H:i:s');
+		            $ins_data['last_payment_amt'] = $ins['amount'];
+		            $ins_data['payment_method'] = "Authorize";
+		            $this->payment_model->insert("payment_recurring_profiles",$ins_data);
 		            //Create Auth Transaction Table Fields
-		            $trans_data['userid']= $userid;
-		            $trans_data['description']= $ins['description'];
-		            $trans_data['amount']=  $ins['amount'];
+		            $trans_data['user_id']= $userid;
+		            $trans_data['profile_id']= $b['subs_id'];
+		            $trans_data['last_payment_amt']=  $ins['amount'];
+		            $trans_data['last_payment_date']=  date("Y-m-d H:i:s");
+		            $trans_data['created_date']=  date("Y-m-d H:i:s");
 		            $trans_data['trans_id']= $c['transid'];
 		            $trans_data['status']= $c['trans_status'];
 		            $trans_data['payment_mode']= "Authorize";
-		            $trans_data['date_inserted']= date("Y-m-d H:i:s");
-		            $this->payment_model->insert("payments",$trans_data);
+		            $this->payment_model->insert("payment_transaction_history",$trans_data);
 		            $this->session->set_flashdata("signup_succ","User Profile has been created sucessfully.",TRUE);
 		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
 					redirect("login/signup");
@@ -227,7 +224,7 @@ class Payment extends App_Controller
                 //'trialOccurrences' => 0,
                 ),
             'amount' => $post['amount'],
-            //'trialAmount' => 0.00,
+            //'trialAmount' => 0.00,            
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => $post['c_number'],

@@ -8,8 +8,7 @@
 						
 						<h4>Choose Payment Gateway</h4>
 						<p>
-						<?php 
-
+						<?php
 						if($this->session->userdata)
 						{
 							$email = $this->session->userdata['signup_data']['email'];
@@ -37,8 +36,9 @@
 						<div class="auth_div" style="display:none;">
 								<form name="auth-form" method="post" action="<?php echo base_url('payment/authorize_form'); ?>"	
 									autocomplete="on">
-									<input type="" name="plan_name" value="Silver">
-									<input type="" name="plan_cost" value="50">
+									<input type="" name="plan_name" value="<?php echo $_SESSION['plan_details']['plan_type'];?>">
+									<input type="" name="plan_cost" value="<?php echo $_SESSION['plan_details']['plan_amount'];?>">
+									<input type="" name="plan_id" value="<?php echo $_SESSION['plan_details']['id'];?>">
 								<h5>Personal Info</h5>
 									 <div class="row">
 					                    <div class="col-sm-6">
