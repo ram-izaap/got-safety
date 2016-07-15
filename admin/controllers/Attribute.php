@@ -121,7 +121,13 @@ class Attribute extends Admin_controller {
                 if($form['save_method']=='add')
                   $update_data = $this->attribute_model->insert("attribute",$ins_data);
                 else
+                {
                   $update_data = $this->attribute_model->update("attribute",$ins_data,array("id" => $edit_id));
+                  if($ins_data['is_active']==0)
+                    $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
+                  if($ins_data['is_active']==1)
+                    $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
+                }
                 
                 echo json_encode(array("status" => TRUE));
             }
@@ -188,9 +194,9 @@ class Attribute extends Admin_controller {
       $attr_id = $this->input->post("attr_id");
 
       if($attr_id!='')
-        $where = array("id" => $attr_id);
+        $where = array("id" => $attr_id,"is_active"=>"1");
       else
-        $where = '';
+        $where = array("is_active"=>"1");
       
       $edit_data = $this->attribute_model->get_attr_data1("attribute",$where);
       echo json_encode($edit_data);

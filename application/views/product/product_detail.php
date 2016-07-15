@@ -9,6 +9,7 @@
         ?>
         <!-- -->
         <div class="col-sm-12 col-md-6 content-bar">
+        <?php if(count($attr_dtl) >0): ?>
           <div class="pro-details">
             <div class="row visible-xs visible-sm aside-pannel">
               <div class="sidebar">
@@ -111,12 +112,12 @@
                     <input type="hidden" name="p_id" value="<?php echo $product_dtl['id']; ?>">
                     <?php if(count($attr_dtl) >0) : ?>
                     <label>
-                      <?php //echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
+                      <?php echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
                     </label>
 
                     <div data-role="sorting"  class="product-size">
                     <select name="label_size" class="sel_label_size" id="label_size">
-                      <option value="" variationid=''>Choose Your Label Size
+                      <option value="" variationid=''>Choose Your <?php echo $attrname; ?> 
                       </option>
                       <?php foreach($attr_dtl as $key=>$value): ?>
                       <option value="<?php echo $value['id']; ?>" variationid="<?php echo $value['id1']; ?>">
@@ -133,6 +134,11 @@
               </div>
             </div>
           </div>
+          <?php endif; ?>
+
+          <?php if(!count($attr_dtl)): ?>
+             <h2>No Product Found</h2><hr>
+          <?php endif; ?>
           <div class="col-sm-12 marginT-20 padding-xs">
             <div class="review-section">
               <h3>Client Reviews
