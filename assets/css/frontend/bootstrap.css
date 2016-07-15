@@ -1462,8 +1462,8 @@ select[multiple].form-group-sm .form-control {
   border-radius: 6px;
 }
 select.input-lg {
-  height: 46px;
-  line-height: 46px;
+  min-height: 46px;
+  /*line-height: 46px;*/
 }
 textarea.input-lg,
 select[multiple].input-lg {

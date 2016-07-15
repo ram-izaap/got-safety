@@ -31,8 +31,8 @@
           ?>
           <tr>
             <td class="prod-name">
-              <div class="media">
-                <a class="thumbnail pull-left" href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>"> 
+              <div class="media clearfix">
+                <a class="thumbnail m-thumbnail pull-left" href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>"> 
                   <img class="media-object" width="72" src="<?php echo $img_url; ?>assets/product_images/<?php echo $items['img']; ?>" alt="<?php echo $items['name']; ?>" title="<?php echo $items['name']; ?>"> 
                 </a>
                 <div class="media-body">

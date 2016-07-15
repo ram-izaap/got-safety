@@ -1,6 +1,6 @@
 
 <div class="qty">
-  <div class="col-sm-6 input-group number-spinner">
+  <div class="col-sm-12 input-group number-spinner">
     <div class="pro-spinner">
       <span class="input-group-btn minus">
         <button class="btn btn-default" data-dir=dwn>
@@ -17,7 +17,7 @@
       </span><br>
     </div>
     <div>
-      <span><?php echo $values[0]['price']; ?></span>
+      <span><?php //echo $values[0]['price']; ?></span>
     </div>
   </div>
 </div>

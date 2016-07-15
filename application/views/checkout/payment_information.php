@@ -12,35 +12,66 @@
           </span>Secure Payment
         </div>
         <div class="panel-body">
-          <div class="form-group">
-            <!--<div class="col-md-12">
-              <select class="form-control input-lg payment_type" name="pay_type" id="pay_type" onchange="javascript:hide_card_details();">
-                <option value="">Payment Type</option>
-                <option value="authorize">Authorize Net</option>
-                <option value="paypal">Paypal</option>
-              </select>
-            </div>-->
-            <div class="col-md-12">
-                <input type="radio" name="pay_type" id="pay_type" value="authorize" checked onchange="javascript:hide_card_details();">&nbsp;Authorize &nbsp;&nbsp; <input type="radio" name="pay_type" id="pay_type" value="paypal" onchange="javascript:hide_card_details();">&nbsp;Paypal
-            </div>
-          </div>
+        
           <span class="vstar err_pay_type"></span>
           <div class="panel panel-info hide_cards" data-form="checkout">
+
             <div class="panel-body">
               <div class="form-group">
-                <!--<div class="col-md-12">
-                  <select class="form-control input-lg card_type" name="card_type" id="card_type">
-                    <option value="">Card Type</option>
-                    <option value="6">Visa</option>
-                    <option value="7">MasterCard</option>
-                    <option value="8">American Express</option>
-                    <option value="9">Discover</option>
-                  </select>
-                </div>-->
-                <div class="col-md-12">
-                  <input type="radio" name="card_type" id="card_type" value="4" checked>&nbsp;Visa &nbsp;&nbsp; <input type="radio" name="card_type" id="card_type" value="3">&nbsp;MasterCard <br>
-                  <input type="radio" name="card_type" id="card_type" value="0" >&nbsp;American Express &nbsp;&nbsp; <input type="radio" name="card_type" id="card_type" value="2">&nbsp;Discover 
+              <!--  -->
+              <div class="plan-wrapper plan-checkout">
 
+              <input type="radio" name="pay_type" id="pay_type-1" value="authorize" checked onchange="javascript:hide_card_details();"> 
+              <label for="pay_type-1">
+                Authorize
+              </label>
+
+              <input type="radio" name="pay_type" id="plan_type-2" value="paypal" onchange="javascript:hide_card_details();"> 
+              <label for="plan_type-2">
+                Paypal
+              </label>
+
+              </div>
+              <!--  -->
+                
+
+                <div class="col-md-12">
+                  
+
+<!--  -->
+              <div class="plan-wrapper plan-checkout">
+
+                <input type="radio" name="card_type" id="pay_type-3" value="4" checked>
+                <label for="pay_type-3">
+                  Visa
+                </label>
+
+                <input type="radio" name="card_type" id="pay_type-4" value="3"> 
+                <label for="pay_type-4">
+                  MasterCard
+                </label>
+
+                <input type="radio" name="card_type" id="pay_type-5" value="0"> 
+                <label for="pay_type-5">
+                  American Express
+                </label>
+
+                <input type="radio" name="card_type" id="pay_type-6" value="2"> 
+                <label for="pay_type-6">
+                  Discover
+                </label>
+
+              </div>
+              <!--  -->
+
+<!-- 
+              <hr />
+
+                  <input type="radio" name="card_type" id="card_type" value="4" checked>&nbsp;Visa &nbsp;&nbsp; 
+                  <input type="radio" name="card_type" id="card_type" value="3">&nbsp;MasterCard <br>
+                  <input type="radio" name="card_type" id="card_type" value="0" >&nbsp;American Express &nbsp;&nbsp; 
+                  <input type="radio" name="card_type" id="card_type" value="2">&nbsp;Discover 
+ -->
                 </div>
               </div>
               <span class="vstar err_card_type"></span>

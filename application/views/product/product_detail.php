@@ -99,8 +99,8 @@
             </div>
             <div class="col-sm-7 col-md-7">
               <div class="pro-description">
-                <h6>Product Description :
-                </h6>
+                <h5><b>Product Description </b>
+                </h5>
                 <p>
                   <?php echo $product_dtl['desc']; ?>
                 </p>
@@ -111,10 +111,12 @@
                     <input type="hidden" name="p_id" value="<?php echo $product_dtl['id']; ?>">
                     <?php if(count($attr_dtl) >0) : ?>
                     <label>
-                      <?php echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
+                      <?php //echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
                     </label>
+
+                    <div data-role="sorting"  class="product-size">
                     <select name="label_size" class="sel_label_size" id="label_size">
-                      <option value="" variationid=''>Choose an option
+                      <option value="" variationid=''>Choose Your Label Size
                       </option>
                       <?php foreach($attr_dtl as $key=>$value): ?>
                       <option value="<?php echo $value['id']; ?>" variationid="<?php echo $value['id1']; ?>">
@@ -122,6 +124,7 @@
                       </option>
                       <?php endforeach; ?>
                     </select>
+                    </div>
                     <?php endif; ?>
                     <div id="attr_price">
                     </div>
@@ -136,15 +139,28 @@
               </h3>
               <hr />
               <div class="user-reviews">
+                
+                <div class="clear"></div>
+
+                <!--  -->
                 <div class="star-rating">
-                  <div id="stars" class="starrr">
-                  </div>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry 
-                  </p>
-                  <div class="profile-img">
-                    <img src="<?php echo site_url(); ?>assets/images/frontend/profile-img.jpg" alt="" class="img-responsive">
-                  </div>
+                   <div id="" class="reviewer-name"><b>Syed</b></div>
+                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry </p>
+                   <div class="profile-img">
+                      <img src="<?php echo site_url(); ?>assets/images/frontend/profile-img.jpg" alt="" class="img-responsive">
+                   </div>
+                   <hr />
                 </div>
+
+                <div class="star-rating">
+                   <div class="reviewer-name"><b>Syed</b></div>
+                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus explicabo asperiores sed ipsa odio iure consequuntur ipsum numquam doloribus fugiat molestias dolor praesentium totam repellendus placeat, voluptatem debitis iusto, suscipit dolores eveniet similique magni aliquam veniam repudiandae? Dolor reiciendis maiores corporis non soluta quidem corrupti doloremque, ea ab, earum velit placeat inventore veritatis eius incidunt repellat magni odit itaque veniam. Doloremque repudiandae ex quaerat id aperiam quis rem illo quas voluptate ratione consequatur dicta dolorem deleniti, culpa dolor voluptatem illum nobis aspernatur libero corporis incidunt labore adipisci vitae repellendus. Dignissimos autem fugiat ut quisquam repellat aut incidunt hic veniam ratione!</p>
+                   <div class="profile-img">
+                      <img src="<?php echo site_url(); ?>assets/images/frontend/profile-img.jpg" alt="" class="img-responsive">
+                   </div>
+                   <hr />
+                </div>
+                <!--  -->
                 <div class="review-form" data-form="suggestion">
                   <h3>Reviews
                   </h3>
@@ -254,12 +270,12 @@
         </p>
       </div>
       <div class="modal-footer">
-		  <a class="btn btn-lg btn-danger" href="<?php echo base_url();?>product">
+		  <a class="btn btn-sm btn-danger" href="<?php echo base_url();?>product">
         <i class="fa fa-hand-o-right">
         </i>
         Continue Shopping
       </a>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Ok
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Ok
         </button>
       </div>
     </div>

@@ -37,7 +37,7 @@
                     ?>
                     <tr>
                       <td class="prod-name">
-                        <div class="media">
+                        <div class="media clearfix">
                           <a class="thumbnail pull-left" href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>"> 
                             <img class="media-object" width="72" src="<?php echo $img_url; ?>assets/product_images/<?php echo $items['img']; ?>" alt="<?php echo $items['name']; ?>" title="<?php echo $items['name']; ?>"> 
                           </a>
@@ -87,22 +87,7 @@
                 </table>
                 <table width="100%" class="table">
                   <tbody>
-                    <tr>
-                      <td class="td-empty"> 
-                      </td>
-                      <td class="td-empty"> 
-                      </td>
-                      <td class="td-empty"> 
-                      </td>
-                      <td class="cart-chkout">
-                        <a href="#" class="btn btn-success btn-green btn-delete" from="cart_list" remove="all" type="button"> Clear Cart 
-                          </span>
-                        </a>
-                      </td>
-                      <td class="cart-cntshop">
-                       <input class="btn btn-success btn-green" value="Update Cart" type="submit">
-                      </td>
-                    </tr>
+                    
                     <tr>
                       <td class="td-empty"> 
                       </td>
@@ -182,18 +167,22 @@
                     <tr>
                       <td class="td-empty"> 
                       </td>
-                      <td class="td-empty"> 
-                      </td>
-                      <td class="td-empty"> 
+                      <td class="cart-chkout">
+                        <a href="#" class="btn btn-success btn-sm btn-delete" from="cart_list" remove="all" type="button"> Clear Cart 
+                          </span>
+                        </a>
                       </td>
                       <td class="cart-cntshop">
-                        <a href="<?php echo site_url('product'); ?>" class="btn btn-default continue-btn" type="button">
+                       <input class="btn btn-success btn-sm" value="Update Cart" type="submit">
+                      </td>
+                      <td class="cart-cntshop">
+                        <a href="<?php echo site_url('product'); ?>" class="btn btn-default btn-sm" type="button">
                           <i class="fa fa-shopping-cart">
                           </i> Continue Shopping 
                         </a>
                       </td>
                       <td class="cart-chkout">
-                        <a href="<?php echo site_url('checkout'); ?>" class="btn btn-success btn-green" type="button"> 
+                        <a href="<?php echo site_url('checkout'); ?>" class="btn btn-success btn-sm" type="button"> 
                           <i class="fa fa-hand-o-right">
                           </i>Checkout 
                           </span>

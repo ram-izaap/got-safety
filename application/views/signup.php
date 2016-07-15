@@ -82,8 +82,8 @@
         <div class="plan-wrapper">
           <!-- // plan section -->
         <?php foreach ($plan_data as $key=>$value): ?>
-          <input type="radio" name="plan_type" id="radio2" value="<?php echo $value['id']; ?>" <?php echo set_radio('plan_type', $value['id'])?>>
-          <label for="radio1">
+          <input type="radio" name="plan_type" id="plan_type<?php echo $key; ?>" value="<?php echo $value['id']; ?>" <?php echo set_radio('plan_type', $value['id'])?>>
+          <label for="plan_type<?php echo $key; ?>">
             <span class="title"><?php echo $value['plan_type']; ?>
             </span>
             <span class="price"><?php echo $value['plan_amount']; ?>
