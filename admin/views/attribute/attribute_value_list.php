@@ -77,6 +77,15 @@
 					<span class="vstar err1" style="display:none;">The Attribute Value field is required.</span>  
 				</div>
 			  </div>
+
+			  <div class="form-group">
+				<label class="col-md-2 control-label">Is Active:
+				</label>
+				<div class="col-md-10">
+					<input type="checkbox" class="" name="is_active" id="is_active" value="1"> 
+				</div>
+			  </div>
+			  
 			  <div class="form-group">
 				<label class="col-md-2 control-label"> <span class="required">
 				 </span>

@@ -61,7 +61,7 @@ class Product_model extends App_Model {
 
     function get_attr_by_id($pid)
     {
-        $result = $this->db->query("select a.attr_name,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."'");
+        $result = $this->db->query("select a.attr_name,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."' and b.is_active=1");
         return $result->result_array();
     }
 

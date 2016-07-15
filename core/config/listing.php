@@ -367,7 +367,8 @@ $config['attribute_index'] = array(
 	"base_url"	=> 	'/attribute/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-							'attr_name'=>array('name'=>'Attribute', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)
+							'attr_name'=>array('name'=>'Attribute', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
@@ -381,7 +382,8 @@ $config['attribute_attribute_value'] = array(
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'attr_name'=>array('name'=>'Attribute', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-							'attr_val'=>array('name'=>'Attribute Value', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1)
+							'attr_val'=>array('name'=>'Attribute Value', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

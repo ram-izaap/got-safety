@@ -23,18 +23,17 @@ class Product1_model extends CI_Model {
     function get_all_products($cat)
     {
         if($cat!='')
-            $where = 'where a.cat="'.$cat.'"';
+            $where = 'a.cat="'.$cat.'" and';
         else
             $where='';
 
-        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,a.updated_date,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id $where order by c.price");
+        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,a.updated_date,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price,d.attr_val,d.id as id4,d.is_active as active1 from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id inner join attribute_value d on d.id=b.attr_val_id where $where d.is_active=1 order by c.price");
         return $result->result_array();
     }
 
     function get_product_count($table_name,$where)
     {
-         $this->db->select('count(*) as cnt');    
-         $result = $this->db->get_where($table_name,$where);
+         $result = $this->db->query('select b.cat,b.id,b.attr_id,b.name,count(DISTINCT(b.id)) as cnt,c.attr_id as attr_id1 from products b inner join attribute_value c on b.attr_id=c.attr_id where b.cat='.$where['cat'].' and b.is_active=1 and c.is_active=1');    
          return $result->row();
     }
 
@@ -46,7 +45,7 @@ class Product1_model extends CI_Model {
     
     function get_attr_by_id($pid)
     {
-        $result = $this->db->query("select a.attr_name,b.id ,c.id as id1,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."' order by d.price");
+        $result = $this->db->query("select a.attr_name,b.id ,c.id as id1,b.attr_val,c.attr_val_id,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$pid."' and b.is_active=1 order by d.price");
         return $result->result_array();
     }
 }

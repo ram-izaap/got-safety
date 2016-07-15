@@ -245,7 +245,7 @@ class Product extends Admin_controller {
                 else
                     $attr_id = $_POST['attrid'];
 
-                $attrdata['values'] = $this->product_model->get_product_data("attribute_value",array("attr_id" =>$attr_id));
+                $attrdata['values'] = $this->product_model->get_product_data("attribute_value",array("attr_id" =>$attr_id,"is_active"=>1));
                 $attr_price = array(); 
                 if(!empty($edit_id))
                 {
@@ -273,7 +273,7 @@ class Product extends Admin_controller {
     function get_attributes($attr_id,$edit_id = '')
     {
         $attr_price=array();
-        $this->data['values'] = $this->product_model->get_product_data("attribute_value",array("attr_id" => $attr_id));
+        $this->data['values'] = $this->product_model->get_product_data("attribute_value",array("attr_id" => $attr_id,"is_active"=>"1"));
 
         if(!empty($edit_id))
         {

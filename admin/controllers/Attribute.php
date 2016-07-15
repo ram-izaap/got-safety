@@ -69,7 +69,7 @@ class Attribute extends Admin_controller {
          
          $this->_narrow_search_conditions = array("start_date");
         
-         $str = '<a href="#" id1="{id}" attr_id="{attr_id}" attr_val="{attr_val}"  class="table-link add_attr_val">
+         $str = '<a href="#" id1="{id}" attr_id="{attr_id}" attr_val="{attr_val}" is_active="{is_active}"  class="table-link add_attr_val">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -113,6 +113,9 @@ class Attribute extends Admin_controller {
             if(empty($edit_id) && $form['save_method']=='add' || !empty($edit_id) && $form['save_method']=='update')
             {
                 $ins_data['attr_name']  = $form['attr_name'];
+
+                $ins_data['is_active']  = $form['is_active'];
+                
                 $ins_data['updated_date']  = date("Y-m-d H:i:s");
                 
                 if($form['save_method']=='add')
@@ -151,6 +154,7 @@ class Attribute extends Admin_controller {
             {
                 $ins_data['attr_id']  = $form['attr_name'];
                 $ins_data['attr_val']  = $form['attr_val'];
+                $ins_data['is_active']  = $form['is_active'];
                 $ins_data['updated_date']  = date("Y-m-d H:i:s");
                 
                 if($form['save_method']=='add')

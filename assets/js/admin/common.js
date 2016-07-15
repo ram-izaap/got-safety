@@ -199,13 +199,16 @@ function add_attr_name()
     $(".err").hide();
 }
 
-$('#save_attr_name').on("click",function(event) {
+$('#save_attr_name').one("click",function(event) {
    
    $("#attribute_index").attr("onsubmit", "javascript:return false");
 
    var url=base_url+'attribute/add_edit_attr/',
     attr_name = $("input[name='attr_name']").val(),
+    is_active = $("input[name=is_active]:checked").val(),
+    is_Active = (is_active!=undefined)?1:0,
     edit_id = $("input[name='edit_id']").val();
+
 
     if(attr_name=='')
     {
@@ -222,7 +225,7 @@ $('#save_attr_name').on("click",function(event) {
            save_method='add';	
 
 
-        var data = 'attr_name='+ attr_name +'&edit_id=' + edit_id+'&save_method=' + save_method; 
+        var data = 'attr_name='+ attr_name +'&is_active=' + is_active+'&edit_id=' + edit_id+'&save_method=' + save_method; 
 
         $.ajax({
             url : url,
@@ -265,6 +268,9 @@ function edit_attr_name(id)
         	
             $('input[name="attr_name"]').val(data.attr_name);
             $('input[name="edit_id"]').val(data.id);
+            if(data.is_active==1)
+              $("input[name=is_active]").prop("checked",true);
+
             $('.modal-title').text('Edit Attribute');
             $('#attr_form').modal('show');
         },
@@ -283,6 +289,7 @@ $(".add_attr_val").on("click",function()
     var id = $(this).attr("id1"),
         attr_id = $(this).attr("attr_id"),
         attr_val = $(this).attr("attr_val"),
+        is_active = $(this).attr("is_active"),
         url = base_url+'attribute/get_attribute/';
       
         var data = 'attr_id=' + attr_id;
@@ -310,6 +317,9 @@ $(".add_attr_val").on("click",function()
                 $('.attr_names').append("<option value='"+item.id+"' "+selected1+">"+item.attr_name+"</option>");
             });
             
+            if(is_active=='Active')
+              $("input[name=is_active]").prop("checked",true);
+
             $("input[name='edit_id']").val(id);
             $("input[name='attr_val']").val(attr_val);
             $('#attr_form').modal('show');
@@ -322,13 +332,15 @@ $(".add_attr_val").on("click",function()
     });
 });
 
-$('#save_attr_value').on("click",function(event) {
+$('#save_attr_value').one("click",function(event) {
 
    $("#attribute_attribute_value").attr("onsubmit", "javascript:return false");
 
     var url = base_url+'attribute/add_edit_attr_val/',
         attr_name = $(".attr_names option:selected").val(),
         attr_val = $("input[name='attr_val']").val(),
+        is_active = $("input[name=is_active]:checked").val(),
+        is_Active = (is_active!=undefined)?1:0,
         edit_id = $("input[name='edit_id']").val();
         
 
@@ -361,7 +373,7 @@ $('#save_attr_value').on("click",function(event) {
         else
            save_method='add';   
 
-        var data = 'attr_name='+ attr_name +'&attr_val=' + attr_val +'&edit_id=' + edit_id+'&save_method=' + save_method; 
+        var data = 'attr_name='+ attr_name +'&attr_val=' + attr_val +'&is_active=' + is_active+'&edit_id=' + edit_id+'&save_method=' + save_method; 
 
         $.ajax({
             url : url,

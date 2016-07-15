@@ -9,6 +9,7 @@
           $this->load->view("product/left_sidebar",$this->data['cat_data']);
         ?>
         <!-- -->
+        <?php if(count($product_detail)): ?>
         <div class="col-sm-6 content-bar">
           <h3>Products 
             <div data-role="sorting">
@@ -81,8 +82,22 @@
               </div>
             </div>
             <?php endif; ++$i; endforeach; ?>
+              
           </div>
         </div>
+      <?php endif; ?>
+      <?php if(!count($product_detail)): ?>
+        <div class="col-sm-6 content-bar">
+          <h3>Products</h3>
+        <hr>
+        <div class="product-container">
+          <div class="product-loop">
+            <h2>No Records Found</h2>
+          </div>
+        </div>
+        </div>
+        
+        <?php endif; ?> 
         <!-- Right Bar -->
         <div class="col-sm-6 col-md-3 right-bar cart_item">
           <div class="product-bag radius-5 clearfix">
