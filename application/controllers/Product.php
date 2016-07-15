@@ -31,7 +31,7 @@ class Product extends App_Controller {
             
             foreach ($product_data as $key => $value) 
             {
-                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id']);
+                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id'],"updated_date"=>$value['updated_date']);
                 $productvariationdtl[$value['id']][] = $value['price'];
             }
 
@@ -45,7 +45,7 @@ class Product extends App_Controller {
             
             foreach ($product_data as $key => $value) 
             {
-                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id']);
+                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id'],"updated_date"=>$value['updated_date']);
                 $productvariationdtl[$value['id']][] = $value['price'];
             }
 

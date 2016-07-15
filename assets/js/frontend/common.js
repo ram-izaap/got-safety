@@ -29,6 +29,42 @@ $('.sel_label_size').on("change",function() {
   });
 
 
+$(window).load(function(){
+    var $divs = $("div.product-loop");
+
+  $('#sort').on('change', function () {
+    $val = $(this).val();
+
+    if($val=="low-to-high")
+    {
+      var lowprice = $divs.sort(function (a, b) {
+          return $(a).find("h2").text() > $(b).find("h2").text();
+      });
+      $("#product-container").html(lowprice);
+    }
+    else if($val=="high-to-low") {
+      var highprice = $divs.sort(function (a, b) {
+          return $(a).find("h2").text() < $(b).find("h2").text();
+      });
+      $("#product-container").html(highprice);
+    }
+    else if($val=="new-item") {
+      var newitem = $divs.sort(function (a, b) {
+          return new Date( $(a).find("h3").text() ) < new Date( $(b).find("h3").text() );
+      });
+      $("#product-container").html(newitem);
+    }
+    else if($val=="default-order")
+    {
+      var defaultorder = $divs.sort(function (a, b) {
+          return $(a).find("h4").text() > $(b).find("h4").text();
+      });
+      $("#product-container").html(defaultorder);
+    }
+   });
+});
+
+
 
  
 

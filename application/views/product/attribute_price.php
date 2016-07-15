@@ -1,11 +1,5 @@
 
 <div class="qty">
-  <div class="col-sm-6" data-role="sorting">
-    <select>
-      <option>Popularity
-      </option>
-    </select>
-  </div>
   <div class="col-sm-6 input-group number-spinner">
     <div class="pro-spinner">
       <span class="input-group-btn minus">
@@ -21,6 +15,8 @@
           </i>
         </button>
       </span><br>
+    </div>
+    <div>
       <span><?php echo $values[0]['price']; ?></span>
     </div>
   </div>

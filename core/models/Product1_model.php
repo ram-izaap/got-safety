@@ -27,7 +27,7 @@ class Product1_model extends CI_Model {
         else
             $where='';
 
-        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id $where order by c.price");
+        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,a.updated_date,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id $where order by c.price");
         return $result->result_array();
     }
 

@@ -146,7 +146,7 @@ foreach($this->_cart as $val){
 
 	$Item = array(
 			'name' => $val['name'], 							// Item name. 127 char max.
-			'desc' => $val['desc'], 							// Item description. 127 char max.
+			'desc' => strip_tags($val['desc']), 							// Item description. 127 char max.
 			'amt' => $val['price'], 								// Cost of item.
 			'number' => $val['options']['product_id'], 							// Item number.  127 char max.
 			'qty' => $val['qty'], 								// Item qty on order.  Any positive integer.

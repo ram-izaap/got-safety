@@ -79,7 +79,7 @@
             </div>
             <div class="col-sm-5 col-md-5">
               <div class="product-poster">
-                <img src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" alt="<?php echo $product_dtl['name']; ?>" style="width:210px;height:300px;" class="">                         
+                <img src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" alt="<?php echo $product_dtl['name']; ?>" class="">                         
                 <?php if(count($attr_dtl)==1 || $attr_dtl[$cur_val]['price']==$attr_dtl[$end_val]['price']){ ?>
                 <div class="block-price">
                   <strong>
