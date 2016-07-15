@@ -23,6 +23,8 @@ class Product extends App_Controller {
         {
             $this->data['p_count'] = $this->product1_model->get_product_count("products",array("cat" =>$value['id'],"is_active"=>1));
             $this->data['cat_data'][$key]['p_count'] = $this->data['p_count']->cnt;
+            if($catid!='')
+                $this->data['cat_data'][$key]['catid'] = $catid;
         }
 
         if($catid=='')
@@ -59,16 +61,18 @@ class Product extends App_Controller {
     }
 
     function product_detail($pid)
-    {        
+    {   
+        $this->data['product_dtl'] = $this->product1_model->get_product_by_id($pid);
+        $this->data['attr_dtl'] = $this->product1_model->get_attr_by_id($pid);
         $this->data['cat_data'] = $this->product1_model->get_product("category",NULL);
         foreach($this->data['cat_data'] as $key=>$value)
         {
             $this->data['p_count'] = $this->product1_model->get_product_count("products",array("cat" =>$value['id'],"is_active"=>1));
             $this->data['cat_data'][$key]['p_count'] = $this->data['p_count']->cnt;
+            
+            if($this->data['product_dtl']['cat']!='')
+                $this->data['cat_data'][$key]['catid'] = $this->data['product_dtl']['cat'];
         }
-        
-        $this->data['product_dtl'] = $this->product1_model->get_product_by_id($pid);
-        $this->data['attr_dtl'] = $this->product1_model->get_attr_by_id($pid);
         $this->layout->view('product/product_detail','frontend');
     }
 

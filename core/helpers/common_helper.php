@@ -157,6 +157,10 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $data = $result;
             break;
             
+            case 'symbol_amt':
+            
+            $data = '$'.$data;
+            break; 
             
             
                

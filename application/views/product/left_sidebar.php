@@ -9,8 +9,9 @@
     <h3>Product Categories
     </h3>
     <ul>
+    
       <?php foreach($cat_data as $key=>$value): if($value['p_count']!=0): ?>
-      <li>
+      <li class="<?php echo (isset($value['catid']) && $value['id']==$value['catid']) ?"active":""; ?>">
         <a href="<?php echo site_url(); ?>product/index/<?php echo $value["id"]; ?>">
           <?php echo $value['cat_name']; ?>
           <span class="badge">

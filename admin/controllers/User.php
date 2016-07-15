@@ -12,6 +12,17 @@ class User extends Admin_Controller
 													
 												);
     
+    
+    protected $_user_detail_validation_rules = array(
+													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim'),
+													array('field' => 'email', 'label' => 'Email', 'rules' => 'trim'),
+													array('field' => 'phone', 'label' => 'Phone No', 'rules' => 'trim|required')
+													
+													
+												);
+    
+    
+    
     function __construct()
     {
         parent::__construct();  
@@ -221,8 +232,162 @@ class User extends Admin_Controller
            // $this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
-    } 
+    }
     
+    
+    
+    function profile($edit_id = "")
+    {
+		 
+		//$user_id = $this->uri->segment(3);
+		$user_id =  $edit_id; 
+		$role =  $this->session->userdata('admin_data')['role']; 
+		
+		
+		
+		//$this->data['get_menu'] = $this->inspection_model->get_menu_inspection("users",array("role" => 2));
+		//print_r($this->data['get_menu']);exit;
+			
+			
+		
+		if(is_logged_in()) {
+		  
+            
+			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
+			
+			
+			 if ( empty($_FILES['profile_img']['name']) && empty($_POST['slide_image']) )
+			{ 
+				$this->form_validation->set_rules('profile_img', 'Profile Image', 'required');
+			} 
+			
+			
+			$this->form_validation->set_rules($this->_user_detail_validation_rules);
+			
+        if($this->form_validation->run())
+        {
+			
+          
+            $form = $this->input->post();
+           
+            
+			if(!empty($_FILES['profile_img']['tmp_name'])){ 
+			  $upload_data = $this->do_upload();
+	
+              $filename = (isset($upload_data['profile_img']['file_name']))?$upload_data['profile_img']['file_name']:"";
+			}else{
+				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
+			} 
+			
+			
+			
+			
+			$ins_data = array();
+            $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
+			
+            $ins_data['name']       	= $form['name'];
+           
+            $ins_data['email']  = $form['email'];
+            $ins_data['phone']  = $form['phone'];
+            
+            if($form['password'] == "") { 
+	
+					$ins_data['password']  = $edit_data[0]['password'];
+            }else {
+				
+				$ins_data['password']  = md5($form['password']);
+			}
+            //$ins_data['ori_password']  = $form['password'];
+           $ins_data['profile_img']  = $filename;
+           
+			if(empty($edit_id)){
+			      
+                     $social_data = $this->user_model->insert("users",$ins_data);
+                    // $this->service_message->set_flash_message('record_insert_success');
+		      }
+              else 
+              {  
+                    $social_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
+                    //$this->service_message->set_flash_message('record_update_success');
+		      }
+		      redirect("home");    
+		
+		}	
+			
+			 if($edit_id) {
+                $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
+               
+                if(!isset($edit_data[0])) {
+                    //$this->service_message->set_flash_message('record_not_found_error');
+                    redirect("home");   
+                }
+                $this->data['title']          = "EDIT INSPECTION";
+                $this->data['crumb']        = "Edit";
+                $this->data['form_data']      = (array)$edit_data[0];
+                $this->data['form_data']['slide_image'] = $this->data['form_data']['profile_img'];
+                
+            }
+            else if($this->input->post()) {
+                $this->data['form_data'] = $_POST;
+                $this->data['title']     = "ADD INSPECTION";
+                $this->data['crumb']   = "Add";
+                $this->data['form_data']['id'] = $edit_id != ''?$edit_id:'';
+            }
+            else
+            {
+                $this->data['title']     = "ADD INSPECTION";
+                $this->data['crumb']   = "Add";
+                $this->data['form_data'] = array("name" => "","email" => "","slide_image" => "","profile_img" => "");
+                
+            }
+		    
+		    $this->data['img_url']=$this->layout->get_img_dir();
+		    $this->layout->view('user/profile');
+		}
+        else
+        {
+            redirect("admim/login");
+        }  
+		
+		
+	} 
+    
+    
+    function do_upload()
+	{
+		 
+		$config['upload_path'] = '../assets/images/frontend/users';
+
+		$config['allowed_types'] = 'pdf';
+		$config['max_size']	= '3000';
+		
+		
+		$this->load->library('upload', $config);
+		if ( ! $this->upload->do_upload('profile_img'))
+		{ 
+			$error = array('error' => $this->upload->display_errors());
+
+			return $error;
+			
+		}
+		else
+		{
+			$data = array('profile_img' => $this->upload->data());
+			return $data;
+			
+		}
+		
+	}
+	
+	
+	
+	function user_plan_detail($id)
+	{
+		 $this->data['plan_detail'] = $this->user_model->get_user_plan_data($id);
+		 //print_r($this->data['plan_detail']);exit;
+		 $this->layout->view('user/user_plan_detail');
+		
+	}
     
     
    
