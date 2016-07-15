@@ -168,7 +168,25 @@ class User_Model extends App_Model {
         return $result = $this->db->get()->result_array();
 		
 	}
+	
+	 function get_user_data($table_name,$where)
+    {
+		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
     
+    
+    function get_user_plan_data($id)
+    {
+		$this->db->select('p.plan_type as plan_name,p.plan_amount,p.plan_desc');
+		$this->db->from('plan p');
+        $this->db->join('users u','u.plan_type=p.id');
+		$this->db->where('u.id',$id);
+		$result = $this->db->get()->result_array();
+		return $result;
+		
+	}
     
 	
 	

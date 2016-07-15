@@ -422,3 +422,23 @@ $config['order_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+
+
+$config['transaction_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'transaction/filter',
+	"base_url"	=> 	'/transaction/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+							'email'=>array('name'=>'Email', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+							'profile_id'=>array('name'=>'Subscription ID', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                            'trans_id'=>array('name'=>'Tranasction No', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1),
+                            'status'=>array('name'=>'Status', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
+                            'last_payment_amt'=>array('name'=>'Amount', 'data_type' => 'symbol_amt', 'sortable' => TRUE, 'default_view'=>1),                             
+                            'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                              
+                          ),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);

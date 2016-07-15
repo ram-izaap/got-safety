@@ -51,7 +51,7 @@
 									<?php endif;?>
 									</th>
 									<?php endforeach;?>
-									<?php $uri = $this->uri->segment(2); if($uri!= 'review' && $uri!= 'contact_form' && $uri != 'schedule'  && $uri != 'quicksurvey' && $uri != 'panelgroup' && $uri != 'worksurface' && $uri != 'fabrics' && $uri != 'symmerty_trimpaint' && $uri!='symmerty_fabrics' && $uri!='symmerty_worksurface' && $uri!='calibrate_worksurface' && $uri!='calibrate_trimpaint' && $uri!='calibrate_fabrics' && $uri!='landing' && $uri!='meta' && $uri!='newsletter' && $uri!='lightbox' && $uri!='lightboxdata'){ ?>
+									<?php $uri = $this->uri->segment(1); if($uri!= 'transaction' ){ ?>
 									<th>Action</th>
 									<?php } ?>
 								</tr>
@@ -88,7 +88,7 @@
                                     <?php }?>
                                     
 									<?php endforeach;?>
-						          <?php if($uri!= 'review' && $uri != 'schedule' && $uri != 'contact_form' && $uri != 'quicksurvey' && $uri != 'panelgroup' && $uri != 'worksurface' && $uri != 'fabrics' && $uri != 'symmerty_trimpaint' && $uri!='symmerty_fabrics' && $uri!='symmerty_worksurface' && $uri!='calibrate_worksurface' && $uri!='calibrate_trimpaint' && $uri!='calibrate_fabrics' && $uri!='landing' && $uri!='meta' && $uri!='newsletter' && $uri!='lightbox' && $uri!='lightboxdata' ){ ?>
+						          <?php if($uri!= 'transaction' ){ ?>
 									<td>
 										<?php if(strcmp($listing_action, '') === 0):?>
 										<a class="btn btn-small" href="<?php echo site_url($this->uri->segment(1, 'index')."/view/". $item['id']);?>"

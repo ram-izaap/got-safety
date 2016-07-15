@@ -321,17 +321,30 @@
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" class="img-circle" src="<?php echo str_replace("admin","assets",base_url());?>images/admin/avatar3_small.jpg"/>
-				<?php 	$name =  $this->session->userdata('admin_data')['name']; ?> 
+					<img alt="" class="img-circle" src="<?php echo $img_url; ?>assets/images/frontend/users/<?php echo $user_image;?>"/>
+				<?php 	$name =  $this->session->userdata('admin_data')['name']; 
+						$id =  $this->session->userdata('admin_data')['id']; 
+				
+				?> 
 					<span class="username username-hide-on-mobile">
 					<?php echo $name;?> </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
+							<a href="<?php echo site_url('user/profile'); ?>/<?php echo $id?>">
 							<i class="icon-user"></i> My Profile </a>
 						</li>
+						
+						<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 2){ ?>
+						<li>
+							<a href="<?php echo site_url('user/user_plan_detail'); ?>/<?php echo $id?>">
+							<i class="icon-user"></i> Plan Detail </a>
+						</li>
+						
+						<?php } ?>
+						
 						<?php /*<li>
 							<a href="page_calendar.html">
 							<i class="icon-calendar"></i> My Calendar </a>

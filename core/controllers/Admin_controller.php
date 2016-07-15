@@ -73,6 +73,17 @@ class Admin_Controller extends App_Controller
         
         $this->load->library("form_validation");
         
+        
+        $this->load->model("user_model");
+        
+        $id = $this->session->userdata('admin_data')['id'];
+        if($id!=""){
+        $user_data = $this->user_model->get_user_data("users",array("id" => $id));
+        $this->data['user_image'] = $user_data[0]['profile_img'];
+	}
+
+        $this->data['img_url']=$this->layout->get_img_dir();  
+        
     }
     
     
