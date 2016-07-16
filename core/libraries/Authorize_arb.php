@@ -24,6 +24,7 @@ class Authorize_arb
 		'create' => 'ARBCreateSubscriptionRequest',
 		'update' => 'ARBUpdateSubscriptionRequest',
 		'cancel' => 'ARBCancelSubscriptionRequest',
+		'get' 	 => 'ARBGetSubscriptionRequest',
 		);
 	
     private $type;						// The current action type we are working with
@@ -224,6 +225,7 @@ class Authorize_arb
 	// Parse the response back from Authorize.Net
 	public function parseResponse( $response )
 	{
+
 		if( $response === FALSE )
 		{
 			$this->error = 'There was a problem while contacting Authorize.Net. Please try again.';
@@ -245,8 +247,8 @@ class Authorize_arb
 						break;
 					
 						case 'Ok':
-						$this->response = $res;
-						return TRUE;
+						return $this->response = $res;
+						return false;
 						break;
 					}
 				}
@@ -298,6 +300,12 @@ class Authorize_arb
 	public function getId()
 	{
 		return isset($this->response->subscriptionId) ? (int)$this->response->subscriptionId : 0;
+	}
+	public function getName()
+	{
+		//echo "<pre>";
+		//print_r($this->response->subscription->);exit;
+		return $this->response;
 	}
 	
 	// Get the reference id of the last request

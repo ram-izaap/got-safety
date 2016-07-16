@@ -456,3 +456,25 @@ $(".media-opt,.non-media-opt").hide();
 		$(".non-media-opt").show();
 		$(".media-opt").show();
 	}
+
+function cancel_sub(attr)
+{
+  href = attr.getAttribute("data-href");
+  con = confirm("Are you sure want to do this?");
+  if(con)
+    window.location.href=href;
+  else
+    location.reload();
+}
+function show_payment()
+{
+  $(".payment-info").show();
+}
+
+$("input[name='plan_name']").click(function(){
+  val = $(this).attr("data-price");
+  type = $(this).attr("data-type");
+  $(".plan-amt").html("$"+val);
+  $(".ip_amt").val(val);
+  $(".ip_type").val(type);
+});
