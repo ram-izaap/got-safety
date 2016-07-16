@@ -81,3 +81,20 @@ Change Quick Sidebar Width
   color: #dd191d; }
   .theme-whbl .table a.table-link:hover {
   color: #1ABC9C; }
+
+  .content-order-area{width: 100%}
+.content-order-area .order-invoice-wrapper h3 {font-size: 14px;}
+.content-order-area .order-invoice-wrapper h3 strong {display: inline-block; font-size: 16px; margin-bottom: 5px;}
+
+.content-order-area .order-invoice-wrapper address {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.content-order-area .order-invoice-wrapper address strong:first-child {
+    color: #000;
+    margin-right: 5px;
+}
+.content-order-area .order-invoice-wrapper address strong {
+    font-size: 16px;
+}
+

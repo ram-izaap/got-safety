@@ -6,7 +6,7 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Product extends Admin_controller {
 	
 	protected $_product_validation_rules = array(
-		                                         array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required'),
+		                                         array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required|callback_check_duplicate_product'),
 											     array('field' => 'cat', 'label' => 'Category', 'rules' => 'trim|required'),
                                                  array('field' => 'desc', 'label' => 'Product Description', 'rules' => 'trim|required'),
                                                  array('field' => 'sku', 'label' => 'Product SKU', 'rules' => 'required'),
@@ -384,5 +384,26 @@ class Product extends Admin_controller {
 
         $this->layout->view("product/product_info");
     } 
+
+    function check_duplicate_product()
+    {
+        $product_name = $this->input->post('name');
+
+        $edit_id = $this->input->post('edit_id');
+        if($edit_id!='')
+            $edit_data = $this->product_model->get_product_data1("products",array("name" => $product_name,"id" => $edit_id));
+        else
+            $edit_data = $this->product_model->get_product_data1("products",array("name" => $product_name));
+        
+        if (count($edit_data) > 0) 
+        {
+           $this->form_validation->set_message('check_duplicate_product', 'This product already exists. Please enter a new product.');
+           return FALSE;
+        } 
+        else 
+        {
+          return TRUE;
+        }
+    }  
  }
 

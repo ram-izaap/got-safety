@@ -92,38 +92,42 @@
                   <div class="col-xs-12">
                     <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="name">
                   </div>
+                  <span class="vstar err_name"></span>
                 </div>
-                <span class="vstar err_name"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Company Name" class="form-control input-lg" id="company_name" name="company_name">
                   </div>
+                  <span class="vstar"></span>
                 </div>
                 
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" <?php echo (isset($this->session->userdata['email1']) && $this->session->userdata['email1']!='')?("readonly=readonly"):'';?> placeholder="E - Mail" class="form-control input-lg" id="email" name="email">
                   </div>
+                  <span class="vstar err_email"></span>
                 </div>
-                <span class="vstar err_email"></span>
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text"  placeholder="Phone Number" class="form-control input-lg" id="phone" name="phone">
                   </div>
+                  <span class="vstar err_phone"></span>
                 </div>
-                <span class="vstar err_phone"></span>
+                
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text"  placeholder="Address" class="form-control input-lg" id="address" name="address">
                   </div>
+                  <span class="vstar err_add"></span>
                 </div>
-                 <span class="vstar err_add"></span>
+                 
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text"  placeholder="City" class="form-control input-lg" id="city" name="city">
                   </div>
+                  <span class="vstar err_city"></span>
                 </div>
-                <span class="vstar err_city"></span> 
+                 
                 <div class="form-group">
                   <div class="col-md-12">
                     <select class="form-control input-lg state" name="state" id="state">
@@ -136,8 +140,9 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <span class="vstar err_state"></span> 
                 </div>
-                <span class="vstar err_state"></span> 
+                
                 <div class="form-group">
                   <div class="col-md-12">
                     <select class="form-control input-lg country" name="country" id="country">
@@ -150,14 +155,16 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <span class="vstar err_country"></span> 
                 </div>
-                <span class="vstar err_country"></span>  
+                 
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text"  placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="zip_code">
                   </div>
+                  <span class="vstar err_zip"></span>
                 </div>
-                <span class="vstar err_zip"></span>                           
+                                           
               </div>
             </div>
             <!--SHIPPING METHOD END-->

@@ -1,5 +1,5 @@
 <!-- // Content area -->
-<section class="container content-area" data-view="list">
+<section class="container content-area checkout-area" data-view="list">
   <!-- rwo default --> 
   <div class="row" data-row="default">
     <aside class="col-sm-12 bg-white inner-full">
@@ -8,7 +8,7 @@
       <div><img src="<?php echo site_url(); ?>assets/images/frontend/preloader-screen.gif" id="preloader_image"></div>
     </div>
 
-      <div class="inner-content">
+      <div class="inner-content clearfix">
         <!-- Left Bar -->
         <?php 
            $this->load->view("product/left_sidebar",$this->data['cat_data']);
@@ -42,6 +42,7 @@
           </div>
         </div>
       </div>
+      
     </aside>
     <!-- rwo default --> 
   </div>

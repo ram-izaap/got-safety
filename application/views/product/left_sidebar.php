@@ -11,7 +11,7 @@
     <ul>
       <?php foreach($cat_data as $key=>$value): if($value['p_count']!=0): ?>
       <li class="<?php echo (isset($value['catid']) && $value['id']==$value['catid']) ?"active":""; ?>">
-        <a href="<?php echo site_url(); ?>product/index/<?php echo $value["id"]; ?>">
+        <a href="<?php echo site_url(); ?>shop/<?php echo strtolower(str_replace(" ","-",$value["cat_name"])); ?>">
           <?php echo $value['cat_name']; ?>
           <span class="badge">
             <?php echo $value = ($value['p_count']!='')?$value['p_count']:'0'; ?>

@@ -94,38 +94,44 @@
                   <div class="col-xs-12">
                     <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="sa_name">
                   </div>
+                  <span class="vstar err_sa_name"></span>
                 </div>
-                <span class="vstar err_sa_name"></span>
+                
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Company Name" class="form-control input-lg" id="company_name" name="sa_company_name">
                   </div>
+                  <span class="vstar"></span>
                 </div>
                 
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text"  placeholder="E - Mail" class="form-control input-lg" id="email" name="sa_email">
                   </div>
+                  <span class="vstar err_sa_email"></span>
                 </div>
-                <span class="vstar err_sa_email"></span>
+                
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Phone Number" class="form-control input-lg" id="phone" name="sa_phone">
                   </div>
+                  <span class="vstar err_sa_phone"></span>
                 </div>
-                <span class="vstar err_sa_phone"></span>
+                
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Address" class="form-control input-lg" id="address" name="sa_address">
                   </div>
+                  <span class="vstar err_sa_add"></span>
                 </div>
-                 <span class="vstar err_sa_add"></span>
+                 
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="City" class="form-control input-lg" id="city" name="sa_city">
                   </div>
+                   <span class="vstar err_sa_city"></span> 
                 </div>
-                <span class="vstar err_sa_city"></span> 
+               
                 <div class="form-group">
                   <div class="col-md-12">
                     <select class="form-control input-lg sa_state" name="sa_state" id="state">
@@ -138,8 +144,8 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <span class="vstar err_sa_state"></span>
                 </div>
-                <span class="vstar err_sa_state"></span> 
                 <div class="form-group">
                   <div class="col-md-12">
                     <select class="form-control input-lg sa_country" name="sa_country" id="country">
@@ -152,14 +158,16 @@
                       <?php endforeach; ?>
                     </select>
                   </div>
+                  <span class="vstar err_sa_country"></span>
                 </div>
-                <span class="vstar err_sa_country"></span>  
+                  
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Zip Code" class="form-control input-lg" id="zip_code" name="sa_zip_code">
                   </div>
+                   <span class="vstar err_sa_zip"></span>
                 </div>
-                <span class="vstar err_sa_zip"></span>
+               
 
               </div>
             </div>

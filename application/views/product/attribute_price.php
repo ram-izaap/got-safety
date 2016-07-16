@@ -1,4 +1,6 @@
-
+<div class="text-center">
+      <span><?php echo "$".$values[0]['price']; ?></span>
+    </div>
 <div class="qty">
   <div class="col-sm-12 input-group number-spinner">
     <div class="pro-spinner">
@@ -15,9 +17,6 @@
           </i>
         </button>
       </span><br>
-    </div>
-    <div>
-      <span><?php //echo $values[0]['price']; ?></span>
     </div>
   </div>
 </div>

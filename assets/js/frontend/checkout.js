@@ -100,10 +100,9 @@ function billing_address_validation()
        zip_code = $("input[name='zip_code']").val(),
        valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
        url = base_url +'checkout/save_billing_address';
-       
+   
    if(name!=undefined)
    {
-
 
        if(name.length) 
         {
@@ -128,7 +127,7 @@ function billing_address_validation()
         }
         else
         {
-            $(".err_phone").text('Please Enter Your Phone No');
+            $(".err_phone").text('Please Enter Valid Phone No');
         }
         if(address.length)
         {
@@ -254,7 +253,7 @@ function shipping_address_validation()
         }
         else
         {
-            $(".err_sa_phone").text('Please Enter Your Phone No');
+            $(".err_sa_phone").text('Please Enter Valid Phone No');
         }
         if(address.length)
         {
@@ -407,6 +406,7 @@ function card_validation()
   
   if(pay_type=="authorize" && cc_name!='' && cc_number!='' && exp_month!='' && exp_year!='' && (year > currentYear) || ((year === currentYear) && (month >= currentMonth)) && cc_ccd!='' && cc_ccd.length <=4 && !isNaN(cc_ccd))
    {
+
      $('#cc_number').validateCreditCard(function(result) {
 
           if(!result.valid)
@@ -421,7 +421,6 @@ function card_validation()
       });
       
    }
-
     
 }
 

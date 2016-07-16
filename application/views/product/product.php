@@ -48,7 +48,7 @@
               <div class="block clearfix">
                 <div class="col-sm-6">
                   <div class="block-image">
-                    <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $value['id']; ?>">
+                    <a href="<?php echo site_url(); ?>product/<?php echo strtolower(str_replace(" ","-",$value['name'])); ?>">
                       <img data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $value['img']; ?>" alt="<?php echo $value['name']; ?>" width="" height="" class=""/>
                     </a>
                     <?php if(count($product_variation[$value['id']])==1 || $product_variation[$value['id']][$cur_val]==$product_variation[$value['id']][$end_val]){ ?>
@@ -68,12 +68,12 @@
                 </div>
                 <div class="col-sm-6">
                   <h4>
-                    <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $value['id']; ?>">
+                    <a href="<?php echo site_url(); ?>product/<?php echo strtolower(str_replace(" ","-",$value['name'])); ?>">
                       <?php echo $value['name']; ?>
                     </a>
                   </h4>
                   <p class="text-right">
-                    <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $value['id']; ?>">
+                    <a href="<?php echo site_url(); ?>product/<?php echo strtolower(str_replace(" ","-",$value['name'])); ?>">
                       <i class="fa fa-hand-o-right">
                       </i> Select Options
                     </a>

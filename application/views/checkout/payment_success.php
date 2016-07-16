@@ -106,10 +106,10 @@
                         <?php $sno=1; foreach($product_details as $product_detail):?>         
                         <tr>
                           <td><?php echo $sno++;?></td>
-                          <td><?php echo $product_detail['sku'];?></td>
-                          <td><?php echo $product_detail['name'];?></td>
-                          <td><?php echo displayData($product_detail['sell_price'], 'money');?></td>
-                          <td align="center"><?php echo $product_detail['quantity'];?></td>
+                          <td class="text-center"><?php echo $product_detail['sku'];?></td>
+                          <td class="text-center"><?php echo $product_detail['name'];?></td>
+                          <td align="right"><?php echo displayData($product_detail['sell_price'], 'money');?></td>
+                          <td align="right"><?php echo $product_detail['quantity'];?></td>
                         </tr>             
                         <?php endforeach;?>
                         <?php if(count($so_details)):?>

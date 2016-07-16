@@ -53,6 +53,16 @@ class Product_model extends App_Model {
          return $result->result_array();
 	}
 
+    function get_product_data1($table_name,$where)
+    {
+        if(count($where) > 1)
+           $result = $this->db->get_where($table_name,array('id !='=> $where['id'],'name ='=>$where['name']));
+        else
+         $result = $this->db->get_where($table_name,$where);
+
+         return $result->result_array();
+    }
+
     function get_product_by_id($pid)
     {
         $result = $this->db->query("select a.id,a.cat,a.name,a.desc,a.sku,b.cat_name,a.add_info,a.img, IF(a.is_active='1','Active','Inactive') as is_active from products a inner join category b on a.cat=b.id where a.id='".$pid."'");

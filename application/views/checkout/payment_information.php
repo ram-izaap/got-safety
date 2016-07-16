@@ -13,7 +13,6 @@
         </div>
         <div class="panel-body">
         
-          <span class="vstar err_pay_type"></span>
           <div class="panel panel-info hide_cards" data-form="checkout">
 
             <div class="panel-body">
@@ -35,7 +34,7 @@
               <!--  -->
                 
 
-                <div class="col-md-12">
+                <div class="col-md-12 cc-pay-type">
                   
 
 <!--  -->
@@ -74,29 +73,28 @@
  -->
                 </div>
               </div>
-              <span class="vstar err_card_type"></span>
               <div class="form-group">
-                <div class="col-md-12">
+                <div class="col-md-12 cc-pay-type">
                   <input type="text" placeholder="Name on Card" class="form-control input-lg" id="cc_name" name="cc_name">
                 </div>
+                <span class="vstar err_cc_name"></span>
               </div>
-              <span class="vstar err_cc_name"></span>
               <div class="form-group">
-                <div class="col-md-12">
+                <div class="col-md-12 cc-pay-type">
                   <input type="text" placeholder="Card Number" class="form-control input-lg" id="cc_number" name="cc_number">
                 </div>
+                <span class="vstar err_cc_number"></span>
               </div>
-              <span class="vstar err_cc_number"></span>
               <div class="form-group">
-                <div class="col-md-12">
+                <div class="col-md-12 cc-pay-type">
                   <input type="text" placeholder="Card CVV" class="form-control input-lg" id="cc_ccd" name="cc_ccd">
                 </div>
+                <span class="vstar err_cc_ccd"></span>
               </div>
-              <span class="vstar err_cc_ccd"></span>
               <div class="form-group">
                 <div class="col-md-12">
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 card-month">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 card-month cc-pay-type">
                   <select name="exp_month" id="exp_month" class="form-control input-lg exp_month">
                     <option value="">Expiry Month</option>
                     <option value="01">01</option>
@@ -113,7 +111,7 @@
                     <option value="12">12</option>
                   </select>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 card-month">
                   <select name="exp_year" id="exp_year" class="form-control input-lg exp_year">
                     <option value="">Expiry Year</option>
                     <option value="2016">2016</option>
@@ -128,8 +126,8 @@
                     <option value="2025">2025</option>
                   </select>
                 </div>
+                <span class="vstar err_exp_date"></span>
               </div>
-              <span class="vstar err_exp_date"></span>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <button class="btn btn-success btn-submit-fix btn-green" type="submit" id="check_before_order">

@@ -94,8 +94,8 @@
                   </strong>
                 </div>
                 <?php }?>
-                <div data-cover="gs-english">
-                </div>
+                <!--<div data-cover="gs-english">
+                </div>-->
               </div>
             </div>
             <div class="col-sm-7 col-md-7">

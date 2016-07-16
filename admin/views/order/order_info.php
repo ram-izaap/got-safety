@@ -22,11 +22,11 @@
     </li>
   </ul>
 </div>
-<section class="container content-area" data-view="about">
+<section class="container content-area content-order-area" data-view="about">
   <!-- rwo default --> 
   <div class="row" data-row="default">
     <aside class="col-sm-12 bg-white inner-full">
-      <div class="inner-content">
+      <div class="inner-content clearfix">
         
         <!-- // Order Invoice  -->
         <div class="order-invoice-wrapper">
@@ -58,9 +58,7 @@
                   <?php echo $so_details['created_date']; ?>
                   </h3>
                 </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
+                <div class="col-md-3">
                    <h3><strong>Paid Status</strong>
                   <div class="clearfix"></div>
                   <?php echo ($so_details['paid_status']=='Y')?'Yes':'No'; ?>
@@ -94,7 +92,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <div class="panel panel-default" style="width:75%;">
+              <div class="panel panel-default order-summary" style="width:100%;">
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     <strong>Order summary
