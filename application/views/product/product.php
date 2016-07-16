@@ -13,7 +13,7 @@
         <div class="col-sm-6 content-bar">
           <h3>Products 
             <div data-role="sorting">
-              Sort By -   
+              <span class="sort_text">Sort By -  </span> 
               <select name="sort" id="sort">
                 <option value="default-order">default order
                 </option>
@@ -153,3 +153,4 @@
     </aside>
   </div>
 </section>
+

@@ -102,9 +102,11 @@
               <div class="pro-description">
                 <h5><b>Product Description </b>
                 </h5>
+                <div class="pro_desc">
                 <p>
                   <?php echo $product_dtl['desc']; ?>
                 </p>
+                </div>
                 <p>SKU:<?php echo $product_dtl['sku']; ?>
                 </p>
 
@@ -287,3 +289,4 @@
     </div>
   </div>
 </div>
+
