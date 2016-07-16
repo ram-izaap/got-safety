@@ -28,9 +28,16 @@ class User extends Admin_Controller
     function __construct()
     {
         parent::__construct();  
+        $config = api_credentials('sandbox');
         
+		// Show Errors
+		if($config['Sandbox']){
+			error_reporting(E_ALL);
+			ini_set('display_errors', '1');
+		}
         $this->load->model('user_model');
-        
+        $this->load->library('Paypal_pro',$config);        
+        $this->payment_method = '';       
        
     }  
     
@@ -415,7 +422,20 @@ class User extends Admin_Controller
 		}
 		else
 		{
-			//Paypal Cancel Subscription
+			$profileid = "I-V8R3WTLVBVR4";
+			$MRPPSFields = array('profileid' => $profileid,'action'=>"suspend");
+						   
+			$PayPalRequestData = array('MRPPSFields' => $MRPPSFields);
+			
+			$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
+			
+			if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
+			{
+				$ins_data['profile_status'] = "Inactive";
+				$this->user_model->update("payment_recurring_profiles",$ins_data,
+					array("user_id"=>$id));
+			}
+			
 		}
 		redirect("user/user_plan_detail/$id");
 	}
@@ -423,58 +443,89 @@ class User extends Admin_Controller
 	{
 		if($_POST['submit'])
 		{
-			$this->data['form_data'] = $_POST;
-			$form = $this->input->post();
-			$this->form_validation->set_rules($this->_payment_detail_validation_rules);
-			if($this->form_validation->run())
-        	{
-        		$users_data = $this->user_model->get_users($id);
-        		
-        		$ins['phone'] = $users_data[0]['mobile'];
-        		$ins['fax'] = $users_data[0]['fax'];
-        		$ins['email'] = $users_data[0]['email'];
-        		$ins['fname'] = $users_data[0]['fname'];
-        		$ins['lname'] = $users_data[0]['lname'];
-        		$ins['address'] = $users_data[0]['address'];
-        		$ins['city'] = $users_data[0]['city'];
-        		$ins['state'] = $users_data[0]['state'];
-        		$ins['zipcode'] = $users_data[0]['zipcode'];
-        		$ins['country'] = $users_data[0]['country'];
-        		$amt = $this->input->post('amount');
-        		$ins['c_number'] = $this->input->post('c_number');
-        		$ins['cvv'] = $this->input->post('cvv');
+			if($_POST['pay_method']=="Authorize")
+			{
+				$this->data['form_data'] = $_POST;
+				$form = $this->input->post();
+				$this->form_validation->set_rules($this->_payment_detail_validation_rules);
+				if($this->form_validation->run())
+	        	{
+	        		$users_data = $this->user_model->get_users($id);
+	        		$ins['phone'] = $users_data[0]['mobile'];
+	        		$ins['fax'] = $users_data[0]['fax'];
+	        		$ins['email'] = $users_data[0]['email'];
+	        		$ins['fname'] = $users_data[0]['fname'];
+	        		$ins['lname'] = $users_data[0]['lname'];
+	        		$ins['address'] = $users_data[0]['address'];
+	        		$ins['city'] = $users_data[0]['city'];
+	        		$ins['state'] = $users_data[0]['state'];
+	        		$ins['zipcode'] = $users_data[0]['zipcode'];
+	        		$ins['country'] = $users_data[0]['country'];
+	        		$amt = $this->input->post('amount');
+	        		$ins['c_number'] = $this->input->post('c_number');
+	        		$ins['cvv'] = $this->input->post('cvv');
 
-        		$ins['description'] = $this->input->post('desc');
-		        $ins['amount'] = $amt;
-		        $ins['exp_month'] = $this->input->post('exp_month');
-		        $ins['exp_year'] = $this->input->post('exp_year');
-        		$p_id = $this->input->post('plan_name');
-        		$userid = $_SESSION['admin_data']['id'];
-        		$res['profileid']=time();
-		        $res['customer_id']=rand();
-        		$b =  $this->create_auth_subscription($res,$ins);
-        		$up_data['profile_id'] = $res['profileid'];
-        		$up_data['customer_id'] = $res['customer_id'];
-        		$up_data['plan_id'] = $p_id;
-        		$up_data['amount'] = $amt;
-        		$up_data['profile_status'] = "Active";
-        		$ins_data['plan_type'] = $p_id;
-        		if($res['profileid']!='' && $b['subs_status']=="Success")
-		        {
-		        	$up_data['invoice_no'] = $b['invoice_no'];
-		        	$up_data['subscription_id'] = $b['subs_id'];
-        			$this->user_model->update("payment_recurring_profiles",$up_data,
-        				array("user_id"=>$id));
-        			$this->user_model->update("users",$ins_data,array("id"=>$id));
-        			$_SESSION["renew_succ"]="<strong>Success!</strong>
-        				Your Subscription has been renewed.";
-        		}
-        		else
-        		{
-        			$_SESSION["renew_succ"]="<strong>Sorry!</strong>Something went wrong.";
-        		}
-        		$_POST="";
-        	}
+	        		$ins['description'] = $this->input->post('desc');
+			        $ins['amount'] = $amt;
+			        $ins['exp_month'] = $this->input->post('exp_month');
+			        $ins['exp_year'] = $this->input->post('exp_year');
+	        		$p_id = $this->input->post('plan_name');
+	        		$userid = $_SESSION['admin_data']['id'];
+	        		$res['profileid']=time();
+			        $res['customer_id']=rand();
+	        		$b =  $this->create_auth_subscription($res,$ins);
+	        		$up_data['profile_id'] = $res['profileid'];
+	        		$up_data['customer_id'] = $res['customer_id'];
+	        		$up_data['plan_id'] = $p_id;
+	        		$up_data['amount'] = $amt;
+	        		$up_data['profile_status'] = "Active";
+	        		$ins_data['plan_type'] = $p_id;
+	        		if($res['profileid']!='' && $b['subs_status']=="Success")
+			        {
+			        	$up_data['invoice_no'] = $b['invoice_no'];
+			        	$up_data['subscription_id'] = $b['subs_id'];
+	        			$this->user_model->update("payment_recurring_profiles",$up_data,
+	        				array("user_id"=>$id));
+	        			$this->user_model->update("users",$ins_data,array("id"=>$id));
+	        			$_SESSION["renew_succ"]="<strong>Success!</strong>
+	        				Your Subscription has been renewed.";
+	        		}
+	        		else
+	        		{
+	        			$_SESSION["renew_succ"]="<strong>Sorry!</strong>Something went wrong.";
+	        		}
+	        		$_POST="";
+	        	}
+	        }
+	        else
+	        {
+	        	$plan_detail = $this->user_model->get_user_plan_data($id);
+	        	$plan_id = $plan_detail[0]['plan_id'];
+	        	$p_id = $this->input->post('plan_name');
+	        	if($plan_detail==$p_id)
+	        	{
+	        		//if plan is not changed just update amount
+		        	$profileid = trim($plan_detail[0]['profile_id']);
+		        	$MRPPSFields = array('profileid' => $profileid,'action'=>"reactivate");
+		        	$URPPFields = array('profileid' => $profileid,'amt'=>"100");
+					$PayPalRequestData = array('MRPPSFields' => $MRPPSFields);				
+					$PayPalRequestData1 = array('URPPFields' => $URPPFields);
+					$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
+					//$PayPalResult1 = $this->paypal_pro->UpdateRecurringPaymentsProfile($PayPalRequestData1);
+					//echo "<pre>";print_r($PayPalResult1);
+					//exit;
+					if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
+					{
+						$ins_data['profile_status'] = "Active";
+						$this->user_model->update("payment_recurring_profiles",$ins_data,
+							array("user_id"=>$id));
+					}
+				}
+				else
+				{
+					//if plan is changed create new profile
+				}
+	        }
         	redirect("user/user_plan_detail/$id");
 		}
 		

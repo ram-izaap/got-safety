@@ -39,8 +39,7 @@ class Payment extends App_Controller
         
         
         $this->load->model(array('payment_model','login_model'));
-        $this->load->library('Paypal_pro',$config);
-        
+        $this->load->library('Paypal_pro',$config);        
         $this->payment_method = '';
      }           
                 
@@ -759,6 +758,8 @@ class Payment extends App_Controller
 		}	
 	}
 	
+	
+
     function notify()
     {
         

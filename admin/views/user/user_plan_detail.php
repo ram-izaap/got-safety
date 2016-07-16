@@ -48,6 +48,7 @@ else
 	<div class="payment-info col-md-7" style="<?php echo $disp;?>margin-left:23%;">
 		<form action="<?php echo base_url();?>user/renew_subscription/<?php echo $id;?>"
 			method="post">
+			<input type="hidden" name="pay_method" value="<?php echo $plan_detail[0]['payment_method']; ?>"  >
 				<div class="form-group">
 					<label class="col-md-4 control-label">Current Plan: 
 					</label>
@@ -95,6 +96,9 @@ else
 							value="<?php echo $plan_detail[0]['plan_name'];?>">
 					</div>
 				</div>
+				<?php 
+				if($plan_detail[0]['payment_method']=="Authorize")
+				{?>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Card Number: 
 						<span class="required">	* </span>
@@ -145,6 +149,7 @@ else
 						</select>
 					</div>
 				</div>
+				<?php }?>
 				<div class="form-group">
 					<label class="col-md-2 control-label"> <span class="required"></span></label>
 					<div class="col-md-3">

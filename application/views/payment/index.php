@@ -1,4 +1,7 @@
-
+<?php
+echo "<pre>";
+print_r($_SESSION);
+?>
 	<!-- // Content area -->
 	<section class="container content-area" data-view="create-account">
 		<!-- rwo default --> 

@@ -2263,7 +2263,7 @@ class PayPal_Pro
 		
 		$BillingAddress = isset($DataArray['BillingAddress']) ? $DataArray['BillingAddress'] : array();
 		foreach($BillingAddress as $BillingAddressVar => $BillingAddressVal)
-		{
+		{	
 			$URPPFieldsNVP .= $BillingAddressVal != '' ? '&' . strtoupper($BillingAddressVar) . '=' . urlencode($BillingAddressVal) : '';
 		}
 		
