@@ -86,6 +86,11 @@ class Client extends Admin_Controller
 			$this->form_validation->set_rules($this->_user_validation_rules);
 			
 			$id  = $this->session->userdata('admin_client_id');
+			
+			if (isset($_POST['password']) &&  $edit_id =="" )
+					{ 
+						$this->form_validation->set_rules('password', 'Password', 'required');
+					} 
        
         if($this->form_validation->run())
         { 

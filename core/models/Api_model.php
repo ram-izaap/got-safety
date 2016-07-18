@@ -11,7 +11,7 @@ class Api_model extends App_Model {
 
     }
     
-    function login($name = "",$password = "")
+    /*function login($name = "",$password = "")
 	{
 		$where=array('name'=>$name,'password'=>md5($password));
 		
@@ -20,6 +20,36 @@ class Api_model extends App_Model {
 		$this->db->where("(role = 2 OR role = 3)");
 		$this->db->where($where);
 		return $this->db->get()->row_array();
+		
+	} */
+	
+	
+	
+	function login($name = "",$password = "")
+	{
+		$where=array('name'=>$name,'password'=>md5($password));
+		
+		$this->db->select('id,name,email,employee_limit,created_id,role,is_active');
+		$this->db->from('users');
+		$this->db->where("(role = 2 OR role = 3)");
+		$this->db->where($where);
+
+		$user = $this->db->get()->row_array();
+
+		if(is_array($user)){
+
+			$user['client_name'] = ($user['role'] == 2)?$user['name']:'';
+
+			if(empty($user['client_name']))
+			{
+				$this->db->where('id',$user['created_id']);
+				$client = $this->db->get('users')->row_array();
+
+				$user['client_name'] = (is_array($client)) ? $client['name'] : '';
+			}
+		}
+
+		return $user;
 		
 	}
     

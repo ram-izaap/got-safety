@@ -118,6 +118,11 @@ class User extends Admin_Controller
 					} 
 		}
 		
+		if (isset($_POST['password']) &&  $edit_id =="" )
+					{ 
+						$this->form_validation->set_rules('password', 'Password', 'required');
+					} 
+					
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
