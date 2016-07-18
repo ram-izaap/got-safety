@@ -29,17 +29,32 @@ class Payment extends App_Controller
      {
         parent::__construct();
         
-        $config = api_credentials('sandbox');
+        $config = api_credentials('sandbox','paypal');
+        $config1 = api_credentials('TEST','authorize');
+        if($config1['mode']=="TEST")
+        {
+        	$config1['api_url'] = 'https://test.authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://apitest.authorize.net/xml/v1/request.api';
+        }
+        else
+        {
+        	$config1['api_url'] = 'https://authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://api.authorize.net/xml/v1/request.api';
+        }
         
+       	$this->load->library('authorize_net',$config1);
+       	$this->load->library('authorize_arb',$config1);
 		// Show Errors
-		if($config['Sandbox']){
+
+		if($config['Sandbox'])
+		{
 			error_reporting(E_ALL);
 			ini_set('display_errors', '1');
 		}
         
         
-        $this->load->model(array('payment_model','login_model'));
-        $this->load->library('Paypal_pro',$config);        
+        $this->load->model(array('payment_model','login_model','user_model'));
+        $this->load->library('Paypal_pro',$config);
         $this->payment_method = '';
      }           
                 
@@ -70,6 +85,7 @@ class Payment extends App_Controller
      //get authorize form while click the authorize option
      function authorize_form()
      {
+     	
         if($_POST)
      	{
      		$this->form_validation->set_rules($this->_auth_validation_rules);
@@ -88,6 +104,7 @@ class Payment extends App_Controller
 		        //$res['shippingprofileid']=time();
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
+		        
 		        $c = $this->create_auth_transaction($res,$ins);
 		        if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
 		        {
@@ -98,7 +115,15 @@ class Payment extends App_Controller
 	                $usr_data['created_date']  =  date("Y-m-d H:i:s");
 					$usr_data['is_active']  = 1;
 					$usr_data['language']  = 1;
-					$usr_data['created_id']  = 8;
+					$usr_data['fname']  = $this->input->post('fname');
+					$usr_data['lname']  = $this->input->post('lname');
+					$usr_data['address']  = $this->input->post('address');
+					$usr_data['city']  = $this->input->post('city');
+					$usr_data['state']  =$this->input->post('state');
+					$usr_data['country']  = $this->input->post('country');
+					$usr_data['zipcode']  = $this->input->post('zipcode');
+					$usr_data['phone']  = $this->input->post('phone');
+					$usr_data['fax']  = $this->input->post('fax');
 				 	$folder = $usr_data['name'];
 				 	$dir = './admin/views/repository/files/'.$folder;
 				 	if(!file_exists($dir))	
@@ -124,7 +149,7 @@ class Payment extends App_Controller
 		            $ins_data['user_id'] = $userid;
 		            $ins_data['profile_id'] = $res['profileid'];
 		            $ins_data['plan_id'] = $ins['plan_id'];         
-		            $ins_data['customer_id'] = $ins['customer_id'];
+		            $ins_data['customer_id'] = $res['customer_id'];
 		            $ins_data['profile_start_date'] = date("Y-m-d");
 		            $ins_data['next_billing_date'] = date("Y-m-d",strtotime("+32 days"));
 		            $ins_data['subscription_id'] = $b['subs_id'];
@@ -144,7 +169,7 @@ class Payment extends App_Controller
 		            $trans_data['created_date']=  date("Y-m-d H:i:s");
 		            $trans_data['trans_id']= $c['transid'];
 		            $trans_data['status']= $c['trans_status'];
-		            $trans_data['payment_mode']= "Authorize";
+		            $trans_data['mode']= "Authorize";
 		            $this->payment_model->insert("payment_transaction_history",$trans_data);
 		            $this->session->set_flashdata("signup_succ","User Profile has been created sucessfully.",TRUE);
 		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
@@ -167,7 +192,6 @@ class Payment extends App_Controller
 
      function create_auth_transaction($res,$ins)
     {
-        $this->load->library('authorize_net');
         $auth_net = array(
             'x_card_num'            => $ins['c_number'], // Visa
             'x_exp_date'            =>  $ins['exp_month'].'/'.$ins['exp_year'],
@@ -205,7 +229,6 @@ class Payment extends App_Controller
     }
     function create_auth_subscription($res,$post)
     {
-        $this->load->library('authorize_arb');
         $this->authorize_arb->startData('create');
         // Locally-defined reference ID (can't be longer than 20 chars)
         $refId = substr(md5( microtime() . 'ref' ), 0, 20);

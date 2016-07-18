@@ -98,7 +98,7 @@ class Login extends App_Controller {
                 $ins_data['role']          = 2;
                 $ins_data['password']      = $form['password'];
                 $ins_data['plan_type']     = $form['plan_type'];
-               // $ins_data['plan_details']  = get_plan_details($form['plan_type']);
+                $ins_data['plan_details']  = get_plan_details($form['plan_type']);
                 $ins_data['created_date']  =  date("Y-m-d H:i:s");
 				$ins_data['is_active']     = 1;
 				$ins_data['language']      = 1;
