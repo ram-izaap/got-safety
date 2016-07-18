@@ -42,7 +42,7 @@ class Authorize_net
 		$this->CI =& get_instance();
 		
 		// Load config file
-		$this->CI->config->load('authorize_net', TRUE);
+		/*$this->CI->config->load('authorize_net', TRUE);
 		
 		foreach( $this->CI->config->item('authorize_net') as $key => $value )
 		{
@@ -50,9 +50,10 @@ class Authorize_net
 			{
 				$this->$key = $value;
 			}
-		}
-
+		}*/
+		
 		$this->initialize($config);
+		
 	}
 
 	// Initialize the lib

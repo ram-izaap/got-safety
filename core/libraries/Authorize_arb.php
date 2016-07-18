@@ -56,16 +56,17 @@ class Authorize_arb
 		$this->CI =& get_instance();
 		
 		// Load config file
-		$this->CI->config->load('authorize_net', TRUE);
+		//$this->CI->config->load('authorize_net', TRUE);
 		
 		// Pull the config into scope
-		foreach( $this->CI->config->item('authorize_net') as $key => $value )
+		/*foreach( $config as $key => $value )
 		{
 			if( isset($this->$key) )
 			{
 				$this->$key = $value;
 			}
-		}
+		}*/
+		
 
 		// Inline config
 		$this->initialize($config);
