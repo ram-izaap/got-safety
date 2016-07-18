@@ -82,13 +82,13 @@
               <div class="product-poster">
                 <img src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" alt="<?php echo $product_dtl['name']; ?>" class="">                         
                 <?php if(count($attr_dtl)==1 || $attr_dtl[$cur_val]['price']==$attr_dtl[$end_val]['price']){ ?>
-                <div class="block-price">
+                <div class="block-price mprice-bar">
                   <strong>
                     <?php echo $attr_dtl[$cur_val]['price']; ?>
                   </strong>
                 </div>
                 <?php } else if(count($attr_dtl) > 1){ ?>
-                <div class="block-price multi_price">
+                <div class="block-price multi_price mprice-bar">
                   <strong>
                     <?php echo ($attr_dtl[$cur_val]['price'] < $attr_dtl[$end_val]['price'])?$attr_dtl[$cur_val]['price'] .'-'.$attr_dtl[$end_val]['price']:$attr_dtl[$end_val]['price'] .' - '.$attr_dtl[$cur_val]['price']; ?>
                   </strong>
@@ -113,9 +113,9 @@
                 <form name="product_attribute" id="product_attribute" method="post" action="#" onsubmit="javascript:return false;">
                     <input type="hidden" name="p_id" value="<?php echo $product_dtl['id']; ?>">
                     <?php if(count($attr_dtl) >0) : ?>
-                    <label>
+                    <!--<label>
                       <?php echo $attrname = (isset($attr_dtl[0]['attr_name']))?$attr_dtl[0]['attr_name']:"-"; ?>
-                    </label>
+                    </label>-->
 
                     <div data-role="sorting"  class="product-size">
                     <select name="label_size" class="sel_label_size" id="label_size">

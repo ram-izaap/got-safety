@@ -20,14 +20,20 @@ class Product1_model extends CI_Model {
          return $result->result_array();
 	}
 
-    function get_all_products($cat)
+    function get_all_products($cat,$limit,$offset)
     {
+        if($limit!='' || $offset!='')
+         $limit1 = 'limit '.$offset.','.$limit;
+
+        else
+         $limit1='';
+
         if($cat!='')
             $where = 'a.cat="'.$cat.'" and';
         else
             $where='';
 
-        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,a.updated_date,b.id as id1,b.p_id as p_id1,b.attr_val_id,c.price,d.attr_val,d.id as id4,d.is_active as active1 from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id inner join attribute_value d on d.id=b.attr_val_id where $where d.is_active=1 order by c.price");
+        $result = $this->db->query("select a.img,a.name,a.id,a.is_active,a.attr_id,a.updated_date,group_concat(b.id) as id1,group_concat(b.p_id) as p_id1,group_concat(b.attr_val_id) as attr_val_id,group_concat(c.price) as price,group_concat(d.attr_val) as attr_val,group_concat(d.id) as id4,group_concat(d.is_active) as active1 from products a left join product_variation b on a.id=b.p_id inner join product_price c on c.variation_id=b.id inner join attribute_value d on d.id=b.attr_val_id where $where d.is_active=1 and a.is_active=1 group by a.id order by c.price $limit1");
         return $result->result_array();
     }
 

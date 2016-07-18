@@ -130,7 +130,7 @@
               </div>
               <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <button class="btn btn-success btn-submit-fix btn-green" type="submit" id="check_before_order">
+                  <button class="btn btn-success btn-submit-fix btn-green" onsubmit="javascript:return false();" id="check_before_order">
                     <i class="fa fa-hand-o-right">
                     </i>Place Order
                   </button>

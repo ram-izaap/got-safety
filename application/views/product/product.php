@@ -26,18 +26,23 @@
               </select>
             </div>
           </h3>
+          <div class="main_pagination clearfix">
+              <div class="sub_pagination">
+                <div class="tot_rec"> <?php echo (!empty($pagermessage) ? $pagermessage : ''); ?></div>
+                <?php echo $paginglinks; ?>
+              </div>
+          </div>
           <hr />
           <div class="product-container" id="product-container">
             <?php $i=1; foreach($product_detail as $key=>$value): if($value['is_active']==1) :  ?>
             <?php
-              $cur_val = current($product_variation[$value['id']]);
-              $cur_val = key($product_variation[$value['id']]);
-              $end_val = end($product_variation[$value['id']]);
-              $end_val = key($product_variation[$value['id']]);
+              $price = explode(",",$value['price']);
+              $cur_val = current($price);
+              $end_val = end($price);
             ?>
-            <div class="product-loop" data-item="single" data-price="<?php echo $product_variation[$value['id']][$end_val]; ?>" data-order="<?php echo $i; ?>" data-date="<?php echo $value['updated_date']; ?>">
+            <div class="product-loop" data-item="single" data-price="<?php echo $end_val; ?>" data-order="<?php echo $i; ?>" data-date="<?php echo $value['updated_date']; ?>">
               <h2 style="display:none;">
-                <?php echo $product_variation[$value['id']][$end_val]; ?>
+                <?php echo $end_val; ?>
               </h2>
               <h3 style="display:none;">
                 <?php echo $value['updated_date']; ?>
@@ -51,16 +56,16 @@
                     <a href="<?php echo site_url(); ?>product/<?php echo strtolower(str_replace(" ","-",$value['name'])); ?>">
                       <img data-src="<?php echo $img_url; ?>assets/product_images/<?php echo $value['img']; ?>" alt="<?php echo $value['name']; ?>" width="" height="" class=""/>
                     </a>
-                    <?php if(count($product_variation[$value['id']])==1 || $product_variation[$value['id']][$cur_val]==$product_variation[$value['id']][$end_val]){ ?>
+                    <?php if(count($price)==1 || $cur_val==$end_val){ ?>
                     <div class="block-price">
                       <strong>
-                        <?php echo $product_variation[$value['id']][$cur_val]; ?>
+                        <?php echo $cur_val; ?>
                       </strong>
                     </div>
-                    <?php } else if(count($product_variation[$value['id']]) > 1){ ?>
+                    <?php } else if(count($price) > 1){ ?>
                     <div class="block-price multi_price">
                       <strong>
-                        <?php echo ($product_variation[$value['id']][$cur_val] < $product_variation[$value['id']][$end_val])?$product_variation[$value['id']][$cur_val] .' - '.$product_variation[$value['id']][$end_val]:$product_variation[$value['id']][$end_val] .' - '.$product_variation[$value['id']][$cur_val]; ?>
+                        <?php echo ($cur_val < $end_val)?$cur_val .' - '.$end_val:$end_val .' - '.$cur_val; ?>
                       </strong>
                     </div>
                     <?php }?>

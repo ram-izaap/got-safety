@@ -14,14 +14,23 @@ class Shop extends App_Controller {
 
     public function index($catname='')
     {
-        if($catname!='')
-        {
-         $get_cat_id  = $this->product1_model->get_product("category",array("cat_name"=>str_replace("-"," ",$catname)));
-         $catid = $get_cat_id[0]['id'];
-        } 
-        else
+        $uri_segment = $this->uri->segment(2);
+
+        if($uri_segment=='page')
         {
             $catid='';
+        }
+        else
+        {
+            if($catname!='')
+            {
+                $get_cat_id  = $this->product1_model->get_product("category",array("cat_name"=>str_replace("-"," ",$catname)));
+                $catid = $get_cat_id[0]['id'];
+            } 
+            else
+            {
+                $catid='';
+            }
         }
 
 
@@ -39,30 +48,82 @@ class Shop extends App_Controller {
 
         if($catid=='')
         {
-            $product_data = $this->product1_model->get_all_products($catid);
+            $product_data = $this->product1_model->get_all_products($catid,$config='',$offset='');
             
-            foreach ($product_data as $key => $value) 
-            {
-                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id'],"updated_date"=>$value['updated_date']);
-                $productvariationdtl[$value['id']][] = $value['price'];
-            }
+            $offset = ($this->uri->segment(3) != '' ? $this->uri->segment(3): 0);
 
-            $this->data['product_detail'] = $product_detail;
-            $this->data['product_variation'] = $productvariationdtl;
+            $config['total_rows'] = count($product_data);
+            $config['per_page']= 1;
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['first_link'] = false;
+            $config['last_link'] = false;
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['prev_link'] = '&laquo';
+            $config['prev_tag_open'] = '<li class="prev">';
+            $config['prev_tag_close'] = '</li>';
+            $config['uri_segment'] = 3;
+            $config['base_url']= base_url().'/shop/page';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            $config['next_link'] = 'Next &gt;';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>'; 
+            $this->pagination->initialize($config);
+            $this->data['paginglinks'] = $this->pagination->create_links();
+            
+            if($this->data['paginglinks']!= '') 
+            {
+              $this->data['pagermessage'] = 'Showing '.((($this->pagination->cur_page-1)*$this->pagination->per_page)+1).' to '.($this->pagination->cur_page*$this->pagination->per_page).' of '.count($product_data).' results.';
+            }  
+            
+            $product_data1 = $this->product1_model->get_all_products($catid,$config["per_page"], $offset); 
+            $this->data['product_detail'] = $product_data1;
         }
 
         else
         {
-          $product_data = $this->product1_model->get_all_products($catid);
-            
-            foreach ($product_data as $key => $value) 
-            {
-                $product_detail[$value['id']] = array("id"=>$value['id'],"name"=>$value['name'],"img"=>$value['img'],"is_active"=>$value['is_active'],"attr_id"=>$value['attr_id'],"updated_date"=>$value['updated_date']);
-                $productvariationdtl[$value['id']][] = $value['price'];
-            }
+          $product_data = $this->product1_model->get_all_products($catid,$config='',$offset='');
 
-            $this->data['product_detail'] = $product_detail;
-            $this->data['product_variation'] = $productvariationdtl;
+
+            $offset = ($this->uri->segment(4) != '' ? $this->uri->segment(4): 0);
+
+            $config['total_rows'] = count($product_data);
+            $config['per_page']= 1;
+            //$config['first_link'] = 'First';
+            //$config['last_link'] = 'Last';
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['first_link'] = false;
+            $config['last_link'] = false;
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['prev_link'] = '&laquo';
+            $config['prev_tag_open'] = '<li class="prev">';
+            $config['prev_tag_close'] = '</li>';
+            $config['uri_segment'] = 4;
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['cur_tag_open'] = '<li class="active"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>'; 
+            $config['base_url']= base_url().'/shop/'.$catname.'/page'; 
+            $this->pagination->initialize($config);
+            $this->data['paginglinks'] = $this->pagination->create_links();
+
+            if($this->data['paginglinks']!= '') 
+            {
+               $this->data['pagermessage'] = 'Showing '.((($this->pagination->cur_page-1)*$this->pagination->per_page)+1).' to '.($this->pagination->cur_page*$this->pagination->per_page).' of '.count($product_data);
+            }  
+
+            $product_data1 = $this->product1_model->get_all_products($catid,$config["per_page"], $offset); 
+            $this->data['product_detail'] = $product_data1;
         }
 
         $this->data['img_url']=$this->layout->get_img_dir();

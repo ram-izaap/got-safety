@@ -1,6 +1,6 @@
    <?php if(isset($this->session->userdata['shipping_info']['name']) && $this->session->userdata['shipping_info']['name']!=''): ?>
 
-      <form action="#" name="shipping_information" id="shipping_information" method="post" class="form-horizontal" onsubmit="javascript:shipping_address_validation(); return false;">
+      <form action="#" name="shipping_information" id="shipping_information" method="post" class="form-horizontal" onsubmit="javascript:return false;">
             <div class="billing-details">
               
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">

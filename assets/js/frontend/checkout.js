@@ -49,7 +49,7 @@ $(document).on("click",".edit_billing_addr",function(){
                 $("#billing_form").show();
                 $("#billing_form").html(data.content);
                 $("#billing_list").hide();
-                $("#billing_address").hide();
+                $("#billing_address").html('');
 
             }
             
@@ -76,7 +76,7 @@ $(document).on("click",".edit_shipping_addr",function(){
                 $("#shipping_form").show();
                 $("#shipping_form").html(data.content);
                 $("#shipping_list").hide();
-                $("#shipping_address").hide();
+                $("#shipping_address").html('');
 
             }
         },
@@ -102,7 +102,8 @@ function billing_address_validation()
        url = base_url +'checkout/save_billing_address';
    
    if(name!=undefined)
-   {
+   {  
+
 
        if(name.length) 
         {
@@ -201,7 +202,6 @@ function billing_address_validation()
                 error: function (jqXHR, textStatus, errorThrown)
                 {
                     alert('Error adding / update data');
-                    window.location.href= base_url+'attribute/attribute_value';
                 }
             });
 
@@ -209,6 +209,8 @@ function billing_address_validation()
 
         
     }
+
+
 }
 
 
@@ -325,7 +327,6 @@ function shipping_address_validation()
                 error: function (jqXHR, textStatus, errorThrown)
                 {
                     alert('Error adding / update data');
-                    window.location.href= base_url+'attribute/attribute_value';
                 }
             });
         }
@@ -469,7 +470,7 @@ function submit_order()
 
     success: function(data)
     {
-       $("#preloader").css("display",'none');
+       //$("#preloader").css("display",'none');
 
         if(data.status=="success" && data.message == 'success')
         {
