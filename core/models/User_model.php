@@ -207,6 +207,7 @@ class User_Model extends App_Model {
         return $result = $this->db->get()->result_array();
     }
     
+    
 	
 	
     
