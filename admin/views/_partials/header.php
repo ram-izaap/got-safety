@@ -377,7 +377,7 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="" class="dropdown-toggle">
+					<a href="<?php echo base_url('index.php/login/logout');?>" class="dropdown-toggle">
 					<i class="icon-logout"></i>
 					</a>
 				</li>
@@ -476,7 +476,7 @@
 					if($role == 1){ ?>
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-settings"></i>
 						<span class="title">Settings</span>
 						<span class="arrow "></span>
 						</a>
@@ -520,7 +520,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-notebook"></i>
 						<span class="title">Safety lessons</span>
 						<span class="arrow "></span>
 						</a>
@@ -556,7 +556,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-screen-desktop"></i>
 						<span class="title">Webinars</span>
 						<span class="arrow "></span>
 						</a>
@@ -721,7 +721,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-docs"></i>
 						<span class="title">Documentation</span>
 						<span class="arrow "></span>
 						</a>
@@ -747,7 +747,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-list"></i>
 						<span class="title">Safety Forms</span>
 						<span class="arrow "></span>
 						</a>
@@ -815,7 +815,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-users"></i>
 						<span class="title">Client Management</span>
 						<span class="arrow "></span>
 						</a>
@@ -855,7 +855,7 @@
 					if($role == 2){ ?>	
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-user-following"></i>
 						<span class="title">Employee Management</span>
 						<span class="arrow "></span>
 						</a>
@@ -880,7 +880,7 @@
 					<?php } ?>
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-fire"></i>
 						<span class="title">Repository Management</span>
 						<span class="arrow "></span>
 						</a>
@@ -898,7 +898,7 @@
 					if($role == 1){ ?>		
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-tag"></i>
 						<span class="title">Plans</span>
 						<span class="arrow "></span>
 						</a>
@@ -917,7 +917,7 @@
 
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-layers"></i>
 						<span class="title">Category</span>
 						<span class="arrow "></span>
 						</a>
@@ -936,7 +936,7 @@
 
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-anchor"></i>
 						<span class="title">Attribute</span>
 						<span class="arrow "></span>
 						</a>
@@ -949,7 +949,7 @@
 					</li>
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-basket-loaded"></i>
 						<span class="title">Product</span>
 						<span class="arrow "></span>
 						</a>
@@ -966,7 +966,7 @@
 					</li>
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-credit-card"></i>
 						<span class="title">Payment Info</span>
 						<span class="arrow "></span>
 						</a>
@@ -983,7 +983,7 @@
 					
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="icon-bag"></i>
 						<span class="title">Order Details</span>
 						<span class="arrow "></span>
 						</a>
@@ -1000,7 +1000,7 @@
 					<?php } ?>
 					<li>
 						<a href="javascript:;">
-						<i class="icon-user"></i>
+						<i class="fa fa-dollar"></i>
 						<span class="title">Transaction Details</span>
 						<span class="arrow "></span>
 						</a>
