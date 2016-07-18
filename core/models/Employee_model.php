@@ -160,7 +160,10 @@ class Employee_model extends App_Model {
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
 		
+		$path = $_FILES['employee']['name'];
+		$ext = pathinfo($path, PATHINFO_EXTENSION);
 		
+		if($ext == 'csv') {
 		
 		$fp = fopen($_FILES['employee']['tmp_name'],'r') or die("can't open file");
 			  while($csv_line = fgetcsv($fp,1024)) 
@@ -240,6 +243,11 @@ class Employee_model extends App_Model {
                    fclose($fp) or die("can't close file");
 	       $data['success']="success";
 	       return $data;
+	       
+	   }else{
+		   
+		   $this->session->set_flashdata('csv_up','Upload only CSV files',TRUE);
+	   }
 		
 	}
 	

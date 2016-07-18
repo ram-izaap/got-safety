@@ -11,8 +11,8 @@ class Login extends App_Controller {
 												
 	
 	protected $_signup_validation_rules = array(
-			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+			//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+			//array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
             array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
@@ -100,6 +100,17 @@ class Login extends App_Controller {
 	{
 		if($_POST) {
             $this->load->library('email');
+            
+            		
+			if(isset($_POST['name'])) 
+			{
+					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
+			}
+			
+			if(isset($_POST['email'])) 
+			{
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
+			}
             
             $this->form_validation->set_rules($this->_signup_validation_rules);
             
@@ -424,6 +435,37 @@ class Login extends App_Controller {
     
 
 
+	 function name_unique_check($name,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("name" => $name));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('name_unique_check', 'Username already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
+    
+     function email_unique_check($email,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("email" => $email));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('email_unique_check', 'Email already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
    
    
 	

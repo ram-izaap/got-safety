@@ -1,5 +1,14 @@
+
+<?php if($this->session->flashdata('csv_up')==TRUE){?>
+		<div class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<?php echo $this->session->flashdata('csv_up');?>
+		</div>
+		<?php }?>
 <div class="upload-file">
 	<div class="col-md-9">
+		
+		
 		<form action="" method="post" enctype="multipart/form-data" name="form1" id="form1"> 
 		<table>
 		<tr>
