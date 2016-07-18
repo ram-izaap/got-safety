@@ -7,10 +7,10 @@ class Payment extends Admin_controller
 {
 	protected $_pay_validation_rules =    array (
 		 array('field' => 'paypal_email_id', 'label' => 'Paypal E-mail ID', 'rules' => 'trim|required|valid_email'),
+         array('field' => 'paypal_password', 'label' => 'Paypal Password', 'rules' => 'trim|required'),
+         array('field' => 'paypal_signature', 'label' => 'Paypal Singature', 'rules' => 'trim|required'),
 		 array('field' => 'auth_login_id', 'label' => 'Test Merchant Login ID', 'rules' => 'trim|required'),
 		 array('field' => 'auth_trans_key', 'label' => 'Test Merchant Transaction Key', 'rules' => 'trim|required'),
-		  array('field' => 'live_auth_login_id', 'label' => 'Production Merchant Transaction Key', 'rules' => 'trim|required'),
-		   array('field' => 'live_auth_trans_key', 'label' => 'Production Merchant Transaction Key', 'rules' => 'trim|required'),	
 		);
 	 function __construct() 
     {
@@ -22,7 +22,7 @@ class Payment extends Admin_controller
     }
     function index()
     {
-    	 $this->data['info'] = $this->payment_model->get_pay_info("payment_info",array("id"=>"1"));
+    	$this->data['info']=$this->payment_model->get_pay_info("payment_api_credentials");
     	 $this->layout->view("payment/add");
   		//echo json_encode($response);
     }
@@ -34,31 +34,34 @@ class Payment extends Admin_controller
      		$this->form_validation->set_rules($this->_pay_validation_rules);
      		if($this->form_validation->run())
 	        {
-				$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
+				$edit_id ="1";$edit_id1="2";
 				$form = $this->input->post();
-				$ins_data['paypal_email'] = $form['paypal_email_id'];
-				$ins_data['paypal_mode'] = $form['paypal_mode'];
-				$ins_data['auth_login_id'] = $form['auth_login_id'];
-				$ins_data['auth_trans_key'] = $form['auth_trans_key'];
-				$ins_data['live_auth_login_id'] = $form['live_auth_login_id'];
-				$ins_data['live_auth_trans_key'] = $form['live_auth_trans_key'];
-				$ins_data['auth_mode'] = $form['auth_mode'];
-				$ins_data['date_updated'] = date("Y-m-d H:i:s");
-				if(empty($edit_id))
+				$ins_data['api_username'] = $form['paypal_email_id'];
+                $ins_data['api_password'] = $form['paypal_signature'];
+                $ins_data['api_signature'] = $form['paypal_password'];
+				$ins_data['payment_mode'] = $form['paypal_mode'];
+               // $ins_data['date_updated'] = date("Y-m-d H:i:s");
+				$ins_data1['api_username'] = $form['auth_login_id'];
+				$ins_data1['api_password'] = $form['auth_trans_key'];
+				$ins_data1['payment_mode'] = $form['auth_mode'];
+			//	$ins_data1['date_updated'] = date("Y-m-d H:i:s");
+				if(empty($edit_id) || empty($edit_id))
 				{
 					$ins_data['date_created'] = date("Y-m-d H:i:s");
-					$this->payment_model->insert("payment_info",$ins_data);
+					$this->payment_model->insert("payment_api_credentials",$ins_data);
+                    $this->payment_model->insert("payment_api_credentials",$ins_data1);
 				}	
 				else
 				{
-					$this->payment_model->update("payment_info",$ins_data,array("id" => $edit_id));
+					$this->payment_model->update("payment_api_credentials",$ins_data,array("id" => $edit_id));
+                    $this->payment_model->update("payment_api_credentials",$ins_data1,array("id" => $edit_id1));
 					$this->session->set_flashdata('up_pay','Payment Info has been updated successfully',TRUE);
 				}
 				redirect('payment');
 	        }
 	        else
 	        {
-	        	$this->data['info']=$this->payment_model->get_pay_info("payment_info",array("id"=>"1"));
+	        	$this->data['info']=$this->payment_model->get_pay_info("payment_api_credentials");
 	        	$this->layout->view('payment/add');
 	        }
      	}

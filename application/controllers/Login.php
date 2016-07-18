@@ -12,7 +12,7 @@ class Login extends App_Controller {
 	
 	protected $_signup_validation_rules = array(
 			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
             array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
@@ -43,6 +43,20 @@ class Login extends App_Controller {
         $this->load->model(array('login_model'));
         $this->load->model('plan_model');
        
+    }
+    function email_check()
+    {
+        $email = $this->input->post('email');
+        $chk= $this->login_model->email_check($email);
+        if($chk)
+        {
+            $this->form_validation->set_message('email_check', "This Email-ID Already Exists");
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
     }
 
     public function index()

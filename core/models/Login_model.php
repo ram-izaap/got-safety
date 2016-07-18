@@ -66,7 +66,6 @@ class Login_Model extends CI_Model
         $this->db->from('users');
         $this->db->where('name', $name);
         $this->db->where('password', $pass);
-
         return $this->db->get()->row_array();
          
     }
@@ -92,6 +91,16 @@ class Login_Model extends CI_Model
    public function logout()
    {
         $this->session->sess_destroy();
+   }
+   function email_check($mail)
+   {
+      $this->db->select('*');
+      $this->db->from('users');
+      $this->db->where('email', $mail);
+      if($this->db->get()->num_rows() > 0)
+        return true;
+      else
+        return false;
    }
     
 }

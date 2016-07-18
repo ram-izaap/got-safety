@@ -5,9 +5,9 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Login extends Admin_Controller 
 { 
     protected $_login_validation_rules =    array (
-                                                    array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
-                                                    array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
-                                                  );
+            array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
+            array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
+          );
     function __construct()
     {
         parent::__construct();  

@@ -362,8 +362,6 @@ class User extends Admin_Controller
         {
             redirect("admim/login");
         }  
-		
-		
 	} 
     
     
@@ -535,7 +533,7 @@ class User extends Admin_Controller
 		}
 		
 	}
-	 function create_auth_subscription($res,$post)
+	function create_auth_subscription($res,$post)
     {
         $this->load->library('authorize_arb');
         $this->authorize_arb->startData('create');
