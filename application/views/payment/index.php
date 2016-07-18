@@ -1,7 +1,4 @@
-<?php
-echo "<pre>";
-print_r($_SESSION);
-?>
+
 	<!-- // Content area -->
 	<section class="container content-area" data-view="create-account">
 		<!-- rwo default --> 
@@ -39,9 +36,9 @@ print_r($_SESSION);
 						<div class="auth_div" style="display:none;">
 								<form name="auth-form" method="post" action="<?php echo base_url('payment/authorize_form'); ?>"	
 									autocomplete="on">
-									<input type="" name="plan_name" value="<?php echo $_SESSION['plan_details']['plan_type'];?>">
-									<input type="" name="plan_cost" value="<?php echo $_SESSION['plan_details']['plan_amount'];?>">
-									<input type="" name="plan_id" value="<?php echo $_SESSION['plan_details']['id'];?>">
+									<input type="hidden" name="plan_name" value="<?php echo $_SESSION['signup_data']['plan_details']['plan_type'];?>">
+									<input type="hidden" name="plan_cost" value="<?php echo $_SESSION['signup_data']['plan_details']['plan_amount'];?>">
+									<input type="hidden" name="plan_id" value="<?php echo $_SESSION['signup_data']['plan_details']['id'];?>">
 								<h5>Personal Info</h5>
 									 <div class="row">
 					                    <div class="col-sm-6">
