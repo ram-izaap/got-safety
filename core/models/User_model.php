@@ -207,6 +207,13 @@ class User_Model extends App_Model {
         return $result = $this->db->get()->result_array();
     }
     
+     function check_exists($table_name,$where)
+    {
+		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
+    
     
 	
 	

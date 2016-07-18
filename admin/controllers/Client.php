@@ -5,8 +5,8 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Client extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-													array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-													array('field' => 'email', 'label' => 'email', 'rules' => 'trim|required|valid_email'),
+													//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+													//array('field' => 'email', 'label' => 'email', 'rules' => 'trim|required|valid_email'),
 													//array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
@@ -16,7 +16,7 @@ class Client extends Admin_Controller
     {
         parent::__construct();  
         
-        $this->load->model('client_model');
+        $this->load->model('client_model','user_model');
        
     }  
     
@@ -88,9 +88,20 @@ class Client extends Admin_Controller
 			$id  = $this->session->userdata('admin_client_id');
 			
 			if (isset($_POST['password']) &&  $edit_id =="" )
-					{ 
-						$this->form_validation->set_rules('password', 'Password', 'required');
-					} 
+			{ 
+				$this->form_validation->set_rules('password', 'Password', 'required');
+			} 
+					
+					
+			if(isset($_POST['name'])) 
+			{
+					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
+			}
+			
+			if(isset($_POST['email'])) 
+			{
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
+			}
        
         if($this->form_validation->run())
         { 
@@ -104,6 +115,7 @@ class Client extends Admin_Controller
 			else { 
 				$form['is_active'] = "0";
 			}
+			
 			
 			
 			$ins_data = array();
@@ -191,6 +203,38 @@ class Client extends Admin_Controller
            // $this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
+    } 
+    
+    
+     function name_unique_check($name,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("name" => $name,"id !=" => $edit_id));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('name_unique_check', 'Username already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
+    
+     function email_unique_check($email,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("email" => $email,"id !=" => $edit_id));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('email_unique_check', 'Email already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
     } 
     
     

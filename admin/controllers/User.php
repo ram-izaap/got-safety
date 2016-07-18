@@ -5,8 +5,8 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class User extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-				array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-				array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+				//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+				//array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
 				array('field' => 'employee_limit', 'label' => 'No.of employee', 'rules' => 'trim|required'),
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
@@ -28,7 +28,7 @@ class User extends Admin_Controller
     function __construct()
     {
         parent::__construct();  
-        $config = api_credentials('sandbox');
+        $config = api_credentials('sandbox','paypal');
         
 		// Show Errors
 		if($config['Sandbox']){
@@ -119,10 +119,20 @@ class User extends Admin_Controller
 		}
 		
 		if (isset($_POST['password']) &&  $edit_id =="" )
-					{ 
-						$this->form_validation->set_rules('password', 'Password', 'required');
-					} 
+		{ 
+			$this->form_validation->set_rules('password', 'Password', 'required');
+		} 
 					
+		if(isset($_POST['name'])) 
+		{
+				$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
+		}
+		
+		if(isset($_POST['email'])) 
+		{
+				$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
+		}
+				
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
@@ -595,6 +605,39 @@ class User extends Admin_Controller
         
         return $this->data;
     }
+    
+    
+    
+     function name_unique_check($name,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("name" => $name,"id !=" => $edit_id));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('name_unique_check', 'Username already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
+    
+     function email_unique_check($email,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("email" => $email,"id !=" => $edit_id));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('email_unique_check', 'Email already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
     
    
     
