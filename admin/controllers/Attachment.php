@@ -31,6 +31,10 @@ class Attachment extends Admin_controller {
 
     function index()
     {
+		
+		if(is_logged_in()) 
+		{
+			
 		//$this->output->enable_profiler(true);
 		if(isset($_GET['id']))
        $this->session->set_userdata('id',$_GET['id']);
@@ -78,10 +82,13 @@ class Attachment extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
         $this->layout->view("attachment/attachment_list");
         
         
+		}
+		redirect("login");
+		
+	
     }
     
     
