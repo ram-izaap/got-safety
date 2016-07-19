@@ -185,7 +185,7 @@ class User_Model extends App_Model {
         $this->db->join('users u','u.plan_type=p.id');
         $this->db->join('payment_recurring_profiles rp','u.id=rp.user_id');
 		$this->db->where('u.id',$id);
-		$result = $this->db->get()->result_array();
+		$result = $this->db->get()->result_array();      
 		return $result;
 	}
     
