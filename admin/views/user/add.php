@@ -38,7 +38,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Email: <span class="required">
+					<label class="col-md-2 control-label">Email: <span class="required">*
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -57,13 +57,33 @@
 					</div>
 				</div>
 				
+
 				<div class="form-group">
-					<label class="col-md-2 control-label">No.of Employee : <span class="required">
+					<label class="col-md-2 control-label">Plan Type : <span class="required">
 					* </span>
 					</label>
 					<div class="col-md-10">
-						<input type="text" name="employee_limit" class="form-control" value="<?php echo set_value('employee_limit',$form_data['employee_limit']); ?>"<?php if($this->session->userdata('admin_data')['role'] == 2){ echo "readonly"; } ?>>
-						<span class="vstar" <?php echo form_error('employee_limit', '<span class="help-block">', '</span>'); ?></span>
+						<?php 
+						if($get_plans)
+							{?>
+							<select class="form-control" name="plan_name">
+							<?php foreach ($get_plans as $key => $value) 
+							{?>
+								<option value="<?php echo $value['id'];?>">
+									<?php echo $value['plan_type']." ($".$value['plan_amount'].")";?></option>
+							<?php 
+							}?>
+							</select>
+						<?php 
+							}
+							else
+							{
+								?>
+								<span class="vstar">Please Add Plans to Add User.
+								<a href="<?=base_url('plan/add_plan');?>">Click Here</a></span>
+								<input type="hidden" name="plan_name" value="">
+								<?php
+							}?>
 					</div>
 				</div>
 				
@@ -71,7 +91,7 @@
 				<?php $role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){   ?>
 					<div class="form-group">
-						<label class="col-md-2 control-label">Language: <span class="required"> 
+						<label class="col-md-2 control-label">Language: <span class="required"> *
 						 </span>
 						</label>
 						<div class="col-md-10">

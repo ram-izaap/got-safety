@@ -40,6 +40,14 @@
 			<span class="vstar" <?php echo form_error('plan_amount', '<span class="help-block">', '</span>'); ?></span>
 		</div>
 	  </div>
+	   <div class="form-group">
+		<label class="col-md-2 control-label">Emplolyee Limit:<span class="required">*</span>
+		</label>
+		<div class="col-md-10">
+			<input type="text" name="emp_limit" class="form-control" value="<?php echo set_value('emp_limit',$form_data['emp_limit']); ?>">  
+			<span class="vstar" <?php echo form_error('emp_limit', '<span class="help-block">', '</span>'); ?></span>
+		</div>
+	  </div>
 	  
 	  <div class="form-group">
 		<label class="col-md-2 control-label">Description: 

@@ -7,7 +7,7 @@ class User extends Admin_Controller
 	protected $_user_validation_rules = array(
 				array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
 				array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-				array('field' => 'employee_limit', 'label' => 'No.of employee', 'rules' => 'trim|required'),
+				
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 												);
@@ -117,24 +117,17 @@ class User extends Admin_Controller
         $this->layout->view("user/user_list");
         
     }
-    
-    
-    
-    public function add_edit_user($edit_id = "")
+		public function add_edit_user($edit_id = "")
     { 
-		//print_r($_POST);exit;
-		
-		if(is_logged_in()) {
-			 $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
-			
-			$this->form_validation->set_rules($this->_user_validation_rules);
-			
-			$id =  $this->session->userdata('admin_data')['id'];
-            $role =  $this->session->userdata('admin_data')['role'];
-            
-		$this->data['get_menu'] = $this->user_model->get_language("language");
-		
-		$role =  $this->session->userdata('admin_data')['role'];  
+			if(is_logged_in()) 
+			{
+				$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;			
+				$this->form_validation->set_rules($this->_user_validation_rules);
+				$id =  $this->session->userdata('admin_data')['id'];
+        $role =  $this->session->userdata('admin_data')['role'];            
+				$this->data['get_menu'] = $this->user_model->get_language("language");
+				$this->data['get_plans'] = $this->user_model->get_plans("plan","");
+				$role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){ 
 				if (!isset($_POST['language']) )
 					{ 
@@ -160,12 +153,16 @@ class User extends Admin_Controller
 			$ins_data = array();
 			
 			//print $filename;exit;
+
 			 $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
-			
+			 $get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_name']));
+			 $emp_limit = $get_plan[0]['emp_limit'];
             $ins_data['name']       	= $form['name'];
+            $ins_data['plan_type']       	= $form['plan_name'];
+
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['email']  = $form['email'];
-            $ins_data['employee_limit']  = $form['employee_limit'];
+            $ins_data['employee_limit']  = $emp_limit;
             if($form['password'] == "") { 
 	
 					$ins_data['password']  = $edit_data[0]['password'];
@@ -185,7 +182,8 @@ class User extends Admin_Controller
 			$ins_data['language'] = $edit_data[0]['language'];
 		}
            
-			if(empty($edit_id)){
+			if(empty($edit_id))
+			{
 				
 				$folder = $form['name'];
 				mkdir('./views/repository/files/'.$folder.'', 0755,true);
@@ -415,7 +413,7 @@ class User extends Admin_Controller
 		$this->data['form_data']['c_number'] = "";
 		$this->data['form_data']['cvv'] = "";
 		$this->data['plan_detail'] = $this->user_model->get_user_plan_data($id);
-		$this->data['plans'] = $this->user_model->get_plans();
+		$this->data['plans'] = $this->user_model->get_plans("plan",'');
 		//print_r($this->data['grid']);exit;
 		$this->layout->view('user/user_plan_detail');
 		

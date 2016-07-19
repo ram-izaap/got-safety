@@ -199,10 +199,12 @@ class User_Model extends App_Model {
         return $result;
         
     }
-    function get_plans()
+    function get_plans($table,$where)
     {
         $this->db->select("*");
-        $this->db->from("plan");
+        $this->db->from($table);
+        if($where!='')
+            $this->db->where($where);
         return $result = $this->db->get()->result_array();
     }
     

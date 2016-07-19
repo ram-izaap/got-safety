@@ -6,9 +6,10 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Plan extends Admin_controller {
 	
 	protected $_plan_validation_rules = array(
-		                                         array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'trim|required|callback_check_duplicate_plan'),
-											     array('field' => 'plan_amount', 'label' => 'Price', 'rules' => 'trim|required|numeric'),
-                                                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
+         array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'trim|required|callback_check_duplicate_plan'),
+         array('field' => 'emp_limit', 'label' => 'Employee Limit', 'rules' => 'trim|required|numeric'),
+	     array('field' => 'plan_amount', 'label' => 'Price', 'rules' => 'trim|required|numeric'),
+         array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 											 );
 	
 												
@@ -89,6 +90,7 @@ class Plan extends Admin_controller {
             $ins_data['plan_type']       	= $form['plan_type'];
             $ins_data['plan_amount']       	= $form['plan_amount'];
             $ins_data['plan_desc']       	= $form['plan_desc'];
+            $ins_data['emp_limit']          = $form['emp_limit'];
             $ins_data['plan_directory']  = $form['plan_directory'];
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['updated_date']  = date("Y-m-d H:i:s");
