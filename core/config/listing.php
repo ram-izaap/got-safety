@@ -339,7 +339,7 @@ $config['plan_index'] = array(
 	"fields"	=> array(   
 							'plan_type'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
 							'plan_amount'=>array('name'=>'Price', 'data_type' => 'integer', 'sortable' => FALSE, 'default_view'=>1),
-							'plan_desc'=>array('name'=>'Description', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+							'emp_limit'=>array('name'=>'Employee Limit', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
 							'plan_directory'=>array('name'=>'Directory', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
                              'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => FALSE, 'default_view'=>1)                             
 						),
