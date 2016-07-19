@@ -199,7 +199,7 @@ class Forms extends Admin_controller {
 		}
         else
         {
-            redirect("admim/login");
+            redirect("login");
         }  
     
 	}
@@ -280,7 +280,7 @@ class Forms extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 	}

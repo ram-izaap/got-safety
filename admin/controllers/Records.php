@@ -213,7 +213,7 @@ class Records extends Admin_controller {
 		}
         else
         {
-            redirect("admim/login");
+            redirect("login");
         }  
     
 	}
@@ -295,7 +295,7 @@ class Records extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 	}

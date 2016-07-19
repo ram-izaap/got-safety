@@ -140,7 +140,7 @@ class Attribute extends Admin_controller {
         }
         else
         {
-            redirect("home");
+            redirect("login");
         } 
     }
 
@@ -184,7 +184,7 @@ class Attribute extends Admin_controller {
         }
         else
         {
-            redirect("home");
+            redirect("login");
         } 
     }
     

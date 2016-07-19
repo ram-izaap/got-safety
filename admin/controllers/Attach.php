@@ -208,7 +208,7 @@ class Attach extends Admin_controller {
 		}
         else
         {
-            redirect("admim/login");
+            redirect("login");
         }  
     
 	}

@@ -125,7 +125,7 @@ class Category extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}

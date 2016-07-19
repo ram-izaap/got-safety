@@ -17,8 +17,10 @@ class Home extends Admin_Controller
     
     public function index()
     { 
-    
-       	$this->layout->view("home");
+    	if(is_logged_in())
+       		$this->layout->view("home");
+       	else
+       		redirect("login");
         
     }
     

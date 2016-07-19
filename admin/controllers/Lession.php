@@ -200,7 +200,7 @@ class Lession extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}
@@ -295,7 +295,7 @@ class Lession extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 		

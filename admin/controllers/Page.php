@@ -162,7 +162,7 @@ class Page extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}

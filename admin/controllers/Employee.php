@@ -208,7 +208,7 @@ class Employee extends Admin_controller {
 		}
         else
         {
-            redirect("admim/login");
+            redirect("login");
         }  
     
 	}

@@ -265,7 +265,7 @@ class Product extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}

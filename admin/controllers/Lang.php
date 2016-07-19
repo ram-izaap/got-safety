@@ -161,7 +161,7 @@ class Lang extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}

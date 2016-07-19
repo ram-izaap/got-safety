@@ -237,7 +237,7 @@ class User extends Admin_Controller
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}
@@ -370,7 +370,7 @@ class User extends Admin_Controller
 		}
         else
         {
-            redirect("admim/login");
+            redirect("login");
         }  
 	} 
     

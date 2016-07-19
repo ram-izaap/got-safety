@@ -213,7 +213,7 @@ class Documents extends Admin_controller {
 		}
         else
         {
-            redirect("admin/login");
+            redirect("login");
         }  
     
 	}
@@ -294,7 +294,7 @@ class Documents extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 	}

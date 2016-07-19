@@ -35,7 +35,8 @@ class Aboutus extends Admin_Controller
      function about()
     {
 		
-		if(is_logged_in()) {
+		if(is_logged_in())
+		 {
 			
 			
 			
@@ -69,7 +70,7 @@ class Aboutus extends Admin_Controller
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 		

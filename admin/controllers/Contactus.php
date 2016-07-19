@@ -74,7 +74,7 @@ class Contactus extends Admin_Controller
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         } 
 		
 		
