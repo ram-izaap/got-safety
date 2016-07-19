@@ -58,10 +58,8 @@ class User extends Admin_Controller
     public function index()
     { 
         $this->layout->add_javascripts(array('listing', 'rwd-table'));  
-
-
         $this->load->library('listing');
-         
+      
 
         //init fncts
        //$this->load_settings_data();
@@ -608,7 +606,6 @@ class User extends Admin_Controller
         return $this->data;
     }
     
-   
-    
+
 }
 ?>
