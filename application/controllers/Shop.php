@@ -20,6 +20,7 @@ class Shop extends App_Controller {
         {
             $catid='';
         }
+        
         else
         {
             if($catname!='')
