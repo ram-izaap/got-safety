@@ -276,7 +276,10 @@ $("input[name='plan']").click(function(){
   $("input[name='plan_name']").val(value[0]);
   $("input[name='plan_cost']").val(value[1]);
 
-  val = $("input[name='pay_method']:checked").val();
+ 
+});
+
+ val = $("input[name='pay_method']:checked").val();
   if(val==1)
   {
     $(".auth_div").hide();
@@ -287,9 +290,3 @@ $("input[name='plan']").click(function(){
     $(".auth_div").show();
     $(".paypal_div").hide();
   }
-});
-
-
-
-
-

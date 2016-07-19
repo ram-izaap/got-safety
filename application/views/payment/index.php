@@ -1,9 +1,19 @@
-
-	<!-- // Content area -->
+<!-- // Content area -->
 	<section class="container content-area" data-view="create-account">
 		<!-- rwo default --> 
 		<div class="row" data-row="default">
 			<aside class="col-sm-12 bg-white inner-full">
+			<?php 
+			if(isset($_SESSION['signup_fail']))
+				{?>
+				<div class="alert alert-danger alert-dismissable col-md-6 col-md-offset-3">
+				 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+				 	<?php  
+				 		echo $_SESSION['signup_fail'];
+				 		unset($_SESSION['signup_fail']);
+				 	}
+				 	?>
+				</div>
 				<div class="inner-content form-wrap" style="width:90%;">
 						
 						<h4>Choose Payment Gateway</h4>

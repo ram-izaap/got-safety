@@ -340,7 +340,7 @@
 					if($role == 2){ ?>
 						<li>
 							<a href="<?php echo site_url('user/user_plan_detail'); ?>/<?php echo $id?>">
-							<i class="icon-user"></i> Plan Detail </a>
+							<i class="icon-tag"></i> Plan Detail </a>
 						</li>
 						
 						<?php } ?>

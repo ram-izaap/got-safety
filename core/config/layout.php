@@ -39,7 +39,7 @@ $config['layout']['frontend']['javascripts'] = array(
   'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min','gs-main','common','cart','jquery.creditCardValidator','checkout'  
 );
  
-$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main');
+$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main','components');
 
 $config['layout']['frontend']['description'] = 'GotSafety';
 $config['layout']['frontend']['keywords']    = 'GotSafety';

@@ -104,7 +104,6 @@ class Payment extends App_Controller
 		        //$res['shippingprofileid']=time();
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
-		        
 		        $c = $this->create_auth_transaction($res,$ins);
 		        if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
 		        {
@@ -171,15 +170,15 @@ class Payment extends App_Controller
 		            $trans_data['status']= $c['trans_status'];
 		            $trans_data['mode']= "Authorize";
 		            $this->payment_model->insert("payment_transaction_history",$trans_data);
-		            $this->session->set_flashdata("signup_succ","User Profile has been created sucessfully.",TRUE);
+		            $_SESSION['signup_succ']="User Profile has been created sucessfully.";
 		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
 					redirect("login/signup");
 		        }
-		        else
+		        else if($b['subs_status']=="Fail")
 		        {
-		            $this->session->set_flashdata("signup_fail","Something went wrong. Please try again later.",TRUE);
-		         	$this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-					redirect("login/signup");
+		            $_SESSION['signup_fail'] = $b['error'];
+		         	//$this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
+					redirect("payment");
 		        }
 	        }
 	        else

@@ -1,13 +1,13 @@
 <?php 
-if(isset($_SESSION['renew_succ']))
-{?>
-<div class="alert alert-success alert-dismisable">
+//if(isset($_SESSION['renew_succ']))
+//{?>
+<div class="alert alert-danger alert-dismisable">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 		<?php echo $_SESSION['renew_succ'];
 		unset($_SESSION['renew_succ']);?>
 </div>
 <?php 
-}?>
+//}?>
 
 <ul class="view-details-signup">
 	<li class="title-head">View Details</li>

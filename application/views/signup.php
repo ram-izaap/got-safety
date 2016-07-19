@@ -4,10 +4,16 @@
     <!-- rwo default --> 
     <div class="row" data-row="default">
       <aside class="col-sm-12 bg-white inner-full">
-        <?php if($this->session->flashdata('signup_succ')==TRUE) {?>
-        <div style="margin:0 auto;width:500px;padding:10px;background:#abe7ed;
-                    text-align:center;border:5px solid #abe7ed;color: #27a4b0;margin-top:20px;">
-          <?php echo $this->session->flashdata('signup_succ');?>
+        <?php if(isset($_SESSION['signup_succ'])) {?>
+        <div class="alert alert-success alert-dismissable col-md-6 col-md-offset-3">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+          <?php echo $_SESSION['signup_succ'];unset($_SESSION['signup_succ']);?>
+        </div>
+        <?php }?>
+        <?php if(isset($_SESSION['signup_fail'])) {?>
+        <div class="alert alert-danger alert-dismissable col-md-6 col-md-offset-3">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+          <?php echo $_SESSION['signup_fail'];unset($_SESSION['signup_fail'])?>
         </div>
         <?php }?>
         <div class="inner-content form-wrap">
