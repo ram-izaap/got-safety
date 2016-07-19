@@ -100,7 +100,7 @@
 				</div>
 				
 				
-				<div class="form-group">
+				<?php /*<div class="form-group">
 					<label class="col-md-2 control-label">Content: <span class="required">
 					* </span>
 					</label>
@@ -108,7 +108,7 @@
 						<textarea name="content" class="form-control"> <?php echo set_value('content',$form_data['content']); ?></textarea>
 					<span class="vstar" <?php echo form_error('content', '<span class="help-block">', '</span>'); ?></span>
 					</div>
-				</div>
+				</div> */?>
 				
 				
 				<div class="form-group">

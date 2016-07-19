@@ -9,7 +9,6 @@ class Lession extends Admin_controller {
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required|max_length[255]'),
 													array('field' => 'from', 'label' => 'From date', 'rules' => 'trim|required'),
 													array('field' => 'to_date', 'label' => 'To date', 'rules' => 'trim|required'),
-													array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 												);
@@ -145,7 +144,6 @@ class Lession extends Admin_controller {
             $ins_data['from']       	= $form['from'];
             $ins_data['to_date']       	= $form['to_date'];
             $ins_data['is_active']  = $form['is_active'];
-            $ins_data['content']  = $form['content'];
             
             if($_POST['user_id'] == ""){
 				$ins_data['created_user']  = $user_id;
@@ -193,7 +191,7 @@ class Lession extends Admin_controller {
             {
                 $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","content" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => ""); 
             }
 		
 		 

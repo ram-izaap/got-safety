@@ -27,6 +27,29 @@
 				<span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<label class="col-md-2 control-label">Title: <span class="required">
+			* </span>
+			</label>
+			<div class="col-md-10">
+				<input type="text" name="title" class="form-control" value="<?php echo set_value('title',$form_data['title']); ?>">
+				<span class="vstar" <?php echo form_error('title', '<span class="help-block">', '</span>'); ?></span>
+			</div>
+		</div>
+		
+		
+		<div class="form-group">
+			<label class="col-md-2 control-label">Content: <span class="required">
+			* </span>
+			</label>
+			<div class="col-md-10">
+				<textarea name="content" class="form-control"> <?php echo set_value('content',$form_data['content']); ?></textarea>
+			<span class="vstar" <?php echo form_error('content', '<span class="help-block">', '</span>'); ?></span>
+			</div>
+		</div>
+		
+		
 		<!-- dropdown for file type-->
 		<div class="form-group">
 		<label class="col-md-2 control-label">Type: <span class="required">* </span>
@@ -97,7 +120,10 @@
 				<?php } ?>
 			</div>
 		</div>
+		
+		
 		<div class="media-opt">
+			<p style="padding-left:200px; "> ( OR )</p>
 			<div class="form-group">
 				<label class="col-md-2 control-label">Lesson URL:<span class="required">* </span>
 				</label>
