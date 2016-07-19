@@ -30,6 +30,16 @@ class User extends Admin_Controller
         parent::__construct();  
         $config = api_credentials('sandbox','paypal');
         $config1 = api_credentials('TEST','authorize');
+        if($config1['mode']=="TEST")
+        {
+        	$config1['api_url'] = 'https://test.authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://apitest.authorize.net/xml/v1/request.api';
+        }
+        else
+        {
+        	$config1['api_url'] = 'https://authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://api.authorize.net/xml/v1/request.api';
+        }
         
         $this->load->library('authorize_arb',$config1);
 		// Show Errors
@@ -392,11 +402,12 @@ class User extends Admin_Controller
 	
 	function user_plan_detail($id)
 	{
+		$this->data['grid']=$this->user_model->gettransactionlist("payment_transaction_history a",array("user_id"=>$id));
 		$this->data['form_data']['c_number'] = "";
 		$this->data['form_data']['cvv'] = "";
 		$this->data['plan_detail'] = $this->user_model->get_user_plan_data($id);
 		$this->data['plans'] = $this->user_model->get_plans();
-		 //print_r($this->data['plan_detail']);exit;
+		//print_r($this->data['grid']);exit;
 		$this->layout->view('user/user_plan_detail');
 		
 	}

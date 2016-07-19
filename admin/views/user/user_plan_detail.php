@@ -162,4 +162,40 @@ else
 <div class="col-md-12">
 <a href="<?php echo site_url('home'); ?>" class="btn-back">Back</a>
 </div>
-  		 	 	 
+<div class="clear"></div>
+<?php 
+if($grid)
+{
+?>
+<div class="row">
+	<h3 class="page-title" style="padding-left:20px;">My Subscription Transaction</h3>
+	<table class="table table-hover">
+		<thead>
+			<th>SNO</th>
+			<th>Subscription ID</th>
+			<th>Amount</th>
+			<th>Transaction ID</th>
+			<th>Status</th>
+			<th>Date</th>
+		</thead>
+		<tbody>
+		<?php
+			$i=1;
+			foreach ($grid as $key => $value) 
+			{
+				?>
+				<tr>
+					<td><?php echo $i++;?></td>
+					<td><?php echo $value['profile_id'];?></td>
+					<td><?php echo "$".number_format($value['last_payment_amt'],2);?></td>
+					<td><?php echo $value['trans_id'];?></td>
+					<td><?php echo $value['status'];?></td>
+					<td><?php echo $value['created_date'];?></td>
+				</tr>
+			  <?php 
+			}?>
+		</tbody>
+	</table>
+</div>
+<?php 
+}?>

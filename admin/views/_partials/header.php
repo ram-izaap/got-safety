@@ -998,7 +998,7 @@
 					</li>
 					
 					<?php } ?>
-					<li>
+					<!--<li>
 						<a href="javascript:;">
 						<i class="fa fa-dollar"></i>
 						<span class="title">Transaction Details</span>
@@ -1012,7 +1012,7 @@
 							
 							
 						</ul>
-					</li>
+					</li>-->
 					
 					
 					
