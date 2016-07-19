@@ -215,13 +215,21 @@ class User_Model extends App_Model {
         return $result->result_array();
 	}
     
-    public function gettransactionlist($table,$where)
-      {
-        $this->db->select('a.*,b.name,b.email');
-        $this->db->join('users b','b.id=a.user_id');
-        $result = $this->db->get_where($table,$where);
-        return $result->result_array();
-      }  
+  public function gettransactionlist($table,$where)
+  {
+    $this->db->select('a.*,b.name,b.email');
+    $this->db->join('users b','b.id=a.user_id');
+    $result = $this->db->get_where($table,$where);
+    return $result->result_array();
+  }
+  
+  function get_plan($where)  
+  {
+    $this->db->select("*");
+    $this->db->from("plan");
+    $this->db->where($where);
+    return $result = $this->db->get()->row_array();
+  }
 	
 	
     
