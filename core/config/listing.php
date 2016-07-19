@@ -444,3 +444,20 @@ $config['transaction_index'] = array(
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
 );
+$config['subscribers_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'subscribers/filter',
+	"base_url"	=> 	'/subscribers/index/',
+	"per_page"	=>	"10",
+	"fields"	=> array(   
+			'name'=>array('name'=>'Name', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
+			 'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+			 'profile_id'=>array('name'=>'Profile ID', 'data_type' => 'find_plan', 'sortable' => TRUE, 'default_view'=>1),
+			 'plan_name'=>array('name'=>'Plan', 'data_type' => 'find_plan', 'sortable' => TRUE, 'default_view'=>1),
+			 'amount'=>array('name'=>'Amount', 'data_type' => 'money', 'sortable' => TRUE, 'default_view'=>1),
+			 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)
+						),
+	"default_order"	=> "u.id",
+	"default_direction" => "DESC"
+);
