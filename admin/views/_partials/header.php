@@ -828,6 +828,10 @@
 								<a href="<?php echo site_url('user'); ?>">
 								 Manage Clients</a>
 							</li>
+							<li> 
+								<a href="<?php echo site_url('subscribers'); ?>">
+								 Subscribed Users</a>
+							</li>
 							
 						</ul>
 					</li>
