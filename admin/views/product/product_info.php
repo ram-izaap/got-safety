@@ -56,6 +56,7 @@
       </label>
     </div>
   </div>
+  <?php if(isset($product_dtl['add_info']) && $product_dtl['add_info']!=''): ?>
   <div class="form-group">
     <label class="col-md-2 control-label">
       <strong>Additional Information:
@@ -67,6 +68,7 @@
       </label>
     </div>
   </div>
+<?php endif; ?>
   <div class="form-group">
     <label class="col-md-2 control-label">
       <strong>Product SKU:
@@ -85,9 +87,7 @@
     </label>
     <div class="col-md-10">
       <label>
-        <a target="_blank" href="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" > 
-          <?php echo $product_dtl['img']; ?> 
-        </a>
+        <img class="media-object" width="72" src="<?php echo $img_url; ?>assets/product_images/<?php echo $product_dtl['img']; ?>" alt="<?php echo $product_dtl['name']; ?>" title="<?php echo $product_dtl['name']; ?>">
       </label>
     </div>
   </div>
@@ -102,6 +102,7 @@
       </label>
     </div>
   </div>
+  <?php if(count($attr_dtl) > 0): ?>
   <div class="form-group">
     <label class="col-md-2 control-label">
       <strong>Attribute Type:
@@ -113,7 +114,6 @@
       </label>
     </div>
   </div>
-  <?php if(count($attr_dtl) > 0): ?>
   <table class="table table-striped table-bordered attr_table" id="example" style="margin-left:16px;width:49.7%">
     <thead>
       <tr>
@@ -138,7 +138,7 @@
         </td>
         <td>
           <label>
-            <?php echo $value['price']; ?> 
+            <?php echo "$".number_format($value['price'],2); ?> 
           </label>
         </td>
       </tr>

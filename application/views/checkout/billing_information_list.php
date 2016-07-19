@@ -50,21 +50,6 @@
                       </div>
                       <span class="vstar err_city"></span> 
                     </div>
-                    
-                    <div class="form-group">
-                      <div class="col-md-12">
-                        <select class="form-control input-lg state" name="state" id="state">
-                          <option value="">Select State
-                          </option>
-                          <?php foreach($states as $key=>$value): ?>
-                          <option value="<?php echo $value['state_code']; ?>" <?php if($value['state_code'] == $this->session->userdata['billing_info']['state']) { ?> selected <?php } ?>>
-                            <?php echo $value['state_name']; ?>
-                          </option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                      <span class="vstar err_state"></span>
-                    </div>
                      
                     <div class="form-group">
                       <div class="col-md-12">
@@ -79,6 +64,13 @@
                         </select>
                       </div>
                        <span class="vstar err_country"></span>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-xs-12">
+                        <input type="text" placeholder="State" value="<?php echo $this->session->userdata['billing_info']['state']; ?>" class="form-control input-lg" id="state" name="state">
+                      </div>
+                      <span class="vstar err_state"></span>
                     </div>
                      
                     <div class="form-group">
@@ -102,7 +94,7 @@
                    </div>                           
                   </div>
                 </div>
-                <input type="hidden" name="success1" value="billing_success">
+                <input type="hidden" name="success1">
                 <!--SHIPPING METHOD END-->
               </div>
             </div>

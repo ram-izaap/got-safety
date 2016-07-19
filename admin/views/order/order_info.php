@@ -65,25 +65,15 @@
                   </h3>
                   </div>
                 </div>
-                <?php if(count($order_log) > 0): ?>
-                <div class="row">
-                  <div class="col-xs-12">
-                   <h3><strong>Order Logs</strong>
-                  <div class="clearfix"></div>
-                  <?php echo $order_log['action']; ?>
-                  </h3>
-                  </div>
-                </div>
-              <?php endif; ?>
                 <div class="row">
                 <div class="col-xs-6">
                   <address>
-                    <strong>Billed To:</strong><strong><?php echo $billing['name']; ?></strong> <br><?php echo $billing['company_name']; ?><br><?php echo $billing['address']; ?> <br><?php echo $billing['city']; ?> <br><?php echo $billing['state']; ?> <br><?php echo $billing['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $billing['phone']; ?>
+                    <strong>Billing Information:</strong><br><?php echo $billing['name']; ?> <br><?php echo (isset($billing['company_name']) && $billing['company_name']!='')? $billing['company_name']."<br/>":''; ?><?php echo $billing['address']; ?> <br><?php echo $billing['city']; ?> <br><?php echo $billing['state']; ?> <br><?php echo $billing['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $billing['phone']; ?>
                   </address>
                 </div>
                 <div class="col-xs-6">
                   <address>
-                    <strong>Shipped To:</strong><strong><?php echo $shipping['name']; ?></strong> <br><?php echo $shipping['company_name']; ?><br><?php echo $shipping['address']; ?> <br><?php echo $shipping['city']; ?> <br><?php echo $shipping['state']; ?> <br><?php echo $shipping['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $shipping['phone']; ?>
+                    <strong>Shipping Information:</strong><br><?php echo $shipping['name']; ?> <br><?php echo (isset($shipping['company_name']) && $shipping['company_name']!='')? $shipping['company_name']."<br/>":''; ?><?php echo $shipping['address']; ?> <br><?php echo $shipping['city']; ?> <br><?php echo $shipping['state']; ?> <br><?php echo $shipping['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $shipping['phone']; ?>
                   </address>
                 </div>
               </div>
@@ -153,6 +143,7 @@
                           </td>
                           <td class="thick-line text-right">(<?php echo ($so_details['total_items']>1)?($so_details['total_items'].' items'):($so_details['total_items'].'item');?> )
                           </td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td class="thick-line">
@@ -165,6 +156,7 @@
                           </td>
                           <td class="thick-line text-right"><?php echo '$'.number_format($sub_total,2);?>
                           </td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td class="no-line">
@@ -177,6 +169,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['shipping'],2);?>
                           </td>
+                          <td></td>
                         </tr>
                         <?php if(isset($so_details['tax']) && ceil($so_details['tax'])):?>
                         <tr>
@@ -190,6 +183,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['tax'],2);?>
                           </td>
+                          <td></td>
                         </tr>
                         <?php endif;?>
                         <tr>
@@ -203,6 +197,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['total_amount'],2);?>
                           </td>
+                          <td></td>
                         </tr>
                        <?php endif; ?>
                       </tbody>
@@ -212,6 +207,16 @@
               </div>
             </div>
           </div>
+          <?php if(count($order_log) > 0): ?>
+            <div class="row">
+              <div class="col-xs-12">
+               <h3><strong>Order Logs</strong>
+              <div class="clearfix"></div>
+              <?php echo $order_log['action']; ?>
+              </h3>
+              </div>
+            </div>
+          <?php endif; ?>
         </div>
         <!-- Order Invoice  // -->
       </div>

@@ -2,7 +2,7 @@
 
    <?php if(isset($this->session->userdata['billing_info']['name']) && $this->session->userdata['billing_info']['name']!=''){ ?>
 
-      <div class="billing-details" id="billinig_list">
+      <div class="billing-details" id="billing_list">
           
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">
             <!--SHIPPING METHOD-->
@@ -12,52 +12,55 @@
               <div class="panel-body">
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Name:</strong><?php echo $this->session->userdata['billing_info']['name']; ?></label>
+                  <label><strong>Name:</strong><span class="name"><?php echo $this->session->userdata['billing_info']['name']; ?></span></label>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Company Name:</strong><?php echo $this->session->userdata['billing_info']['company_name']; ?></label>
+                  <label><strong>Company Name:</strong><span class="company"><?php echo $this->session->userdata['billing_info']['company_name']; ?></span></label>
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Email:</strong><?php echo $this->session->userdata['billing_info']['email']; ?></label>
+                  <label><strong>Email:</strong><span class="email"><?php echo $this->session->userdata['billing_info']['email']; ?></span></label>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Phone:</strong><?php echo $this->session->userdata['billing_info']['phone']; ?></label>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-xs-12">
-                  <label><strong>Address:</strong><?php echo $this->session->userdata['billing_info']['address']; ?></label>
+                  <label><strong>Phone:</strong><span class="phone"><?php echo $this->session->userdata['billing_info']['phone']; ?></span></label>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>City:</strong><?php echo $this->session->userdata['billing_info']['city']; ?></label>
+                  <label><strong>Address:</strong><span class="address"><?php echo $this->session->userdata['billing_info']['address']; ?></span></label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                  <label><strong>City:</strong><span class="city"><?php echo $this->session->userdata['billing_info']['city']; ?></span></label>
                   </div>
                 </div> 
                 
+                
+
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>State:</strong><?php echo $this->session->userdata['billing_info']['state']; ?></label>
+                  <label><strong>Country:</strong><span class="country"><?php echo $this->session->userdata['billing_info']['country']; ?></span></label>
                   </div>
                 </div> 
 
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Country:</strong><?php echo $this->session->userdata['billing_info']['country']; ?></label>
+                  <label><strong>State:</strong><span class="state"><?php echo $this->session->userdata['billing_info']['state']; ?></span></label>
                   </div>
                 </div> 
+
                 <div class="form-group">
                   <div class="col-xs-12">
-                  <label><strong>Zip Code:</strong><?php echo $this->session->userdata['billing_info']['zip_code']; ?></label>
+                  <label><strong>Zip Code:</strong><span class="zip_code"><?php echo $this->session->userdata['billing_info']['zip_code']; ?></span></label>
                   </div>
                 </div> 
 
@@ -79,7 +82,7 @@
 
     <!-- Right Bar -->
       <form action="#" name="billing_information" id="billing_information" method="post" class="form-horizontal">
-        <input type="hidden" name="success1" value="billing_success">
+        <input type="hidden" name="success1">
         <div class="billing-details">
           
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">
@@ -127,21 +130,6 @@
                   </div>
                   <span class="vstar err_city"></span>
                 </div>
-                 
-                <div class="form-group">
-                  <div class="col-md-12">
-                    <select class="form-control input-lg state" name="state" id="state">
-                      <option value="">Select State
-                      </option>
-                      <?php foreach($states as $key=>$value): ?>
-                      <option value="<?php echo $value['state_code']; ?>">
-                        <?php echo $value['state_name']; ?>
-                      </option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                  <span class="vstar err_state"></span> 
-                </div>
                 
                 <div class="form-group">
                   <div class="col-md-12">
@@ -156,6 +144,13 @@
                     </select>
                   </div>
                   <span class="vstar err_country"></span> 
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input type="text"  placeholder="State" class="form-control input-lg" id="state" name="state">
+                  </div>
+                  <span class="vstar err_state"></span> 
                 </div>
                  
                 <div class="form-group">

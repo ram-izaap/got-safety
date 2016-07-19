@@ -38,7 +38,6 @@ class Cart_controller extends App_Controller {
           $cards = array(
                         'payment_type'  => $form['pay_type'],
                         'cc_name'       => $form['cc_name'],
-                        'cc_type'       => $form['card_type'],
                         'cc_number'     => $form['cc_number'],
                         'cc_month'      => $form['exp_month'],
                         'cc_year'       => $form['exp_year'],

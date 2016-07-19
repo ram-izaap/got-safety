@@ -11,7 +11,7 @@
         <div class="col-sm-12">
           <p class="mc-title">
             <b>
-              <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>">
+              <a href="<?php echo site_url(); ?>product/<?php echo str_replace(" ","-",$items['name']); ?>">
                 <?php echo $items['name']; ?>
               </a>
             </b> 
@@ -60,10 +60,10 @@
       </small>
     </p>
     <p>
-      <a href="<?php echo site_url('product');?>"  class="btn btn-lg btn-danger">
+      <a href="<?php echo site_url('cart');?>"  class="btn btn-lg btn-danger">
         <i class="fa fa-hand-o-right">
         </i>
-        Continue Shopping
+        View Cart
       </a>
       <a href="<?php echo site_url('checkout');?>"  class="btn btn-lg btn-warning">
         <i class="fa fa-hand-o-right">

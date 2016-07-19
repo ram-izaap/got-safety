@@ -6,10 +6,10 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Product extends Admin_controller {
 	
 	protected $_product_validation_rules = array(
-		                                         array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required|callback_check_duplicate_product'),
+		                                         array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required'),
 											     array('field' => 'cat', 'label' => 'Category', 'rules' => 'trim|required'),
                                                  array('field' => 'desc', 'label' => 'Product Description', 'rules' => 'trim|required'),
-                                                 array('field' => 'sku', 'label' => 'Product SKU', 'rules' => 'required'),
+                                                 array('field' => 'sku', 'label' => 'Product SKU', 'rules' => 'required|callback_check_duplicate_sku'),
                                                  array('field' => 'attrid', 'label' => 'Product Attribute', 'rules' => 'required'),
                                                  array('field' => 'price[]', 'label' => 'Amount', 'rules'=>'callback_check_attr_amt|numeric')
                                         );
@@ -389,25 +389,27 @@ class Product extends Admin_controller {
             redirect("login");
     } 
 
-    function check_duplicate_product()
+    
+    function check_duplicate_sku()
     {
-        $product_name = $this->input->post('name');
+        $sku_name = $this->input->post('sku');
 
         $edit_id = $this->input->post('edit_id');
+
         if($edit_id!='')
-            $edit_data = $this->product_model->get_product_data1("products",array("name" => $product_name,"id" => $edit_id));
+            $edit_data = $this->product_model->get_product_data1("products",array('id !='=> $edit_id,'sku ='=>$sku_name));
         else
-            $edit_data = $this->product_model->get_product_data1("products",array("name" => $product_name));
+            $edit_data = $this->product_model->get_product_data1("products",array("sku" => $sku_name));
         
         if (count($edit_data) > 0) 
         {
-           $this->form_validation->set_message('check_duplicate_product', 'This product already exists. Please enter a new product.');
+           $this->form_validation->set_message('check_duplicate_sku', 'This SKU already exists. Please enter a new SKU.');
            return FALSE;
         } 
         else 
         {
           return TRUE;
         }
-    }  
+    }   
  }
 

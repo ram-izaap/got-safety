@@ -6,9 +6,11 @@ function hide_card_details()
 
    if(pay_type=="paypal")
    {
-    $("#card_type").prop("disabled","disabled");
+    $(".err_cc_name").text('');
+    $(".err_cc_number").text('');
+    $(".err_cc_ccd").text('');
+    $(".err_exp_date").text('');
     $("input[name='cc_name']").prop("readonly",true);
-    $("input[type=radio][name=card_type]").attr('disabled', true);
     $("input[name='cc_number']").prop("readonly",true);
     $("input[name='cc_ccd']").prop("readonly",true);
     $("#exp_month").prop("disabled","disabled");
@@ -23,10 +25,8 @@ function hide_card_details()
 
    else
    {
-    $("#card_type").removeAttr("disabled");
     $("input[name='cc_name']").removeAttr("readonly");
     $("input[name='cc_number']").removeAttr("readonly");
-    $("input[type=radio][name=card_type]").removeAttr('disabled');
     $("input[name='cc_ccd']").removeAttr("readonly");
     $("#exp_month").removeAttr("disabled");
     $("#exp_year").removeAttr("disabled");
@@ -34,6 +34,7 @@ function hide_card_details()
 }
 
 $(document).on("click",".edit_billing_addr",function(){
+  $("input[name='ship_to_addr']").prop("checked",false);
 
     var url = base_url+'checkout/set_billing_address';
 
@@ -61,7 +62,10 @@ $(document).on("click",".edit_billing_addr",function(){
      });
 });
 
+
+
 $(document).on("click",".edit_shipping_addr",function(){
+
 
     var url = base_url+'checkout/set_shipping_address';
 
@@ -87,15 +91,93 @@ $(document).on("click",".edit_shipping_addr",function(){
      });
 });
 
+$(document).on("change","input[name='ship_to_addr']",function(){
+
+  var val = $(this).val();
+
+  if(val==0)
+  {
+    var name = $("input[name='name']").val(),
+         company_name = $("input[name='company_name']").val(),
+         email = $("input[name='email']").val(),
+         phone = $("input[name='phone']").val(),
+         address = $("input[name='address']").val(),
+         city = $("input[name='city']").val(),
+         state = $("input[name='state']").val(),
+         country = $(".country option:selected").val(),
+         zip_code = $("input[name='zip_code']").val();
+
+      if(name!=undefined)
+      {   
+
+         if(name!='' && company_name!='' && email!='' && phone!='' && address!='' && city!='' && state!='' && country!='' && zip_code!='')
+         {
+            $("input[name='sa_name']").val(name);
+            $("input[name='sa_company_name']").val(company_name);
+            $("input[name='sa_email']").val(email);
+            $("input[name='sa_phone']").val(phone);
+            $("input[name='sa_address']").val(address);
+            $("input[name='sa_city']").val(city);
+            $("input[name='sa_state']").val(state);
+            $(".sa_country").val(country);
+            $("input[name='sa_zip_code']").val(zip_code);
+         }
+         else
+         {
+           alert("Please fill all the fields in billing form");
+           $("input[name='ship_to_addr']").prop("checked",false);
+           return false;
+         }
+       }
+       else
+       {
+        name = $("#billing_list").find("span.name").text();
+        company_name = $("#billing_list").find("span.company").text();
+        email = $("#billing_list").find("span.email").text();
+        phone = $("#billing_list").find("span.phone").text();
+        address = $("#billing_list").find("span.address").text();
+        city = $("#billing_list").find("span.city").text();
+        country = $("#billing_list").find("span.country").text();
+        state = $("#billing_list").find("span.state").text();
+        zip_code = $("#billing_list").find("span.zip_code").text();
+
+           $("input[name='sa_name']").val(name);
+            $("input[name='sa_company_name']").val(company_name);
+            $("input[name='sa_email']").val(email);
+            $("input[name='sa_phone']").val(phone);
+            $("input[name='sa_address']").val(address);
+            $("input[name='sa_city']").val(city);
+            $("input[name='sa_state']").val(state);
+            $(".sa_country").val(country);
+            $("input[name='sa_zip_code']").val(zip_code);
+
+       }
+     }
+     else
+     {
+          $("input[name='sa_name']").val('');
+          $("input[name='sa_company_name']").val('');
+          $("input[name='sa_email']").val('');
+          $("input[name='sa_phone']").val('');
+          $("input[name='sa_address']").val('');
+          $("input[name='sa_city']").val('');
+          $("input[name='sa_state']").val('');
+          $(".sa_country").val('');
+          $("input[name='sa_zip_code']").val('');
+     }  
+});
+
+
 function billing_address_validation()
 {
+
    var name = $("input[name='name']").val(),
        company_name = $("input[name='company_name']").val(),
        email = $("input[name='email']").val(),
        phone = $("input[name='phone']").val(),
        address = $("input[name='address']").val(),
        city = $("input[name='city']").val(),
-       state = $(".state option:selected").val();
+       state = $("input[name='state']").val(),
        country = $(".country option:selected").val(),
        zip_code = $("input[name='zip_code']").val(),
        valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -122,7 +204,7 @@ function billing_address_validation()
         {
             $(".err_email").text('');
         }
-        if(phone.length && phone.length >=10)
+        if(phone.length && phone.length >=10 && !isNaN(phone))
         {
             $(".err_phone").text('');
         }
@@ -162,16 +244,16 @@ function billing_address_validation()
         {
             $(".err_country").text('Please Enter Your Country');
         }
-        if(zip_code.length)
+        if(zip_code.length && !isNaN(zip_code))
         {
             $(".err_zip").text('');
         }
         else
         {
-            $(".err_zip").text("Please Enter Your Zip Code")
+            $(".err_zip").text("Please Enter Valid Zip Code")
         }
 
-        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || address=='' || city=='' || state=='' || country=='' || zip_code=='')
+        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='' || isNaN(zip_code))
         {
           $('html, body').animate({ scrollTop: $('#billing_information').offset().top }, 'slow');
           return false;
@@ -195,8 +277,7 @@ function billing_address_validation()
                         $("#billing_form").html('');
                         $("#billing_list").show();
                         $("#billing_list").html(data.content);
-                        
-
+                        $("input[name='success1']").val("billing_success");
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -222,7 +303,7 @@ function shipping_address_validation()
        phone = $("input[name='sa_phone']").val(),
        address = $("input[name='sa_address']").val(),
        city = $("input[name='sa_city']").val(),
-       state = $(".sa_state option:selected").val();
+       state = $("input[name='sa_state']").val(),
        country = $(".sa_country option:selected").val(),
        zip_code = $("input[name='sa_zip_code']").val(),
        valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -249,7 +330,7 @@ function shipping_address_validation()
         {
             $(".err_sa_email").text('');
         }
-        if(phone.length && phone.length >=10)
+        if(phone.length && phone.length >=10 && !isNaN(phone))
         {
             $(".err_sa_phone").text('');
         }
@@ -289,16 +370,16 @@ function shipping_address_validation()
         {
             $(".err_sa_country").text('Please Enter Your Country');
         }
-        if(zip_code.length)
+        if(zip_code.length && !isNaN(zip_code))
         {
             $(".err_sa_zip").text('');
         }
         else
         {
-            $(".err_sa_zip").text('Please Enter Your Zip Code');
+            $(".err_sa_zip").text('Please Enter Valid Zip Code');
         }
 
-        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || address=='' || city=='' || state=='' || country=='' || zip_code=='')
+        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='' || isNaN(zip_code))
         {
           $('html, body').animate({ scrollTop: $('#shipping_information').offset().top }, 'slow');
           return false;
@@ -322,6 +403,7 @@ function shipping_address_validation()
                         $("#shipping_form").html('');
                         $("#shipping_list").show();
                         $("#shipping_list").html(data.content);
+                        $("input[name='success']").val("shipping_success");
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown)
@@ -336,7 +418,6 @@ function shipping_address_validation()
 function card_validation()
 {
   var pay_type = $("input[name=pay_type]:checked").val(),
-      card_type = $("input[name=card_type]:checked").val(),
       cc_name = $("input[name='cc_name']").val(),
       cc_number = $("input[name='cc_number']").val(),
       cc_ccd = $("input[name='cc_ccd']").val(),
@@ -427,8 +508,11 @@ function card_validation()
 
 
 $("#check_before_order").on("click",function(event){
+
     event.preventDefault();
-    
+  
+  $("input[name='ship_to_addr']").prop("checked",false);
+
     billing_address_validation();
     shipping_address_validation();
     card_validation();
@@ -438,18 +522,22 @@ $("#check_before_order").on("click",function(event){
         shipping_succ = $("input[name='success']").val(),
         card_succ = $("input[name='card_success']").val();
 
+        
+
     if(pay_type =="paypal" && billing_succ=="billing_success" && shipping_succ=="shipping_success")
     {
       location.href = base_url + 'paypal_exp';
     }
     else if(pay_type=="authorize" && billing_succ=="billing_success" && shipping_succ=="shipping_success" && card_succ=="card_success")
     {
+
         submit_order();
     }
 });
 
 function submit_order()
 {
+
 
   var url = checkout_url+'submit_order';
   var rurl1 = checkout_url+'success';

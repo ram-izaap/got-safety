@@ -84,7 +84,7 @@
                             </strong>
                           </td>
                           <td class="text-center">
-                            <strong>Product ID
+                            <strong>SKU
                             </strong>
                           </td>
                           <td class="text-center">
@@ -128,6 +128,8 @@
                           </td>
                           <td class="thick-line text-right">(<?php echo ($so_details['total_items']>1)?($so_details['total_items'].' items'):($so_details['total_items'].'item');?> )
                           </td>
+                          <td class="thick-line">
+                          </td>
                         </tr>
                         <tr>
                           <td class="thick-line">
@@ -139,6 +141,8 @@
                             </strong>
                           </td>
                           <td class="thick-line text-right"><?php echo '$'.number_format($sub_total,2);?>
+                          </td>
+                          <td class="thick-line">
                           </td>
                         </tr>
                         <tr>
@@ -152,6 +156,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['shipping'],2);?>
                           </td>
+                          
                         </tr>
                         <?php if(isset($so_details['tax']) && ceil($so_details['tax'])):?>
                         <tr>
@@ -165,6 +170,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['tax'],2);?>
                           </td>
+                          
                         </tr>
                         <?php endif;?>
                         <tr>
@@ -178,6 +184,7 @@
                           </td>
                           <td class="no-line text-right"><?php echo '$'.number_format((float)$so_details['total_amount'],2);?>
                           </td>
+                          
                         </tr>
                     <?php endif; ?>
                       </tbody>

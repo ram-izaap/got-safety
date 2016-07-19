@@ -278,7 +278,7 @@
         </p>
       </div>
       <div class="modal-footer">
-		  <a class="btn btn-sm btn-danger" href="<?php echo base_url();?>product">
+		  <a class="btn btn-sm btn-danger" href="<?php echo site_url('shop');?>">
         <i class="fa fa-hand-o-right">
         </i>
         Continue Shopping

@@ -40,7 +40,10 @@ $(document).ready(function() {
             if (data.status == 'success') {
                 $("#add_to_cart").html(data.content);
                 $(".cart_item").find(".subtotal").html("$" + data.subtotal);
-                $(".cart_item").find(".items").html("" + data.total_items + " items <i class='fa fa-shopping-cart'></i>");
+
+                total_item = (data.total_items > 1)?data.total_items + " items":data.total_items + "item";
+
+                $(".cart_item").find(".items").html(total_item +"<i class='fa fa-shopping-cart'></i>");
             }
         },
 
@@ -72,7 +75,9 @@ $(document).on('click','.btn-delete',function(){
 
                   $("#add_to_cart").html(data.content);
                   $(".cart_item").find(".subtotal").html("$" + data.subtotal);
-                  $(".cart_item").find(".items").html("" + data.total_items + " items <i class='fa fa-shopping-cart'></i>");
+                  total_item = (data.total_items > 1)?data.total_items + " items":data.total_items + "item";
+
+                  $(".cart_item").find(".items").html(total_item +"<i class='fa fa-shopping-cart'></i>");
                 }
             },
 

@@ -81,7 +81,7 @@
 
     <!-- Right Bar -->
       <form action="#" name="shipping_information" id="shipping_information" method="post" class="form-horizontal">
-      <input type="hidden" name="success" value="shipping_success">
+      <input type="hidden" name="success">
         <div class="billing-details">
           
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">
@@ -91,12 +91,27 @@
               </div>
               <div class="panel-body">
                 <div class="form-group">
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input type="radio" name="ship_to_addr" id="ship_to_billing_address" value="0">&nbsp;<lable>Ship to My Billing Address</lable>
+                  </div>
+                  <span class="vstar"></span>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input type="radio" name="ship_to_addr" id="ship_to_new_address" value="1">&nbsp;<lable>Ship to a New Address</lable>
+                  </div>
+                  <span class="vstar"></span>
+                </div>
+
                   <div class="col-xs-12">
                     <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="sa_name">
                   </div>
                   <span class="vstar err_sa_name"></span>
                 </div>
-                
+
                 <div class="form-group">
                   <div class="col-xs-12">
                     <input type="text" placeholder="Company Name" class="form-control input-lg" id="company_name" name="sa_company_name">
@@ -132,20 +147,7 @@
                    <span class="vstar err_sa_city"></span> 
                 </div>
                
-                <div class="form-group">
-                  <div class="col-md-12">
-                    <select class="form-control input-lg sa_state" name="sa_state" id="state">
-                      <option value="">Select State
-                      </option>
-                      <?php foreach($states as $key=>$value): ?>
-                      <option value="<?php echo $value['state_code']; ?>">
-                        <?php echo $value['state_name']; ?>
-                      </option>
-                      <?php endforeach; ?>
-                    </select>
-                  </div>
-                  <span class="vstar err_sa_state"></span>
-                </div>
+                
                 <div class="form-group">
                   <div class="col-md-12">
                     <select class="form-control input-lg sa_country" name="sa_country" id="country">
@@ -159,6 +161,13 @@
                     </select>
                   </div>
                   <span class="vstar err_sa_country"></span>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input type="text" placeholder="State" class="form-control input-lg" id="sa_state" name="sa_state">
+                  </div>
+                  <span class="vstar err_sa_state"></span>
                 </div>
                   
                 <div class="form-group">

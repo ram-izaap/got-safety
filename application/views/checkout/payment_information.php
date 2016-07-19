@@ -34,10 +34,9 @@
               <!--  -->
                 
 
-                <div class="col-md-12 cc-pay-type">
+                <!--<div class="col-md-12 cc-pay-type">
                   
 
-<!--  -->
               <div class="plan-wrapper plan-checkout">
 
                 <input type="radio" name="card_type" id="pay_type-3" value="4" checked>
@@ -61,17 +60,14 @@
                 </label>
 
               </div>
-              <!--  -->
-
-<!-- 
+        
               <hr />
 
                   <input type="radio" name="card_type" id="card_type" value="4" checked>&nbsp;Visa &nbsp;&nbsp; 
                   <input type="radio" name="card_type" id="card_type" value="3">&nbsp;MasterCard <br>
                   <input type="radio" name="card_type" id="card_type" value="0" >&nbsp;American Express &nbsp;&nbsp; 
                   <input type="radio" name="card_type" id="card_type" value="2">&nbsp;Discover 
- -->
-                </div>
+                 </div>-->
               </div>
               <div class="form-group">
                 <div class="col-md-12 cc-pay-type">
@@ -113,17 +109,13 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 card-month">
                   <select name="exp_year" id="exp_year" class="form-control input-lg exp_year">
-                    <option value="">Expiry Year</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
+                  <option value="">Expiry Year</option>
+                    <?php 
+                        for($i=date('Y');$i<=date('Y')+20;$i++){
+                          $sel = ($i == @$cards['exp_year'])?('selected'):('');
+                          echo "<option value='$i' $sel>$i</option>";
+                        }
+                    ?>
                   </select>
                 </div>
                 <span class="vstar err_exp_date"></span>

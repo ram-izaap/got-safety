@@ -38,7 +38,7 @@
                     <tr>
                       <td class="prod-name">
                         <div class="media clearfix">
-                          <a class="thumbnail pull-left" href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>"> 
+                          <a class="thumbnail pull-left" href="<?php echo site_url(); ?>product/<?php echo str_replace(" ","-",$items['name']); ?>"> 
                             <img class="media-object" width="72" src="<?php echo $img_url; ?>assets/product_images/<?php echo $items['img']; ?>" alt="<?php echo $items['name']; ?>" title="<?php echo $items['name']; ?>"> 
                           </a>
                           <div class="media-body">
@@ -176,7 +176,7 @@
                        <input class="btn btn-success btn-sm" value="Update Cart" type="submit">
                       </td>
                       <td class="cart-cntshop">
-                        <a href="<?php echo site_url('product'); ?>" class="btn btn-default btn-sm" type="button">
+                        <a href="<?php echo site_url('shop'); ?>" class="btn btn-default btn-sm" type="button">
                           <i class="fa fa-shopping-cart">
                           </i> Continue Shopping 
                         </a>
