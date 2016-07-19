@@ -140,14 +140,12 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $name = $CI->employee_model->get_client_name($data);
             $data = $name->name;
             break; 
-            
-            
+            case 'find_plan':
+                $data = ucfirst($data);
+            break;
             case 'find_topic':
-            
-            $data = $data;
-            break; 
-            
-            
+                $data = $data;
+            break;            
             case 'shot_desc':
             if(strlen($data)>35) {
 				$result = substr(ucfirst(strip_tags($data)), 0, 50) . "....";
@@ -161,8 +159,6 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             
             $data = '$'.$data;
             break; 
-            
-            
                
     }
     
