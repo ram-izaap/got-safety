@@ -79,6 +79,7 @@ class Attachment_model extends App_Model {
 		
 		$this->db->select("*");
         $this->db->from($table_name);
+        $this->db->where('is_active',1);
         return $result = $this->db->get()->result_array();
 		
 	}
@@ -102,6 +103,12 @@ class Attachment_model extends App_Model {
         return $result->result_array();
 	}
     
+     function get_lesson_id($table_name,$where)
+    {
+		
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->result_array();
+	}
     
     
     

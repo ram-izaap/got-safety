@@ -92,7 +92,7 @@ class Lession extends Admin_controller {
 	public function add_edit_lession($edit_id = "")
     { 
 		//$this->output->enable_profiler(true);
-		
+		$this->data["lesson_id"] = "";
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
 		
@@ -102,7 +102,7 @@ class Lession extends Admin_controller {
 		{
 			$user_id = '8';
 		}
-		
+		$this->load->model('attachment_model');
 		$this->data['get_menu'] = $this->lession_model->get_menu("users",array("role" => 2));
 			
 			if ( isset($_POST['user_id']) )
@@ -157,14 +157,17 @@ class Lession extends Admin_controller {
            
 			if(empty($edit_id)){
 			
-			$update_data = $this->lession_model->insert("lession",$ins_data);
-           // $this->service_message->set_flash_message('record_insert_success');
+			$update_data = $this->lession_model->insert_lesson("lession",$ins_data);
+			$this->data["lesson_id"] = $update_data;
+           $this->session->set_flashdata("lesson_succ","Lesson added successfully",TRUE);
 		}else {
 			
 			$update_data = $this->lession_model->update("lession",$ins_data,array("id" => $edit_id));
-           // $this->service_message->set_flash_message('record_update_success');
+			
+           $this->session->set_flashdata("lesson_succ","Lesson added successfully",TRUE);
 		}
-		redirect("lession");    
+		//redirect("lession");  
+		 
 
 		}	
 			
@@ -193,6 +196,19 @@ class Lession extends Admin_controller {
                 $this->data['crumb']   = "Add";
                 $this->data['form_data'] = array("title" => "","is_active" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => ""); 
             }
+            
+            $this->data['attachment_list'] = "";
+            if(!empty($lesson_id)){
+				
+				
+				$this->data['attachment_list'] = $this->lession_model->get_lession_attachment_list($lesson_id);  
+				
+			}else if(!empty($edit_id)){
+				
+				$this->data['attachment_list'] = $this->lession_model->get_lession_attachment_list($edit_id);  
+			}
+			
+			$this->data['attachment_display'] = $this->load->view('lession/attachment_display',$this->data,TRUE);
 		
 		 
 		$this->layout->view('lession/add');

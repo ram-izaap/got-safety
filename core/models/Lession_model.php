@@ -97,6 +97,13 @@ class Lession_model extends App_Model {
     }
     
     
+    function insert_lesson($table_name,$data)
+    {
+        $this->db->insert($table_name,$data);
+        return $this->db->insert_id();
+    }
+    
+    
     function update($table_name,$data,$where)
     { 
         $this->db->where($where);
@@ -141,6 +148,19 @@ class Lession_model extends App_Model {
 	{
 		 $result = $this->db->get_where($table_name,$where);
         return $result->result_array();
+	}
+	
+	
+	function get_lession_attachment_list($id="")
+	{
+		
+		$result = $this->db->select("a.id as id,l.id as lid,a.language,l.lang,a.title,a.content, IF(a.is_active='1','Active','Inactive') as is_active");
+        $this->db->from('language l');
+        $this->db->join('lession_attachment a','a.language=l.id', 'right');
+        $this->db->group_by('a.id');
+		$this->db->where('a.lession_id',$id);
+		 return $result = $this->db->get()->result_array();
+		
 	}
     
     

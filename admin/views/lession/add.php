@@ -1,4 +1,10 @@
 
+<?php if($this->session->flashdata('lesson_succ')==TRUE){?>
+		<div class="alert alert-success alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<?php echo $this->session->flashdata('lesson_succ');?>
+		</div>
+		<?php }?>
 	<h3 class="page-title">
 			<?php echo $title;?>
 			</h3>
@@ -132,5 +138,28 @@
 				
 			</form>	
 			</div>
+			
+			
+			<?php if($lesson_id != "") { ?>
 
+					<a class="add-att" href="<?php echo site_url();?>attachment/add_edit_attachment?id=<?php echo $lesson_id;?>">Add attachment</a> 
+
+			<?php }else if($edit_id !="") { ?>
+				
+				<a class="add-att" href="<?php echo site_url();?>attachment/add_edit_attachment?id=<?php echo $edit_id;?>">Add attachment</a> 
+				
+				<?php } ?>
+				
+				
+				
+			<?php if($lesson_id != "") { ?>
+
+					<?php echo $attachment_display;?> 
+
+			<?php }else if($edit_id !="") { ?>
+				
+				<?php echo $attachment_display;?> 
+				
+				<?php } ?>
+				
 

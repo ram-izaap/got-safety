@@ -37,8 +37,8 @@ $config['lession_index'] = array(
 	"fields"	=> array(   
 						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),
 						//'content'=>array('name'=>'Content', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
-						 'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link', 'sortable' => TRUE, 'default_view'=>1)                             
+						 'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)
+						 //'id'=>array('name'=>'Add Attachment', 'data_type' => 'attach_link', 'sortable' => TRUE, 'default_view'=>1)                             
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

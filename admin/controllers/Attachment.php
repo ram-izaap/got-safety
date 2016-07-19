@@ -88,8 +88,11 @@ class Attachment extends Admin_controller {
     
   
 	
-	public function add_edit_attachment($edit_id = "")
-  {            
+  public function add_edit_attachment($edit_id = "")
+  {           
+	  
+		if(isset($_GET['id']))
+       $this->session->set_userdata('id',$_GET['id']);
 		
 		if(is_logged_in()) 
 		{
@@ -140,12 +143,12 @@ class Attachment extends Admin_controller {
 					if(!empty($_FILES['f_name']['tmp_name']))
 					{
 					  $upload_data = $this->do_upload();
-			      echo $filename = (isset($upload_data['f_name']['file_name']))?$upload_data['f_name']['file_name']:"";
+			          $filename = (isset($upload_data['f_name']['file_name']))?$upload_data['f_name']['file_name']:"";
 					}
 
 					else
 					{
-						echo $filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
+						$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
 					}					
 
 					if(!empty($_FILES['f_name_quiz']['tmp_name']))
@@ -166,6 +169,15 @@ class Attachment extends Admin_controller {
 						$form['is_active'] = "0";
 					}
 					$id  = $this->session->userdata('id');
+					if($id !="") {
+						$id  = $this->session->userdata('id');
+					}else{
+						
+						$get_lesson_id = $this->attachment_model->get_lesson_id("lession_attachment",array("id" => $edit_id));
+						
+						
+						$id = $get_lesson_id[0]['lession_id']; 
+					}
 					$ins_data = array();
 					$ins_data['lession_id']       	= $id;
           $ins_data['language']          = $form['language'];
@@ -196,14 +208,14 @@ class Attachment extends Admin_controller {
 					if(empty($edit_id))
 					{
 				    $social_data = $this->attachment_model->insert("lession_attachment",$ins_data);
-	        	// $this->service_message->set_flash_message('record_insert_success');
+	        	$this->session->set_flashdata("lesson_succ","Lesson added successfully",TRUE);
 			    }
 	        else 
 	        { 
 	          $social_data = $this->attachment_model->update("lession_attachment",$ins_data,array("id" => $edit_id));
-	          //$this->service_message->set_flash_message('record_update_success');
+	         $this->session->set_flashdata("lesson_succ","Lesson added successfully",TRUE);
 			    }
-			    redirect("attachment");    
+			    redirect("lession/add_edit_lession/$id");    
 				}	
 			 	if($edit_id)
 			 	{

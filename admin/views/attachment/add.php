@@ -1,3 +1,11 @@
+
+<?php if($this->session->flashdata('lesson_succ')==TRUE){?>
+		<div class="alert alert-success alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<?php echo $this->session->flashdata('lesson_succ');?>
+		</div>
+		<?php }?>
+		
 <h3 class="page-title"><?php echo $title;?></h3>
 <div class="page-bar">
 	<ul class="page-breadcrumb">

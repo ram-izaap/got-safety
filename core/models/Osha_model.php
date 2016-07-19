@@ -31,6 +31,7 @@ class Osha_model extends App_Model {
         
         if($role == '2'){
         $this->db->where('created_user',$user_id);
+        $this->db->or_where('visible_to_all',1);
         }else {
 			$this->db->where('updated_user',$user_id);
 		}

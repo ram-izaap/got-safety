@@ -179,15 +179,17 @@ class Login extends App_Controller {
     public function logout()
 	{
 	   
-		//$this->session->sess_destroy();
+		$this->session->sess_destroy();
 		
-		$this->session->unset_userdata('user_detail');
+		//$this->session->unset_userdata('user_detail');
 	
 		//$this->session->sess_create();
 		//$this->service_message->set_flash_message('logout_success');
 	
 		redirect();
 	}
+	
+	
     
     function payment()
     {
