@@ -129,7 +129,7 @@ class Plan extends Admin_controller {
             {
                 $this->data['title']     = "ADD PLAN";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("plan_type" => "","plan_amount" =>"","plan_desc" => "","plan_directory" => "","is_active" => ""); 
+                $this->data['form_data'] = array("plan_type" => "","plan_amount" =>"","plan_desc" => "","plan_directory" => "","is_active" => "","emp_limit" => ""); 
             }
 		
 		 
