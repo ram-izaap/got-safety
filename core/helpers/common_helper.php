@@ -2,16 +2,11 @@
 
 function is_logged_in()
 {
-    return TRUE;
-
-    $CI = get_instance();
-    
-    $user_data = get_user_data();
-    
-    if( is_array($user_data) && $user_data )
-        return TRUE;
-
-    return FALSE;
+    if(isset($_SESSION['admin_data']['id'])) 
+        return true;
+    else
+        return false;
+    exit;
 
 }
 
