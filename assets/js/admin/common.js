@@ -459,13 +459,15 @@ $(".media-opt,.non-media-opt").hide();
 
 function cancel_sub(attr)
 {
-  href = attr.getAttribute("data-href");
-  con = confirm("Are you sure want to do this?");
+   href   = attr.getAttribute("data-href");
+   
+   con = confirm("Are you sure want to do this?");
   if(con)
     window.location.href=href;
   else
     location.reload();
 }
+
 function show_payment()
 {
   $(".payment-info").show();

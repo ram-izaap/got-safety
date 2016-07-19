@@ -361,7 +361,7 @@ class Paypal_lib
 		
 		if (strcmp ($res, "VERIFIED") == 0) 
 		{
-			return TRUE;
+			return $res;
 		} 
 		else if (strcmp ($res, "INVALID") == 0) 
 		{

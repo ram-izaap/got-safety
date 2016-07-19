@@ -1,14 +1,20 @@
 <?php 
-//if(isset($_SESSION['renew_succ']))
-//{?>
-<div class="alert alert-danger alert-dismisable">
+if(isset($_SESSION['renew_succ']))
+{?>
+<div class="alert alert-success alert-dismisable">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 		<?php echo $_SESSION['renew_succ'];
 		unset($_SESSION['renew_succ']);?>
 </div>
 <?php 
-//}?>
+}
 
+$id= (isset($_SESSION['admin_data']['id']))?$_SESSION['admin_data']['id']:"";
+if( (form_error('c_number')!="" || form_error('cvv')!="") )
+	$disp= "display:block;";
+else
+	$disp= "display:none;";
+?>
 <ul class="view-details-signup">
 	<li class="title-head">View Details</li>
 <li><span>Plan type:</span><span> <?php echo Ucfirst($plan_detail[0]['plan_name']); ?></span></li>
@@ -28,9 +34,96 @@
 	if($plan_detail[0]['profile_status']=="Inactive"){?>
 		<a href="javascript:void();" class="btn btn-success" onclick="show_payment();">
 		<i class="fa fa-plus" ></i>Renew Subscription</a>
-	<?php }else{?>
-		<a href="javascript:void();"
-		data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>" onclick="cancel_sub(this);" class="btn btn-success">
+	<?php }
+    else if($plan_detail[0]['profile_status']=='Active' && $plan_detail[0]['payment_method']=='paypal') {
+        ?>
+        <a href="javascript:void();" title="Permanently Cancel Subscription" data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>/suspend" onclick="cancel_sub(this);" class="btn btn-success">
+		  <i class="fa fa-remove"></i>Cancel
+        </a>
+        <a href="javascript:void();" title="Temporarily Cancel Subscription" data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>/suspend" onclick="cancel_sub(this);" class="btn btn-success">
+		  <i class="fa fa-remove"></i>Suspend
+        </a>
+ <?php  } 
+    else if($plan_detail[0]['profile_status']=='Suspend' && $plan_detail[0]['payment_method']=='paypal') {
+        ?>
+        <a href="javascript:void();" title="Reactivate Subscription" data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>/reactivate" onclick="cancel_sub(this);" class="btn btn-success">
+		  <i class="fa fa-remove"></i>Reactivate
+        </a>
+        
+ <?php  }
+    else if(($plan_detail[0]['profile_status']== "Active" || $plan_detail[0]['profile_status']== "Suspend") && $plan_detail[0]['payment_method']=="paypal"){ 
+        
+        $buttonname = (isset($plan_detail[0]['profile_status']) && ($plan_detail[0]['profile_status']=='Cancel'))?"Recreate Profile":"Update Profile";
+        
+        ?>
+   <div class="payment-info col-md-7" >
+		<form action="<?php echo base_url();?>user/renew_subscription/<?php echo (!empty($id))?$id:"";?>" method="post">
+			<input type="hidden" name="pay_method" value="<?php echo $plan_detail[0]['payment_method']; ?>" />
+            <input type="hidden" name="profile_status" value="<?php echo $plan_detail[0]['profile_status']; ?>" />
+				<div class="form-group">
+					<label class="col-md-4 control-label">Current Plan: 
+					</label>
+					<div class="col-md-8">
+						<?php 
+							echo Ucfirst($plan_detail[0]['plan_name']);
+						?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Chooe Other Plan: 
+					</label>
+					<div class="col-md-8">
+						<?php 
+						 $cp = $plan_detail[0]['plan_id'];
+							foreach ($plans as $key => $value) 
+							{
+								$np    =  $value['id'];
+								$price =  $value['plan_amount'];
+								$type  =  $value['plan_type'];
+								?>
+									<label class="pull-left">
+										<input type="radio" name="plan_name" value="<?php echo $np;?>"
+										data-price="<?php echo $price;?>" data-type="<?php echo $type;?>"
+										<?php if($cp==$np){ ?> checked <?php }?> >
+										<?php echo $value['plan_type']."( $".$value['plan_amount'].")";?>
+									</label>
+								<?php
+							}
+						?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Amount: </label>
+					<div class="col-md-8">
+						<span class="plan-amt"> 
+						<?php 
+							echo "$".number_format($plan_detail[0]['plan_amount'],2);
+						?>
+						</span>
+						<input type="hidden" name="amount" class="ip_amt"
+							value="<?php echo $plan_detail[0]['plan_amount'];?>" />
+							<input type="hidden" name="desc" class="ip_type" value="<?php echo $plan_detail[0]['plan_name'];?>" />
+					</div>
+				</div>
+				<div class="form-group">
+                    <label class="col-md-8">Reason for Update/Recreate Profile</label>
+                    <div class="col-md-4">
+                        <input name="change_reason" id="change_reason" type="text"/>
+                    </div>
+                </div>
+				<div class="form-group">
+					<label class="col-md-2 control-label"> <span class="required"></span></label>
+					<div class="col-md-8">
+						<input type="submit" class="form-control btn btn-primary" style="font-weight: bold; font-size:17px;" name="submit" id="submit" value="<?php echo $buttonname; ?>" />
+					</div>
+				</div>
+		</form>
+	</div>
+ <?php } 
+       else 
+         { ?>
+         
+		<a href="javascript:void();" data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>/inactive" data-paymentmethod="<?php echo (isset($plan_detail[0]['payment_method']))?$plan_detail[0]['payment_method']:"";?>" onclick="cancel_sub(this);" class="btn btn-success">
 		<i class="fa fa-remove"></i>Cancel Subscription</a>
 		<?php }?>
 	</span>
@@ -38,16 +131,9 @@
 </ul>
 <br>
 <div class="row col-md-12">
-<?php 
-$id= $_SESSION['admin_data']['id'];
-if( (form_error('c_number')!="" || form_error('cvv')!="") )
-	$disp= "display:block;";
-else
-	$disp= "display:none;";
-?>
+  
 	<div class="payment-info col-md-7" style="<?php echo $disp;?>margin-left:23%;">
-		<form action="<?php echo base_url();?>user/renew_subscription/<?php echo $id;?>"
-			method="post">
+		<form action="<?php echo base_url();?>user/renew_subscription/<?php echo $id;?>" method="post">
 			<input type="hidden" name="pay_method" value="<?php echo $plan_detail[0]['payment_method']; ?>"  >
 				<div class="form-group">
 					<label class="col-md-4 control-label">Current Plan: 
@@ -66,9 +152,9 @@ else
 						 $cp = $plan_detail[0]['plan_id'];
 							foreach ($plans as $key => $value) 
 							{
-								$np =  $value['id'];
+								$np    =  $value['id'];
 								$price =  $value['plan_amount'];
-								$type =  $value['plan_type'];
+								$type  =  $value['plan_type'];
 								?>
 									<label class="pull-left">
 										<input type="radio" name="plan_name" value="<?php echo $np;?>"
@@ -91,14 +177,14 @@ else
 						?>
 						</span>
 						<input type="hidden" name="amount" class="ip_amt"
-							value="<?php echo $plan_detail[0]['plan_amount'];?>">
+							value="<?php echo $plan_detail[0]['plan_amount'];?>" />
 							<input type="hidden" name="desc" class="ip_type"
-							value="<?php echo $plan_detail[0]['plan_name'];?>">
+							value="<?php echo $plan_detail[0]['plan_name'];?>" />
 					</div>
 				</div>
 				<?php 
-				if($plan_detail[0]['payment_method']=="Authorize")
-				{?>
+				   if($plan_detail[0]['payment_method']=="Authorize"){
+                ?>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Card Number: 
 						<span class="required">	* </span>

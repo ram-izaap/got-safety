@@ -41,12 +41,26 @@ class User extends Admin_Controller
 			$config1['arb_api_url'] = 'https://api.authorize.net/xml/v1/request.api';
         }
         
-        $this->load->library('authorize_arb',$config1);
 		// Show Errors
 		if($config['Sandbox']){
 			error_reporting(E_ALL);
 			ini_set('display_errors', '1');
 		}
+        
+        if($config1['mode']=="TEST")
+        {
+        	$config1['api_url']     = 'https://test.authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://apitest.authorize.net/xml/v1/request.api';
+        }
+        else
+        {
+        	$config1['api_url']     = 'https://authorize.net/gateway/transact.dll';
+			$config1['arb_api_url'] = 'https://api.authorize.net/xml/v1/request.api';
+        }
+        
+       	$this->load->library('authorize_net',$config1);
+       	$this->load->library('authorize_arb',$config1);
+        
         $this->load->model('user_model');
         $this->load->library('Paypal_pro',$config);        
         $this->payment_method = '';       
@@ -128,11 +142,6 @@ class User extends Admin_Controller
 					} 
 		}
 		
-		if (isset($_POST['password']) &&  $edit_id =="" )
-					{ 
-						$this->form_validation->set_rules('password', 'Password', 'required');
-					} 
-					
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
@@ -372,6 +381,8 @@ class User extends Admin_Controller
         {
             redirect("login");
         }  
+		
+		
 	} 
     
     
@@ -409,21 +420,20 @@ class User extends Admin_Controller
 		$this->layout->view('user/user_plan_detail');
 		
 	}
-    function cancel_subscription($id)
+    function cancel_subscription($id,$status)
 	{
 		$get_sub_id = $this->user_model->get_subscription_id($id);
-		$pay_method = $get_sub_id[0]['payment_method'];
+		$pay_method = (isset($get_sub_id['payment_method']))?$get_sub_id['payment_method']:"";
 		if($pay_method=="Authorize")
 		{
 			//Auhtorize Cancel Subscription
-			$sub_id = $get_sub_id[0]['subscription_id'];
-			
+			$sub_id = $get_sub_id['subscription_id'];
+			$this->load->library('authorize_arb');
 			$this->authorize_arb->startData('cancel');
 			$refId = substr(md5( microtime() . 'ref' ), 0, 20);
 			$this->authorize_arb->addData('refId', $refId);
 			$this->authorize_arb->addData('subscriptionId', $sub_id);
-			if( $this->authorize_arb->send() )
-			{
+			if( $this->authorize_arb->send()){
 				$ref_id=$this->authorize_arb->getRefId();
 				$ins_data['profile_status'] = "Inactive";
 				$this->user_model->update("payment_recurring_profiles",$ins_data,
@@ -436,34 +446,36 @@ class User extends Admin_Controller
 		}
 		else
 		{
-			$profileid = $get_sub_id[0]['profile_id'];
-			$MRPPSFields = array('profileid' => $profileid,'action'=>"suspend");
-						   
-			$PayPalRequestData = array('MRPPSFields' => $MRPPSFields);
-			
-			$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
-			
-			if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
-			{
-				$ins_data['profile_status'] = "Inactive";
-				$this->user_model->update("payment_recurring_profiles",$ins_data,
-					array("user_id"=>$id));
-			}
-			
+			$profileid = (isset($get_sub_id['profile_id']))?$get_sub_id['profile_id']:"";
+            if(!empty($profileid)) {
+                
+    			$MRPPSFields = array('profileid' => $profileid,'action'=> ucfirst($status));
+    						   
+    			$PayPalRequestData = array('MRPPSFields' => $MRPPSFields);
+    			
+    			$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
+                //echo "<pre>";
+    			//print_r($PayPalResult);exit;
+    			if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
+    			  echo   $status = ($status!= 'reactivate')?ucfirst($status):"Active"; exit;
+    				$ins_data['profile_status'] = $status;
+    				$this->user_model->update("payment_recurring_profiles",$ins_data, array("user_id"=>$id));
+    			}
+		   }
 		}
 		redirect("user/user_plan_detail/$id");
 	}
+    
 	function renew_subscription($id)
 	{
-		if($_POST['submit'])
-		{
-			if($_POST['pay_method']=="Authorize")
-			{
+		if($_POST['submit']){
+		  
+			if($_POST['pay_method']=="Authorize"){
 				$this->data['form_data'] = $_POST;
 				$form = $this->input->post();
 				$this->form_validation->set_rules($this->_payment_detail_validation_rules);
-				if($this->form_validation->run())
-	        	{
+				if($this->form_validation->run()){
+				    
 	        		$users_data = $this->user_model->get_users($id);
 	        		$ins['phone'] = $users_data[0]['mobile'];
 	        		$ins['fax'] = $users_data[0]['fax'];
@@ -494,8 +506,7 @@ class User extends Admin_Controller
 	        		$up_data['amount'] = $amt;
 	        		$up_data['profile_status'] = "Active";
 	        		$ins_data['plan_type'] = $p_id;
-	        		if($res['profileid']!='' && $b['subs_status']=="Success")
-			        {
+	        		if($res['profileid']!='' && $b['subs_status']=="Success"){
 			        	$up_data['invoice_no'] = $b['invoice_no'];
 			        	$up_data['subscription_id'] = $b['subs_id'];
 	        			$this->user_model->update("payment_recurring_profiles",$up_data,
@@ -513,39 +524,105 @@ class User extends Admin_Controller
 	        }
 	        else
 	        {
-	        	$plan_detail = $this->user_model->get_user_plan_data($id);
-	        	$plan_id = $plan_detail[0]['plan_id'];
-	        	$p_id = $this->input->post('plan_name');
-	        	if($plan_detail==$p_id)
-	        	{
+	        	$plan_detail    = $this->user_model->get_user_plan_data($id);
+	        	$plan_id        = $plan_detail[0]['plan_id'];
+	        	$p_id           = $this->input->post('plan_name');
+                $profile_status = $this->input->post('profile_status');
+                $change_reason  = $this->input->post('change_reason');
+                
+                
+	        	if($plan_detail==$p_id){
 	        		//if plan is not changed just update amount
-		        	$profileid = trim($plan_detail[0]['profile_id']);
-		        	$MRPPSFields = array('profileid' => $profileid,'action'=>"reactivate");
-		        	$URPPFields = array('profileid' => $profileid,'amt'=>"100");
-					$PayPalRequestData = array('MRPPSFields' => $MRPPSFields);				
-					$PayPalRequestData1 = array('URPPFields' => $URPPFields);
-					$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
-					//$PayPalResult1 = $this->paypal_pro->UpdateRecurringPaymentsProfile($PayPalRequestData1);
-					//echo "<pre>";print_r($PayPalResult1);
-					//exit;
-					if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
-					{
-						$ins_data['profile_status'] = "Active";
-						$this->user_model->update("payment_recurring_profiles",$ins_data,
-							array("user_id"=>$id));
-					}
+		        	$profileid          = trim($plan_detail[0]['profile_id']);
+                    
+		        	$MRPPSFields        = array('profileid' => $profileid,'action'=>"reactivate");
+		        	$URPPFields         = array('profileid' => $profileid,'amt'=>"100");
+                    
+                    
+                      $URPPFields       = array(
+                						   'profileid' => $profileid, 							
+                						   'note' => $change_reason, 								
+                						   'desc' => $plan_detail['plan_desc'], 					
+                						   'subscribername' => '', 						
+                						   'profilereference' => '', 					
+                						   'additionalbillingcycles' => '', 			
+                						   'amt' => $plan_detail['plan_amount'], 		
+                						   'outstandingamt' => '', 						  
+                						   'autobilloutamt' => '', 						
+                						   'maxfailedpayments' => '', 					
+                						   'profilestartdate' => date("Y-m-d H:i:s")	
+						                 );
+		
+        		  $BillingAddress = array(
+            							'street' => '', 						
+            							'street2' => '', 						
+            							'city' => '', 							
+            							'state' => '', 							
+            							'countrycode' => '', 					
+            							'zip' => '', 							
+            							'phonenum' => '' 						
+        						     );
+        		
+        		
+        		  $BillingPeriod = array(
+                    						'trialbillingperiod' => '', 
+                    						'trialbillingfrequency' => '', 
+                    						'trialtotalbillingcycles' => '', 
+                    						'trialamt' => '', 
+                    						'billingperiod' => '', 						
+                    						'billingfrequency' => '', 					 
+                    						'totalbillingcycles' => '', 				  
+                    						'amt' => '', 								 
+                    						'currencycode' => '', 						
+        					            );
+        		
+        		  $CCDetails   = array(
+                    						'creditcardtype' => '', 					
+                    						'acct' => '', 								  
+                    						'expdate' => '', 							
+                    						'cvv2' => '', 								
+                    						'startdate' => '', 							
+                    						'issuenumber' => ''							
+        					              );
+        		
+        		   $PayerInfo  = array(
+            						      'email'     => $plan_detail['email'], 								
+                						  'firstname' => $plan_detail['fname'], 							
+                						  'lastname'  => $plan_detail['lname']							
+            					       );	
+            					
+            		$PayPalRequestData  = array(
+                    							'URPPFields' => $URPPFields, 
+                    							'BillingAddress' => $BillingAddress, 
+                    							'ShippingAddress' => $ShippingAddress, 
+                    							'BillingPeriod' => $BillingPeriod, 
+                    							'CCDetails' => $CCDetails, 
+                    							'PayerInfo' => $PayerInfo
+            						       );
+            						
+            		$PayPalResult = $this->paypal_pro->UpdateRecurringPaymentsProfile($PayPalRequestData);
+            		
+            		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
+            			$errors = array('Errors'=>$PayPalResult['ERRORS']);
+            			$this->load->view('paypal/samples/error',$errors);
+            		}
+            		else
+            		{
+            			$ins_data['profile_status'] = "Active";
+						$this->user_model->update("payment_recurring_profiles",$ins_data, array("user_id"=>$id));
+            		}
+  
 				}
-				else
-				{
-					//if plan is changed create new profile
-				}
+				
 	        }
         	redirect("user/user_plan_detail/$id");
 		}
-		
 	}
-	function create_auth_subscription($res,$post)
+    
+   
+    function create_auth_subscription($res,$post)
     {
+        $this->load->library('authorize_arb');
         $this->authorize_arb->startData('create');
         // Locally-defined reference ID (can't be longer than 20 chars)
         $refId = substr(md5( microtime() . 'ref' ), 0, 20);

@@ -180,14 +180,13 @@ class User_Model extends App_Model {
     
     function get_user_plan_data($id)
     {
-		$this->db->select('p.plan_type as plan_name,p.plan_amount,p.id as plan_id,p.plan_desc,rp.profile_status,rp.payment_method,rp.profile_id');
+		$this->db->select('p.plan_type as plan_name,p.plan_amount,p.id as plan_id,p.plan_desc,rp.profile_status,rp.payment_method,rp.profile_id,u.email,u.fname,u.lname');
 		$this->db->from('plan p');
         $this->db->join('users u','u.plan_type=p.id');
         $this->db->join('payment_recurring_profiles rp','u.id=rp.user_id');
 		$this->db->where('u.id',$id);
 		$result = $this->db->get()->result_array();
 		return $result;
-		
 	}
     
 
@@ -196,7 +195,7 @@ class User_Model extends App_Model {
         $this->db->select('*');
         $this->db->from('payment_recurring_profiles');
         $this->db->where('user_id',$id);
-        $result = $this->db->get()->result_array();
+        $result = $this->db->get()->row_array();
         return $result;
         
     }

@@ -55,6 +55,7 @@ class Payment extends App_Controller
         
         $this->load->model(array('payment_model','login_model','user_model'));
         $this->load->library('Paypal_pro',$config);
+        $this->load->library('paypal_lib');
         $this->payment_method = '';
      }           
                 
@@ -226,6 +227,7 @@ class Payment extends App_Controller
         }
         return $this->data;
     }
+    
     function create_auth_subscription($res,$post)
     {
         $this->authorize_arb->startData('create');
@@ -246,31 +248,29 @@ class Payment extends App_Controller
                 ),
             'amount' => $post['amount'],
             //'trialAmount' => 0.00,            
-            'payment' => array(
-                'creditCard' => array(
-                    'cardNumber' => $post['c_number'],
-                    'expirationDate' => $post['exp_year']."-".$post['exp_month'],
-                    'cardCode' => $post['cvv'],
-                    ),
-                ),
+            'payment' => array(   'creditCard' => array(    'cardNumber' => $post['c_number'],
+                                                            'expirationDate' => $post['exp_year']."-".$post['exp_month'],
+                                                            'cardCode' => $post['cvv'],
+                                                          ),
+                                ),
             'order' => array(
-                'invoiceNumber' => $this->data['invoice_no'],
-                'description' =>  $post['description'],
-                ),
+                                'invoiceNumber' => $this->data['invoice_no'],
+                                'description' =>  $post['description'],
+                            ),
             'customer' => array(
-                'id' => $res['customer_id'],
-                'email' => $post['email'],
-                'phoneNumber' => $post['phone'],
-                ),
+                                    'id' => $res['customer_id'],
+                                    'email' => $post['email'],
+                                    'phoneNumber' => $post['phone'],
+                                ),
             'billTo' => array(
-                'firstName' => $post['fname'],
-                'lastName' => $post['lname'],
-                'address' => $post['address'],
-                'city' => $post['city'],
-                'state' => $post['state'],
-                'zip' => $post['zipcode'],
-                'country' => $post['country'],
-                ),
+                                'firstName' => $post['fname'],
+                                'lastName' => $post['lname'],
+                                'address' => $post['address'],
+                                'city' => $post['city'],
+                                'state' => $post['state'],
+                                'zip' => $post['zipcode'],
+                                'country' => $post['country'],
+                             ),
             );
 
         $this->authorize_arb->addData('subscription', $subscription_data);
@@ -729,6 +729,8 @@ class Payment extends App_Controller
 		$GRPPDFields = array('profileid' => $profileid);
 					   
 		$PayPalRequestData = array('GRPPDFields' => $GRPPDFields);
+        
+         $plan_details = $this->session->userdata('plan_details');
 		
 		$PayPalResult = $this->paypal_pro->GetRecurringPaymentsProfileDetails($PayPalRequestData);
 		
@@ -752,9 +754,10 @@ class Payment extends App_Controller
                
            if(isset($paymentstatus['payment_status']) && (($paymentstatus['payment_status'] == 'Completed') || $paymentstatus['payment_status'] == 'Pending')) {
            
-               $register_id = $this->user_register();
+               //$register_id = $this->user_register();
     		   
-               $ins_data['user_id']             = $register_id;
+               $ins_data['user_id']             = $plan_details['user_id'];
+               $ins_data['plan_id']             = $plan_details['id'];
                $ins_data['profile_start_date']  = $PayPalResult['PROFILESTARTDATE'];
                $ins_data['payment_status']      = $paymentstatus['payment_status'];
                $ins_data['pending_reason']      = $paymentstatus['pending_reason'];
@@ -762,7 +765,8 @@ class Payment extends App_Controller
                $ins_data['amount']              = $PayPalResult['REGULARAMT'];
                $ins_data['payment_method']      = $this->payment_method;
     		   $this->payment_model->insert("payment_recurring_profiles",$ins_data);
-               
+               //$ipn =   $this->paypal_lib->validate_ipn();
+              // print_r($ipn); exit;
                redirect('login/payment'); 
            }
            else
@@ -776,44 +780,15 @@ class Payment extends App_Controller
                $payment_history['last_payment_amt']  = $PayPalResult['LASTPAYMENTAMT'];
                $this->payment_model->insert("payment_transaction_history",$payment_history);
            }
-           
+         
 		}	
 	}
-	
-	
 
     function notify()
     {
         
     }
     
-    function user_register()
-    {
-        
-        //register user.
-        $signup_data      = $this->session->userdata("signup_data");
-        
-        $folder = $signup_data['name'];
-        
-        mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
-        
-        $register_user_id = $this->login_model->insert("users",$signup_data);
-        
-     	if(!empty($register_user_id)) {
-           // $this->service_message->set_flash_message('signup_success');
-        }    
-        $url = "http://izaapinnovations.com/got_safety/admin/";
-        $msg = "Your Backend Login link as client ".$url." <br>
-        	<b>Client Username</b>: ".$signup_data['name']."<br>
-			<b>Password</b>: ".$signup_data['password']."<br><br>
-			Thanks you..";                
-        $this->email->from('admin@gotsafety.com', 'Gotsafety');
-		$this->email->to($signup_data['email']);
-		$this->email->subject('Signup Successfully');
-		$this->email->message($msg);
-		$this->email->send();
-        
-        return $register_user_id;
-    }
+    
 }
 ?>

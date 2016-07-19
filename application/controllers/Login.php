@@ -123,32 +123,38 @@ class Login extends App_Controller {
                 $ins_data['role']          = 2;
                 $ins_data['password']      = $form['password'];
                 $ins_data['plan_type']     = $form['plan_type'];
-                $ins_data['plan_details']  = get_plan_details($form['plan_type']);
-                $ins_data['created_date']  =  date("Y-m-d H:i:s");
+               // $ins_data['plan_details']  = get_plan_details($form['plan_type']);
+                $ins_data['created_date']  = date("Y-m-d H:i:s");
 				$ins_data['is_active']     = 1;
 				$ins_data['language']      = 1;
 				$ins_data['created_id']    = 8;
 			 	$folder                    = $ins_data['name'];	
-            //    $this->session->set_userdata("plan_details",get_plan_details($form['plan_type']));
-			 	$this->session->set_userdata("signup_data",$ins_data);
-				/*mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
-                echo $add_user    = $this->login_model->insert("users",$ins_data);
-                exit;
-             	if(!empty($add_user)) 
-                {
-                    //$this->service_message->set_flash_message('signup_success');
+                
+                
+                $folder = $ins_data['name'];
+                
+                mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
+                
+                $register_user_id = $this->login_model->insert("users",$ins_data);
+                
+             	if(!empty($register_user_id)) {
+             	  $plan_details           = get_plan_details($form['plan_type']);
+                  $plan_details['user_id']= $register_user_id;
+             	  $this->session->set_userdata("plan_details",$plan_details);
+			 	  $this->session->set_userdata("signup_data",$ins_data);
                 }    
                 $url = "http://izaapinnovations.com/got_safety/admin/";
-                $msg = "Your Backend Login link as client ".$url." <br>
-                	<b>Client Username</b>: ".$form['name']."<br>
-					<b>Password</b>: ".$form['password']."<br><br>
-					Thanks you..";                
+                $msg = " Your Backend Login link as client ".$url." <br>
+                	     <b>Client Username</b>: ".$ins_data['name']."<br>
+        			     <b>Password</b>: ".$ins_data['password']."<br><br>
+        			     Thanks you..";                
                 $this->email->from('admin@gotsafety.com', 'Gotsafety');
-				$this->email->to($form['email']);
-				$this->email->subject('Signup Successfully');
-				$this->email->message($msg);
-				$this->email->send();*/
-               //	redirect('login/payment');
+        		$this->email->to($ins_data['email']);
+        		$this->email->subject('Signup Successfully');
+        		$this->email->message($msg);
+        		$this->email->send();
+        
+                
                redirect("payment");
             }
             if($this->input->post())
