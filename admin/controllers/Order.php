@@ -51,9 +51,10 @@ class Order extends Admin_controller {
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        
-        
-        $this->layout->view("order/order_list");
+        if(is_logged_in())       
+            $this->layout->view("order/order_list");
+        else
+            redirect("login");
         
     }
 
@@ -80,7 +81,10 @@ class Order extends Admin_controller {
         $this->data['order_log'] = $this->checkout_model->get_order_log(array('action_id'=>$so_details['id']));
         $this->data['title'] = "Order Information";
         $this->data['crumb'] = "Order Information";
-        $this->layout->view("order/order_info");
+        if(is_logged_in())
+            $this->layout->view("order/order_info");
+        else
+            redirect("login");
     } 
     
     

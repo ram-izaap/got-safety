@@ -68,8 +68,10 @@ class Product extends Admin_controller {
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         
-        
-        $this->layout->view("product/product_list");
+        if(is_logged_in())
+            $this->layout->view("product/product_list");
+        else
+            redirect("login");
         
     }
 
@@ -381,8 +383,10 @@ class Product extends Admin_controller {
         $this->data['crumb'] = "Product Information";
 
         $this->data['img_url']=$this->layout->get_img_dir();
-
-        $this->layout->view("product/product_info");
+        if(is_logged_in())
+            $this->layout->view("product/product_info");
+        else
+            redirect("login");
     } 
 
     function check_duplicate_product()

@@ -78,9 +78,10 @@ class Lession extends Admin_controller {
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        
-        
-        $this->layout->view("lession/lession_list");
+        if(is_logged_in())        
+        	$this->layout->view("lession/lession_list");
+        else
+        	redirect("login");
         
         
     }

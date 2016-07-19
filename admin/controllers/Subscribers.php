@@ -33,13 +33,19 @@ class Subscribers extends Admin_Controller
     $this->data['search_bar'] = $this->load->view('listing/search_bar', $this->data, TRUE);        
     $this->data['listing'] = $listing;
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
-   	$this->layout->view('subscribers/subscribed_users');
+    if(is_logged_in())
+   	  $this->layout->view('subscribers/subscribed_users');
+    else
+      redirect("login");
   }
   function  view_subscribed_user($id)
   {
   		$this->data['info'] = $this->subscribers_model->get_user_info($id);
   		$this->data['trans'] = $this->subscribers_model->get_user_trans($id);
-  		$this->layout->view('subscribers/view_subscribed_users');
+      if(is_logged_in())
+  		  $this->layout->view('subscribers/view_subscribed_users');
+      else
+        redirect("login");
   }
     
 }

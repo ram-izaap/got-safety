@@ -70,8 +70,10 @@ class Signoff extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
       
-       
+       if(is_logged_in())
         $this->layout->view("signoff/signoff_list");
+    	else
+    		redirect("login");
         
         
     }
@@ -146,7 +148,9 @@ class Signoff extends Admin_controller {
 		$this->export->to_excel($this->data['result'], 'Signoff'); 
         
        
-		}else {
+		}
+		else 
+		{
 			redirect("signoff");
 			
 		}	
@@ -161,8 +165,10 @@ class Signoff extends Admin_controller {
 		$search_value = $id;
 		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
 		//print_r($this->data['result']);exit;
-		
-		$this->layout->view("signoff/signoff_view");
+		if(is_logged_in())
+			$this->layout->view("signoff/signoff_view");
+		else
+			redirect("login");
 		
 	}
     

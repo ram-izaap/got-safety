@@ -23,12 +23,16 @@ class Payment extends Admin_controller
     function index()
     {
     	$this->data['info']=$this->payment_model->get_pay_info("payment_api_credentials");
+        if(is_logged_in())
     	 $this->layout->view("payment/add");
+        else
+            redirect("login");
   		//echo json_encode($response);
     }
     function add()
     {
-
+        if(is_logged_in())
+        {
     	if($_POST)
      	{
      		$this->form_validation->set_rules($this->_pay_validation_rules);
@@ -65,6 +69,10 @@ class Payment extends Admin_controller
 	        	$this->layout->view('payment/add');
 	        }
      	}
+        }
+        else
+            redirect("login");
+
     }
     function do_payment()
     {

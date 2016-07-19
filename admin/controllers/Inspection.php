@@ -79,8 +79,10 @@ class Inspection extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("inspection/inspection_list");
+        if(is_logged_in())
+        	$this->layout->view("inspection/inspection_list");
+        else
+        	redirect("login");
         
         
     }

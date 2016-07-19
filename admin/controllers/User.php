@@ -113,8 +113,10 @@ class User extends Admin_Controller
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         
-        
-        $this->layout->view("user/user_list");
+        if(is_logged_in())
+        	$this->layout->view("user/user_list");
+        else
+        	redirect("login");
         
     }
 		public function add_edit_user($edit_id = "")
@@ -414,8 +416,11 @@ class User extends Admin_Controller
 		$this->data['form_data']['cvv'] = "";
 		$this->data['plan_detail'] = $this->user_model->get_user_plan_data($id);
 		$this->data['plans'] = $this->user_model->get_plans("plan",'');
-		//print_r($this->data['grid']);exit;
-		$this->layout->view('user/user_plan_detail');
+		//print_r($this->data['plan_detail']);exit;
+		if(is_logged_in())
+			$this->layout->view('user/user_plan_detail');
+		else
+			redirect("login");
 		
 	}
     function cancel_subscription($id,$status)

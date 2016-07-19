@@ -76,8 +76,10 @@ class Attach extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("attach/attach_list");
+        if(is_logged_in())
+        	$this->layout->view("attach/attach_list");
+        else
+        	redirect("login");
         
         
     }
@@ -271,19 +273,26 @@ class Attach extends Admin_controller {
 	
 	function attach_delete()
     {
+       if(is_logged_in())
+       {
+        	$this->layout->view("attach/attach_list");
        
-        $id = ($_POST['id'])?$_POST['id']:"";
-        if(!empty($id)) {
+       	 $id = ($_POST['id'])?$_POST['id']:"";
+        	if(!empty($id)) {
             
             $this->db->query('delete from posters_attachment where id in ('.$id.')');
             //$this->service_message->set_flash_message('record_delete_success');
             return true;  
+        	}
         }
+        else
+        	redirect("login");
     } 
     
     
     
-    function language_unique_check($language,$edit_id) {
+    function language_unique_check($language,$edit_id) 
+    {
         
        
         

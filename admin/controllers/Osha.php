@@ -77,8 +77,10 @@ class Osha extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("osha/osha_list");
+        if(is_logged_in())
+        	$this->layout->view("osha/osha_list");
+        else
+        	redirect("login");
         
         
     }

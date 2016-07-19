@@ -69,9 +69,11 @@ class Employee extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("employee/employee_list");
-        
+        if(is_logged_in())
+            $this->layout->view("attach/employee_list");
+        else
+            redirect("login");
+               
         
     }
     
@@ -278,19 +280,21 @@ class Employee extends Admin_controller {
     
     public function bulk_upload()
     {            
-		
-		if(!empty($_FILES['employee']['tmp_name'])){ 
-		
-		$data['result'] = $this->employee_model->upload_csv();
-		
-		if($data['result']){
-		
-		redirect("employee");
-		
-		}
-	}
-		
-		$this->layout->view('employee/bulk_upload');
+		if(is_logged_in())
+        {
+            $this->layout->view("attach/employee_list");        
+		    if(!empty($_FILES['employee']['tmp_name']))
+            { 
+				$data['result'] = $this->employee_model->upload_csv();
+				if($data['result'])
+                {
+				    redirect("employee");
+				}
+	       }
+		  $this->layout->view('employee/bulk_upload');
+        }
+        else
+            redirect("login");
     
 	}
 	

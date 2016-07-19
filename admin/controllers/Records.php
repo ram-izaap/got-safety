@@ -77,8 +77,10 @@ class Records extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("records/records_list");
+        if(is_logged_in())
+        	$this->layout->view("records/records_list");
+        else
+        	redirect("login");
         
         
     }

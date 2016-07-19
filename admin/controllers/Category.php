@@ -56,9 +56,10 @@ class Category extends Admin_controller {
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        
-        
-        $this->layout->view("category/category_list");
+        if(is_logged_in())        
+            $this->layout->view("category/category_list");
+        else
+            redirect("login");
         
     }
     

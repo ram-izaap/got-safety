@@ -77,8 +77,10 @@ class Forms extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("forms/forms_list");
+        if(is_logged_in())
+        	$this->layout->view("attach/forms_list");
+        else
+        	redirect("login");
         
         
     }

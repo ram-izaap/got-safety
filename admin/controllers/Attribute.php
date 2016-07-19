@@ -52,9 +52,10 @@ class Attribute extends Admin_controller {
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        
-        
-        $this->layout->view("attribute/attribute_list");
+        if(is_logged_in())        
+          $this->layout->view("attribute/attribute_list");
+        else
+          redirect("login");
         
     }
 
@@ -94,8 +95,10 @@ class Attribute extends Admin_controller {
          $this->data['listing'] = $listing;
         
          $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
-        
+        if(is_logged_in())
          $this->layout->view("attribute/attribute_value_list");
+       else
+        redirect("login");
         
     }
     

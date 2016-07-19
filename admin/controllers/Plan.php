@@ -59,9 +59,10 @@ class Plan extends Admin_controller {
         
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
-        
-        
-        $this->layout->view("plans/plan_list");
+        if(is_logged_in())        
+            $this->layout->view("plans/plan_list"); 
+        else
+            redirect("login");
         
     }
     
@@ -138,7 +139,7 @@ class Plan extends Admin_controller {
 		}
         else
         {
-            redirect("home");
+            redirect("login");
         }  
     
 	}

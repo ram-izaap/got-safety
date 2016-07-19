@@ -35,8 +35,10 @@ class Repository extends Admin_controller {
 				//str_replace(find,replace,string,count) 
 				$this->data['result'] = $names ;
 				//print_r($this->data['result']);exit;
-        
-        $this->layout->view("repository/elfinder");
+        if(is_logged_in())
+        	$this->layout->view("repository/elfinder");
+        else
+        	redirect("login");
         
         
     }

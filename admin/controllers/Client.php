@@ -70,8 +70,10 @@ class Client extends Admin_Controller
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         
-        
-        $this->layout->view("client/client_list");
+        if(is_logged_in())
+            $this->layout->view("client/client_list");
+        else
+            redirect("login");
         
     }
     

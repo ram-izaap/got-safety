@@ -79,8 +79,10 @@ class Addpages extends Admin_controller {
         
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
-        
-        $this->layout->view("addpages/addpages_list");
+        if(is_logged_in())
+            $this->layout->view("addpages/addpages_list");
+        else
+            redirect("login");
         
         
     }
@@ -192,30 +194,41 @@ class Addpages extends Admin_controller {
 	function addpages_delete()
     {
        
+       if(is_logged_in())
+       {
         $id = ($_POST['id'])?$_POST['id']:"";
-        if(!empty($id)) {
+        if(!empty($id)) 
+        {
             
             $this->db->query('delete from add_pages where id in ('.$id.')');
             //$this->service_message->set_flash_message('record_delete_success');
             return true;  
         }
+        else
+            redirect("login");
     } 
     
     
     
     function page_unique_check($page_id,$edit_id)
      {
+        if(is_logged_in())
+        {
          
         $get_data = $this->addpages_model->page_check_exists("add_pages",array("page_id" => $page_id,"is_active" => 1,"id !=" => $edit_id));
        
        
-        if(count($get_data) >0) {
+        if(count($get_data) >0) 
+        {
       
           $this->form_validation->set_message('page_unique_check', 'Content was added already ');
           return FALSE;
         }
         
        	return TRUE;
+        }
+        else
+            redirect("login");
     } 
     
     

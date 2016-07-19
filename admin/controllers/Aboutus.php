@@ -1,3 +1,4 @@
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(COREPATH."controllers/Admin_controller.php");
@@ -25,9 +26,10 @@ class Aboutus extends Admin_Controller
     
     public function index()
     { 
-        
+        if(is_logged_in())  
          $this->layout->view("about");
-        
+     	else
+        	redirect("login");
     }
     
     

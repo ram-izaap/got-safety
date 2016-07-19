@@ -72,8 +72,10 @@ class Page extends Admin_controller {
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         
-        
-        $this->layout->view("page/page_list");
+        if(is_logged_in())
+            $this->layout->view("page/page_list");
+        else
+            redirect("login");
         
         
     }

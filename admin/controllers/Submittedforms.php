@@ -69,8 +69,10 @@ class Submittedforms extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
       
-       
+       if(is_logged_in())
         $this->layout->view("submittedforms/submittedforms_list");
+        else
+            redirect("login");
         
         
     }
@@ -98,8 +100,10 @@ class Submittedforms extends Admin_controller {
 		$this->data['result'] = $this->submittedforms_model->view_details($search_field,$search_value);
 		//$this->data['user_result'] = $this->submittedforms_model->get_user_details($this->data['result']['user_id']);
 		//print_r($this->data['user_result']->name);exit;
-		
+		if(is_logged_in())
 		$this->layout->view("submittedforms/submittedforms_view");
+        else
+            redirect("login");
 		
 	}
     

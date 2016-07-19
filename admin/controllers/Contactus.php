@@ -25,8 +25,10 @@ class Contactus extends Admin_Controller
     
     public function index()
     { 
-        
+        if(is_logged_in())
          $this->layout->view("contact");
+     	else
+     		redirect("login");
         
     }
     
