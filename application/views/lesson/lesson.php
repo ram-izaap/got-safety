@@ -5,7 +5,7 @@
           <div class="row" data-row="default" >
 
 
-               <aside class="col-sm-12 bg-white inner-full">
+               <aside class="col-sm-12 col-md-6 rbg-white inner-full safety-lesn">
                  <div class="inner-content">
                    
                      
@@ -21,7 +21,7 @@
                      
                      
                      
-                     <div class="" data-nav="gs-recommended-lesson" id="content-load">
+                     <div class="safety-contentload" data-nav="gs-recommended-lesson" id="content-load">
                           <ul>
 							  <?php  foreach($get_attachment as $list){ ?>
 								  

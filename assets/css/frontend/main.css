@@ -855,6 +855,62 @@ width: 42px; }
 .mc-remove-cart > a > i { font-size:12px; padding-left:5px; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
+/*safety lesson*/
+.safety-lesn {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+}
+.safety-lesn select {
+    border: 1px solid #c8c8c8;
+    color: #292f2b;
+    line-height: 36px;
+    min-height: 20px;
+    padding: 5px;
+    box-shadow: none;
+}
+.safety-contentload ul {
+    background: rgb(246, 246, 246) none repeat scroll 0 0;
+    border: 1px solid rgb(221, 221, 221);
+    margin-top: 15px;
+    text-align: center;
+}
+.safety-contentload li {
+    border-bottom: 1px solid #ddd;margin-left: -40px;
+}
+
+.safety-contentload li:nth-child(2n) {
+    background: #fff none repeat scroll 0 0;
+}
+.safety-contentload li a {
+    text-transform: capitalize;
+}
+.lesson-contnt{padding:15px}
+.lesson-contnt select{max-width: 200px; width:100%;}
+.lesson-contnt p {
+    font-size: 15px;
+    text-align: left;
+}
+.lesson-contnt h2{  text-align: center; text-transform: capitalize;}
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff3019+55,cf0404+100 */
+.lesson-contnt .lesson-btn, .lesson-contnt .quiz-btn{background: #ff3019; /* Old browsers */
+background: -moz-linear-gradient(top,  #ff3019 55%, #cf0404 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ff3019 55%,#cf0404 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ff3019 55%,#cf0404 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3019', endColorstr='#cf0404',GradientType=0 ); /* IE6-9 */
+color: #fff;
+}
+.lesson-contnt select, .safety-lesn select{
+    -moz-appearance: none;
+    background: rgba(0, 0, 0, 0) url("../img/Down_red_arrow.png") no-repeat scroll 97% center / 14px auto;
+    color: red;
+    min-width: 200px;
+    z-index: 9; box-shadow: none; border-radius: 0;
+}
+.lesson-contnt .lesson-btn:hover, .lesson-contnt .quiz-btn:hover{ background: #fff; color: red; border:1px solid red;}
+.pre-web{border:2px solid transparent !important;}
+.pre-web:hover{border:2px solid #E81B23 !important;}
+
 /* Mini Cart UI */
 
 
@@ -1299,3 +1355,46 @@ display: block; color:#fff;}
 {
   margin-top: 20px;
 }
+
+
+/*  Webinars saran */
+
+
+
+.product-categories-webinars ul { display:inline-block;background-color:#CE1A20; margin:0; padding:0;position: relative; z-index:1; }
+.product-categories-webinars li { list-style-type:none; border:1px solid #fff;  padding-left:5px; position: relative;}
+.product-categories-webinars li:hover, .product-categories-webinars li.active { background:none repeat scroll 0 0 #E81B23 !important;}
+.list-web .pre-but-color{ border:0 none;}
+.list-web .pre-but-color:hover{ background:#fff !important; color:#E81C23;border:2px solid #E81B23}
+.product-categories-webinars li:hover a, .product-categories-webinars li.active a { color:#fff; font-weight:normal;}
+.product-categories-webinars ul li a { font-size:12px; color:#fff; display:block; text-decoration:none; padding:8px 5px; white-space:nowrap; cursor: pointer;}
+
+.lesson-btn{ 
+    background: -moz-linear-gradient(45deg, rgba(255,0,0,1) 35%, rgba(128,0,0,1) 100%, rgba(255,0,0,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(35%, rgba(255,0,0,1)), color-stop(100%, rgba(128,0,0,1)), color-stop(100%, rgba(255,0,0,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(45deg, rgba(255,0,0,1) 35%, rgba(128,0,0,1) 100%, rgba(255,0,0,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(45deg, rgba(255,0,0,1) 35%, rgba(128,0,0,1) 100%, rgba(255,0,0,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(255,0,0,1) 35%, rgba(128,0,0,1) 100%, rgba(255,0,0,1) 100%); /* ie10+ */
+    background: linear-gradient(45deg, rgba(255,0,0,1) 35%, rgba(128,0,0,1) 100%, rgba(255,0,0,1) 100%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#FF0000',GradientType=1 ); /* ie6-9 */
+color: #fff;}
+.lesson-btn:hover{ background:transparent;}
+.quiz-btn:hover{ background:transparent;}
+.quiz-btn{
+    
+    background: -moz-linear-gradient(45deg, rgba(255,181,176,1) 0%, rgba(255,181,176,1) 0%, rgba(255,0,0,1) 58%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,181,176,1)), color-stop(0%, rgba(255,181,176,1)), color-stop(58%, rgba(255,0,0,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(45deg, rgba(255,181,176,1) 0%, rgba(255,181,176,1) 0%, rgba(255,0,0,1) 58%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(45deg, rgba(255,181,176,1) 0%, rgba(255,181,176,1) 0%, rgba(255,0,0,1) 58%); /* opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(255,181,176,1) 0%, rgba(255,181,176,1) 0%, rgba(255,0,0,1) 58%); /* ie10+ */
+    background: linear-gradient(45deg, rgba(255,181,176,1) 0%, rgba(255,181,176,1) 0%, rgba(255,0,0,1) 58%); /* w3c */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF0000', endColorstr='#FFB5B0',GradientType=1 ); /* ie6-9 */
+
+
+color: #fff;}
+.language-list{ margin-top:10px;}
+
+.content-bar{ max-height:801px;overflow-x:hidden;}
+
+.vstar {color:red !important;font-size:12px;}
+

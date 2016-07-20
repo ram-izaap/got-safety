@@ -1,14 +1,4 @@
- <!-- // Content area -->
-         <section class="container content-area" data-view="list">
-          
-          <!-- rwo default --> 
-          <div class="row" data-row="default" >
-
-
-               <aside class="col-sm-12 bg-white inner-full">
-                 <div class="inner-content">
-                   
-                     <div class="" data-nav="gs-recommended-lesson" id="content-load">
+  <div class="safety-contentload" data-nav="gs-recommended-lesson" id="content-load">
                           <ul>
 							  <?php  foreach($get_attachment as $list){ ?>
 								  
@@ -18,19 +8,6 @@
 							<?php } ?>
                           </ul>
                       </div>
-
-                    <!--  Right menu  -->
-                     
-                  </div>
-				</aside>
-
-            <!-- rwo default --> 
-          </div>
-          
-
-         </section>
-    <!-- Content area // -->
-    
     
     
    <script>

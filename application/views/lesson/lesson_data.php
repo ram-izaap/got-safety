@@ -1,6 +1,6 @@
-<div id="sample-con">
+<div id="sample-con" class="lesson-contnt">
 	
-	 <select name="language" id="lang" class="table-group-action-input form-control input-medium" onChange="get_lesson_list(this);">
+	 <select name="language" id="lang" class="table-group-action-input form-control input-medium select-bg" onChange="get_lesson_list(this);">
 						
 						<?php if(isset($get_language)) { 
 							foreach($get_language as $fkey => $fvalue){

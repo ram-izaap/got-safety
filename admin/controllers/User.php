@@ -138,12 +138,14 @@ class User extends Admin_Controller
 					} 
 		}
 		
-		if(isset($_POST['name'])){
-					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
+		if(isset($_POST['name'])) 
+			{
+					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
 			}
 			
-			if(isset($_POST['email'])){
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
+			if(isset($_POST['email'])) 
+			{
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
 			}
 		
         if($this->form_validation->run())
@@ -726,10 +728,10 @@ class User extends Admin_Controller
     
     
     
-     function name_unique_check($name,$edit_id)
+      function name_unique_check($name,$edit_id)
      {
-        
-        $get_data = $this->user_model->check_exists("users",array("name" => $name));
+       
+        $get_data = $this->user_model->check_exists("users",array("name" => $name,"id !=" => $edit_id));
        
        
         if(count($get_data) >0) {
@@ -745,7 +747,7 @@ class User extends Admin_Controller
      function email_unique_check($email,$edit_id)
      {
         
-        $get_data = $this->user_model->check_exists("users",array("email" => $email));
+        $get_data = $this->user_model->check_exists("users",array("email" => $email,"id !=" => $edit_id));
        
        
         if(count($get_data) >0) {

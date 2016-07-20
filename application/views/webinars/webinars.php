@@ -9,7 +9,7 @@
                      <!-- Left Bar -->
                      <div class="col-md-3 list-web">
 
-                       <button class="pre-but-color"> Previous Webinars</button>
+                       <button class="pre-but-color pre-web"> Previous Webinars</button>
                         <div class="letter-size product-categories-webinars"; >
 							<ul>
 								<?php foreach($all_data as $data) { ?>
