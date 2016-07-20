@@ -55,7 +55,7 @@ class Payment extends App_Controller
         
         $this->load->model(array('payment_model','login_model','user_model'));
         $this->load->library('Paypal_pro',$config);
-        $this->load->library('paypal_lib');
+        
         $this->payment_method = '';
      }           
                 
@@ -304,105 +304,26 @@ class Payment extends App_Controller
 							'token' => '', 								
 							'maxamt' => '', 						
 							'returnurl' => $returnUrl, 							
-							'cancelurl' => $cancelUrl, 							
-							'callback' => '', 						
-							'callbacktimeout' => '', 					
-							'callbackversion' => '', 												
-							'reqconfirmshipping' => '', 				
-							'noshipping' => '', 						
-							'allownote' => '', 							
-							'addroverride' => '', 						
-							'localecode' => '', 						
-							'pagestyle' => '', 							  
-							'hdrimg' => '', 							
-							'hdrbordercolor' => '', 					  
-							'hdrbackcolor' => '', 						  
-							'payflowcolor' => '', 						
-							'skipdetails' => '', 						
-							'email' => '', 								
-							'solutiontype' => '', 						
-							'landingpage' => '', 						
-							'channeltype' => '', 						
-							'giropaysuccessurl' => '', 					
-							'giropaycancelurl' => '', 					
-							'banktxnpendingurl' => '',  				
-							'brandname' => '', 							
-							'customerservicenumber' => '', 				
-							'giftmessageenable' => '', 					
-							'giftreceiptenable' => '', 					
-							'giftwrapenable' => '', 					
-							'giftwrapname' => '', 						
-							'giftwrapamount' => '', 					
-							'buyeremailoptionenable' => '', 			
+							'cancelurl' => $cancelUrl, 												 						 			
 							'surveyquestion' => '', 					
-							'surveyenable' => '', 						
-							'totaltype' => '', 							
-							'notetobuyer' => '', 													
-							'buyerid' => '', 							
-							'buyerusername' => '', 						
-							'buyerregistrationdate' => '',  			
-							'allowpushfunding' => ''								
+							'surveyenable' => '', 																										
 						);
-		
-		$SurveyChoices = array('Choice 1', 'Choice2', 'Choice3', 'etc');
 		
 		$Payments = array();
 		$Payment = array(
-						'amt' => $plan_details['plan_amount'], 							
-						'currencycode' => 'USD', 					
-						'itemamt' => $plan_details['plan_amount'], 						  
-						'shippingamt' => '', 					
-						'shipdiscamt' => '', 				   
-						'insuranceoptionoffered' => '', 		
-						'handlingamt' => '', 					
-						'taxamt' => '', 						 
-						'desc' => '', 							
-						'custom' => '', 						
-						'invnum' => '', 						
-						'notifyurl' => $ipn_url, 						
-						'shiptoname' => '', 					
-						'shiptostreet' => '', 					
-						'shiptostreet2' => '', 					
-						'shiptocity' => '', 					
-						'shiptostate' => '', 					
-						'shiptozip' => '', 						
-						'shiptocountrycode' => '', 				
-						'shiptophonenum' => '',  				
-						'notetext' => '', 						  
-						'allowedpaymentmethod' => '', 			
-						'allowpushfunding' => '', 				
-						'paymentaction' => 'Sale', 					 
-						'paymentrequestid' => '',  				 
-						'sellerid' => '', 						
-						'sellerusername' => '', 				
-						'sellerpaypalaccountid' => ''			
+    						'amt' => $plan_details['plan_amount'], 							
+    						'currencycode' => 'USD', 					
+    						'itemamt' => $plan_details['plan_amount'], 						  						
+    						'notifyurl' => $ipn_url			
 						);
 	
 				
 		$PaymentOrderItems = array();
 		$Item = array(
-					'name' => ucfirst($plan_details['plan_type']), 								
-					'desc' => strip_tags($plan_details['plan_desc']), 								
-					'amt' => $plan_details['plan_amount'], 								
-					'number' => '', 							
-					'qty' => '', 								
-					'taxamt' => '', 							
-					'itemurl' => '', 							
-					'itemweightvalue' => '', 					
-					'itemweightunit' => '', 					
-					'itemheightvalue' => '', 					
-					'itemheightunit' => '', 					
-					'itemwidthvalue' => '', 					
-					'itemwidthunit' => '', 						
-					'itemlengthvalue' => '', 					
-					'itemlengthunit' => '',  					
-					'itemurl' => '', 							
-					'itemcategory' => '', 						
-					'ebayitemnumber' => '', 					  
-					'ebayitemauctiontxnid' => '', 				  
-					'ebayitemorderid' => '',  					
-					'ebayitemcartid' => ''						
-					);
+					   'name' => ucfirst($plan_details['plan_type']), 								
+					   'desc' => strip_tags($plan_details['plan_desc']), 								
+					   'amt' => $plan_details['plan_amount']
+                      );
 		array_push($PaymentOrderItems, $Item);
 		
 		
@@ -410,41 +331,21 @@ class Payment extends App_Controller
 		
 		array_push($Payments, $Payment);
 		
-		$BuyerDetails = array(  'buyerid' => '', 			
-								'buyerusername' => '', 			
-								'buyerregistrationdate' => ''	
-								);
-								
-		$ShippingOptions = array();
-		$Option = array(
-						'l_shippingoptionisdefault' => '', 				
-						'l_shippingoptionname' => '', 					
-						'l_shippingoptionlabel' => '', 					
-						'l_shippingoptionamount' => '' 					  
-						);
-		array_push($ShippingOptions, $Option);
-			
-		
 		$BillingAgreements = array();
 		$Item = array(
 					  'l_billingtype' => 'RecurringPayments', 							
 					  'l_billingagreementdescription' => 'SubscriptionPlans', 			  
-					  'l_paymenttype' => 'Any', 							
-					 // 'l_billingagreementcustom' => ''					
+					  'l_paymenttype' => 'Any', 												
 					  );
 		array_push($BillingAgreements, $Item);
 		
 		$PayPalRequestData = array(
             						'SECFields' => $SECFields, 
-            						'SurveyChoices' => $SurveyChoices, 
             						'Payments' => $Payments, 
-            						'BuyerDetails' => $BuyerDetails, 
-            						'ShippingOptions' => $ShippingOptions, 
             						'BillingAgreements' => $BillingAgreements
             					  );
 					
 		$PayPalResult = $this->paypal_pro->SetExpressCheckout($PayPalRequestData);
-		
 		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
 			$errors = array('Errors'=>$PayPalResult['ERRORS']);
 			$this->load->view('payment/paypal/error',$errors);
@@ -456,7 +357,6 @@ class Payment extends App_Controller
              $this->session->set_userdata("payment_method",$PayPalResult);
              redirect($PayPalResult['REDIRECTURL']);
           }
-         
 		}
      }
      
@@ -471,7 +371,6 @@ class Payment extends App_Controller
            
             $token           = (isset($_REQUEST['token']))?$_REQUEST['token']:""; 
     		$PayPalResult    = $this->paypal_pro->GetExpressCheckoutDetails($token);
-    		
     		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
     			$errors = array('Errors'=>$PayPalResult['ERRORS']);
     			$this->load->view('payment/paypal/error',$errors);
@@ -488,7 +387,8 @@ class Payment extends App_Controller
      //payment cancel 
      function cancel()
      {
-        
+        //$this->layout->add_stylesheets("custom");
+        $this->load->view("payment/cancel");
      }
      	
 	function Do_express_checkout_payment($token)
@@ -502,75 +402,21 @@ class Payment extends App_Controller
 		$DECPFields = array(
 							'token' => $token, 								
 							'payerid' => $paypal_express['PAYERID'], 							
-							'returnfmfdetails' => '', 					
-							'giftmessage' => '', 						
-							'giftreceiptenable' => '', 					
-							'giftwrapname' => '', 						
-							'giftwrapamount' => '', 					
-							'buyermarketingemail' => '', 				
-							'surveyquestion' => '', 					
-							'surveychoiceselected' => '',  				
-							'allowedpaymentmethod' => '' 				
-						);
-						
-		
+							'returnfmfdetails' => '', 										
+							'buyermarketingemail' => '', 				 				
+						   );
 		$Payments = array();
 		$Payment  = array(
-						'amt' => $plan_details['plan_amount'], 							
-						'currencycode' => 'USD', 					
-						'itemamt' => '', 						  
-						'shippingamt' => '0.00', 					
-						'shipdiscamt' => '', 					
-						'insuranceoptionoffered' => '', 		
-						'handlingamt' => '', 					
-						'taxamt' => '0.00', 						 
-						'desc' => '', 							
-						'custom' => '', 						
-						'invnum' => '', 						
-						'notifyurl' => $ipn_url, 						
-						'shiptoname' => '', 					
-						'shiptostreet' => '', 					
-						'shiptostreet2' => '', 					
-						'shiptocity' => '', 					
-						'shiptostate' => '', 					
-						'shiptozip' => '', 						
-						'shiptocountrycode' => '', 				
-						'shiptophonenum' => '',  				
-						'notetext' => '', 						  
-						'allowedpaymentmethod' => '', 			
-						'paymentaction' => '', 					 
-						'paymentrequestid' => '',  				 
-						'sellerid' => '', 						
-						'sellerusername' => '', 				
-						'sellerregistrationdate' => '', 		
-						'softdescriptor' => '', 				
-						'transactionid' => ''					 
+    						'amt' => $plan_details['plan_amount'], 							
+    						'currencycode' => 'USD', 					
+    						'itemamt' => '', 						  
+    						'shippingamt' => '0.00', 					
+                            'taxamt' => '0.00', 						 						
+    						'notifyurl' => $ipn_url 											 
 						);
 			
 		$PaymentOrderItems = array();
-		$Item = array(
-					'name' => '', 								
-					'desc' => '', 								
-					'amt' => '', 								
-					'number' => '', 							
-					'qty' => '', 								
-					'taxamt' => '', 						
-					'itemurl' => '', 							
-					'itemweightvalue' => '', 					
-					'itemweightunit' => '', 					
-					'itemheightvalue' => '', 				
-					'itemheightunit' => '', 				
-					'itemwidthvalue' => '', 					
-					'itemwidthunit' => '', 					
-					'itemlengthvalue' => '', 					
-					'itemlengthunit' => '',  				
-					'itemurl' => '', 							
-					'itemcategory' => '', 					
-					'ebayitemnumber' => '', 					
-					'ebayitemauctiontxnid' => '', 			
-					'ebayitemorderid' => '',  				
-					'ebayitemcartid' => ''					
-					);
+		$Item = array();
 		array_push($PaymentOrderItems, $Item);
 		
 	
@@ -579,15 +425,9 @@ class Payment extends App_Controller
 		
 		array_push($Payments, $Payment);
 		
-		$UserSelectedOptions = array(
-									 'shippingcalculationmode' => '', 	
-									 'insuranceoptionselected' => '', 	
-									 'shippingoptionisdefault' => '', 	  
-									 'shippingoptionamount' => '', 		
-									 'shippingoptionname' => '', 		
-									 );
+		$UserSelectedOptions = array();
 									 
-		$PayPalRequestData = array(
+		$PayPalRequestData   = array(
         							'DECPFields' => $DECPFields, 
         							'Payments' => $Payments, 
         							'UserSelectedOptions' => $UserSelectedOptions
@@ -618,98 +458,52 @@ class Payment extends App_Controller
 	{
 	   
 	    $paypal_token = $this->session->userdata('Paypal_express');
-        
         $plan_details = $this->session->userdata('plan_details');
        
-		$CRPPFields   = array('token' => $token);
-						
-		$ProfileDetails = array(
-        							'subscribername' => '', 					
-        							'profilestartdate' => date("Y-m-d H:i:s"), 					
-        							'profilereference' => '' 					
-						        );
-						
+		$CRPPFields      = array('token' => $token);	
+		$ProfileDetails  = array('profilestartdate' => date("Y-m-d H:i:s"));			
 		$ScheduleDetails = array(
         							'desc' => 'SubscriptionPlans', 								
         							'maxfailedpayments' => '5', 					  
         							'autobilloutamt' => 'AddToNextBilling' 			
-					            );
+					            );	
+		$BillingPeriod   = array(
+        							'billingperiod' => 'Month', 						
+        							'billingfrequency' => '1', 					 
+        							'totalbillingcycles' => '12', 				  
+        							'amt' => $plan_details['plan_amount'], 							 
+        							'currencycode' => 'USD', 												
+    						     );								
+		$PayerInfo      = array(
+        							'email' => $paypal_token['EMAIL'], 								
+        							'payerid' => $payerid, 							
+        							'payerstatus' => $paypal_token['PAYERSTATUS']						
+						       );
 						
-		$BillingPeriod = array(
-    							'trialbillingperiod' => '', 
-    							'trialbillingfrequency' => '', 
-    							'trialtotalbillingcycles' => '', 
-    							'trialamt' => '', 
-    							'billingperiod' => 'Month', 						
-    							'billingfrequency' => '1', 					 
-    							'totalbillingcycles' => '12', 				  
-    							'amt' => $plan_details['plan_amount'], 							 
-    							'currencycode' => 'USD', 					
-    							'shippingamt' => '0', 					
-    							'taxamt' => '0' 							
-						     );
-						
-		$ActivationDetails = array(
-        							'initamt' => '', 						
-        							'failedinitamtaction' => '', 			
-						         );
-						
-		$CCDetails = array(
-							'creditcardtype' => '', 					
-							'acct' => '', 								  
-							'expdate' => '', 							
-							'cvv2' => '', 								
-							'startdate' => '', 							
-							'issuenumber' => ''							
-						);
-						
-		$PayerInfo = array(
-							'email' => $paypal_token['EMAIL'], 								
-							'payerid' => $payerid, 							
-							'payerstatus' => $paypal_token['PAYERSTATUS'], 						
-							'business' => '' 						
-						  );
-						
-		$PayerName = array(
-							'salutation' => '', 						
-							'firstname' => $paypal_token['FIRSTNAME'], 							
-							'middlename' => '', 						
-							'lastname' => $paypal_token['LASTNAME'], 							
-							'suffix' => ''							
-						   );
+		$PayerName      = array(						
+    							     'firstname' => $paypal_token['FIRSTNAME'], 							
+    							     'middlename' => '', 						
+    							     'lastname' => $paypal_token['LASTNAME']						
+						       );
 						
 		$BillingAddress = array(
-								'street' => 'West Street', 					
-								'street2' => '', 						
-								'city' => 'Florida', 						
-								'state' => 'Florida', 							
-								'countrycode' => 'US', 				
-								'zip' => '32005', 					
-								'phonenum' => '' 				
-							  );
-							
-		$ShippingAddress = array(
-								'shiptoname' => '', 					
-								'shiptostreet' => '', 					
-								'shiptostreet2' => '', 					
-								'shiptocity' => '', 					
-								'shiptostate' => '', 					
-								'shiptozip' => '', 						
-								'shiptocountry' => '', 				    
-								'shiptophonenum' => ''					
-								);
-								
+    								'street' => 'West Street', 					
+    								'street2' => '', 						
+    								'city' => 'Florida', 						
+    								'state' => 'Florida', 							
+    								'countrycode' => 'US', 				
+    								'zip' => '32005', 					
+    								'phonenum' => '' 				
+							   );
+						
 		$PayPalRequestData = array(
         							'CRPPFields' => $CRPPFields, 
         							'ProfileDetails' => $ProfileDetails, 
         							'ScheduleDetails' => $ScheduleDetails, 
         							'BillingPeriod' => $BillingPeriod, 
-        							'ActivationDetails' => $ActivationDetails, 
-        							'CCDetails' => $CCDetails, 
         							'PayerInfo' => $PayerInfo, 
         							'PayerName' => $PayerName, 
         							'BillingAddress' => $BillingAddress, 
-        							'ShippingAddress' => $ShippingAddress
 						         );	
 						
 		$PayPalResult = $this->paypal_pro->CreateRecurringPaymentsProfile($PayPalRequestData);
@@ -727,12 +521,10 @@ class Payment extends App_Controller
 	
 	function Get_recurring_payments_profile_details($profileid)
 	{
-		$GRPPDFields = array('profileid' => $profileid);
-					   
+		$GRPPDFields       = array('profileid' => $profileid);
 		$PayPalRequestData = array('GRPPDFields' => $GRPPDFields);
         
-         $plan_details = $this->session->userdata('plan_details');
-		
+        $plan_details = $this->session->userdata('plan_details');
 		$PayPalResult = $this->paypal_pro->GetRecurringPaymentsProfileDetails($PayPalRequestData);
 		
 		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
@@ -755,20 +547,19 @@ class Payment extends App_Controller
                
            if(isset($paymentstatus['payment_status']) && (($paymentstatus['payment_status'] == 'Completed') || $paymentstatus['payment_status'] == 'Pending')) {
            
-               //$register_id = $this->user_register();
+               $register_id = $this->user_register();
     		   
-               $ins_data['user_id']             = $plan_details['user_id'];
+               $ins_data['user_id']             = $register_id;
                $ins_data['plan_id']             = $plan_details['id'];
                $ins_data['profile_start_date']  = $PayPalResult['PROFILESTARTDATE'];
-               $ins_data['payment_status']      = $paymentstatus['payment_status'];
+               $ins_data['payment_status']      = "pending";
                $ins_data['pending_reason']      = $paymentstatus['pending_reason'];
                $ins_data['trans_id']            = $paymentstatus['transaction_id'];
                $ins_data['amount']              = $PayPalResult['REGULARAMT'];
                $ins_data['payment_method']      = $this->payment_method;
     		   $this->payment_model->insert("payment_recurring_profiles",$ins_data);
-               //$ipn =   $this->paypal_lib->validate_ipn();
-              // print_r($ipn); exit;
-               redirect('login/payment'); 
+              
+               $this->load->view("payment/success");
            }
            else
            {
@@ -787,9 +578,62 @@ class Payment extends App_Controller
 
     function notify()
     {
-        
+        if(isset($_POST)) {
+            if(isset($_POST['ipn_track_id']) && !empty($_POST['ipn_track_id'])) {
+                $payment_status = (isset($_POST['payment_status']))?$_POST['payment_status']:"pending";
+                $profile_id     = (isset($_POST['recurring_payment_id']))?$_POST['recurring_payment_id']:"";
+                $txn_type       = (isset($_POST['txn_type']))?$_POST['txn_type']:"";
+                if(!empty($profile_id)){
+                    //update initial payment status
+                    $this->db->query("update payment_recurring_profiles set payment_status='".$payment_status."' where profile_id='".$profile_id."'");
+                    
+                    //get user for this profile
+                    $user = $this->db->query("select r.user_id,u.email from payment_recurring_profiles r inner join users u on u.id=r.user_id where r.profile_id='".$profile_id."'")->row_array();
+                    
+                    //update user profile active
+                    $this->db->query("update users set is_active=1 where id='".$user['user_id']."'");
+                    $ipn_data = json_encode($_POST);
+                    $this->db->query("update payment_transaction_history set txn_type='".$txn_type."', paypal_ipn='".$ipn_data."' where profile_id='".$profile_id."'");
+                } 
+            }
+        }
     }
     
-    
+   function user_register()
+   {
+       
+        $ins_data = $this->session->userdata("signup_data");
+        
+        mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
+                
+        $register_user_id = $this->login_model->insert("users",$ins_data);
+        
+     	if(!empty($register_user_id)) {
+          $plan_details['user_id']= $register_user_id;  
+        }    
+        $url = "http://izaapinnovations.com/got_safety/admin/";
+        $msg = " Your Backend Login link as client ".$url." <br>
+        	     <b>Client Username</b>: ".$ins_data['name']."<br>
+    		     <b>Password</b>: ".$ins_data['password']."<br><br>
+    		     Thanks you..";                
+        user_email($ins_data['email'],'Signup Successfully',$msg);
+   } 
+  
+  function user_email($email,$subject,$message)
+  {
+        $config['protocol'] = 'sendmail';
+        $config['mailpath'] = '/usr/sbin/sendmail';
+        $config['charset']  = 'iso-8859-1';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = "html";
+        
+        $this->email->from('admin@gotsafety.com', 'Gotsafety');
+    	$this->email->to($email);
+    	$this->email->subject('Signup Successfully');
+    	$this->email->message($msg);
+    	$this->email->send();
+         
+
+  }  
 }
 ?>

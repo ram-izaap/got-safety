@@ -111,22 +111,18 @@ class Login extends App_Controller {
 	{
 		if($_POST) {
             $this->load->library('email');
-            
-            		
-			if(isset($_POST['name'])) 
-			{
+            	
+			if(isset($_POST['name'])){
 					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
 			}
 			
-			if(isset($_POST['email'])) 
-			{
+			if(isset($_POST['email'])){
 					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
 			}
             
             $this->form_validation->set_rules($this->_signup_validation_rules);
             
-            if($this->form_validation->run())
-            {  
+            if($this->form_validation->run()){  
                 $form = $this->input->post();                              
                 $ins_data                  = array();
                 $ins_data['name']          = $form['name'];
@@ -134,49 +130,23 @@ class Login extends App_Controller {
                 $ins_data['role']          = 2;
                 $ins_data['password']      = $form['password'];
                 $ins_data['plan_type']     = $form['plan_type'];
-               // $ins_data['plan_details']  = get_plan_details($form['plan_type']);
                 $ins_data['created_date']  = date("Y-m-d H:i:s");
-				$ins_data['is_active']     = 1;
+				$ins_data['is_active']     = 0;
 				$ins_data['language']      = 1;
 				$ins_data['created_id']    = 8;
 			 	$folder                    = $ins_data['name'];	
                 
-                
-                $folder = $ins_data['name'];
-                
-                mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
-                
-                $register_user_id = $this->login_model->insert("users",$ins_data);
-                
-             	if(!empty($register_user_id)) {
-             	  $plan_details           = get_plan_details($form['plan_type']);
-                  $plan_details['user_id']= $register_user_id;
-             	  $this->session->set_userdata("plan_details",$plan_details);
-			 	  $this->session->set_userdata("signup_data",$ins_data);
-                }    
-                $url = "http://izaapinnovations.com/got_safety/admin/";
-                $msg = " Your Backend Login link as client ".$url." <br>
-                	     <b>Client Username</b>: ".$ins_data['name']."<br>
-        			     <b>Password</b>: ".$ins_data['password']."<br><br>
-        			     Thanks you..";                
-                $this->email->from('admin@gotsafety.com', 'Gotsafety');
-        		$this->email->to($ins_data['email']);
-        		$this->email->subject('Signup Successfully');
-        		$this->email->message($msg);
-        		$this->email->send();
-        
-                
-               redirect("payment");
+                $plan_details              = get_plan_details($form['plan_type']);
+                $this->session->set_userdata("plan_details",$plan_details);
+	 	        $this->session->set_userdata("signup_data",$ins_data);
+                redirect("payment");
             }
-            if($this->input->post())
-            {
-               
+            if($this->input->post()){
                 $this->data['form_data']      = $_POST; 
             }
         }
         else
-        { 
-            
+        {
             $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","plan_type" =>"");        
         }
         $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));		

@@ -1,0 +1,71 @@
+/** typography **/
+.successbox h1 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1.5em;
+  letter-spacing: -0.05em;
+  margin-bottom: 20px;
+  padding: .1em 0;
+  color: #444;
+    position: relative;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: center;
+}
+.successbox p {  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+.successbox h1:before,
+.successbox h1:after {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  height: 1px;
+  vertical-align: middle;
+  background: #f0f0f0;
+}
+.successbox h1:before {    
+  left: -.5em;
+  margin: 0 0 0 -50%;
+}
+.successbox h1:after {    
+  left: .5em;
+  margin: 0 -50% 0 0;
+}
+
+/** notifications **/
+.notify {
+  display: block;
+  background: #fff;
+  padding: 12px 18px;
+  max-width: 400px;
+  margin: 0 auto;
+
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px;
+}
+
+.notify h1 { margin-bottom: 6px; }
+
+.successbox h1 { color: #678361; }
+.errorbox h1 { color: #6f423b; }
+
+.successbox h1:before, .successbox h1:after { background: #cad8a9; }
+.errorbox h1:before, .errorbox h1:after { background: #d6b8b7; }
+
+.notify .alerticon { 
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.redirect {
+    background:#ccc;
+    padding: 6px 16px;
+    text-align: center;
+    color:#000;
+    text-decoration:none;
+}
+.redirect-center  {text-align:center; padding-bottom:10px;}
