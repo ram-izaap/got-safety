@@ -5,8 +5,8 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class User extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-				array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-				array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+				//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+				//array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
 				
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
@@ -137,6 +137,14 @@ class User extends Admin_Controller
 						$this->form_validation->set_rules('language', 'Language', 'required');
 					} 
 		}
+		
+		if(isset($_POST['name'])){
+					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
+			}
+			
+			if(isset($_POST['email'])){
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
+			}
 		
         if($this->form_validation->run())
         { 
@@ -713,6 +721,42 @@ class User extends Admin_Controller
         
         return $this->data;
     }
+    
+    
+    
+    
+    
+     function name_unique_check($name,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("name" => $name));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('name_unique_check', 'Username already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
+    
+     function email_unique_check($email,$edit_id)
+     {
+        
+        $get_data = $this->user_model->check_exists("users",array("email" => $email));
+       
+       
+        if(count($get_data) >0) {
+      
+          $this->form_validation->set_message('email_unique_check', 'Email already exists');
+          return FALSE;
+        }
+        
+       	return TRUE;
+    } 
+    
     
 
 }

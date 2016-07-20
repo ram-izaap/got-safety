@@ -119,7 +119,7 @@ class Login extends App_Controller {
 			if(isset($_POST['email'])){
 					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
 			}
-            
+             'pay_mode' in 'field list'
             $this->form_validation->set_rules($this->_signup_validation_rules);
             
             if($this->form_validation->run()){  
