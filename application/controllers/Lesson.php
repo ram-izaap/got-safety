@@ -24,7 +24,7 @@ class Lesson extends App_Controller {
         //echo $this->layout->get_img_dir();
     }
 
-    public function index()
+  /*  public function index()
     {
 		$user_id = $this->session->userdata('user_id');
 		$role = $this->session->userdata('role');
@@ -89,10 +89,10 @@ class Lesson extends App_Controller {
 		$this->data['img_url']=$this->layout->get_img_dir();
      	$this->layout->view('lesson/lesson','frontend');
         
-    }
+    } */
     
     
-    public function get_lesson_data()
+   /* public function get_lesson_data()
     {
 		$this->data['img_url']=$this->layout->get_img_dir();
 		$lession_id = $this->input->post('view_param');
@@ -106,9 +106,110 @@ class Lesson extends App_Controller {
 		echo json_encode($response);
 		
 		
-	} 
+	} */
 	
 	
+	
+	public function index()
+	{
+		$user_id = $this->session->userdata('user_id');
+		$role = $this->session->userdata('role');
+		
+		if($role == 2){
+			$user_id = $this->session->userdata('user_id');
+		}else{
+			$user_id = $this->session->userdata('created_user');
+		}
+		
+		
+		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
+		
+		$this->data['get_language'] = $this->lession_model->get_language("language");
+		
+		
+		$this->data['img_url']=$this->layout->get_img_dir();
+     	$this->layout->view('lesson/lesson','frontend');
+		
+	}
+	
+	
+	 public function get_lesson_data()
+	 {
+		 $lesson_id = $this->input->get('lesson_id');
+		 $attachment_id = $this->input->get('attachment_id');
+		 $language_id = $this->input->get('language_id');
+		 
+		 $this->session->set_userdata('lesson_id',$lesson_id);
+		 $less_id = $this->session->userdata('lesson_id');
+		 
+		 $this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		 
+		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
+		 
+		 $this->data['get_language'] = $this->lession_model->get_language("language");
+		 
+		 $this->data['img_url']=$this->layout->get_img_dir();
+		 $this->layout->view('lesson/lesson_data','frontend');
+		 
+		
+	 }
+	 
+	 
+	
+	public function ajax_lesson_display()
+    {
+		$language_id = $this->input->post('language_id');
+		
+		
+		$user_id = $this->session->userdata('user_id');
+		$role = $this->session->userdata('role');
+		
+		if($role == 2){
+			$user_id = $this->session->userdata('user_id');
+		}else{
+			$user_id = $this->session->userdata('created_user');
+		}
+		
+		
+		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id));
+		
+		$this->data['get_language'] = $this->lession_model->get_language("language");
+
+		$response['html_view'] = $this->load->view('lesson/ajax_lesson_display',$this->data,TRUE);
+  
+		echo json_encode($response);
+		
+		
+	}
+	
+	
+	public function ajax_attachment_display()
+    {
+		$language_id = $this->input->post('language_id');
+		$lesson_id = $this->session->userdata('lesson_id');
+		
+		
+		$user_id = $this->session->userdata('user_id');
+		$role = $this->session->userdata('role');
+		
+		if($role == 2){
+			$user_id = $this->session->userdata('user_id');
+		}else{
+			$user_id = $this->session->userdata('created_user');
+		}
+		
+		$this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		 
+		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
+		 
+		$this->data['get_language'] = $this->lession_model->get_language("language");
+
+		$response['html_view'] = $this->load->view('lesson/ajax_attachment_display',$this->data,TRUE);
+  
+		echo json_encode($response);
+		
+		
+	}
 	
 
 

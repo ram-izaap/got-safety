@@ -8,19 +8,6 @@
                <aside class="col-sm-12 bg-white inner-full">
                  <div class="inner-content">
                    
-                     
-                     <select name="language" id="lang" class="table-group-action-input form-control input-medium" onChange="get_lesson_list(this);">
-						
-						<?php if(isset($get_language)) { 
-							foreach($get_language as $fkey => $fvalue){
-							 
-						?>
-						<option value="<?php echo $fvalue['id']; ?>" ><?php echo $fvalue['lang'];?></option>
-						<?php } } ?>
-					</select>
-                     
-                     
-                     
                      <div class="" data-nav="gs-recommended-lesson" id="content-load">
                           <ul>
 							  <?php  foreach($get_attachment as $list){ ?>

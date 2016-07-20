@@ -27,7 +27,11 @@ table, th, td {
     <td><?php echo $data['lang'];?></td>
     <td><?php echo $data['title'];?></td>
     <td><?php echo $data['is_active'];?></td>
-    <td><a href="<?php echo site_url("attachment/add_edit_attachment");?>/<?php echo $data['id']; ?>"> <?php echo "Edit";?></a></td>
+    <td><a title="Edit" href="<?php echo site_url("attachment/add_edit_attachment");?>/<?php echo $data['id']; ?>"> 
+		<span class="fa-stack">
+			<i class="fa fa-pencil"></i>
+		</span></a>
+	</td>
   </tr>
   <?php $i++; } ?>
 </table>

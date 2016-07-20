@@ -121,6 +121,7 @@ class Lession extends Admin_controller {
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
+            //print_r($form);exit;
            
 			if(isset($form['is_active'])) { 
 				$form['is_active'] = $form['is_active'];	
@@ -129,11 +130,11 @@ class Lession extends Admin_controller {
 				$form['is_active'] = "0";
 			}
 			
-			if(isset($form['status'])) { 
-				$form['status'] = $form['status'];	
+			if(isset($form['visible_to_all'])) { 
+				$form['visible_to_all'] = $form['visible_to_all'];	
 			}
 			else { 
-				$form['status'] = "0";
+				$form['visible_to_all'] = "0";
 			}
 			
 			$ins_data = array();
@@ -195,7 +196,7 @@ class Lession extends Admin_controller {
             {
                 $this->data['title']     = "ADD LESSON";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","is_active" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => ""); 
+                $this->data['form_data'] = array("title" => "","is_active" => "","user_id" => "","status" => "","from" => "","to_date" => "","created_user" => "","visible_to_all" => ""); 
             }
             
             $this->data['attachment_list'] = "";

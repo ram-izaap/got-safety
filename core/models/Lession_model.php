@@ -151,6 +151,13 @@ class Lession_model extends App_Model {
 	}
 	
 	
+	function get_language_content($table_name,$where)
+	{
+		 $result = $this->db->get_where($table_name,$where);
+        return $result->row_array();
+	}
+	
+	
 	function get_lession_attachment_list($id="")
 	{
 		
@@ -160,6 +167,71 @@ class Lession_model extends App_Model {
         $this->db->group_by('a.id');
 		$this->db->where('a.lession_id',$id);
 		 return $result = $this->db->get()->result_array();
+		
+	}
+	
+	
+	function get_language_attachment($where)
+	{
+
+        
+        
+        $date = date('Y-m-d');
+		$user_id =  $this->session->userdata('admin_data')['id']; 
+		$role =  $this->session->userdata('admin_data')['role']; 
+		
+		if($role == '2'){
+			$user_id = $this->session->userdata('admin_data')['id'];
+		}else 
+		{
+			$user_id = '8';
+		}
+		
+		
+       $result = $this->db->select("l.id as id,a.language,la.id as laid,la.lang,a.title as att_title,a.content as att_content,a.id as att_id");
+       $this->db->from('lession l');
+       $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
+       $this->db->join('language la','la.id=a.language','left');
+       $this->db->group_by('l.id'); 
+       
+        if($role == '2'){
+        $this->db->where('l.created_user',$user_id);
+        $this->db->where($where);
+        $this->db->where('l.to_date >=',$date);
+        //$this->db->or_where('l.visible_to_all',1);
+        }else {
+			$this->db->where('l.updated_user',$user_id);
+			$this->db->where($where);
+			$this->db->where('l.to_date >=',$date);
+			 //$this->db->or_where('l.visible_to_all',1);
+		}
+		return $result = $this->db->get()->result_array();
+        
+       
+		
+	}
+	
+	
+	function get_lession_attachment_details($where)
+	{
+		
+		$result = $this->db->select("*");
+        $this->db->from('language l');
+        $this->db->join('lession_attachment a','a.language=l.id', 'right');
+        $this->db->group_by('a.id');
+		$this->db->where($where);
+		return $result = $this->db->get()->result_array();
+		
+	}
+	
+	
+	function get_language($table_name)
+    {
+		
+		$this->db->select("*");
+        $this->db->from($table_name);
+        $this->db->where('is_active',1);
+        return $result = $this->db->get()->result_array();
 		
 	}
     

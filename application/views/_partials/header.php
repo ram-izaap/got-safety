@@ -14,7 +14,7 @@
 				  
                 <h3>Got Safety? <i class="fa fa-phone"></i>(800) 734-3577 
                 <?php if($this->session->userdata('user_id') == "") { ?>
-                <a href="<?php echo base_url('login/signup');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a>
+                <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Login</strong></a>
                 
                 <?php } else { ?>
 					<a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a>
@@ -61,8 +61,9 @@
 				  
 					  <li <?php  if($this->uri->segment(1) == 'webinars') { ?> class="active"; <?php }?>><a href="<?php echo base_url("webinars");?>"> <i class="fa fa-video-camera"></i> Webinars </a></li>
 					  
-					 <?php /*  <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("lesson");?>">Safety Lessons </a></li>
-					  
+					  <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("lesson");?>">Safety Lessons </a></li>
+					   
+					 <?php /* 
 					 <li <?php  if($this->uri->segment(1) == 'posters') { ?> class="active"; <?php }?>><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> */ ?>
 					  
 					 <?php /* <li class="dropdown"><a role="button" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);"><i class="fa fa-user"></i> Client Area <span class="caret"></span></a>
