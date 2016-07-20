@@ -85,7 +85,7 @@
                     <?php echo strip_tags($info[0]['plan_desc']); ?> <br>
                     Profile ID : 
                     <?php 
-                    	if( $info[0]['payment_method']=="paypal")
+                    	if( $info[0]['payment_method']=="paypal" || $info[0]['payment_method']=="Others")
                     		echo  $info[0]['profile_id'];
                     	else
                     		echo  $info[0]['subscription_id'];

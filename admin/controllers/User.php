@@ -62,7 +62,8 @@ class User extends Admin_Controller
        	$this->load->library('authorize_arb',$config1);
         
         $this->load->model('user_model');
-        $this->load->library('Paypal_pro',$config);        
+        $this->load->library('Paypal_pro',$config);
+        $this->load->library('email');
         $this->payment_method = '';       
        
     }  
@@ -119,7 +120,7 @@ class User extends Admin_Controller
         	redirect("login");
         
     }
-		public function add_edit_user($edit_id = "")
+	public function add_edit_user($edit_id = "")
     { 
 			if(is_logged_in()) 
 			{
@@ -158,12 +159,14 @@ class User extends Admin_Controller
 
 			 $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
 			 $get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_name']));
-			 $emp_limit = $get_plan[0]['emp_limit'];
+			$emp_limit = $get_plan[0]['emp_limit'];
+			$plan_amt = $get_plan[0]['plan_amount'];
             $ins_data['name']       	= $form['name'];
             $ins_data['plan_type']       	= $form['plan_name'];
 
             $ins_data['is_active']  = $form['is_active'];
             $ins_data['email']  = $form['email'];
+            $ins_data['pay_mode']       	= "Others";
             $ins_data['employee_limit']  = $emp_limit;
             if($form['password'] == "") { 
 	
@@ -176,29 +179,50 @@ class User extends Admin_Controller
             $ins_data['role']  = 2;
             $ins_data['created_date']  = date("Y-m-d H:i:s");
             $ins_data['created_id']  = 8;
-            
+           
+
+
             if ( isset($_POST['language']) )
 			{
-            $ins_data['language']  = implode(",",$form["language"]);
-		}else {
-			$ins_data['language'] = $edit_data[0]['language'];
-		}
+           	 	$ins_data['language']  = implode(",",$form["language"]);
+			}
+			else 
+			{
+				$ins_data['language'] = $edit_data[0]['language'];
+			}
            
 			if(empty($edit_id))
 			{
-				
+				$url = "http://izaapinnovations.com/got_safety/admin/";
+		        $msg = "Your Backend Login link as client ".$url." \n\nClient Username: ".$form['name']."\nPassword: ".$form['password']."\n\nThank you.";
+	            $this->email->from('admin@gotsafety.com', 'Gotsafety');
+				$this->email->to( $form['email'] );
+				$this->email->subject('Signup Successfully');
+				$this->email->message($msg);
+				$this->email->send();
 				$folder = $form['name'];
-				mkdir('./views/repository/files/'.$folder.'', 0755,true);
-			
-			$update_data = $this->user_model->insert("users",$ins_data);
-           // $this->service_message->set_flash_message('record_insert_success');
-		}else {
-			
-			$update_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
-           // $this->service_message->set_flash_message('record_update_success');
-		}
-		redirect("user");    
-
+				mkdir('./views/repository/files/'.$folder.'', 0755,true);			
+				$update_data = $this->user_model->insert("users",$ins_data);
+				 /* Create Subscription Profile*/
+				 $sub_data['user_id'] = $update_data;
+				 $sub_data['profile_id'] = rand();
+				 $sub_data['plan_id'] = $form['plan_name'];
+				 $sub_data['profile_start_date']= date("Y-m-d H:i:s");
+				 $sub_data['next_billing_date']=date("Y-m-d H:i:s",strtotime("+31 days"));
+				 $sub_data['amount'] = $plan_amt;
+				 $sub_data['profile_status'] = "Active";
+				 $sub_data['payment_status'] = "Completed";
+				 $sub_data['payment_method'] = "Others";
+				 $sub_insert_data = $this->user_model->insert("payment_recurring_profiles",$sub_data);
+				 /*End Subscription Profile*/
+           		// $this->service_message->set_flash_message('record_insert_success');
+			}
+			else
+			{
+				$update_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
+           		// $this->service_message->set_flash_message('record_update_success');
+			}
+			redirect("user");    
 		}	
 			
 			 if($edit_id) {
@@ -428,7 +452,8 @@ class User extends Admin_Controller
 	   
 		$get_sub_id = $this->user_model->get_subscription_id($id);
 		$pay_method = (isset($get_sub_id['payment_method']))?$get_sub_id['payment_method']:"";
-		if($pay_method=="Authorize"){
+		if(strtolower($pay_method)=="authorize")
+		{
 			//Auhtorize Cancel Subscription
 			$sub_id = $get_sub_id['subscription_id'];
 			$this->load->library('authorize_arb');
@@ -447,7 +472,7 @@ class User extends Admin_Controller
 				 $this->authorize_arb->getError() . '</p>';
 			}
 		}
-		else
+		else if(strtotlower($pay_method)=="paypal")
 		{
 			$profileid = (isset($get_sub_id['profile_id']))?$get_sub_id['profile_id']:"";
             if(!empty($profileid)) {
@@ -472,7 +497,8 @@ class User extends Admin_Controller
 	{
 		if($_POST['submit']){
 		  
-			if($_POST['pay_method']=="Authorize"){
+			if($_POST['pay_method']=="Authorize")
+			{
 				$this->data['form_data'] = $_POST;
 				$form = $this->input->post();
 				$this->form_validation->set_rules($this->_payment_detail_validation_rules);
@@ -535,7 +561,7 @@ class User extends Admin_Controller
                 $change_reason  = $this->input->post('change_reason');
                 
                 //
-	        //	if($plan_detail['plan_name']==$p_id){
+	        	//	if($plan_detail['plan_name']==$p_id){
 	        		
 		        	$profileid          = $this->input->post('profile_id');
                     
@@ -617,7 +643,7 @@ class User extends Admin_Controller
 						$this->user_model->update("payment_recurring_profiles",$ins_data, array("user_id" => $id));
             		}
   
-			//	}
+					//	}
 				
 	        }
         	redirect("user/user_plan_detail/$id");

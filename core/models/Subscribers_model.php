@@ -27,7 +27,7 @@ class Subscribers_model extends App_Model {
         }
         
         
-        $this->_fields = "p.plan_type as plan_name,p.plan_amount,u.*,u.id as id,prp.*,prp.id as prp_id,prp.user_id,IF(u.is_active='1','Active','Inactive') as is_active,IF(prp.payment_method='paypal',prp.profile_id,prp.subscription_id)as profile_id";
+        $this->_fields = "p.plan_type as plan_name,p.plan_amount,u.*,u.id as id,prp.*,prp.id as prp_id,prp.user_id,IF(u.is_active='1','Active','Inactive') as is_active,IF(prp.payment_method='authorize',prp.subscription_id,prp.profile_id)as profile_id";
         
         
         

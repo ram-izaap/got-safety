@@ -118,7 +118,8 @@ class User_Model extends App_Model {
     
     function insert($table_name,$data)
     {
-        return $this->db->insert($table_name,$data);
+        $this->db->insert($table_name,$data);
+        return $this->db->insert_id();
     }
     
     
