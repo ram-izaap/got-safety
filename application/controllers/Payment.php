@@ -18,9 +18,32 @@ class Payment extends App_Controller
     array('field' => 'exp_year', 'label' => 'Expiration Year', 'rules' => 'trim|required'),
     array('field'=>'email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
     array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
-    array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]')
-				);
+    array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]'));
+    
+    protected $_paypal_validation_rules =    array (
+                                                        array('field'=>'firstname','label'=>'First Name','rules'=>'trim|required|alpha'),		
+                                                        array('field' => 'lastname', 'label' => 'Last Name', 'rules' => 'trim|required|alpha'),
+                                                        array('field' => 'pay_address', 'label' => 'Address', 'rules' => 'trim|required'),
+                                                        array('field' => 'pay_city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
+                                                        array('field' => 'pay_state', 'label' => 'State', 'rules' => 'trim|required|alpha'),
+                                                        array('field' => 'pay_zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[6]|min_length[6]'),
+                                                        array('field' => 'pay_country', 'label' => 'Country', 'rules' => 'trim|required|alpha'),
+                                                        array('field' => 'pay_email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
+                                                        array('field' => 'pay_phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
+                                                        array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
+                                                    );
                 
+    protected $fname   = '';
+    protected $lname   = '';
+    protected $address = '';
+    protected $city    = '';
+    protected $state   = '';
+    protected $zipcode = '';
+    protected $country = ''; 
+    protected $u_email = '';
+    protected $phone   = '';
+    protected $fax     = ''; 
+     
      
      protected $payment_method;
      
@@ -71,8 +94,7 @@ class Payment extends App_Controller
      	  
      		$this->form_validation->set_rules($this->_auth_validation_rules);
             
-     		if($this->form_validation->run())
-     		{
+     		if($this->form_validation->run()){
 	                        
 	        }
 	        else
@@ -95,19 +117,11 @@ class Payment extends App_Controller
 				$ins = $this->input->post();
 		        $ins['description'] = $this->input->post('plan_name');
 		    	$ins['amount'] = $this->input->post('plan_cost');
-		       	/*$a = $this->create_auth_cust_profile( $ins );
-		      	
-		      	$res['profileid'] = $a['profileid'];
-		        $res['paymentprofileid'] = $a['paymentprofileid'];
-		        $res['shippingprofileid'] = $a['shippingprofileid'];*/
 		        $res['profileid']=uniqid();
-		        //$res['paymentprofileid']=time();
-		        //$res['shippingprofileid']=time();
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
-		        //$c = $this->create_auth_transaction($res,$ins);
-		        if($res['profileid']!='' && $b['subs_status']=="Success")
-		        {
+                
+		        if($res['profileid']!='' && $b['subs_status']=="Success"){
 		        	$usr_data['name']=$this->session->userdata['signup_data']['name'];
 	                $usr_data['email']= $this->session->userdata['signup_data']['email'];
 	                $usr_data['role']= 2;
@@ -129,8 +143,7 @@ class Payment extends App_Controller
 				 	if(!file_exists($dir))	
 		        		mkdir($dir, 0755,true);
                 	$userid = $this->login_model->insert("users",$usr_data);
-                	if(!empty($add_user)) 
-	                {
+                	if(!empty($add_user)) {
 	                    //$this->service_message->set_flash_message('signup_success');
 	                }    
 	                $url = "http://izaapinnovations.com/got_safety/admin/";
@@ -293,82 +306,105 @@ class Payment extends App_Controller
      //paypal set express checkout
      function paypal()
      {
-        $cancelUrl = base_url()."payment/cancel";
-        $returnUrl = base_url()."payment/success";
-        $ipn_url   = base_url()."payment/notify";
+        $this->form_validation->set_rules($this->_paypal_validation_rules);
         
-        $plan_details = $this->session->userdata('plan_details');
-        //$plan_details = $plan_details['plan_details'];
-        
-		$SECFields = array(
-							'token' => '', 								
-							'maxamt' => '', 						
-							'returnurl' => $returnUrl, 							
-							'cancelurl' => $cancelUrl, 												 						 			
-							'surveyquestion' => '', 					
-							'surveyenable' => '', 																										
-						);
-		
-		$Payments = array();
-		$Payment = array(
-    						'amt' => $plan_details['plan_amount'], 							
-    						'currencycode' => 'USD', 					
-    						'itemamt' => $plan_details['plan_amount'], 						  						
-    						'notifyurl' => $ipn_url			
-						);
-	
-				
-		$PaymentOrderItems = array();
-		$Item = array(
-					   'name' => ucfirst($plan_details['plan_type']), 								
-					   'desc' => strip_tags($plan_details['plan_desc']), 								
-					   'amt' => $plan_details['plan_amount']
-                      );
-		array_push($PaymentOrderItems, $Item);
-		
-		
-		$Payment['order_items'] = $PaymentOrderItems;
-		
-		array_push($Payments, $Payment);
-		
-		$BillingAgreements = array();
-		$Item = array(
-					  'l_billingtype' => 'RecurringPayments', 							
-					  'l_billingagreementdescription' => 'SubscriptionPlans', 			  
-					  'l_paymenttype' => 'Any', 												
-					  );
-		array_push($BillingAgreements, $Item);
-		
-		$PayPalRequestData = array(
-            						'SECFields' => $SECFields, 
-            						'Payments' => $Payments, 
-            						'BillingAgreements' => $BillingAgreements
-            					  );
-					
-		$PayPalResult = $this->paypal_pro->SetExpressCheckout($PayPalRequestData);
-		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
-			$errors = array('Errors'=>$PayPalResult['ERRORS']);
-			$this->load->view('payment/paypal/error',$errors);
-		}
-		else
-		{
-          if(!count($PayPalResult['ERRORS'])) {
-             $PayPalResult['payment_method'] = 'paypal';
-             $this->session->set_userdata("payment_method",$PayPalResult);
-             redirect($PayPalResult['REDIRECTURL']);
-          }
-		}
-     }
+ 		if($this->form_validation->run()){
+            
+            $this->session->set_userdata("bill_addr",$_POST);
+            
+            $cancelUrl = base_url()."payment/cancel";
+            $returnUrl = base_url()."payment/success";
+            $ipn_url   = base_url()."payment/notify";
+            
+            
+            $plan_details = $this->session->userdata('plan_details');
+            
+    		$SECFields    = array(
+    							'token' => '', 								
+    							'maxamt' => '', 						
+    							'returnurl' => $returnUrl, 							
+    							'cancelurl' => $cancelUrl, 												 						 			
+    							'surveyquestion' => '', 					
+    							'surveyenable' => '', 																										
+    						 );
+    		
+    		$Payments = array();
+    		$Payment = array(
+        						'amt' => $plan_details['plan_amount'], 							
+        						'currencycode' => 'USD', 					
+        						'itemamt' => $plan_details['plan_amount'], 						  						
+        						'notifyurl' => $ipn_url			
+    						);
+    	
+    				
+    		$PaymentOrderItems = array();
+    		$Item = array(
+    					   'name' => ucfirst($plan_details['plan_type']), 								
+    					   'desc' => strip_tags($plan_details['plan_desc']), 								
+    					   'amt' => $plan_details['plan_amount']
+                          );
+    		array_push($PaymentOrderItems, $Item);
+    		
+    		
+    		$Payment['order_items'] = $PaymentOrderItems;
+    		
+    		array_push($Payments, $Payment);
+    		
+    		$BillingAgreements = array();
+    		$Item = array(
+    					  'l_billingtype' => 'RecurringPayments', 							
+    					  'l_billingagreementdescription' => 'SubscriptionPlans', 			  
+    					  'l_paymenttype' => 'Any', 												
+    					  );
+    		array_push($BillingAgreements, $Item);
+    		
+    		$PayPalRequestData = array(
+                						'SECFields' => $SECFields, 
+                						'Payments' => $Payments, 
+                						'BillingAgreements' => $BillingAgreements
+                					  );
+    					
+    		$PayPalResult = $this->paypal_pro->SetExpressCheckout($PayPalRequestData);
+    		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
+    			$errors = array('Errors'=>$PayPalResult['ERRORS']);
+    			$this->load->view('payment/paypal/error',$errors);
+    		}
+    		else
+    		{
+                  if(!count($PayPalResult['ERRORS'])) {
+                     $PayPalResult['payment_method'] = 'paypal';
+                     $this->session->set_userdata("payment_method",$PayPalResult);
+                     redirect($PayPalResult['REDIRECTURL']);
+                  }
+    		 }
+       } 
+       else
+        {
+        	$this->layout->view('payment/index','frontend');
+        }
+   }
      
      //paypal succcess get express checkout details
      function success()
      {
-        $payment_session = $this->session->userdata('payment_method');
         
+        $form = $this->session->userdata("bill_addr");
+            
+        $this->fname   = $form['firstname'];
+        $this->lname   = $form['lastname'];
+        $this->u_email = $form['pay_email'];
+        $this->address = $form['pay_address'];
+        $this->city    = $form['pay_city'];
+        $this->state   = $form['pay_state'];
+        $this->zipcode = $form['pay_zipcode'];
+        $this->country = $form['pay_country'];
+        $this->fax     = $form['pay_fax'];
+        $this->phone   = $form['pay_phone'];
+        
+        $payment_session = $this->session->userdata('payment_method');
         $this->payment_method = $payment_session['payment_method'];
         
         if($payment_session['payment_method'] == 'paypal') {
-           
             $token           = (isset($_REQUEST['token']))?$_REQUEST['token']:""; 
     		$PayPalResult    = $this->paypal_pro->GetExpressCheckoutDetails($token);
     		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
@@ -387,7 +423,6 @@ class Payment extends App_Controller
      //payment cancel 
      function cancel()
      {
-        //$this->layout->add_stylesheets("custom");
         $this->load->view("payment/cancel");
      }
      	
@@ -475,25 +510,25 @@ class Payment extends App_Controller
         							'currencycode' => 'USD', 												
     						     );								
 		$PayerInfo      = array(
-        							'email' => $paypal_token['EMAIL'], 								
+        							'email' => $this->u_email, 								
         							'payerid' => $payerid, 							
         							'payerstatus' => $paypal_token['PAYERSTATUS']						
 						       );
 						
 		$PayerName      = array(						
-    							     'firstname' => $paypal_token['FIRSTNAME'], 							
+    							     'firstname' => $this->fname, 							
     							     'middlename' => '', 						
-    							     'lastname' => $paypal_token['LASTNAME']						
+    							     'lastname' => $this->lname						
 						       );
 						
 		$BillingAddress = array(
-    								'street' => 'West Street', 					
+    								'street' => $this->address, 					
     								'street2' => '', 						
-    								'city' => 'Florida', 						
-    								'state' => 'Florida', 							
+    								'city' => $this->city, 						
+    								'state' => $this->state, 							
     								'countrycode' => 'US', 				
-    								'zip' => '32005', 					
-    								'phonenum' => '' 				
+    								'zip' => $this->zipcode, 					
+    								'phonenum' => $this->phone				
 							   );
 						
 		$PayPalRequestData = array(
@@ -583,6 +618,7 @@ class Payment extends App_Controller
                 $payment_status = (isset($_POST['payment_status']))?$_POST['payment_status']:"pending";
                 $profile_id     = (isset($_POST['recurring_payment_id']))?$_POST['recurring_payment_id']:"";
                 $txn_type       = (isset($_POST['txn_type']))?$_POST['txn_type']:"";
+                
                 if(!empty($profile_id)){
                     //update initial payment status
                     $this->db->query("update payment_recurring_profiles set payment_status='".$payment_status."' where profile_id='".$profile_id."'");
@@ -594,6 +630,12 @@ class Payment extends App_Controller
                     $this->db->query("update users set is_active=1 where id='".$user['user_id']."'");
                     $ipn_data = json_encode($_POST);
                     $this->db->query("update payment_transaction_history set txn_type='".$txn_type."', paypal_ipn='".$ipn_data."' where profile_id='".$profile_id."'");
+                    
+                    //send mail to user for active profile notification
+                    $msg  = "Hi".ucfirst($user['name']).",";
+                    $msg .= "<br /> <br />";
+                    $msg .= "Your Profile has been  Activated successfully. now you can access your plans in <a href='".site_url()."'>Got Safety</a>";
+                    $this->user_email($user['email'],'Profile Activation',$msg);
                 } 
             }
         }
@@ -604,19 +646,34 @@ class Payment extends App_Controller
        
         $ins_data = $this->session->userdata("signup_data");
         
-        mkdir('./admin/views/repository/files/'.$folder.'', 0755,true);
-                
-        $register_user_id = $this->login_model->insert("users",$ins_data);
+        $ins_data['fname']  = $this->fname;
+        $ins_data['lname']  = $this->lname;
+        $ins_data['address']= $this->address;
+        $ins_data['state']  = $this->state;
+        $ins_data['city']   = $this->city;
+        $ins_data['zipcode']= $this->zipcode;
+        $ins_data['fax']    = $this->fax;
+        $ins_data['phone']  = $this->phone;
         
-     	if(!empty($register_user_id)) {
-          $plan_details['user_id']= $register_user_id;  
-        }    
-        $url = "http://izaapinnovations.com/got_safety/admin/";
-        $msg = " Your Backend Login link as client ".$url." <br>
-        	     <b>Client Username</b>: ".$ins_data['name']."<br>
-    		     <b>Password</b>: ".$ins_data['password']."<br><br>
-    		     Thanks you..";                
-        user_email($ins_data['email'],'Signup Successfully',$msg);
+        
+        $folder = $ins_data['name'];
+        $path   = './admin/views/repository/files/'.$folder;
+        
+        if(!file_exists($path)) {
+        
+            mkdir('./admin/views/repository/files/'.$folder, 0755,true);
+                    
+            $register_user_id = $this->login_model->insert("users",$ins_data);  
+             
+            $url = "http://izaapinnovations.com/got_safety/admin/";
+            $msg = " Your Backend Login link as client ".$url." <br>
+            	     <b>Client Username</b>: ".$ins_data['name']."<br>
+        		     <b>Password</b>: ".$ins_data['password']."<br><br>
+        		     Thanks you..";                
+            $this->user_email($ins_data['email'],'Signup Successfully',$msg);
+            
+            return $register_user_id;
+      }  
    } 
   
   function user_email($email,$subject,$message)
@@ -629,8 +686,8 @@ class Payment extends App_Controller
         
         $this->email->from('admin@gotsafety.com', 'Gotsafety');
     	$this->email->to($email);
-    	$this->email->subject('Signup Successfully');
-    	$this->email->message($msg);
+    	$this->email->subject($subject);
+    	$this->email->message($message);
     	$this->email->send();
          
 

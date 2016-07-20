@@ -19,8 +19,7 @@
 						<h4>Choose Payment Gateway</h4>
 						<p>
 						<?php
-						if($this->session->userdata)
-						{
+						if($this->session->userdata){
 							$email = $this->session->userdata['signup_data']['email'];
 						}
 						else
@@ -35,9 +34,96 @@
                          
 						</p>
 						<div class="paypal_div">
-                          <a href="<?php echo base_url();?>payment/paypal"> 
-							<input type="image" src="https://www.paypalobjects.com/webstatic/mktg/merchant/images/express-checkout-hero.png" style="width:200px;" />
-                           </a> 
+                          	<form name="paypal_form" method="post" action="<?php echo base_url('payment/paypal'); ?>"	
+									autocomplete="on">
+									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details']['plan_type']:"";?>">
+									<input type="hidden" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details']['plan_amount']))?$_SESSION['plan_details']['plan_amount']:"";?>">
+									<input type="hidden" name="plan_id" value="<?php echo (isset($_SESSION['plan_details']['id']))?$_SESSION['plan_details']['id']:"";?>">
+								     <h5>Personal Info</h5>
+									 <div class="row">
+					                    <div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="firstname" id="firstname" class="form-control input-lg" 
+					                        value="<?php echo set_value('firstname');?>" placeholder="First Name" >
+					                         <span class="vstar"> <?php echo form_error('firstname');?></span>
+					                      </div>
+					                    </div>
+					                    <div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="lastname" id="lastname" class="form-control input-lg" value="<?php echo set_value('lastname');?>" placeholder="Last Name">
+					                         <span class="vstar"> <?php echo form_error('lastname');?></span>
+					                      </div>
+					                    </div>
+					                   </div>
+				                    <div class="row">
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_email" id="pay_email" class="form-control input-lg" 
+					                        value="<?php echo (!empty($email))?$email:set_value('pay_email');?>" readonly placeholder="Email-ID">
+					                         <span class="vstar"> <?php echo form_error('pay_email');?></span>
+					                      </div>
+				                    	</div>
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_address" id="pay_address" class="form-control input-lg" value="<?php echo set_value('pay_address');?>" placeholder="Address">
+					                         <span class="vstar"> <?php echo form_error('pay_address');?></span>
+					                      </div>
+				                    	</div>
+				                    </div>
+				                    <div class="row">
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_city" id="pay_city" class="form-control input-lg" 
+					                        value="<?php echo set_value('pay_city');?>" placeholder="City">
+					                         <span class="vstar"> <?php echo form_error('pay_city');?></span>
+					                      </div>
+				                    	</div>
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_state" id="pay_state" class="form-control input-lg"
+					                         value="<?php echo set_value('pay_state');?>" placeholder="State">
+					                         <span class="vstar"> <?php echo form_error('pay_state');?></span>
+					                      </div>
+				                    	</div>
+				                    </div>
+				                    <div class="row">
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_zipcode" id="pay_zipcode" class="form-control input-lg" value="<?php echo set_value('pay_zipcode');?>" placeholder="Zipcode">
+					                         <span class="vstar"> <?php echo form_error('pay_zipcode');?></span>
+					                      </div>
+				                    	</div>
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_country" id="pay_country" class="form-control input-lg" value="<?php echo set_value('pay_country');?>" placeholder="Country">
+					                         <span class="vstar"> <?php echo form_error('pay_country');?></span>
+					                      </div>
+				                    	</div>
+				                    </div>
+				                    <div class="row">
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_phone" id="pay_phone" class="form-control input-lg" value="<?php echo set_value('pay_phone');?>" placeholder="Mobile">
+					                         <span class="vstar"> <?php echo form_error('pay_phone');?></span>
+					                      </div>
+				                    	</div>
+				                    	<div class="col-sm-6">
+					                      <div class="form-group">
+					                        <input type="text" name="pay_fax" id="pay_fax" class="form-control input-lg" value="<?php echo set_value('pay_fax');?>" placeholder="Fax">
+					                         <span class="vstar"> <?php echo form_error('pay_fax');?></span>
+					                      </div>
+				                    	</div>
+				                    </div>
+				                 	
+					                    <div class="row">
+					                   		<div class="col-sm-12">
+					                   			<input type="submit" class="btn btn-block client-login btn-danger" name="submit" value="Pay & Register" />
+					                   		</div>
+					                    </div>
+								</form>
+                           
+							  
+                           
 						</div>
 						<p>
 							<input <?php echo set_radio('pay_method','2',TRUE);?> name="pay_method" type="radio" value="2">&nbsp;&nbsp;&nbsp;Authorize.net
