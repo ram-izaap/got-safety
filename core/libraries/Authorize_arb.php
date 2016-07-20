@@ -25,6 +25,8 @@ class Authorize_arb
 		'update' => 'ARBUpdateSubscriptionRequest',
 		'cancel' => 'ARBCancelSubscriptionRequest',
 		'get' 	 => 'ARBGetSubscriptionRequest',
+		'batch' => 'getSettledBatchListRequest',
+		'trans' => 'getTransactionListRequest'
 		);
 	
     private $type;						// The current action type we are working with
@@ -306,9 +308,22 @@ class Authorize_arb
 	{
 		//echo "<pre>";
 		//print_r($this->response->subscription->);exit;
-		return $this->response;
+		return $this->response->batchList;
 	}
-	
+	public function getBatchId()
+	{
+		//echo "<pre>";
+		//print_r($this->response->batchList);
+		return $this->response->batchList;
+	}
+	public function getTransList()
+	{
+		return $this->response->transactions->transaction;
+	}
+	public function getSubscriptionId()
+	{
+		return $this->response->subscription->id;
+	}
 	// Get the reference id of the last request
 	public function getRefId()
 	{

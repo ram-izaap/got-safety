@@ -466,12 +466,13 @@ class User extends Admin_Controller
 		{
 			//Auhtorize Cancel Subscription
 			$sub_id = $get_sub_id['subscription_id'];
-			$this->load->library('authorize_arb');
+			//$this->load->library('authorize_arb');
 			$this->authorize_arb->startData('cancel');
 			$refId = substr(md5( microtime() . 'ref' ), 0, 20);
 			$this->authorize_arb->addData('refId', $refId);
 			$this->authorize_arb->addData('subscriptionId', $sub_id);
-			if( $this->authorize_arb->send()){
+			if( $this->authorize_arb->send())
+			{
 				$ref_id=$this->authorize_arb->getRefId();
 				$ins_data['profile_status'] = "Inactive";
 				$this->user_model->update("payment_recurring_profiles",$ins_data,

@@ -87,7 +87,42 @@ class Payment extends App_Controller
      	$this->layout->view('payment/index','frontend');
      }
      
-     
+       
+   function gettranslist()
+   {
+        $this->authorize_arb->startData('batch');
+        // Locally-defined reference ID (can't be longer than 20 chars)
+        $refId = substr(md5( microtime() . 'ref' ), 0, 20);
+        $firstSettlementDate = date("Y-m-01")."T00:00:00";
+        $lastSettlementDate =  date("Y-m-31")."T00:00:00";
+        $this->authorize_arb->addData('refId', $refId);
+        $this->authorize_arb->addData('firstSettlementDate',$firstSettlementDate);
+        $this->authorize_arb->addData('lastSettlementDate',$lastSettlementDate);
+        $this->authorize_arb->send();
+        echo "<pre>";
+        print_r($this->authorize_arb->getName());
+        exit;
+        /*foreach ($this->authorize_arb->getName() as $value) 
+        {
+            foreach($this->authorize_arb->getBatchId()->batch as $batch)
+            {
+                echo $batch->batchId."<br>---Start---<br><br>";
+                $this->authorize_arb->startData('trans');
+                $this->authorize_arb->addData('refId', $refId);
+                $this->authorize_arb->addData('batchId',$batch->batchId);
+                $this->authorize_arb->send();
+                foreach ($this->authorize_arb->getTransList() as $trans) 
+                {
+                    if($trans->subscription->id!='')
+                    echo $trans->subscription->id."<br>";
+                }
+                echo "<br><br>---End---<br><br>";
+            }
+        }
+        //echo "<pre>";print_r($this->authorize_arb->getName());
+        exit; */
+   }
+   
      public function check()
      {
      	if($_POST){
@@ -186,7 +221,7 @@ class Payment extends App_Controller
 		            $this->payment_model->insert("payment_transaction_history",$trans_data);
 		            $_SESSION['signup_succ']="User Profile has been created sucessfully.";
 		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-					redirect("login/signup");
+					$this->load->view("payment/success");
 		        }
 		        else if($b['subs_status']=="Fail")
 		        {
