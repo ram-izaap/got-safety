@@ -13,6 +13,16 @@
 
 
                <aside class="col-sm-12 bg-white inner-full">
+               <?php
+                if(isset($_SESSION['log_fail']))
+                {?>
+               <div class="alert alert-danger alert-dismissable">
+                <button class="close" data-dismiss="alert" aria-hidden="true">X</button>
+                  <?php 
+                    echo $this->session->flashdata('log_fail');
+                    ?>
+               </div>
+               <?php }?>
                  <div class="inner-content form-wrap">
                       
                     

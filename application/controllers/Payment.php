@@ -105,15 +105,15 @@ class Payment extends App_Controller
 		        //$res['shippingprofileid']=time();
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
-		        $c = $this->create_auth_transaction($res,$ins);
-		        if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
+		        //$c = $this->create_auth_transaction($res,$ins);
+		        if($res['profileid']!='' && $b['subs_status']=="Success")
 		        {
 		        	$usr_data['name']=$this->session->userdata['signup_data']['name'];
 	                $usr_data['email']= $this->session->userdata['signup_data']['email'];
 	                $usr_data['role']= 2;
 	                $usr_data['password']=md5($this->session->userdata['signup_data']['password']);
 	                $usr_data['created_date']  =  date("Y-m-d H:i:s");
-					$usr_data['is_active']  = 1;
+					$usr_data['is_active']  = 0;
 					$usr_data['language']  = 1;
 					$usr_data['fname']  = $this->input->post('fname');
 					$usr_data['lname']  = $this->input->post('lname');
@@ -155,7 +155,7 @@ class Payment extends App_Controller
 		            $ins_data['subscription_id'] = $b['subs_id'];
 		            $ins_data['invoice_no'] = $b['invoice_no'];
 					$ins_data['amount'] = $ins['amount'];
-		            $ins_data['profile_status'] = "Active";
+		            $ins_data['profile_status'] = "Inactive";
 		            $ins_data['payment_status'] = "Completed";
 		            $ins_data['last_payment_date'] = date('Y-m-d H:i:s');
 		            $ins_data['last_payment_amt'] = $ins['amount'];
@@ -167,8 +167,8 @@ class Payment extends App_Controller
 		            $trans_data['last_payment_amt']=  $ins['amount'];
 		            $trans_data['last_payment_date']=  date("Y-m-d H:i:s");
 		            $trans_data['created_date']=  date("Y-m-d H:i:s");
-		            $trans_data['trans_id']= $c['transid'];
-		            $trans_data['status']= $c['trans_status'];
+		            $trans_data['trans_id']= 0;
+		            $trans_data['status']= 'Pending';
 		            $trans_data['mode']= "Authorize";
 		            $this->payment_model->insert("payment_transaction_history",$trans_data);
 		            $_SESSION['signup_succ']="User Profile has been created sucessfully.";
@@ -248,10 +248,11 @@ class Payment extends App_Controller
                 ),
             'amount' => $post['amount'],
             //'trialAmount' => 0.00,            
-            'payment' => array(   'creditCard' => array(    'cardNumber' => $post['c_number'],
-                                                            'expirationDate' => $post['exp_year']."-".$post['exp_month'],
-                                                            'cardCode' => $post['cvv'],
-                                                          ),
+		    'payment' => array(   'creditCard'=>array(
+		    		'cardNumber' => $post['c_number'],
+                    'expirationDate' => $post['exp_year']."-".$post['exp_month'],
+                    'cardCode' => $post['cvv'],
+                  ),
                                 ),
             'order' => array(
                                 'invoiceNumber' => $this->data['invoice_no'],

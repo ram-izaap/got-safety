@@ -69,13 +69,24 @@ class Login extends App_Controller {
             $form      = $this->input->post();
             $user_data = $this->login_model->user_login($form['name'], $form['password']);
             
-            if($user_data == 1){ 
+            if($user_data == 1)
+            { 
 				  //$this->service_message->set_flash_message('login_success');
-                redirect("");
+                if($this->session->userdata('user_detail')['is_active']==1)
+                    redirect("");
+                else
+                {
+                    $this->session->unset_userdata('user_detail');
+                    $this->session->set_flashdata('log_fail',"Your account has been blocked or Inactive due to pending payment. Please try after some time or contact administrator to resolve.",TRUE);
+                    redirect("login");
+
+                }
             }
             else
             { 
-				// $this->service_message->set_flash_message('login_unsuccess');
+                $this->session->unset_userdata('user_detail');
+				$this->session->set_flashdata('log_fail',"Invalid Username or Password",TRUE);
+                //$this->session->keep_flashdata('log_fail');
 				redirect("login");
 			}
             
