@@ -295,7 +295,7 @@ class Payment extends App_Controller
             'amount' => $post['amount'],
             //'trialAmount' => 0.00,            
 		    'payment' => array(   'creditCard'=>array(
-		    		'cardNumber' => $post['c_number'],
+      		'cardNumber' => $post['c_number'],
                     'expirationDate' => $post['exp_year']."-".$post['exp_month'],
                     'cardCode' => $post['cvv'],
                   ),
@@ -313,9 +313,9 @@ class Payment extends App_Controller
                                 'firstName' => $post['fname'],
                                 'lastName' => $post['lname'],
                                 'address' => $post['address'],
-                                'city' => $post['city'],
-                                'state' => $post['state'],
-                                'zip' => $post['zipcode'],
+                                'city'   => $post['city'],
+                                'state'  => $post['state'],
+                                'zip'     => $post['zipcode'],
                                 'country' => $post['country'],
                              ),
             );

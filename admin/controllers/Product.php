@@ -15,6 +15,7 @@ class Product extends Admin_controller {
                                                  array('field' => 'price[]', 'label' => 'Amount', 'rules'=>'callback_check_attr_amt|numeric')
                                         );
 	
+												
    public $upload_data = array();
 
    function __construct() 
@@ -86,17 +87,27 @@ class Product extends Admin_controller {
 
         $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 
+        if (empty($_FILES['img']['name']) && empty($_POST['prod_img']))
+        { 
+            $this->form_validation->set_rules('img', 'Image', 'required');
+        } 
         
 		
 		$this->form_validation->set_rules($this->_product_validation_rules);
 	
+
         $this->upload_data = array();
 		if($this->form_validation->run())
         { 
             $form = $this->input->post();
 
+            if(!empty($_FILES['img']['tmp_name']) )
             if(count($this->upload_data) )
             { 
+              $upload_data = $this->do_upload();
+              //$pathMain = '../assets/product_images/';
+              //$this->resize_image($pathMain . '/' . $upload_data['img']['file_name']);
+              $filename = (isset($upload_data['img']['file_name']))?$upload_data['img']['file_name']:"";
               $filename = (isset($this->upload_data['img']['file_name']))?$this->upload_data['img']['file_name']:"";
             }
             
@@ -325,9 +336,13 @@ class Product extends Admin_controller {
 
     function do_upload()
     {
+       $this->load->library('image_lib');
+
+
       if(!empty($_FILES['img']['name']) && $_FILES['img']['name']!='')
       {
         $config['upload_path'] = '../assets/product_images/';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png|GIF|JPG|PNG|JPEG';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '2048';
         $config['overwrite'] = FALSE;
@@ -338,6 +353,7 @@ class Product extends Admin_controller {
         if (!$this->upload->do_upload("img"))
         {
             $error = array('error' => $this->upload->display_errors());
+            return $error;
             $this->form_validation->set_message("do_upload",$error['error']);
             return false;
         }
@@ -360,6 +376,7 @@ class Product extends Admin_controller {
       }
     }
 
+    function resize_image($sourcePath)
     /*function resize_image($sourcePath)
     {
         $this->image_lib->clear();
@@ -376,6 +393,7 @@ class Product extends Admin_controller {
         if ($this->image_lib->resize())
             return true;
         return false;
+    }
     }*/
 
     function view_product_details($pid)
@@ -422,4 +440,3 @@ class Product extends Admin_controller {
         }
     }   
  }
-
