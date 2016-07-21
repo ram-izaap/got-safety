@@ -3,7 +3,7 @@
   <!-- rwo default --> 
   <div class="row" data-row="default">
     <aside class="col-sm-12 bg-white inner-full">
-      <div class="inner-content">
+      <div class="inner-content sidebar-fixed">
         <!-- Left Bar -->
         <?php 
           $this->load->view("product/left_sidebar",$this->data['cat_data']);

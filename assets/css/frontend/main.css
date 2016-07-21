@@ -955,6 +955,13 @@ color: #fff;
 /* HD Tab View Start
 **************************************/
 
+@media screen and (max-width:991px){
+ 
+ .content-area .inner-content{ display:block;}
+ 
+ }
+
+
   @media (max-width: 980px) {
 
 /*body { font-size: 16px; }*/
@@ -967,6 +974,8 @@ color: #fff;
 .product-poster { margin: 0 auto 12px; }
 
 }
+
+
 
 /* HD Tab View End
 **************************************/
@@ -1059,9 +1068,28 @@ header .container { max-width: 320px; }
 [data-role="sorting"] select { width: 200px; }
 .checkout-section .checkout-review .block-price{width:50px; height:50px; line-height:50px;}
   .checkout-section .checkout-review .block-price strong{font-size:12px;}.mini-submenu .icon-bar{width:16px; margin-bottom:3px;}
+ [data-role="testimonial"] h4{ font-size:37px;}
+ .video_modal .bs-example-modal-lg h2 { font-size: 21px; margin-bottom: 18px;}
+ [data-role="sorting"] {margin-right: 0;} 
+ .main_pagination .tot_rec{ margin-top: 4px;}
+  
 }
 /* small device View End
 **************************************/
+
+@media (max-width:479px) {
+.main_pagination {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.main_pagination ul {
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+}
+
 
 @media 
   only screen and (max-width: 760px),
@@ -1081,7 +1109,38 @@ header .container { max-width: 320px; }
   
     
 
+@media (max-width: 767px) {
+.main_pagination {
+    margin-top: 12px;
+    width: 100%;
+}
 
+.main_pagination .sub_pagination {
+  clear: both;  
+    float: right;
+}
+
+.main_pagination .tot_rec {
+    display: inline-block;
+    margin-top:18px;
+    vertical-align: top;
+}
+
+[data-role="sorting"] {
+    float: right;
+    text-align: right;
+    width: 100%;
+}
+
+[data-role="sorting"] {
+    margin-right: 0;
+}
+
+.main_pagination .pagination {
+    margin-top: 12px;
+}
+
+}
 
 
 
@@ -1405,7 +1464,18 @@ color: #fff;}
 color: #fff;}
 .language-list{ margin-top:10px;}
 
-.content-bar{ max-height:801px;overflow-x:hidden;}
+/*.content-bar{ max-height:801px;overflow-x:hidden;}*/
 
 .vstar {color:red !important;font-size:12px;}
 
+.sidebar-fixed {
+             
+  display: -webkit-box;      
+  display: -moz-box;         
+  display: -ms-flexbox;     
+  display: -webkit-flex;  
+ display: flex;
+
+}
+
+.main_pagination {margin-top:26px; clear:both;}

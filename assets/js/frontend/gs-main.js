@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-    if (window.matchMedia("(min-width: 992px)").matches) {
+    /*if (window.matchMedia("(min-width: 992px)").matches) {
         $(".content-bar").height($(".inner-full").height());
         $(".right-bar").height($(".inner-full").height());
     }
@@ -10,7 +10,7 @@ $(document).ready(function() {
     }
     if (window.matchMedia("(min-width: 768px)").matches) {
         $(".home-right").height($(".content-area").height());
-    };
+    };*/
 
     function init() {
         var imgDefer = document.getElementsByTagName('img');

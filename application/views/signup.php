@@ -39,7 +39,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Username" onfocus="(this.value == 'Username') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Username')">
+                        <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Client/App Username" onfocus="(this.value == 'Client/App Username') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client/App Username')">
                         <span class="vstar" 
                               <?php echo form_error('name', '
                         <span class="help-block">', '
@@ -61,7 +61,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control input-lg" value="<?php echo set_value('password',$form_data['password']); ?>" placeholder="Password" onfocus="(this.value == 'Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Password')">
+                    <input type="password" name="password" id="password" class="form-control input-lg" value="<?php echo set_value('password',$form_data['password']); ?>" placeholder="Client/App Password" onfocus="(this.value == 'Client/App Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client/App Password')">
                     <span class="vstar" 
                           <?php echo form_error('password', '
                     <span class="help-block">', '
