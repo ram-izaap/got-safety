@@ -97,23 +97,5 @@ Change Quick Sidebar Width
 .content-order-area .order-invoice-wrapper address strong {
     font-size: 16px;
 }
-.att-lesson { width:80%; margin:20px auto; }
-.att-lesson th { text-align: center; border-top:none !important; font-size: 14px;}
-.att-lesson td {  text-align:center; border-top:1px solid #000 !important;}
-.att-main{ width:100%; display:inline-block; border:1px solid #ccc; margin-top:20px;}
-.att-main h2 {background: #8795A8; margin-bottom: 0; margin-top: 0; padding: 6px 12px; color:#ffffff;}
-.add-att { background:#364150; padding: 6px 12px; color:#fff; float:right;   margin-right: 22px; text-decoration:none;}
-.att-back {  margin: 0 16px 16px 0 !important;}
-.add-att:hover {
-    background-color: #3b9c96;
-    border-color: #307f7a;
-    color: #fff;
-    text-decoration: none;
-}
-.add-att::before {
-    content: "+";
-    font-size: 15px;
-    padding-right: 5px;
-   
-}
+
 

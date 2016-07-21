@@ -198,12 +198,12 @@ class Lession_model extends App_Model {
         $this->db->where($where);
 
         $this->db->where('l.to_date >=',$date);
-        //$this->db->or_where('l.visible_to_all',1);
+        
         }else {
 			$this->db->where('l.updated_user',$user_id);
 			$this->db->where($where);
 			$this->db->where('l.to_date >=',$date);
-			 //$this->db->or_where('l.visible_to_all',1);
+			
 		}
 		return $result = $this->db->get()->result_array();
         

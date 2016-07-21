@@ -293,7 +293,7 @@ class Attachment extends Admin_controller {
 	function do_upload2()
 	{
 		 
-		$config['upload_path'] = '../assets/images/admin/lession_attachment/quiz';
+		$config['upload_path'] = '../assets/images/admin/lession_attachment';
 
 		$config['allowed_types'] = 'pdf|doc';
 		$config['max_size']	= '10000';
