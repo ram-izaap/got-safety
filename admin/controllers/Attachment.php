@@ -112,6 +112,8 @@ class Attachment extends Admin_controller {
 			$this->data['get_menu'] = $this->attachment_model->get_menu("language");
 			$this->form_validation->set_rules($this->_attachment_validation_rules);
 			 /*Changed By Ram*/
+			 $fname_ip = $this->input->post('fname_ip');
+			 $fquiz_ip = $this->input->post('fquiz_ip');
 			if($this->input->post('type')=="2" || $this->input->post('type')=="3")
 			{
 				if($this->input->post('l_url')!='' || $this->input->post('q_url')!='')
@@ -121,14 +123,18 @@ class Attachment extends Admin_controller {
 				}
 				else if(empty($_FILES['f_name']['name']) || empty($_FILES['f_name_quiz']['name']))
 				{
-					$this->form_validation->set_rules('f_name', 'lesson', 'required');
-					$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
+					if($fname_ip=="" || $fquiz_ip=="")
+					{
+					 $this->form_validation->set_rules('f_name', 'lesson', 'required');
+					 $this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
+					}
 				}
 			}
 			if($this->input->post('type')=="1")
 			{
 				if ( empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
 				{
+					
 					$this->form_validation->set_rules('f_name', 'lesson', 'required');
 				} 
 				
