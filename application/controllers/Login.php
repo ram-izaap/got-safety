@@ -11,10 +11,20 @@ class Login extends App_Controller {
 												
 	
 	protected $_signup_validation_rules = array(
-			//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-			//array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
+            array('field' => 'admin_name', 'label' => 'Admin Name', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'admin_pwd', 'label' => 'Admin Password', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'admin_con_pwd', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[admin_pwd]'),
+            array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
+            array('field' => 'phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
+            array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
+            array('field' => 'company_url', 'label' => 'Company URL', 'rules' => 'trim|callback_checkwebsiteurl'),
+            array('field' => 'main_contact_no', 'label' => 'Main Contact No', 'rules' => 'trim|numeric|max_length[12]|min_length[6]'),
+            array('field' => 'email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
+            array('field' => 'no_of_employees', 'label' => 'No of Employees', 'rules' => 'trim|numeric'),
             array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
            
 		);
@@ -129,6 +139,20 @@ class Login extends App_Controller {
                 $ins_data['email']         = $form['email'];
                 $ins_data['role']          = 2;
                 $ins_data['password']      = $form['password'];
+
+                $ins_data['admin_name']  = $form['admin_name'];
+                $ins_data['admin_pwd']  = md5($form['admin_pwd']);
+                $ins_data['company_name']  = $form['company_name'];
+                $ins_data['company_phone_no'] = $form['phone_no'];
+                $ins_data['company_address'] = $form['company_address'];
+                $ins_data['company_url'] = $form['company_url'];
+                $ins_data['main_contact'] = $form['main_contact'];
+                $ins_data['main_contact_no'] = $form['main_contact_no'];
+                $ins_data['main_email_addr'] = $form['email_addr'];
+                $ins_data['main_contact_address'] = $form['main_contact_address'];
+                $ins_data['no_of_employees'] = $form['no_of_employees'];
+
+
                 $ins_data['plan_type']     = $form['plan_type'];
                 $ins_data['created_date']  = date("Y-m-d H:i:s");
 				$ins_data['is_active']     = 0;
@@ -147,7 +171,7 @@ class Login extends App_Controller {
         }
         else
         {
-            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","plan_type" =>"");        
+            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"");        
         }
         $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));		
 		$this->layout->view('signup','frontend');
@@ -454,6 +478,18 @@ class Login extends App_Controller {
         }
         
        	return TRUE;
+    } 
+
+    function checkwebsiteurl($string_url)
+    {
+        $reg_exp = "@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i";
+        if(preg_match($reg_exp, $string_url) == TRUE){
+         return TRUE;
+        }
+        else{
+         $this->form_validation->set_message('checkwebsiteurl', 'URL is invalid format');
+         return FALSE;
+        }
     } 
   
 	
