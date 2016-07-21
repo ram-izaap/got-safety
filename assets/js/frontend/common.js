@@ -65,7 +65,55 @@ $(window).load(function(){
 });
 
 
+function newTabFunction() { 
+    var w = window.open();
+    var html = $("#newTab").html();
 
+    $(w.document.body).html(html);
+}
+
+
+$(function() { 
+    $("a#link").click(newTabFunction);
+});
+
+
+function newTabFunction2() { 
+    var w = window.open();
+    var html = $("#newTab2").html();
+
+    $(w.document.body).html(html);
+}
+
+
+$(function() { 
+    $("a#link2").click(newTabFunction2);
+});
+
+function newTabFunction3() { 
+    var w = window.open();
+    var html = $("#newTab3").html();
+
+    $(w.document.body).html(html);
+}
+
+
+$(function() { 
+    $("a#link3").click(newTabFunction3);
+});
+
+function newTabFunction4() { 
+    var w = window.open();
+    var html = $("#newTab4").html();
+
+    $(w.document.body).html(html);
+}
+
+
+$(function() { 
+    $("a#link4").click(newTabFunction4);
+});
+	
 	
  
 
