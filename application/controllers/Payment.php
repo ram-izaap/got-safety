@@ -182,10 +182,8 @@ class Payment extends App_Controller
 	                    //$this->service_message->set_flash_message('signup_success');
 	                }    
 	                $url = "http://izaapinnovations.com/got_safety/admin/";
-	                $msg = "Your Backend Login link as client ".$url." <br>
-	                	<b>Client Username</b>: ".$this->session->userdata['name']."<br>
-						<b>Password</b>: ".$this->session->userdata['password']."<br><br>
-						Thanks you..";                
+                    $msg ="Hi ".ucfirst($this->session->userdata['signup_data']['name']).",\n\tYour payment has been initiated and Authorize,net consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
+                    $msg .= "Your Backend Login link as client ".$url." \n\nClient Admin Username: ".$this->session->userdata['signup_data']['name']."\nPassword: ".$this->session->userdata['signup_data']['password']."\n\nThank you.";                     
 	                $this->email->from('admin@gotsafety.com', 'Gotsafety');
 					$this->email->to( $usr_data['email'] );
 					$this->email->subject('Signup Successfully');
@@ -227,7 +225,7 @@ class Payment extends App_Controller
 		        {
 		            $_SESSION['signup_fail'] = $b['error'];
 		         	//$this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-					redirect("payment");
+					redirect("cancel");
 		        }
 	        }
 	        else
@@ -648,8 +646,10 @@ class Payment extends App_Controller
 
     function notify()
     {
-        if(isset($_POST)) {
-            if(isset($_POST['ipn_track_id']) && !empty($_POST['ipn_track_id'])) {
+        if(isset($_POST)) 
+        {
+            if(isset($_POST['ipn_track_id']) && !empty($_POST['ipn_track_id'])) 
+            {
                 $payment_status = (isset($_POST['payment_status']))?$_POST['payment_status']:"pending";
                 $profile_id     = (isset($_POST['recurring_payment_id']))?$_POST['recurring_payment_id']:"";
                 $txn_type       = (isset($_POST['txn_type']))?$_POST['txn_type']:"";
@@ -659,7 +659,7 @@ class Payment extends App_Controller
                     $this->db->query("update payment_recurring_profiles set payment_status='".$payment_status."' where profile_id='".$profile_id."'");
                     
                     //get user for this profile
-                    $user = $this->db->query("select r.user_id,u.email from payment_recurring_profiles r inner join users u on u.id=r.user_id where r.profile_id='".$profile_id."'")->row_array();
+                    $user = $this->db->query("select r.user_id,u.email,u.name from payment_recurring_profiles r inner join users u on u.id=r.user_id where r.profile_id='".$profile_id."'")->row_array();
                     
                     //update user profile active
                     $this->db->query("update users set is_active=1 where id='".$user['user_id']."'");
@@ -675,7 +675,37 @@ class Payment extends App_Controller
             }
         }
     }
-    
+    function NotifyURLForAuthourize()
+    {
+        if($_POST)
+        {
+            $response = json_encode($_POST);
+            $sub_id = $_POST['x_subscription_id'];
+            $status = $_POST['x_response_reason_text'];
+            $up_data['trans_id'] = $_POST['x_trans_id'];
+            $up_data['paypal_ipn'] = $response;
+            $user = $this->db->query("select r.user_id,u.email,u.name from payment_recurring_profiles r inner join users u on u.id=r.user_id where r.subscription_id='".$sub_id."'")->row_array();
+            if($_POST['x_response_code'] == 1)
+            {
+               $up_data['status'] = $status;
+               $up_data1['is_active'] = 1;
+               $subject = "Your Profile has been activated.";
+               $msg  = "Hi".ucfirst($user['name']).",\n\n";
+               $msg .= "Your Profile has been  Activated successfully. now you can access your plans in <a href='".site_url()."'>Got Safety</a>";
+            }
+            elseif($_POST['x_response_code'] == 2)
+            {
+                $up_data['status'] = $status;
+                $up_data1['is_active'] = 0;
+                $msg  = "Hi".ucfirst($user['name']).",\n\n";
+                $msg .= "Your Profile has not activated due to ".strttolower($status).". Please try again.";
+                $subject = "Your Profile has not activated.";
+            }
+            $this->user_model->update("payment_transaction_history",$up_data,array("subscription_id"=>$sub_id));
+            $this->user_model->update("users",$up_data1,array("id"=>$user['user_id']));
+            $this->user_email($user['email'],$subject,$msg);
+        }
+    }
    function user_register()
    {
        
