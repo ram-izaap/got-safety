@@ -122,17 +122,43 @@ class Attribute extends Admin_controller {
                 $ins_data['updated_date']  = date("Y-m-d H:i:s");
                 
                 if($form['save_method']=='add')
-                  $update_data = $this->attribute_model->insert("attribute",$ins_data);
+                {
+                  $edit_data = $this->attribute_model->get_attr_data("attribute",array("attr_name" => $ins_data['attr_name']));
+                  
+
+                  if(count($edit_data) >0)
+                  {
+                    echo json_encode(array("status" => "This attribute already exists. Please enter a new attribute"));
+                  }
+                  else
+                  {
+                    $update_data = $this->attribute_model->insert("attribute",$ins_data);
+                     echo json_encode(array("status" => "success"));
+                  }
+                }
                 else
                 {
-                  $update_data = $this->attribute_model->update("attribute",$ins_data,array("id" => $edit_id));
-                  if($ins_data['is_active']==0)
-                    $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
-                  if($ins_data['is_active']==1)
-                    $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
+                  $edit_data = $this->attribute_model->get_attr_data("attribute",array('id !='=> $edit_id,'attr_name ='=>$ins_data['attr_name']));
+                  
+                  if(count($edit_data) >0)
+                  {
+                    echo json_encode(array("status" => "This attribute already exists. Please enter a new attribute"));
+                  }
+
+                  else
+                  {
+
+                      $update_data = $this->attribute_model->update("attribute",$ins_data,array("id" => $edit_id));
+                      
+                      if($ins_data['is_active']==0)
+                        $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
+                      if($ins_data['is_active']==1)
+                        $update_data = $this->attribute_model->update("attribute_value",array("is_active"=>$ins_data['is_active'],"updated_date"=>$ins_data['updated_date']),array("attr_id" => $edit_id));
+                      
+                      echo json_encode(array("status" => "success"));
+                  }
                 }
                 
-                echo json_encode(array("status" => TRUE));
             }
 
             else
@@ -168,15 +194,32 @@ class Attribute extends Admin_controller {
                 
                 if($form['save_method']=='add')
                 {
-
-                  $update_data = $this->attribute_model->insert("attribute_value",$ins_data);
+                  $edit_data = $this->attribute_model->get_attr_data("attribute_value",array("attr_id" => $ins_data['attr_id'],"attr_val" => $ins_data['attr_val']));
+                  
+                  if(count($edit_data) >0)
+                  {
+                    echo json_encode(array("status" => "This attribute value already exists. Please enter a new attribute value"));
+                  }
+                  else
+                  {
+                     $update_data = $this->attribute_model->insert("attribute_value",$ins_data);
+                      echo json_encode(array("status" => "success"));
+                   }
                 }
                 else
                 {
-                  $update_data = $this->attribute_model->update("attribute_value",$ins_data,array("id" => $edit_id));
+                  $edit_data = $this->attribute_model->get_attr_data("attribute_value",array('id !='=> $edit_id,"attr_id" => $ins_data['attr_id'],"attr_val" => $ins_data['attr_val']));
+                  
+                  if(count($edit_data) >0)
+                  {
+                    echo json_encode(array("status" => "This attribute value already exists. Please enter a new attribute value"));
+                  }
+                  else
+                  {
+                    $update_data = $this->attribute_model->update("attribute_value",$ins_data,array("id" => $edit_id));
+                    echo json_encode(array("status" => "success"));
+                  }
                 }
-                
-                echo json_encode(array("status" => TRUE));
             }
 
             else

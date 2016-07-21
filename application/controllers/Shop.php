@@ -54,7 +54,7 @@ class Shop extends App_Controller {
             $offset = ($this->uri->segment(3) != '' ? $this->uri->segment(3): 0);
 
             $config['total_rows'] = count($product_data);
-            $config['per_page']= 1;
+            $config['per_page']= 20;
             $config['full_tag_open'] = '<ul class="pagination">';
             $config['full_tag_close'] = '</ul>';
             $config['first_link'] = false;
@@ -95,9 +95,7 @@ class Shop extends App_Controller {
             $offset = ($this->uri->segment(4) != '' ? $this->uri->segment(4): 0);
 
             $config['total_rows'] = count($product_data);
-            $config['per_page']= 1;
-            //$config['first_link'] = 'First';
-            //$config['last_link'] = 'Last';
+            $config['per_page']= 20;
             $config['full_tag_open'] = '<ul class="pagination">';
             $config['full_tag_close'] = '</ul>';
             $config['first_link'] = false;

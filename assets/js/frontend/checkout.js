@@ -1,5 +1,7 @@
 var checkout_url = base_url + 'checkout/';
 
+
+
 function hide_card_details()
 {
    var pay_type = $("input[name=pay_type]:checked").val();

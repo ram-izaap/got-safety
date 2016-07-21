@@ -1337,6 +1337,8 @@ display: block; color:#fff;}
   width:100%;
 }
 
+.order-invoice-wrapper address { background: rgba(0,0,0,0.1); padding: 10px;}
+#payment_information [readonly],.checkout-area [disabled] { opacity:0.3 !important}
 
 .alert.alert-danger
 {
@@ -1361,6 +1363,14 @@ display: block; color:#fff;}
 /*  Webinars saran */
 
 
+.shipping input[type=radio] + label {
+    background-color: #ddd !important;
+    text-decoration: line-through;
+    width: 43%;
+    margin-left: 16px;
+    margin-top: 0;
+}
+.shipping{ margin-bottom:23px;}
 
 .product-categories-webinars ul { display:inline-block;background-color:#CE1A20; margin:0; padding:0;position: relative; z-index:1; }
 .product-categories-webinars li { list-style-type:none; border:1px solid #fff;  padding-left:5px; position: relative;}

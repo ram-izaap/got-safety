@@ -10,11 +10,13 @@ class Product extends Admin_controller {
 											     array('field' => 'cat', 'label' => 'Category', 'rules' => 'trim|required'),
                                                  array('field' => 'desc', 'label' => 'Product Description', 'rules' => 'trim|required'),
                                                  array('field' => 'sku', 'label' => 'Product SKU', 'rules' => 'required|callback_check_duplicate_sku'),
+                                                 array('field' => 'img', 'label' => 'File', 'rules' => 'callback_do_upload'),
                                                  array('field' => 'attrid', 'label' => 'Product Attribute', 'rules' => 'required'),
                                                  array('field' => 'price[]', 'label' => 'Amount', 'rules'=>'callback_check_attr_amt|numeric')
                                         );
 	
-												
+   public $upload_data = array();
+
    function __construct() 
     {
         parent::__construct();
@@ -84,24 +86,18 @@ class Product extends Admin_controller {
 
         $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 
-        if (empty($_FILES['img']['name']) && empty($_POST['prod_img']))
-        { 
-            $this->form_validation->set_rules('img', 'Image', 'required');
-        } 
+        
 		
 		$this->form_validation->set_rules($this->_product_validation_rules);
 	
-
+        $this->upload_data = array();
 		if($this->form_validation->run())
         { 
             $form = $this->input->post();
 
-            if(!empty($_FILES['img']['tmp_name']) )
+            if(count($this->upload_data) )
             { 
-              $upload_data = $this->do_upload();
-              //$pathMain = '../assets/product_images/';
-              //$this->resize_image($pathMain . '/' . $upload_data['img']['file_name']);
-              $filename = (isset($upload_data['img']['file_name']))?$upload_data['img']['file_name']:"";
+              $filename = (isset($this->upload_data['img']['file_name']))?$this->upload_data['img']['file_name']:"";
             }
             
             else
@@ -329,28 +325,42 @@ class Product extends Admin_controller {
 
     function do_upload()
     {
-       $this->load->library('image_lib');
-
-
+      if(!empty($_FILES['img']['name']) && $_FILES['img']['name']!='')
+      {
         $config['upload_path'] = '../assets/product_images/';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png|GIF|JPG|PNG|JPEG';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '2048';
+        $config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['img']['name'];
     
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload("img"))
         {
             $error = array('error' => $this->upload->display_errors());
-            return $error;
+            $this->form_validation->set_message("do_upload",$error['error']);
+            return false;
         }
         else
         {
             $data = array("img" => $this->upload->data());
+            @unlink("../assets/product_images/".$_POST['prod_img']);
+            $this->upload_data = $data;
             return $data;
         }
+      }
+      else if(empty($_FILES['img']['name']) && $_POST['prod_img']=='')
+      {
+        $this->form_validation->set_message("do_upload","The Image Filed is required");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
     }
 
-    function resize_image($sourcePath)
+    /*function resize_image($sourcePath)
     {
         $this->image_lib->clear();
         $config['image_library'] = 'gd2';
@@ -366,7 +376,7 @@ class Product extends Admin_controller {
         if ($this->image_lib->resize())
             return true;
         return false;
-    }
+    }*/
 
     function view_product_details($pid)
     {

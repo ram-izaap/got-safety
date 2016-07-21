@@ -94,7 +94,7 @@
                    </div>                           
                   </div>
                 </div>
-                <input type="hidden" name="success1">
+                <input type="hidden" name="billing_success">
                 <!--SHIPPING METHOD END-->
               </div>
             </div>

@@ -73,7 +73,7 @@
                 </div>
               </div>
             </div>
-            <input type="hidden" name="success1" value="billing_success">
+            <input type="hidden" name="billing_success" value="billing_success">
             <!--SHIPPING METHOD END-->
           </div>
         </div>
@@ -82,7 +82,7 @@
 
     <!-- Right Bar -->
       <form action="#" name="billing_information" id="billing_information" method="post" class="form-horizontal">
-        <input type="hidden" name="success1">
+        <input type="hidden" name="billing_success">
         <div class="billing-details">
           
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">

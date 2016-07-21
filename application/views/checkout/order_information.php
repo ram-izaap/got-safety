@@ -19,7 +19,6 @@
             <th width="7%">Quantity</th>
             <th width="7%">Price</th>
             <th width="13%">Sub Total</th>
-            <th width="3%"></th>
           </tr>
         </thead>
         <tbody>
@@ -84,7 +83,7 @@
               <h5>Subtotal
               </h5>
             </td>
-            <td class="text-right">
+            <td class="text-center">
               <h5>
                 <strong>$
                   <?php echo $this->cart->format_number($this->cart->total()); ?>
@@ -103,7 +102,7 @@
               <h5>Shipping
               </h5>
             </td>
-            <td class="text-right">
+            <td class="text-center">
               <h5>
                 <strong>$
                   <?php echo $ship_amt = (isset($this->session->userdata['ship_amt']['shipping_amt']) && $this->session->userdata['ship_amt']['shipping_amt']!='')? number_format($this->session->userdata['ship_amt']['shipping_amt'],2):0; ?>
@@ -122,7 +121,7 @@
               <h5>Tax
               </h5>
             </td>
-            <td class="text-right">
+            <td class="text-center">
               <h5>
                 <strong>$
                   <?php echo $tax_amt = (isset($this->session->userdata['tax_amt']['tax_amt']) && $this->session->userdata['tax_amt']['tax_amt']!='')? number_format((float)$this->session->userdata['tax_amt']['tax_amt'],2):0; ?>
@@ -141,7 +140,7 @@
               <h3>Total
               </h3>
             </td>
-            <td class="text-right">
+            <td class="text-center">
               <h3>
                 <strong>$
                   <?php echo number_format($this->cart->format_number($this->cart->total()) + number_format((float)$this->session->userdata['ship_amt']['shipping_amt'],2)+number_format((float)$this->session->userdata['tax_amt']['tax_amt'],2),2); ?>

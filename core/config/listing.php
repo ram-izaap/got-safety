@@ -378,7 +378,7 @@ $config['attribute_attribute_value'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'attribute_value/filter',
-	"base_url"	=> 	'/attribute_value/index/',
+	"base_url"	=> 	'attribute/attribute_value/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 							'attr_name'=>array('name'=>'Attribute', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),

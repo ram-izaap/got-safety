@@ -73,7 +73,7 @@
             </div>
             <!--SHIPPING METHOD END-->
           </div>
-                <input type="hidden" name="success" value="shipping_success">
+                <input type="hidden" name="shipping_success" value="shipping_success">
 
         </div>
 
@@ -81,7 +81,7 @@
 
     <!-- Right Bar -->
       <form action="#" name="shipping_information" id="shipping_information" method="post" class="form-horizontal">
-      <input type="hidden" name="success">
+      <input type="hidden" name="shipping_success">
         <div class="billing-details">
           
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 billing" data-form="checkout">
@@ -92,19 +92,24 @@
               <div class="panel-body">
                 <div class="form-group">
 
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <input type="radio" name="ship_to_addr" id="ship_to_billing_address" value="0">&nbsp;<lable>Ship to My Billing Address</lable>
-                  </div>
-                  <span class="vstar"></span>
-                </div>
 
-                <div class="form-group">
-                  <div class="col-xs-12">
-                    <input type="radio" name="ship_to_addr" id="ship_to_new_address" value="1">&nbsp;<lable>Ship to a New Address</lable>
+
+                  <div class="plan-wrapper plan-checkout shipping">
+
+                  <input type="radio" name="ship_to_addr" id="ship_to_billing_address" value="0"> 
+                  <label for="ship_to_billing_address">
+                    Ship to my Billing Address
+                  </label>
+
+                  <input type="radio" name="ship_to_addr" id="ship_to_new_address" value="1"> 
+                  <label for="ship_to_new_address">
+                    Ship to a New Address
+                  </label>
+
                   </div>
-                  <span class="vstar"></span>
                 </div>
+                
+                <div class="form-group">
 
                   <div class="col-xs-12">
                     <input type="text" placeholder="Name" class="form-control input-lg" id="name" name="sa_name">

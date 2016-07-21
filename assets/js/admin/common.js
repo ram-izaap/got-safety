@@ -196,9 +196,10 @@ function add_attr_name()
     $('#attr_form').modal('show');
     $('.modal-title').text('Add Attribute');
     $(".err").hide();
+    $('input[name="attr_name"]').val('');
 }
 
-$('#save_attr_name').one("click",function(event) {
+$('#save_attr_name').on("click",function(event) {
    
    $("#attribute_index").attr("onsubmit", "javascript:return false");
 
@@ -231,12 +232,24 @@ $('#save_attr_name').one("click",function(event) {
             type: "POST",
             data: data,
             dataType: "JSON",
+
+            beforesend: function()
+            {
+              $('#attr_form').modal('show');
+            },
+
             success: function(data)
             {
-                if(data.status)
+                if(data.status=='success')
                 {
                     $('#attr_form').modal('hide');
                     window.location.href= base_url+'attribute';
+                }
+                else if(data.status=='This attribute already exists. Please enter a new attribute')
+                {
+                  $('#attr_form').modal('show');
+                  $(".err").show()
+                  $(".err").text("This attribute already exists.");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -331,7 +344,7 @@ $(".add_attr_val").on("click",function()
     });
 });
 
-$('#save_attr_value').one("click",function(event) {
+$('#save_attr_value').on("click",function(event) {
 
    $("#attribute_attribute_value").attr("onsubmit", "javascript:return false");
 
@@ -379,12 +392,24 @@ $('#save_attr_value').one("click",function(event) {
             type: "POST",
             data: data,
             dataType: "JSON",
+
+            beforesend: function()
+            {
+              $('#attr_form').modal('show');
+            },
+
             success: function(data)
             {
-                if(data.status)
+                if(data.status=='success')
                 {
                     $('#attr_form').modal('hide');
                     window.location.href= base_url+'attribute/attribute_value';
+                }
+                else if(data.status='This attribute value already exists. Please enter a new attribute value')
+                {
+                  $('#attr_form').modal('show');
+                  $(".err1").show();
+                  $(".err1").text("This attribute value already exists.");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown)

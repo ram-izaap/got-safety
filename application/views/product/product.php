@@ -109,7 +109,7 @@
             <div class="row">
               <div class="col-xs-6 subtotal">$0.00
               </div>
-              <div class="col-xs-6 items">0 items 
+              <div class="col-xs-6 items">0 item 
                 <i class="fa fa-shopping-cart">
                 </i>
               </div>
