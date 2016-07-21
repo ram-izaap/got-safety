@@ -174,7 +174,6 @@ class Lesson extends App_Controller {
 		$this->data['get_language'] = $this->lession_model->get_language("language");
 
 		$response['html_view'] = $this->load->view('lesson/ajax_lesson_display',$this->data,TRUE);
-  
 		echo json_encode($response);
 		
 		
