@@ -159,7 +159,7 @@ class Lesson extends App_Controller {
 	public function ajax_lesson_display()
     {
 		$language_id = $this->input->post('language_id');
-		
+		$title = $this->input->post('title');
 		
 		$user_id = $this->session->userdata('user_id');
 		$role = $this->session->userdata('role');
@@ -168,10 +168,8 @@ class Lesson extends App_Controller {
 			$user_id = $this->session->userdata('user_id');
 		}else{
 			$user_id = $this->session->userdata('created_user');
-		}
-		
-		
-		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id));
+		}	
+		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id),$title);
 		
 		$this->data['get_language'] = $this->lession_model->get_language("language");
 
@@ -186,21 +184,25 @@ class Lesson extends App_Controller {
 	public function ajax_attachment_display()
     {
 		$language_id = $this->input->post('language_id');
+		
 		$lesson_id = $this->session->userdata('lesson_id');
 		
 		
 		$user_id = $this->session->userdata('user_id');
 		$role = $this->session->userdata('role');
 		
-		if($role == 2){
+		if($role == 2)
+		{
 			$user_id = $this->session->userdata('user_id');
-		}else{
+		}
+		else
+		{
 			$user_id = $this->session->userdata('created_user');
 		}
 		
 		$this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
 		 
-		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
+		$this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
 		 
 		$this->data['get_language'] = $this->lession_model->get_language("language");
 

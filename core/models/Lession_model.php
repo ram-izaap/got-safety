@@ -152,7 +152,7 @@ class Lession_model extends App_Model {
 	
 	
 	function get_language_content($table_name,$where)
-	{
+	{  
 		 $result = $this->db->get_where($table_name,$where);
         return $result->row_array();
 	}
@@ -171,10 +171,8 @@ class Lession_model extends App_Model {
 	}
 	
 	
-	function get_language_attachment($where)
+	function get_language_attachment($where,$like='')
 	{
-
-        
         
         $date = date('Y-m-d');
 		$user_id =  $this->session->userdata('admin_data')['id']; 
@@ -193,10 +191,12 @@ class Lession_model extends App_Model {
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
        $this->db->join('language la','la.id=a.language','left');
        $this->db->group_by('l.id'); 
-       
-        if($role == '2'){
+       $this->db->like('a.title',$like);
+        if($role == '2')
+        {
         $this->db->where('l.created_user',$user_id);
         $this->db->where($where);
+
         $this->db->where('l.to_date >=',$date);
         //$this->db->or_where('l.visible_to_all',1);
         }else {
