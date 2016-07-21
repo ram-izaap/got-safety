@@ -119,7 +119,8 @@ class Login extends App_Controller {
     
     function signup()
 	{
-		if($_POST) {
+		if($_POST) 
+        {
             $this->load->library('email');
             	
 			if(isset($_POST['name'])){

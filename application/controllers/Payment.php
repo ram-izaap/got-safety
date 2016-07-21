@@ -21,17 +21,17 @@ class Payment extends App_Controller
     array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]'));
     
     protected $_paypal_validation_rules =    array (
-                                                        array('field'=>'firstname','label'=>'First Name','rules'=>'trim|required|alpha'),		
-                                                        array('field' => 'lastname', 'label' => 'Last Name', 'rules' => 'trim|required|alpha'),
-                                                        array('field' => 'pay_address', 'label' => 'Address', 'rules' => 'trim|required'),
-                                                        array('field' => 'pay_city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
-                                                        array('field' => 'pay_state', 'label' => 'State', 'rules' => 'trim|required|alpha'),
-                                                        array('field' => 'pay_zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[6]|min_length[6]'),
-                                                        array('field' => 'pay_country', 'label' => 'Country', 'rules' => 'trim|required|alpha'),
-                                                        array('field' => 'pay_email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
-                                                        array('field' => 'pay_phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
-                                                        array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
-                                                    );
+    array('field'=>'firstname','label'=>'First Name','rules'=>'trim|required|alpha'),		
+    array('field' => 'lastname', 'label' => 'Last Name', 'rules' => 'trim|required|alpha'),
+    array('field' => 'pay_address', 'label' => 'Address', 'rules' => 'trim|required'),
+    array('field' => 'pay_city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
+    array('field' => 'pay_state', 'label' => 'State', 'rules' => 'trim|required|alpha'),
+    array('field' => 'pay_zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[6]|min_length[6]'),
+    array('field' => 'pay_country', 'label' => 'Country', 'rules' => 'trim|required|alpha'),
+    array('field' => 'pay_email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
+    array('field' => 'pay_phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
+    array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
+);
                 
     protected $fname   = '';
     protected $lname   = '';
@@ -156,14 +156,28 @@ class Payment extends App_Controller
 		        $res['customer_id']=time();
 		        $b =  $this->create_auth_subscription($res,$ins);
                 
-		        if($res['profileid']!='' && $b['subs_status']=="Success"){
-		        	$usr_data['name']=$this->session->userdata['signup_data']['name'];
+		        if($res['profileid']!='' && $b['subs_status']=="Success")
+                {
+                    $userid = $this->user_register();
+		        	/*$usr_data1['name']=$this->session->userdata['signup_data']['name'];
 	                $usr_data['email']= $this->session->userdata['signup_data']['email'];
 	                $usr_data['role']= 2;
-	                $usr_data['password']=md5($this->session->userdata['signup_data']['password']);
+	                $usr_data1['password']=md5($this->session->userdata['signup_data']['password']);
 	                $usr_data['created_date']  =  date("Y-m-d H:i:s");
 					$usr_data['is_active']  = 0;
 					$usr_data['language']  = 1;
+
+                    $usr_data['admin_name']  = $this->session->userdata['signup_data']['admin_name'];
+                    $usr_data['admin_pwd']  = md5($this->session->userdata['signup_data']['admin_pwd']);
+                    $usr_data['company_name']  =$this->session->userdata['signup_data']['company_name'];
+                    $usr_data['company_phone_no'] = $this->session->userdata['signup_data']['phone_no'];
+                    $usr_data['company_address'] = $this->session->userdata['signup_data']['admin_name']['company_address'];
+                    $usr_data['company_url'] = $this->session->userdata['signup_data']['company_url'];
+                    $usr_data['main_contact'] = $this->session->userdata['signup_data']['main_contact'];
+                    $usr_data['main_contact_no'] = $this->session->userdata['signup_data']['admin_name']['main_contact_no'];
+                    $usr_data['main_email_addr'] = $this->session->userdata['signup_data']['admin_name']['email_addr'];
+                    $usr_data['main_contact_address'] = $this->session->userdata['signup_data']['main_contact_address'];
+                    $usr_data['no_of_employees'] = $this->session->userdata['signup_data']['no_of_employees'];*/
 					$usr_data['fname']  = $this->input->post('fname');
 					$usr_data['lname']  = $this->input->post('lname');
 					$usr_data['address']  = $this->input->post('address');
@@ -173,22 +187,24 @@ class Payment extends App_Controller
 					$usr_data['zipcode']  = $this->input->post('zipcode');
 					$usr_data['phone']  = $this->input->post('phone');
 					$usr_data['fax']  = $this->input->post('fax');
-				 	$folder = $usr_data['name'];
+				 	/*$folder = $usr_data['name'];
 				 	$dir = './admin/views/repository/files/'.$folder;
 				 	if(!file_exists($dir))	
-		        		mkdir($dir, 0755,true);
-                	$userid = $this->login_model->insert("users",$usr_data);
-                	if(!empty($add_user)) {
+		        		mkdir($dir, 0755,true);*/
+                	$up_user = $this->login_model->update("users",$usr_data,array("id")=>$userid);
+                //    $cl_id = $this->login_model->insert("users",$usr_data1);
+                	if(!empty($add_user)) 
+                    {
 	                    //$this->service_message->set_flash_message('signup_success');
 	                }    
-	                $url = "http://izaapinnovations.com/got_safety/admin/";
+	             /*   $url = "http://izaapinnovations.com/got_safety/admin/";
                     $msg ="Hi ".ucfirst($this->session->userdata['signup_data']['name']).",\n\tYour payment has been initiated and Authorize,net consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
                     $msg .= "Your Backend Login link as client ".$url." \n\nClient Admin Username: ".$this->session->userdata['signup_data']['name']."\nPassword: ".$this->session->userdata['signup_data']['password']."\n\nThank you.";                     
 	                $this->email->from('admin@gotsafety.com', 'Gotsafety');
 					$this->email->to( $usr_data['email'] );
 					$this->email->subject('Signup Successfully');
 					$this->email->message($msg);
-					$this->email->send();
+					$this->email->send();*/
 		            //Load Models
 		            $this->load->model('payment_model');
 		            //Create Subscription Table Fields 
@@ -775,7 +791,7 @@ class Payment extends App_Controller
         		     Thanks you..";                
             $this->user_email($ins_data['email'],'Signup Successfully',$msg);
             
-            return $register_user_id;
+            return $admin_user_id;
       }  
    } 
   
