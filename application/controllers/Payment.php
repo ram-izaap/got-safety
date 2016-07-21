@@ -706,10 +706,12 @@ class Payment extends App_Controller
             $this->user_email($user['email'],$subject,$msg);
         }
     }
+    
+    
    function user_register()
    {
        
-        $ins_data = $this->session->userdata("signup_data");
+        $form = $this->session->userdata("signup_data");
         
         $ins_data['fname']  = $this->fname;
         $ins_data['lname']  = $this->lname;
@@ -720,20 +722,56 @@ class Payment extends App_Controller
         $ins_data['fax']    = $this->fax;
         $ins_data['phone']  = $this->phone;
         
+        $ins_data = array();
+        $ins_data['admin_name']           = $form['admin_name'];
+        $ins_data['admin_pwd']            = md5($form['admin_pwd']);
+        $ins_data['company_name']         = $form['company_name'];
+        $ins_data['company_phone_no']     = $form['phone_no'];
+        $ins_data['company_address']      = $form['company_address'];
+        $ins_data['company_url']          = $form['company_url'];
+        $ins_data['main_contact']         = $form['main_contact'];
+        $ins_data['main_contact_no']      = $form['main_contact_no'];
+        $ins_data['main_email_addr']      = $form['email_addr'];
+        $ins_data['main_contact_address'] = $form['main_contact_address'];
+        $ins_data['no_of_employees']      = $form['no_of_employees'];
+        $ins_data['email']                = $form['email'];
+        $ins_data['plan_type']            = $form['plan_type'];
+        $ins_data['is_active']            = 0;
+        $ins_data['role']                 = 2;
+        $ins_data['language']             = 1;
+        $ins_data['created_date']         = date("Y-m-d H:i:s");
+        $ins_data['created_id']          = 0;
+       
+       
+	 	$folder                    = $ins_data['name'];	
         
-        $folder = $ins_data['name'];
         $path   = './admin/views/repository/files/'.$folder;
         
         if(!file_exists($path)) {
         
             mkdir('./admin/views/repository/files/'.$folder, 0755,true);
                     
-            $register_user_id = $this->login_model->insert("users",$ins_data);  
+            $admin_user_id = $this->login_model->insert("users",$ins_data);  
+            
+            $user_data['name']          = $form['name'];
+            $user_data['password']      = $form['password'];
+            $user_data['created_date']  = date("Y-m-d H:i:s");
+    		$user_data['is_active']     = 0;
+            $user_data['created_id']    = $admin_user_id;
              
-            $url = "http://izaapinnovations.com/got_safety/admin/";
-            $msg = " Your Backend Login link as client ".$url." <br>
-            	     <b>Client Username</b>: ".$ins_data['name']."<br>
-        		     <b>Password</b>: ".$ins_data['password']."<br><br>
+            $register_user_id = $this->login_model->insert("users",$user_data); 
+             
+            $furl  = "http://izaapinnovations.com/got_safety/";
+            $aurl  = "http://izaapinnovations.com/got_safety/admin";
+            
+            $msg   = "Your payment has been initiated and ".ucfirst($this->payment_method)." consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
+            $msg  .= " Your Frontend Login link as client ".$url." <br>
+            	     <b>Username</b>: ".$user_data['name']."<br>
+        		     <b>Password</b>: ".$user_data['password']."<br><br>
+        		     ";
+            $msg  .= " Your Backend Login link as client ".$aurl." <br>
+            	     <b>Client Username</b>: ".$ins_data['admin_name']."<br>
+        		     <b>Password</b>: ".$ins_data['admin_pwd']."<br><br>
         		     Thanks you..";                
             $this->user_email($ins_data['email'],'Signup Successfully',$msg);
             

@@ -133,36 +133,10 @@ class Login extends App_Controller {
             $this->form_validation->set_rules($this->_signup_validation_rules);
             
             if($this->form_validation->run()){  
-                $form = $this->input->post();                              
-                $ins_data                  = array();
-                $ins_data['name']          = $form['name'];
-                $ins_data['email']         = $form['email'];
-                $ins_data['role']          = 2;
-                $ins_data['password']      = $form['password'];
-
-                $ins_data['admin_name']  = $form['admin_name'];
-                $ins_data['admin_pwd']  = md5($form['admin_pwd']);
-                $ins_data['company_name']  = $form['company_name'];
-                $ins_data['company_phone_no'] = $form['phone_no'];
-                $ins_data['company_address'] = $form['company_address'];
-                $ins_data['company_url'] = $form['company_url'];
-                $ins_data['main_contact'] = $form['main_contact'];
-                $ins_data['main_contact_no'] = $form['main_contact_no'];
-                $ins_data['main_email_addr'] = $form['email_addr'];
-                $ins_data['main_contact_address'] = $form['main_contact_address'];
-                $ins_data['no_of_employees'] = $form['no_of_employees'];
-
-
-                $ins_data['plan_type']     = $form['plan_type'];
-                $ins_data['created_date']  = date("Y-m-d H:i:s");
-				$ins_data['is_active']     = 0;
-				$ins_data['language']      = 1;
-				$ins_data['created_id']    = 8;
-			 	$folder                    = $ins_data['name'];	
-                
+                $form = $this->input->post();                             
                 $plan_details              = get_plan_details($form['plan_type']);
                 $this->session->set_userdata("plan_details",$plan_details);
-	 	        $this->session->set_userdata("signup_data",$ins_data);
+	 	        $this->session->set_userdata("signup_data",$form);
                 redirect("payment");
             }
             if($this->input->post()){
