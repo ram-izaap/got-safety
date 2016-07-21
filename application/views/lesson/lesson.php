@@ -45,7 +45,6 @@ function get_lesson_list()
 { 
 	language_id = $("#lang").val();
 	title = $("input[name='search_title']").val();
-alert
 	$.ajax({
 		url: '<?php echo base_url() ?>index.php/lesson/ajax_lesson_display/', 
 		type: 'POST',
