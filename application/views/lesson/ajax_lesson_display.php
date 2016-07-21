@@ -14,10 +14,10 @@
 </div>
 <script>
 
-function get_lesson_list(lang)
+function get_lesson_list()
 { 
 
-var language_id = lang.value;
+language_id = $("#lang").val();
 title = $("input[name='search_title']").val();
 
 $.ajax({
@@ -35,21 +35,6 @@ $('#content-load').html(response.html_view);
 }
 });
 }
-function get_title_list(title)
-{
-	title = title.value;
-	language_id = $("#lang").val();
-	//alert(title);
-	$.ajax({
-		url: '<?php echo base_url() ?>index.php/lesson/ajax_lesson_display/', 
-		type: 'POST',
-		dataType:'json',
-		data: {'language_id': language_id,'title':title},
-		success: function(response)
-		{ 	
-			$('#content-load').html(response.html_view);
-		}
-		});
-}
+
 
 </script>  

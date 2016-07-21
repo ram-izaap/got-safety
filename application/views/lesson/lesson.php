@@ -4,7 +4,7 @@
 	<div class="row" data-row="default" >
 		<aside class="col-sm-12 col-md-6 rbg-white inner-full safety-lesn">
 			<div class="inner-content">
-				<select name="language" id="lang" class="table-group-action-input form-control 	    input-medium" onChange="get_lesson_list(this);">
+				<select name="language" id="lang" class="table-group-action-input form-control 	    input-medium" onChange="get_lesson_list();">
 					<?php 
 					if(isset($get_language)) 
 					{ 
@@ -18,7 +18,7 @@
 					?>
 				</select><br>
 				<input type="text" class="form-control" placeholder="Search Lesson By Title..."
-				 name="search_title" onkeyup="get_title_list(this);">
+				 name="search_title" onkeyup="get_lesson_list();">
 				<div class="safety-contentload" data-nav="gs-recommended-lesson" id="content-load">
 					<ul>
 						<?php  
@@ -41,27 +41,11 @@
 </section>
 <!-- Content area // -->
 <script>
-function get_lesson_list(lang)
+function get_lesson_list()
 { 
-	var language_id = lang.value;
-	title = $("input[name='search_title']").val();
-
-	$.ajax({
-		url: '<?php echo base_url() ?>index.php/lesson/ajax_lesson_display/', 
-		type: 'POST',
-		dataType:'json',
-		data: {'language_id': language_id,'title':title},
-		success: function(response)
-		{ 	
-			$('#content-load').html(response.html_view);
-		}
-		});
-}
-function get_title_list(title)
-{
-	title = title.value;
 	language_id = $("#lang").val();
-	//alert(title);
+	title = $("input[name='search_title']").val();
+alert
 	$.ajax({
 		url: '<?php echo base_url() ?>index.php/lesson/ajax_lesson_display/', 
 		type: 'POST',

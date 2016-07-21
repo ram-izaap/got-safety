@@ -190,8 +190,8 @@ class Lession_model extends App_Model {
        $this->db->from('lession l');
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
        $this->db->join('language la','la.id=a.language','left');
-       $this->db->group_by('l.id'); 
-       $this->db->like('a.title',$like);
+       $this->db->group_by('l.id');      
+        $this->db->like('a.title',$like);
         if($role == '2')
         {
         $this->db->where('l.created_user',$user_id);
