@@ -31,7 +31,7 @@
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
 			
 				<div class="form-group">
-					<label class="col-md-2 control-label">Name: <span class="required">
+					<label class="col-md-2 control-label">Client Admin Username: <span class="required">
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -39,19 +39,9 @@
 						<span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
-				
+
 				<div class="form-group">
-					<label class="col-md-2 control-label">Email: <span class="required">
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="email" readonly class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
-						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-2 control-label">Password: <span class="required">
+					<label class="col-md-2 control-label">Client Admin Password: <span class="required">
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -59,10 +49,20 @@
 						<span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="col-md-2 control-label">Client Admin Email: <span class="required">
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="email" readonly class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
+						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
 
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">User Name: <span class="required">* 
+					<label class="col-md-2 control-label">Client/App Username: <span class="required">* 
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -72,7 +72,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">User Password: 
+					<label class="col-md-2 control-label">Client/App Password: 
 					</label>
 					<div class="col-md-10">
 						<input type="password" name="user_pwd" value="" class="form-control">

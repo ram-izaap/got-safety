@@ -5,9 +5,9 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class User extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-				array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-				array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
-				array('field' => 'admin_name', 'label' => 'Admin Name', 'rules' => 'required'),
+				array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
+				array('field' => 'email', 'label' => 'Client Admin Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+				array('field' => 'admin_name', 'label' => 'Client Admin Username', 'rules' => 'required'),
 				array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
 	            array('field' => 'company_phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
 	            array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
@@ -154,25 +154,25 @@ class User extends Admin_Controller
 		
 		if(isset($_POST['name'])) 
 		{
-			$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
+			$this->form_validation->set_rules('name', 'Client/App Username', 'trim|required|callback_name_unique_check['.$edit_id.']');
 		}
 		if(isset($_POST['admin_name'])) 
 		{
-			$this->form_validation->set_rules('admin_name', 'Name', 'trim|required|callback_admin_name_unique_check['.$edit_id.']');
+			$this->form_validation->set_rules('admin_name', 'Client Admin Username', 'trim|required|callback_admin_name_unique_check['.$edit_id.']');
 		}
 		if(isset($_POST['email'])) 
 		{
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
+			$this->form_validation->set_rules('email', 'Client Admin Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
 		}
 
 		if(isset($_POST['admin_pwd']) && $_POST['admin_pwd'] == "" && $edit_id=="") 
         {
-        	$this->form_validation->set_rules("admin_pwd","Admin Password","required");
+        	$this->form_validation->set_rules("admin_pwd","Client Admin Password","required");
         } 
 
         if(isset($_POST['password']) && $_POST['password'] == "" && $edit_id=="") 
         {
-        	$this->form_validation->set_rules("password","Password","required");
+        	$this->form_validation->set_rules("password","Client/App Password","required");
         } 
 		
         if($this->form_validation->run())
@@ -401,7 +401,7 @@ class User extends Admin_Controller
 		  
 		  if(isset($_POST['user_name'])) 
 		  {
-			$this->form_validation->set_rules('user_name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
+			$this->form_validation->set_rules('user_name', 'Client/App Username', 'trim|required|callback_name_unique_check['.$edit_id.']');
 		  }
 
 		  $this->form_validation->set_rules($this->_user_detail_validation_rules);

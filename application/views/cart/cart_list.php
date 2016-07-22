@@ -61,7 +61,7 @@
                         </div>
                       </td>
                       <td class="prod-quantity">
-                        <input type="number" name="cart[<?php echo $i; ?>][qty]" class="form-control" value="<?php echo $items['qty']; ?>" />
+                        <input type="number" name="cart[<?php echo $i; ?>][qty]" class="form-control"  value="<?php echo $items['qty']; ?>" min="1"/>
                       </td>
                       <td class="prod-price">
                         <strong>
@@ -74,7 +74,7 @@
                         </strong>
                       </td>
                       <td class="cart-del" id="cart-del">
-                        <button class="btn btn-danger btn-sm btn-delete" from="cart_list" remove="" rowid="<?php echo $items['rowid']; ?>">
+                        <button class="btn btn-danger btn-sm btn-delete" type="button" from="cart_list" remove="" rowid="<?php echo $items['rowid']; ?>">
                           <i class="fa fa-trash-o prd-delete">
                           </i>
                         </button>

@@ -29,36 +29,7 @@
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
 				<div class="form-group">
-					<label class="col-md-2 control-label">Client Name : <span class="required">
-					* </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="name" class="form-control" value="<?php echo set_value('name',$form_data['name']); ?>">
-						<span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-2 control-label">Email: <span class="required">*
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="email" class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
-						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-2 control-label">Password: <span class="required"> 
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="password" name="password" class="form-control" value="">
-						<span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-                
-                <div class="form-group">
-					<label class="col-md-2 control-label">Admin Name: <span class="required">* 
+					<label class="col-md-2 control-label">Client Admin Username: <span class="required">* 
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -68,7 +39,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">Admin Password: <span class="required">* 
+					<label class="col-md-2 control-label">Client Admin Password: <span class="required">* 
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -76,6 +47,39 @@
 						<span class="vstar" <?php echo form_error('admin_pwd', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Client Admin Email: <span class="required">*
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="email" class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
+						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Client/App Username : <span class="required">
+					* </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="name" class="form-control" value="<?php echo set_value('name',$form_data['name']); ?>">
+						<span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-md-2 control-label">Client/App Password: <span class="required"> 
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="password" name="password" class="form-control" value="">
+						<span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+                
+                
 
 				<div class="form-group">
 					<label class="col-md-2 control-label">Company Name: <span class="required">* 
