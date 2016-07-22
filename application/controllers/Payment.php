@@ -739,8 +739,8 @@ class Payment extends App_Controller
         $ins_data['phone']  = $this->phone;
         
         $ins_data = array();
-        $ins_data['admin_name']           = $form['admin_name'];
-        $ins_data['admin_pwd']            = md5($form['admin_pwd']);
+        $ins_data['name']                 = $form['admin_name'];
+        $ins_data['password']             = md5($form['admin_pwd']);
         $ins_data['company_name']         = $form['company_name'];
         $ins_data['company_phone_no']     = $form['phone_no'];
         $ins_data['company_address']      = $form['company_address'];
@@ -773,6 +773,7 @@ class Payment extends App_Controller
             $user_data['password']      = $form['password'];
             $user_data['created_date']  = date("Y-m-d H:i:s");
     		$user_data['is_active']     = 0;
+            $user_data['role']          = 3;
             $user_data['created_id']    = $admin_user_id;
              
             $register_user_id = $this->login_model->insert("users",$user_data); 
