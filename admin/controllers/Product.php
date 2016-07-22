@@ -4,35 +4,34 @@
 require_once(COREPATH."controllers/Admin_controller.php");
 
 class Product extends Admin_controller {
-	
-	protected $_product_validation_rules = array(
-		                                         array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required'),
-											     array('field' => 'cat', 'label' => 'Category', 'rules' => 'trim|required'),
+  
+  protected $_product_validation_rules = array(
+                                             array('field' => 'name', 'label' => 'Product Name', 'rules' => 'trim|required'),
+                           array('field' => 'cat', 'label' => 'Category', 'rules' => 'trim|required'),
                                                  array('field' => 'desc', 'label' => 'Product Description', 'rules' => 'trim|required'),
                                                  array('field' => 'sku', 'label' => 'Product SKU', 'rules' => 'required|callback_check_duplicate_sku'),
                                                  array('field' => 'img', 'label' => 'File', 'rules' => 'callback_do_upload'),
                                                  array('field' => 'attrid', 'label' => 'Product Attribute', 'rules' => 'required'),
                                                  array('field' => 'price[]', 'label' => 'Amount', 'rules'=>'callback_check_attr_amt|numeric')
                                         );
-	
-												
-   public $upload_data = array();
+  
+    public $upload_data = array();
 
    function __construct() 
     {
         parent::__construct();
         
         $this->load->model('product_model');
-		$this->load->library('form_validation');
+    $this->load->library('form_validation');
     }
 
 
     function index()
     { 
                  
-		 $this->layout->add_javascripts(array('listing', 'rwd-table'));  
+     $this->layout->add_javascripts(array('listing', 'rwd-table'));  
 
-		 $this->load->library('listing');        
+     $this->load->library('listing');        
         
          $this->simple_search_fields = array('cat_name' => 'Category','name' => 'Name','sku'=> 'SKU');
          
@@ -71,10 +70,8 @@ class Product extends Admin_controller {
         $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
         
         
-        if(is_logged_in())
-            $this->layout->view("product/product_list");
-        else
-            redirect("login");
+        
+        $this->layout->view("product/product_list");
         
     }
 
@@ -82,16 +79,15 @@ class Product extends Admin_controller {
     
     public function add_product($edit_id = "")
     { 
-		//print_r($_FILES['img']['name']);exit;
+    //print_r($_FILES['img']['name']);exit;
        if(is_logged_in()) {
 
         $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
-
-        $this->form_validation->set_rules($this->_product_validation_rules);
-	
-
+    
+    $this->form_validation->set_rules($this->_product_validation_rules);
+  
         $this->upload_data = array();
-		    if($this->form_validation->run())
+    if($this->form_validation->run())
         { 
             $form = $this->input->post();
 
@@ -102,26 +98,26 @@ class Product extends Admin_controller {
             
             else
             {
-            	$filename = (isset($_POST['prod_img']))?$_POST['prod_img']:"";
-            }             	
+                $filename = (isset($_POST['prod_img']))?$_POST['prod_img']:"";
+            }               
 
             if(isset($form['is_active'])) 
             { 
-        				$form['is_active'] = $form['is_active'];	
-        		}
-        		else 
-        		{ 
-        				$form['is_active'] = "0";
-        		}
-			
-			      $ins_data = array();
+        $form['is_active'] = $form['is_active'];  
+      }
+      else 
+      { 
+        $form['is_active'] = "0";
+      }
+      
+      $ins_data = array();
             $ins_data1 = array();
-            $ins_data2=array();			
-			
-            $ins_data['name']       	= $form['name'];
-            $ins_data['desc']       	= $form['desc'];
+            $ins_data2=array();     
+      
+            $ins_data['name']         = $form['name'];
+            $ins_data['desc']         = $form['desc'];
             $ins_data['cat']         = $form['cat'];
-            $ins_data['img']       	= (!empty($filename))?$filename:"";
+            $ins_data['img']        = (!empty($filename))?$filename:"";
             $ins_data['add_info']  = $form['add_info'];
             $ins_data['sku']  = $form['sku'];
             $ins_data['attr_id']  = $form['attrid'];
@@ -130,7 +126,7 @@ class Product extends Admin_controller {
             
             if(empty($edit_id))
             {
-            	$update_data = $this->product_model->insert("products",$ins_data);
+              $update_data = $this->product_model->insert("products",$ins_data);
                 $last_insert_id = $this->db->insert_id();
                 $ins_data1['p_id'] = $last_insert_id;
                 
@@ -159,7 +155,7 @@ class Product extends Admin_controller {
             }
             else 
             {
-            	$update_data = $this->product_model->update("products",$ins_data,array("id" => $edit_id));
+              $update_data = $this->product_model->update("products",$ins_data,array("id" => $edit_id));
                 
                 $i=0;
                     foreach($form['attr_id'] as $key=>$value)
@@ -195,10 +191,10 @@ class Product extends Admin_controller {
                         ++$i;
                     }
             }
-		     redirect("product");
-		}	
-			
-			 if($edit_id) {
+         redirect("product");
+    } 
+      
+       if($edit_id) {
                 $edit_data = $this->product_model->get_product_data("products",array("id" => $edit_id));
 
 
@@ -223,7 +219,7 @@ class Product extends Admin_controller {
                 $this->data['crumb']   = "Add";
                 $this->data['form_data'] = array("name" => "","desc" =>"","add_info" => "","sku" => "","cat"=>"","img"=>"","attr_id"=>"","is_active" => ""); 
             }
-		
+    
             $this->load->model('category_model');
             $cat_data = $this->category_model->get_cat_data("category",NULL);
             $this->data['cat_data'] = $cat_data;
@@ -259,14 +255,14 @@ class Product extends Admin_controller {
             }
             $this->data['img_url']=$this->layout->get_img_dir();
             $this->layout->view('product/add');
-		
-		}
+    
+    }
         else
         {
-            redirect("login");
+            redirect("home");
         }  
     
-	}
+  }
 
     function get_attributes($attr_id,$edit_id = '')
     {
@@ -287,9 +283,9 @@ class Product extends Admin_controller {
         $status = 'success';
         echo json_encode(array('status'=>$status,'content'=>$content));
     }
-	
-	
-	function product_delete()
+  
+  
+  function product_delete()
     {
       
         $id = ($_POST['id'])?$_POST['id']:"";
@@ -325,11 +321,9 @@ class Product extends Admin_controller {
 
     function do_upload()
     {
-       $this->load->library('image_lib');
-
-
       if(!empty($_FILES['img']['name']) && $_FILES['img']['name']!='')
       {
+
         $config['upload_path'] = '../assets/product_images/';
         $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $config['max_size'] = '2048';
@@ -364,7 +358,6 @@ class Product extends Admin_controller {
     }
 
     function resize_image($sourcePath)
-    /*function resize_image($sourcePath)
     {
         $this->image_lib->clear();
         $config['image_library'] = 'gd2';
@@ -381,7 +374,6 @@ class Product extends Admin_controller {
             return true;
         return false;
     }
-    }*/
 
     function view_product_details($pid)
     {
@@ -398,13 +390,10 @@ class Product extends Admin_controller {
         $this->data['crumb'] = "Product Information";
 
         $this->data['img_url']=$this->layout->get_img_dir();
-        if(is_logged_in())
-            $this->layout->view("product/product_info");
-        else
-            redirect("login");
+
+        $this->layout->view("product/product_info");
     } 
 
-    
     function check_duplicate_sku()
     {
         $sku_name = $this->input->post('sku');
@@ -425,5 +414,6 @@ class Product extends Admin_controller {
         {
           return TRUE;
         }
-    }   
+    }  
  }
+
