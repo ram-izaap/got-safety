@@ -129,8 +129,8 @@ $config['user_index'] = array(
 	"fields"	=> array(   
 							'name'=>array('name'=>'Name', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),
 							'role'=>array('name'=>'Role', 'data_type' => 'user_role', 'sortable' => TRUE, 'default_view'=>1),
-                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1),                             
-                             'id'=>array('name'=>'Add User', 'data_type' => 'admin_client_list', 'sortable' => TRUE, 'default_view'=>1)                    
+                             'is_active'=>array('name'=>'Is Active', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
+                             //'id'=>array('name'=>'Add User', 'data_type' => 'admin_client_list', 'sortable' => TRUE, 'default_view'=>1)                    
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"

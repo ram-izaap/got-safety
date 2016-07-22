@@ -5,12 +5,20 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class User extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-				//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-				//array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-				
+				array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+				array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+				array('field' => 'admin_name', 'label' => 'Admin Name', 'rules' => 'required'),
+				array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
+	            array('field' => 'company_phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
+	            array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
+	            array('field' => 'company_url', 'label' => 'Company URL', 'rules' => 'trim|callback_checkwebsiteurl'),
+	            array('field' => 'main_contact_no', 'label' => 'Main Contact No', 'rules' => 'trim|numeric|max_length[12]|min_length[6]'),
+	            array('field' => 'main_email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
+	            array('field' => 'no_of_employees', 'label' => 'No of Employees', 'rules' => 'trim|numeric'),
+	            array('field' => 'plan_name', 'label' => 'Plan', 'rules' => 'required'),
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
-												);
+			);
     
     
     protected $_user_detail_validation_rules = array(
@@ -74,16 +82,8 @@ class User extends Admin_Controller
     { 
         $this->layout->add_javascripts(array('listing', 'rwd-table'));  
         $this->load->library('listing');
-      
 
-        //init fncts
-       //$this->load_settings_data();
-        
-        $this->simple_search_fields = array(
-                                                
-                                                'name' => 'Name'
-                                            
-        );
+        $this->simple_search_fields = array('name' => 'Name');
          
         $this->_narrow_search_conditions = array("start_date");
         
@@ -122,76 +122,125 @@ class User extends Admin_Controller
     }
 	public function add_edit_user($edit_id = "")
     { 
-			if(is_logged_in()) 
-			{
-				$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;			
-				$this->form_validation->set_rules($this->_user_validation_rules);
-				$id =  $this->session->userdata('admin_data')['id'];
-        $role =  $this->session->userdata('admin_data')['role'];            
-				$this->data['get_menu'] = $this->user_model->get_language("language");
-				$this->data['get_plans'] = $this->user_model->get_plans("plan","");
-				$role =  $this->session->userdata('admin_data')['role'];  
-              if($role == "1"){ 
-				if (!isset($_POST['language']) )
-					{ 
-						$this->form_validation->set_rules('language', 'Language', 'required');
-					} 
-		}
+		if(is_logged_in()) 
+		{
+			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;			
+			$this->form_validation->set_rules($this->_user_validation_rules);
+			$id =  $this->session->userdata('admin_data')['id'];
+            $role =  $this->session->userdata('admin_data')['role'];            
+			$this->data['get_menu'] = $this->user_model->get_language("language");
+			$this->data['get_plans'] = $this->user_model->get_plans("plan","");
+			$role =  $this->session->userdata('admin_data')['role'];  
+            
+            if($role == "1")
+            { 
+			  if (!isset($_POST['language']) )
+			  { 
+				 $this->form_validation->set_rules('language', 'Language', 'required');
+			  } 
+		    }
 		
 		if(isset($_POST['name'])) 
-			{
-					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
-			}
-			
-			if(isset($_POST['email'])) 
-			{
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
-			}
+		{
+			$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check['.$edit_id.']');
+		}
+		if(isset($_POST['admin_name'])) 
+		{
+			$this->form_validation->set_rules('admin_name', 'Name', 'trim|required|callback_admin_name_unique_check['.$edit_id.']');
+		}
+		if(isset($_POST['email'])) 
+		{
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check['.$edit_id.']');
+		}
+
+		if(isset($_POST['admin_pwd']) && $_POST['admin_pwd'] == "" && $edit_id=="") 
+        {
+        	$this->form_validation->set_rules("admin_pwd","Admin Password","required");
+        } 
+
+        if(isset($_POST['password']) && $_POST['password'] == "" && $edit_id=="") 
+        {
+        	$this->form_validation->set_rules("password","Password","required");
+        } 
 		
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
-            //print_r($form);exit;
             
-           // print_r($form);exit;
-			if(isset($form['is_active'])) { 
+			if(isset($form['is_active'])) 
+			{ 
 				$form['is_active'] = $form['is_active'];	
 			}
-			else { 
+			else 
+			{ 
 				$form['is_active'] = "0";
 			}
 			
-				
-			
 			$ins_data = array();
-			
-			//print $filename;exit;
 
-			 $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
-			 $get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_name']));
-			$emp_limit = $get_plan[0]['emp_limit'];
+			$ins_data1 = array();
+			
+
+			$edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
+			$get_user_data = $this->user_model->get_lession_data("users",array("created_id" =>$edit_data[0]['id']));
+			$get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_name']));
+			
+
+            $ins_data1['name']       	= $form['name'];
+
+            if($form['password'] == "") 
+            { 
+            	$ins_data1['password']  = $get_user_data[0]['password'];
+            }
+            else 
+            {
+			    $ins_data1['password']  = md5($form['password']);
+			}
+
+           if($form['admin_pwd'] == "") 
+            { 
+            	$ins_data['password']  = $edit_data[0]['password'];
+            }
+            else 
+            {
+			    $ins_data['password']  = md5($form['password']);
+			}
+
+			$ins_data['email']  = $form['email'];
+
+            $ins_data['name']  = $form['admin_name'];
+			$ins_data['company_name']  = $form['company_name'];
+            $ins_data['company_phone_no'] = $form['company_phone_no'];
+            $ins_data['company_address'] = $form['company_address'];
+            $ins_data['company_url'] = $form['company_url'];
+            $ins_data['main_contact'] = $form['main_contact'];
+            $ins_data['main_contact_no'] = $form['main_contact_no'];
+            $ins_data['main_email_addr'] = $form['main_email_addr'];
+            $ins_data['main_contact_address'] = $form['main_contact_address'];
+            $ins_data['no_of_employees'] = $form['no_of_employees'];
+
+            $ins_data['role']  = 2;
+
+            $ins_data1['role'] = 3;
+
+            $emp_limit = $get_plan[0]['emp_limit'];
 			$plan_amt = $get_plan[0]['plan_amount'];
-            $ins_data['name']       	= $form['name'];
+            
+            $ins_data['employee_limit']  = $emp_limit;
+
             $ins_data['plan_type']       	= $form['plan_name'];
+            $ins_data['pay_mode']       	= "Others";
 
             $ins_data['is_active']  = $form['is_active'];
-            $ins_data['email']  = $form['email'];
-            $ins_data['pay_mode']       	= "Others";
-            $ins_data['employee_limit']  = $emp_limit;
-            if($form['password'] == "") { 
-	
-					$ins_data['password']  = $edit_data[0]['password'];
-            }else {
-				
-				$ins_data['password']  = md5($form['password']);
-			}
-            //$ins_data['ori_password']  = $form['password'];
-            $ins_data['role']  = 2;
+
+            $ins_data1['is_active']  = $form['is_active'];
+
+            $ins_data['created_id']  =  $this->session->userdata("admin_data")['id'];
+
             $ins_data['created_date']  = date("Y-m-d H:i:s");
-            $ins_data['created_id']  = 8;
-           
 
-
+            $ins_data1['created_date']  = date("Y-m-d H:i:s");
+            
             if ( isset($_POST['language']) )
 			{
            	 	$ins_data['language']  = implode(",",$form["language"]);
@@ -212,7 +261,15 @@ class User extends Admin_Controller
 				$this->email->send();
 				$folder = $form['name'];
 				mkdir('./views/repository/files/'.$folder.'', 0755,true);			
+				
+				/* Client Insertion */
 				$update_data = $this->user_model->insert("users",$ins_data);
+				$last_insert_id = $this->db->insert_id();
+                
+                /* User Insertion */  
+				$ins_data1['created_id'] = $last_insert_id;
+				$update_data = $this->user_model->insert("users",$ins_data1);
+
 				 /* Create Subscription Profile*/
 				 $sub_data['user_id'] = $update_data;
 				 $sub_data['profile_id'] = rand();
@@ -230,60 +287,84 @@ class User extends Admin_Controller
 			else
 			{
 				$update_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
+				$update_data = $this->user_model->update("users",$ins_data1,array("created_id" => $edit_id));
            		// $this->service_message->set_flash_message('record_update_success');
 			}
 			redirect("user");    
 		}	
 			
-			 if($edit_id) {
+			 if($edit_id) 
+			 {
                 $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
+
+                $get_user_data = $this->user_model->get_lession_data("users",array("created_id" => $edit_id));
+
+                $edit_data1 = array();
+                $get_user_data1 = array();
                 
-                if(!isset($edit_data[0])) {
-                    //$this->service_message->set_flash_message('record_not_found_error');
+                $edit_data1 = array("id"=>$edit_data[0]['id'],"admin_name" =>$edit_data[0]['name'],"email"=>$edit_data[0]['email'],"company_name"=>$edit_data[0]['company_name'],"company_address"=>$edit_data[0]['company_address'],"company_phone_no"=>$edit_data[0]['company_phone_no'],"company_address"=>$edit_data[0]['company_address'],"company_url"=>$edit_data[0]['company_url'],"main_contact"=>$edit_data[0]['main_contact'],"main_contact_no"=>$edit_data[0]['main_contact_no'],"main_email_addr"=>$edit_data[0]['main_email_addr'],"main_contact_address"=>$edit_data[0]['main_contact_address'],"no_of_employees"=>$edit_data[0]['no_of_employees'],"plan_type"=>$edit_data[0]['plan_type'],"language"=>$edit_data[0]['language'],"is_active"=>$edit_data[0]['is_active']);
+                $get_user_data1 = array("name"=>$get_user_data[0]['name']);
+
+                if(!isset($edit_data[0])) 
+                {
                     redirect("user");   
                 }
-                if($role== 1) {
+                if($role== 1) 
+                {
 					$this->data['title']          = "EDIT CLIENT";
-				} else {
+				} 
+				else 
+				{
 					$this->data['title']          = "EDIT";
 				}
                 $this->data['crumb']        = "Edit";
-                $this->data['form_data']      = (array)$edit_data[0];
+                $this->data['form_data']      = array_merge($edit_data1,$get_user_data1);
+
                 
-            }
-            else if($this->input->post()) { 
+             }
+            
+             else if($this->input->post()) 
+             { 
                 $this->data['form_data'] = $_POST;
-                if($role== 1) {
+                
+                if($role== 1) 
+                {
 					$this->data['title']          = "ADD CLIENT";
-				} else {
+				} 
+				
+				else 
+				{
 					$this->data['title']          = "ADD";
 				}
+
                 $this->data['crumb']   = "Add";
                 $this->data['form_data']['id'] = $edit_id != ''?$edit_id:'';
                 $this->data['form_data']['ori_password'] = "";
                 
-            }
-            else
-            {
-                if($role== 1) {
+             }
+
+             else
+             {
+                if($role== 1) 
+                {
 					$this->data['title']          = "ADD CLIENT";
-				} else {
+				} 
+				else 
+				{
 					$this->data['title']          = "ADD";
 				}
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","language" => "","employee_limit" => ""); 
-            }
-		
-		 
-		$this->layout->view('user/add');
+                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","admin_name" =>"","admin_pwd"=>"","company_name" =>"","company_phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","main_email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","language" => "","employee_limit" => ""); 
+             }
+
+             $this->layout->view('user/add');
 		
 		}
         else
         {
             redirect("login");
         }  
-    
-	}
+    }
 	
 	
 	
@@ -291,12 +372,10 @@ class User extends Admin_Controller
     {
       
         $id = ($_POST['id'])?$_POST['id']:"";
-        if(!empty($id)) {
-            
-            $this->db->query('delete from users where id in ('.$id.')');
-             $this->db->query('delete from users where created_id in ('.$id.')');
-            
-           // $this->service_message->set_flash_message('record_delete_success');
+        if(!empty($id)) 
+        {
+        	$this->db->query('delete from users where id in ('.$id.')');
+            $this->db->query('delete from users where created_id in ('.$id.')');
             return true;  
         }
     }
@@ -305,32 +384,19 @@ class User extends Admin_Controller
     
     function profile($edit_id = "")
     {
-		 //print_r($_FILES);exit;
-		//$user_id = $this->uri->segment(3);
 		$user_id =  $edit_id; 
-		$role =  $this->session->userdata('admin_data')['role']; 
-		
-		
-		
-		//$this->data['get_menu'] = $this->inspection_model->get_menu_inspection("users",array("role" => 2));
-		//print_r($this->data['get_menu']);exit;
-			
-			
-		
+		$role =  $this->session->userdata('admin_data')['role']; 			
+					
 		if(is_logged_in()) 
 		{
+		  $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 		  
-            
-			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
-			
-			
-			 if ( empty($_FILES['profile_img']['name']) && empty($_POST['slide_image']) )
-			{ 
-				$this->form_validation->set_rules('profile_img', 'Profile Image', 'required');
-			} 
-			
-			
-			$this->form_validation->set_rules($this->_user_detail_validation_rules);
+		  if (empty($_FILES['profile_img']['name']) && empty($_POST['slide_image']) )
+		  { 
+			$this->form_validation->set_rules('profile_img', 'Profile Image', 'required');
+		  } 
+
+		$this->form_validation->set_rules($this->_user_detail_validation_rules);
 			
         if($this->form_validation->run())
         {
@@ -344,10 +410,7 @@ class User extends Admin_Controller
 			{
 				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
 			} 
-			//echo $filename."1";exit;
-			
-			
-			
+						
 			$ins_data = array();
             $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
 			
@@ -356,60 +419,64 @@ class User extends Admin_Controller
             $ins_data['email']  = $form['email'];
             $ins_data['phone']  = $form['phone'];
             
-            if($form['password'] == "") { 
-	
-					$ins_data['password']  = $edit_data[0]['password'];
-            }else {
-				
+            if($form['password'] == "") 
+            { 
+            	$ins_data['password']  = $edit_data[0]['password'];
+            }
+            else 
+            {
 				$ins_data['password']  = md5($form['password']);
 			}
-            //$ins_data['ori_password']  = $form['password'];
-           $ins_data['profile_img']  = $filename;
+
+            $ins_data['profile_img']  = $filename;
            
 			if(empty($edit_id))
 			{
-			      
-                     $social_data = $this->user_model->insert("users",$ins_data);
-                    // $this->service_message->set_flash_message('record_insert_success');
-		      }
-              else 
-              {  
-                    $social_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
-                    //$this->service_message->set_flash_message('record_update_success');
-		      }
-		      redirect("home");    
+			   $social_data = $this->user_model->insert("users",$ins_data);
+               // $this->service_message->set_flash_message('record_insert_success');
+		    }
+            else 
+            {  
+               $social_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
+               //$this->service_message->set_flash_message('record_update_success');
+		    }
+		    redirect("home");    
 		
 		}	
 			
-			 if($edit_id) {
+			 if($edit_id) 
+			 {
                 $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
                
-                if(!isset($edit_data[0])) {
+                if(!isset($edit_data[0])) 
+                {
                     //$this->service_message->set_flash_message('record_not_found_error');
                     redirect("home");   
                 }
+
                 $this->data['title']          = "EDIT INSPECTION";
                 $this->data['crumb']        = "Edit";
                 $this->data['form_data']      = (array)$edit_data[0];
                 $this->data['form_data']['slide_image'] = $this->data['form_data']['profile_img'];
                 
-            }
-            else if($this->input->post()) {
+             }
+             else if($this->input->post()) 
+             {
                 $this->data['form_data'] = $_POST;
                 $this->data['title']     = "ADD INSPECTION";
                 $this->data['crumb']   = "Add";
                 $this->data['form_data']['id'] = $edit_id != ''?$edit_id:'';
-            }
-            else
-            {
+             }
+             else
+             {
                 $this->data['title']     = "ADD INSPECTION";
                 $this->data['crumb']   = "Add";
                 $this->data['form_data'] = array("name" => "","email" => "","slide_image" => "","profile_img" => "");
                 
-            }
+             }
 		    
-		    $this->data['img_url']=$this->layout->get_img_dir();
-		    $this->layout->view('user/profile');
+		     $this->data['img_url']=$this->layout->get_img_dir();
+		     $this->layout->view('user/profile');
 		}
         else
         {
@@ -486,7 +553,8 @@ class User extends Admin_Controller
 		else if(strtotlower($pay_method)=="paypal")
 		{
 			$profileid = (isset($get_sub_id['profile_id']))?$get_sub_id['profile_id']:"";
-            if(!empty($profileid)) {
+            if(!empty($profileid)) 
+            {
                 
     			$MRPPSFields = array('profileid' => $profileid,'action'=> ucfirst($status));
     						   
@@ -494,7 +562,8 @@ class User extends Admin_Controller
     			
     			$PayPalResult = $this->paypal_pro->ManageRecurringPaymentsProfileStatus($PayPalRequestData);
                 
-    			if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
+    			if($this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
+    			{
     			    $status = ($status!= 'reactivate')?ucfirst($status):"Active"; 
     				$ins_data['profile_status'] = $status;
     				$this->user_model->update("payment_recurring_profiles",$ins_data, array("user_id"=>$id));
@@ -506,7 +575,8 @@ class User extends Admin_Controller
     
 	function renew_subscription($id)
 	{
-		if($_POST['submit']){
+		if($_POST['submit'])
+		{
 		  
 			if($_POST['pay_method']=="Authorize")
 			{
@@ -564,22 +634,15 @@ class User extends Admin_Controller
 	        else
 	        {
 	        	$userdetail    = $this->user_model->get_user_plan_data($id);
-                //print_r($plan_detail);
 	        	$p_id           = $this->input->post('plan_name');
                 $plan_detail    = $this->user_model->get_plan(array("id" => $p_id));
 	        	
                 $profile_status = $this->input->post('profile_status');
                 $change_reason  = $this->input->post('change_reason');
-                
-                //
-	        	//	if($plan_detail['plan_name']==$p_id){
-	        		
-		        	$profileid          = $this->input->post('profile_id');
-                    
-		        	$MRPPSFields        = array('profileid' => $profileid,'action'=>"reactivate");
-		        	$URPPFields         = array('profileid' => $profileid,'amt'=>"100");
-                    
-                    $URPPFields         = array(
+                $profileid      = $this->input->post('profile_id');
+                $MRPPSFields    = array('profileid' => $profileid,'action'=>"reactivate");
+		        $URPPFields     = array('profileid' => $profileid,'amt'=>"100");
+                $URPPFields     = array(
                 						   'profileid' => $profileid, 							
                 						   'note' => $change_reason, 								
                 						   'desc' => $plan_detail['plan_desc'], 					
@@ -642,7 +705,8 @@ class User extends Admin_Controller
             						
             		$PayPalResult = $this->paypal_pro->UpdateRecurringPaymentsProfile($PayPalRequestData);
             		
-            		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
+            		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK']))
+            		{
             			$errors = array('Errors'=>$PayPalResult['ERRORS']);
                         print_r($PayPalResult);
             			$this->load->view('paypal/error',$errors);
@@ -654,7 +718,6 @@ class User extends Admin_Controller
 						$this->user_model->update("payment_recurring_profiles",$ins_data, array("user_id" => $id));
             		}
   
-					//	}
 				
 	        }
         	redirect("user/user_plan_detail/$id");
@@ -729,41 +792,57 @@ class User extends Admin_Controller
     
     
     
-      function name_unique_check($name,$edit_id)
+     function name_unique_check($name,$edit_id)
      {
+        $get_data = $this->user_model->check_exists("users",array("name" => $name,"created_id !=" => $edit_id));
        
-        $get_data = $this->user_model->check_exists("users",array("name" => $name,"id !=" => $edit_id));
        
-       
-        if(count($get_data) >0) {
-      
+        if(count($get_data) >0) 
+        {
           $this->form_validation->set_message('name_unique_check', 'Username already exists');
           return FALSE;
         }
-        
-       	return TRUE;
-    } 
+        return TRUE;
+     } 
+
+     function admin_name_unique_check($name,$edit_id)
+     {
+        $get_data = $this->user_model->check_exists("users",array("name" => $name,"id !=" => $edit_id));
+       
+       
+        if(count($get_data) >0) 
+        {
+          $this->form_validation->set_message('admin_name_unique_check', 'Username already exists');
+          return FALSE;
+        }
+        return TRUE;
+     } 
     
     
      function email_unique_check($email,$edit_id)
      {
         
         $get_data = $this->user_model->check_exists("users",array("email" => $email,"id !=" => $edit_id));
-       
-       
-        if(count($get_data) >0) {
-      
+
+        if(count($get_data) >0) 
+        {
           $this->form_validation->set_message('email_unique_check', 'Email already exists');
           return FALSE;
         }
         
-       	return TRUE;
-    } 
-    
-    
+        return TRUE;
+     }
 
-}
+    function checkwebsiteurl($string_url)
+    {
+        $reg_exp = "@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i";
+        if(preg_match($reg_exp, $string_url) == TRUE){
+         return TRUE;
+        }
+        else{
+         $this->form_validation->set_message('checkwebsiteurl', 'URL is invalid format');
+         return FALSE;
+        }
+    }  
+ }
 ?>
-
-
-
