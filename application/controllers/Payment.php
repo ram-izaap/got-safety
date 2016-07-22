@@ -759,7 +759,7 @@ class Payment extends App_Controller
         $ins_data['created_id']          = 0;
        
        
-	 	$folder                    = $ins_data['name'];	
+	 	$folder                    = $ins_data['admin_name'];	
         
         $path   = './admin/views/repository/files/'.$folder;
         
