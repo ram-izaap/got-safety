@@ -9,6 +9,7 @@ class Login_Model extends CI_Model
    }
    public function login($name, $password)
    { 
+
      $this->load->model('admin_user_model'); 
 
      $pass = md5($password);
@@ -66,6 +67,7 @@ class Login_Model extends CI_Model
         $this->db->from('users');
         $this->db->where('name', $name);
         $this->db->where('password', $pass);
+        $this->db->where("(role = 1 OR role = 2)");
         return $this->db->get()->row_array();
          
     }

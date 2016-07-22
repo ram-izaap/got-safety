@@ -84,11 +84,12 @@ class Product extends Admin_controller {
 
         $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
     
-    $this->form_validation->set_rules($this->_product_validation_rules);
+        $this->form_validation->set_rules($this->_product_validation_rules);
   
         $this->upload_data = array();
-    if($this->form_validation->run())
-        { 
+        
+        if($this->form_validation->run())
+          { 
             $form = $this->input->post();
 
             if(count($this->upload_data) )
@@ -103,14 +104,14 @@ class Product extends Admin_controller {
 
             if(isset($form['is_active'])) 
             { 
-        $form['is_active'] = $form['is_active'];  
-      }
-      else 
-      { 
-        $form['is_active'] = "0";
-      }
+              $form['is_active'] = $form['is_active'];  
+            }
+            else 
+            { 
+              $form['is_active'] = "0";
+            }
       
-      $ins_data = array();
+            $ins_data = array();
             $ins_data1 = array();
             $ins_data2=array();     
       

@@ -56,6 +56,7 @@
 						<span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
+                
                 <div class="form-group">
 					<label class="col-md-2 control-label">Admin Name: <span class="required">* 
 					 </span>
@@ -178,7 +179,7 @@
 							<select class="form-control" name="plan_name">
 							<?php foreach ($get_plans as $key => $value) 
 							{?>
-								<option value="<?php echo $value['id'];?>" <?php echo (isset($form_data['plan_type']) && $form_data['plan_type']==$value['id'])?"selected":''; ?>>
+								<option value="<?php echo $value['id'];?>" <?php echo (isset($form_data['plan_type']) && $form_data['plan_type']==$value['id'])?"selected":''; ?> <?php echo set_select('plan_name',  $value['id']); ?>>
 									<?php echo $value['plan_type']." ($".$value['plan_amount'].")";?></option>
 							<?php 
 							}?>
