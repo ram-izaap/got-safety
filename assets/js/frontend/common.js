@@ -65,7 +65,7 @@ $(window).load(function(){
 });
 
 
-function newTabFunction() { 
+/*function newTabFunction() { 
     var w = window.open();
     var html = $("#newTab").html();
 
@@ -115,7 +115,7 @@ $(function() {
 });
 	
 	
- 
+ */
 
 
 
