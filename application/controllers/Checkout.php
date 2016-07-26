@@ -43,7 +43,7 @@ class Checkout extends Cart_controller {
         foreach($this->data['cat_data'] as $key=>$value)
         {
             $this->data['p_count'] = $this->product1_model->get_product_count("products",array("cat" =>$value['id'],"is_active"=>1));
-            $this->data['cat_data'][$key]['p_count'] = $this->data['p_count']->cnt;
+            $this->data['cat_data'][$key]['p_count'] = count($this->data['p_count']);
         }
 
         if($this->session->userdata("email1")!='' && !$this->session->userdata('billing_info') && !$this->session->userdata('shipping_info')) 

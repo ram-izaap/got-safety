@@ -1,12 +1,12 @@
 <div id="sample-con" class="lesson-contnt">
 	
-	 <select name="language" id="lang" class="table-group-action-input form-control input-medium select-bg" onChange="get_lesson_list(this);">
+	 <select name="language" class="table-group-action-input form-control input-medium select-bg lang1">
 						
 						<?php if(isset($get_language)) { 
 							foreach($get_language as $fkey => $fvalue){
 							 
 						?>
-						<option value="<?php echo $fvalue['id']; ?>" ><?php echo $fvalue['lang'];?></option>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo (isset($selected_language) && $fvalue['id']==$selected_language)?"selected":""; ?>><?php echo $fvalue['lang'];?></option>
 						<?php } } ?>
 					</select>
 	
@@ -115,27 +115,6 @@
 	   
 
 	   
-	function get_lesson_list(lang)
-	{ 
-		
-		 var language_id = lang.value;
-		 
-		 
-	   $.ajax({
-
-             url: '<?php echo base_url() ?>index.php/lesson/ajax_attachment_display/', 
-             type: 'POST',
-             dataType:'json',
-             data: {'language_id': language_id},
-             
-             success: function(response)
-             { 
-				
-                $('#content-load').html(response.html_view);
-
-             }
-		});
-	}
 	
 	$( document ).ready(function() {
 	

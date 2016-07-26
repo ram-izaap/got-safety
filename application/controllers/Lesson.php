@@ -14,6 +14,15 @@ class Lesson extends App_Controller {
                                                         array('field' => 'suggestion','label' => 'Suggestion','rules' => 'trim'),
                                                         array('field' => 'email',  'rules' => 'trim|required|valid_email')
                                                       );
+
+    protected $_lesson_suggest_validation_rules = array(
+															array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+															array('field' => 'company', 'label' => 'Company', 'rules' => 'trim|required'),
+												            array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+												            array('field' => 'phone_no', 'label' => 'Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
+												            array('field' => 'contact_time', 'label' => 'Contact Time', 'rules' => 'trim|required')
+												        );
+
     function __construct()
     {
         parent::__construct();
@@ -21,6 +30,7 @@ class Lesson extends App_Controller {
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker'));
         $this->load->model(array('lession_model'));
         $this->load->model(array('contact_model'));
+
         //echo $this->layout->get_img_dir();
     }
 
@@ -135,23 +145,29 @@ class Lesson extends App_Controller {
 	
 	 public function get_lesson_data()
 	 {
-		 $lesson_id = $this->input->get('lesson_id');
-		 $attachment_id = $this->input->get('attachment_id');
-		 $language_id = $this->input->get('language_id');
+		 $lesson_id = $this->input->post('lesson_id');
+		 $attachment_id = $this->input->post('attachment_id');
+		 $language_id = $this->input->post('language_id');
 		 
 		 $this->session->set_userdata('lesson_id',$lesson_id);
 		 $less_id = $this->session->userdata('lesson_id');
+
+		 $this->session->set_userdata('language_id',$language_id);
+		 $less_id = $this->session->userdata('language_id');
 		 
 		 $this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
 		 
 		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
 		 
 		 $this->data['get_language'] = $this->lession_model->get_language("language");
+
+		 $this->data['selected_language'] = $language_id;
 		 
 		 $this->data['img_url']=$this->layout->get_img_dir();
-		 $this->layout->view('lesson/lesson_data','frontend');
+		 $content = $this->load->view('lesson/lesson_data',$this->data,TRUE);
+		 $status = 'success';
+         echo json_encode(array('status'=>$status,'content'=>$content));
 		 
-		
 	 }
 	 
 	 
@@ -169,6 +185,7 @@ class Lesson extends App_Controller {
 		}else{
 			$user_id = $this->session->userdata('created_user');
 		}	
+		
 		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id),$title);
 		
 		$this->data['get_language'] = $this->lession_model->get_language("language");
@@ -211,11 +228,59 @@ class Lesson extends App_Controller {
 		
 		
 	}
-	
 
+	public function lesson_suggestion()
+	{
+		$this->form_validation->set_rules($this->_lesson_suggest_validation_rules);
+            
+            if($this->form_validation->run())
+            {  
+                $form = $this->input->post(); 
+                $ins_data['name'] = $form['name'];                             
+                $ins_data['company'] = $form['company'];
+                $ins_data['email'] = $form['email'];
+                $ins_data['phone_no'] = $form['phone_no'];
+                $ins_data['lesson_suggestion'] = $form['lesson_suggestion'];
+                $ins_data['contact_time'] = $form['contact_time'];
+                $ins_data['lesson_id'] = $lesson_id = $this->session->userdata('lesson_id');
+                $ins_data['user_id'] = $this->session->userdata['created_user'];
+                $ins_data['created_date'] = date("Y-m-d H:i:s");
+                
+                $languageid = $this->session->userdata('language_id');
+                $this->db->insert("lesson_suggestion",$ins_data);
 
-   
-   
-	
+                $get_lesson_content = $this->db->get_where("lession_attachment",array("lession_id"=>$lesson_id,"language"=>$languageid))->row();
+                
+                $ins_data['lesson_name'] = $get_lesson_content['title'];
+                
+                $data['lesson_data'] = $ins_data;
+                $message = $this->load->view('lesson/system_email_template', $data, TRUE);
+
+                $this->config->load('email_config');
+                $this->load->library('email',$this->config->item('email'));
+
+                $this->email->clear(TRUE);
+		        $this->email->set_mailtype("html");
+
+		        $this->email->set_newline("\r\n");
+                $this->email->from('admin@gotsafety.com', 'Gotsafety');
+				$this->email->to($form['email'] );
+				$this->email->subject('Lesson Suggestion');
+				$this->email->message($message);
+				$this->email->send();
+
+                $this->session->set_flashdata("lession_suggestion_succ","Thank you for your suggestion",TRUE);
+
+                $this->session->unset_userdata("language_id");
+            }
+
+        $this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
+		
+		$this->data['get_language'] = $this->lession_model->get_language("language");
+		
+		$this->data['img_url']=$this->layout->get_img_dir();    
+
+		$this->layout->view("lesson/lesson",'frontend');
+	}
 }
 ?>

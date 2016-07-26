@@ -39,8 +39,15 @@ class Product1_model extends CI_Model {
 
     function get_product_count($table_name,$where)
     {
-         $result = $this->db->query('select b.cat,b.id,b.attr_id,b.name,count(DISTINCT(b.id)) as cnt,c.attr_id as attr_id1 from products b inner join attribute_value c on b.attr_id=c.attr_id where b.cat='.$where['cat'].' and b.is_active=1 and c.is_active=1');    
-         return $result->row();
+         $result = $this->db->query("select a.id,a.cat,a.name,a.desc,a.sku,b.cat_name,a.add_info,a.img, IF(a.is_active='1','Active','Inactive') as is_active from products a inner join category b on  a.cat = ".$where['cat']." and a.cat=b.id and a.is_active=1")->result_array();    
+         $result2 = array();
+         foreach($result as $key=>$value)
+         {
+           $result1 = $this->db->query("select a.attr_name,b.id ,c.id as id1,b.attr_val,c.attr_val_id,count(DISTINCT(c.p_id)) as cnt,d.price from attribute a inner join attribute_value b on a.id=b.attr_id inner join product_variation c on c.attr_val_id=b.id inner join product_price d on d.variation_id=c.id where c.p_id='".$value['id']."' and b.is_active=1 group by c.p_id order by d.price");
+           $result2[] = $result1->row();
+
+         }
+        return array_filter($result2);
     }
 
     function get_product_by_id($pid)

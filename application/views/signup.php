@@ -50,7 +50,7 @@
                    </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                    <input type="password" name="admin_pwd" id="admin_pwd" class="form-control input-lg" value="" placeholder="Client Admin Password" onfocus="(this.value == 'Client Admin Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client Admin Password')">
+                    <input type="password" name="admin_pwd" id="admin_pwd" class="form-control input-lg" value="<?php echo set_value('admin_pwd',$form_data['admin_pwd']); ?>" placeholder="Client Admin Password" onfocus="(this.value == 'Client Admin Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client Admin Password')">
                     <span class="vstar" 
                           <?php echo form_error('admin_pwd', '
                     <span class="help-block">', '
@@ -63,7 +63,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                     <div class="form-group">
-                      <input type="password" name="admin_con_pwd" id="admin_con_pwd" class="form-control input-lg" value="" placeholder="Client Admin Confirm Password" onfocus="(this.value == 'Client Admin Confirm Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client Admin Confirm Password')">
+                      <input type="password" name="admin_con_pwd" id="admin_con_pwd" class="form-control input-lg" value="<?php echo set_value('admin_con_pwd',$form_data['admin_con_pwd']); ?>" placeholder="Client Admin Confirm Password" onfocus="(this.value == 'Client Admin Confirm Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Client Admin Confirm Password')">
                       <span class="vstar" 
                             <?php echo form_error('admin_con_pwd', '
                       <span class="help-block">', '

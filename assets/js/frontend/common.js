@@ -64,8 +64,117 @@ $(window).load(function(){
    });
 });
 
+$(document).on("click","ul.lesson_list li a",function(event){
 
-/*function newTabFunction() { 
+  event.preventDefault();
+  var lesson_id= $(this).attr("lesson_id"),
+        attachment_id=$(this).attr("attachment_id"),
+        language_id=$(this).attr("language_id"),
+        url = base_url+'lesson/get_lesson_data';
+
+  $.ajax({
+      url: url, 
+      type: 'POST',
+      dataType:'json',
+      data: {
+        'lesson_id': lesson_id, 'attachment_id': attachment_id,'language_id':language_id
+      }
+      ,
+      success: function(data)
+      {
+        if(data.status=="success")
+        {
+          $("#lesson_content").html('');
+          $('#lesson_content').html(data.content);
+        }
+      },
+
+      error: function(jqXHR, textStatus, errorThrown) 
+      {
+            alert("Error get data from ajax");
+      }
+    });
+ });
+
+  $("select.lang").on("change",function() {
+
+
+    language_id = $(".lang option:selected").val();
+    title = $("input[name='search_title']").val(),
+    url = base_url+'lesson/ajax_lesson_display';
+
+
+    $.ajax({
+      url: url, 
+      type: 'POST',
+      dataType:'json',
+      data: {
+        'language_id': language_id,'title':title
+      }
+      ,
+      success: function(response)
+      {
+        $('#content-load1').html(response.html_view);
+      },
+      error: function(jqXHR, textStatus, errorThrown) 
+      {
+            alert("Error get data from ajax");
+      }
+    });
+  });
+
+  $(document).on("change","select.lang1",function() {
+
+
+    language_id = $(".lang1 option:selected").val();
+        url = base_url+'lesson/ajax_attachment_display';
+
+
+     $.ajax({
+       url: url, 
+       type: 'POST',
+       dataType:'json',
+       data: {'language_id': language_id},
+       
+       success: function(response)
+       { 
+         $('#content-load').html(response.html_view);
+       },
+       error: function(jqXHR, textStatus, errorThrown) 
+       {
+         alert("Error get data from ajax");
+       }
+     });
+  });
+
+   $("input[name='search_title']").on("keyup",function() {
+
+    language_id = $(".lang option:selected").val();
+    title = $("input[name='search_title']").val(),
+    url = base_url+'lesson/ajax_lesson_display';
+
+    $.ajax({
+      url: url, 
+      type: 'POST',
+      dataType:'json',
+      data: {
+        'language_id': language_id,'title':title
+      }
+      ,
+      success: function(response)
+      {
+        $('#content-load1').html(response.html_view);
+      },
+      error: function(jqXHR, textStatus, errorThrown) 
+      {
+            alert("Error get data from ajax");
+      }
+    });
+  });
+
+/*
+
+function newTabFunction() { 
     var w = window.open();
     var html = $("#newTab").html();
 
