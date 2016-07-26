@@ -132,7 +132,8 @@ class Login extends App_Controller {
              //'pay_mode' in 'field list'
             $this->form_validation->set_rules($this->_signup_validation_rules);
             
-            if($this->form_validation->run()){  
+            if($this->form_validation->run())
+            {  
                 $form = $this->input->post();                             
                 $plan_details              = get_plan_details($form['plan_type']);
                 $this->session->set_userdata("plan_details",$plan_details);

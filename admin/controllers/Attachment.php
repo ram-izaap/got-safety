@@ -6,14 +6,14 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Attachment extends Admin_controller {
 	
 	protected $_attachment_validation_rules = array(
-													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
-													array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required'),
-													array('field' => 'type', 'label' => 'Type', 'rules' => 'trim|required'),
-                                                    array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
-                                                    array('field' => 'slide_image', 'label' => 'Lesson', 'rules' => 'trim'),
-                                                    array('field' => 'slide_image2', 'label' => 'Quiz', 'rules' => 'trim')
-													
-												);
+			array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
+			array('field' => 'content', 'label' => 'Content', 'rules' => 'trim|required'),
+			array('field' => 'type', 'label' => 'Type', 'rules' => 'trim|required'),
+            array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
+          //  array('field' => 'f_name_quiz', 'label' => 'File', 'rules' => 'callback_do_upload2'),
+          //  array('field' => 'f_name', 'label' => 'File', 'rules' => 'callback_do_upload2'),
+            array('field' => 'slide_image', 'label' => 'Lesson', 'rules' => 'trim'),
+            array('field' => 'slide_image2', 'label' => 'Quiz', 'rules' => 'trim'));
 												
 												
 											
@@ -167,11 +167,11 @@ class Attachment extends Admin_controller {
 					if(!empty($_FILES['f_name_quiz']['tmp_name']))
 					{ 
 					  $upload_data2 = $this->do_upload2();
-			      $filename2 = (isset($upload_data2['f_name_quiz']['file_name']))?$upload_data2['f_name_quiz']['file_name']:"";
+			      	  $filename2 = (isset($upload_data2['f_name_quiz']['file_name']))?$upload_data2['f_name_quiz']['file_name']:"";
 					}
 					else
 					{
-						$filename2 = (isset($_POST['slide_image2']))?$_POST['slide_image2']:"";
+						$filename2=(isset($_POST['slide_image2']))?$_POST['slide_image2']:"";
 					}			
 					if(isset($form['is_active'])) 
 					{ 
@@ -273,7 +273,7 @@ class Attachment extends Admin_controller {
 		 
 		$config['upload_path'] = '../assets/images/admin/lession_attachment';
 
-		$config['allowed_types'] = 'pdf|doc';
+		$config['allowed_types'] = 'pdf';
 		$config['max_size']	= '10000';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
@@ -298,28 +298,113 @@ class Attachment extends Admin_controller {
 	
 	function do_upload2()
 	{
-		 
-		$config['upload_path'] = '../assets/images/admin/lession_attachment';
+		if(!empty($_FILES['f_name_quiz']['name']) && $_FILES['f_name_quiz']['name']!='')
+      {
 
-		$config['allowed_types'] = 'pdf|doc';
-		$config['max_size']	= '10000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+        $config['upload_path'] = '../assets/images/admin/lession_attachment';
+        $config['allowed_types'] = 'doc';
+        $config['max_size'] = '2048';
+        $config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['f_name_quiz']['name'];
+    
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload("f_name_quiz"))
+        {
+            $error = array('error' => $this->upload->display_errors());
+            $this->form_validation->set_message("do_upload2",$error['error']);
+            return false;
+        }
+        else
+        {
+            $data = array("f_name_quiz" => $this->upload->data());
+            @unlink("../assets/images/admin/lession_attachment".$_POST['slide_image2']);
+            $this->upload_data = $data;
+            return $data;
+        }
+      }
+      else if(empty($_FILES['f_name_quiz']['name']) && $_POST['slide_image2']=='')
+      {
+        $this->form_validation->set_message("do_upload2","The Image Filed is required");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+
+      if(!empty($_FILES['f_name']['name']) && $_FILES['f_name']['name']!='')
+      {
+      	 $error=array();;
+        $config['upload_path'] = '../assets/images/admin/lession_attachment';
+        $config['allowed_types'] = 'doc';
+        $config['max_size'] = '2048';
+        $config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['f_name']['name'];
+    
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload("f_name"))
+        {
+            $error1 = array('error' => $this->upload->display_errors());
+            $this->form_validation->set_message("do_upload2",$error1['error']);
+            return false;
+        }
+        else
+        {
+            $data1 = array("f_name" => $this->upload->data());
+            @unlink("../assets/images/admin/lession_attachment".$_POST['slide_image']);
+            $this->upload_data = $data1;
+            return $data1;
+        }
+      }
+      else if(empty($_FILES['f_name']['name']) && $_POST['slide_image']=='')
+      {
+        $this->form_validation->set_message("do_upload2","The Image Filed is required");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
 		
-		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload('f_name_quiz'))
-		{ 
-			$error = array('error' => $this->upload->display_errors());
+	}
+	function do_upload3()
+	{
+	  if(!empty($_FILES['f_name']['name']) && $_FILES['f_name']['name']!='')
+      {
 
-			return $error;
-			
-		}
-		else
-		{
-			$data = array('f_name_quiz' => $this->upload->data());
-			return $data;
-			
-		}
+        $config['upload_path'] = '../assets/images/admin/lession_attachment';
+        $config['allowed_types'] = 'doc';
+        $config['max_size'] = '2048';
+        $config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['f_name']['name'];
+    
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload("f_name"))
+        {
+            $error1 = array('error' => $this->upload->display_errors());
+            $this->form_validation->set_message("do_upload3",$error1['error']);
+            return false;
+        }
+        else
+        {
+            $data1 = array("f_name" => $this->upload->data());
+            @unlink("../assets/images/admin/lession_attachment".$_POST['slide_image']);
+            $this->upload_data = $data1;
+            return $data1;
+        }
+      }
+      else if(empty($_FILES['f_name']['name']) && $_POST['slide_image']=='')
+      {
+        $this->form_validation->set_message("do_upload3","The Image Filed is required");
+        return false;
+      }
+      else
+      {
+        return true;
+      }
 		
 	}
 	

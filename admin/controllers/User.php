@@ -277,7 +277,7 @@ class User extends Admin_Controller
 				$update_data = $this->user_model->insert("users",$ins_data1);
 
 				 /* Create Subscription Profile*/
-				 $sub_data['user_id'] = $update_data;
+				 $sub_data['user_id'] = $last_insert_id;
 				 $sub_data['profile_id'] = rand();
 				 $sub_data['plan_id'] = $form['plan_name'];
 				 $sub_data['profile_start_date']= date("Y-m-d H:i:s");

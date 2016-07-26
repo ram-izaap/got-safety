@@ -71,7 +71,7 @@ else
     else 
     { 
     	if($plan_detail[0]['payment_method']!="Others")
-    	{
+	    	{
     		?>
 					<a href="javascript:void();" data-href="<?php echo base_url();?>user/cancel_subscription/<?php echo $_SESSION['admin_data']['id'];?>/inactive" data-paymentmethod="<?php echo (isset($plan_detail[0]['payment_method']))?$plan_detail[0]['payment_method']:"";?>" onclick="cancel_sub(this);" class="btn btn-success"><i class="fa fa-remove"></i>Cancel Subscription</a>
 				<?php 
