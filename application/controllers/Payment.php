@@ -33,16 +33,17 @@ class Payment extends App_Controller
     array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
 );
                 
-    protected $fname   = '';
-    protected $lname   = '';
-    protected $address = '';
-    protected $city    = '';
-    protected $state   = '';
-    protected $zipcode = '';
-    protected $country = ''; 
-    protected $u_email = '';
-    protected $phone   = '';
-    protected $fax     = ''; 
+    protected $fname         = '';
+    protected $lname         = '';
+    protected $address       = '';
+    protected $city          = '';
+    protected $state         = '';
+    protected $zipcode       = '';
+    protected $country       = ''; 
+    protected $u_email       = '';
+    protected $phone         = '';
+    protected $fax           = ''; 
+    protected $admin_user_id = '';
      
      
      protected $payment_method;
@@ -99,9 +100,9 @@ class Payment extends App_Controller
         $this->authorize_arb->addData('firstSettlementDate',$firstSettlementDate);
         $this->authorize_arb->addData('lastSettlementDate',$lastSettlementDate);
         $this->authorize_arb->send();
-        echo "<pre>";
-        print_r($this->authorize_arb->getName());
-        exit;
+       // echo "<pre>";
+      //  print_r($this->authorize_arb->getName());
+      //  exit;
         /*foreach ($this->authorize_arb->getName() as $value) 
         {
             foreach($this->authorize_arb->getBatchId()->batch as $batch)
@@ -143,7 +144,7 @@ class Payment extends App_Controller
      //get authorize form while click the authorize option
      function authorize_form()
      {
-     	
+       
         if($_POST)
      	{
      		$this->form_validation->set_rules($this->_auth_validation_rules);
@@ -178,20 +179,20 @@ class Payment extends App_Controller
                     $usr_data['main_email_addr'] = $this->session->userdata['signup_data']['admin_name']['email_addr'];
                     $usr_data['main_contact_address'] = $this->session->userdata['signup_data']['main_contact_address'];
                     $usr_data['no_of_employees'] = $this->session->userdata['signup_data']['no_of_employees'];*/
-					$usr_data['fname']  = $this->input->post('fname');
-					$usr_data['lname']  = $this->input->post('lname');
-					$usr_data['address']  = $this->input->post('address');
-					$usr_data['city']  = $this->input->post('city');
-					$usr_data['state']  =$this->input->post('state');
-					$usr_data['country']  = $this->input->post('country');
-					$usr_data['zipcode']  = $this->input->post('zipcode');
-					$usr_data['phone']  = $this->input->post('phone');
-					$usr_data['fax']  = $this->input->post('fax');
+					$this->fname  = $this->input->post('fname');
+					$this->lname  = $this->input->post('lname');
+					$this->address  = $this->input->post('address');
+					$this->city  = $this->input->post('city');
+					$this->state  =$this->input->post('state');
+					$this->country  = $this->input->post('country');
+					$this->zipcode  = $this->input->post('zipcode');
+					$this->phone  = $this->input->post('phone');
+					$this->fax  = $this->input->post('fax');
 				 	/*$folder = $usr_data['name'];
 				 	$dir = './admin/views/repository/files/'.$folder;
 				 	if(!file_exists($dir))	
 		        		mkdir($dir, 0755,true);*/
-                	$up_user = $this->login_model->update("users",$usr_data,array("id")=>$userid);
+                	//$up_user = $this->login_model->update("users",$usr_data,array("id"=>$userid));
                 //    $cl_id = $this->login_model->insert("users",$usr_data1);
                 	if(!empty($add_user)) 
                     {
@@ -208,7 +209,7 @@ class Payment extends App_Controller
 		            //Load Models
 		            $this->load->model('payment_model');
 		            //Create Subscription Table Fields 
-		            $ins_data['user_id'] = $userid;
+		            $ins_data['user_id'] = $this->admin_user_id;
 		            $ins_data['profile_id'] = $res['profileid'];
 		            $ins_data['plan_id'] = $ins['plan_id'];         
 		            $ins_data['customer_id'] = $res['customer_id'];
@@ -472,7 +473,8 @@ class Payment extends App_Controller
      //payment cancel 
      function cancel()
      {
-        $this->load->view("payment/cancel");
+        $this->layout->add_stylesheets("custom");
+        $this->layout->view("payment/cancel");
      }
      	
 	function Do_express_checkout_payment($token)
@@ -632,8 +634,9 @@ class Payment extends App_Controller
            if(isset($paymentstatus['payment_status']) && (($paymentstatus['payment_status'] == 'Completed') || $paymentstatus['payment_status'] == 'Pending')) {
            
                $register_id = $this->user_register();
+               
     		   
-               $ins_data['user_id']             = $register_id;
+               $ins_data['user_id']             = $this->admin_user_id;
                $ins_data['plan_id']             = $plan_details['id'];
                $ins_data['profile_start_date']  = $PayPalResult['PROFILESTARTDATE'];
                $ins_data['payment_status']      = "pending";
@@ -642,8 +645,9 @@ class Payment extends App_Controller
                $ins_data['amount']              = $PayPalResult['REGULARAMT'];
                $ins_data['payment_method']      = $this->payment_method;
     		   $this->payment_model->insert("payment_recurring_profiles",$ins_data);
-              
-               $this->load->view("payment/success");
+               
+               $this->layout->add_stylesheets("custom");
+               $this->layout->view("payment/success");
            }
            else
            {
@@ -759,7 +763,7 @@ class Payment extends App_Controller
         $ins_data['created_id']           = 0;
        
        
-	 	$folder                    = $ins_data['admin_name'];	
+	 	$folder                    = $form['admin_name'];	
         
         $path   = './admin/views/repository/files/'.$folder;
         
@@ -767,14 +771,14 @@ class Payment extends App_Controller
         
             mkdir('./admin/views/repository/files/'.$folder, 0755,true);
                     
-            $admin_user_id = $this->login_model->insert("users",$ins_data);  
+            $this->admin_user_id = $this->login_model->insert("users",$ins_data);  
             
             $user_data['name']          = $form['name'];
             $user_data['password']      = md5($form['password']);
             $user_data['created_date']  = date("Y-m-d H:i:s");
     		$user_data['is_active']     = 0;
             $user_data['role']          = 3;
-            $user_data['created_id']    = $admin_user_id;
+            $user_data['created_id']    = $this->admin_user_id;
              
             $register_user_id = $this->login_model->insert("users",$user_data); 
              
@@ -782,17 +786,30 @@ class Payment extends App_Controller
             $aurl  = "http://izaapinnovations.com/got_safety/admin";
             
             $msg   = "Your payment has been initiated and ".ucfirst($this->payment_method)." consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
-            $msg  .= " Your Frontend Login link as client ".$url." <br>
+            $msg  .= " Your Frontend Login link as client ".$furl." <br>
             	     <b>Username</b>: ".$user_data['name']."<br>
         		     <b>Password</b>: ".$user_data['password']."<br><br>
         		     ";
             $msg  .= " Your Backend Login link as client ".$aurl." <br>
-            	     <b>Client Username</b>: ".$ins_data['admin_name']."<br>
-        		     <b>Password</b>: ".$ins_data['admin_pwd']."<br><br>
+            	     <b>Client Username</b>: ".$form['admin_name']."<br>
+        		     <b>Password</b>: ".$form['admin_pwd']."<br><br>
         		     Thanks you..";                
-            $this->user_email($ins_data['email'],'Signup Successfully',$msg);
+            //$this->user_email($ins_data['email'],'Signup Successfully',$msg);
             
-            return $admin_user_id;
+            $config['protocol'] = 'sendmail';
+            $config['mailpath'] = '/usr/sbin/sendmail';
+            $config['charset']  = 'iso-8859-1';
+            $config['wordwrap'] = TRUE;
+            $config['mailtype'] = "html";
+            
+            $this->email->from('admin@gotsafety.com', 'Gotsafety');
+        	$this->email->to($ins_data['email']);
+        	$this->email->subject("Signup Successfully");
+        	$this->email->message($msg);
+        	$this->email->send();
+            
+            return $this->admin_user_id;
+             
       }  
    } 
   
@@ -809,6 +826,8 @@ class Payment extends App_Controller
     	$this->email->subject($subject);
     	$this->email->message($message);
     	$this->email->send();
+        
+        return true;
          
 
   }  

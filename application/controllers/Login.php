@@ -11,6 +11,12 @@ class Login extends App_Controller {
 												
 	
 	protected $_signup_validation_rules = array(
+			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+            array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
+            array('field' => 'admin_name', 'label' => 'Admin Name', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'admin_pwd', 'label' => 'Admin Password', 'rules' => 'trim|required|max_length[255]'),
 			array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
 			array('field' => 'email', 'label' => 'Client Admin Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Client/App Password', 'rules' => 'trim|required|max_length[255]'),
@@ -457,6 +463,9 @@ class Login extends App_Controller {
 
     function checkwebsiteurl($string_url)
     {
+        $reg_exp = "@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i";
+        if(preg_match($reg_exp, $string_url) == TRUE){
+         return TRUE;
         $url = $this->input->post("company_url");
         if($url!='')
         {
@@ -469,6 +478,15 @@ class Login extends App_Controller {
              return FALSE;
             }
         }
+        else{
+         $this->form_validation->set_message('checkwebsiteurl', 'URL is invalid format');
+         return FALSE;
+        }
+
+
+
+
+
     } 
   
 	
