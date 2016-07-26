@@ -9,6 +9,8 @@ if(isset($_SESSION['renew_succ']))
 	</div>
 	<?php 
 }
+if($plan_detail)
+{
 $id= (isset($_SESSION['admin_data']['id']))?$_SESSION['admin_data']['id']:"";
 if( (form_error('c_number')!="" || form_error('cvv')!="") )
 	$disp= "display:block;";
@@ -307,6 +309,15 @@ if($grid)
 			}?>
 		</tbody>
 	</table>
+</div>
+<?php 
+}
+}
+else
+{
+?>
+<div class="alert alert-danger alert-dismisable">
+	<strong>Sorry!</strong> Something error has been occured.
 </div>
 <?php 
 }?>
