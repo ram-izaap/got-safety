@@ -113,7 +113,7 @@
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
  <script>
 	   
-$( document ).ready(function() {
+
 	   
 	function get_lesson_list(lang)
 	{ 
@@ -137,6 +137,7 @@ $( document ).ready(function() {
 		});
 	}
 	
+	$( document ).ready(function() {
 	
 function newTabFunction() { 
     var w = window.open();
