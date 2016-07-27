@@ -235,10 +235,10 @@ class Product extends Admin_controller {
             
             if((isset($_POST) && !empty($_POST['attrid'])) ||  !empty($edit_id)){
 
-                if(!empty($edit_id))
-                    $attr_id = $edit_data[0]['attr_id'];
+                if(!empty($_POST['attrid']))
+                  $attr_id = $_POST['attrid'];
                 else
-                    $attr_id = $_POST['attrid'];
+                  $attr_id = $edit_data[0]['attr_id'];
 
                 $attrdata['values'] = $this->product_model->get_product_data("attribute_value",array("attr_id" =>$attr_id,"is_active"=>1));
                 $attr_price = array(); 
