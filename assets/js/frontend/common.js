@@ -172,6 +172,53 @@ $(document).on("click","ul.lesson_list li a",function(event){
     });
   });
 
+
+$(document).on("click",".lesson_suggestion1",function(event){
+
+  event.preventDefault();
+
+  var name = $("input[name='name']").val(),
+      company = $("input[name='company']").val(),
+      email = $("input[name='email']").val(),
+      phone_no = $("input[name='phone_no']").val(),
+      lesson_suggestion = $("#lesson_suggestion").val(),
+      contact_time = $("#contact_time option:selected").val(),
+      url = base_url+'lesson/lesson_suggestion';
+      data = 'name='+ name +'&company='+ company +'&email=' + email +'&phone_no=' + phone_no+'&lesson_suggestion=' + lesson_suggestion+'&contact_time=' + contact_time; 
+      
+      $.ajax({
+          url : url,
+          type: "POST",
+          data: data,
+          dataType: "JSON",
+          success: function(data)
+          {
+
+            if(data.status=="failure")
+            {
+              $("#div-lesson-forms").html(data.content);
+            }
+            else if(data.status=="success")
+            {
+              $("#div-lesson-forms").html(data.content);
+              $("input[name='name']").val('');
+              $("input[name='company']").val('');
+              $("input[name='email']").val('');
+              $("input[name='phone_no']").val('');
+              $("#lesson_suggestion").val('');
+              $('#contact_time').prop('selectedIndex',0);
+
+              $(".lesson_succ").css("display","block");
+            }
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert('Error adding / update data');
+          }
+      });
+});
+
+
 /*
 
 function newTabFunction() { 

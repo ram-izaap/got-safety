@@ -135,9 +135,16 @@ class Lesson extends App_Controller {
 		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
 		
 		$this->data['get_language'] = $this->lession_model->get_language("language");
+
+		$data['title'] = "Lesson Suggestion";
 		
-		
+	    $data['form_data'] = array("name" => "","company" =>"","email" => "","phone_no" => "","lesson_suggestion" => "","contact_time" => ""); 
+
+		$this->data['lesson_suggestion'] = $this->load->view("lesson/lesson_suggestion",$data,true);
+
 		$this->data['img_url']=$this->layout->get_img_dir();
+
+
      	$this->layout->view('lesson/lesson','frontend');
 		
 	}
@@ -159,7 +166,7 @@ class Lesson extends App_Controller {
 		 
 		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
 		 
-		 $this->data['get_language'] = $this->lession_model->get_language("language");
+		 $this->data['get_language'] = $this->db->query("select a.lang,a.id,b.language from language a inner join lession_attachment b on a.id=b.language where b.lession_id=".$lesson_id."")->result_array();
 
 		 $this->data['selected_language'] = $language_id;
 		 
@@ -232,6 +239,7 @@ class Lesson extends App_Controller {
 	public function lesson_suggestion()
 	{
 		$this->form_validation->set_rules($this->_lesson_suggest_validation_rules);
+
             
             if($this->form_validation->run())
             {  
@@ -247,7 +255,10 @@ class Lesson extends App_Controller {
                 $ins_data['created_date'] = date("Y-m-d H:i:s");
                 
                 $languageid = $this->session->userdata('language_id');
+
+
                 $this->db->insert("lesson_suggestion",$ins_data);
+
 
                 $get_lesson_content = $this->db->get_where("lession_attachment",array("lession_id"=>$lesson_id,"language"=>$languageid))->row();
                 
@@ -257,6 +268,8 @@ class Lesson extends App_Controller {
                 
                   $ins_data['lesson_name'] = $get_lesson_content->title;
                 }
+
+
                 
                 $data['lesson_data'] = $ins_data;
                 $message = $this->load->view('lesson/system_email_template', $data, TRUE);
@@ -278,15 +291,34 @@ class Lesson extends App_Controller {
 
                 $this->session->unset_userdata("language_id");
                 $this->session->unset_userdata("lesson_id");
+                
+                $data['form_data'] = array("name" => "","company" =>"","email" => "","phone_no" => "","lesson_suggestion" => "","contact_time" => "");
+                
+                $data['title'] = "Lesson Suggestion";
+            	$status = "success";
+            	$content = $this->load->view("lesson/lesson_suggestion",$data,TRUE);
+
+            	echo json_encode(array("status"=>$status,"content"=>$content));
+            }
+            else
+            {
+            	if($this->input->post()) 
+		        { 
+		        	$data['form_data'] = $_POST;
+		        
+		        }
+		        else
+		        {
+		            $data['form_data'] = array("name" => "","company" =>"","email" => "","phone_no" => "","lesson_suggestion" => "","contact_time" => ""); 
+		        }
+
+            	$data['title'] = "Lesson Suggestion";
+            	$status = "failure";
+            	$content = $this->load->view("lesson/lesson_suggestion",$data,TRUE);
+
+            	echo json_encode(array("status"=>$status,"content"=>$content));
             }
 
-        $this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
-		
-		$this->data['get_language'] = $this->lession_model->get_language("language");
-		
-		$this->data['img_url']=$this->layout->get_img_dir();    
-
-		$this->layout->view("lesson/lesson",'frontend');
 	}
 }
 ?>
