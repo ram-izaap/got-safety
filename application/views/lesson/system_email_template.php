@@ -100,7 +100,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 												        <th>Lesson Suggestion</th>
 												        <th>Lesson Title</th>
 												      </tr>
-												      <tr><td colspan=6><hr/></td></tr>
+												      <tr><td colspan=7><hr/></td></tr>
 												        <tr>
 												          <td><?php echo $lesson_data['name'];?></td>
 												          <td><?php echo $lesson_data['company'];?></td>
@@ -110,7 +110,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 												          <td><?php echo $lesson_data['lesson_suggestion'];?></td>
 												          <td><?php echo (isset($lesson_data['lesson_name']) && $lesson_data['lesson_name']!='')?$lesson_data['lesson_name']:'';?></td>
 												        </tr>
-												        <tr><td colspan=6><hr/></td></tr>     
+												        <tr><td colspan=7><hr/></td></tr>     
 												     </table>
 												    </div>
 											</td>

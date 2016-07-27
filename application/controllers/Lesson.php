@@ -153,7 +153,7 @@ class Lesson extends App_Controller {
 		 $less_id = $this->session->userdata('lesson_id');
 
 		 $this->session->set_userdata('language_id',$language_id);
-		 $less_id = $this->session->userdata('language_id');
+		 $languageid = $this->session->userdata('language_id');
 		 
 		 $this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
 		 
@@ -251,7 +251,12 @@ class Lesson extends App_Controller {
 
                 $get_lesson_content = $this->db->get_where("lession_attachment",array("lession_id"=>$lesson_id,"language"=>$languageid))->row();
                 
-                $ins_data['lesson_name'] = $get_lesson_content['title'];
+                if(isset($lesson_id) && !empty($lesson_id))
+                {
+                  $get_lesson_content = $this->db->get_where("lession_attachment",array("lession_id"=>$lesson_id,"language"=>$languageid))->row();
+                
+                  $ins_data['lesson_name'] = $get_lesson_content->title;
+                }
                 
                 $data['lesson_data'] = $ins_data;
                 $message = $this->load->view('lesson/system_email_template', $data, TRUE);
@@ -272,6 +277,7 @@ class Lesson extends App_Controller {
                 $this->session->set_flashdata("lession_suggestion_succ","Thank you for your suggestion",TRUE);
 
                 $this->session->unset_userdata("language_id");
+                $this->session->unset_userdata("lesson_id");
             }
 
         $this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
