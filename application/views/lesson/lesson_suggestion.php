@@ -6,61 +6,60 @@
   </div>
 <?php endif; ?>
 <form id="lesson_suggest" method="post" action="#">
-  <div id="div-register-msg">
-    <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right">
+          <div id="div-register-msg">
+            <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right">
+            </div>
+            <span class="form-title" id="text-register-msg">Lesson Suggestion
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Name" >
+                <span class="vstar" 
+                  <?php echo form_error('name', '
+                <span class="help-block">', '
+                </span>'); ?>
+              </span>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" name="company" id="company" class="form-control input-lg" value="<?php echo set_value('company',$form_data['company']); ?>" placeholder="Company" >
+              <span class="vstar" 
+               <?php echo form_error('company', '
+               <span class="help-block">', '
+               </span>'); ?>
+              </span>
+          </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" name="email" id="email" class="form-control input-lg" value="<?php echo set_value('email',$form_data['email']); ?>" placeholder="Email" >
+            <span class="vstar" 
+              <?php echo form_error('email', '
+              <span class="help-block">', '
+              </span>'); ?>
+            </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" name="phone_no" id="phone_no" class="form-control input-lg" value="<?php echo set_value('phone_no',$form_data['phone_no']); ?>" placeholder="Phone No" >
+          <span class="vstar" 
+           <?php echo form_error('phone_no', '
+           <span class="help-block">', '
+           </span>'); ?>
+          </span>
+      </div>
     </div>
-    <span class="form-title" id="text-register-msg">Lesson Suggestion
-    </span>
   </div>
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group">
-        <input type="text" name="name" id="name" class="form-control input-lg" value="<?php echo set_value('name',$form_data['name']); ?>" placeholder="Name">
-        <span class="vstar" 
-              <?php echo form_error('name', '
-        <span class="help-block">', '
-        </span>'); ?>
-        </span>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="form-group">
-      <input type="text" name="company" id="company" class="form-control input-lg" value="<?php echo set_value('company',$form_data['company']); ?>" placeholder="Company">
-      <span class="vstar" 
-            <?php echo form_error('company', '
-      <span class="help-block">', '
-      </span>'); ?>
-      </span>
-  </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="form-group">
-      <input type="text" name="email" id="email" class="form-control input-lg" value="<?php echo set_value('email',$form_data['email']); ?>" placeholder="Email">
-      <span class="vstar" 
-            <?php echo form_error('email', '
-      <span class="help-block">', '
-      </span>'); ?>
-      </span>
-  </div>
-</div>
-<div class="col-sm-6">
-  <div class="form-group">
-    <input type="text" name="phone_no" id="phone_no" class="form-control input-lg" value="<?php echo set_value('phone_no',$form_data['phone_no']); ?>" placeholder="Phone No">
-    <span class="vstar" 
-          <?php echo form_error('phone_no', '
-    <span class="help-block">', '
-    </span>'); ?>
-    </span>
-</div>
-</div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="form-group">
-      <textarea name="lesson_suggestion" id="lesson_suggestion" class="form-control input-lg" placeholder="Lesson Suggestion" ><?php echo set_value('lesson_suggestion',$form_data['lesson_suggestion']); ?>
-      </textarea>
+        <textarea name="lesson_suggestion" id="lesson_suggestion" class="form-control input-lg" placeholder="Lesson Suggestion" ><?php echo set_value('lesson_suggestion',$form_data['lesson_suggestion']); ?></textarea>
     </div>
   </div>
   <div class="col-sm-6">
@@ -76,12 +75,13 @@
         </option>
       </select>
       <span class="vstar" 
-            <?php echo form_error('contact_time', '
-      <span class="help-block">', '
-      </span>'); ?>
+       <?php echo form_error('contact_time', '
+       <span class="help-block">', '
+       </span>'); ?>
       </span>
   </div>
 </div>
 </div>
+
 <input type="submit" value="SUBMIT" class="btn client-login lesson_suggestion1">
 </form>
