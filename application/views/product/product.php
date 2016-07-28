@@ -10,10 +10,53 @@
         ?>
         <!-- -->
         <?php if(count($product_detail)): ?>
-        <div class="col-sm-6 content-bar">
+        <div class="col-sm-12 col-md-6 content-bar">
+        
+        <a href="<?php echo site_url('cart'); ?>"> 
+        <div class="product-bag radius-5 clearfix visible-xs visible-sm add-cart cart_item">
+           <div class="row">
+               <div class="col-xs-6 subtotal">$0.00
+              </div>
+              <div class="col-xs-6 items">0 item 
+                <i class="fa fa-shopping-cart">
+                </i>
+              </div>
+           </div>
+        </div>
+        </a>
+
+          <div class="row visible-xs visible-sm aside-pannel">
+             <div class="sidebar">
+                <div class="mini-submenu tab-view">
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                </div>
+                <div class="list-group col-xs-12 tab-menu">
+                   <div class="list-group-item active aside_bar">
+                      Submenu<span class="pull-right" id="slide-submenu">
+                      <i class="fa fa-times"></i>
+                      </span>
+                   </div>
+
+
+                   <ul>
+                      <li><a href="javascript:void(0);">Broucher Downloads </a></li>
+                      <li><a href="javascript:void(0);">Free Safety Evaluation </a></li>
+                      <li><a href="javascript:void(0);">Free OSHA Citation Review </a></li>
+                      <li><a href="javascript:void(0);">Forkit Certifications </a></li>
+                      <li><a href="javascript:void(0);">FAQ’S </a></li>
+                      <li><a href="javascript:void(0);">Industries Serviced </a></li>
+                      <li><a href="javascript:void(0);">Safety Blog </a></li>
+                      <li><a href="javascript:void(0);"> Accident Reporting</a></li>
+                   </ul>
+                </div>
+             </div>
+          </div>
+
           <h3>Products 
             <div data-role="sorting">
-              <span class="sort_text">Sort By -  </span> 
+              <span >Sort By -  </span> 
               <select name="sort" id="sort">
                 <option value="default-order">default order
                 </option>
@@ -104,7 +147,7 @@
         
         <?php endif; ?> 
         <!-- Right Bar -->
-        <div class="col-sm-6 col-md-3 right-bar cart_item">
+        <div class="col-sm-6 col-md-3 right-bar hidden-xs hidden-sm cart_item">
           <div class="product-bag radius-5 clearfix">
             <div class="row">
               <div class="col-xs-6 subtotal">$0.00

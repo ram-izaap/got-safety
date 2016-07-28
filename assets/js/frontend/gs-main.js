@@ -229,7 +229,7 @@ $(document).ready(function() {
         $('#stars-existing').on('starrr:change', function(e, value) {
             $('#count-existing').html(value);
         });
-    });
+    });*/
     $(function() {
         $('#slide-submenu').on('click', function() {
             $(this).closest('.list-group').fadeOut('slide', function() {
@@ -240,7 +240,7 @@ $(document).ready(function() {
             $(this).next('.list-group').toggle('slide');
             $('.mini-submenu').hide();
         })
-    })*/
+    })
 });
 $(function() {
     $(".dropdown").hover(function() {

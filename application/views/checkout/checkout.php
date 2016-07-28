@@ -14,7 +14,7 @@
            $this->load->view("product/left_sidebar",$this->data['cat_data']);
         ?>
         <!-- Right Bar -->
-        <div class="col-sm-9 content-bar checkout-section">
+        <div class="col-sm-12 content-bar checkout-section">
           <h3>Checkout
           </h3>
           <hr>

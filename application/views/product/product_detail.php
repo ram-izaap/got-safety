@@ -9,9 +9,25 @@
         ?>
         <!-- -->
         <div class="col-sm-12 col-md-6 content-bar">
-        <?php if(count($attr_dtl) >0): ?>
-          <div class="pro-details">
+        
+          <div class="pro-details ">
+          
+          <a href="<?php echo site_url('cart'); ?>">
+           <div class="product-bag radius-5 clearfix visible-xs visible-sm add-cart cart_item">
+            <div class="row">
+              <div class="col-xs-6 subtotal">$0.00
+              </div>
+              <div class="col-xs-6 items">0 item 
+                <i class="fa fa-shopping-cart">
+                </i>
+              </div>
+            </div>
+           </div>
+          </a>
+          
+
             <div class="row visible-xs visible-sm aside-pannel">
+              
               <div class="sidebar">
                 <div class="mini-submenu tab-view">
                   <span class="icon-bar">
@@ -22,6 +38,7 @@
                   </span>
                 </div>
                 <div class="list-group col-xs-12 tab-menu">
+                  
                   <div class="list-group-item active aside_bar">
                     Submenu
                     <span class="pull-right" id="slide-submenu">
@@ -66,6 +83,7 @@
                 </div>
               </div>
             </div>
+            <?php if(count($attr_dtl) >0): ?>
             <?php
             $cur_val = current($attr_dtl);
             $cur_val = key($attr_dtl);
@@ -135,8 +153,9 @@
 
               </div>
             </div>
+                      <?php endif; ?>
+
           </div>
-          <?php endif; ?>
 
           <?php if(!count($attr_dtl)): ?>
              <h2>No Product Found</h2><hr>

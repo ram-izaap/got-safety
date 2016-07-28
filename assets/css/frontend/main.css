@@ -1157,7 +1157,7 @@ header .container { max-width: 320px; }
 
 @media screen and (min-width: 768px)
 #add_cart_modal .modal-dialog1 {left: 50%;right: auto;width: 600px;padding-top: 30px;padding-bottom: 30px;}
-#add_cart_modal .modal-dialog1 {margin-left: auto;margin-right: auto;width: 600px;padding: 10px;z-index: 1050;}
+#add_cart_modal .modal-dialog1 {margin-left: auto;margin-right: auto;max-width: 600px;width:100%;padding: 10px;z-index: 1050;}
 #add_cart_modal{background: none !important;}
 @media screen and (min-width: 768px)
 #add_cart_modal .modal-content {-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);}
@@ -1479,3 +1479,7 @@ color: #fff;}
 }
 
 .main_pagination {margin-top:26px; clear:both;}
+
+.plan-checkout {
+    margin-bottom: 3px !important;
+}
