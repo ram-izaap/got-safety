@@ -37,17 +37,19 @@ class Email_manager
 	
 
 
-	public function send_email($to, $toname, $from, $from_name, $subject, $message, $cc = array(),$attachments = array())
+	public function send_email($to, $toname, $subject, $message)
 	{
-		/*$this->_CI->config->load('email_config');*/
+		$this->_CI->config->load('email_config');
 	
-		$this->_CI->load->library('email');
+		$this->_CI->load->library('email',$this->_CI->config->item('email'));
 
 		$this->_CI->email->clear(TRUE);
 		
 		$this->_CI->email->set_newline("\r\n");
+
+		$this->_CI->email->set_mailtype("html");
 	
-		$this->_CI->email->from($from,$from_name);
+		$this->_CI->email->from('admin@gotsafety.com', 'Gotsafety');
 		$this->_CI->email->to($to);
 		//$this->_CI->email->cc( array_merge($cc, $this->_cc) );
 		//$this->_CI->email->bcc($this->_bcc);
@@ -121,7 +123,7 @@ class Email_manager
 		}
 
 
-		$this->send_email("itgavaskar@gmail.com", 'gavas', 'gavaskarizaap@gmail.com', 'gavaskar', "Order Confirmation Mail", $message);
+		$this->send_email($data['billing']['email'], 'gavas', "Order Confirmation Mail", $message);
 		 
 		$this->_CI->checkout_model->addaction_loginfo('sales_order', 'Order confirmation mail has been sent to customer', $so_id);
 

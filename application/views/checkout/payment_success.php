@@ -9,7 +9,7 @@
         <!-- // Order Invoice  -->
         <div class="order-invoice-wrapper">
           <div class="alert alert-success" role="alert"> 
-            <h4>Order Confiremd!
+            <h4>Order Confirmed!
             </h4>
             <p><?php echo $this->session->flashdata('message');?>
             </p> 
@@ -19,19 +19,19 @@
               <div class="invoice-title">
                 <h2>Invoice
                 </h2>
-                <h3 class="pull-right"><?php echo isset($so_details['id'])?("Order No.: <strong>{$so_details['id']}</strong>"):('');?>
+                <h3 class="pull-right"><?php echo isset($so_details['id'])?("Order No: <strong>{$so_details['id']}</strong>"):('');?>
                 </h3>
               </div>
               <hr>
               <div class="row">
                 <div class="col-xs-6">
                   <address>
-                    <strong>Billed To:</strong><strong><?php echo $billing['name']; ?></strong> <br><?php echo $billing['company_name']; ?><br><?php echo $billing['address']; ?> <br><?php echo $billing['city']; ?> <br><?php echo $billing['state']; ?> <br><?php echo $billing['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $billing['phone']; ?>
+                    <strong>Billed To:</strong><strong><?php echo $billing['name']; ?></strong> <br><?php echo $billing['company_name']; ?><br><?php echo $billing['address']; ?> <br><?php echo $billing['city']; ?> <br><?php echo $billing['state']; ?> <br><?php echo $billing['zip_code']; ?> <br><abbr title="Phone">Phone:</abbr> <?php echo $billing['phone']; ?>
                   </address>
                 </div>
                 <div class="col-xs-6 text-right">
                   <address>
-                    <strong>Shipped To:</strong><strong><?php echo $shipping['name']; ?></strong> <br><?php echo $shipping['company_name']; ?><br><?php echo $shipping['address']; ?> <br><?php echo $shipping['city']; ?> <br><?php echo $shipping['state']; ?> <br><?php echo $shipping['zip_code']; ?> <br><abbr title="Phone">P:</abbr> <?php echo $shipping['phone']; ?>
+                    <strong>Shipped To:</strong><strong><?php echo $shipping['name']; ?></strong> <br><?php echo $shipping['company_name']; ?><br><?php echo $shipping['address']; ?> <br><?php echo $shipping['city']; ?> <br><?php echo $shipping['state']; ?> <br><?php echo $shipping['zip_code']; ?> <br><abbr title="Phone">Phone:</abbr> <?php echo $shipping['phone']; ?>
                   </address>
                 </div>
               </div>

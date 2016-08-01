@@ -93,24 +93,32 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 												    <table cellspacing="10" width="100%">
 												      <tr>
 												        <th>Name</th>
-												        <th>Company</th>
-												        <th>Email</th>
-												        <th>Phone No</th>
-												        <th>Contact Time</th>
-												        <th>Lesson Suggestion</th>
-												        <th>Lesson Title</th>
+												        <td><?php echo $lesson_data['name'];?></td>
 												      </tr>
-												      <tr><td colspan=7><hr/></td></tr>
-												        <tr>
-												          <td><?php echo $lesson_data['name'];?></td>
-												          <td><?php echo $lesson_data['company'];?></td>
-												          <td><?php echo $lesson_data['email'];?></td>
-												          <td><?php echo $lesson_data['phone_no'];?></td>
-												          <td><?php echo $lesson_data['contact_time'];?></td>
-												          <td><?php echo $lesson_data['lesson_suggestion'];?></td>
-												          <td><?php echo (isset($lesson_data['lesson_name']) && $lesson_data['lesson_name']!='')?$lesson_data['lesson_name']:'';?></td>
-												        </tr>
-												        <tr><td colspan=7><hr/></td></tr>     
+												      <tr>
+												        <th>Company</th>
+												        <td><?php echo $lesson_data['company'];?></td>
+												      </tr>
+												      <tr>
+												        <th>Email</th>
+												        <td><?php echo $lesson_data['email'];?></td>
+												       </tr>
+												       <tr>
+												        <th>Phone No</th>
+												        <td><?php echo $lesson_data['phone_no'];?></td>
+												       </tr>
+												       <tr>
+												        <th>Contact Time</th>
+												        <td><?php echo $lesson_data['contact_time'];?></td>
+												       </tr>
+												       <tr>
+												        <th>Lesson Suggestion</th>
+												        <td><?php echo $lesson_data['lesson_suggestion'];?></td>
+												       </tr>
+												       <tr>
+												        <th>Lesson Title</th>
+												        <td><?php echo (isset($lesson_data['lesson_name']) && $lesson_data['lesson_name']!='')?$lesson_data['lesson_name']:'-';?></td>
+												      </tr>    
 												     </table>
 												    </div>
 											</td>

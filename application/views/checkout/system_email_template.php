@@ -62,7 +62,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 											<td width="10" align="left"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_l.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
 											
 											<td align="right" class="bold">
-												<div>1-8001-4931-34501<br><a href="mailto:info@gotsafety.com">info@gotsafety.com</a></div>
+												<div>1-123-123<br><a href="mailto:info@gotsafety.com">info@gotsafety.com</a></div>
 											</td>
 											<td width="10" align="right"><img src="<?php echo site_url(); ?>assets/images/frontend/emailtemplate/sep_r.gif" style="display:block;" width="10" height="36" alt="" border="0"></td>
 										</tr>
@@ -139,7 +139,7 @@ div.preheader{line-height:1px;font-size:1px;height:1px;color:#F4F4F4;display:non
 					<td align="left" height="100" valign="top" colspan="2">
 						<div>
 							Got Safety.<br>Address1<br>Address2<br>Country<br> <a href="mailto:info@gotsafety.com" target="_blank">info@gotsafety.com</a><br>
-							<a href="http://www.gotsafety.com" target="_blank">http://www.gotsafety.com</a><br>Toll Free: 80012-49312-345012<br>Fax: 330121-56412-011812<br>
+							<a href="http://www.gotsafety.com" target="_blank">http://www.gotsafety.com</a><br>Toll Free: 123-908<br>Fax: 120-9098<br>
 						</div>
 						<br>
 					</td>

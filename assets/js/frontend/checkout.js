@@ -1,3 +1,4 @@
+
 var checkout_url = base_url + 'checkout/';
 
 
@@ -576,3 +577,96 @@ function submit_order()
  });
 }
 
+
+$(window).load(function(){
+
+  if ($(".checkout-area").length) 
+   {
+     var name = sessionStorage.getItem('name');
+     var company_name = sessionStorage.getItem('company_name');
+     var email = sessionStorage.getItem('email');
+     var phone = sessionStorage.getItem('phone');
+     var address = sessionStorage.getItem('address');
+     var city = sessionStorage.getItem('city');
+     var state = sessionStorage.getItem('state');
+     var country = sessionStorage.getItem('country');
+     var zip_code = sessionStorage.getItem('zip_code');
+
+     var sa_name = sessionStorage.getItem('sa_name');
+     var sa_company_name = sessionStorage.getItem('sa_company_name');
+     var sa_email = sessionStorage.getItem('sa_email');
+     var sa_phone = sessionStorage.getItem('sa_phone');
+     var sa_address = sessionStorage.getItem('sa_address');
+     var sa_city = sessionStorage.getItem('sa_city');
+     var sa_state = sessionStorage.getItem('sa_state');
+     var sa_country = sessionStorage.getItem('sa_country');
+     var sa_zip_code = sessionStorage.getItem('sa_zip_code');
+
+     if (name!="undefined") $('input[name="name"]').val(name);
+     if (company_name!="undefined") $('input[name="company_name"]').val(company_name);
+     if (email!="undefined") $('input[name="email"]').val(email);
+     if (phone!="undefined") $('input[name="phone"]').val(phone);
+     if (address!="undefined") $('input[name="address"]').val(address);
+     if (city!="undefined") $('input[name="city"]').val(city);
+     if (state!="undefined") $('input[name="state"]').val(state);
+     if (country!="undefined") $("#country option[value='"+country+"']").prop('selected', true);;
+     if (zip_code!="undefined") $('input[name="zip_code"]').val(zip_code);
+
+     if (sa_name!="undefined") $('input[name="sa_name"]').val(sa_name);
+     if (sa_company_name!="undefined") $('input[name="sa_company_name"]').val(sa_company_name);
+     if (sa_email!="undefined") $('input[name="sa_email"]').val(sa_email);
+     if (sa_phone!="undefined") $('input[name="sa_phone"]').val(sa_phone);
+     if (sa_address!="undefined") $('input[name="sa_address"]').val(sa_address);
+     if (sa_city!="undefined") $('input[name="sa_city"]').val(sa_city);
+     if (sa_state!="undefined") $('input[name="sa_state"]').val(sa_state);
+     if (sa_country!="undefined") $(".sa_country option[value='"+sa_country+"']").prop('selected', true);;
+     if (sa_zip_code!="undefined") $('input[name="sa_zip_code"]').val(sa_zip_code);
+
+   }
+});
+
+$(window).unload(function(){
+
+   if ($(".checkout-area").length) 
+   {
+     var name = $("input[name='name']").val(),
+       company_name = $("input[name='company_name']").val(),
+       email = $("input[name='email']").val(),
+       phone = $("input[name='phone']").val(),
+       address = $("input[name='address']").val(),
+       city = $("input[name='city']").val(),
+       state = $("input[name='state']").val(),
+       country = $(".country option:selected").val(),
+       zip_code = $("input[name='zip_code']").val(),
+       sa_name = $("input[name='sa_name']").val(),
+       sa_company_name = $("input[name='sa_company_name']").val(),
+       sa_email = $("input[name='sa_email']").val(),
+       sa_phone = $("input[name='sa_phone']").val(),
+       sa_address = $("input[name='sa_address']").val(),
+       sa_city = $("input[name='sa_city']").val(),
+       sa_state = $("input[name='sa_state']").val(),
+       sa_country = $(".sa_country option:selected").val(),
+       sa_zip_code = $("input[name='sa_zip_code']").val();
+
+
+       sessionStorage.setItem("name", name);
+       sessionStorage.setItem("company_name", company_name);
+       sessionStorage.setItem("email", email);
+       sessionStorage.setItem("phone", phone);
+       sessionStorage.setItem("address", address);
+       sessionStorage.setItem("city", city);
+       sessionStorage.setItem("state", state);
+       sessionStorage.setItem("country", country);
+       sessionStorage.setItem("zip_code", zip_code);
+
+       sessionStorage.setItem("sa_name", sa_name);
+       sessionStorage.setItem("sa_company_name", sa_company_name);
+       sessionStorage.setItem("sa_email", sa_email);
+       sessionStorage.setItem("sa_phone", sa_phone);
+       sessionStorage.setItem("sa_address", sa_address);
+       sessionStorage.setItem("sa_city", sa_city);
+       sessionStorage.setItem("sa_state", sa_state);
+       sessionStorage.setItem("sa_country", sa_country);
+       sessionStorage.setItem("sa_zip_code", sa_zip_code);
+  }
+});
