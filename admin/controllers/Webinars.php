@@ -23,6 +23,11 @@ class Webinars extends Admin_controller {
        $this->load->model('webinars_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
+
+       if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

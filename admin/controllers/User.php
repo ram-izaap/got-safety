@@ -84,7 +84,12 @@ class User extends Admin_Controller
         $this->load->model('user_model');
         $this->load->library('Paypal_pro',$config);
         $this->load->library('email');
-        $this->payment_method = '';       
+        $this->payment_method = ''; 
+
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }      
        
     }  
     
@@ -141,7 +146,7 @@ class User extends Admin_Controller
 			$id =  $this->session->userdata('admin_data')['id'];
             $role =  $this->session->userdata('admin_data')['role'];            
 			$this->data['get_menu'] = $this->user_model->get_language("language");
-			$this->data['get_plans'] = $this->user_model->get_plans("plan","");
+			$this->data['get_plans'] = $this->user_model->get_plans("plan",array("is_active"=>"1"));
 			$role =  $this->session->userdata('admin_data')['role'];  
             
             if($role == "1")
@@ -396,7 +401,7 @@ class User extends Admin_Controller
 		{
 		  $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 
-		  $this->data['get_plans'] = $this->user_model->get_plans("plan","");
+		  $this->data['get_plans'] = $this->user_model->get_plans("plan",array("is_active"=>"1"));
 
 		  
 		  if(isset($_POST['user_name'])) 

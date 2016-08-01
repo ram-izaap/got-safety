@@ -17,6 +17,10 @@ class Client extends Admin_Controller
         parent::__construct();  
         
         $this->load->model('client_model','user_model');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
        
     }  
     

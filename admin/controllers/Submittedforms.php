@@ -13,6 +13,10 @@ class Submittedforms extends Admin_controller {
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
         $this->data['img_url']=$this->layout->get_img_dir();
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

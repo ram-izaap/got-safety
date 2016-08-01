@@ -27,6 +27,10 @@ class Documents extends Admin_controller {
        $this->load->model('logs_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
+       if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

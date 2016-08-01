@@ -12,6 +12,10 @@ class Attribute extends Admin_controller {
         $this->load->model('attribute_model');
         $this->load->model('attribute_value_model');
         $this->load->library('form_validation');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

@@ -27,6 +27,11 @@ class Posters extends Admin_controller {
         $this->load->model('posters_model');
 		$this->load->library('form_validation');
         $this->layout->add_javascripts(array('common'));
+
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

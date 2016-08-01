@@ -27,6 +27,11 @@ class Osha extends Admin_controller {
        $this->load->model('osha_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
+
+       if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

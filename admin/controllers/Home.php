@@ -8,6 +8,10 @@ class Home extends Admin_Controller
     function __construct()
     {
         parent::__construct();  
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
         
         //$this->load->model('login_model');
        

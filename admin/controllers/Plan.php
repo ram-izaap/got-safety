@@ -19,6 +19,10 @@ class Plan extends Admin_controller {
         
         $this->load->model('plan_model');
 		$this->load->library('form_validation');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

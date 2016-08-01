@@ -19,6 +19,10 @@ class Aboutus extends Admin_Controller
         parent::__construct();  
         
         $this->load->model('about_model');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
        
     }  
     

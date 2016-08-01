@@ -8,6 +8,10 @@ class Subscribers extends Admin_Controller
   {
     parent::__construct();
     $this->load->model('subscribers_model');
+    if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
   }
   function index()
   {

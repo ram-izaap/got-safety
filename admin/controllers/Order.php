@@ -11,6 +11,10 @@ class Order extends Admin_controller {
         parent::__construct();
         
         $this->load->model('order_model');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 

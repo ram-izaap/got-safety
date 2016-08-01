@@ -16,6 +16,10 @@ class Category extends Admin_controller {
         
         $this->load->model('category_model');
 		$this->load->library('form_validation');
+        if(!is_logged_in()) 
+        {
+          redirect("login");
+        }
     }
 
 
