@@ -89,12 +89,12 @@
 				  
 				  
                 </ul>
-                <form class="navbar-form navbar-right" data-form="search">
+                <!--<form class="navbar-form navbar-right" data-form="search">
                   <div class="form-group">
                     <input type="text" class="form-control" value="Search..." onfocus="(this.value == 'Search...') && (this.value = '')" onblur="(this.value == '') && (this.value = 'Search...')" />
                   </div>
                   <button type="submit" class="btn-search" data-icon="search"><i class="fa fa-search"></i></button>
-                </form>
+                </form>-->
 
               </div>
             

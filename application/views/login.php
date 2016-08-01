@@ -47,7 +47,7 @@
                                       <div class="row">
                                         <div class="col-sm-12">
                                           <div class="form-group">
-                                            <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Username" value="<?php echo set_value('name',$form_data['name']); ?>" onfocus="(this.value == 'Username') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Username')">
+                                            <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Username" value="<?php echo set_value('name',$form_data['name']); ?>" >
                                             <span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
                                             
                                             
@@ -58,7 +58,7 @@
                                       <div class="row">
                                         <div class="col-sm-12">
                                           <div class="form-group">
-                                            <input type="password" name="password" id="password" value ="<?php echo set_value('password',$form_data['password']); ?>" class="form-control input-lg"  placeholder="Password" onfocus="(this.value == 'Password') &amp;&amp; (this.value = '')" onblur="(this.value == '') &amp;&amp; (this.value = 'Password')">
+                                            <input type="password" name="password" id="password" value ="<?php echo set_value('password',$form_data['password']); ?>" class="form-control input-lg"  placeholder="Password" >
                                             <span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
                                           </div>
                                         </div>

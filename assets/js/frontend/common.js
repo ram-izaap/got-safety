@@ -28,6 +28,9 @@ $('.sel_label_size').on("change",function() {
       
   });
 
+ $('.video_modal .close').click(function(){      
+        $('iframe').attr('src', $('iframe').attr('src'));
+    });
 
 $(window).load(function(){
     var $divs = $("div.product-loop");

@@ -186,11 +186,12 @@ class Lession_model extends App_Model {
 		}
 		
 		
-       $result = $this->db->select("l.id as id,a.language,la.id as laid,la.lang,a.title as att_title,a.content as att_content,a.id as att_id");
+       $result = $this->db->select("l.id as id,a.language,l.rec_lesson,la.id as laid,la.lang,a.title as att_title,a.content as att_content,a.id as att_id");
        $this->db->from('lession l');
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
        $this->db->join('language la','la.id=a.language','left');
-       $this->db->group_by('l.id');      
+       $this->db->group_by('l.id'); 
+       $this->db->order_by('l.rec_lesson','desc');      
         $this->db->like('a.title',$like);
         if($role == '2')
         {

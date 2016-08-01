@@ -6,7 +6,7 @@
       <div data-text="static">
         <div>
           <h3>Simplest way to keep track of your documentation and safety lessons online and on your phone!</h3>
-          <a href="javascript:void(0);"><i class="fa fa-hand-o-right"></i> Click Here to Join Now <i class="fa fa-hand-o-left"></i></a>
+          <a href="<?php echo site_url("login/signup"); ?>"><i class="fa fa-hand-o-right"></i> Click Here to Join Now <i class="fa fa-hand-o-left"></i></a>
         </div>
       </div>
     </section>
@@ -22,7 +22,7 @@
                 <!-- // Plans -->  
                 <div class="plans">
                   <div class="bg-white" data-plan="gs-monthly">
-                    <h4>Access Hundredsof Safety Lessons</h4> 
+                    <h4>Access Hundreds of Safety Lessons</h4> 
                     <a href="javascript:void(0);"> <strong>$37</strong> month</a>
                   </div>
                   <div class="bg-white" data-plan="gs-yearly">
@@ -89,7 +89,7 @@
                           <div class="modal-content">
                             <div class="modal-body">
                               <div class="container">
-                                <H2>10 Extreme Safety Fails <button class="btn btn-default pull-right" data-dismiss="modal"><i class="fa fa-close"></i></button></H2>
+                                <H2>10 Extreme Safety Fails <button class="btn btn-default pull-right close" data-dismiss="modal"><i class="fa fa-close"></i></button></H2>
                                 <div class="embed-responsive embed-responsive-16by9">
                                   <iframe width="560" height="315" src="//www.youtube.com/embed/3pGQk9VSfVs" allowfullscreen></iframe>
                                 </div>

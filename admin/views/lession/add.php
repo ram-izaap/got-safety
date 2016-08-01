@@ -115,6 +115,15 @@
 					<span class="vstar" <?php echo form_error('content', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div> */?>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Recommended Lesson:
+					</label>
+					<div class="col-md-10">
+						<input type="checkbox" class="" name="rec_lesson" id="rec_lesson" value="1" 
+						<?php echo set_checkbox('rec_lesson',1,((isset($form_data['rec_lesson']) && $form_data['rec_lesson'] == 1)?true:false));?>/>
+					</div>
+				  </div>
 				
 				
 				<div class="form-group">

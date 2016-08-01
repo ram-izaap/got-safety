@@ -4141,3 +4141,5 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+textarea{resize:vertical !important;}
