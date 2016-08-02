@@ -173,39 +173,54 @@ class Lesson_model extends App_Model {
 	
 	function get_language_attachment($where,$like='')
 	{
+
         
         $date = date('Y-m-d');
-		$user_id =  $this->session->userdata('admin_data')['id']; 
-		$role =  $this->session->userdata('admin_data')['role']; 
+		$user_id =  $this->session->userdata('user_detail')['id']; 
+        $role =  $this->session->userdata('role'); 
+        
+        if($role == '2')
+        {
+            $user_id = $this->session->userdata('user_detail')['id'];
+        }
+        else 
+        {
+            $user_id = $this->session->userdata('created_user');
+        }
 		
-		if($role == '2'){
-			$user_id = $this->session->userdata('admin_data')['id'];
-		}else 
-		{
-			$user_id = '8';
-		}
-		
-		
+
        $result = $this->db->select("l.id as id,a.language,l.rec_lesson,la.id as laid,la.lang,a.title as att_title,a.content as att_content,a.id as att_id");
        $this->db->from('lession l');
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
        $this->db->join('language la','la.id=a.language','left');
        $this->db->group_by('l.id'); 
        $this->db->order_by('l.rec_lesson','desc');      
-        $this->db->like('a.title',$like);
-        if($role == '2')
-        {
-        $this->db->where('l.created_user',$user_id);
-        $this->db->where($where);
+       $this->db->like('a.title',$like);
+
+        /*if($role == '2')
+        {*/
+
+        
+        
 
         $this->db->where('l.to_date >=',$date);
+
+        $this->db->where('l.created_user',$user_id);
+
+        $this->db->or_where('l.visible_to_all=1');
+
+        $this->db->where($where);
         
-        }else {
+        /*}
+        else 
+        {
+
 			$this->db->where('l.updated_user',$user_id);
 			$this->db->where($where);
 			$this->db->where('l.to_date >=',$date);
 			
-		}
+		}*/
+
 		return $result = $this->db->get()->result_array();
         
        

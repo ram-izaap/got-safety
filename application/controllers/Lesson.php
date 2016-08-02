@@ -132,7 +132,7 @@ class Lesson extends App_Controller {
 		}
 		
 		
-		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
+		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.is_active" => 1,"a.language" => 1));
 		
 		$this->data['get_language'] = $this->lesson_model->get_language("language");
 
@@ -162,11 +162,11 @@ class Lesson extends App_Controller {
 		 $this->session->set_userdata('language_id',$language_id);
 		 $languageid = $this->session->userdata('language_id');
 		 
-		 $this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		 $this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1,"l.is_active" => 1));
 		 
 		 $this->data['language_content'] = $this->lesson_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
 		 
-		 $this->data['get_language'] = $this->db->query("select a.lang,a.id,b.language from language a inner join lession_attachment b on a.id=b.language where b.lession_id=".$lesson_id."")->result_array();
+		 $this->data['get_language'] = $this->db->query("select a.lang,a.id,b.language from language a inner join lession_attachment b on a.id=b.language where b.lession_id=".$lesson_id." and a.is_active=1 and b.is_active=1")->result_array();
 
 		 $this->data['selected_language'] = $language_id;
 		 
@@ -223,7 +223,7 @@ class Lesson extends App_Controller {
 			$user_id = $this->session->userdata('created_user');
 		}
 		
-		$this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		$this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1,"l.is_active" => 1));
 		 
 		$this->data['language_content'] = $this->lesson_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
 		 
