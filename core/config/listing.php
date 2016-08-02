@@ -28,11 +28,11 @@
 
 
 
-$config['lession_index'] = array(
+$config['lesson_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'lession/filter',
-	"base_url"	=> 	'/lession/index/',
+	"advance_search_view" => 'lesson/filter',
+	"base_url"	=> 	'/lesson/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
 						'title'=>array('name'=>'Title', 'data_type' => 'String', 'sortable' => TRUE, 'default_view'=>1),

@@ -28,7 +28,7 @@ class Lesson extends App_Controller {
         parent::__construct();
         
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker'));
-        $this->load->model(array('lession_model'));
+        $this->load->model(array('lesson_model'));
         $this->load->model(array('contact_model'));
 
         //echo $this->layout->get_img_dir();
@@ -94,8 +94,8 @@ class Lesson extends App_Controller {
 		
 		
 		
-		$this->data['list_data'] = $this->lession_model->get_lession_detail("lession",array("created_user"=> $user_id,"is_active" => 1));
-		$this->data['lesson_content'] = $this->lession_model->get_info("lesson_content");
+		$this->data['list_data'] = $this->lesson_model->get_lession_detail("lession",array("created_user"=> $user_id,"is_active" => 1));
+		$this->data['lesson_content'] = $this->lesson_model->get_info("lesson_content");
 		$this->data['img_url']=$this->layout->get_img_dir();
      	$this->layout->view('lesson/lesson','frontend');
         
@@ -107,9 +107,9 @@ class Lesson extends App_Controller {
 		$this->data['img_url']=$this->layout->get_img_dir();
 		$lession_id = $this->input->post('view_param');
 		
-		$this->data['view_link'] = $this->lession_model->get_lession_attachment("lession_attachment",array("lession_id" => $lession_id,"is_active" => 1));
+		$this->data['view_link'] = $this->lesson_model->get_lession_attachment("lession_attachment",array("lession_id" => $lession_id,"is_active" => 1));
 		
-		$this->data['view_content'] = $this->lession_model->get_lession_attachment("lession",array("id" => $lession_id,"is_active" => 1));
+		$this->data['view_content'] = $this->lesson_model->get_lession_attachment("lession",array("id" => $lession_id,"is_active" => 1));
 
 		$response['html_view'] = $this->load->view('lesson/lesson_attachment',$this->data,TRUE);
   
@@ -132,9 +132,9 @@ class Lesson extends App_Controller {
 		}
 		
 		
-		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
+		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.language" => 1));
 		
-		$this->data['get_language'] = $this->lession_model->get_language("language");
+		$this->data['get_language'] = $this->lesson_model->get_language("language");
 
 		$data['title'] = "Lesson Suggestion";
 		
@@ -162,9 +162,9 @@ class Lesson extends App_Controller {
 		 $this->session->set_userdata('language_id',$language_id);
 		 $languageid = $this->session->userdata('language_id');
 		 
-		 $this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		 $this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
 		 
-		 $this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
+		 $this->data['language_content'] = $this->lesson_model->get_language_content("lession_attachment",array("id" => $attachment_id,"language" => $language_id,"is_active" => 1));
 		 
 		 $this->data['get_language'] = $this->db->query("select a.lang,a.id,b.language from language a inner join lession_attachment b on a.id=b.language where b.lession_id=".$lesson_id."")->result_array();
 
@@ -193,9 +193,9 @@ class Lesson extends App_Controller {
 			$user_id = $this->session->userdata('created_user');
 		}	
 		
-		$this->data['get_attachment'] = $this->lession_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id),$title);
+		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id),$title);
 		
-		$this->data['get_language'] = $this->lession_model->get_language("language");
+		$this->data['get_language'] = $this->lesson_model->get_language("language");
 
 		$response['html_view'] = $this->load->view('lesson/ajax_lesson_display',$this->data,TRUE);
 		echo json_encode($response);
@@ -223,11 +223,11 @@ class Lesson extends App_Controller {
 			$user_id = $this->session->userdata('created_user');
 		}
 		
-		$this->data['atachment_detail'] = $this->lession_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
+		$this->data['atachment_detail'] = $this->lesson_model->get_lession_attachment_details(array("a.lession_id" => $lesson_id,"a.is_active" => 1));
 		 
-		$this->data['language_content'] = $this->lession_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
+		$this->data['language_content'] = $this->lesson_model->get_language_content("lession_attachment",array("lession_id" => $lesson_id,"language" => $language_id,"is_active" => 1));
 		 
-		$this->data['get_language'] = $this->lession_model->get_language("language");
+		$this->data['get_language'] = $this->lesson_model->get_language("language");
 
 		$response['html_view'] = $this->load->view('lesson/ajax_attachment_display',$this->data,TRUE);
   

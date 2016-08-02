@@ -534,12 +534,12 @@
 					<?php } ?>
 							
 							<li> 
-								<a href="<?php echo site_url('lession/add_edit_lession'); ?>">
+								<a href="<?php echo site_url('lesson/add_lesson'); ?>">
 								Add lessons </a>
 							</li>
 							
 							<li> 
-								<a href="<?php echo site_url('lession'); ?>">
+								<a href="<?php echo site_url('lesson'); ?>">
 								Manage lessons </a>
 							</li>
 							

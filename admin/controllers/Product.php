@@ -354,7 +354,7 @@ class Product extends Admin_controller {
       }
       else if(empty($_FILES['img']['name']) && $_POST['prod_img']=='')
       {
-        $this->form_validation->set_message("do_upload","The Image Filed is required");
+        $this->form_validation->set_message("do_upload","The Image Field is required");
         return false;
       }
       else

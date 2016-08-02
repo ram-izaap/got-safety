@@ -50,7 +50,7 @@ class Lang extends Admin_controller {
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('lang/add_edit_lang/{id}').'" class="table-link">
+        $str = '<a href="'.site_url('lang/add_lang/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -88,7 +88,7 @@ class Lang extends Admin_controller {
     
   
 	
-	public function add_edit_lang($edit_id = "")
+	public function add_lang($edit_id = "")
     { 
 		
 		if(is_logged_in()) {
