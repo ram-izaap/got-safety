@@ -23,8 +23,8 @@ class Webinars extends App_Controller {
 			$user_id = $this->session->userdata('created_user');
 		}
 		
-		$this->data['most_data'] = $this->webinars_model->get_webinars_most("webinars",array('created_user'=> $user_id,"is_active" => 1));
-		$this->data['all_data'] = $this->webinars_model->get_webinars_all("webinars",array('created_user'=> $user_id,"is_active" => 1));
+		$this->data['most_data'] = $this->webinars_model->get_webinars_most("webinars",$user_id);
+		$this->data['all_data'] = $this->webinars_model->get_webinars_all("webinars",$user_id);
 		
      	$this->layout->view('webinars/webinars','frontend');
         

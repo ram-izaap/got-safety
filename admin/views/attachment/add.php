@@ -19,6 +19,8 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
+		<input type="hidden" name="lesson_id" id="lesson_id" value="<?php echo $lesson_id = (isset($form_data['lession_id']))?$form_data['lession_id']:""; ?>" /> 
+
 		<div class="form-group">
 			<label class="col-md-2 control-label">Language: <span class="required">	* </span>
 			</label>

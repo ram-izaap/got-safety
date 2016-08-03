@@ -90,7 +90,7 @@
 					* </span>
 					</label>
 					<div class="col-md-10">
-						<input type="text" id="from" name="from" class="form-control" value="<?php echo set_value('from',$form_data['from']); ?>">
+						<input type="text" id="from" name="from" class="form-control" value="<?php echo set_value('from',$form_data['from']); ?>" readonly>
 						<span class="vstar" <?php echo form_error('from', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 					* </span>
 					</label>
 					<div class="col-md-10">
-						<input type="text" id="to" name="to_date" class="form-control" value="<?php echo set_value('to_date',$form_data['to_date']); ?>">
+						<input type="text" id="to" name="to_date" class="form-control" value="<?php echo set_value('to_date',$form_data['to_date']); ?>" readonly>
 						<span class="vstar" <?php echo form_error('to_date', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>

@@ -194,8 +194,10 @@ class Lesson_model extends App_Model {
        $this->db->join('lession_attachment a','a.lession_id=l.id', 'left');
        $this->db->join('language la','la.id=a.language','left');
        $this->db->group_by('l.id'); 
-       $this->db->order_by('l.rec_lesson','desc');      
-       $this->db->like('a.title',$like);
+       $this->db->order_by('l.rec_lesson','desc');
+
+
+         $this->db->like('a.title',$like);
 
         /*if($role == '2')
         {*/
@@ -205,9 +207,12 @@ class Lesson_model extends App_Model {
 
         $this->db->where('l.to_date >=',$date);
 
-        $this->db->where('l.created_user',$user_id);
+        $this->db->where("(l.created_user=$user_id or l.visible_to_all=1)");
 
-        $this->db->or_where('l.visible_to_all=1');
+
+        //$this->db->where('l.created_user',$user_id);
+
+        //$this->db->or_where('l.visible_to_all=1');
 
         $this->db->where($where);
         

@@ -50,7 +50,7 @@ class Webinars extends Admin_controller {
          
         $this->_narrow_search_conditions = array("start_date");
         
-        $str = '<a href="'.site_url('webinars/add_edit_webinars/{id}').'" class="table-link">
+        $str = '<a href="'.site_url('webinars/add_webinars/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
                         <i class="fa fa-pencil"></i>
@@ -90,7 +90,7 @@ class Webinars extends Admin_controller {
     
   
 	
-	public function add_edit_webinars($edit_id = "")
+	public function add_webinars($edit_id = "")
     {            
 		
 		$user_id =  $this->session->userdata('admin_data')['id']; 

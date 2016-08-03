@@ -562,7 +562,7 @@
 						</a>
 						<ul class="sub-menu">
 							<li> 
-								<a href="<?php echo site_url('webinars/add_edit_Webinars'); ?>">
+								<a href="<?php echo site_url('webinars/add_webinars'); ?>">
 								Add Webinars </a>
 							</li>
 							<li> 

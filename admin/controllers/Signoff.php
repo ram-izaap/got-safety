@@ -49,7 +49,7 @@ class Signoff extends Admin_controller {
             $str = '<a href="'.site_url('signoff/view_detail/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-eye"></i>
                     </span>
                 </a>';
  

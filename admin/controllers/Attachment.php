@@ -94,6 +94,7 @@ class Attachment extends Admin_controller {
       $get_menu= $this->attachment_model->get_language_list("users",array('id'=>$user_id));
 			$this->data['lang_list'] = $get_menu[0]['language'];       
 			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
+
 			$this->data['get_menu'] = $this->attachment_model->get_menu("language");
 			$this->form_validation->set_rules($this->_attachment_validation_rules);
 
@@ -106,17 +107,17 @@ class Attachment extends Admin_controller {
 					$this->form_validation->set_rules('l_url', 'lesson url', 'required');
 					$this->form_validation->set_rules('q_url', 'quiz url', 'required');
 				}
-				else if(empty($_FILES['f_name']['name']) || empty($_FILES['f_name_quiz']['name']))
+				/*else if(empty($_FILES['f_name']['name']) || empty($_FILES['f_name_quiz']['name']))
 				{
 					if($fname_ip=="" || $fquiz_ip=="")
 					{
 					 $this->form_validation->set_rules('f_name', 'lesson', 'required');
 					 $this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
 					}
-				}
+				}*/
 			}
 
-			if($this->input->post('type')=="1")
+			/*if($this->input->post('type')=="1")
 			{
 				if (empty($_FILES['f_name']['name']) && empty($_POST['slide_image']) )
 				{
@@ -127,36 +128,51 @@ class Attachment extends Admin_controller {
 				{
 					$this->form_validation->set_rules('f_name_quiz', 'Quiz', 'required');
 				} 
-			}	
+			}*/
+
 			if(isset($_POST['language'])) 
 			{
 					$this->form_validation->set_rules('language', 'Language', 'trim|required|callback_language_unique_check['.$edit_id.']');
 			}
 
       $this->upload_data = array();
+      $this->upload_data1 = array();
        
         if($this->form_validation->run())
         { 
           $form = $this->input->post();
+
+          
+          if($form['l_url']!="" && $form['q_url']!="")
+          {
+            @unlink("../assets/images/admin/lession_attachment/".$_POST['slide_image']);
+            @unlink("../assets/images/admin/lession_attachment/".$_POST['slide_image2']);
+            $filename='';
+            $filename2='';
+
+          }
+          else
+          {
 					
-          if(count($this->upload_data) )
-          { 
-              $filename = (isset($this->upload_data['f_name']['file_name']))?$this->upload_data['f_name']['file_name']:"";
-          }
+            if(count($this->upload_data) )
+            { 
+                $filename = (isset($this->upload_data['f_name']['file_name']))?$this->upload_data['f_name']['file_name']:"";
+            }
 
-					else
-					{
-						$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
-					}					
+  					else
+  					{
+  						$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
+  					}					
 
-					if(count($this->upload_data1) )
-          { 
-              $filename = (isset($this->upload_data1['f_name_quiz']['file_name']))?$this->upload_data1['f_name_quiz']['file_name']:"";
-          }
-					else
-					{
-						$filename2=(isset($_POST['slide_image2']))?$_POST['slide_image2']:"";
-					}			
+  					if(count($this->upload_data1) )
+            { 
+                $filename2 = (isset($this->upload_data1['f_name_quiz']['file_name']))?$this->upload_data1['f_name_quiz']['file_name']:"";
+            }
+  					else
+  					{
+  						$filename2=(isset($_POST['slide_image2']))?$_POST['slide_image2']:"";
+  					}	
+          }		
 					if(isset($form['is_active'])) 
 					{ 
 						$form['is_active'] = $form['is_active'];	
@@ -166,17 +182,16 @@ class Attachment extends Admin_controller {
 						$form['is_active'] = "0";
 					}
 
-					$id  = $this->session->userdata('id');
-					if($id !="") 
-          {
-						$id  = $this->session->userdata('id');
-					}
-          else
-          {
-						
-						$get_lesson_id = $this->attachment_model->get_lesson_id("lession_attachment",array("id" => $edit_id));
-						$id = $get_lesson_id[0]['lession_id']; 
-					}
+					 if($_GET['id']!='')
+           {
+					   $id=$_GET['id'];
+           }
+           else
+           {
+					   $get_lesson_id = $this->attachment_model->get_lesson_id("lession_attachment",array("id" => $edit_id));
+					   $id = $get_lesson_id[0]['lession_id'];
+            } 
+					
 
 					$ins_data = array();
 					$ins_data['lession_id']       	= $id;
@@ -195,14 +210,15 @@ class Attachment extends Admin_controller {
 					}
 					else
 					{
-						if($filename2!='' && $filename!='')
-						{
+						/*if($filename2!='' && $filename!='')
+						{*/
 							$ins_data['f_name']  = $filename;
 						  $ins_data['f_name_quiz']  = $filename2;
-						}
+						/*}*/
 						$ins_data['l_url']  = $form['l_url'];
 						$ins_data['q_url']  = $form['q_url'];
 					}
+
 					if(empty($edit_id))
 					{
 				    $social_data = $this->attachment_model->insert("lession_attachment",$ins_data);
@@ -262,15 +278,21 @@ class Attachment extends Admin_controller {
           $error=array();;
           $config['upload_path'] = '../assets/images/admin/lession_attachment';
 
-          if($_POST['type']!='1')
-          {
-            $config['allowed_types'] = 'audio|video';
-            $config['max_size'] = '5120';
-          }
-          else
+          if($_POST['type']=='1')
           {
             $config['allowed_types'] = 'pdf';
             $config['max_size'] = '2048';
+            
+          }
+          else if($_POST['type']=='2')
+          {
+            $config['allowed_types'] = 'mid|midi|mpga|mp2|mp3|aif|aiff|aifc|ram|rm|rpm|ra|wav|m4a|aac|au|ac3|flac|ogg|wma';
+            $config['max_size'] = '5120';
+          }
+          else if($_POST['type']=='3')
+          {
+            $config['allowed_types'] = 'rv|mpeg|mpg|mpe|qt|mov|avi|movie|3g2|3gp|mp4|f4v|webm|wmv|wma';
+            $config['max_size'] = '10120';
           }
 
           
@@ -288,23 +310,38 @@ class Attachment extends Admin_controller {
           else
           {
               $data1 = array("f_name" => $this->upload->data());
-              @unlink("../assets/images/admin/lession_attachment".$_POST['slide_image']);
+              @unlink("../assets/images/admin/lession_attachment/".$_POST['slide_image']);
               $this->upload_data = $data1;
               return $data1;
           }
         }
         else if(empty($_FILES['f_name']['name']) && $_POST['slide_image']=='')
         {
-          $this->form_validation->set_message("do_upload","The Name Field is required");
+          $this->form_validation->set_message("do_upload","The Lesson Field is required");
           return false;
         }
-        else
+
+        else if(empty($_FILES['f_name']['name']) && $_POST['slide_image']!='')
         {
-          return true;
-        }
+          $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
+
+          if(isset($edit_id) && $edit_id!='')
+          {
+            $edit_data = $this->attachment_model->get_slideimage_detail("lession_attachment",array("id" => $edit_id));
+
+            if($edit_data[0]['type']!=$_POST['type'])
+            {
+               $this->form_validation->set_message("do_upload","The Lesson Field is required");
+               return false;
+            } 
+            else
+            {
+              return true;
+            }
+          }
+        }	
+      }	
     }
-		
-	}
 	
 	
 	function do_upload2()
@@ -316,15 +353,21 @@ class Attachment extends Admin_controller {
 
         $config['upload_path'] = '../assets/images/admin/lession_attachment';
         
-        if($_POST['type']!='1')
-        {
-          $config['allowed_types'] = 'audio|video';
-          $config['max_size'] = '5120';
-        }
-        else
+        if($_POST['type']=='1')
         {
           $config['allowed_types'] = 'pdf';
           $config['max_size'] = '2048';
+          
+        }
+        else if($_POST['type']=='2')
+        {
+          $config['allowed_types'] = 'mid|midi|mpga|mp2|mp3|aif|aiff|aifc|ram|rm|rpm|ra|wav|m4a|aac|au|ac3|flac|ogg|wma';
+          $config['max_size'] = '5120';
+        }
+        else 
+        {
+          $config['allowed_types'] = 'rv|mpeg|mpg|mpe|qt|mov|avi|movie|3g2|3gp|mp4|f4v|webm|wmv|wma';
+          $config['max_size'] = '10120';
         }
 
         $config['overwrite'] = FALSE;
@@ -334,14 +377,14 @@ class Attachment extends Admin_controller {
 
         if (!$this->upload->do_upload("f_name_quiz"))
         {
-            $error = array('error' => $this->upload->display_errors());
-            $this->form_validation->set_message("do_upload2",$error['error']);
+            $error = array('error1' => $this->upload->display_errors());
+            $this->form_validation->set_message("do_upload2",$error['error1']);
             return false;
         }
         else
         {
             $data = array("f_name_quiz" => $this->upload->data());
-            @unlink("../assets/images/admin/lession_attachment".$_POST['slide_image2']);
+            @unlink("../assets/images/admin/lession_attachment/".$_POST['slide_image2']);
             $this->upload_data1 = $data;
             return $data;
         }
@@ -351,13 +394,27 @@ class Attachment extends Admin_controller {
         $this->form_validation->set_message("do_upload2","The Quiz Field is required");
         return false;
       }
-      else
-      {
-        return true;
-      }
-    }
+      else if(empty($_FILES['f_name_quiz']['name']) && $_POST['slide_image2']!='')
+        {
+          $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 
-  }
+          if(isset($edit_id) && $edit_id!='')
+          {
+            $edit_data = $this->attachment_model->get_slideimage_detail("lession_attachment",array("id" => $edit_id));
+
+            if($edit_data[0]['type']!=$_POST['type'])
+            {
+               $this->form_validation->set_message("do_upload2","The Quiz Field is required");
+               return false;
+            } 
+            else
+            {
+              return true;
+            }
+          }
+        } 
+      } 
+    }
 	
 	
 
@@ -377,8 +434,11 @@ class Attachment extends Admin_controller {
     
   function language_unique_check($language,$edit_id) 
   {
-        
-        $id  = $this->session->userdata('id');
+          if($_GET['id']!='')
+            $id=$_GET['id'];
+          
+          else
+            $id  = $this->input->post('lesson_id');
         
         $get_data = $this->attachment_model->language_check_exists("lession_attachment",array("language" => $language,"lession_id" => $id,"id !=" => $edit_id));
        

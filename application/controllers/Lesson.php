@@ -193,7 +193,7 @@ class Lesson extends App_Controller {
 			$user_id = $this->session->userdata('created_user');
 		}	
 		
-		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.language" => $language_id),$title);
+		$this->data['get_attachment'] = $this->lesson_model->get_language_attachment(array("l.is_active" => 1,"a.is_active" =>1,"a.language" => $language_id),$title);
 		
 		$this->data['get_language'] = $this->lesson_model->get_language("language");
 

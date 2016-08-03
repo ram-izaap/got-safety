@@ -25,7 +25,7 @@
 						 <div class="pull-right top-page-ui">
 							 
 							  
-	                        <a href="<?php echo site_url('webinars/add_edit_Webinars');?>" class="btn btn-success">
+	                        <a href="<?php echo site_url('webinars/add_webinars');?>" class="btn btn-success">
 	                            <i class="fa fa-plus-circle fa-lg"></i> New
 	                        </a>
 	                        <a onclick="return DeleteCheckedRow(this,'delete-webinars','webinars/webinars_delete');" class="btn btn-success">

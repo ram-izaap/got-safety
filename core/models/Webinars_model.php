@@ -111,13 +111,13 @@ class Webinars_model extends App_Model {
         return $result->result_array();
 	}
 	
-	function get_webinars_most($table_name,$where)
+	function get_webinars_most($table_name,$userid)
     {
 		
 		$this->db->select('*');
 		$this->db->from($table_name);
-        $this->db->where($where);
-         $this->db->or_where("visible_to_all",1);
+        $this->db->where("(created_user=$userid or visible_to_all=1)");
+        $this->db->where("is_active",1);
         $this->db->order_by("id","desc");
         $this->db->limit(0,1);
 		$result = $this->db->get()->result_array();
@@ -125,13 +125,13 @@ class Webinars_model extends App_Model {
 		
 	}
 	
-	function get_webinars_all($table_name,$where)
+	function get_webinars_all($table_name,$userid)
     {
 		
 		$this->db->select('*');
 		$this->db->from($table_name);
-        $this->db->where($where);
-        $this->db->or_where("visible_to_all",1);
+        $this->db->where("(created_user=$userid or visible_to_all=1)");
+        $this->db->where("is_active",1);
         $this->db->order_by("id","ASC");
 		$result = $this->db->get()->result_array();
 		return $result;

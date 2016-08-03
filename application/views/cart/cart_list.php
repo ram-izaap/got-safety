@@ -43,7 +43,7 @@
                           </a>
                           <div class="media-body">
                             <h4 class="media-heading">
-                              <a href="<?php echo site_url(); ?>product/product_detail/<?php echo $items['options']['product_id']; ?>">
+                              <a href="<?php echo site_url(); ?>product/<?php echo str_replace(" ","-",$items['name']); ?>">
                                 <?php echo $items['name']; ?>
                               </a>
                             </h4>
