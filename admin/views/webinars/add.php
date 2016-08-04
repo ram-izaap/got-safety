@@ -77,12 +77,20 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-2 control-label">Link: <span class="required">
+					<label class="col-md-2 control-label">Description: 
+					</label>
+					<div class="col-md-10">
+						<textarea name="web_desc" class="form-control"> <?php echo set_value('web_desc',$form_data['web_desc']); ?></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Link: <span class="required">*
 					 </span>
 					</label>
 					<div class="col-md-10">
-						<textarea name="link" class="form-control"> <?php echo set_value('link',$form_data['link']); ?></textarea>
-					<span class="vstar" <?php echo form_error('link', '<span class="help-block">', '</span>'); ?></span>
+					  <input type="text" name="link" class="form-control" value="<?php echo set_value('link',$form_data['link']); ?>"> 
+					  <span class="vstar" <?php echo form_error('link', '<span class="help-block">', '</span>'); ?></span>
 					</div>
 				</div>
 				

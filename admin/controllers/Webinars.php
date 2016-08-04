@@ -7,6 +7,7 @@ class Webinars extends Admin_controller {
 	
 	protected $_webinars_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
+													array('field' => 'link', 'label' => 'Link', 'rules' => 'trim|required|callback_valid_url'),
                                                     array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
                                                     array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim')
 													
@@ -152,6 +153,7 @@ class Webinars extends Admin_controller {
 			
 			$ins_data = array();
             $ins_data['title']       	= Ucfirst($form['title']);
+            $ins_data['web_desc']          = $form['web_desc'];
             $ins_data['link']          = $form['link'];
             $ins_data['is_active']  = $form['is_active'];
             if($_POST['user_id'] == ""){
@@ -202,7 +204,7 @@ class Webinars extends Admin_controller {
             {
                 $this->data['title']     = "ADD WEBINARS";
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("title" => "","link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "","visible_to_all" => "");
+                $this->data['form_data'] = array("title" => "","web_desc"=>'',"link" => '',"is_active" => "","slide_image" => "","video_file" => "","user_id" => "","visible_to_all" => "");
                 
             }
 		    
@@ -258,7 +260,10 @@ class Webinars extends Admin_controller {
         }
     } 
     
-  
+   function valid_url($str)
+   {
+     return (filter_var($str, FILTER_VALIDATE_URL) !== FALSE);
+   }
    
     
 }

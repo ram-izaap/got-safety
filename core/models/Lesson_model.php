@@ -41,6 +41,7 @@ class Lesson_model extends App_Model {
        
         if($role == '2'){
         $this->db->where('l.created_user',$user_id);
+        $this->db->where('l.from <=',$date);
         $this->db->where('l.to_date >=',$date);
         }else {
 			$this->db->where('l.updated_user',$user_id);

@@ -24,15 +24,23 @@
                      </div>
 
                      <!-- -->
-                     <div class="col-sm-6 content-bar" id="content-load">
-                       <?php  if(count($all_data)>0) {  ?>
-						<iframe width="560" height="315" src="<?php echo strip_tags($most_data[0]['link']);?>" frameborder="0" allowfullscreen></iframe>
-                      <?php } else { ?>
-						
-						  <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
-						   
-						  <?php } ?>
+                     <div id="content-load">
+                     <div class="col-sm-12 col-md-6 content-bar">
+                       <?php  if(count($all_data)>0): ?>
+						             <iframe width="560" height="315" src="<?php echo strip_tags($most_data[0]['link']);?>" frameborder="0" allowfullscreen></iframe>
+                      <?php endif; ?>
                      </div>
+                     <div class="clearfix"></div>
+         
+                     <?php if(isset($most_data[0]['web_desc']) && $most_data[0]['web_desc']!=''): ?>
+                      
+                      <div class="col-sm-12 col-md-12 content-bar">
+                        
+                        <?php echo $most_data[0]['web_desc']; ?>
+                      
+                      </div>
+                     
+                     <?php endif; ?>
 
                     <!--  Right menu  -->
                      

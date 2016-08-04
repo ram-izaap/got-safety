@@ -10,7 +10,7 @@
           </i>
         </button>
       </span>
-      <input type="text" name="quantity" class="form-control text-center" value=1>
+      <input type="text" name="quantity" class="form-control text-center" value=1 maxlength="3">
       <span class="input-group-btn">
         <button class="btn btn-default plus" data-dir=up>
           <i class="fa fa-plus">

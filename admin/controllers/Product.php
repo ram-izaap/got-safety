@@ -174,7 +174,7 @@ class Product extends Admin_controller {
 
                           $check_attr_val = $this->product_model->get_attr_id($value,$edit_id);
                           
-                          if($value!=$check_attr_val->attr_val_id)
+                          if($value!=$check_attr_val->attr_val_id )
                           {
                               $update_data = $this->product_model->insert("product_variation",$ins_data1);
                               $last_insert_id1 = $this->db->insert_id();
@@ -191,11 +191,21 @@ class Product extends Admin_controller {
                               //$ins_data2['variation_id']=$value;
                               $ins_data2['price'] = $form['price'][$i];
                               $ins_data2['updated_date']  = date("Y-m-d H:i:s");
+
                               $update_data = $this->product_model->update("product_price",$ins_data2,array("variation_id" => $form['variation_id'][$i]));
                           }
                         }
+                        else if($form['price'][$i]=='')
+                        {
+                          $get_variation_id = $this->product_model->get_product_data("product_variation",array("p_id" => $edit_id,"attr_val_id" => $value));
+                          $this->db->query("delete from product_variation where id ='".$get_variation_id[0]['id']."'");
+                          $this->db->query("delete from product_price where variation_id ='".$get_variation_id[0]['id']."'");
+                        }
                         ++$i;
+
+
                     }
+
             }
          redirect("product");
     } 

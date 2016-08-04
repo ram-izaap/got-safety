@@ -159,7 +159,7 @@
                       <td class="text-right">
                         <h3>
                           <strong>$
-                            <?php echo number_format($this->cart->format_number($this->cart->total()) + number_format((float)$this->session->userdata['ship_amt']['shipping_amt'],2)+number_format((float)$this->session->userdata['tax_amt']['tax_amt'],2),2); ?>
+                            <?php echo number_format($this->cart->total() + number_format((float)$this->session->userdata['ship_amt']['shipping_amt'],2)+number_format((float)$this->session->userdata['tax_amt']['tax_amt'],2),2); ?>
                           </strong>
                         </h3>
                       </td>

@@ -8,7 +8,8 @@ class Osha extends Admin_controller {
 	protected $_osha_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
                                                     array('field' => 'is_display', 'label' => 'Is display', 'rules' => 'trim'),
-                                                    array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim')
+                                                    array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim'),
+                                                    array('field' => 'pdf_file', 'label' => 'File', 'rules' => 'callback_do_upload')
 													
 												);
 												
@@ -19,7 +20,8 @@ class Osha extends Admin_controller {
                                                   );											
 											
 	
-
+    public $upload_data = array();
+    
     function __construct() 
     {
         parent::__construct();
@@ -122,25 +124,24 @@ class Osha extends Admin_controller {
 			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 			
 			
-			 if ( empty($_FILES['pdf_file']['name']) && empty($_POST['slide_image']) )
-			{ 
-				$this->form_validation->set_rules('pdf_file', 'File', 'required');
-			} 
+			 
 			
 			
 			$this->form_validation->set_rules($this->_osha_validation_rules);
-			
+
+	    $this->upload_data=array();		
         if($this->form_validation->run())
         {
           
             $form = $this->input->post();
            
             
-			if(!empty($_FILES['pdf_file']['tmp_name'])){ 
-			  $upload_data = $this->do_upload();
-	
-              $filename = (isset($upload_data['pdf_file']['file_name']))?$upload_data['pdf_file']['file_name']:"";
-			}else{
+			if(count($this->upload_data) )
+            { 
+              $filename = (isset($this->upload_data['pdf_file']['file_name']))?$this->upload_data['pdf_file']['file_name']:"";
+            }
+            else
+            {
 				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
 			} 
 			
@@ -228,27 +229,40 @@ class Osha extends Admin_controller {
 	
 	function do_upload()
 	{
+		if(!empty($_FILES['pdf_file']['name']) && $_FILES['pdf_file']['name']!='')
+      {
 		 
 		$config['upload_path'] = '../assets/images/frontend/call_osha';
-
 		$config['allowed_types'] = 'pdf';
-		$config['max_size']	= '3000';
+		$config['max_size']	= '2048';
+		$config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['pdf_file']['name'];
 		
 		
 		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload('pdf_file'))
+		if (!$this->upload->do_upload('pdf_file'))
 		{ 
 			$error = array('error' => $this->upload->display_errors());
-
-			return $error;
-			
+            $this->form_validation->set_message("do_upload",$error['error']);
+            return false;
 		}
 		else
 		{
 			$data = array('pdf_file' => $this->upload->data());
-			return $data;
-			
+			@unlink("../assets/images/frontend/call_osha/".$_POST['slide_image']);
+            $this->upload_data = $data;
+            return $data;
 		}
+	 }
+	 else if(empty($_FILES['pdf_file']['name']) && $_POST['slide_image']=='')
+     {
+        $this->form_validation->set_message("do_upload","The File Field is required");
+        return false;
+     }
+     else
+     {
+        return true;
+     }
 		
 	}
 	

@@ -104,8 +104,8 @@ class Attachment extends Admin_controller {
 			{
 				if($this->input->post('l_url')!='' || $this->input->post('q_url')!='')
 				{
-					$this->form_validation->set_rules('l_url', 'lesson url', 'required');
-					$this->form_validation->set_rules('q_url', 'quiz url', 'required');
+					$this->form_validation->set_rules('l_url', 'lesson url', 'required|callback_valid_url');
+					$this->form_validation->set_rules('q_url', 'quiz url', 'required|callback_valid_url');
 				}
 				/*else if(empty($_FILES['f_name']['name']) || empty($_FILES['f_name_quiz']['name']))
 				{
@@ -451,5 +451,10 @@ class Attachment extends Admin_controller {
         
        	return TRUE;
   } 
+
+  function valid_url($str)
+  {
+     return (filter_var($str, FILTER_VALIDATE_URL) !== FALSE);
+  }
 }
 
