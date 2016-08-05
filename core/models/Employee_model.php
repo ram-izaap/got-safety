@@ -116,9 +116,13 @@ class Employee_model extends App_Model {
     {
 		
 		 $result = $this->db->get_where($table_name,$where)->result_array();
-		 $max_limit = $result[0]['employee_limit'];
+		 $result1 = $this->db->query("select emp_limit from plan where id=".$result[0]['plan_type']."");
+
+		 $result1 = $result1->row();
+		 $max_limit = $result1->emp_limit;
 		 $user_id = $result[0]['id'];
-		 
+
+
 			$this->db->select();
 			$this->db->from('employee');
 			$this->db->where('created_user', $user_id);
@@ -156,95 +160,132 @@ class Employee_model extends App_Model {
 	
 	function upload_csv()
 	{
-		
+
+
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
 		
 		$path = $_FILES['employee']['name'];
+
 		$ext = pathinfo($path, PATHINFO_EXTENSION);
 		
+
 		if($ext == 'csv') {
-		
-		$fp = fopen($_FILES['employee']['tmp_name'],'r') or die("can't open file");
-			  while($csv_line = fgetcsv($fp,1024)) 
-			  { 
-				for ($i = 1, $j = count($csv_line) ; $i < $j; $i++) 
-				  { //print $csv_line[0];exit;
-					  
-						/*$this->db->select('id');
-						$this->db->from('users');
-						$this->db->where("name" ,$csv_line[0]);
-						$result = $this->db->get()->result_array();
-						//print_r($result);exit;
-						
-						if(count($result)>0){
-						$client_id = $result[0]['id'];
-						}else{
-							$client_id = "";
-						}*/
-						//echo $client_id;exit;
-						$client_id =  $this->session->userdata('admin_data')['id'];
-						//print_r($client_id);exit;
-						
-						$this->db->select('*');
-						$this->db->from('employee');
-						$this->db->where("emp_id" ,$csv_line[2]);
-						$this->db->where("created_user" ,$client_id);
-						$result_employee = $this->db->get()->result_array();
-						//print_r(count($result_employee));exit;
-						
-						if(count($result_employee) == 0) {
-						$insert_csv = array();
-						$insert_csv['client'] = $client_id;
-						$insert_csv['name'] = $csv_line[0];
-						$insert_csv['email'] = $csv_line[1];
-						$insert_csv['employee_id'] = $csv_line[2];
-					}else {
-						
-						$insert_csv = array();
-						$insert_csv['client'] = "";
-						$insert_csv['name'] = "";
-						$insert_csv['email'] = "";
-						$insert_csv['employee_id'] = "";
+
+		$limit_check_exists = $this->limit_check_exists("users",array("id" => $user_id));
+
+		if($limit_check_exists==1)
+		{	
+
+			$fp = fopen($_FILES['employee']['tmp_name'],'r') or die("can't open file");
+				  while($csv_line = fgetcsv($fp,1024)) 
+				  { 
+				  							
+
+					for ($i = 1, $j = count($csv_line) ; $i < $j; $i++) 
+					  { 
+					  //print $csv_line[0];exit;
+						  
+							/*$this->db->select('id');
+							$this->db->from('users');
+							$this->db->where("name" ,$csv_line[0]);
+							$result = $this->db->get()->result_array();
+							//print_r($result);exit;
+							
+							if(count($result)>0){
+							$client_id = $result[0]['id'];
+							}else{
+								$client_id = "";
+							}*/
+							//echo $client_id;exit;
+							$client_id =  $this->session->userdata('admin_data')['id'];
+							//print_r($client_id);exit;
+							
+							$this->db->select('*');
+							$this->db->from('employee');
+							$this->db->where("emp_id" ,$csv_line[2]);
+							$this->db->where("created_user" ,$client_id);
+							$result_employee = $this->db->get()->result_array();
+							//print_r(count($result_employee));exit;
+					 $limit_check_exists = $this->limit_check_exists("users",array("id" => $user_id));
+		             
+		             if($limit_check_exists==1)
+		             {
+					   if(count($result_employee) == 0) {
+							
+							$insert_csv['client'] = $client_id;
+							$insert_csv['name'] = $csv_line[0];
+							$insert_csv['email'] = $csv_line[1];
+							$insert_csv['employee_id'] = $csv_line[2];
+						}
+						else
+						{
+
+							$insert_csv['client'] = "";
+							$insert_csv['name'] = "";
+							$insert_csv['email'] = "";
+							$insert_csv['employee_id'] = "";
+						}
 					}
-						
-						
-				  }
+					else
+					{
+						    break;
+					}
+
+					
+							
+							
+			  }
+
+
+
+						  if($role == 1) {
+							   $data = array(
+						   'id'    => '',
+						   'employee_name' => $insert_csv['name'] ,
+						   'employee_email' => $insert_csv['email'],
+						   'emp_id' => $insert_csv['employee_id'],
+						   'created_user' => $insert_csv['client'],
+						   'updated_user' => $user_id,
+						   'created_date' => date("Y-m-d H:i:s"),
+						   
+						   );
+							  
+						  }else {
+							   $data = array(
+						   'id'    => '',
+						   'employee_name' => $insert_csv['name'] ,
+						   'employee_email' => $insert_csv['email'],
+						   'emp_id' => $insert_csv['employee_id'],
+						   'created_user' => $insert_csv['client'],
+						   'created_date' => date("Y-m-d H:i:s"),
+						   );
+							  
+						  }
 				 
-					  if($role == 1) {
-						   $data = array(
-					   'id'    => '',
-					   'employee_name' => $insert_csv['name'] ,
-					   'employee_email' => $insert_csv['email'],
-					   'emp_id' => $insert_csv['employee_id'],
-					   'created_user' => $insert_csv['client'],
-					   'updated_user' => $user_id,
-					   'created_date' => date("Y-m-d H:i:s"),
-					   
-					   );
-						  
-					  }else {
-						   $data = array(
-					   'id'    => '',
-					   'employee_name' => $insert_csv['name'] ,
-					   'employee_email' => $insert_csv['email'],
-					   'emp_id' => $insert_csv['employee_id'],
-					   'created_user' => $insert_csv['client'],
-					   'created_date' => date("Y-m-d H:i:s"),
-					   );
-						  
-					  }
-			 
-					 
-				$data['add_employee']=$this->db->insert('employee', $data);
-				$this->db->query("delete from employee where employee_name =' ' OR employee_name = 'Name'");
-				
-			}
+					if($limit_check_exists==1)
+		            {	 
+					  $data['add_employee']=$this->db->insert('employee', $data);
+					}
+					else
+					{
+						$this->session->set_flashdata('csv_up','Maximum Employee Limit Exists',TRUE);
+					}
+					$this->db->query("delete from employee where employee_name =' ' OR employee_name = 'Name'");
+					
+				}
+
                    fclose($fp) or die("can't close file");
 	       $data['success']="success";
 	       return $data;
 	       
-	   }else{
+	   }
+	   else
+	   {
+	   	$this->session->set_flashdata('csv_up','Maximum Employee Limit Exists',TRUE);
+	   }
+	 }
+	   else{
 		   
 		   $this->session->set_flashdata('csv_up','Upload only CSV files',TRUE);
 	   }

@@ -74,7 +74,7 @@ class Employee extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
         if(is_logged_in())
-            $this->layout->view("attach/employee_list");
+            $this->layout->view("employee/employee_list");
         else
             redirect("login");
                
@@ -121,7 +121,7 @@ class Employee extends Admin_controller {
 				$this->form_validation->set_rules('emp_id', 'Employee ID', 'required|callback_employee_id_unique_check['.$edit_id.']');
 			}
 			
-			if($role == 2) {
+			if($role == 2 && $edit_id =="") {
 				
 				 $this->form_validation->set_rules('employee_name', 'Name', 'required|callback_max_limit_unique_check');
 				
@@ -286,7 +286,7 @@ class Employee extends Admin_controller {
     {            
 		if(is_logged_in())
         {
-            $this->layout->view("attach/employee_list");        
+            //$this->layout->view("employee/employee_list");        
 		    if(!empty($_FILES['employee']['tmp_name']))
             { 
 				$data['result'] = $this->employee_model->upload_csv();

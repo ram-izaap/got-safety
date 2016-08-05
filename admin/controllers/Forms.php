@@ -8,7 +8,8 @@ class Forms extends Admin_controller {
 	protected $_forms_validation_rules = array(
 													array('field' => 'title', 'label' => 'Title', 'rules' => 'trim|required'),
                                                     array('field' => 'is_display', 'label' => 'Is display', 'rules' => 'trim'),
-                                                    array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim')
+                                                    array('field' => 'slide_image', 'label' => 'Image', 'rules' => 'trim'),
+                                                    array('field' => 'pdf_file', 'label' => 'File', 'rules' => 'callback_do_upload')
 													
 												);
 												
@@ -19,7 +20,8 @@ class Forms extends Admin_controller {
                                                   );											
 											
 	
-
+    public $upload_data = array();
+    
     function __construct() 
     {
         parent::__construct();
@@ -83,7 +85,7 @@ class Forms extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
         if(is_logged_in())
-        	$this->layout->view("attach/forms_list");
+        	$this->layout->view("forms/forms_list");
         else
         	redirect("login");
         
@@ -112,32 +114,31 @@ class Forms extends Admin_controller {
 		//print_r($this->data['get_menu']);exit;
 			
 			
-		
+		if ( isset($_POST['user_id']) )
+			{
+				$this->form_validation->set_rules('user_id', 'Client', 'required');
+			}
 		if(is_logged_in()) {
 		  
             
-			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
-			
-			
-			 if ( empty($_FILES['pdf_file']['name']) && empty($_POST['slide_image']) )
-			{ 
-				$this->form_validation->set_rules('pdf_file', 'File', 'required');
-			} 
+			$edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id; 
 			
 			
 			$this->form_validation->set_rules($this->_forms_validation_rules);
-			
+		
+		$this->upload_data=array();	
+
         if($this->form_validation->run())
         {
           
             $form = $this->input->post();
            
             
-			if(!empty($_FILES['pdf_file']['tmp_name'])){ 
-			  $upload_data = $this->do_upload();
-	
-              $filename = (isset($upload_data['pdf_file']['file_name']))?$upload_data['pdf_file']['file_name']:"";
-			}else{
+			if(count($this->upload_data) )
+            { 
+              $filename = (isset($this->upload_data['pdf_file']['file_name']))?$this->upload_data['pdf_file']['file_name']:"";
+            }
+            else{
 				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
 			} 
 			
@@ -150,6 +151,13 @@ class Forms extends Admin_controller {
 			else { 
 				$form['is_display'] = "0";
 			}
+
+			if(isset($form['visible_to_all'])) { 
+				$form['visible_to_all'] = $form['visible_to_all'];	
+			}
+			else { 
+				$form['visible_to_all'] = "0";
+			}
 			
 			
 			
@@ -157,6 +165,17 @@ class Forms extends Admin_controller {
             $ins_data['title']       	= Ucfirst($form['title']);
             $ins_data['is_display']  = $form['is_display'];
            
+           if($_POST['user_id'] == "")
+           {
+				$ins_data['created_user']  = $user_id;
+			}
+			else 
+			{
+				$ins_data['created_user']  = $form['user_id'];
+				$ins_data['updated_user']  = $this->session->userdata('admin_data')['id']; 
+				$ins_data['visible_to_all']  = $form['visible_to_all'];
+			}
+
             $ins_data['created_date']  = date("Y-m-d");
 			$ins_data['pdf_file']  = $filename;
            
@@ -214,27 +233,40 @@ class Forms extends Admin_controller {
 	
 	function do_upload()
 	{
+		if(!empty($_FILES['pdf_file']['name']) && $_FILES['pdf_file']['name']!='')
+      {
 		 
 		$config['upload_path'] = '../assets/images/frontend/safety_forms';
-
 		$config['allowed_types'] = 'pdf';
-		$config['max_size']	= '3000';
+		$config['max_size']	= '2048';
+		$config['overwrite'] = FALSE;
+        $config['file_name'] = $_FILES['pdf_file']['name'];
 		
 		
 		$this->load->library('upload', $config);
-		if ( ! $this->upload->do_upload('pdf_file'))
+		if (!$this->upload->do_upload('pdf_file'))
 		{ 
 			$error = array('error' => $this->upload->display_errors());
-
-			return $error;
-			
+            $this->form_validation->set_message("do_upload",$error['error']);
+            return false;
 		}
 		else
 		{
 			$data = array('pdf_file' => $this->upload->data());
-			return $data;
-			
+			@unlink("../assets/images/frontend/safety_forms/".$_POST['slide_image']);
+            $this->upload_data = $data;
+            return $data;
 		}
+	 }
+	 else if(empty($_FILES['pdf_file']['name']) && $_POST['slide_image']=='')
+     {
+        $this->form_validation->set_message("do_upload","The File Field is required");
+        return false;
+     }
+     else
+     {
+        return true;
+     }
 		
 	}
 	

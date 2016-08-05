@@ -247,7 +247,7 @@ function billing_address_validation()
         {
             $(".err_country").text('Please Enter Your Country');
         }
-        if(zip_code.length && !isNaN(zip_code))
+        if(zip_code.length)
         {
             $(".err_zip").text('');
         }
@@ -256,7 +256,7 @@ function billing_address_validation()
             $(".err_zip").text("Please Enter Valid Zip Code")
         }
 
-        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='' || isNaN(zip_code))
+        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='')
         {
           $('html, body').animate({ scrollTop: $('#billing_information').offset().top }, 'slow');
           return false;
@@ -373,7 +373,7 @@ function shipping_address_validation()
         {
             $(".err_sa_country").text('Please Enter Your Country');
         }
-        if(zip_code.length && !isNaN(zip_code))
+        if(zip_code.length)
         {
             $(".err_sa_zip").text('');
         }
@@ -382,7 +382,7 @@ function shipping_address_validation()
             $(".err_sa_zip").text('Please Enter Valid Zip Code');
         }
 
-        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='' || isNaN(zip_code))
+        if(name=='' || email=='' || !valid_email.test(email) || phone=='' || phone.length <10 || isNaN(phone) || address=='' || city=='' || state=='' || country=='' || zip_code=='' )
         {
           $('html, body').animate({ scrollTop: $('#shipping_information').offset().top }, 'slow');
           return false;

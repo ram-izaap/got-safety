@@ -48,7 +48,7 @@ $(document).ready(function() {
         },
 
         error: function(jqXHR, textStatus, errorThrown) {
-            alert("Error get data from ajax");
+            //alert("Error get data from ajax");
         }
     });
 });

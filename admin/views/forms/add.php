@@ -31,7 +31,7 @@
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
 			
-			<?php /*	<?php $role =  $this->session->userdata('admin_data')['role'];  
+			<?php $role =  $this->session->userdata('admin_data')['role'];  
               if($role == "1"){   ?>
 				  
 			 
@@ -48,7 +48,7 @@
 							foreach($get_menu as $fkey => $fvalue){
 							  $selected = ($form_data['created_user'] == $fvalue['id'])?"selected='selected'":"";   
 						?>
-						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?>><?php echo $fvalue['name'];?></option>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?> <?php echo set_select("user_id",$fvalue['id']); ?>><?php echo $fvalue['name'];?></option>
 						<?php } } ?>
 					</select>
 					 <span class="vstar" <?php echo form_error('user_id', '<span class="help-block">', '</span>'); ?></span>
@@ -65,7 +65,7 @@
 				</div>
 				
 			
-			<?php } ?> */  ?>
+			<?php } ?>  
 				
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title: <span class="required">

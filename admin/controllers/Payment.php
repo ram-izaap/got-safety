@@ -6,7 +6,7 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Payment extends Admin_controller 
 {
 	protected $_pay_validation_rules =    array (
-		 array('field' => 'paypal_email_id', 'label' => 'Paypal E-mail ID', 'rules' => 'trim|required|valid_email'),
+		 array('field' => 'paypal_email_id', 'label' => 'Paypal E-mail ID', 'rules' => 'trim|required'),
          array('field' => 'paypal_password', 'label' => 'Paypal Password', 'rules' => 'trim|required'),
          array('field' => 'paypal_signature', 'label' => 'Paypal Singature', 'rules' => 'trim|required'),
 		 array('field' => 'auth_login_id', 'label' => 'Test Merchant Login ID', 'rules' => 'trim|required'),

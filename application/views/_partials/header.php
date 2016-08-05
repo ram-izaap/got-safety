@@ -64,6 +64,8 @@
 					  <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("lesson");?>">Safety Lessons </a></li>
 
             <li <?php  if($this->uri->segment(1) == 'documents') { ?> class="active"; <?php }?>><a href="<?php echo base_url("documents");?>">Documents </a></li>
+
+            <li <?php  if($this->uri->segment(1) == 'forms') { ?> class="active"; <?php }?>><a href="<?php echo base_url("safety_forms");?>">Safety Forms </a></li>
 					   
 					 <?php /* 
 					 <li <?php  if($this->uri->segment(1) == 'posters') { ?> class="active"; <?php }?>><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> */ ?>

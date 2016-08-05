@@ -13,10 +13,10 @@
 		<table>
 		<tr>
 		<td> Choose your file: </td>
-		<td><input type="file" class="form-control file-option" name="employee" id="userfile"  align="center"/>
+		<td><input type="file" class="form-control file-option" required name="employee" id="userfile"  align="center"/>
 		</td>
 		<td><div class="col-lg-offset-3 col-lg-9">    <button type="submit" name="submit" class="btn btn-info"  >   Save  </button>
-		</div></td></tr></table> 
+		</div></td></tr></table>
 		</form>
     </div>	
     <div class="col-md-3">

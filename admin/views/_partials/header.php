@@ -754,10 +754,10 @@
 						<ul class="sub-menu">
 					<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>		
-							<?php /*<li> 
+							<li> 
 								<a href="<?php echo site_url('forms/forms_content'); ?>">
 								Frontend Content </a>
-							</li>*/?>
+							</li>
 						
 							<li> 
 								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
