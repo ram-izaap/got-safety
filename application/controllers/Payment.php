@@ -730,9 +730,20 @@ class Payment extends App_Controller
     
    function user_register()
    {
-       
+
+
+
         $form = $this->session->userdata("signup_data");
         
+        $get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_type']));
+
+        
+        $ins_data = array();
+        $ins_data['name']                 = $form['admin_name'];
+        $ins_data['password']             = md5($form['admin_pwd']);
+        $ins_data['no_of_employees']      = $form['no_of_employees'];
+        $ins_data['email']                = $form['email'];
+
         $ins_data['fname']  = $this->fname;
         $ins_data['lname']  = $this->lname;
         $ins_data['address']= $this->address;
@@ -741,20 +752,25 @@ class Payment extends App_Controller
         $ins_data['zipcode']= $this->zipcode;
         $ins_data['fax']    = $this->fax;
         $ins_data['phone']  = $this->phone;
-        
-        $ins_data = array();
-        $ins_data['name']                 = $form['admin_name'];
-        $ins_data['password']             = md5($form['admin_pwd']);
+
+
         $ins_data['company_name']         = $form['company_name'];
-        $ins_data['company_phone_no']     = $form['phone_no'];
         $ins_data['company_address']      = $form['company_address'];
+        $ins_data['pri_city']      = $form['city'];
+        $ins_data['pri_state']      = $form['state'];
+        $ins_data['pri_zip_code']      = $form['zip_code'];
+        $ins_data['company_phone_no']     = $form['phone_no'];
+        
         $ins_data['company_url']          = $form['company_url'];
         $ins_data['main_contact']         = $form['main_contact'];
         $ins_data['main_contact_no']      = $form['main_contact_no'];
-        $ins_data['main_email_addr']      = $form['email_addr'];
         $ins_data['main_contact_address'] = $form['main_contact_address'];
-        $ins_data['no_of_employees']      = $form['no_of_employees'];
-        $ins_data['email']                = $form['email'];
+        $ins_data['sec_city']      = $form['city1'];
+        $ins_data['sec_state']      = $form['state1'];
+        $ins_data['sec_zip_code']      = $form['zip_code1'];
+        
+        
+        $ins_data['employee_limit']       = $get_plan[0]['emp_limit'];
         $ins_data['plan_type']            = $form['plan_type'];
         $ins_data['is_active']            = 0;
         $ins_data['role']                 = 2;

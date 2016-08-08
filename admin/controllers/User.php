@@ -6,16 +6,20 @@ class User extends Admin_Controller
 {
 	protected $_user_validation_rules = array(
 				array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
-				array('field' => 'email', 'label' => 'Client Admin Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+				array('field' => 'email', 'label' => 'Main Contact Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
 				array('field' => 'admin_name', 'label' => 'Client Admin Username', 'rules' => 'required'),
 				array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
+				array('field' => 'pri_city', 'label' => 'City', 'rules' => 'required'),
+				array('field' => 'pri_state', 'label' => 'State', 'rules' => 'required'),
+				array('field' => 'pri_zip_code', 'label' => 'Zip Code', 'rules' => 'required'),
 	            array('field' => 'company_phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
 	            array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
 	            array('field' => 'company_url', 'label' => 'Company URL', 'rules' => 'trim|callback_checkwebsiteurl'),
 	            array('field' => 'main_contact_no', 'label' => 'Main Contact No', 'rules' => 'trim|numeric|max_length[12]|min_length[6]'),
-	            array('field' => 'main_email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
+	            //array('field' => 'main_email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
 	            array('field' => 'no_of_employees', 'label' => 'No of Employees', 'rules' => 'trim|numeric'),
 	            array('field' => 'plan_name', 'label' => 'Plan', 'rules' => 'required'),
+	            array('field' => 'profile_img', 'label' => 'Image', 'rules' => 'callback_do_upload'),
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
 													
 			);
@@ -23,17 +27,6 @@ class User extends Admin_Controller
     public $upload_data = array();
 
     protected $_user_detail_validation_rules = array(
-					array('field' => 'name', 'label' => 'Name', 'rules' => 'trim'),
-					array('field' => 'email', 'label' => 'Email', 'rules' => 'trim'),
-					array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
-		            array('field' => 'company_phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
-		            array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
-		            array('field' => 'company_url', 'label' => 'Company URL', 'rules' => 'trim|callback_checkwebsiteurl'),
-		            array('field' => 'main_contact_no', 'label' => 'Main Contact No', 'rules' => 'trim|numeric|max_length[12]|min_length[6]'),
-		            array('field' => 'main_email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
-		            array('field' => 'no_of_employees', 'label' => 'No of Employees', 'rules' => 'trim|numeric'),
-		            array('field' => 'plan_name', 'label' => 'Plan', 'rules' => 'required'),
-                    array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim'),
 		            array('field' => 'profile_img', 'label' => 'File', 'rules' => 'callback_do_upload')
 		          );
 
@@ -179,10 +172,27 @@ class User extends Admin_Controller
         {
         	$this->form_validation->set_rules("password","Client/App Password","required");
         } 
+
+
+        /*if(isset($_POST['profile_img']) && $_POST['profile_img']!='')
+        {
+        	$this->form_validation->set_rules("profile_img","Image","callback_do_upload");
+        }*/
+
+        $this->upload_data=array();
 		
         if($this->form_validation->run())
         { 
             $form = $this->input->post();
+
+            if(count($this->upload_data))
+			{ 
+				$filename = (isset($this->upload_data['profile_img']['file_name']))?$this->upload_data['profile_img']['file_name']:"";
+			}
+			else
+			{
+				$filename = (isset($_POST['slide_image']))?$_POST['slide_image']:"";
+			} 
             
 			if(isset($form['is_active'])) 
 			{ 
@@ -223,14 +233,22 @@ class User extends Admin_Controller
 			$ins_data['email']  = $form['email'];
 
             $ins_data['name']  = $form['admin_name'];
+
+            $ins_data['profile_img'] = $filename;
+
 			$ins_data['company_name']  = $form['company_name'];
+			$ins_data['company_address'] = $form['company_address'];
+            $ins_data['pri_city']      = $form['pri_city'];
+            $ins_data['pri_state']      = $form['pri_state'];
+            $ins_data['pri_zip_code']      = $form['pri_zip_code'];
             $ins_data['company_phone_no'] = $form['company_phone_no'];
-            $ins_data['company_address'] = $form['company_address'];
             $ins_data['company_url'] = $form['company_url'];
             $ins_data['main_contact'] = $form['main_contact'];
             $ins_data['main_contact_no'] = $form['main_contact_no'];
-            $ins_data['main_email_addr'] = $form['main_email_addr'];
             $ins_data['main_contact_address'] = $form['main_contact_address'];
+            $ins_data['sec_city']      = $form['sec_city'];
+            $ins_data['sec_state']      = $form['sec_state'];
+            $ins_data['sec_zip_code']      = $form['sec_zip_code'];
             $ins_data['no_of_employees'] = $form['no_of_employees'];
 
             $ins_data['role']  = 2;
@@ -247,7 +265,8 @@ class User extends Admin_Controller
 
             $ins_data['is_active']  = $ins_data1['is_active'] =  $form['is_active'];
 
-            $ins_data['created_id']  =  $this->session->userdata("admin_data")['id'];
+            if($role==1)
+              $ins_data['created_id']  =  $this->session->userdata("admin_data")['id'];
 
             $ins_data['created_date']=$ins_data1['created_date']= date("Y-m-d H:i:s");
 
@@ -301,7 +320,10 @@ class User extends Admin_Controller
 				$update_data = $this->user_model->update("users",$ins_data1,array("created_id" => $edit_id));
            		// $this->service_message->set_flash_message('record_update_success');
 			}
-			redirect("user");    
+			if($role==1)
+			  redirect("user");
+			  else
+			  redirect("user/add_edit_user/".$edit_id."");    
 		}	
 			
 			 if($edit_id) 
@@ -312,7 +334,7 @@ class User extends Admin_Controller
 
                 $edit_data1 = $get_user_data1 = array();
                 
-                $edit_data1 = array("id"=>$edit_data[0]['id'],"admin_name" =>$edit_data[0]['name'],"email"=>$edit_data[0]['email'],"company_name"=>$edit_data[0]['company_name'],"company_address"=>$edit_data[0]['company_address'],"company_phone_no"=>$edit_data[0]['company_phone_no'],"company_address"=>$edit_data[0]['company_address'],"company_url"=>$edit_data[0]['company_url'],"main_contact"=>$edit_data[0]['main_contact'],"main_contact_no"=>$edit_data[0]['main_contact_no'],"main_email_addr"=>$edit_data[0]['main_email_addr'],"main_contact_address"=>$edit_data[0]['main_contact_address'],"no_of_employees"=>$edit_data[0]['no_of_employees'],"plan_type"=>$edit_data[0]['plan_type'],"language"=>$edit_data[0]['language'],"is_active"=>$edit_data[0]['is_active']);
+                $edit_data1 = array("id"=>$edit_data[0]['id'],"admin_name" =>$edit_data[0]['name'],"email"=>$edit_data[0]['email'],"profile_img"=>$edit_data[0]['profile_img'],"company_name"=>$edit_data[0]['company_name'],"company_address"=>$edit_data[0]['company_address'],"company_phone_no"=>$edit_data[0]['company_phone_no'],"company_address"=>$edit_data[0]['company_address'],"company_url"=>$edit_data[0]['company_url'],"main_contact"=>$edit_data[0]['main_contact'],"main_contact_no"=>$edit_data[0]['main_contact_no'],"main_contact_address"=>$edit_data[0]['main_contact_address'],"no_of_employees"=>$edit_data[0]['no_of_employees'],"plan_type"=>$edit_data[0]['plan_type'],"language"=>$edit_data[0]['language'],"is_active"=>$edit_data[0]['is_active'],"pri_city"=>$edit_data[0]['pri_city'],"pri_state"=>$edit_data[0]['pri_state'],"pri_zip_code"=>$edit_data[0]['pri_zip_code'],"sec_city"=>$edit_data[0]['sec_city'],"sec_state"=>$edit_data[0]['sec_state'],"sec_zip_code"=>$edit_data[0]['sec_zip_code']);
                 $get_user_data1 = array("name"=>$get_user_data[0]['name']);
 
                 if(!isset($edit_data[0])) 
@@ -364,7 +386,7 @@ class User extends Admin_Controller
 					$this->data['title']          = "ADD";
 				}
                 $this->data['crumb']   = "Add";
-                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","admin_name" =>"","admin_pwd"=>"","company_name" =>"","company_phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","main_email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","language" => "","employee_limit" => ""); 
+                $this->data['form_data'] = array("name" => "","is_active" => "","email" => "","password" => "","ori_password" => "","admin_name" =>"","admin_pwd"=>"","company_name" =>"","company_phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","main_email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","language" => "","employee_limit" => "","pri_city"=>"","pri_state"=>"","pri_zip_code"=>"","sec_city"=>"","sec_state"=>"","sec_zip_code"=>""); 
              }
 
              $this->layout->view('user/add');
@@ -401,14 +423,8 @@ class User extends Admin_Controller
 		{
 		  $edit_id = (isset($_POST['edit_id']))?$_POST['edit_id']:$edit_id;
 
-		  $this->data['get_plans'] = $this->user_model->get_plans("plan",array("is_active"=>"1"));
-
+          $edit_data = $this->user_model->get_lession_data("users",array("id" => $edit_id));
 		  
-		  if(isset($_POST['user_name'])) 
-		  {
-			$this->form_validation->set_rules('user_name', 'Client/App Username', 'trim|required|callback_name_unique_check['.$edit_id.']');
-		  }
-
 		  $this->form_validation->set_rules($this->_user_detail_validation_rules);
 			
 		   $this->upload_data = array();
@@ -430,14 +446,10 @@ class User extends Admin_Controller
 				} 
 							
 				$ins_data = $ins_data1 = array();
-
-	            $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
 	            
-	            $get_user_data = $this->user_model->get_user_data("users",array("created_id" =>$edit_data[0]['id']));
 				
-	            $ins_data1['name']       	= $form['user_name'];
+	            $ins_data['name']       	= $form['name'];
 	           
-	            $ins_data['email']  = $form['email'];
 	            
 	            if($form['password'] == "") 
 	            { 
@@ -467,36 +479,14 @@ class User extends Admin_Controller
 				}
 
 	            $ins_data['name']  = $form['name'];
-				$ins_data['company_name']  = $form['company_name'];
-	            $ins_data['company_phone_no'] = $form['company_phone_no'];
-	            $ins_data['company_address'] = $form['company_address'];
-	            $ins_data['company_url'] = $form['company_url'];
-	            $ins_data['main_contact'] = $form['main_contact'];
-	            $ins_data['main_contact_no'] = $form['main_contact_no'];
-	            $ins_data['main_email_addr'] = $form['main_email_addr'];
-	            $ins_data['main_contact_address'] = $form['main_contact_address'];
-	            $ins_data['no_of_employees'] = $form['no_of_employees'];
+				
 
 	            $ins_data['profile_img']  = $filename;
 
-	            $ins_data['plan_type']  = $form['plan_name'];
+	            $ins_data['is_active'] = $form['is_active'];
 
-	            $ins_data['is_active']  = $ins_data1['is_active'] = $form['is_active'];
+	            $social_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
 
-
-	           
-				if(empty($edit_id))
-				{
-				   $social_data = $this->user_model->insert("users",$ins_data);
-	               // $this->service_message->set_flash_message('record_insert_success');
-			    }
-	            else 
-	            {  
-	               $social_data = $this->user_model->update("users",$ins_data,array("id" => $edit_id));
-
-	               $update_data = $this->user_model->update("users",$ins_data1,array("created_id" => $edit_id));
-	               //$this->service_message->set_flash_message('record_update_success');
-			    }
 			    redirect("home");    
 			
 			}	
@@ -505,14 +495,6 @@ class User extends Admin_Controller
 			 {
                 $edit_data = $this->user_model->get_user_data("users",array("id" => $edit_id));
 
-                $get_user_data = $this->user_model->get_user_data("users",array("created_id" => $edit_id));
-
-                $get_user_data1 = array();
-                
-                $get_user_data1 = array("user_name"=>$get_user_data[0]['name']);
-
-
-               
                 if(!isset($edit_data[0])) 
                 {
                     //$this->service_message->set_flash_message('record_not_found_error');
@@ -521,7 +503,7 @@ class User extends Admin_Controller
 
                 $this->data['title']          = "EDIT INSPECTION";
                 $this->data['crumb']        = "Edit";
-                $this->data['form_data']      = array_merge((array)$edit_data[0],$get_user_data1);
+                $this->data['form_data']      = (array)$edit_data[0];
                 $this->data['form_data']['slide_image'] = $this->data['form_data']['profile_img'];
                 
              }
@@ -554,7 +536,7 @@ class User extends Admin_Controller
     
     function do_upload()
 	{
-		if(!empty($_FILES['profile_img']['name']) && $_FILES['profile_img']['name']!='')
+		if(isset($_FILES['profile_img']['name']) && !empty($_FILES['profile_img']['name']) && $_FILES['profile_img']['name']!='')
 		{ 
 			$config['upload_path'] = '../assets/images/frontend/users/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -577,7 +559,7 @@ class User extends Admin_Controller
 				return $data;
 			}
 		}
-		else if(empty($_FILES['profile_img']['name']) && $_POST['slide_image']=='')
+		else if(isset($_FILES['profile_img']['name']) && empty($_FILES['profile_img']['name']) && isset($_POST['slide_image']) && $_POST['slide_image']=='')
 	    {
 	        $this->form_validation->set_message("do_upload","The Image Filed is required");
 	        return false;
@@ -587,6 +569,8 @@ class User extends Admin_Controller
 	       return true;
 	    }
 	}
+
+
 	
 	
 	

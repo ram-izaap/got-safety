@@ -31,7 +31,7 @@
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
 			
 				<div class="form-group">
-					<label class="col-md-2 control-label">Client Admin Username: <span class="required">
+					<label class="col-md-2 control-label">Username: <span class="required">
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -41,7 +41,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">Client Admin Password: <span class="required">
+					<label class="col-md-2 control-label"> Password: <span class="required">
 					 </span>
 					</label>
 					<div class="col-md-10">
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="col-md-2 control-label">Client Admin Email: <span class="required">
 					 </span>
 					</label>
@@ -197,7 +197,7 @@
 								<?php
 							}?>
 					</div>
-				</div>
+				</div>-->
 
 				
 				<div class="form-group">

@@ -326,17 +326,26 @@
 						$id =  $this->session->userdata('admin_data')['id']; 
 				
 				?> 
+
+				<?php $role =  $this->session->userdata('admin_data')['role']; 
+                      if($role==1)
+                      	$url = site_url('user/profile');
+                      else
+                      	$url = site_url('user/add_edit_user');
+ 
+				?>
+
 					<span class="username username-hide-on-mobile">
 					<?php echo $name;?> </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="<?php echo site_url('user/profile'); ?>/<?php echo $id?>">
+							<a href="<?php echo $url; ?>/<?php echo $id?>">
 							<i class="icon-user"></i> My Profile </a>
 						</li>
 						
-						<?php $role =  $this->session->userdata('admin_data')['role'];
+						<?php 
 					if($role == 2){ ?>
 						<li>
 							<a href="<?php echo site_url('user/user_plan_detail'); ?>/<?php echo $id?>">

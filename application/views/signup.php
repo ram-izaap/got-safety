@@ -38,6 +38,161 @@
                   </div>
 
                   <div class="row">
+                   <div class="col-sm-12">
+                    <div class="form-group">
+                      <input type="text" name="company_name" id="company_name" class="form-control input-lg" value="<?php echo set_value('company_name',$form_data['company_name']); ?>" placeholder="Name of Company" >
+                      <span class="vstar" 
+                            <?php echo form_error('company_name', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                 </div>
+                 </div>
+
+                 <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                      <textarea name="company_address" id="company_address" class="form-control input-lg" placeholder="Address"><?php echo set_value('company_address',$form_data['company_address']); ?></textarea>
+                      <span class="vstar" 
+                            <?php echo form_error('company_address', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <input type="text" name="city" id="city" class="form-control input-lg" placeholder="City" value="<?php echo set_value('city',$form_data['city']); ?>">
+                      <span class="vstar" <?php echo form_error('city', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <input type="text" name="state" id="state" class="form-control input-lg" placeholder="State" value="<?php echo set_value('state',$form_data['state']); ?>">
+                      <span class="vstar" <?php echo form_error('state', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <input type="text" name="zip_code" id="zip_code" class="form-control input-lg" placeholder="Zip Code" value="<?php echo set_value('zip_code',$form_data['zip_code']); ?>">
+                      <span class="vstar" <?php echo form_error('zip_code', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <div class="col-sm-5">
+                  <div class="form-group">
+                    <input type="text" name="phone_no" id="phone_no" class="form-control input-lg" value="<?php echo set_value('phone_no',$form_data['phone_no']); ?>" placeholder="Phone Number" >
+                    <span class="vstar" 
+                          <?php echo form_error('phone_no', '
+                    <span class="help-block">', '
+                    </span>'); ?>
+                    </span>
+                  </div>
+                 </div>
+                 <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="text" name="company_url" id="company_url" class="form-control input-lg" value="<?php echo set_value('company_url',$form_data['company_url']); ?>" placeholder="Company Web Address" >
+                    <span class="vstar" 
+                          <?php echo form_error('company_url', '
+                    <span class="help-block">', '
+                    </span>'); ?>
+                    </span>
+                  </div>
+                 </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" name="main_contact" id="main_contact" class="form-control input-lg" value="<?php echo set_value('main_contact',$form_data['main_contact']); ?>" placeholder="Main Contact" >
+                      <span class="vstar" 
+                            <?php echo form_error('main_contact', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <input type="text" name="email" id="email" class="form-control input-lg" value="<?php echo set_value('email',$form_data['email']); ?>" placeholder="Main Contact Email" >
+                      <span class="vstar" 
+                            <?php echo form_error('email', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                  <div class="form-group">
+                    <input type="text" name="main_contact_no" id="main_contact_no" class="form-control input-lg" value="<?php echo set_value('main_contact_no',$form_data['main_contact_no']); ?>" placeholder="Main Contact Phone #" >
+                    <span class="vstar" 
+                          <?php echo form_error('main_contact_no', '
+                    <span class="help-block">', '
+                    </span>'); ?>
+                    </span>
+                  </div>
+                 </div>
+                </div>
+
+                <div class="row">
+                 <div class="col-sm-12">
+                    <div class="form-group">
+                      <textarea name="main_contact_address" id="main_contact_address" class="form-control input-lg" placeholder="Main Contact Address if different than company's" ><?php echo set_value('main_contact_address',$form_data['main_contact_address']); ?></textarea>
+                      <span class="vstar" 
+                            <?php echo form_error('main_contact_address', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <input type="text" name="city1" id="city1" class="form-control input-lg" placeholder="City" value="<?php echo set_value('city',$form_data['city1']); ?>">
+                      <span class="vstar" <?php echo form_error('city1', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <input type="text" name="state1" id="state1" class="form-control input-lg" placeholder="State" value="<?php echo set_value('state',$form_data['state1']); ?>">
+                      <span class="vstar" <?php echo form_error('state1', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <input type="text" name="zip_code1" id="zip_code1" class="form-control input-lg" placeholder="Zip Code" value="<?php echo set_value('zip_code',$form_data['zip_code1']); ?>">
+                      <span class="vstar" <?php echo form_error('zip_code1', '<span class="help-block">', '</span>'); ?></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                 <div class="col-sm-5">
+                    <div class="form-group">
+                      <input type="text" name="no_of_employees" id="no_of_employees" value="<?php echo set_value('no_of_employees',$form_data['no_of_employees']); ?>" class="form-control input-lg" placeholder="No of Employees">
+                      <span class="vstar" 
+                            <?php echo form_error('no_of_employees', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                </div>
+
+
+
+                  <div class="row">
                    <div class="col-sm-6">
                     <div class="form-group">
                       <input type="text" name="admin_name" id="admin_name" class="form-control input-lg" value="<?php echo set_value('admin_name',$form_data['admin_name']); ?>" placeholder="Client Admin Username" >
@@ -60,7 +215,7 @@
                  </div>
                 </div>
 
-                  <div class="row">
+                  <!--<div class="row">
                     <div class="col-sm-6">
                     <div class="form-group">
                       <input type="password" name="admin_con_pwd" id="admin_con_pwd" class="form-control input-lg" value="<?php echo set_value('admin_con_pwd',$form_data['admin_con_pwd']); ?>" placeholder="Client Admin Confirm Password" >
@@ -71,130 +226,11 @@
                       </span>
                     </div>
                    </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" name="email" id="email" class="form-control input-lg" value="<?php echo set_value('email',$form_data['email']); ?>" placeholder="Client Admin Email" >
-                      <span class="vstar" 
-                            <?php echo form_error('email', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-                </div>
-                
-
-
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" name="company_name" id="company_name" class="form-control input-lg" value="<?php echo set_value('company_name',$form_data['company_name']); ?>" placeholder="Company Name" >
-                      <span class="vstar" 
-                            <?php echo form_error('company_name', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input type="text" name="phone_no" id="phone_no" class="form-control input-lg" value="<?php echo set_value('phone_no',$form_data['phone_no']); ?>" placeholder="Company Phone Number" >
-                    <span class="vstar" 
-                          <?php echo form_error('phone_no', '
-                    <span class="help-block">', '
-                    </span>'); ?>
-                    </span>
-                  </div>
-                </div>
-                
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <textarea name="company_address" id="company_address" class="form-control input-lg" placeholder="Company Address"><?php echo set_value('company_address',$form_data['company_address']); ?></textarea>
-                      <span class="vstar" 
-                            <?php echo form_error('company_address', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-                </div>
-
-                <div class="row">
+                  
+                </div>-->
                 
                 
-
-                  <div class="col-sm-6">
-                  <div class="form-group">
-                    <input type="text" name="company_url" id="company_url" class="form-control input-lg" value="<?php echo set_value('company_url',$form_data['company_url']); ?>" placeholder="Company URL" >
-                    <span class="vstar" 
-                          <?php echo form_error('company_url', '
-                    <span class="help-block">', '
-                    </span>'); ?>
-                    </span>
-                  </div>
-                 </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" name="main_contact" id="main_contact" class="form-control input-lg" value="<?php echo set_value('main_contact',$form_data['main_contact']); ?>" placeholder="Main Contact" >
-                      <span class="vstar" 
-                            <?php echo form_error('main_contact', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input type="text" name="main_contact_no" id="main_contact_no" class="form-control input-lg" value="<?php echo set_value('main_contact_no',$form_data['main_contact_no']); ?>" placeholder="Contact Number" >
-                    <span class="vstar" 
-                          <?php echo form_error('main_contact_no', '
-                    <span class="help-block">', '
-                    </span>'); ?>
-                    </span>
-                  </div>
-                 </div>
-                 <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" name="email_addr" id="email_addr" class="form-control input-lg" value="<?php echo set_value('email_addr',$form_data['email_addr']); ?>" placeholder="Email Address" >
-                      <span class="vstar" 
-                            <?php echo form_error('email_addr', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <input type="text" name="no_of_employees" id="no_of_employees" value="<?php echo set_value('no_of_employees',$form_data['no_of_employees']); ?>" class="form-control input-lg" placeholder="No of Employees">
-                      <span class="vstar" 
-                            <?php echo form_error('no_of_employees', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                      <textarea name="main_contact_address" id="main_contact_address" class="form-control input-lg" placeholder="Main Contact Address if different then company's" ><?php echo set_value('main_contact_address',$form_data['main_contact_address']); ?></textarea>
-                      <span class="vstar" 
-                            <?php echo form_error('main_contact_address', '
-                      <span class="help-block">', '
-                      </span>'); ?>
-                      </span>
-                  </div>
-                </div>
-                
-                </div>
+             
 
               <div class="row">
               <div class="col-sm-6">

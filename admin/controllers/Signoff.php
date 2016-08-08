@@ -100,7 +100,7 @@ class Signoff extends Admin_controller {
     
    
     
-   /* function bulk_export()
+   function bulk_export()
     {
 		
 		$this->load->library('pdf');
@@ -118,6 +118,7 @@ class Signoff extends Admin_controller {
 		$html = $this->load->view('signoff/sign_export',$this->data,true);
 		
 		$pdf = $this->pdf->load(); 
+		$pdf->setTitle('Manage Training Records');	
 		$pdf->WriteHTML($stylesheet,1);	
         $pdf->WriteHTML($html,2);
         
@@ -134,11 +135,11 @@ class Signoff extends Admin_controller {
 	}	
 		
 	}
-	*/
 	
 	
 	
-	function bulk_export_excel()
+	
+	/*function bulk_export_excel()
     {
 		
 		$this->load->library('export');
@@ -160,7 +161,7 @@ class Signoff extends Admin_controller {
 			
 		}	
 		
-	}
+	}*/
 	
 	
 	

@@ -78,8 +78,8 @@ if($role == 2) {
 			'path'          => $path,                 			// path to files (REQUIRED)
 			'URL'           => $url, 							// URL to files (REQUIRED)
 			//'uploadDeny'    => array('all'),                	// All Mimetypes not allowed to upload
-			'uploadAllow'   => array('image', 'text/plain'),	// Mimetype `image` and `text/plain` allowed to upload
-			'uploadOrder'   => array('deny', 'allow'),      	// allowed Mimetype `image` and `text/plain` only
+			'uploadAllow'   => array('image','application/pdf','audio','video'),	// Mimetype `image` and `text/plain` allowed to upload
+			'uploadOrder'   => array('allow', 'deny'),      	// allowed Mimetype `image` and `text/plain` only
 			'accessControl' => 'access',
 			'attributes' => array(
                 array(// hide anything else
@@ -102,8 +102,8 @@ if($role == 2) {
 			'path'          => $path,                 			// path to files (REQUIRED)
 			'URL'           => $url, 							// URL to files (REQUIRED)
 			//'uploadDeny'    => array('all'),              	// All Mimetypes not allowed to upload
-			'uploadAllow'   => array('image', 'text/plain'),	// Mimetype `image` and `text/plain` allowed to upload
-			'uploadOrder'   => array('deny', 'allow'),      	// allowed Mimetype `image` and `text/plain` only
+			'uploadAllow'   => array('image','application/pdf','audio','video'),	// Mimetype `image` and `text/plain` allowed to upload
+			'uploadOrder'   => array('allow', 'deny'),      	// allowed Mimetype `image` and `text/plain` only
 			'accessControl' => 'access'
 			                   
 		)

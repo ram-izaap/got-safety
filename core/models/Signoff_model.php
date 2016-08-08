@@ -136,7 +136,7 @@ class Signoff_model extends App_Model {
 		$this->db->like($search_field,$search_value);
 		$result = $this->db->get()->result_array();*/
 		
-		return $result;
+		return $result->result_array();
 		
 	}
 	

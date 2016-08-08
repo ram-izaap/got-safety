@@ -5,34 +5,30 @@ require_once(COREPATH."controllers/App_controller.php");
 class Login extends App_Controller {
 	
 	protected $_login_validation_rules =    array (
-                array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
-                array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
-											);
+            array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
+            array('field' =>'password','label'=>'Password','rules'=>'trim|required'));
 												
 	
 	protected $_signup_validation_rules = array(
-			array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-			array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
-            array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|max_length[255]'),
-            array('field' => 'con_password', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[password]'),
-            array('field' => 'admin_name', 'label' => 'Admin Name', 'rules' => 'trim|required|max_length[255]'),
-            array('field' => 'admin_pwd', 'label' => 'Admin Password', 'rules' => 'trim|required|max_length[255]'),
-			array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
-			array('field' => 'email', 'label' => 'Client Admin Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
+            array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'email', 'label' => 'Main Contact Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Client/App Password', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'admin_name', 'label' => 'Client Admin Username', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'admin_pwd', 'label' => 'Client Admin Password', 'rules' => 'trim|required|max_length[255]'),
-            array('field' => 'admin_con_pwd', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[admin_pwd]'),
+            //array('field' => 'admin_con_pwd', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[admin_pwd]'),
             array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
+            array('field' => 'city', 'label' => 'City', 'rules' => 'required'),
+            array('field' => 'state', 'label' => 'State', 'rules' => 'required'),
+            array('field' => 'zip_code', 'label' => 'Zip Code', 'rules' => 'required'),
             array('field' => 'phone_no', 'label' => 'Company Phone No', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
             array('field' => 'company_address', 'label' => 'Company Address', 'rules' => 'required'),
             array('field' => 'company_url', 'label' => 'Company URL', 'rules' => 'trim|callback_checkwebsiteurl'),
             array('field' => 'main_contact_no', 'label' => 'Main Contact No', 'rules' => 'trim|numeric|max_length[12]|min_length[6]'),
-            array('field' => 'email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
+            //array('field' => 'email_addr', 'label' => 'Email', 'rules' => 'trim|valid_email'),
             array('field' => 'no_of_employees', 'label' => 'No of Employees', 'rules' => 'trim|numeric'),
             array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
            
-		);
+        );
 	protected $_auth_validation_rules =    array (
                     array('field' => 'fname', 'label' => 'First Name', 'rules' => 'trim|required|min_length[4]|alpha'),		
                     array('field' => 'lname', 'label' => 'Last Name', 'rules' => 'trim|required|min_length[2]|alpha'),
@@ -86,24 +82,22 @@ class Login extends App_Controller {
             
             if($user_data == 1)
             { 
-				  //$this->service_message->set_flash_message('login_success');
+                  //$this->service_message->set_flash_message('login_success');
                 if($this->session->userdata('user_detail')['is_active']==1)
                     redirect("");
                 else
                 {
                     $this->session->unset_userdata('user_detail');
-                    $this->session->set_flashdata('log_fail',"Your account has been blocked or Inactive due to pending payment. Please try after some time or contact administrator to resolve.",TRUE);
+                    $this->session->set_flashdata("log_fail","Your account has been blocked or Inactive due to pending payment. Please try after some time or contact administrator to resolve.",TRUE);
                     redirect("login");
-
                 }
             }
             else
             { 
                 $this->session->unset_userdata('user_detail');
-				$this->session->set_flashdata('log_fail',"Invalid Username or Password",TRUE);
-                //$this->session->keep_flashdata('log_fail');
-				redirect("login");
-			}
+                $this->session->set_flashdata("log_fail","Invalid Username or Password",TRUE);
+                redirect("login");
+            }
             
         }
         
@@ -122,28 +116,31 @@ class Login extends App_Controller {
     }
     
     
+    
     function signup()
-	{
-		if($_POST) 
+    {
+        if($_POST) 
         {
             $this->load->library('email');
-            	
-			if(isset($_POST['name'])){
-					$this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
-			}
-			
-			if(isset($_POST['email'])){
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
-			}
+                
+            if(isset($_POST['name'])){
+                    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
+            }
+            
+            if(isset($_POST['email'])){
+                    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
+            }
              //'pay_mode' in 'field list'
             $this->form_validation->set_rules($this->_signup_validation_rules);
+
+
             
             if($this->form_validation->run())
             {  
                 $form = $this->input->post();                             
                 $plan_details              = get_plan_details($form['plan_type']);
                 $this->session->set_userdata("plan_details",$plan_details);
-	 	        $this->session->set_userdata("signup_data",$form);
+                $this->session->set_userdata("signup_data",$form);
                 redirect("payment");
             }
             if($this->input->post()){
@@ -152,31 +149,28 @@ class Login extends App_Controller {
         }
         else
         {
-            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"");        
+            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"");        
         }
-        $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));		
-		$this->layout->view('signup','frontend');
-		
-	}
+        $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));     
+        $this->layout->view('signup','frontend');
+        
+    }
 
 
+    
     
     
     public function logout()
 	{
 	   
-		//$this->session->sess_destroy();
-		
-		//$this->session->unset_userdata('user_detail');
-		unset($_SESSION['user_id']);
+		$this->session->sess_destroy();		
+		$this->session->unset_userdata('user_detail');
+	
 		//$this->session->sess_create();
 		//$this->service_message->set_flash_message('logout_success');
-		
 	
 		redirect();
 	}
-	
-	
     
     function payment()
     {
@@ -430,7 +424,7 @@ class Login extends App_Controller {
     
 
 
-	 function name_unique_check($name,$edit_id)
+	function name_unique_check($name,$edit_id)
      {
         
         $get_data = $this->user_model->check_exists("users",array("name" => $name));
@@ -442,7 +436,7 @@ class Login extends App_Controller {
           return FALSE;
         }
         
-       	return TRUE;
+        return TRUE;
     } 
     
     
@@ -458,14 +452,11 @@ class Login extends App_Controller {
           return FALSE;
         }
         
-       	return TRUE;
+        return TRUE;
     } 
 
-    function checkwebsiteurl($string_url)
+     function checkwebsiteurl($string_url)
     {
-        $reg_exp = "@^(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*$@i";
-        if(preg_match($reg_exp, $string_url) == TRUE){
-         return TRUE;
         $url = $this->input->post("company_url");
         if($url!='')
         {
@@ -478,17 +469,10 @@ class Login extends App_Controller {
              return FALSE;
             }
         }
-        else{
-         $this->form_validation->set_message('checkwebsiteurl', 'URL is invalid format');
-         return FALSE;
-        }
-
-
-
-
-
     } 
   
+   
+   
 	
 }
 ?>

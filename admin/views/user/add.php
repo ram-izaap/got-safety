@@ -28,6 +28,154 @@
 <div class="form-body">
 	<form role="form" name="social" id="social" method="POST" enctype="multipart/form-data">
              <input type="hidden" name="edit_id" id="edit_id" value="<?php echo $edit_id = (isset($form_data['id']))?$form_data['id']:""; ?>" /> 
+				
+                <div class="form-group">
+					<label class="col-md-2 control-label">Name of Company: <span class="required">* 
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="company_name" value="<?php echo set_value('company_name',$form_data['company_name']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('company_name', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Address: <span class="required"> *
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<textarea type="text" name="company_address" class="form-control"><?php echo set_value('company_address',$form_data['company_address']); ?></textarea>
+						<span class="vstar" <?php echo form_error('company_address', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+				    <label class="col-md-2 control-label">City: <span class="required"> *
+					 </span>
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="pri_city" id="pri_city" class="form-control" value="<?php echo set_value('pri_city',$form_data['pri_city']); ?>">
+                    <span class="vstar" <?php echo form_error('pri_city', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+				    <label class="col-md-2 control-label">State: <span class="required"> *
+					 </span>
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="pri_state" id="pri_state" class="form-control" value="<?php echo set_value('pri_state',$form_data['pri_state']); ?>">
+                    <span class="vstar" <?php echo form_error('pri_state', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+				    <label class="col-md-2 control-label">Zip Code: <span class="required"> *
+					 </span>
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="pri_zip_code" id="pri_zip_code" class="form-control" value="<?php echo set_value('pri_zip_code',$form_data['pri_zip_code']); ?>">
+                    <span class="vstar" <?php echo form_error('pri_zip_code', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+					<label class="col-md-2 control-label">Phone No: <span class="required"> *
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="company_phone_no" value="<?php echo set_value('company_phone_no',$form_data['company_phone_no']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('company_phone_no', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Company Web Address: 
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="company_url" value="<?php echo set_value('company_url',$form_data['company_url']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('company_url', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Main Contact: 
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="main_contact" value="<?php echo set_value('main_contact',$form_data['main_contact']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('main_contact', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Main Contact Email: <span class="required">*
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="email" class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
+						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Main Contact Phone #:  
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="main_contact_no" value="<?php echo set_value('main_contact_no',$form_data['main_contact_no']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('main_contact_no', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-2 control-label">Main Contact address if different than Company's:  
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<textarea name="main_contact_address" class="form-control"><?php echo set_value('main_contact_address',$form_data['main_contact_address']); ?></textarea>
+						<span class="vstar" <?php echo form_error('main_contact_address', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
+				<div class="form-group">
+				    <label class="col-md-2 control-label">City: 
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="sec_city" id="sec_city" class="form-control" value="<?php echo set_value('sec_city',$form_data['sec_city']); ?>">
+                    <span class="vstar" <?php echo form_error('sec_city', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+				    <label class="col-md-2 control-label">State: 
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="sec_state" id="sec_state" class="form-control" value="<?php echo set_value('sec_state',$form_data['sec_state']); ?>">
+                    <span class="vstar" <?php echo form_error('sec_state', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+				    <label class="col-md-2 control-label">Zip Code: 
+					</label>
+				  <div class="col-md-10">
+                   <input type="text" name="sec_zip_code" id="sec_zip_code" class="form-control" value="<?php echo set_value('sec_zip_code',$form_data['sec_zip_code']); ?>">
+                    <span class="vstar" <?php echo form_error('sec_zip_code', '<span class="help-block">', '</span>'); ?></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+					<label class="col-md-2 control-label">No of Employees:  
+					 </span>
+					</label>
+					<div class="col-md-10">
+						<input type="text" name="no_of_employees" value="<?php echo set_value('no_of_employees',$form_data['no_of_employees']); ?>" class="form-control">
+						<span class="vstar" <?php echo form_error('no_of_employees', '<span class="help-block">', '</span>'); ?></span>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<label class="col-md-2 control-label">Client Admin Username: <span class="required">* 
 					 </span>
@@ -48,15 +196,7 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">Client Admin Email: <span class="required">*
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="email" class="form-control" value="<?php echo set_value('email',$form_data['email']); ?>">
-						<span class="vstar" <?php echo form_error('email', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
+				
 
 				<div class="form-group">
 					<label class="col-md-2 control-label">Client/App Username : <span class="required">
@@ -79,100 +219,7 @@
 					</div>
 				</div>
                 
-                
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Company Name: <span class="required">* 
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="company_name" value="<?php echo set_value('company_name',$form_data['company_name']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('company_name', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Company Address: <span class="required"> *
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<textarea type="text" name="company_address" class="form-control"><?php echo set_value('company_address',$form_data['company_address']); ?></textarea>
-						<span class="vstar" <?php echo form_error('company_address', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Company Phone No: <span class="required"> *
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="company_phone_no" value="<?php echo set_value('company_phone_no',$form_data['company_phone_no']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('company_phone_no', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Company URL: 
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="company_url" value="<?php echo set_value('company_url',$form_data['company_url']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('company_url', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Main Contact: 
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="main_contact" value="<?php echo set_value('main_contact',$form_data['main_contact']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('main_contact', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Main Contact No:  
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="main_contact_no" value="<?php echo set_value('main_contact_no',$form_data['main_contact_no']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('main_contact_no', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">Main Contact Address:  
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<textarea name="main_contact_address" class="form-control"><?php echo set_value('main_contact_address',$form_data['main_contact_address']); ?></textarea>
-						<span class="vstar" <?php echo form_error('main_contact_address', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-               <div class="form-group">
-					<label class="col-md-2 control-label">Main Email Address:  
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="main_email_addr" value="<?php echo set_value('main_email_addr',$form_data['main_email_addr']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('main_email_addr', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-md-2 control-label">No of Employees:  
-					 </span>
-					</label>
-					<div class="col-md-10">
-						<input type="text" name="no_of_employees" value="<?php echo set_value('no_of_employees',$form_data['no_of_employees']); ?>" class="form-control">
-						<span class="vstar" <?php echo form_error('no_of_employees', '<span class="help-block">', '</span>'); ?></span>
-					</div>
-				</div>
-				
-
-				<div class="form-group">
+                <div class="form-group">
 					<label class="col-md-2 control-label">Plan Type : <span class="required">
 					* </span>
 					</label>
@@ -223,6 +270,22 @@
 							<span class="vstar" <?php echo form_error('language', '<span class="help-block">', '</span>'); ?></span>
 						</div>
 					</div>
+				<?php } ?>
+
+				<?php if($role == "2"){   ?>
+                   <div class="form-group">
+					<label class="col-md-2 control-label">Profile Image:<span class="required"> *</span>
+					</label>
+					<div class="col-md-10">
+						<input id="image" name="profile_img" type="file" class="file" />
+					    <span class="vstar"<?php echo form_error('profile_img', '<span class="help-block">', '</span>'); ?> </span><br>
+					    <input id="slide_image" name="slide_image" type="hidden" value="<?php echo $value = (isset($form_data['profile_img']))?set_value('slide_image',$form_data['profile_img']):''; ?>" />
+					    <?php if($edit_id != "") { ?>
+				          <img  alt="<?php echo $form_data['profile_img'];?>" src="<?php echo $img_url; ?>assets/images/frontend/users/<?php echo $form_data['profile_img'];?>" class="media-object" width="72"> 
+				         <?php } ?>
+						
+					</div>
+				</div>
 				<?php } ?>
 				
 				<div class="form-group">
