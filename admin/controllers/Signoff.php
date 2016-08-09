@@ -75,10 +75,8 @@ class Signoff extends Admin_controller {
         //$this->data['user_data'] = $this->session->userdata('admin_user_data');
         
       
-       if(is_logged_in())
+       
         $this->layout->view("signoff/signoff_list");
-    	else
-    		redirect("login");
         
         
     }
@@ -111,14 +109,16 @@ class Signoff extends Admin_controller {
 		$stylesheet = file_get_contents(base_url()."views/pdf.css");
 		// print $stylesheet;exit;
 		//http://localhost/got_safety/admin/views/pdf_test.css
-		if($search_field != "" && $search_value !="" ) {
+		if($search_field != "" && $search_value !="" ) 
+		  $this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
 		
-		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
+		else
+		  $this->data['result'] = $this->signoff_model->get_serach_data($search_field='',$search_value='');
 		
 		$html = $this->load->view('signoff/sign_export',$this->data,true);
 		
 		$pdf = $this->pdf->load(); 
-		$pdf->setTitle('Manage Training Records');	
+		$pdf->setTitle('Manage Training Records');
 		$pdf->WriteHTML($stylesheet,1);	
         $pdf->WriteHTML($html,2);
         
@@ -129,10 +129,10 @@ class Signoff extends Admin_controller {
         $pdf->Output($filename,"D");
         
        
-	}else {
+	/*}else {
 		redirect("signoff");
 		
-	}	
+	}*/	
 		
 	}
 	
@@ -154,9 +154,7 @@ class Signoff extends Admin_controller {
 		$this->export->to_excel($this->data['result'], 'Signoff'); 
         
        
-		}
-		else 
-		{
+		}else {
 			redirect("signoff");
 			
 		}	
@@ -171,10 +169,8 @@ class Signoff extends Admin_controller {
 		$search_value = $id;
 		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
 		//print_r($this->data['result']);exit;
-		if(is_logged_in())
-			$this->layout->view("signoff/signoff_view");
-		else
-			redirect("login");
+		
+		$this->layout->view("signoff/signoff_view");
 		
 	}
     

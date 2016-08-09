@@ -127,7 +127,12 @@ class Signoff_model extends App_Model {
 		
 		//$result = $this->db->query("select * from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field LIKE '%$search_value%'")->result_array();
 		 
-		 $result = $this->db->query("select le.title,l.employee_name,l.emp_id,u.name as client,ld.created_date from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id WHERE $search_field LIKE '%$search_value%'");
+         if($search_field!='' && $search_value!='')
+            $where = "WHERE $search_field LIKE '%$search_value%'";
+         else
+            $where='';
+
+		 $result = $this->db->query("select le.title,l.employee_name,l.emp_id,u.name as client,ld.created_date,ld.sign from sign_off as ld JOIN employee as l ON l.id = ld.employee_id JOIN users as u ON u.id = ld.client_id JOIN lession as le ON le.id=ld.lesson_id $where");
 		 
 		/*$this->db->select('*');
 		$this->db->from('sign_off ld');

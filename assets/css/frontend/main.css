@@ -555,7 +555,7 @@ header { background-color: #dfdfe1; padding: 10px 0; }
 [data-role="testimonial"]:before { content: ""; width: 160px; height: 160px; background: url(../img/quote-top.png) no-repeat; position: absolute; top: -62px; z-index: -0 }[data-role="testimonial"] h4 { color: #ed1c24; font: bold 42px "aileronbold", Helvetica, Arial, sans-serif; margin: 0; position: relative; z-index: 5 }
 [data-role="testimonial"] blockquote { color: #ed1c24; text-align: right; font-weight: bold; }
 /* Testimonial */
-footer { background: #ed1c24; border: 1px solid transparent; }footer p { text-align: center; margin:0; padding: 15px 0; }footer p a { display: inline-block; }
+footer { background: none;  }footer p { text-align: center; margin:0; padding: 15px 0; }footer p a { display: inline-block; }
 .navbar-nav li { border-right: 1px solid #cd191f; }.navbar-nav li:last-child, .navbar-nav li.active { border-color: transparent; }
 .navbar-brand:hover { color: #fff; }
  [data-form="search"] {position: relative;}
@@ -1479,7 +1479,125 @@ color: #fff;}
 }
 
 .main_pagination {margin-top:26px; clear:both;}
-
 #shipping_information .plan-checkout {
     margin-bottom: 3px !important;
 }
+
+/* home & About us new design css Start*/
+.martop{ margin-top:40px;}
+.login-area .client-login{margin-bottom: 8px;}
+.login-area .sign-up {color: #000; font-size: 16px; text-align: center; text-decoration: underline; width: 100%;}
+.login-area h3 {margin-right: 19px; margin-top: 25px;}
+header { padding: 10px 0 15px;}
+
+.main-slider{background-color: #000000; 	width: 100%; }
+
+.main-slider #slider, .main-slider #slider .sliderInner {
+    height: 281px;
+    margin: 0 auto;
+    max-width: 1170px;
+    width: 100%;
+}
+
+.main-slider #slider .bgLayer {
+    background-repeat: no-repeat !important;
+    background-size: 100% auto !important;
+}
+.main-slider #slider img {width: 100% !important;}
+
+footer{ text-align:center; }
+footer .footer-nav > li { display: inline-block; border:0; float: none;}
+footer .footer-nav { float:none;}
+footer .footer-nav > li {border-left: 1px solid #000;line-height:16px;}
+footer .footer-nav > li a {   
+    color: #000;
+    font-size: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+footer .footer-nav li:first-child {
+    border-left: 0;
+}
+
+footer .footer-nav {
+    float: none;
+    padding-bottom:20px;
+    
+}
+
+footer .footer-nav li:first-child {
+    border-left: 0 none;
+   
+}
+
+
+footer a .footer-logo {
+    margin: 40px auto auto;
+    text-align: center !important;
+}
+
+[data-view="home"], [data-page="home"] {
+    background: #fafafa ;
+}
+
+.start-button {
+    text-align: center;
+    width: 100%;
+}
+
+.start-button a {
+    background: #ec1f27 ;
+    border: 1px solid #000;
+    color: #fff;
+    display: inline-block;
+    font-size: 29px;
+    padding: 10px 20px;
+    text-shadow: 2px 2px 2px #000;
+    width: auto;
+		text-transform: uppercase;
+}
+
+.footer-logo-sec > a {
+    display: inline-block;
+}
+
+
+.list-area li {
+    font-size: 24px;
+    line-height: normal;
+    list-style: outside none none;
+}
+
+
+.list-area{ padding-left:0;}
+
+.sub-title{ color:#ed1c24;}
+.about-bottom-img{ width:100%;}
+
+/* home & About us new design css End*/
+
+/* Login page css Start */
+[data-view="create-account"] .form-wrap { padding: 35px;  max-width: 505px;  width: 100%; padding: 20px 35px;}
+  [data-view="create-account"] .form-wrap{background-color: transparent; border:1px solid #ddd; box-shadow: 2px 2px 12px #ddd;}
+    #div-forms #login-form input { background-color: transparent;}
+    [data-view="create-account"] .form-wrap { -moz-border-bottom-colors: none;  -moz-border-left-colors: none;  -moz-border-right-colors: none;
+    -moz-border-top-colors: none;    background-color: transparent;   border-color: #ff0000 #ddd #ddd;  border-image: none;  border-style: solid;
+    border-width: 9px 1px 1px;}
+    #div-forms #login-form input{ background-color: transparent !important; background-color: rgba(0, 0, 0, 0.1);  border-bottom: 1px solid #c8c8c8;
+    border-color: transparent transparent #c8c8c8;  box-shadow: 0 0 0 transparent; color: #494b4c;    }
+    
+    #div-forms #login-form .form-title {  color: #555555;  font-size: 36px;  font-weight: bold;  text-align: center;  text-transform: uppercase;}
+    #div-forms #login-form div { text-align: center;}
+    [data-view="create-account"] .forgot_pwd > p {  font-size: 15px;  text-align: center;}
+   .login-submit {  margin-bottom: 20px;}
+   .forgot_pwd .forgot-con a{ color:#292f2b; text-decoration:underline;}
+   .login-user{ position: relative;}
+
+#div-forms #login-form .login-user::before { color: #ff0000; content: "\f007";  font-family: "FontAwesome";  font-size: 20px; left: -5px;  position: absolute; top: 9px;}
+
+#div-forms #login-form .login-pass{ position: relative;}
+#div-forms #login-form .login-pass:before{ color: #585858;  content: "\f084";  font-family: "FontAwesome";  font-size: 20px; left: -5px; position: absolute;
+    top: 9px;}
+
+/* Login Page Ends */

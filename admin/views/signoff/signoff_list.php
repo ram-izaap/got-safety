@@ -27,7 +27,7 @@
 					 <?php if($this->uri->segment(1) == 'signoff'){ ?>
 						
 						<a class="pull-right search-export" href="<?php echo base_url('signoff/bulk_export'); ?>" ><i class="fa fa-cloud-download" aria-hidden="true"></i>
-Search Export </a>
+Export </a>
 						
 					<?php } ?>
 	                        <a onclick="return DeleteCheckedRow(this,'delete-signoff','signoff/signoff_delete');" class="btn btn-success">

@@ -33,31 +33,28 @@
                             
                             <!-- Begin # Login Form -->
                             <form id="login-form" method="POST">
-                            <div class="switch">
-                             <a class="active">login</a> or 
-                             <a href="<?php echo base_url('login/signup');?>">REGISTER</a>
-                            </div> 
+                           
                             
-                            <div class="">
+                            <div class="login-head">
                                     <div id="div-login-msg">
                                         <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
-                                        <span class="form-title" id="text-login-msg">Login</span>
+                                        <span class="form-title" id="text-login-msg">Sign In</span>
 
                                     </div>
                                       <div class="row">
                                         <div class="col-sm-12">
-                                          <div class="form-group">
+                                          <div class="form-group login-user">
                                             <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Username" value="<?php echo set_value('name',$form_data['name']); ?>" >
                                             <span class="vstar" <?php echo form_error('name', '<span class="help-block">', '</span>'); ?></span>
                                             
                                             
-							</div>
+							                              </div>
                                           </div>
                                         </div>
                                       </div>
                                       <div class="row">
                                         <div class="col-sm-12">
-                                          <div class="form-group">
+                                          <div class="form-group login-pass">
                                             <input type="password" name="password" id="password" value ="<?php echo set_value('password',$form_data['password']); ?>" class="form-control input-lg"  placeholder="Password" >
                                             <span class="vstar" <?php echo form_error('password', '<span class="help-block">', '</span>'); ?></span>
                                           </div>
@@ -65,11 +62,14 @@
                                       </div>
                                       
                                 </div>
-                                <div class="">
-                                    <div>
+                                <div class="login-submit">
+                                    
                                         <input type="submit" value="LOGIN" class="btn btn-danger btn-block client-login">
                                     </div>
                                     <div class="forgot_pwd">
+                                     <p class="forgot-con"><a href="">Forgot Password?</a></p>
+  
+                                       <p> <span> Don't have an account?</span> <span><a href="<?php echo site_url("login/signup"); ?>">create one now</a></span></p>
                                         
                                     </div>
                                 </div>

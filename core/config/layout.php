@@ -36,10 +36,10 @@ $config['layout']['frontend']['css_dir']   = "assets/css/frontend";
 $config['layout']['frontend']['img_dir']   = "assets/images/frontend";
 
 $config['layout']['frontend']['javascripts'] = array(
-  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min','gs-main','common','cart','jquery.creditCardValidator','checkout'  
+  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min','gs-main','js-image-slider','common','cart','jquery.creditCardValidator','checkout'  
 ,'audio_video');
  
-$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main','components');
+$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main','components','js-image-slider');
 
 $config['layout']['frontend']['description'] = 'GotSafety';
 $config['layout']['frontend']['keywords']    = 'GotSafety';

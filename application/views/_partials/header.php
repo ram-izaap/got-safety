@@ -1,7 +1,7 @@
   <!-- // Header -->
         <header>
         <section class="container">
-            <aside class="col-sm-4">
+            <aside class="col-sm-2">
               <div class="row">
                 <a href="<?php echo base_url();?>" class="logo device-center">
                   <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/logo.png" width="123" height="114" class="" alt="Got Safety">
@@ -10,19 +10,33 @@
             </aside>
 
             <aside class="col-sm-8 header-right">
+              <div class="row "> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/header-img.png" class="martop mg-responsive" alt="Got Safety"> </div>
+            </aside>
+
+            <aside class="col-sm-2 header-right login-area">
+              <div class="row">
+                <?php if($this->session->userdata('user_id') == "") { ?>
+                  <h3> <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a> <a href="<?php echo base_url('login/signup');?>" class="pull-right sign-up"><strong>SIGN UP</strong></a></h3>
+                <?php } else { ?>
+                  <h3><a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a></h3> 
+                <?php } ?>
+              </div> 
+            </aside>
+
+            <!--<aside class="col-sm-8 header-right">
               <div class="row">
 				  
                 <h3>Got Safety? <i class="fa fa-phone"></i>(800) 734-3577 
                 <?php if($this->session->userdata('user_id') == "") { ?>
-                <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Login</strong></a>
-                
+                <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a>
+                <a href="<?php echo base_url('signup');?>" class="pull-right sign-up"><strong>SIGN UP</strong></a>
                 <?php } else { ?>
 					<a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a>
 				 <?php } ?>
                 </h3>
                  
               </div>
-            </aside>
+            </aside>-->
 
         </section>
       </header>

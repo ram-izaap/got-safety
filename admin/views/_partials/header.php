@@ -560,6 +560,79 @@
 							
 						</ul>
 					</li>
+
+					<li>
+						<a href="javascript:;">
+						<i class="icon-docs"></i>
+						<span class="title">Documentation</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+						<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>	
+							<li> 
+								<a href="<?php echo site_url('osha/osha_content'); ?>">
+								Frontend Content </a>
+							</li>
+					<?php } ?>		
+							<li> 
+								<a href="<?php echo site_url('osha/add_edit_osha'); ?>">
+								Add Documents </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('osha'); ?>">
+								Manage Documents </a>
+							</li>
+							
+						</ul>
+					</li>
+
+					<li>
+						<a href="javascript:;">
+						<i class="icon-list"></i>
+						<span class="title">Forms</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+					<?php $role =  $this->session->userdata('admin_data')['role'];
+					if($role == 1){ ?>		
+							<li> 
+								<a href="<?php echo site_url('forms/forms_content'); ?>">
+								Frontend Content </a>
+							</li>
+						
+							<li> 
+								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
+								Add Safety Forms </a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('forms'); ?>">
+								Manage Safety Forms </a>
+							</li>
+							<?php } ?>	
+							<li> 
+								<a href="<?php echo site_url('submittedforms'); ?>">
+								Submitted Safety Forms </a>
+							</li>
+							
+						</ul>
+					</li>
+
+					<li>
+						<a href="javascript:;">
+						<i class="icon-fire"></i>
+						<span class="title">Repository Tree</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('repository'); ?>">
+								 Add Files</a>
+							</li>
+							
+							
+						</ul>
+					</li>
 					
 					
 					
@@ -728,62 +801,9 @@
 					</li>
 					*/ ?>
 					
-					<li>
-						<a href="javascript:;">
-						<i class="icon-docs"></i>
-						<span class="title">Documentation</span>
-						<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-						<?php $role =  $this->session->userdata('admin_data')['role'];
-					if($role == 1){ ?>	
-							<li> 
-								<a href="<?php echo site_url('osha/osha_content'); ?>">
-								Frontend Content </a>
-							</li>
-					<?php } ?>		
-							<li> 
-								<a href="<?php echo site_url('osha/add_edit_osha'); ?>">
-								Add Documents </a>
-							</li>
-							<li> 
-								<a href="<?php echo site_url('osha'); ?>">
-								Manage Documents </a>
-							</li>
-							
-						</ul>
-					</li>
 					
-					<li>
-						<a href="javascript:;">
-						<i class="icon-list"></i>
-						<span class="title">Safety Forms</span>
-						<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-					<?php $role =  $this->session->userdata('admin_data')['role'];
-					if($role == 1){ ?>		
-							<li> 
-								<a href="<?php echo site_url('forms/forms_content'); ?>">
-								Frontend Content </a>
-							</li>
-						
-							<li> 
-								<a href="<?php echo site_url('forms/add_edit_forms'); ?>">
-								Add Safety Forms </a>
-							</li>
-							<li> 
-								<a href="<?php echo site_url('forms'); ?>">
-								Manage Safety Forms </a>
-							</li>
-							<?php } ?>	
-							<li> 
-								<a href="<?php echo site_url('submittedforms'); ?>">
-								Submitted Safety Forms </a>
-							</li>
-							
-						</ul>
-					</li>
+					
+					
 					
 				<?php /*	
 					<li>
@@ -891,21 +911,7 @@
 					</li>
 					
 					<?php } ?>
-					<li>
-						<a href="javascript:;">
-						<i class="icon-fire"></i>
-						<span class="title">Repository Management</span>
-						<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-							<li> 
-								<a href="<?php echo site_url('repository'); ?>">
-								 Add Files</a>
-							</li>
-							
-							
-						</ul>
-					</li>
+					
 					
 			<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>		
