@@ -22,18 +22,12 @@
             <div id="div-forms">
               <!-- Begin | Register Form -->
               <form id="register-form" method="post" >
-                <div class="switch">
-                  <a href="<?php echo base_url('login'); ?>" title="Login" id="register_login_btn">login
-                  </a>
-                  or
-                  <a href="<?php echo base_url('login/signup'); ?>"  id="login_register_btn" title="Register" class="active">Register
-                  </a>
-                </div>
+               
                 <div class="">
                   <div id="div-register-msg">
                     <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right">
                     </div>
-                    <span class="form-title" id="text-register-msg">Create An  Account
+                   <span class="form-title" id="text-login-msg">Create an Account</span>
                     </span>
                   </div>
 

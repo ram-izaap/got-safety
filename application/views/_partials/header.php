@@ -13,26 +13,26 @@
               <div class="row "> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/header-img.png" class="martop mg-responsive" alt="Got Safety"> </div>
             </aside>
 
-            <aside class="col-sm-2 header-right login-area">
+            <aside class="col-sm-2 header-right login-area pull-right">
               <div class="row">
                 <?php if($this->session->userdata('user_id') == "") { ?>
-                  <h3> <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a> <a href="<?php echo base_url('login/signup');?>" class="pull-right sign-up"><strong>SIGN UP</strong></a></h3>
+                  <h3> <a href="<?php echo base_url('login');?>" class="client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a> <a href="<?php echo base_url('login/signup');?>" class="sign-up"><strong>SIGN UP</strong></a></h3>
                 <?php } else { ?>
-                  <h3><a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a></h3> 
+                  <h3><a href="<?php echo base_url('login/logout');?>" class="client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a></h3> 
                 <?php } ?>
               </div> 
             </aside>
 
             <!--<aside class="col-sm-8 header-right">
               <div class="row">
-				  
+          
                 <h3>Got Safety? <i class="fa fa-phone"></i>(800) 734-3577 
                 <?php if($this->session->userdata('user_id') == "") { ?>
                 <a href="<?php echo base_url('login');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Client Login</strong></a>
                 <a href="<?php echo base_url('signup');?>" class="pull-right sign-up"><strong>SIGN UP</strong></a>
                 <?php } else { ?>
-					<a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a>
-				 <?php } ?>
+          <a href="<?php echo base_url('login/logout');?>" class="pull-right client-login radius-5"><strong><i class="fa fa-lock"></i>Logout</strong></a>
+         <?php } ?>
                 </h3>
                  
               </div>
@@ -72,16 +72,16 @@
 					<?php /*	<li <?php  if($this->uri->segment(1) == 'product') { ?> class="active"; <?php }?>><a href="<?php echo base_url("index.php/product");?>"> <i class="fa fa-shopping-cart"></i> Products </a></li>*/ ?>
 				   <?php } ?> 
 				  <?php if($this->session->userdata('user_id') != "") { ?>
-				  
+				    
+            <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("lesson");?>"><i class="fa fa-book" aria-hidden="true"></i> Safety Lessons </a></li>
+
+            <li <?php  if($this->uri->segment(1) == 'documents') { ?> class="active"; <?php }?>><a href="<?php echo base_url("documents");?>"><i class="fa fa-file-text" aria-hidden="true"></i> Documentation </a></li> 
+
+            <li <?php  if($this->uri->segment(1) == 'forms') { ?> class="active"; <?php }?>><a href="<?php echo base_url("safety_forms");?>">Forms </a></li>
+
 					  <li <?php  if($this->uri->segment(1) == 'webinars') { ?> class="active"; <?php }?>><a href="<?php echo base_url("webinars");?>"> <i class="fa fa-video-camera"></i> Webinars </a></li>
-					  
-					  <li <?php  if($this->uri->segment(1) == 'lesson') { ?> class="active"; <?php }?>><a href="<?php echo base_url("lesson");?>">Safety Lessons </a></li>
 
-            <li <?php  if($this->uri->segment(1) == 'documents') { ?> class="active"; <?php }?>><a href="<?php echo base_url("documents");?>">Documents </a></li>
-
-            <li <?php  if($this->uri->segment(1) == 'forms') { ?> class="active"; <?php }?>><a href="<?php echo base_url("safety_forms");?>">Safety Forms </a></li>
-					   
-					 <?php /* 
+           <?php /* 
 					 <li <?php  if($this->uri->segment(1) == 'posters') { ?> class="active"; <?php }?>><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> */ ?>
 					  
 					 <?php /* <li class="dropdown"><a role="button" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);"><i class="fa fa-user"></i> Client Area <span class="caret"></span></a>

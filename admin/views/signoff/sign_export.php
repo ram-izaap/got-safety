@@ -17,7 +17,7 @@
 			<td><?php echo $value['employee_name']?></td>		
 			<td><?php echo $value['emp_id']?></td>
 			<td><?php echo $value['client'] ?></td>
-			<td><img src="<?php echo site_url(); ?>signature/<?php echo $value['sign'] ?>" title="<?php echo site_url(); ?>signature/<?php echo $value['sign'] ?>"></td>
+			<td><img src="<?php echo $img_url;?>signature/<?php echo $value['sign']; ?>"></td>
 			<td><?php echo $value['created_date']?></td>
 		  </tr>
 		<?php }  ?>  

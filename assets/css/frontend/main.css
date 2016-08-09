@@ -524,7 +524,7 @@ p {
 .radius-5 { -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; }
 .bg-white { background-color: #fff }
 .bg-red { background-color: #ed1c24 }
-.home-left { }
+.home-left {background:#fafafa;}
 .home-right, .inner-full { padding-bottom: 30px; }
 #map-row { }
 #map-overlay { height: 400px; margin-top: -410px; background-color: rgba(0, 0, 0, 0.8); padding: 40px; }
@@ -626,7 +626,7 @@ footer { background: none;  }footer p { text-align: center; margin:0; padding: 1
 [data-view="create-account"] .form-group input[type="password"]::-moz-placeholder { /* Firefox 19+ */color:#5C4B4C;}
 [data-view="create-account"] .form-group input[type="password"]:-ms-input-placeholder { /* IE 10+ */color:#5C4B4C;}
 [data-view="create-account"] .form-group input[type="password"]:-moz-placeholder { /* Firefox 18- */color:#5C4B4C;}
-[data-form="register"] .form-group input, [data-form="register"] .form-group select, [data-form="register"] .form-group textarea { background-color: rgba(0, 0, 0, 0.1); border-radius: 0; border-color: transparent; box-shadow: 0 0 0 transparent; border-bottom: 4px solid #494b4c; color: #494b4c; }
+/*[data-form="register"] .form-group input, [data-form="register"] .form-group select, [data-form="register"] .form-group textarea { background-color: rgba(0, 0, 0, 0.1); border-radius: 0; border-color: transparent; box-shadow: 0 0 0 transparent; border-bottom: 4px solid #494b4c; color: #494b4c; }*/
 [data-form="register"] .form-group input:focus, [data-form="register"] .form-group select:focus, [data-form="register"] .form-group textarea:focus { border-color: #494b4c; }[data-view="create-account"] input[type="checkbox"] { font-size: .6em; }
 [data-view="create-account"] .form-switch { text-align: center; }
 .switch a:hover { text-decoration: none; }
@@ -1283,6 +1283,8 @@ header .container { max-width: 320px; }
  }
 
 
+.plan-wrapper  input[type=radio] + label { background-color: #ccc; }
+.plan-wrapper  input[type=radio]:checked + label { background-color: #ddd; }
 
  .plan-wrapper  input[type=radio]:nth-child(1) + label { background-color: #c8db4d; }
  .plan-wrapper  input[type=radio]:nth-child(1):checked + label { background-color: #b6d203; }
@@ -1484,21 +1486,25 @@ color: #fff;}
 }
 
 /* home & About us new design css Start*/
-.martop{ margin-top:40px;}
+.martop{ margin-top:20px;}
 .login-area .client-login{margin-bottom: 8px;}
 .login-area .sign-up {color: #000; font-size: 16px; text-align: center; text-decoration: underline; width: 100%;}
-.login-area h3 {margin-right: 19px; margin-top: 25px;}
+.login-area h3 { margin-top: 25px;text-align:center;}
 header { padding: 10px 0 15px;}
 
 .main-slider{background-color: #000000; 	width: 100%; }
 
-.main-slider #slider, .main-slider #slider .sliderInner {
-    height: 281px;
+.main-slider #slider, .main-slider #slider .sliderInner,.about_banner {
+   
     margin: 0 auto;
     max-width: 1170px;
     width: 100%;
 }
-
+ 
+.main-slider #slider, .main-slider #slider .sliderInner 
+{
+   height: 281px;
+}
 .main-slider #slider .bgLayer {
     background-repeat: no-repeat !important;
     background-size: 100% auto !important;
@@ -1533,17 +1539,18 @@ footer .footer-nav li:first-child {
 
 
 footer a .footer-logo {
-    margin: 40px auto auto;
+    margin: 15px auto auto;
     text-align: center !important;
 }
 
 [data-view="home"], [data-page="home"] {
-    background: #fafafa ;
+    background: #fff ;
 }
 
 .start-button {
     text-align: center;
     width: 100%;
+    margin-bottom: 25px;
 }
 
 .start-button a {
@@ -1565,7 +1572,7 @@ footer a .footer-logo {
 
 .list-area li {
     font-size: 24px;
-    line-height: normal;
+    line-height: 35px;
     list-style: outside none none;
 }
 
@@ -1578,7 +1585,7 @@ footer a .footer-logo {
 /* home & About us new design css End*/
 
 /* Login page css Start */
-[data-view="create-account"] .form-wrap { padding: 35px;  max-width: 505px;  width: 100%; padding: 20px 35px;}
+[data-view="create-account"] .form-wrap { padding: 35px;  max-width: 677px;  width: 100%; padding: 20px 35px;}
   [data-view="create-account"] .form-wrap{background-color: transparent; border:1px solid #ddd; box-shadow: 2px 2px 12px #ddd;}
     #div-forms #login-form input { background-color: transparent;}
     [data-view="create-account"] .form-wrap { -moz-border-bottom-colors: none;  -moz-border-left-colors: none;  -moz-border-right-colors: none;
@@ -1601,3 +1608,54 @@ footer a .footer-logo {
     top: 9px;}
 
 /* Login Page Ends */
+
+
+/* Register Page Start */
+ [data-form="register"] .form-group input, [data-form="register"] .form-group select, [data-form="register"] .form-group textarea {
+    background-color: transparent;
+    border: 2px solid #6e6e6e;
+    border-radius: 0;
+    box-shadow: 0 0 0 transparent;
+    color: #222;
+}
+
+ [data-form="register"] #div-register-msg .form-title {color: #555555;
+font-size: 36px;
+font-weight: bold;
+text-align: center;
+text-transform: uppercase;}
+/* Register Page Ends */
+.lesson-contnt table {
+    width: auto;
+    margin-left: 5px !important;
+}
+.header-right img{max-width:100%;}
+
+p.sales_video {
+    position: absolute;
+    bottom: 32px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+    color:#000;
+    font-size:32px;
+    font-weight: bold;
+
+}
+.home-right .video_modal{position: relative;}
+.header-right.login-area.pull-right {
+    margin-right: -31px;
+}
+.safety_forms .content-bar:nth-child(2n+1), .documents .content-bar:nth-child(2n+1) {
+    background: #efeeec;
+    /*border: 1px solid #ccc;*/
+    display: block;
+}
+.safety_forms .content-bar:nth-child(2n):hover, .documents .content-bar:nth-child(2n):hover {
+    background: rgb(248, 248, 248) none repeat scroll 0px 0px;
+}
+.safety_forms .content-bar, .documents .content-bar
+{
+  padding:6px;
+}

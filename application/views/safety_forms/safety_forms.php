@@ -11,14 +11,15 @@
           <?php echo ucfirst($safety_content->content); ?>
         </div>
           <?php endif; ?>
-        <div class="clearfix">
-        </div>
+        
+        <div class="safety_forms">
+
         <?php if(count($safety_attachment) >0): foreach($safety_attachment as $key=>$value): ?>
           <div class="col-sm-12 col-md-12 content-bar">
-          <p><strong><?php echo $value['title']; ?> - </strong><a href="<?php echo $img_url; ?>assets/images/frontend/safety_forms/<?php echo $value['pdf_file'];?>" target="_blank"><?php echo $value['pdf_file'];?></a></p>
+          <a href="<?php echo $img_url; ?>assets/images/frontend/safety_forms/<?php echo $value['pdf_file'];?>" target="_blank"><strong><?php echo $value['title']; ?> </strong></a>
         </div>
         <?php endforeach; endif; ?>  
-        
+        </div>
         </aside>
       </div>
  </section>

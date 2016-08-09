@@ -11,14 +11,14 @@
           <?php echo ucfirst($osha_content->content); ?>
         </div>
           <?php endif; ?>
-        <div class="clearfix">
-        </div>
+        <div class="documents">
         <?php if(count($osha_attachment) >0): foreach($osha_attachment as $key=>$value): ?>
           <div class="col-sm-12 col-md-12 content-bar">
-          <p><strong><?php echo $value['title']; ?> - </strong><a href="<?php echo $img_url; ?>assets/images/frontend/call_osha/<?php echo $value['pdf_file'];?>" target="_blank"><?php echo $value['pdf_file'];?></a></p>
+          <a href="<?php echo $img_url; ?>assets/images/frontend/call_osha/<?php echo $value['pdf_file'];?>" target="_blank"><strong><?php echo $value['title']; ?></strong></a>
         </div>
-        <?php endforeach; endif; ?>  
         
+        <?php endforeach; endif; ?>  
+        </div>
         </aside>
       </div>
  </section>

@@ -13,7 +13,7 @@
 
     <div id="banner_full " class="main-slider">
       <div id="slider"> 
-        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner1.png" alt="" class="" /></a> <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/banner2.png" alt="" class="" /></a> 
+        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner1.png" alt="" class="" /></a> <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner2.jpg" alt="" class="" /></a> 
         <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner3.png" alt="" class="" /></a> 
         <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner4.png" alt="" class="" /></a> 
         <a href="#" ><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner5.png" alt="" class="" /></a> </div>
@@ -87,6 +87,7 @@
         </div>
       </div>
       <!-- // button section -->
+       <?php if($this->session->userdata('user_id') == ""): ?>
       <div class="start-button"> 
         <a href="<?php echo site_url("login/signup"); ?>" class=" radius-5">
           <strong>Click Here to 
@@ -95,6 +96,7 @@
           </strong>
         </a> 
       </div>
+      <?php endif; ?>
       <!--  button section // --> 
     </aside>
     <aside class="col-sm-6 home-right">
@@ -111,6 +113,7 @@
       <div class="video_modal">
          <a href="javascript:void(0);" data-toggle="modal" data-target=".bs-example-modal-lg">
             <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/video-cover.jpg" class="img-responsive" alt="" />
+          <p class="sales_video">SALES VIDEO HERE</p>
           </a>
 
         <!-- // modal box content -->

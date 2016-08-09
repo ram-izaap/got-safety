@@ -1,10 +1,8 @@
  <!-- // Content area -->
    <div id="banner_full " class="main-slider">
-      <div id="slider"> 
-        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner1.png" alt="" class="" /></a> <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="images/banner2.png" alt="" class="" /></a> 
-        <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner3.png" alt="" class="" /></a> 
-        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner4.png" alt="" class="" /></a> 
-        <a href="#" ><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner5.png" alt="" class="" /></a> </div>
+      <div class="about_banner"> 
+        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/about-banner.jpg" alt="" class="" /></a>  
+         </div>
     </div>
 
          <section class="container content-area" data-page="about">

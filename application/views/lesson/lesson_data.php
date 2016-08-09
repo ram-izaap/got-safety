@@ -14,19 +14,19 @@
 			<div aria-label="Large button group" role="group" class="btn-group btn-group-lg">
 	<?php foreach($atachment_detail as $data){
 		
+			if($data['f_name'] || $data['l_url']):
+
 			if($data['type'] =='1'){ ?>
 			
 				<a href="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name'];?>" target="_blank"><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
 				
-				<a href="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name_quiz'];?>" target="_blank">	<button class="btn btn-default quiz-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
 					
-			<?php }else if($data['type'] =='2' && $data['f_name'] == "" && $data['f_name_quiz'] == "" ) {?>
-		<!--audio url -->
+			<?php }else if($data['type'] =='2' && $data['f_name'] == "" ) {?>
+				<!--audio url -->
 				<a href="<?php echo $data['l_url']; ?>" target=_blank> <button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
-				<a href="<?php echo $data['q_url']; ?>" target=_blank><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
 				
-			<?php }else if($data['type'] =='2' && $data['l_url'] == "" && $data['q_url'] == "" ) {?>
-		<!--Audio File -->
+			<?php }else if($data['type'] =='2' && $data['l_url'] == "") {?>
+			<!--Audio File -->
 			
 			<div id="newTab">
 				
@@ -35,58 +35,39 @@
 							  <source src="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name'];?>" type="audio/mpeg">
 							  Your browser does not support the video tag.
 					</audio> 
-			</div>
-			
-			<div id="newTab2">
-				
-				   <audio style="width:1000px; position:absolute; top:0; bottom:0; margin:auto; left:0; right:0;" controls>
-				  
-							  <source src="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name_quiz'];?>" type="audio/mpeg">
-							  Your browser does not support the video tag.
-					</audio> 
-			</div>
+			</div>		
 		
-				<a href="javascript:;" id="link" ><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
+			<a href="javascript:;" id="link" ><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
 				
-				<a href="javascript:;" id="link2">	<button class="btn btn-default quiz-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
 				
-			<?php }else if($data['type'] =='3' && $data['f_name'] == "" && $data['f_name_quiz'] == "" ) {?>
+			<?php }else if($data['type'] =='3' && $data['f_name'] == "") {?>
 		<!--Video url -->
 				<a href="<?php echo $data['l_url']; ?>" target=_blank> <button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
-				<a href="<?php echo $data['q_url']; ?>" target=_blank><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
 				
-			<?php }else if($data['type'] =='3' && $data['l_url'] == "" && $data['q_url'] == "" ) {?>
+			<?php }else if($data['type'] =='3' && $data['l_url'] == "") {?>
 		<!--Video File -->
-		<div id="newTab3">
+			<div id="newTab3">
 				
 				   <video width="100%" height="100%" controls>
 				  
 							  <source src="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name'];?>" type="video/ogg">
 							  Your browser does not support the video tag.
 					</video> 
-			</div>
-			
-			<div id="newTab4">
-				
-				   <video width="100%" height="100%" controls>
-				  
-							  <source src="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name_quiz'];?>" type="video/ogg">
-							  Your browser does not support the video tag.
-					</video> 
-			</div>
+			</div>			
 		
-				<a href="javascript:;" id="link3" ><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
+			<a href="javascript:;" id="link3" ><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
 				
-				<a href="javascript:;" id="link4">	<button class="btn btn-default quiz-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
 			<?php }else { ?>	
 				
 				<a href="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name'];?>" target="_blank"><button class="btn btn-default lesson-btn" type="button"> <?php echo $data['lang']; ?> Lesson</button></a>
-				
-				<a href="<?php echo $img_url.'assets/images/admin/lession_attachment/'.$data['f_name_quiz'];?>" target="_blank">	<button class="btn btn-default quiz-btn" type="button"> <?php echo $data['lang']; ?> Quiz</button></a>
-				
-			<?php } ?>
+								
+			<?php } 
+
+			endif; ?>
+
 		
 		<?php } ?>
+
 			
 			</div>
 		</div>

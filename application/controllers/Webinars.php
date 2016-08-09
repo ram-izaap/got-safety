@@ -43,6 +43,7 @@ class Webinars extends App_Controller {
 		$response['html_view'] = $this->load->view('webinars/webinars_attachment',$this->data,TRUE);
   
 		echo json_encode($response);
+		exit();
 		
 		
 	} 

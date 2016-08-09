@@ -4,7 +4,7 @@
         </footer>-->
 
         <footer>
-		  <section class="container bg-white">
+		  <section class="container">
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <div class="footer-logo-sec"> <a href="<?php echo site_url(); ?>"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/footer-logo.png" alt="footer-logo" width="" class="img-responsive footer-logo" /></a> </div>
 		      <ul class="footer-nav">

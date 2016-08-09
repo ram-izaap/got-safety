@@ -67,9 +67,9 @@
                                         <input type="submit" value="LOGIN" class="btn btn-danger btn-block client-login">
                                     </div>
                                     <div class="forgot_pwd">
-                                     <p class="forgot-con"><a href="">Forgot Password?</a></p>
+                                     <!--<p class="forgot-con"><a href="">Forgot Password?</a></p>-->
   
-                                       <p> <span> Don't have an account?</span> <span><a href="<?php echo site_url("login/signup"); ?>">create one now</a></span></p>
+                                       <p> <span> Don't have an account?</span> <span><a href="<?php echo site_url("login/signup"); ?>">Create one now</a></span></p>
                                         
                                     </div>
                                 </div>

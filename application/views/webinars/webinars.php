@@ -4,30 +4,24 @@
           <div class="row" data-row="default">
 
                <aside class="col-sm-12 bg-white inner-full">
-                 <div class="inner-content">
-                     
-                     <!-- Left Bar -->
-                     <div class="col-md-3 list-web">
+                 <div class="inner-content text-center">                     
+                   
+                     <div class="btn btn-danger"> Previous Webinars</div>
 
-                       <button class="pre-but-color pre-web"> Previous Webinars</button>
-                        <div class="letter-size product-categories-webinars"; >
-							<ul>
-								<?php foreach($all_data as $data) { ?>
-									<li>
-										<a onclick="change_webinars(<?php echo $data['id'];?>);"><?php echo $data['created_date'];?> - <?php echo $data['title'];?></a>
-									</li>
-									
-								<?php } ?>
-							</ul>
-						</div>
-						
-                     </div>
+                     <div class="row form-group">                     
 
-                     <!-- -->
+                      <select class="form-control" onchange="change_webinars(this.value)" id="webinarslist" name="webinarslist">
+                        <option  value="">Please select webinar</option>
+                        <?php foreach($all_data as $data) { ?>
+                           <option value="<?php echo $data['id'];?>"><?php echo $data['created_date'];?> - <?php echo $data['title'];?></option>
+                        <?php } ?>
+                       </select>
+                     </div>  
+
                      <div id="content-load">
-                     <div class="col-sm-12 col-md-6 content-bar">
+                     <div class="content-bar">
                        <?php  if(count($all_data)>0): ?>
-						             <iframe width="560" height="315" src="<?php echo strip_tags($most_data[0]['link']);?>" frameborder="0" allowfullscreen></iframe>
+                         <iframe width="560" height="315" src="<?php echo strip_tags($most_data[0]['link']);?>" frameborder="0" allowfullscreen></iframe>
                       <?php endif; ?>
                      </div>
                      <div class="clearfix"></div>
@@ -77,14 +71,6 @@
     
     </script>
     
- <style>
-	 
-.list-web:hover .letter-size { display: block; }
-	 
-.letter-size { font-size:12px; display:none;}
-
-.pre-but-color { background:#E81B23 !important; color:#FFFFFF;}
-.pre-but-color:hover { background:#737373 !important;}
-
+<style>
+#webinarslist{width:50%; margin:auto; margin-top:10px;}
 </style>
-

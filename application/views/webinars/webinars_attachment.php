@@ -1,9 +1,8 @@
 <section class="container" data-view="list">
           
-	<div class="row" data-row="default" >
+	<div class="row" data-row="default">
 	
-		 
-		 <div class="col-sm-12 col-md-6 content-bar"> 
+		 <div class="content-bar">
                
 			<iframe width="560" height="315" src="<?php echo strip_tags($view_link[0]['link']);?>" frameborder="0" allowfullscreen></iframe>
            
