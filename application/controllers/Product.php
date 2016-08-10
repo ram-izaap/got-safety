@@ -10,6 +10,11 @@ class Product extends App_Controller {
         
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker','cart'));
         $this->load->model(array('product1_model'));
+
+        if($this->session->userdata('user_detail')['role']!=2 || $this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
     }
 
     public function index($pname='')

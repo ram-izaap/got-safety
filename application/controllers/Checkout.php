@@ -10,6 +10,12 @@ class Checkout extends Cart_controller {
         parent::__construct();
         $this->load->library("cart");
         $this->load->model("checkout_model");
+
+        if($this->session->userdata('user_detail')['role']!=2 || $this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
+
     }
 
     function index()

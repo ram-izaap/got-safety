@@ -13,7 +13,7 @@ class Login extends App_Controller {
             array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'email', 'label' => 'Main Contact Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Client/App Password', 'rules' => 'trim|required|max_length[255]'),
-            array('field' => 'admin_name', 'label' => 'Client Admin Username', 'rules' => 'trim|required|max_length[255]'),
+            array('field' => 'admin_name', 'label' => 'Client Admin Username', 'rules' => 'trim|required|max_length[255]|callback_name_unique_check'),
             array('field' => 'admin_pwd', 'label' => 'Client Admin Password', 'rules' => 'trim|required|max_length[255]'),
             //array('field' => 'admin_con_pwd', 'label' => 'Confirm Password', 'rules' => 'trim|required|matches[admin_pwd]'),
             array('field' => 'company_name', 'label' => 'Company Name', 'rules' => 'required'),
@@ -51,9 +51,10 @@ class Login extends App_Controller {
         parent::__construct();
         
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker'));
-        $this->load->model(array('login_model'));
+        $this->load->model(array('login_model','user_model'));
         $this->load->model('plan_model');
-       
+
+         
     }
     function email_check()
     {
@@ -72,6 +73,10 @@ class Login extends App_Controller {
 
     public function index()
     {
+      if($this->session->userdata('user_id') != "")
+       {
+            redirect("");
+       }
 		if($_POST) { 
 			
 		$this->form_validation->set_rules($this->_login_validation_rules);
@@ -119,12 +124,18 @@ class Login extends App_Controller {
     
     function signup()
     {
+
+        if($this->session->userdata('user_id') != "")
+        {
+            redirect("");
+        }
+
         if($_POST) 
         {
             $this->load->library('email');
                 
-            if(isset($_POST['name'])){
-                    $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_unique_check[]');
+            if(isset($_POST['admin_name'])){
+                    $this->form_validation->set_rules('admin_name', 'Name', 'trim|required|callback_name_unique_check[]');
             }
             
             if(isset($_POST['email'])){
@@ -137,11 +148,92 @@ class Login extends App_Controller {
             
             if($this->form_validation->run())
             {  
-                $form = $this->input->post();                             
-                $plan_details              = get_plan_details($form['plan_type']);
-                $this->session->set_userdata("plan_details",$plan_details);
-                $this->session->set_userdata("signup_data",$form);
-                redirect("payment");
+                if($this->input->post('plan_type')!=27)
+                {
+                  $form = $this->input->post();                             
+                  $plan_details = $this->user_model->get_plans("plan",array("id" => $form['plan_type']));
+                  $this->session->set_userdata("plan_details",$plan_details);
+                  $this->session->set_userdata("signup_data",$form);
+                  redirect("payment");
+                }
+                else
+                {
+                  $form = $this->input->post();
+
+                  $ins_data = array();
+                  $ins_data['name']                 = $form['admin_name'];
+                  $ins_data['password']             = md5($form['admin_pwd']);
+                  $ins_data['no_of_employees']      = $form['no_of_employees'];
+                  $ins_data['email']                = $form['email'];
+                  $ins_data['company_name']         = $form['company_name'];
+                  $ins_data['company_address']      = $form['company_address'];
+                  $ins_data['pri_city']      = $form['city'];
+                  $ins_data['pri_state']      = $form['state'];
+                  $ins_data['pri_zip_code']      = $form['zip_code'];
+                  $ins_data['company_phone_no']     = $form['phone_no'];
+                  $ins_data['company_url']          = $form['company_url'];
+                  $ins_data['main_contact']         = $form['main_contact'];
+                  $ins_data['main_contact_no']      = $form['main_contact_no'];
+                  $ins_data['main_contact_address'] = $form['main_contact_address'];
+                  $ins_data['sec_city']      = $form['city1'];
+                  $ins_data['sec_state']      = $form['state1'];
+                  $ins_data['sec_zip_code']      = $form['zip_code1'];
+                  $ins_data['employee_limit']       = 0;
+                  $ins_data['plan_type']            = $form['plan_type'];
+                  $ins_data['is_active']            = 0;
+                  $ins_data['role']                 = 2;
+                  $ins_data['language']             = 1;
+                  $ins_data['created_date']         = date("Y-m-d H:i:s");
+                  $ins_data['created_id']           = 0;
+
+                  $this->admin_user_id = $this->login_model->insert("users",$ins_data);
+
+                  $user_data = array();
+                  $user_data['name']          = $form['name'];
+                  $user_data['password']      = md5($form['password']);
+                  $user_data['created_date']  = date("Y-m-d H:i:s");
+                  $user_data['is_active']     = 0;
+                  $user_data['role']          = 3;
+                  $user_data['created_id']    = $this->admin_user_id;
+             
+                  $register_user_id = $this->login_model->insert("users",$user_data);
+
+                  $furl  = "http://izaapinnovations.com/got_safety/";
+                  
+                  $aurl  = "http://izaapinnovations.com/got_safety/admin";
+
+                  $msg='';
+                    
+                  $msg  .= " Your Frontend Login link as client ".$furl." <br>
+                             <b>Username</b>: ".$user_data['name']."<br>
+                             <b>Password</b>: ".$form['password']."<br><br>
+                             ";
+                  $msg  .= " Your Backend Login link as client ".$aurl." <br>
+                             <b>Client Username</b>: ".$form['admin_name']."<br>
+                             <b>Password</b>: ".$form['admin_pwd']."<br><br>
+                             Thanks you..";                
+                    //$this->user_email($ins_data['email'],'Signup Successfully',$msg);
+                    
+                  $config['protocol'] = 'sendmail';
+                  $config['mailpath'] = '/usr/sbin/sendmail';
+                  $config['charset']  = 'iso-8859-1';
+                  $config['wordwrap'] = TRUE;
+                  $config['mailtype'] = "html";
+                  
+                  $this->email->set_mailtype("html");  
+                  $this->email->from('admin@gotsafety.com', 'Gotsafety');
+                  $this->email->to($ins_data['email']);
+                  $this->email->subject("Signup Detail Information");
+                  $this->email->message($msg);
+                  $this->email->send();
+
+                  $this->session->set_flashdata('signup_succ','User Profile has been created sucessfully.',TRUE);
+                  
+                  $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
+
+                  redirect("login/signup");
+
+                }
             }
             if($this->input->post()){
                 $this->data['form_data']      = $_POST; 
@@ -149,7 +241,7 @@ class Login extends App_Controller {
         }
         else
         {
-            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"");        
+            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
         }
         $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));     
         $this->layout->view('signup','frontend');

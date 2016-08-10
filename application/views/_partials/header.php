@@ -99,8 +99,11 @@
 				  
 
 				  <?php } ?>
+          <?php if($this->session->userdata('user_detail')['role']==2 && $this->session->userdata('user_id') != ""): ?>
               <li <?php  if($this->uri->segment(1) == 'product' || $this->uri->segment(1) == 'cart' || $this->uri->segment(1) == 'checkout') { ?> class="active"; <?php }?>><a href="<?php echo base_url("shop");?>"> <i class="fa fa-shopping-bag"></i> Shop </a></li>
-				  <?php if($this->session->userdata('user_id') == "") { ?>
+				  <?php endif; ?>
+
+          <?php if($this->session->userdata('user_id') == "") { ?>
 				   <li <?php  if($this->uri->segment(1) == 'contact') { ?> class="active"; <?php }?>><a href="<?php echo base_url("contact");?>"> <i class="fa fa-envelope"></i> Contact </a></li>
 				  <?php } ?>
 				  

@@ -20,7 +20,9 @@
     </div>
 
     <!-- // Content area -->
-        <section class="container content-area" data-view="home"> 
+        <section class="container content-area" data-view="home">
+
+        
   <!-- rwo default -->
   <div class="row" data-row="default">
     <aside class="col-sm-6 home-left"> 
@@ -60,7 +62,7 @@
             </li>
           </ul>
           <a href="javascript:void(0);"> 
-            <strong>$37
+            <strong>$79.99
             </strong> month
           </a> 
         </div>
@@ -80,10 +82,10 @@
               (As long a you’re on a service plan)
             </li>
           </ul>
-          <a href="javascript:void(0);"> 
+          <!--<a href="javascript:void(0);"> 
             <strong>$350
             </strong> Only
-          </a> 
+          </a>--> 
         </div>
       </div>
       <!-- // button section -->
@@ -103,7 +105,7 @@
       <div class="welcome-content">
         <h1>Welcome to Gotsafety.com
         </h1>
-        <p>Here you will have access to over 300 Safety Lessons and Documentation specific to your state in a mobile training app which will store or archive all employee signatures into their company client center.
+        <p>Here you will have access to over 500 Safety Lessons and Documentation specific to your state in a mobile training app which will store or archive all employee signatures into their company client center.
         </p>
         <p>OSHA requires that every company in the state provide their employees with regular safety lessons. As an ongoing support services client, you will eceive these mandatory lesson materials and expert support to maintain your safety training program. We will provide you with all lesson materials in both English and Spanish.
         </p>

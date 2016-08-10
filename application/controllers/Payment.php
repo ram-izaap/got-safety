@@ -8,29 +8,30 @@ class Payment extends App_Controller
     array('field'=>'fname','label'=>'First Name','rules'=>'trim|required|min_length[4]|alpha'),		
     array('field' => 'lname', 'label' => 'Last Name', 'rules' => 'trim|required|min_length[2]|alpha'),
     array('field' => 'address', 'label' => 'Address', 'rules' => 'trim|required'),
-    array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
+    array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required|alpha|callback_alpha_dash_space'),
     array('field' => 'state', 'label' => 'State', 'rules' => 'trim|required|alpha'),
-    array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[6]|min_length[6]'),
+    array('field' => 'zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[5]'),
     array('field' => 'country', 'label' => 'Country', 'rules' => 'trim|required|alpha'),
     array('field' => 'c_number', 'label' => 'Card Number', 'rules' => 'trim|required|numeric|max_length[16]|min_length[16]'),
     array('field' => 'cvv', 'label' => 'CVV', 'rules' => 'trim|required|numeric|max_length[3]|min_length[3]'),
     array('field'=>'exp_month', 'label' => 'Expiration Month', 'rules' => 'trim|required'),
     array('field' => 'exp_year', 'label' => 'Expiration Year', 'rules' => 'trim|required'),
     array('field'=>'email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
-    array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
-    array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]'));
+    array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]')
+    //array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]')
+    );
     
     protected $_paypal_validation_rules =    array (
     array('field'=>'firstname','label'=>'First Name','rules'=>'trim|required|alpha'),		
     array('field' => 'lastname', 'label' => 'Last Name', 'rules' => 'trim|required|alpha'),
     array('field' => 'pay_address', 'label' => 'Address', 'rules' => 'trim|required'),
-    array('field' => 'pay_city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
+    array('field' => 'pay_city', 'label' => 'City', 'rules' => 'trim|required|alpha|callback_alpha_dash_space'),
     array('field' => 'pay_state', 'label' => 'State', 'rules' => 'trim|required|alpha'),
-    array('field' => 'pay_zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[6]|min_length[6]'),
+    array('field' => 'pay_zipcode', 'label' => 'Zipcode', 'rules' => 'trim|required|numeric|max_length[5]'),
     array('field' => 'pay_country', 'label' => 'Country', 'rules' => 'trim|required|alpha'),
     array('field' => 'pay_email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
-    array('field' => 'pay_phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
-    array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
+    array('field' => 'pay_phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]')
+    //array('field' => 'pay_fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|min_length[6]')
 );
                 
     protected $fname         = '';
@@ -380,18 +381,18 @@ class Payment extends App_Controller
     		
     		$Payments = array();
     		$Payment = array(
-        						'amt' => $plan_details['plan_amount'], 							
+        						'amt' => $plan_details[0]['plan_amount'], 							
         						'currencycode' => 'USD', 					
-        						'itemamt' => $plan_details['plan_amount'], 						  						
+        						'itemamt' => $plan_details[0]['plan_amount'], 						  						
         						'notifyurl' => $ipn_url			
     						);
     	
     				
     		$PaymentOrderItems = array();
     		$Item = array(
-    					   'name' => ucfirst($plan_details['plan_type']), 								
-    					   'desc' => strip_tags($plan_details['plan_desc']), 								
-    					   'amt' => $plan_details['plan_amount']
+    					   'name' => ucfirst($plan_details[0]['plan_type']), 								
+    					   'desc' => strip_tags($plan_details[0]['plan_desc']), 								
+    					   'amt' => $plan_details[0]['plan_amount']
                           );
     		array_push($PaymentOrderItems, $Item);
     		
@@ -493,7 +494,7 @@ class Payment extends App_Controller
 						   );
 		$Payments = array();
 		$Payment  = array(
-    						'amt' => $plan_details['plan_amount'], 							
+    						'amt' => $plan_details[0]['plan_amount'], 							
     						'currencycode' => 'USD', 					
     						'itemamt' => '', 						  
     						'shippingamt' => '0.00', 					
@@ -557,7 +558,7 @@ class Payment extends App_Controller
         							'billingperiod' => 'Month', 						
         							'billingfrequency' => '1', 					 
         							'totalbillingcycles' => '12', 				  
-        							'amt' => $plan_details['plan_amount'], 							 
+        							'amt' => $plan_details[0]['plan_amount'], 							 
         							'currencycode' => 'USD', 												
     						     );								
 		$PayerInfo      = array(
@@ -637,7 +638,7 @@ class Payment extends App_Controller
                
     		   
                $ins_data['user_id']             = $this->admin_user_id;
-               $ins_data['plan_id']             = $plan_details['id'];
+               $ins_data['plan_id']             = $plan_details[0]['id'];
                $ins_data['profile_start_date']  = $PayPalResult['PROFILESTARTDATE'];
                $ins_data['payment_status']      = "pending";
                $ins_data['pending_reason']      = $paymentstatus['pending_reason'];
@@ -789,6 +790,8 @@ class Payment extends App_Controller
                     
             $this->admin_user_id = $this->login_model->insert("users",$ins_data);  
             
+            $user_data = array();
+
             $user_data['name']          = $form['name'];
             $user_data['password']      = md5($form['password']);
             $user_data['created_date']  = date("Y-m-d H:i:s");
@@ -817,7 +820,7 @@ class Payment extends App_Controller
             $config['charset']  = 'iso-8859-1';
             $config['wordwrap'] = TRUE;
             $config['mailtype'] = "html";
-            
+            $this->email->set_mailtype("html");
             $this->email->from('admin@gotsafety.com', 'Gotsafety');
         	$this->email->to($ins_data['email']);
         	$this->email->subject("Signup Successfully");
@@ -847,5 +850,10 @@ class Payment extends App_Controller
          
 
   }  
+
+  function alpha_dash_space($str)
+  {
+    return ( ! preg_match("/^([-a-z_ ])+$/i", $str)) ? FALSE : TRUE;
+  } 
 }
 ?>

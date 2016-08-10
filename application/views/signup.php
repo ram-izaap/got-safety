@@ -5,13 +5,13 @@
     <div class="row" data-row="default">
       <aside class="col-sm-12 bg-white inner-full">
         <?php if(isset($_SESSION['signup_succ'])) {?>
-        <div class="alert alert-success alert-dismissable col-md-6 col-md-offset-3">
+        <div class="alert alert-success alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
           <?php echo $_SESSION['signup_succ'];unset($_SESSION['signup_succ']);?>
         </div>
         <?php }?>
         <?php if(isset($_SESSION['signup_fail'])) {?>
-        <div class="alert alert-danger alert-dismissable col-md-6 col-md-offset-3">
+        <div class="alert alert-danger alert-dismissable">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
           <?php echo $_SESSION['signup_fail'];unset($_SESSION['signup_fail'])?>
         </div>
@@ -82,6 +82,7 @@
                  <div class="col-sm-5">
                   <div class="form-group">
                     <input type="text" name="phone_no" id="phone_no" class="form-control input-lg" value="<?php echo set_value('phone_no',$form_data['phone_no']); ?>" placeholder="Phone Number" >
+                    <p class="eg_content">(e.g.1234566789)</p>
                     <span class="vstar" 
                           <?php echo form_error('phone_no', '
                     <span class="help-block">', '
@@ -128,6 +129,7 @@
                   <div class="col-sm-6">
                   <div class="form-group">
                     <input type="text" name="main_contact_no" id="main_contact_no" class="form-control input-lg" value="<?php echo set_value('main_contact_no',$form_data['main_contact_no']); ?>" placeholder="Main Contact Phone #" >
+                    <p class="eg_content">(e.g.1234566789)</p>
                     <span class="vstar" 
                           <?php echo form_error('main_contact_no', '
                     <span class="help-block">', '
@@ -177,6 +179,16 @@
                       <input type="text" name="no_of_employees" id="no_of_employees" value="<?php echo set_value('no_of_employees',$form_data['no_of_employees']); ?>" class="form-control input-lg" placeholder="No of Employees">
                       <span class="vstar" 
                             <?php echo form_error('no_of_employees', '
+                      <span class="help-block">', '
+                      </span>'); ?>
+                      </span>
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                      <input type="text" name="promo_code" id="promo_code" value="<?php echo set_value('promo_code',$form_data['promo_code']); ?>" class="form-control input-lg" placeholder="Promo Code">
+                      <span class="vstar" 
+                            <?php echo form_error('promo_code', '
                       <span class="help-block">', '
                       </span>'); ?>
                       </span>

@@ -12,7 +12,7 @@ class Signoff extends Admin_controller {
        $this->load->model('signoff_model');
        $this->load->library('form_validation');
        $this->layout->add_javascripts(array('common'));
-        $this->data['img_url']=$this->layout->get_img_dir();
+       $this->data['img_url']=$this->layout->get_img_dir();
 
         if(!is_logged_in()) 
         {
@@ -101,42 +101,43 @@ class Signoff extends Admin_controller {
    function bulk_export()
     {
 		
-		$this->load->library('pdf');
 		
 		$search_field  = $this->session->userdata('search_field');
 		$search_value  = $this->session->userdata('search_value');
-		
-		$stylesheet = file_get_contents(base_url()."views/pdf.css");
+
 		// print $stylesheet;exit;
 		//http://localhost/got_safety/admin/views/pdf_test.css
 		if($search_field != "" && $search_value !="" ) 
 		  $this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
-		
 		else
 		  $this->data['result'] = $this->signoff_model->get_serach_data($search_field='',$search_value='');
 		
 		$html = $this->load->view('signoff/sign_export',$this->data,true);
-		
+
+
+		$stylesheet = file_get_contents(base_url()."views/pdf.css");
+
+		$this->load->library('pdf');
 		$pdf = $this->pdf->load(); 
-		$pdf->setTitle('Manage Training Records');
-		$pdf->WriteHTML($stylesheet,1);	
-        $pdf->WriteHTML($html,2);
-        
-        $micro = microtime();
-        
-        $filename = "Export-".date("Y-m-d H:i:s").".pdf";
-       
-        $pdf->Output($filename,"D");
-        
-       
-	/*}else {
-		redirect("signoff");
-		
-	}*/	
+		//$pdf->debug=true;
+		$pdf->WriteHTML($stylesheet,1);
+        $pdf->WriteHTML($html);
+        $pdf->Output('Training-signoff-records.pdf','D');
+        exit;
 		
 	}
 	
 	
+	function view_detail($id = "")
+	{
+		$search_field = "ld.id";
+		$search_value = $id;
+		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
+		//print_r($this->data['result']);exit;
+		
+		$this->layout->view("signoff/signoff_view");
+		
+	}
 	
 	
 	/*function bulk_export_excel()
@@ -163,18 +164,6 @@ class Signoff extends Admin_controller {
 	
 	
 	
-	function view_detail($id = "")
-	{
-		$search_field = "ld.id";
-		$search_value = $id;
-		$this->data['result'] = $this->signoff_model->view_details($search_field,$search_value);
-		//print_r($this->data['result']);exit;
-		
-		$this->layout->view("signoff/signoff_view");
-		
-	}
-    
-  
    
     
 }

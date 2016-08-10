@@ -118,7 +118,7 @@ class Employee extends Admin_controller {
 			
 			if ( isset($_POST['emp_id']) )
 			{ 
-				$this->form_validation->set_rules('emp_id', 'Employee ID', 'required|callback_employee_id_unique_check['.$edit_id.']');
+				$this->form_validation->set_rules('emp_id', 'Employee ID', 'required|min_length[3]|max_length[6]|callback_employee_id_unique_check['.$edit_id.']');
 			}
 			
 			if($role == 2 && $edit_id =="") {

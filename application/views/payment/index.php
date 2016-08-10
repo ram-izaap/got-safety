@@ -36,9 +36,9 @@
 						<div class="paypal_div">
                           	<form name="paypal_form" method="post" action="<?php echo base_url('payment/paypal'); ?>"	
 									autocomplete="on">
-									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details']['plan_type']:"";?>">
-									<input type="hidden" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details']['plan_amount']))?$_SESSION['plan_details']['plan_amount']:"";?>">
-									<input type="hidden" name="plan_id" value="<?php echo (isset($_SESSION['plan_details']['id']))?$_SESSION['plan_details']['id']:"";?>">
+									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type']:"";?>">
+									<input type="hidden" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details'][0]['plan_amount']))?$_SESSION['plan_details'][0]['plan_amount']:"";?>">
+									<input type="hidden" name="plan_id" value="<?php echo (isset($_SESSION['plan_details'][0]['id']))?$_SESSION['plan_details'][0]['id']:"";?>">
 								     <h5>Personal Info</h5>
 									 <div class="row">
 					                    <div class="col-sm-6">
@@ -107,12 +107,12 @@
 					                         <span class="vstar"> <?php echo form_error('pay_phone');?></span>
 					                      </div>
 				                    	</div>
-				                    	<div class="col-sm-6">
+				                    	<!--<div class="col-sm-6">
 					                      <div class="form-group">
 					                        <input type="text" name="pay_fax" id="pay_fax" class="form-control input-lg" value="<?php echo set_value('pay_fax');?>" placeholder="Fax">
 					                         <span class="vstar"> <?php echo form_error('pay_fax');?></span>
 					                      </div>
-				                    	</div>
+				                    	</div>-->
 				                    </div>
 				                 	
 					                    <div class="row">
@@ -132,9 +132,9 @@
 						<div class="auth_div" style="display:none;">
 								<form name="auth-form" method="post" action="<?php echo base_url('payment/authorize_form'); ?>"	
 									autocomplete="on">
-									<input type="" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details']['plan_type']:"";?>">
-									<input type="" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details']['plan_amount']))?$_SESSION['plan_details']['plan_amount']:"";?>">
-									<input type="" name="plan_id" value="<?php echo (isset($_SESSION['plan_details']['id']))?$_SESSION['plan_details']['id']:"";?>">
+									<input type="" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type']:"";?>">
+									<input type="" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details'][0]['plan_amount']))?$_SESSION['plan_details'][0]['plan_amount']:"";?>">
+									<input type="" name="plan_id" value="<?php echo (isset($_SESSION['plan_details'][0]['id']))?$_SESSION['plan_details'][0]['id']:"";?>">
 								<h5>Personal Info</h5>
 									 <div class="row">
 					                    <div class="col-sm-6">
@@ -203,12 +203,13 @@
 					                         <span class="vstar"> <?php echo form_error('phone');?></span>
 					                      </div>
 				                    	</div>
-				                    	<div class="col-sm-6">
+				                    	
+				                    	<!--<div class="col-sm-6">
 					                      <div class="form-group">
 					                        <input type="text" name="fax" id="fax" class="form-control input-lg" value="<?php echo set_value('fax');?>" placeholder="Fax">
 					                         <span class="vstar"> <?php echo form_error('fax');?></span>
 					                      </div>
-				                    	</div>
+				                    	</div>-->
 				                    </div>
 				                 	<h5>Card Details</h5>
 				                 	 <div class="row">

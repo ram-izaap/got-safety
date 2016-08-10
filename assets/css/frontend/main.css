@@ -1659,3 +1659,12 @@ p.sales_video {
 {
   padding:6px;
 }
+.eg_content {
+    color: #999999;
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 4px;
+}
+[data-plan*="gs-monthly"] a > strong {
+    font-size: 38px;
+}

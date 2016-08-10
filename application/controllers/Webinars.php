@@ -9,6 +9,11 @@ class Webinars extends App_Controller {
         
         $this->layout->add_javascripts(array('bootstrap.min','bootstrap-datepicker'));
         $this->load->model(array('webinars_model'));
+
+         if($this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
         //echo $this->layout->get_img_dir();
     }
 

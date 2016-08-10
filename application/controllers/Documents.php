@@ -7,6 +7,11 @@ class Documents extends App_Controller {
     {
         parent::__construct();
         $this->load->model(array('documents_model'));
+
+         if($this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
     }
 
     public function index()

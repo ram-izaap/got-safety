@@ -11,6 +11,11 @@ class Cart extends App_Controller {
         $this->layout->add_javascripts(array('cart'));
         $this->load->library('cart');
         $this->load->model(array('cart_model'));
+
+        if($this->session->userdata('user_detail')['role']!=2 || $this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
     }
 
     function index()

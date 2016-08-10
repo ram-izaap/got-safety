@@ -31,6 +31,11 @@ class Lesson extends App_Controller {
         $this->load->model(array('lesson_model'));
         $this->load->model(array('contact_model'));
 
+         if($this->session->userdata('user_id') == "")
+        {
+            redirect("");
+        }
+
         //echo $this->layout->get_img_dir();
     }
 
