@@ -546,7 +546,7 @@ header { background-color: #dfdfe1; padding: 10px 0; }
 .welcome-content { }.welcome-content h1 { font-size: 42px; color: #292f2b; }.welcome-content p { }
  [data-plan="monthly"] {}[data-plan*="gs-"] {padding:30px 20px 100px 20px;margin-bottom:100px;margin-top:30px;position: relative;}
 [data-plan*="gs-"] h4 { color: #ed1c24; font: bold 42px "aileronbold", Helvetica, Arial, sans-serif; }
-[data-plan*="gs-"] a { background-color: rgb(237, 28, 36); box-shadow: 0px 2px 10px 0px rgba(0, 0, 1, 0.3); position: absolute; right: 20px; bottom: -70px; width: 150px; height: 150px; font: bold 32px "aileronbold", Helvetica, Arial, sans-serif; color: #fff; text-align: center; text-transform: uppercase; text-decoration: none; padding: 25px 10px 10px 10px; }[data-plan*="gs-"] a > strong { font-size: 48px; }
+[data-plan*="gs-"] a { background-color: rgb(237, 28, 36); box-shadow: 0px 2px 10px 0px rgba(0, 0, 1, 0.3); position: absolute; right: 20px; bottom: -70px; width: 150px; height: 150px; font: bold 32px "aileronbold", Helvetica, Arial, sans-serif; color: #fff; text-align: center; text-transform: uppercase; text-decoration: none; padding: 35px 10px 10px 10px; }[data-plan*="gs-"] a > strong { font-size: 48px; }
 [data-plan*="gs-"] a:hover { color:#fff}
 /* Testimonial */
 /* Documentation:  */

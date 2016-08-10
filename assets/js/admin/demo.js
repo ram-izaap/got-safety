@@ -81,9 +81,9 @@ var Demo = function() {
 
                 // set footer
                 if (footerOption === 'fixed') {
-                    $('.page-footer').html('<div class="container">' + $('.page-footer').html() + '</div>');
+                    //$('.page-footer').html('<div class="container">' + $('.page-footer').html() + '</div>');
                 } else {
-                    $('.page-footer').appendTo('body > .container');
+                    //$('.page-footer').appendTo('body > .container');
                 }
             }
 

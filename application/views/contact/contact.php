@@ -18,7 +18,7 @@
                         <?php /*  <iframe src="http://mapbuildr.com/frame/8i8sek" frameborder="0" height="400" width="100%"></iframe>
                           <!-- /IFRAME --> */ ?>
                           
-                         <iframe src="http://www.yourmapmaker.com/preview.php?a=<?php echo strip_tags($info[0]['content']);?>,Canada&w=100%&h=400&n=Got Safety&z=14&t=Map" height="400" width="100%"  frameborder="0"></iframe>
+                         <iframe src="http://www.yourmapmaker.com/preview.php?a=<?php echo strip_tags($info[0]['content']);?>,utah&w=100%&h=400&n=Got Safety&z=14&t=Map" height="400" width="100%"  frameborder="0"></iframe>
                           
                             <div id="map-overlay" class="col-xs-5 col-xs-offset-6" style="">
                               <h2>Contact us</h2>

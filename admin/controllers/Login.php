@@ -23,6 +23,10 @@ class Login extends Admin_Controller
     
     public function login()
     {
+        if(is_logged_in()) 
+        {
+          redirect("home");
+        }
        // print_r($_POST);exit;
        $this->form_validation->set_rules($this->_login_validation_rules);
        
