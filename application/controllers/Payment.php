@@ -786,7 +786,7 @@ class Payment extends App_Controller
         
         if(!file_exists($path)) {
         
-            mkdir('../../admin/views/repository/files/'.$folder, 0755,true);
+            mkdir('./admin/views/repository/files/'.$folder, 0755,true);
                     
             $this->admin_user_id = $this->login_model->insert("users",$ins_data);  
             

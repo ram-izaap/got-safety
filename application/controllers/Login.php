@@ -232,9 +232,9 @@ class Login extends App_Controller {
                   
                   $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
                   $folder = $form['admin_name'];
-                  $dir = BASEPATH.'views/repository/files/'.$folder;
+                  $dir = '../../admin/views/repository/files/'.$folder;
                   if(!file_exists($dir)) {
-                    mkdir($dir, 0755,true); 
+                    mkdir('./admin/views/repository/files/'.$folder, 0755,true); 
                   }
                   redirect("login/signup");
 

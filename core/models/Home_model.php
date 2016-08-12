@@ -30,7 +30,9 @@ class Home_model extends App_Model {
 		$this->db->select('*');
 		$this->db->from($table_name);
 
-		if($role==1)
+		$this->db->where(array('role'=>'2'));
+
+		/*if($role==1)
 		{
 		  $this->db->where_not_in('name', $where);
 		  $this->db->where('role','2');
@@ -38,7 +40,7 @@ class Home_model extends App_Model {
 		else if($role==2)
 		{
 		  $this->db->where(array('name'=>$where,'role'=>'2'));
-		}
+		}*/
 
 		$result = $this->db->get()->result_array();
 

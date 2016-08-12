@@ -85,6 +85,10 @@ if($role == 2) {
                 array(// hide anything else
                     'pattern' => '!^/'.$condition.'!',
                     'hidden' => true
+                ),
+                array(// hide anything else
+                    'pattern' => '!^/'.$_GET['name'].'!',
+                    'hidden' => false
                 )
             )                    
 		),
