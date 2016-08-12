@@ -24,11 +24,24 @@ class Home_model extends App_Model {
 	
 	function get_all($table_name,$where)
     {
+		$role = $this->session->userdata('admin_data')['role'];
+
 		
 		$this->db->select('*');
 		$this->db->from($table_name);
-		$this->db->where_not_in('name', $where);
+
+		if($role==1)
+		{
+		  $this->db->where_not_in('name', $where);
+		  $this->db->where('role','2');
+		}
+		else if($role==2)
+		{
+		  $this->db->where(array('name'=>$where,'role'=>'2'));
+		}
+
 		$result = $this->db->get()->result_array();
+
 		return $result;
 		
 	}

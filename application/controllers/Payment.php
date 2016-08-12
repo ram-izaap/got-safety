@@ -782,11 +782,11 @@ class Payment extends App_Controller
        
 	 	$folder                    = $form['admin_name'];	
         
-        $path   = './admin/views/repository/files/'.$folder;
+        $path   = '../../admin/views/repository/files/'.$folder;
         
         if(!file_exists($path)) {
         
-            mkdir('./admin/views/repository/files/'.$folder, 0755,true);
+            mkdir('../../admin/views/repository/files/'.$folder, 0755,true);
                     
             $this->admin_user_id = $this->login_model->insert("users",$ins_data);  
             
@@ -801,8 +801,9 @@ class Payment extends App_Controller
              
             $register_user_id = $this->login_model->insert("users",$user_data); 
              
-            $furl  = "http://izaapinnovations.com/got_safety/";
-            $aurl  = "http://izaapinnovations.com/got_safety/admin";
+            $furl  = base_url();
+            
+            $aurl  = base_url()."/admin";
             
             $msg   = "Your payment has been initiated and ".ucfirst($this->payment_method)." consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
             $msg  .= " Your Frontend Login link as client ".$furl." <br>

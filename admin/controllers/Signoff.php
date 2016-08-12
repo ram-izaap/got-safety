@@ -140,27 +140,22 @@ class Signoff extends Admin_controller {
 	}
 	
 	
-	/*function bulk_export_excel()
+	function bulk_export_excel()
     {
-		
-		$this->load->library('export');
-		
-		$search_field  = $this->session->userdata('search_field');
-		$search_value  = $this->session->userdata('search_value');
-		
-		if($search_field != "" && $search_value !="" ) {
-		
-		$this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
-		
-		$this->export->to_excel($this->data['result'], 'Signoff'); 
         
-       
-		}else {
-			redirect("signoff");
-			
-		}	
-		
-	}*/
+        $this->load->library('export');
+        
+        $search_field  = $this->session->userdata('search_field');
+        $search_value  = $this->session->userdata('search_value');
+        
+        if($search_field != "" && $search_value !="" ) 
+            $this->data['result'] = $this->signoff_model->get_serach_data($search_field,$search_value);
+        else
+            $this->data['result'] = $this->signoff_model->get_serach_data($search_field='',$search_value='');
+        
+        $this->export->to_excel($this->data['result'], 'Signoff'); 
+        
+    }
 	
 	
 	

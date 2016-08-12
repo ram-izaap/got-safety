@@ -76,6 +76,8 @@
 			<h2><?php echo $language_content['title'];?></h2>
 			
 			<?php echo $language_content['content'];?>
+
+			<div class="text-center"><a href="<?php echo site_url('signoff/index/'.$lesson_id);?>" class="btn btn-danger btn-lg">SIGN OFF</a></div>
 		</div>
 		
 	 </div>

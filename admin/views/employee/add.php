@@ -43,9 +43,12 @@
 						<option value="">Select...</option>
 						<?php if(isset($get_menu)) { 
 							foreach($get_menu as $fkey => $fvalue){
-							  $selected = ($form_data['created_user'] == $fvalue['id'])?"selected='selected'":"";   
+							  if($this->session->userdata("clientid")!='')	
+							    $selected = ($this->session->userdata("clientid") == $fvalue['id'])?"selected='selected'":"";
+							  else
+							    $selected = ($form_data['created_user'] == $fvalue['id'])?"selected='selected'":"";      
 						?>
-						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?>><?php echo $fvalue['name'];?></option>
+						<option value="<?php echo $fvalue['id']; ?>" <?php echo $selected; ?> <?php echo set_select("user_id",$fvalue['id']); ?>><?php echo $fvalue['name'];?></option>
 						<?php } } ?>
 					</select>
 					 <span class="vstar" <?php echo form_error('user_id', '<span class="help-block">', '</span>'); ?></span>

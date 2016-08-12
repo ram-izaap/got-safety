@@ -96,11 +96,16 @@ class User extends Admin_Controller
         $this->simple_search_fields = array('name' => 'Name');
          
         $this->_narrow_search_conditions = array("start_date");
-        
+
         $str = '<a href="'.site_url('user/add_edit_user/{id}').'" class="table-link">
                     <span class="fa-stack">
                         
                         <i class="fa fa-pencil"></i>
+                    </span>
+                </a>'.
+                '<a class="table-link employee_view" client_id={id}>
+                    <span class="fa-stack" >
+                        <i class="fa fa-eye"></i>
                     </span>
                 </a>';
  
@@ -289,7 +294,7 @@ class User extends Admin_Controller
 				$this->email->subject('Signup Successfully');
 				$this->email->message($msg);
 				$this->email->send();
-				$folder = $form['name'];
+				$folder = $form['admin_name'];
 				mkdir('./views/repository/files/'.$folder.'', 0755,true);			
 				
 				/* Client Insertion */

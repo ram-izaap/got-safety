@@ -29,7 +29,21 @@ class Employee extends Admin_controller {
     function index()
     {
 		//$this->output->enable_profiler(true);
-		
+
+		$client_id1 = $this->input->post("client_id");
+        $role =  $this->session->userdata('admin_data')['role']; 
+        
+        if($client_id1!='' && $role==1)
+        {
+            $this->session->set_userdata("clientid",$client_id1);
+
+        }
+        else if($client_id1=='' && $role==2 )
+        {
+            $this->session->unset_userdata("clientid");
+        }
+
+
         $this->layout->add_javascripts(array('listing', 'rwd-table'));  
 
         $this->load->library('listing');
@@ -42,9 +56,9 @@ class Employee extends Admin_controller {
                         'employee_email' => 'Email',
                         'emp_id' => 'Employee ID',
                         'name' => 'Client');
-         
-        $this->_narrow_search_conditions = array("start_date");
-        
+
+
+
         $str = '<a href="'.site_url('employee/add_edit_employee/{id}').'" class="table-link">
                     <span class="fa-stack">
                        
@@ -178,7 +192,16 @@ class Employee extends Admin_controller {
                     $social_data = $this->employee_model->update("employee",$ins_data,array("id" => $edit_id));
                     //$this->service_message->set_flash_message('record_update_success');
 		      }
-		      redirect("employee");    
+              if($role==1)
+              {
+                 $this->session->unset_userdata("clientid");
+                 $this->session->set_userdata("clientid",$form['user_id']);
+                 redirect("employee");
+              }
+              else
+              {
+		        redirect("employee");
+              }    
 		
 		}	
 			
@@ -282,25 +305,35 @@ class Employee extends Admin_controller {
     
     
     
-    public function bulk_upload()
-    {            
-		if(is_logged_in())
+   public function bulk_upload()
+    { 
+        
+
+       if(is_logged_in())
         {
-            //$this->layout->view("employee/employee_list");        
-		    if(!empty($_FILES['employee']['tmp_name']))
+            $role =  $this->session->userdata('admin_data')['role']; 
+            if($this->session->userdata("clientid")!='' && $role==1)
+              $client_id =  $this->session->userdata("clientid");
+            else
+              $client_id='';
+            //$this->layout->view("employee/employee_list");
+            if(!empty($_FILES['employee']['tmp_name']))
             { 
-				$data['result'] = $this->employee_model->upload_csv();
-				if($data['result'])
-                {
-				    redirect("employee");
-				}
-	       }
-		  $this->layout->view('employee/bulk_upload');
-        }
+              $data['result'] = $this->employee_model->upload_csv($client_id);
+                if($data['result'])
+                {   
+                  redirect("employee");
+                }
+            }
+           if($role==1)
+             redirect("employee");
+           else
+           $this->layout->view('employee/bulk_upload');
+       }
         else
             redirect("login");
     
-	}
+  }
 	
 
     

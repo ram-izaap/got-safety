@@ -73,6 +73,7 @@ class Login extends App_Controller {
 
     public function index()
     {
+
       if($this->session->userdata('user_id') != "")
        {
             redirect("");
@@ -198,9 +199,9 @@ class Login extends App_Controller {
              
                   $register_user_id = $this->login_model->insert("users",$user_data);
 
-                  $furl  = "http://izaapinnovations.com/got_safety/";
+                  $furl  = base_url();
                   
-                  $aurl  = "http://izaapinnovations.com/got_safety/admin";
+                  $aurl  = base_url()."/admin";
 
                   $msg='';
                     
@@ -230,7 +231,11 @@ class Login extends App_Controller {
                   $this->session->set_flashdata('signup_succ','User Profile has been created sucessfully.',TRUE);
                   
                   $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
-
+                  $folder = $form['admin_name'];
+                  $dir = BASEPATH.'views/repository/files/'.$folder;
+                  if(!file_exists($dir)) {
+                    mkdir($dir, 0755,true); 
+                  }
                   redirect("login/signup");
 
                 }
@@ -294,7 +299,7 @@ class Login extends App_Controller {
 		        $c = $this->create_auth_transaction($res,$ins);
 		        if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
 		        {
-		        	$usr_data['name']     = $this->session->userdata['name'];
+		        	$usr_data['name']     = $this->session->userdata['admin_name'];
 	                $usr_data['email']    = $this->session->userdata['email'];
 	                $usr_data['role']	  = 2;
 	                $usr_data['password'] = md5($this->session->userdata['password']);
@@ -303,7 +308,7 @@ class Login extends App_Controller {
 					$usr_data['language']  = 1;
 					$usr_data['created_id']  = 8;
 				 	$folder = $usr_data['name'];
-				 	$dir = './admin/views/repository/files/'.$folder;
+				 	$dir = '../../admin/views/repository/files/'.$folder;
 				 	if(!file_exists($dir))	
 		        		mkdir($dir, 0755,true);
                 	$userid = $this->login_model->insert("users",$usr_data);

@@ -507,3 +507,26 @@ $("input[name='plan_name']").click(function(){
   $(".ip_amt").val(val);
   $(".ip_type").val(type);
 });
+
+$(document).on("click",".employee_view",function(){
+  var client_id = $(this).attr("client_id"),
+      url = base_url+'employee',
+      data = 'client_id='+ client_id; 
+
+        $.ajax({
+            url : url,
+            type: "POST",
+            data: data,
+            dataType: "JSON",
+
+            success: function(data)
+            {
+              window.location.href= base_url+'employee';
+
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error get data from ajax');
+            }
+        });
+});

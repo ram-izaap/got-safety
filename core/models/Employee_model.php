@@ -15,6 +15,10 @@ class Employee_model extends App_Model {
     
     function listing()
     {  
+
+
+
+        
 		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
 		
@@ -34,12 +38,16 @@ class Employee_model extends App_Model {
        $this->db->join('users l','l.id=ld.created_user');
        $this->db->group_by('ld.id'); 
         
-       if($role == '2'){
+       if($role == '2')
+       {
         $this->db->where('ld.created_user',$user_id);
-        }else {
-			$this->db->where('ld.updated_user',$user_id);
+        }
+        else 
+        {       	
+
+			$this->db->where('ld.created_user',$this->session->userdata("clientid"));
 		}
-        
+
 		
         foreach ($this->criteria as $key => $value) 
         {
@@ -66,7 +74,8 @@ class Employee_model extends App_Model {
                
             }
         }
-        
+
+
         
         return parent::listing();
     }
@@ -158,12 +167,22 @@ class Employee_model extends App_Model {
 	
 	
 	
-	function upload_csv()
+	function upload_csv($clientid)
 	{
-
-
-		$user_id =  $this->session->userdata('admin_data')['id']; 
 		$role =  $this->session->userdata('admin_data')['role']; 
+
+
+        if($clientid!='' && $role==1)
+        {
+          $user_id = $clientid;
+          $user_id1 =  $this->session->userdata('admin_data')['id'];
+        }
+
+        else
+        {
+		 $user_id =  $this->session->userdata('admin_data')['id'];
+        }
+
 		
 		$path = $_FILES['employee']['name'];
 
@@ -198,6 +217,9 @@ class Employee_model extends App_Model {
 								$client_id = "";
 							}*/
 							//echo $client_id;exit;
+							if($clientid!='')
+                              $client_id = $clientid;
+                            else
 							$client_id =  $this->session->userdata('admin_data')['id'];
 							//print_r($client_id);exit;
 							
@@ -209,7 +231,7 @@ class Employee_model extends App_Model {
 							//print_r(count($result_employee));exit;
 					 $limit_check_exists = $this->limit_check_exists("users",array("id" => $user_id));
 		             
-		             if($limit_check_exists==1)
+		             if($limit_check_exists==1 && strlen($csv_line[2])>=3 && strlen($csv_line[2])<=6)
 		             {
 					   if(count($result_employee) == 0) {
 							
@@ -229,6 +251,10 @@ class Employee_model extends App_Model {
 					}
 					else
 					{
+						$insert_csv['client'] = "";
+							$insert_csv['name'] = "";
+							$insert_csv['email'] = "";
+							$insert_csv['employee_id'] = "";
 						    break;
 					}
 
@@ -246,7 +272,7 @@ class Employee_model extends App_Model {
 						   'employee_email' => $insert_csv['email'],
 						   'emp_id' => $insert_csv['employee_id'],
 						   'created_user' => $insert_csv['client'],
-						   'updated_user' => $user_id,
+						   'updated_user' => $user_id1,
 						   'created_date' => date("Y-m-d H:i:s"),
 						   
 						   );
@@ -263,13 +289,13 @@ class Employee_model extends App_Model {
 							  
 						  }
 				 
-					if($limit_check_exists==1)
+					if($limit_check_exists==1 && strlen($csv_line[2])>=3 && strlen($csv_line[2])<=6)
 		            {	 
 					  $data['add_employee']=$this->db->insert('employee', $data);
 					}
 					else
 					{
-						$this->session->set_flashdata('csv_up','Maximum Employee Limit Exists',TRUE);
+						$this->session->set_flashdata('csv_up','Please Check your Employee Limit/Employee Id',TRUE);
 					}
 					$this->db->query("delete from employee where employee_name =' ' OR employee_name = 'Name'");
 					
@@ -282,7 +308,7 @@ class Employee_model extends App_Model {
 	   }
 	   else
 	   {
-	   	$this->session->set_flashdata('csv_up','Maximum Employee Limit Exists',TRUE);
+	   	$this->session->set_flashdata('csv_up','Please Check your Employee Limit/Employee Id',TRUE);
 	   }
 	 }
 	   else{
