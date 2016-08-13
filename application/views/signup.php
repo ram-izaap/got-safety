@@ -273,12 +273,16 @@
           <label for="plan_type<?php echo $key; ?>">
             <span class="title"><?php echo ucwords($value['plan_type']); ?>
             </span>
+            <?php if($value['id']!=27): ?>
             <span class="price"><?php echo "$".$value['plan_amount']; ?>
             </span>
+          <?php endif; ?>
             <span class="description"><?php echo $value['plan_desc']; ?>
             </span>
+            <?php if($value['id']!=27): ?>
             <span class="description">Employee Limit:&nbsp;<?php echo $value['emp_limit']; ?>
             </span>
+          <?php endif; ?>
           </label>
           <?php endforeach; ?>
           <!-- plan section // -->

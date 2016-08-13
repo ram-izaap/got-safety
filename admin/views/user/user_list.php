@@ -30,9 +30,9 @@
 								<a href="<?php echo site_url('user/add_edit_user');?>" class="btn btn-success">
 									<i class="fa fa-plus-circle fa-lg"></i> New
 								</a>
-								<a onclick="return DeleteCheckedRow(this,'delete-user','user/user_delete');" class="btn btn-success">
+								<!--<a onclick="return DeleteCheckedRow(this,'delete-user','user/user_delete');" class="btn btn-success">
 									<i class="fa fa-minus-circle fa-lg"></i> Delete
-								</a>
+								</a>-->
 							   
 							</div>
 						</div>

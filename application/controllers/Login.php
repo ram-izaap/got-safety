@@ -181,6 +181,7 @@ class Login extends App_Controller {
                   $ins_data['sec_zip_code']      = $form['zip_code1'];
                   $ins_data['employee_limit']       = 0;
                   $ins_data['plan_type']            = $form['plan_type'];
+                  $ins_data['pay_mode']         = "Others";
                   $ins_data['is_active']            = 0;
                   $ins_data['role']                 = 2;
                   $ins_data['language']             = 1;
@@ -248,7 +249,7 @@ class Login extends App_Controller {
         {
             $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
         }
-        $this->data['plan_data']      = $this->plan_model->get_plan_data("plan",array("is_active" => "1"));     
+        $this->data['plan_data']      = $this->db->query("SELECT * FROM plan WHERE is_active=1 ORDER BY FIELD(plan_type, 'Enterprice Plan')")->result_array();     
         $this->layout->view('signup','frontend');
         
     }
