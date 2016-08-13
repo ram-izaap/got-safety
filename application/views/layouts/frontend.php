@@ -52,7 +52,7 @@
 		<?php include_javascripts(); ?>
 		
 		<?php 
-		
+			print_r($this->init_scripts);
 			if(is_array($this->init_scripts))
 			{
 				foreach ($this->init_scripts as $file)
