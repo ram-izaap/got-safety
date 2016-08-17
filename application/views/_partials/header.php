@@ -77,7 +77,7 @@
 
             <li <?php  if($this->uri->segment(1) == 'documents') { ?> class="active"; <?php }?>><a href="<?php echo base_url("documents");?>"><i class="fa fa-file-text" aria-hidden="true"></i> Documentation </a></li> 
 
-            <li <?php  if($this->uri->segment(1) == 'safety_forms') { ?> class="active"; <?php }?>><a href="<?php echo base_url("safety_forms");?>"><i class="fa fa-check-square" aria-hidden="true"></i> Forms </a></li>
+            <li <?php  if($this->uri->segment(1) == 'form') { ?> class="active"; <?php }?>><a href="<?php echo base_url("form");?>"><i class="fa fa-check-square" aria-hidden="true"></i> Forms </a></li>
 
 					  <li <?php  if($this->uri->segment(1) == 'webinars') { ?> class="active"; <?php }?>><a href="<?php echo base_url("webinars");?>"> <i class="fa fa-video-camera"></i> Webinars </a></li>
 

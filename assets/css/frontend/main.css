@@ -1668,3 +1668,49 @@ p.sales_video {
 [data-plan*="gs-monthly"] a > strong {
     font-size: 38px;
 }
+
+.check_accident_checkbox{ margin-bottom:20px;}
+.check_accident_checkbox .form-title, .safety_area_sec .form-title, .inspect_item .form-title, .violation_sec .form-title {
+    text-align: center;
+    background: #ddd;
+    color: #ed1c24;
+    margin: 0px;
+    padding: 0;
+
+
+}
+.check_accident_checkbox .form-group span, .violation_sec .form-group span {
+    float: left;
+    width: 90%;
+}
+.check_accident_checkbox .form-group input, .violation_sec .form-group input {
+    float: left;
+    height: auto;
+    width: 1%;
+
+}
+
+.check_accident_checkbox lable, .violation_sec lable {
+    display: block;
+    margin-bottom: 23px;
+}
+.violation_sec
+{
+  margin-bottom:20px;
+}
+.safety_area_sec .form-title, .inspect_item .form-title {
+    margin-bottom: 15px;
+}
+
+.sign-marbt{ margin-bottom:30px;}
+
+.sign-border {
+    border-bottom: 4px solid #999;
+    margin-bottom: 11px;
+}
+
+.inspect_item .form-group div span {
+    margin-right: 8px;
+}
+
+.inspect_item .form-group div span input{  margin-left:5px;}

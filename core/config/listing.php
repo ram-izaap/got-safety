@@ -312,7 +312,7 @@ $config['signoff_index'] = array(
 );
 */
 
-$config['submittedforms_index'] = array(
+/*$config['submittedforms_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'submittedforms/filter',
@@ -327,7 +327,23 @@ $config['submittedforms_index'] = array(
 						),
 	"default_order"	=> "id",
 	"default_direction" => "DESC"
+);*/
+
+$config['submittedforms_index'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'submittedforms/filter',
+	"base_url"	=> 	'/submittedforms/index/',
+	"per_page"	=>	"20",
+	"fields"	=> array(   
+							 'name'=>array('name'=>'Client Name', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							 'type'=>array('name'=>'Form Type', 'data_type' => 'string', 'sortable' => TRUE, 'default_view'=>1),
+							 'created_date'=>array('name'=>'Date', 'data_type' => 'status', 'sortable' => TRUE, 'default_view'=>1)                             
+						),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
 );
+
 
 
 $config['plan_index'] = array(

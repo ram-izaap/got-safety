@@ -25,9 +25,9 @@
 						 <div class="pull-right top-page-ui">
 								
 					
-	                        <a onclick="return DeleteCheckedRow(this,'delete-submittedforms','submittedforms/submittedforms_delete');" class="btn btn-success">
+	                        <!--<a onclick="return DeleteCheckedRow(this,'delete-submittedforms','submittedforms/submittedforms_delete');" class="btn btn-success">
 	                            <i class="fa fa-minus-circle fa-lg"></i> Delete
-	                        </a>
+	                        </a>-->
                            
 	                    </div>
 					</div>

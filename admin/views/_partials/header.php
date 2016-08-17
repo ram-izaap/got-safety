@@ -596,7 +596,7 @@
 						<ul class="sub-menu">
 					<?php $role =  $this->session->userdata('admin_data')['role'];
 					if($role == 1){ ?>		
-							<li> 
+							<!--<li> 
 								<a href="<?php echo site_url('forms/forms_content'); ?>">
 								Frontend Content </a>
 							</li>
@@ -608,7 +608,7 @@
 							<li> 
 								<a href="<?php echo site_url('forms'); ?>">
 								Manage Safety Forms </a>
-							</li>
+							</li>-->
 							<?php } ?>	
 							<li> 
 								<a href="<?php echo site_url('submittedforms'); ?>">
