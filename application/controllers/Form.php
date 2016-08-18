@@ -122,6 +122,7 @@ class Form extends App_Controller {
         $this->email->to($clientDirectory->email);
         $this->email->subject('Your'.$this->input->post('form_type').' Report is ready for viewing');
         $this->email->message($msg);
+        $this->email->attach($filename);
         $this->email->send();
  
         $ins_data = array();

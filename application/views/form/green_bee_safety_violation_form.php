@@ -21,12 +21,12 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="to_field" id="to_field" class="form-control input-lg" placeholder="To" >
+                        <input type="text" name="to_field" id="to_field" maxlength="55" class="form-control input-lg" placeholder="To" >
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="date" id="date" class="form-control input-lg" placeholder="Date" >
+                        <input type="text" name="date" id="date" maxlength="25" class="form-control input-lg" placeholder="Date" >
                       </div>
                     </div>
                   </div>
@@ -34,12 +34,12 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="time" id="time" class="form-control input-lg" placeholder="Time" >
+                        <input type="text" name="time" id="time" maxlength="15" class="form-control input-lg" placeholder="Time" >
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="job_site" id="job_site" class="form-control input-lg" placeholder="Job Site" >
+                        <input type="text" name="job_site" id="job_site" maxlength="60" class="form-control input-lg" placeholder="Job Site" >
                       </div>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <input type="text" name="supervisor_foreman" id="supervisor_foreman" class="form-control input-lg" placeholder="Supervisor / Foreman" >
+                        <input type="text" name="supervisor_foreman" id="supervisor_foreman" maxlength="55" class="form-control input-lg" placeholder="Supervisor / Foreman" >
                       </div>
                     </div>
                   </div>

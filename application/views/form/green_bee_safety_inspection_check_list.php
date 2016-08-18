@@ -20,12 +20,12 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="foreman_name" id="foreman_name" class="form-control input-lg" placeholder="Foreman Name" >
+                        <input type="text" name="foreman_name" maxlength="55" id="foreman_name" class="form-control input-lg" placeholder="Foreman Name" >
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input type="text" name="job_site" id="job_site" class="form-control input-lg" placeholder="Job Site" >
+                        <input type="text" name="job_site" id="job_site" maxlength="55" class="form-control input-lg" placeholder="Job Site" >
                       </div>
                     </div>
                   </div>
@@ -40,7 +40,7 @@
                    <div class="row"> 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <input type="text" name="supervisor" id="supervisor" class="form-control input-lg" placeholder="Supervisor" >
+                        <input type="text" name="supervisor" maxlength="55" id="supervisor" class="form-control input-lg" placeholder="Supervisor" >
                       </div>
                     </div>
                   </div>

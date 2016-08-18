@@ -81,6 +81,8 @@
 
 					  <li <?php  if($this->uri->segment(1) == 'webinars') { ?> class="active"; <?php }?>><a href="<?php echo base_url("webinars");?>"> <i class="fa fa-video-camera"></i> Webinars </a></li>
 
+            <li <?php  if($this->uri->segment(1) == 'repository') { ?> class="active"; <?php }?>><a href="<?php echo base_url("repository");?>"> <i class="fa fa-cloud"></i> Repository </a></li>
+
            <?php /* 
 					 <li <?php  if($this->uri->segment(1) == 'posters') { ?> class="active"; <?php }?>><a href="<?php echo base_url("posters");?>">Safety Posters </a></li> */ ?>
 					  
