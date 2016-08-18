@@ -10,13 +10,16 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Export{
     
     function to_excel($array, $filename) { 
-        header('Content-type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment; filename='.$filename.'.xls');
+         
 
          //Filter all keys, they'll be table headers
         $h = array();
-        
-        foreach($array->result_array() as $row){
+
+       $url = str_replace('/admin','',base_url());
+     
+        $str='';
+
+        foreach($array as $row){
             foreach($row as $key=>$val){
                 if(!in_array($key, $h)){
                  $h[] = $key;   
@@ -24,25 +27,38 @@ class Export{
                 }
                 }
                 //echo the entire table headers
-                echo '<table><tr>';
+                $str .= '<table><tr>';
                 foreach($h as $key) {
                     $key = ucwords($key);
-                    echo '<th>'.$key.'</th>';
+                    $str .= '<th>'.$key.'</th>';
                 }
-                echo '</tr>';
+                $str .= '</tr>';
                 
-                foreach($array->result_array() as $row){
-                     echo '<tr>';
+                foreach($array as $row){
+                     $str .= '<tr>';
                     foreach($row as $val)
-                         $this->writeRow($val);   
+                    {
+                        if(substr(strrchr($val,'.'),1))
+                            //echo '<td><img src="../signature/'.$val.'"></td>';
+                           $str .= "<td><img src='".$url."/signature/".$val."' width='150' height='40'></td>";
+                        else
+                            $str .= $this->writeRow($val); 
+                    }  
                 }
-                echo '</tr>';
-                echo '</table>';
-                
+                $str .= '</tr>';
+                $str .= '</table>';
+
+
+
+               echo $str;
+
+               header('Content-type: application/vnd.ms-excel');
+               header('Content-Disposition: attachment; filename='.$filename.'.xls');
             
         }
-    function writeRow($val) { 
-                echo '<td>'.utf8_decode($val).'</td>';              
+    function writeRow($val) {
+                return '<td>'.utf8_decode($val).'</td>'; 
+                //echo              
     }
 
 }

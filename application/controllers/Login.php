@@ -79,12 +79,15 @@ class Login extends App_Controller {
             redirect("");
        }
 		if($_POST) { 
-			
+
+
 		$this->form_validation->set_rules($this->_login_validation_rules);
        
         if($this->form_validation->run()){
             $form      = $this->input->post();
             $user_data = $this->login_model->user_login($form['name'], $form['password']);
+
+
             
             if($user_data == 1)
             { 
@@ -94,6 +97,7 @@ class Login extends App_Controller {
                 else
                 {
                     $this->session->unset_userdata('user_detail');
+                     $this->session->unset_userdata('user_id');
                     $this->session->set_flashdata("log_fail","Your account has been blocked or Inactive due to pending payment. Please try after some time or contact administrator to resolve.",TRUE);
                     redirect("login");
                 }
