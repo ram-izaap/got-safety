@@ -158,6 +158,26 @@
                           </td>
                           <td></td>
                         </tr>
+                        <?php 
+                        if($coupon)
+                        {
+                          ?>
+                         <tr>
+                          <td class="thick-line">
+                          </td>
+                          <td class="thick-line">
+                          </td>
+                          <td class="thick-line text-center">
+                            <strong>Coupon ( <?=$coupon['code'];?> )
+                            </strong>
+                          </td>
+                          <td class="thick-line text-right"><?php echo '- $'.number_format($coupon['discount_amount'],2);?>
+                          </td>
+                          <td>
+                          </td>
+                        </tr>
+                      <?php
+                      }?>
                         <tr>
                           <td class="no-line">
                           </td>

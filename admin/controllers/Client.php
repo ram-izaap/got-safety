@@ -5,12 +5,12 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Client extends Admin_Controller 
 {
 	protected $_user_validation_rules = array(
-													//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
-													//array('field' => 'email', 'label' => 'email', 'rules' => 'trim|required|valid_email'),
-													//array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required'),
-                                                    array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
-													
-												);
+	//array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required|max_length[255]'),
+	//array('field' => 'email', 'label' => 'email', 'rules' => 'trim|required|valid_email'),
+	//array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required'),
+    array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
+	
+);
     
     function __construct()
     {

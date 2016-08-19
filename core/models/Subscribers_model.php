@@ -82,6 +82,11 @@ class Subscribers_model extends App_Model {
         $query = $this->db->get('payment_transaction_history');
         return $query->result_array();
     }
+    function get_user_trans($id)
+    {
+        $this->db->where('user_id',$id);
+        return $this->db->get('coupon_applied')->row_array();
+    }
     
 }
 ?>

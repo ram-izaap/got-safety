@@ -75,21 +75,30 @@ class Login_Model extends CI_Model
     
     function insert($table_name,$data)
     {
-        
-       $data['password'] = md5($data['password']); 
       if($table_name=="users")
       {
+        $data['password'] = md5($data['password']);
         $this->db->insert($table_name,$data);
         return $this->db->insert_id();
       }
       else
-        return $this->db->insert($table_name,$data);
+      {
+        $this->db->insert($table_name,$data);
+        return $this->db->insert_id();
+      }
     }
-   
-   
-   
-   
-   
+    public function delete($table,$where)
+    {
+      $this->db->where($where);
+      $this->db->delete($table);
+    }
+    public function check_coupon_applied($table,$where)
+    {
+      $this->db->where($where);
+      $result = $this->db->get($table);
+      return $result->row_array();
+    }
+      
    public function logout()
    {
         $this->session->sess_destroy();
@@ -103,6 +112,18 @@ class Login_Model extends CI_Model
         return true;
       else
         return false;
+   }
+   public function code_apply($code,$plan)
+   {
+    $this->db->select("a.id,a.value,a.plans,a.order_type,a.discount_type,c.plan_amount");
+    $this->db->from("coupon_details a");
+    $this->db->join("coupon_codes b","a.id=b.coupon_id");
+    $this->db->join("plan c","c.id=".$plan);
+    $this->db->where("b.code",$code);
+    $this->db->like("a.plans",$plan);
+    $this->db->where("a.order_type","2");
+    $result = $this->db->get();
+    return $result->row_array();
    }
     
 }

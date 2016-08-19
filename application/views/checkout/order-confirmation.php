@@ -53,6 +53,17 @@
           <td colspan=3 align="right">Sub-total:</td>
           <td align="center">$<?php echo $so_details['cart_total']; ?></td>
         </tr>
+        <?php 
+        if($coupon)
+        {
+          ?>
+          <tr>
+            <td colspan=3 align="right">Coupon ( <?=strtoupper($coupon['code']);?> ):</td>
+            <td align="center">- <strong>$<?php echo $coupon['discount_amount']; ?></strong></td>
+          </tr>
+          <?php
+        }
+        ?>
         <tr>
           <td colspan=3 align="right">Shipping:</td>
           <td align="center">$<?php echo $so_details['shipping']; ?></td>

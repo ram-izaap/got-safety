@@ -46,6 +46,7 @@ class Subscribers extends Admin_Controller
   {
   		$this->data['info'] = $this->subscribers_model->get_user_info($id);
   		$this->data['trans'] = $this->subscribers_model->get_user_trans($id);
+      $this->data['coupon'] = $this->subscribers_model->get_user_coupon($id);
       if(is_logged_in())
   		  $this->layout->view('subscribers/view_subscribed_users');
       else

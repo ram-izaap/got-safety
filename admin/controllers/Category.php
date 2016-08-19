@@ -6,8 +6,8 @@ require_once(COREPATH."controllers/Admin_controller.php");
 class Category extends Admin_controller {
 	
 	protected $_category_validation_rules = array(
-		                                         array('field' => 'cat_name', 'label' => 'Category', 'rules' => 'trim|required|callback_check_duplicate_category')
-											 );
+                 array('field' => 'cat_name', 'label' => 'Category', 'rules' => 'trim|required|callback_check_duplicate_category')
+			 );
 	
 												
    function __construct() 
@@ -153,7 +153,7 @@ class Category extends Admin_controller {
 
         $edit_id = $this->input->post('edit_id');
         if($edit_id!='')
-            $edit_data = $this->category_model->get_cat_data("category",array("cat_name" => $cat_name,"id" => $edit_id));
+           $edit_data = $this->category_model->get_cat_data("category",array("cat_name" => $cat_name,"id" => $edit_id));
         else
             $edit_data = $this->category_model->get_cat_data("category",array("cat_name" => $cat_name));
         

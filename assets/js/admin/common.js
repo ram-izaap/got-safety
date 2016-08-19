@@ -513,20 +513,106 @@ $(document).on("click",".employee_view",function(){
       url = base_url+'employee',
       data = 'client_id='+ client_id; 
 
-        $.ajax({
-            url : url,
-            type: "POST",
-            data: data,
-            dataType: "JSON",
+      $.ajax({
+          url : url,
+          type: "POST",
+          data: data,
+          dataType: "JSON",
 
-            success: function(data)
-            {
-              window.location.href= base_url+'employee';
+          success: function(data)
+          {
+            window.location.href= base_url+'employee';
 
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Error get data from ajax');
-            }
-        });
+          },
+          error: function (jqXHR, textStatus, errorThrown)
+          {
+              alert('Error get data from ajax');
+          }
+      });
+
+
 });
+ $("select[name='discount_type']").change(function(){
+    val = $(this).val();
+    if(val=="1")
+      $(".dis_label").html("Amount");
+    else
+      $(".dis_label").html("Percentage");
+  });
+ $("select[name='offer_type']").change(function(){
+    val = $(this).val();
+    if(val=="1")
+    {
+      $(".amount_over").removeClass("hide");
+      $(".spec_prod").addClass("hide");
+    }
+    else if(val=="3")
+    {
+      $(".spec_prod").removeClass("hide");
+      $(".amount_over").addClass("hide");
+    }
+    else
+    {
+      $(".amount_over").addClass("hide");
+      $(".spec_prod").addClass("hide");
+    }
+  });
+
+  $("select[name='order_type']").change(function(){
+    val = $(this).val();
+    if(val=="1")
+    {
+      $(".shop-only").removeClass("hide");
+      $(".spec_plan").addClass("hide");
+    }
+    else
+    {
+      $(".shop-only").addClass("hide");
+      $(".spec_plan").removeClass("hide");
+    }
+  });
+
+
+  d_type = $("select[name='order_type']").val();
+  if(d_type=="1")
+  {
+    $(".shop-only").removeClass("hide");
+    $(".spec_plan").addClass("hide");
+  }
+  else if(d_type=="2")
+  {
+    $(".shop-only").addClass("hide");
+    $(".spec_plan").removeClass("hide");
+  }
+ 
+
+
+ offer = $("select[name='offer_type']").val();
+  if(offer=="1")
+  {
+    $(".amount_over").removeClass("hide");
+    $(".spec_prod").addClass("hide");
+  }
+  else if(offer=="3")
+  {
+    $(".spec_prod").removeClass("hide");
+    $(".amount_over").addClass("hide");
+  }
+  else
+  {
+    $(".amount_over").addClass("hide");
+    $(".spec_prod").addClass("hide");
+  }
+
+  discount = $("select[name='discount_type']").val();
+  if(discount=="1")
+   $(".dis_label").html("Amount");
+  else
+    $(".dis_label").html("Percentage");
+
+  $(".delete-coupon").click(function(){
+    id = $(this).attr("data-id");
+    $("a.remove-coupon").attr("href","http://localhost/got-safety/admin/promo/delete/"+id);
+  });
+
+  

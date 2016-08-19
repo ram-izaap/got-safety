@@ -187,6 +187,96 @@ class Checkout extends Cart_controller {
       $status="success";
       echo json_encode(array("status"=>$status,"content"=>$content,"type"=>"shipping"));
     }
+    public function shop_coupon_apply()
+    {
+      $code = $this->input->post("code");
+      $sku = explode(",",$this->input->post("sku"));
+      $sub_amt = $this->input->post("sub_amt");
+      $user_id = $this->session->userdata('user_detail')['id'];
+      $get_data = $this->checkout_model->get_coupon_data($code);
+      $chk = $this->checkout_model->check_coupon_applied($user_id,$get_data['c_id']);
+      if(!$this->session->userdata('coupon_details'))
+      {
+        $amt = $get_data['value'];
+        $p_sku = explode(",",$get_data['offer']);
+        if($get_data)
+        {
+           /*For All Orders*/
+           if($get_data['offer_type']=="1")
+           {
+              if($get_data['offer'] < $sub_amt)
+              {
+                if($get_data['discount_type']=="1")
+                {
+                  $t_amt = $sub_amt - $amt;
+                  $ans = $get_data['value'];
+                }
+                else
+                {
+                  $t_amt = $sub_amt - (($sub_amt / 100) * $amt);
+                  $ans = (($sub_amt / 100) * $amt);
+                }
+              }
+              else
+              {
+                echo "Less";
+                exit;
+              }
+            }
+            /*For Shipping*/
+            else if($get_data['offer_type']=="2")
+            {
+              if($get_data['discount_type']=="1")
+                {
+                  $t_amt = $sub_amt - $amt;
+                  $ans = $get_data['value'];
+                }
+                else
+                {
+                  $t_amt = $sub_amt - (($sub_amt / 100) * $amt);
+                  $ans = (($sub_amt / 100) * $amt);
+                }
+            }
+            /*For Specific Products Only*/
+            else if($get_data['offer_type']=="3")
+            {
+              if(!array_intersect($sku,$p_sku))
+              {
+                if($get_data['discount_type']=="1")
+                {
+                  $t_amt = $sub_amt - $amt;
+                  $ans = $get_data['value'];
+                }
+                else
+                {
+                  $t_amt = $sub_amt - (($sub_amt / 100) * $amt);
+                  $ans = (($sub_amt / 100) * $amt);
+                }
+              }
+              else
+              {
+                echo "Not Matched";
+                exit;
+              }
+            }
+            $ins_data['user_id'] = $user_id;
+            $ins_data['code'] = $code;
+            $ins_data['coupon_id'] = $get_data['c_id'];
+            $ins_data['plan_id'] = 0;
+            $ins_data['offer_type'] = $get_data['offer_type'];
+            $ins_data['org_amount'] = $sub_amt;
+            $ins_data['discount_amount'] = $ans;
+            $ins_data['total'] = $t_amt;
+            //$cid = $this->checkout_model->insert("coupon_applied",$ins_data);
+            $this->session->set_userdata('coupon_details',$ins_data);
+            $this->data['coupon']=array("code"=>$code,"ans"=>$ans);
+            $this->load->view("coupon_applied",$this->data);
+        }
+        else
+          echo "Invalid";
+      }
+      else
+          echo "Already";
 
-    
+    }   
 }

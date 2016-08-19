@@ -173,9 +173,25 @@ class Cart_controller extends App_Controller {
       $this->update_billing_shipping_address($user_id);
 
       $shipment_info  = $this->session->userdata('shipping_info');
+      $coupon  = $this->session->userdata('coupon_details');
       $payment_info   = $this->session->userdata('billing_info');
+      $sh_cost = $ship_cost['shipping_amt'];
+      if($coupon)
+      {
+        $off_type = $coupon['offer_type'];
+        if($off_type == "2")
+        {
+          $sh_cost = $coupon['discount_amount'];
+          $minus = $coupon['discount_amount'];
+        }
+        else
+        {
+          $minus = $coupon['discount_amount']; 
+        }
+        
+      }
 
-      $total_amount = (float)$this->cart->total()+(float)$ship_cost['shipping_amt']+(float)$tax_cost['tax_amt'];
+      $total_amount = ((float)$this->cart->total()+(float)$ship_cost['shipping_amt']+(float)$tax_cost['tax_amt']) - $minus;
 
       $data = array();
       $data['customer_id']            = $user_id;
@@ -187,14 +203,25 @@ class Cart_controller extends App_Controller {
       $data['shipping_address_id'] = $shipment_info['shipping_id'];
       $data['billing_address_id'] = $payment_info['billing_id'];
       $data['tax']                = $tax_cost['tax_amt'];
-      $data['shipping']           = $ship_cost['shipping_amt'];
+      $data['shipping']           = $sh_cost;
       $data['created_date']         = date("Y-m-d H:i:s");
 
 
       $so_id = $this->checkout_model->create_sales_order("sales_order", $data);
-
       $this->session->set_userdata('so_id', $so_id);
-
+      if($coupon)
+      {
+        $c_data['user_id'] = $user_id;
+        $c_data['code'] = $this->session->userdata('coupon_details')['code'];
+        $c_data['coupon_id'] = $this->session->userdata('coupon_details')['coupon_id'];
+        $c_data['plan_id'] = 0;
+        $c_data['order_id'] = $so_id;
+        $c_data['org_amount'] = $this->session->userdata('coupon_details')['org_amount'];
+        $c_data['discount_amount'] = $this->session->userdata('coupon_details')['discount_amount'];
+        $c_data['total'] = $this->session->userdata('coupon_details')['total'];
+        $c_data['created_date'] = date("Y-m-d H:i:s");
+        $this->checkout_model->insert("coupon_applied",$c_data);
+      }
       if($so_id)
       {
 
@@ -315,7 +342,7 @@ class Cart_controller extends App_Controller {
         $this->load->model('checkout_model');
         
         $result = $this->db->get_where("sales_order",array('id' => $so_id) );
-        
+        $coupon = $this->db->get_where("coupon_applied",array('order_id' => $so_id));
         if(!$result->num_rows())
             redirect('');
         
@@ -340,7 +367,7 @@ class Cart_controller extends App_Controller {
         
         $this->data['product_details']    = $product_details;
         $this->data['so_details']         = $so_details;
-
+        $this->data['coupon']         = $coupon->row_array();
         $this->data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));
         $this->data['shipping'] = $this->checkout_model->get_address(array("id" => $so_details['shipping_address_id'],"type"=>"sa"));
 

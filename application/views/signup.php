@@ -195,10 +195,7 @@
                   </div>
                 </div>
                 </div>
-
-
-
-                  <div class="row">
+                <div class="row">
                    <div class="col-sm-6">
                     <div class="form-group">
                       <input type="text" name="admin_name" id="admin_name" class="form-control input-lg" value="<?php echo set_value('admin_name',$form_data['admin_name']); ?>" placeholder="Client Admin Username" >

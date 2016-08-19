@@ -147,7 +147,7 @@ class Login extends App_Controller {
                     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
             }
              //'pay_mode' in 'field list'
-            $this->form_validation->set_rules($this->_signup_validation_rules);
+            //$this->form_validation->set_rules($this->_signup_validation_rules);
 
 
             
@@ -573,8 +573,21 @@ class Login extends App_Controller {
         }
     } 
   
-   
+   public function coupon_apply()
+   {
+    $code = $this->input->post('code');
+    $plan = $this->input->post('plan');
+    coupon_apply($code,$plan);
+   }
+   public function del_coupon()
+   {
+      $this->session->unset_userdata('coupon_details');
+      $this->session->userdata['signup_data']['promo_code'] ="";
+      //$id = $this->input->post('id');
+      //$this->login_model->delete("coupon_applied",array("id"=>$id));
+   }
    
 	
 }
 ?>
+

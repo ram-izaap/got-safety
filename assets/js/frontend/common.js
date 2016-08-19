@@ -222,6 +222,98 @@ $(document).on("click",".lesson_suggestion1",function(event){
 });
 
 
+$(".apply_coupon").click(function(){
+    code = $(".coupon_text").val();
+    plan_id = $("input[name='plan_id']").val();
+    if(code=="")
+    {
+      $(".coupon_error").addClass("vstar");
+      $(".coupon_error").html("Please Enter Coupon Code First");
+    }
+    else
+    {
+      url = base_url+"login/coupon_apply";
+      $.ajax({
+        type:"POST",
+        url:url,
+        data:{code:code,plan:plan_id},
+        success:function(data)
+        {
+          console.log(data);
+          $(".coupon_div").html($.trim(data));
+          setTimeout(function(){location.reload()},2000);
+        }
+      });
+      
+    }
+  });
+
+$(".shop-coupon-apply").click(function(){
+  code = $(".coupon_text").val();
+  sub_amt = $(".sub_amt").val();
+  sku = $("input[name='sku']").val();
+  if(code=="")
+  {
+    $("span.coupon_error").removeClass("hide");
+    $("span.coupon_error").html("*Please Enter Coupon Code");
+  }
+  else
+  {
+    url = base_url+"checkout/shop_coupon_apply";
+    $("span.coupon_error").addClass("hide");
+    $("span.coupon_error").html("");
+    $.ajax({
+      type:"POST",
+      url:url,
+      data:{code:code,sub_amt:sub_amt,sku:sku},
+      success:function(data)
+      {
+        console.log(data);
+        switch($.trim(data))
+        {
+          case "Less":
+           $("span.coupon_error").removeClass("hide");
+           $("span.coupon_error").html("Amount should be greater than");
+           setTimeout(function(){$("span.coupon_error").addClass("hide");},5000);
+          break;
+          case "Invalid":
+           $("span.coupon_error").removeClass("hide");
+           $("span.coupon_error").html("Coupon Code is Invalid");
+           setTimeout(function(){$("span.coupon_error").addClass("hide");},5000);
+          break;
+          case "Already":
+            $("span.coupon_error").removeClass("hide");
+            $("span.coupon_error").html("Only one time will be allowed apply the coupon");
+            setTimeout(function(){$("span.coupon_error").addClass("hide");},5000);
+          break;
+          case "Not Matched":
+            $("span.coupon_error").removeClass("hide");
+            $("span.coupon_error").html("Coupon for the product is not available in cart");
+            setTimeout(function(){$("span.coupon_error").addClass("hide");},5000);
+          break;
+          default:
+            $(".coupon_success").html(data);
+            setTimeout(function(){location.reload();},1500);
+        }
+      }
+    });
+  }
+});
+  $(".del_coupon").click(function(){
+  id = $(this).attr("data-id");
+  url = base_url+"login/del_coupon";
+  $.ajax({
+    type:"POST",
+    url:url,
+    data:{id:id},
+    success:function(data)
+    {
+      $(".coupon_error,.coupon_success").html("");
+      location.reload();
+    }
+  });
+});
+
 /*
 
 function newTabFunction() { 

@@ -81,7 +81,15 @@
                   <address>
                     <strong>Plan Details:</strong><br>
                     <strong><?php echo ucwords($info[0]['plan_name']); ?></strong><br>
-                    <?php echo "$".number_format($info[0]['plan_amount'],2); ?> <br>
+                    <?php 
+                    if($coupon)
+                    {
+                      echo "Coupon : <strong>".$coupon['code']."</strong>";
+                      echo "$".number_format($coupon['total'],2)."<br>"; 
+                    }
+                    else
+                      echo "$".number_format($info[0]['plan_amount'],2); 
+                    ?> <br>
                     <?php echo strip_tags($info[0]['plan_desc']); ?> <br>
                     Profile ID : 
                     <?php 

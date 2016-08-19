@@ -998,6 +998,23 @@
 							
 						</ul>
 					</li>
+					<li>
+						<a href="javascript:;">
+						<i class="icon-badge"></i>
+						<span class="title">Promo Code</span>
+						<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li> 
+								<a href="<?php echo site_url('promo/add_edit_promo'); ?>">
+								 Add Info</a>
+							</li>
+							<li> 
+								<a href="<?php echo site_url('promo'); ?>">
+								 Manage Info</a>
+							</li>			
+						</ul>
+					</li>
 					
 					
 					<li>

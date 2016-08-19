@@ -15,7 +15,42 @@
 				 	?>
 				</div>
 				<div class="inner-content form-wrap" style="width:90%;">
-						
+						<div class="form-group">
+							<label class="col-md-12 control-label">Coupon Code</label>
+							<div class="col-md-4">
+								<input type="text" class="coupon_text form-control form-input">
+								<div class="coupon_div">
+									<?php
+									//print_r($_SESSION['coupon_details']['code']);
+									if( (isset($_SESSION['signup_data']['promo_code'])) && ($_SESSION['signup_data']['promo_code']!='') || 
+										(isset($_SESSION['coupon_details']['code'])) && ($_SESSION['coupon_details']['code']) )
+									{
+									if(isset($_SESSION['coupon_details']))
+									  $code=$this->session->userdata('coupon_details')['code'];
+									else
+									 	$code=$this->session->userdata['signup_data']['promo_code'];
+									$plan_id=$this->session->userdata['signup_data']['plan_type'];
+									
+									if($this->session->userdata('coupon_details'))
+										$coupon = $this->session->userdata('coupon_details');
+									?>
+									 <span class="coupon_succ">
+                    <span style="width:85px;">
+                      <strong><?=$coupon['code'];?></strong>
+                    </span>
+                    <span></strong>- $<?=$coupon['discount_amount'];?></strong>
+                    </span>
+                    <a href="javascript:void(0)" class="del_coupon">x</a>
+                  </span>
+									<?php
+									}
+									?>
+								</div>
+							</div>
+								<br>
+							<input class="btn btn-danger btn-red apply_coupon" value="Apply" 
+							type="button">
+						</div><br>
 						<h4>Choose Payment Gateway</h4>
 						<p>
 						<?php
@@ -28,16 +63,24 @@
 						}
 
 						?>
-						<input name="pay_method" type="radio" value="1" />&nbsp;&nbsp;&nbsp;Paypal
-						 
-                            <img src="https://www.alternativeairlines.com/images/stories/Website/Homepage/booking_banner/image_paypal.png" style="width:50px;" />
+						<input name="pay_method" type="radio" value="1" />&nbsp;&nbsp;&nbsp;Paypal<img src="https://www.alternativeairlines.com/images/stories/Website/Homepage/booking_banner/image_paypal.png" style="width:50px;" />
                          
 						</p>
 						<div class="paypal_div">
                           	<form name="paypal_form" method="post" action="<?php echo base_url('payment/paypal'); ?>"	
 									autocomplete="on">
-									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type']:"";?>">
-									<input type="hidden" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details'][0]['plan_amount']))?$_SESSION['plan_details'][0]['plan_amount']:"";?>">
+									<?php 
+									if($this->session->userdata('coupon_details'))
+									{
+										$p_amt = $_SESSION['coupon_details']['total'];
+									}
+									else
+									{
+										$p_amt = $_SESSION['plan_details'][0]['plan_amount'];
+									}
+									?>
+									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type'] : "";?>">
+									<input type="hidden" name="plan_cost" value="<?php echo $p_amt;?>">
 									<input type="hidden" name="plan_id" value="<?php echo (isset($_SESSION['plan_details'][0]['id']))?$_SESSION['plan_details'][0]['id']:"";?>">
 								     <h5>Personal Info</h5>
 									 <div class="row">
@@ -120,21 +163,28 @@
 					                   			<input type="submit" class="btn btn-block client-login btn-danger" name="submit" value="Pay & Register" />
 					                   		</div>
 					                    </div>
-								</form>
-                           
-							  
-                           
+								</form>     
 						</div>
 						<p>
 							<input <?php echo set_radio('pay_method','2',TRUE);?> name="pay_method" type="radio" value="2">&nbsp;&nbsp;&nbsp;Authorize.net
 							<img src="http://ignitiondeck.com/id/wp-content/uploads/2013/08/authorize-net.png" style="width:200px;">
-						</p>	
+						</p>
+						<?php 
+						if(isset($_SESSION['coupon_details']))
+						{
+							$p_amt = number_format($coupon['total'],2);
+						}
+						else
+						{
+							$p_amt = $_SESSION['plan_details'][0]['plan_amount'];
+						}
+						?>
 						<div class="auth_div" style="display:none;">
 								<form name="auth-form" method="post" action="<?php echo base_url('payment/authorize_form'); ?>"	
 									autocomplete="on">
-									<input type="" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type']:"";?>">
-									<input type="" name="plan_cost" value="<?php echo (isset($_SESSION['plan_details'][0]['plan_amount']))?$_SESSION['plan_details'][0]['plan_amount']:"";?>">
-									<input type="" name="plan_id" value="<?php echo (isset($_SESSION['plan_details'][0]['id']))?$_SESSION['plan_details'][0]['id']:"";?>">
+									<input type="hidden" name="plan_name" value="<?php echo (isset($_SESSION['plan_details']))?$_SESSION['plan_details'][0]['plan_type']:"";?>">
+									<input type="hidden" name="plan_cost" value="<?php echo $p_amt;?>">
+									<input type="hidden" name="plan_id" value="<?php echo (isset($_SESSION['plan_details'][0]['id']))?$_SESSION['plan_details'][0]['id']:"";?>">
 								<h5>Personal Info</h5>
 									 <div class="row">
 					                    <div class="col-sm-6">

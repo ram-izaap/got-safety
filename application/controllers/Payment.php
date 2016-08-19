@@ -194,12 +194,12 @@ class Payment extends App_Controller
 				 	if(!file_exists($dir))	
 		        		mkdir($dir, 0755,true);*/
                 	//$up_user = $this->login_model->update("users",$usr_data,array("id"=>$userid));
-                //    $cl_id = $this->login_model->insert("users",$usr_data1);
+                 //   $cl_id = $this->login_model->insert("users",$usr_data1);
                 	if(!empty($add_user)) 
                     {
 	                    //$this->service_message->set_flash_message('signup_success');
 	                }    
-	             /*   $url = "http://izaapinnovations.com/got_safety/admin/";
+	              /*   $url = "http://izaapinnovations.com/got_safety/admin/";
                     $msg ="Hi ".ucfirst($this->session->userdata['signup_data']['name']).",\n\tYour payment has been initiated and Authorize,net consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
                     $msg .= "Your Backend Login link as client ".$url." \n\nClient Admin Username: ".$this->session->userdata['signup_data']['name']."\nPassword: ".$this->session->userdata['signup_data']['password']."\n\nThank you.";                     
 	                $this->email->from('admin@gotsafety.com', 'Gotsafety');
@@ -235,6 +235,8 @@ class Payment extends App_Controller
 		            $trans_data['status']= 'Pending';
 		            $trans_data['mode']= "Authorize";
 		            $this->payment_model->insert("payment_transaction_history",$trans_data);
+                    $coupon = $this->session->userdat('coupon_details');
+                   
 		            $_SESSION['signup_succ']="User Profile has been created sucessfully.";
 		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
 					$this->load->view("payment/success");
@@ -366,10 +368,15 @@ class Payment extends App_Controller
             $cancelUrl = base_url()."payment/cancel";
             $returnUrl = base_url()."payment/success";
             $ipn_url   = base_url()."payment/notify";
-            
-            
             $plan_details = $this->session->userdata('plan_details');
-            
+            if(!empty($this->session->userdata('coupon_details')))
+            {
+                $p_amt  = $this->session->userdata('coupon_details')['total'];
+            }
+            else
+            {
+                $p_amt = $plan_details[0]['plan_amount'];
+            }
     		$SECFields    = array(
     							'token' => '', 								
     							'maxamt' => '', 						
@@ -381,18 +388,18 @@ class Payment extends App_Controller
     		
     		$Payments = array();
     		$Payment = array(
-        						'amt' => $plan_details[0]['plan_amount'], 							
-        						'currencycode' => 'USD', 					
-        						'itemamt' => $plan_details[0]['plan_amount'], 						  						
-        						'notifyurl' => $ipn_url			
-    						);
+			'amt' => $p_amt, 							
+			'currencycode' => 'USD', 					
+			'itemamt' => $p_amt,  						
+			'notifyurl' => $ipn_url			
+		);
     	
     				
     		$PaymentOrderItems = array();
     		$Item = array(
     					   'name' => ucfirst($plan_details[0]['plan_type']), 								
     					   'desc' => strip_tags($plan_details[0]['plan_desc']), 								
-    					   'amt' => $plan_details[0]['plan_amount']
+    					   'amt' => $p_amt
                           );
     		array_push($PaymentOrderItems, $Item);
     		
@@ -485,6 +492,14 @@ class Payment extends App_Controller
 	    $paypal_express = $this->session->userdata('Paypal_express');
         
         $plan_details = $this->session->userdata('plan_details');
+        if(!empty($this->session->userdata('coupon_details')))
+        {
+            $p_amt  = $this->session->userdata('coupon_details')['total'];
+        }
+        else
+        {
+            $p_amt = $plan_details[0]['plan_amount'];
+        }
         
 		$DECPFields = array(
 							'token' => $token, 								
@@ -494,7 +509,7 @@ class Payment extends App_Controller
 						   );
 		$Payments = array();
 		$Payment  = array(
-    						'amt' => $plan_details[0]['plan_amount'], 							
+    						'amt' => $p_amt, 							
     						'currencycode' => 'USD', 					
     						'itemamt' => '', 						  
     						'shippingamt' => '0.00', 					
@@ -546,6 +561,14 @@ class Payment extends App_Controller
 	   
 	    $paypal_token = $this->session->userdata('Paypal_express');
         $plan_details = $this->session->userdata('plan_details');
+        if(!empty($this->session->userdata('coupon_details')))
+        {
+            $p_amt  = $this->session->userdata('coupon_details')['total'];
+        }
+        else
+        {
+            $p_amt = $plan_details[0]['plan_amount'];
+        }
        
 		$CRPPFields      = array('token' => $token);	
 		$ProfileDetails  = array('profilestartdate' => date("Y-m-d H:i:s"));			
@@ -558,7 +581,7 @@ class Payment extends App_Controller
         							'billingperiod' => 'Month', 						
         							'billingfrequency' => '1', 					 
         							'totalbillingcycles' => '12', 				  
-        							'amt' => $plan_details[0]['plan_amount'], 							 
+        							'amt' => $p_amt, 							 
         							'currencycode' => 'USD', 												
     						     );								
 		$PayerInfo      = array(
@@ -612,6 +635,14 @@ class Payment extends App_Controller
 		$PayPalRequestData = array('GRPPDFields' => $GRPPDFields);
         
         $plan_details = $this->session->userdata('plan_details');
+        if(!empty($this->session->userdata('coupon_details')))
+        {
+            $p_amt  = $this->session->userdata('coupon_details')['total'];
+        }
+        else
+        {
+            $p_amt = $plan_details[0]['plan_amount'];
+        }
 		$PayPalResult = $this->paypal_pro->GetRecurringPaymentsProfileDetails($PayPalRequestData);
 		
 		if(!$this->paypal_pro->APICallSuccessful($PayPalResult['ACK'])){
@@ -731,10 +762,8 @@ class Payment extends App_Controller
     
    function user_register()
    {
-
-
-
-        $form = $this->session->userdata("signup_data");
+       $form = $this->session->userdata("signup_data");
+       $coupon = $this->session->userdata("coupon_details");
         
         $get_plan=$this->user_model->get_plans("plan",array("id" => $form['plan_type']));
 
@@ -784,7 +813,9 @@ class Payment extends App_Controller
         
         $path   = '../../admin/views/repository/files/'.$folder;
         
-        if(!file_exists($path)) {
+        if(!file_exists($path))
+         {
+
         
             mkdir('./admin/views/repository/files/'.$folder, 0755,true);
                     
@@ -798,6 +829,19 @@ class Payment extends App_Controller
     		$user_data['is_active']     = 0;
             $user_data['role']          = 3;
             $user_data['created_id']    = $this->admin_user_id;
+
+            if($coupon)
+            {
+             $cp_data['user_id'] = $this->admin_user_id;
+             $cp_data['code'] = $coupon['code'];
+             $cp_data['coupon_id'] = $coupon['coupon_id'];
+             $cp_data['plan_id'] = $form['plan_type'];
+             $cp_data['order_id'] = 0;
+             $cp_data['org_amount'] = $coupon['plan_amount'];
+             $cp_data['discount_amount'] = $coupon['discount_amount'];
+             $cp_data['total'] = $coupon['total'];
+             $coupon_id = $this->login_model->insert("coupon_applied",$cp_data); 
+            }
              
             $register_user_id = $this->login_model->insert("users",$user_data); 
              

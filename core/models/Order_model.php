@@ -44,6 +44,10 @@ class Order_model extends App_Model {
         
         return parent::listing();
     }
-    
+     public function get_coupons($order_id)
+    {
+        $this->db->where("order_id",$order_id);
+        return $this->db->get("coupon_applied")->row_array();
+    }
 }
 ?>

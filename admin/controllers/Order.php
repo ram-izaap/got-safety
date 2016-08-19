@@ -77,7 +77,7 @@ class Order extends Admin_controller {
 
         if(!count($product_details))
             return FALSE;
-
+        $this->data['coupon'] = $this->order_model->get_coupons($order_id);
         $this->data['product_details']    = $product_details;
         $this->data['so_details']         = $so_details;
         $this->data['billing'] = $this->checkout_model->get_address(array("id" => $so_details['billing_address_id'],"type"=>"ba"));

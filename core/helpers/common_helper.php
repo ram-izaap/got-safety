@@ -530,5 +530,71 @@ function get_plan_details($plan_id)
     $CI = & get_instance();
     return $plan = $CI->db->query("select * from plan where id='".$plan_id."'")->row_array();
 }
+function get_applied_coupon($user_id,$cp_id)
+{
+   $CI = & get_instance();
+   $CI->db->where("user_id",$user_id);
+   $CI->db->where("id",$cp_id);
+   return $plan = $CI->db->get("coupon_applied")->row_array();
+}
+
+function coupon_apply($code,$plan)
+{
+  $CI = & get_instance();
+  $CI->load->model('login_model');
+  $chk = $CI->login_model->code_apply($code,$plan);
+  $user_id = session_id();
+  $ch_applied = $CI->login_model->check_coupon_applied("coupon_applied",
+      array("user_id"=>$user_id));
+  if(!$CI->session->userdata('coupon_details') || $CI->session->userdata['signup_data']['promo_code']!='')
+  {
+    if(!$ch_applied)
+    {
+      if($chk)
+      {
+        $amt = $chk['plan_amount'];
+        $coupon_id = $chk['id'];
+        if($chk['discount_type'] =="1")
+        {
+          $value = $chk['value'];
+          $ans = $amt - $value;
+          $st="1";
+        }
+        else if($chk['discount_type'] =="2")
+        {
+          $value = (($amt) / 100) * $value;
+          $ans = $amt - ((($amt) / 100) * $value);
+          $st="2";
+        }
+        $ins_data['user_id'] = session_id();
+        $ins_data['code'] = $code;
+        $ins_data['coupon_id'] = $coupon_id;
+        $ins_data['plan_id'] = $plan;
+        $ins_data['org_amount'] = $amt;
+        $ins_data['discount_amount'] = $value;
+        $ins_data['total'] = $ans;
+        $CI->session->set_userdata("coupon_details",$ins_data);
+        //$this->data['coupon'] = array("code"=>$code,"cid"=>$cid,"ans"=>$ans);
+        echo "<span class='coupon_succ'><strong>$code - $$value
+          <a href='javascript:void(0);' class='del_coupon'>x</a>
+          </strong></span>";
+      }
+      else
+      {
+        echo "<span class='vstar'>Coupon is Invalid</span>";
+        $CI->session->userdata['signup_data']['promo_code'] ="";
+      }
+    }
+    else
+    {
+      echo "<span class='vstar'>You Already Availed this offer</span>";
+    }
+  }
+  else
+  {
+    echo "<span class='vstar'>Only one time will be allowed to apply coupon</span>";
+  }
+}
 
 ?>
+
