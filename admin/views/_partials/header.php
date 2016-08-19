@@ -377,7 +377,15 @@
 							<i class="icon-lock"></i> Lock Screen </a>
 						</li> */ ?>
 						<li>
+						   <?php $role = $this->session->userdata("admin_data")['role']; ?>
+						   <?php if($role==1): ?>
 							<a href="<?php echo base_url('index.php/login/logout');?>">
+						   <?php endif; ?>
+						   
+						   <?php if($role==2): ?>
+							<a href="<?php echo base_url('index.php/login/logout1');?>">
+						   <?php endif; ?>	
+
 							<i class="icon-key"></i> Log Out </a>
 						</li>
 					</ul>
@@ -386,9 +394,17 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
+				<?php if($role==1): ?>
 					<a href="<?php echo base_url('index.php/login/logout');?>" class="dropdown-toggle">
 					<i class="icon-logout"></i>
 					</a>
+				<?php endif; ?>
+
+				<?php if($role==2): ?>
+					<a href="<?php echo base_url('index.php/login/logout1');?>" class="dropdown-toggle">
+					<i class="icon-logout"></i>
+					</a>
+				<?php endif; ?>
 				</li>
 				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>

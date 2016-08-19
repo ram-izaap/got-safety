@@ -65,6 +65,14 @@ $(window).load(function(){
       $("#product-container").html(defaultorder);
     }
    });
+  $('#slider').nivoSlider({
+
+
+     animSpeed:1000,
+     pauseTime:5500,
+     pauseOnHover:true
+
+  });
 });
 
 $(document).on("click","ul.lesson_list li a",function(event){
@@ -367,6 +375,8 @@ $(function() {
 	
 	
  */
+
+ 
 
 
 

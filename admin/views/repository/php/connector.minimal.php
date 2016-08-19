@@ -81,6 +81,7 @@ if($role == 2) {
 			'uploadAllow'   => array('image','application/pdf','audio','video'),	// Mimetype `image` and `text/plain` allowed to upload
 			'uploadOrder'   => array('allow', 'deny'),      	// allowed Mimetype `image` and `text/plain` only
 			'accessControl' => 'access',
+			'uploadMaxSize' => '5M',
 			'attributes' => array(
                 array(// hide anything else
                     'pattern' => '!^/'.$condition.'!',
@@ -105,7 +106,8 @@ if($role == 2) {
 			'driver'        => 'LocalFileSystem',           	// driver for accessing file system (REQUIRED)
 			'path'          => $path,                 			// path to files (REQUIRED)
 			'URL'           => $url, 							// URL to files (REQUIRED)
-			//'uploadDeny'    => array('all'),              	// All Mimetypes not allowed to upload
+			//'uploadDeny'    => array('all'),
+			'uploadMaxSize' => '5M',              	// All Mimetypes not allowed to upload
 			'uploadAllow'   => array('image','application/pdf','audio','video'),	// Mimetype `image` and `text/plain` allowed to upload
 			'uploadOrder'   => array('allow', 'deny'),      	// allowed Mimetype `image` and `text/plain` only
 			'accessControl' => 'access'

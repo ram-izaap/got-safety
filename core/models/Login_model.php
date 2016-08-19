@@ -7,14 +7,14 @@ class Login_Model extends CI_Model
    {
      parent::__construct();
    }
-   public function login($name, $password)
+   public function login($name, $password,$role)
    { 
 
      $this->load->model('admin_user_model'); 
 
      $pass = md5($password);
      
-     $user = $this->login_model->login_check($name,$pass);
+     $user = $this->login_model->login_check($name,$pass,$role);
      
       if(count($user)>0)
       {      
@@ -61,13 +61,13 @@ class Login_Model extends CI_Model
         
    }
    
-	public function login_check($name,$pass)
+	public function login_check($name,$pass,$role)
     {
         $this->db->select('*');
         $this->db->from('users');
         $this->db->where('name', $name);
         $this->db->where('password', $pass);
-        $this->db->where("(role = 1 OR role = 2)");
+        $this->db->where('role',$role);
         return $this->db->get()->row_array();
          
     }

@@ -10,13 +10,17 @@
         </div>
       </div>
     </section>-->
-
-    <div id="banner_full " class="main-slider">
-      <div id="slider"> 
-        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner1.png" alt="" class="" /></a> <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner2.jpg" alt="" class="" /></a> 
-        <a href="#"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner3.png" alt="" class="" /></a> 
-        <a href="#"><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner4.png" alt="" class="" /></a> 
-        <a href="#" ><img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="<?php echo get_img_dir();?>/banner5.png" alt="" class="" /></a> </div>
+    <div id="wrapper">
+     <div class="slider-wrapper theme-default">
+       <div id="slider" class="nivoSlider"> 
+   
+        <a href="#"><img src="<?php echo get_img_dir();?>/banner1.png" data-thumb="<?php echo get_img_dir();?>/banner1.png" data-transition="sliceUpDown" alt="" class="" /></a> 
+        <a href="#"> <img src="<?php echo get_img_dir();?>/banner2.jpg" data-thumb="<?php echo get_img_dir();?>/banner2.jpg"  data-transition="sliceDownLeft" alt="" class="" /></a> 
+        <a href="#"> <img src="<?php echo get_img_dir();?>/banner3.png" data-thumb="<?php echo get_img_dir();?>/banner3.png" data-transition="boxRandom" alt="" class="" /></a> 
+        <a href="#"><img src="<?php echo get_img_dir();?>/banner4.png" data-thumb="<?php echo get_img_dir();?>/banner4.png" data-transition="boxRain" alt="" class="" /></a> 
+        <a href="#" ><img src="<?php echo get_img_dir();?>/banner5.png" data-thumb="<?php echo get_img_dir();?>/banner5.png" data-transition="boxRainReverse" alt="" class="" /></a> </div>
+       </div>
+      </div>
     </div>
 
     <!-- // Content area -->

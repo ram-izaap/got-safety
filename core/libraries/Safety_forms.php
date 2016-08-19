@@ -15,30 +15,30 @@ class Safety_forms
 	   {
 
 
-		$prepared_by = $_POST['prepared_by'];
-		$title = $_POST['title'];
+		$prepared_by = isset($_POST['prepared_by'])?$_POST['prepared_by']:'';
+		$title = isset($_POST['title'])?$_POST['title']:'';
 		$address_unclean = $_POST['address'];
-		$address = preg_replace('/[^A-Za-z0-9\-]/', ' ', $address_unclean);
-		$employee_customer = $_POST['employee_customer'];
-		$position = $_POST['position'];
-		$incident_date = $_POST['incident_date'];
-		$time = $_POST['time'];
-		$cold_flu = $_POST['cold_flu'];
-		$date_reported = $_POST['date_reported'];
-		$time_reported = $_POST['time_reported'];
-		$sex = $_POST['sex'];
-		$age = $_POST['age'];
-		$years_on_job = $_POST['years_on_job'];
-		$supervisors_name = $_POST['supervisors_name'];
-		$self_inflicted = $_POST['self_inflicted'];
-		$witness_names = $_POST['witness_names'];
-		$area_1 = $_POST['area_1'];
-		$area_2 = $_POST['area_2'];
-		$area_3 = $_POST['area_3'];
-		$area_4 = $_POST['area_4'];
-		$area_5 = $_POST['area_5'];
-		$area_6 = $_POST['area_6'];
-		$area_7 = $_POST['area_7'];
+		$address = preg_replace('/[^A-Za-z0-9\-]/', ' ', isset($_POST['address'])?$address_unclean:'');
+		$employee_customer = isset($_POST['employee_customer'])?$_POST['employee_customer']:'';
+		$position = isset($_POST['position'])?$_POST['position']:'';
+		$incident_date = isset($_POST['incident_date'])?$_POST['incident_date']:'';
+		$time = isset($_POST['time'])?$_POST['time']:''; 
+		$cold_flu = isset($_POST['cold_flu'])?$_POST['cold_flu']:'';
+		$date_reported = isset($_POST['date_reported'])?$_POST['date_reported']:'';
+		$time_reported = isset($_POST['time_reported'])?$_POST['time_reported']:''; 
+		$sex = isset($_POST['sex'])?$_POST['sex']:''; 
+		$age = isset($_POST['age'])?$_POST['age']:''; 
+		$years_on_job = isset($_POST['years_on_job'])?$_POST['years_on_job']:'';
+		$supervisors_name = isset($_POST['supervisors_name'])?$_POST['supervisors_name']:'';
+		$self_inflicted = isset($_POST['self_inflicted'])?$_POST['self_inflicted']:'';
+		$witness_names = isset($_POST['witness_names'])?$_POST['witness_names']:'';
+		$area_1 = isset($_POST['area_1'])?$_POST['area_1']:'';
+		$area_2 = isset($_POST['area_2'])?$_POST['area_2']:'';
+		$area_3 = isset($_POST['area_3'])?$_POST['area_3']:'';
+		$area_4 = isset($_POST['area_4'])?$_POST['area_4']:'';
+		$area_5 = isset($_POST['area_5'])?$_POST['area_5']:'';
+		$area_6 = isset($_POST['area_6'])?$_POST['area_6']:'';
+		$area_7 = isset($_POST['area_7'])?$_POST['area_7']:'';
 
 		//Check if Checkbox is checked
 		if(isset($_POST['fatality'])) {
@@ -226,7 +226,7 @@ class Safety_forms
 		  </tbody>
 		</table>
 		<br>
-		<table width="90%" height="1141" border="1">
+		<table width="90%" height="600" border="1">
 		  <tbody>
 		    <tr>
 		      <td align="center" bgcolor="#ddd" style="color: #ed1c24;"><strong>Please Complete All Sections Thoroughly</strong></td>
@@ -262,16 +262,16 @@ class Safety_forms
      {
 
      	// Form Variables
-		$to_field = $_POST['to_field'];
-		$date = $_POST['date'];
-		$time = $_POST['time'];
+		$to_field = isset($_POST['to_field'])?$_POST['to_field']:'';
+		$date = isset($_POST['date'])?$_POST['date']:''; 
+		$time = isset($_POST['time'])?$_POST['time']:''; 
 		$job_site_unclean = $_POST['job_site'];
-		$job_site = preg_replace('/[^A-Za-z0-9\-]/', ' ', $job_site_unclean);
-		$supervisor_foreman = $_POST['supervisor_foreman'];
-		$other = $_POST['other'];
-		$comments = $_POST['comments'];
-		$corrective_action = $_POST['corrective_action'];
-		$prepared_by = $_POST['prepared_by'];
+		$job_site = preg_replace('/[^A-Za-z0-9\-]/', ' ', isset($_POST['job_site'])?$job_site_unclean:'');
+		$supervisor_foreman = isset($_POST['supervisor_foreman'])?$_POST['supervisor_foreman']:''; 
+		$other = isset($_POST['other'])?$_POST['other']:''; 
+		$comments = isset($_POST['comments'])?$_POST['comments']:''; 
+		$corrective_action = isset($_POST['corrective_action'])?$_POST['corrective_action']:''; 
+		$prepared_by = isset($_POST['prepared_by'])?$_POST['prepared_by']:''; 
 
 		// Variables to check if checkboxes are checked
 		if(isset($_POST['safety_glasses'])) {
@@ -367,7 +367,7 @@ class Safety_forms
 		  </tbody>
 		</table>
 		<p>&nbsp;</p>
-		<table width="100%" height="1141" border="1" cellpadding="5" cellspacing="5">
+		<table width="100%" height="118" border="1" cellpadding="5" cellspacing="5">
 		  <tbody>
 		  	<tr>
 		    <td height="22" colspan="3" align="center" style="color: #ed1c24;" bgcolor="#ddd"><h3>Violation</h3></td>
@@ -390,21 +390,20 @@ class Safety_forms
 		    <tr>
 		      <td colspan="3"><strong>Other: </strong>' . $other . '</td>
 		    </tr>
-		    <tr>
-		      <td colspan="3"><p><strong>Comments: </strong></p><p>' . $comments . '</p></td>
-		    </tr>
-		    <tr>
-		      <td colspan="3"><p><strong>Corrective Action: </strong></p><p>' . $corrective_action . '</p></td>
-		    </tr>
-		    <tr>
-		      <td colspan="3"><p><strong>Prepared By: </strong></p><p>' . $prepared_by . '</p></td>
-		    </tr>
 		  </tbody>
 		</table>
 		<p>&nbsp;</p>
-		<table width="100%" height="1141" border="1" cellpadding="5" cellspacing="5">
+		<table width="100%" height="71" border="1" cellpadding="5" cellspacing="5">
 		  <tbody>
-		    
+		    <tr>
+		      <td><p><strong>Comments: </strong>' . $comments . '</p></td>
+		    </tr>
+		    <tr>
+		      <td><strong>Corrective Action: </strong>' . $corrective_action . '</td>
+		    </tr>
+		    <tr>
+		      <td><strong>Prepared By: </strong>' . $prepared_by . '</td>
+		    </tr>
 		  </tbody>
 		</table>
 		<p>&nbsp;</p>
@@ -416,62 +415,62 @@ class Safety_forms
      else if ($form_data['form_type']=="Daily Sign in Sheet")
      {
      	//Form Variables
-		$project_name_unclean = $_POST['project_name'];
+		$project_name_unclean = isset($_POST['project_name'])?$_POST['project_name']:'';
 		$project_name = preg_replace('/[^A-Za-z0-9\-]/', ' ', $project_name_unclean);
-		$supervisor_foreman = $_POST['supervisor_foreman'];
+		$supervisor_foreman = isset($_POST['supervisor_foreman'])?$_POST['supervisor_foreman']:'';
 		// Date Variables
 		$date = date('m-d-Y');
 
 		// Sign In Table Variables
-		$name_1 = $_POST['name_1'];
-		$phone_number_1 = $_POST['phone_number_1'];
-		$time_in_1 = $_POST['time_in_1'];
-		$time_out_1 = $_POST['time_out_1'];
+		$name_1 = isset($_POST['name_1'])?$_POST['name_1']:'';
+		$phone_number_1 = isset($_POST['phone_number_1'])?$_POST['phone_number_1']:'';
+		$time_in_1 = isset($_POST['time_in_1'])?$_POST['time_in_1']:'';
+		$time_out_1 = isset($_POST['time_out_1'])?$_POST['time_out_1']:'';
 
-		$name_2 = $_POST['name_2'];
-		$phone_number_2 = $_POST['phone_number_2'];
-		$time_in_2 = $_POST['time_in_2'];
-		$time_out_2 = $_POST['time_out_2'];
+		$name_2 = isset($_POST['name_2'])?$_POST['name_2']:'';
+		$phone_number_2 = isset($_POST['phone_number_2'])?$_POST['phone_number_2']:'';
+		$time_in_2 = isset($_POST['time_in_2'])?$_POST['time_in_2']:'';
+		$time_out_2 = isset($_POST['time_out_2'])?$_POST['time_out_2']:'';
 
-		$name_3 = $_POST['name_3'];
-		$phone_number_3 = $_POST['phone_number_3'];
-		$time_in_3 = $_POST['time_in_3'];
-		$time_out_3 = $_POST['time_out_3'];
+		$name_3 = isset($_POST['name_3'])?$_POST['name_3']:'';
+		$phone_number_3 = isset($_POST['phone_number_3'])?$_POST['phone_number_3']:'';
+		$time_in_3 = isset($_POST['time_in_3'])?$_POST['time_in_3']:'';
+		$time_out_3 = isset($_POST['time_out_3'])?$_POST['time_out_3']:''; 
 
-		$name_4 = $_POST['name_4'];
-		$phone_number_4 = $_POST['phone_number_4'];
-		$time_in_4 = $_POST['time_in_4'];
-		$time_out_4 = $_POST['time_out_4'];
+		$name_4 = isset($_POST['name_4'])?$_POST['name_4']:'';
+		$phone_number_4 = isset($_POST['phone_number_4'])?$_POST['phone_number_4']:'';
+		$time_in_4 = isset($_POST['time_in_4'])?$_POST['time_in_4']:'';
+		$time_out_4 = isset($_POST['time_out_4'])?$_POST['time_out_4']:'';
 
-		$name_5 = $_POST['name_5'];
-		$phone_number_5 = $_POST['phone_number_5'];
-		$time_in_5 = $_POST['time_in_5'];
-		$time_out_5 = $_POST['time_out_5'];
+		$name_5 = isset($_POST['name_5'])?$_POST['name_5']:'';
+		$phone_number_5 = isset($_POST['phone_number_5'])?$_POST['phone_number_5']:'';
+		$time_in_5 = isset($_POST['time_in_5'])?$_POST['time_in_5']:'';
+		$time_out_5 = isset($_POST['time_out_5'])?$_POST['time_out_5']:'';
 
-		$name_6 = $_POST['name_6'];
-		$phone_number_6 = $_POST['phone_number_6'];
-		$time_in_6 = $_POST['time_in_6'];
-		$time_out_6 = $_POST['time_out_6'];
+		$name_6 = isset($_POST['name_6'])?$_POST['name_6']:'';
+		$phone_number_6 = isset($_POST['phone_number_6'])?$_POST['phone_number_6']:'';
+		$time_in_6 = isset($_POST['time_in_6'])?$_POST['time_in_6']:'';
+		$time_out_6 = isset($_POST['time_out_6'])?$_POST['time_out_6']:'';
 
-		$name_7 = $_POST['name_7'];
-		$phone_number_7 = $_POST['phone_number_7'];
-		$time_in_7 = $_POST['time_in_7'];
-		$time_out_7 = $_POST['time_out_7'];
+		$name_7 = isset($_POST['name_7'])?$_POST['name_7']:'';
+		$phone_number_7 = isset($_POST['phone_number_7'])?$_POST['phone_number_7']:'';
+		$time_in_7 = isset($_POST['time_in_7'])?$_POST['time_in_7']:'';
+		$time_out_7 = isset($_POST['time_out_7'])?$_POST['time_out_7']:'';
 
-		$name_8 = $_POST['name_8'];
-		$phone_number_8 = $_POST['phone_number_8'];
-		$time_in_8 = $_POST['time_in_8'];
-		$time_out_8 = $_POST['time_out_8'];
+		$name_8 = isset($_POST['name_8'])?$_POST['name_8']:'';
+		$phone_number_8 = isset($_POST['phone_number_8'])?$_POST['phone_number_8']:'';
+		$time_in_8 = isset($_POST['time_in_8'])?$_POST['time_in_8']:'';
+		$time_out_8 = isset($_POST['time_out_8'])?$_POST['time_out_8']:'';
 
-		$name_9 = $_POST['name_9'];
-		$phone_number_9 = $_POST['phone_number_9'];
-		$time_in_9 = $_POST['time_in_9'];
-		$time_out_9 = $_POST['time_out_9'];
+		$name_9 = isset($_POST['name_9'])?$_POST['name_9']:'';
+		$phone_number_9 = isset($_POST['phone_number_9'])?$_POST['phone_number_9']:'';
+		$time_in_9 = isset($_POST['time_in_9'])?$_POST['time_in_9']:'';
+		$time_out_9 = isset($_POST['time_out_9'])?$_POST['time_out_9']:'';
 
-		$name_10 = $_POST['name_10'];
-		$phone_number_10 = $_POST['phone_number_10'];
-		$time_in_10 = $_POST['time_in_10'];
-		$time_out_10 = $_POST['time_out_10'];
+		$name_10 = isset($_POST['name_10'])?$_POST['name_10']:'';
+		$phone_number_10 = isset($_POST['phone_number_10'])?$_POST['phone_number_10']:''; 
+		$time_in_10 = isset($_POST['time_in_10'])?$_POST['time_in_10']:'';
+		$time_out_10 = isset($_POST['time_out_10'])?$_POST['time_out_10']:'';
 
 		//Date If Statements
 		if ($name_2 != "") 
@@ -662,16 +661,16 @@ class Safety_forms
      {
 
      	  //Form Variables
-			$foreman_name = $_POST['foreman_name'];
-			$job_site_unclean = $_POST['job_site'];
+			$foreman_name = isset($_POST['foreman_name'])?$_POST['foreman_name']:'';
+			$job_site_unclean = isset($_POST['job_site'])?$_POST['job_site']:'';
 			$job_site = preg_replace('/[^A-Za-z0-9\-]/', ' ', $job_site_unclean);
 			$date = date('m-d-Y');
-			$supervisor = $_POST['supervisor'];
+			$supervisor = isset($_POST['supervisor'])?$_POST['supervisor']:'';
 
 			// Text Area Variables
-			$other = $_POST['other'];
-			$details = $_POST['details'];
-			$corrective_action = $_POST['corrective_action'];
+			$other = isset($_POST['other'])?$_POST['other']:''; 
+			$details = isset($_POST['details'])?$_POST['details']:'';  
+			$corrective_action = isset($_POST['corrective_action'])?$_POST['corrective_action']:''; 
 
 			// Variables for Radio Button Questions and Answers
 			$question_1 = isset($_POST['question_1'])?$_POST['question_1']:'';

@@ -7,7 +7,7 @@ class Employee extends Admin_controller {
 	
 	protected $_employee_validation_rules = array(
 				//array('field' => 'emp_id', 'label' => 'Employee ID', 'rules' => 'trim|required|callback_language_unique_check['.$edit_id.']'),
-				array('field' => 'employee_email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+				array('field' => 'employee_email', 'label' => 'Email', 'rules' => 'trim|valid_email'),
                 array('field' => 'is_active', 'label' => 'Is Active', 'rules' => 'trim')
                );
 					

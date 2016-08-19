@@ -35,10 +35,10 @@ $config['layout']['frontend']['css_dir']   = "assets/css/frontend";
 $config['layout']['frontend']['img_dir']   = "assets/images/frontend";
 
 $config['layout']['frontend']['javascripts'] = array(
-  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min','gs-main','js-image-slider','cart','jquery.creditCardValidator','checkout','chosen.jquery','numeric-1.2.6.min','bezier','jquery.signaturepad','common','signoff','jquery.ztree.core'
+  'jquery.min',"jquery-migrate.min", 'bootstrap.min', 'jquery.blockui.min','gs-main','jquery.nivo.slider','cart','jquery.creditCardValidator','checkout','chosen.jquery','numeric-1.2.6.min','bezier','jquery.signaturepad','common','signoff','jquery.ztree.core'
 );
  
-$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main','js-image-slider','bootstrap-chosen','sign/jquery.signaturepad');
+$config['layout']['frontend']['stylesheets'] = array('bootstrap', 'font-awesome/font-awesome.css?4.5.0', 'main','bootstrap-chosen','sign/jquery.signaturepad');
 
 $config['layout']['frontend']['description'] = 'GotSafety';
 $config['layout']['frontend']['keywords']    = 'GotSafety';

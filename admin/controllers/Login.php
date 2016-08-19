@@ -23,6 +23,7 @@ class Login extends Admin_Controller
     
     public function login()
     {
+        $role=1;
         if(is_logged_in()) 
         {
           redirect("home");
@@ -35,7 +36,7 @@ class Login extends Admin_Controller
             $form = $this->input->post();
            
 
-            if($this->login_model->login($form['name'], $form['password']))
+            if($this->login_model->login($form['name'], $form['password'],$role))
             { 
 				$this->service_message->set_flash_message('schedule_call_success');
                 redirect("home");
@@ -43,6 +44,33 @@ class Login extends Admin_Controller
         }
       
         $this->layout->view("login/index");
+        
+        
+    }
+
+    public function client()
+    {
+        $role=2;
+        if(is_logged_in()) 
+        {
+          redirect("home");
+        }
+       // print_r($_POST);exit;
+       $this->form_validation->set_rules($this->_login_validation_rules);
+       
+        if($this->form_validation->run())
+        {  
+            $form = $this->input->post();
+           
+
+            if($this->login_model->login($form['name'], $form['password'],$role))
+            { 
+                $this->service_message->set_flash_message('schedule_call_success');
+                redirect("home");
+            }
+        }
+      
+        $this->layout->view("login/client_index");
         
         
     }
@@ -57,6 +85,17 @@ class Login extends Admin_Controller
 	
 		redirect('login');
 	}
+
+    public function logout1()
+    {
+       
+        $this->session->sess_destroy();
+    
+        //$this->session->sess_create();
+        //$this->service_message->set_flash_message('logout_success');
+    
+        redirect('client');
+    }
     
 }
 ?>
