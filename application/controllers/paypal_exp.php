@@ -248,7 +248,8 @@ class Paypal_exp extends Cart_controller {
   			$params['shipping_info'] 	= $shipment;
   			$params['billing_info'] 	= $payment;
   			$params['cart'] 			= $this->cart->contents();
-  			$params['discount'] 		= 0; 
+  			$params['discount'] 		= 0;
+  			$params['coupon'] 		= $this->session->userdata('coupon_details')['discount_amount'];
   			$params['shipping_discount']= 0;
   			$params['shipping_charge'] 	= $ship_cost['shipping_amt'];
   			$params['tax'] 				= $tax_cost['tax_amt'];

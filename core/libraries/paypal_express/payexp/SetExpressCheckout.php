@@ -21,6 +21,7 @@ class SetExpressCheckout {
 	private $_billing_info  	= array();
 	private $_cart  			= array();
 	private $_discount  		= 0;
+	private $_coupon  		= 0;
 	private $_shipping_discount = 0;
 	private $_shipping_charge	= 0;
 	private $_tax				= 0;
@@ -172,13 +173,27 @@ foreach($this->_cart as $val){
 if(!empty($this->_discount) && $this->_discount!=0){
 	$itemTotalValue += -round_amount($this->_discount);
 	$discount_apply = array(
-			'name' => 'Coupon', 	 							// Item description. 127 char max.
+			'name' => 'Discount', 	 							// Item description. 127 char max.
 			'amt' => -round_amount($this->_discount), 								// Cost of item.
 			'number' => '', 							// Item number.  127 char max.
 			'qty' => 1, 								// Item qty on order.  Any positive integer.
 			'taxamt' => 0				// The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
 			);
 	array_push($PaymentOrderItems, $discount_apply);
+}
+
+
+if(!empty($this->_coupon) && $this->_coupon!=0){
+	$itemTotalValue += -round_amount($this->_coupon);
+	$coupon_apply = array(
+			'name' => 'Coupon', 	 							// Item description. 127 char max.
+			'amt' => -round_amount($this->_coupon), 								// Cost of item.
+			'number' => '', 							// Item number.  127 char max.
+			'qty' => 1, 								// Item qty on order.  Any positive integer.
+			'desc'=>$_SESSION['coupon_details']['code'],
+			'taxamt' => 0				// The unique identifier provided by eBay for this order from the buyer. These parameters must be ordered sequentially beginning with 0 (for example L_EBAYITEMCARTID0, L_EBAYITEMCARTID1). Character length: 255 single-byte characters
+			);
+	array_push($PaymentOrderItems, $coupon_apply);
 }
 
 $shippingTotal = round_amount($this->_shipping_charge);
