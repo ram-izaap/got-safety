@@ -847,7 +847,7 @@ class Payment extends App_Controller
              
             $furl  = base_url();
             
-            $aurl  = base_url()."/admin";
+            $aurl  = base_url()."admin/client";
             
             $msg   = "Your payment has been initiated and ".ucfirst($this->payment_method)." consume few hours to authenticate(Maximum time : 24 hours). Once payment authenticated we can activate your profile and trigger confirmation mail to you.\n\n";
             $msg  .= " Your Frontend Login link as client ".$furl." <br>

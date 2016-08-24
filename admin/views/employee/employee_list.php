@@ -50,7 +50,7 @@
 						</form>
 					   </div>	
 					   <div class="col-md-3">
-						  <a class="btn-csv" href="<?php echo $img_url;?>/test.csv"><p class="csv-format"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Sample CSV file</p></a>
+						  <a class="btn-csv" href="<?php echo $img_url;?>test.csv"><p class="csv-format"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Sample CSV file</p></a>
 					    </div>	
 					</div>
                  <?php endif; ?>

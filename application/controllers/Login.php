@@ -206,7 +206,7 @@ class Login extends App_Controller {
 
                   $furl  = base_url();
                   
-                  $aurl  = base_url()."/admin";
+                  $aurl  = base_url()."admin/client";
 
                   $msg='';
                     
@@ -321,7 +321,7 @@ class Login extends App_Controller {
 	                {
 	                    //$this->service_message->set_flash_message('signup_success');
 	                }    
-	                $url = "http://izaapinnovations.com/got_safety/admin/";
+	                $url = base_url()."admin/client";
 	               /* $msg = "Your Backend Login link as client ".$url." <br>
 	                	<b>Client Username</b>: ".$this->session->userdata['name']."<br>
 						<b>Password</b>: ".$this->session->userdata['password']."<br><br>

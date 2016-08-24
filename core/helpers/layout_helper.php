@@ -32,6 +32,7 @@ function include_amazon_img_path() {
 
 function include_javascripts()
 {
+    
     if (!$layout =& get_layout()) return;
     $CI =& get_instance();
     
@@ -40,7 +41,7 @@ function include_javascripts()
         if (preg_match("/^(http)|(https)/i", $file_name)) {
             $href = $file_name;
         } else {
-            $href =  str_replace('admin','',base_url());
+            $href =  str_replace('admin/','',base_url());
             $href .= $CI->layout->get_js_dir() ? $CI->layout->get_js_dir() . '/' : '';
             $href .= $file_name . '.js';
         }
@@ -62,7 +63,7 @@ function include_stylesheets()
         		$href = $CI->layout->get_css_dir() ? $CI->layout->get_css_dir() . '/' : '';
         		$href .= $item['file_name'] . '.css';
         	} else {
-            		$href = str_replace('admin','',base_url());
+            		$href = str_replace('admin/','',base_url());
             		$href .= $CI->layout->get_css_dir() ? $CI->layout->get_css_dir() . '/' : '';
             		$href .= $item['file_name'] . '.css';
             }

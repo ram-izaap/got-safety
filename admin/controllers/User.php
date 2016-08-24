@@ -287,7 +287,7 @@ class User extends Admin_Controller
            
 			if(empty($edit_id))
 			{
-				$url = "http://izaapinnovations.com/got_safety/admin/";
+				$url = base_url().'client';
 		        $msg = "Your Backend Login link as client ".$url." \n\nClient Username: ".$form['name']."\nPassword: ".$form['password']."\n\nThank you.";
 	            $this->email->from('admin@gotsafety.com', 'Gotsafety');
 				$this->email->to( $form['email'] );

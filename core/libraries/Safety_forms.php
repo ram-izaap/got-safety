@@ -17,8 +17,8 @@ class Safety_forms
 
 		$prepared_by = isset($_POST['prepared_by'])?$_POST['prepared_by']:'';
 		$title = isset($_POST['title'])?$_POST['title']:'';
-		$address_unclean = $_POST['address'];
-		$address = preg_replace('/[^A-Za-z0-9\-]/', ' ', isset($_POST['address'])?$address_unclean:'');
+		$address_unclean = isset($_POST['address'])?$_POST['address']:'';
+		$address = preg_replace('/[^A-Za-z0-9\-]/', $address_unclean);
 		$employee_customer = isset($_POST['employee_customer'])?$_POST['employee_customer']:'';
 		$position = isset($_POST['position'])?$_POST['position']:'';
 		$incident_date = isset($_POST['incident_date'])?$_POST['incident_date']:'';
@@ -265,8 +265,8 @@ class Safety_forms
 		$to_field = isset($_POST['to_field'])?$_POST['to_field']:'';
 		$date = isset($_POST['date'])?$_POST['date']:''; 
 		$time = isset($_POST['time'])?$_POST['time']:''; 
-		$job_site_unclean = $_POST['job_site'];
-		$job_site = preg_replace('/[^A-Za-z0-9\-]/', ' ', isset($_POST['job_site'])?$job_site_unclean:'');
+		$job_site_unclean = isset($_POST['job_site'])?$_POST['job_site']:'';
+		$job_site = preg_replace('/[^A-Za-z0-9\-]/', $job_site_unclean);
 		$supervisor_foreman = isset($_POST['supervisor_foreman'])?$_POST['supervisor_foreman']:''; 
 		$other = isset($_POST['other'])?$_POST['other']:''; 
 		$comments = isset($_POST['comments'])?$_POST['comments']:''; 

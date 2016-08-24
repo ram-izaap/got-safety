@@ -446,7 +446,8 @@ class Api extends REST_Controller {
                 
                 $add_user    = $this->api_model->insert("users",$ins_data);
                 
-                $url = "http://izaapinnovations.com/got_safety/admin/";
+                //$url = "http://izaapinnovations.com/got_safety/admin/";
+                $url = base_url().'admin/client';
                 $msg = "Your Backend Login link as client ".$url."
 						Client username: ".$form['name']."
 						Password: ".$form['password']."

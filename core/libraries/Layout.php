@@ -352,6 +352,7 @@ class Layout {
      */
     function get_css_dir()
     {
+
         return $this->css_dir;
     }
 
@@ -367,7 +368,7 @@ class Layout {
     
     function get_img_dir()
     {
-        $img = str_replace('admin','',base_url()).$this->img_dir;
+        $img = str_replace('admin/','',base_url()).$this->img_dir;
         return $img;
     }
 	
