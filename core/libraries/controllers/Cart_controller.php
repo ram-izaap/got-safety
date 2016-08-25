@@ -145,7 +145,7 @@ class Cart_controller extends App_Controller {
            'name' => $payment['name'],
            'password' => md5($payment['name']),
            'plan_type' => '',
-           'ori_password' => $payment['name'],
+           //'ori_password' => $payment['name'],
            'email' => $payment['email'],
            'language' => 1,
            'role' => 2,

@@ -98,7 +98,7 @@
                         else
                         {
                           $sh_amt = 0;
-                          $cp_amt = $coupon['discount_amount']; <span class="coupon_succ">
+                          $cp_amt = $coupon['discount_amount']; ?><span class="coupon_succ">
                     <span style="width:85px;">
                       <strong><?=$coupon['code'];?></strong>
                     </span>
@@ -106,7 +106,7 @@
                     </span>
                     <a href="javascript:void(0)" class="del_coupon">x</a>
                   </span>
-                        }
+                       <?php }
                         ?>
                         <span class="coupon_succ">
                           <span style="width:85px;">

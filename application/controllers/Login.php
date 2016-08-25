@@ -3,13 +3,13 @@
 //safe_include("controllers/app_controller.php");
 require_once(COREPATH."controllers/App_controller.php");
 class Login extends App_Controller {
-	
-	protected $_login_validation_rules =    array (
+  
+  protected $_login_validation_rules =    array (
             array('field' => 'name', 'label' => 'Username', 'rules' => 'trim|required'),
             array('field' =>'password','label'=>'Password','rules'=>'trim|required'));
-												
-	
-	protected $_signup_validation_rules = array(
+                        
+  
+  protected $_signup_validation_rules = array(
             array('field' => 'name', 'label' => 'Client/App Username', 'rules' => 'trim|required|max_length[255]'),
             array('field' => 'email', 'label' => 'Main Contact Email', 'rules' => 'trim|required|valid_email|callback_email_check'),
             array('field' => 'password', 'label' => 'Client/App Password', 'rules' => 'trim|required|max_length[255]'),
@@ -29,8 +29,8 @@ class Login extends App_Controller {
             array('field' => 'plan_type', 'label' => 'Plan', 'rules' => 'required')
            
         );
-	protected $_auth_validation_rules =    array (
-                    array('field' => 'fname', 'label' => 'First Name', 'rules' => 'trim|required|min_length[4]|alpha'),		
+  protected $_auth_validation_rules =    array (
+                    array('field' => 'fname', 'label' => 'First Name', 'rules' => 'trim|required|min_length[4]|alpha'),   
                     array('field' => 'lname', 'label' => 'Last Name', 'rules' => 'trim|required|min_length[2]|alpha'),
                     array('field' => 'address', 'label' => 'Address', 'rules' => 'trim|required'),
                     array('field' => 'city', 'label' => 'City', 'rules' => 'trim|required|alpha'),
@@ -44,8 +44,8 @@ class Login extends App_Controller {
                     array('field' => 'email', 'label' => 'Email-ID', 'rules' => 'trim|required|valid_email'),
                     array('field' => 'phone', 'label' => 'Phone Number', 'rules' => 'trim|required|numeric|max_length[12]|min_length[6]'),
                     array('field' => 'fax', 'label' => 'Fax Number', 'rules' => 'trim|required|numeric|max_length[10]|min_length[6]'),
-				);
-												
+        );
+                        
     function __construct()
     {
         parent::__construct();
@@ -55,6 +55,7 @@ class Login extends App_Controller {
         $this->load->model('plan_model');
 
          
+       
     }
     function email_check()
     {
@@ -75,19 +76,17 @@ class Login extends App_Controller {
     {
 
       if($this->session->userdata('user_id') != "")
-       {
+      {
             redirect("");
-       }
-		if($_POST) { 
+      }
 
-
-		$this->form_validation->set_rules($this->_login_validation_rules);
+    if($_POST) { 
+      
+    $this->form_validation->set_rules($this->_login_validation_rules);
        
         if($this->form_validation->run()){
             $form      = $this->input->post();
             $user_data = $this->login_model->user_login($form['name'], $form['password']);
-
-
             
             if($user_data == 1)
             { 
@@ -97,7 +96,7 @@ class Login extends App_Controller {
                 else
                 {
                     $this->session->unset_userdata('user_detail');
-                     $this->session->unset_userdata('user_id');
+                    $this->session->unset_userdata('user_id');
                     $this->session->set_flashdata("log_fail","Your account has been blocked or Inactive due to pending payment. Please try after some time or contact administrator to resolve.",TRUE);
                     redirect("login");
                 }
@@ -115,13 +114,13 @@ class Login extends App_Controller {
             $this->data['form_data'] = $_POST; 
          }
         
-		}
+    }
         else 
         { 
-			$this->data['form_data'] = array("name" => "","password" => "");
-		}
-		
-     	$this->layout->view('login','frontend');
+      $this->data['form_data'] = array("name" => "","password" => "");
+    }
+    
+      $this->layout->view('login','frontend');
         
     }
     
@@ -130,11 +129,11 @@ class Login extends App_Controller {
     function signup()
     {
 
-        if($this->session->userdata('user_id') != "")
-        {
+      if($this->session->userdata('user_id') != "")
+      {
             redirect("");
-        }
-
+      }
+      
         if($_POST) 
         {
             $this->load->library('email');
@@ -147,9 +146,7 @@ class Login extends App_Controller {
                     $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_unique_check[]');
             }
              //'pay_mode' in 'field list'
-            //$this->form_validation->set_rules($this->_signup_validation_rules);
-
-
+            $this->form_validation->set_rules($this->_signup_validation_rules);
             
             if($this->form_validation->run())
             {  
@@ -225,8 +222,7 @@ class Login extends App_Controller {
                   $config['charset']  = 'iso-8859-1';
                   $config['wordwrap'] = TRUE;
                   $config['mailtype'] = "html";
-                  
-                  $this->email->set_mailtype("html");  
+                  $this->email->set_mailtype("html");   
                   $this->email->from('admin@gotsafety.com', 'Gotsafety');
                   $this->email->to($ins_data['email']);
                   $this->email->subject("Signup Detail Information");
@@ -236,12 +232,15 @@ class Login extends App_Controller {
                   $this->session->set_flashdata('signup_succ','User Profile has been created sucessfully.',TRUE);
                   
                   $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
-                  $folder = $form['admin_name'];
+                   $folder = $form['admin_name'];
                   $dir = '../../admin/views/repository/files/'.$folder;
-                  if(!file_exists($dir)) {
+
+
+                 if(!file_exists($dir)) {
                     mkdir('./admin/views/repository/files/'.$folder, 0755,true); 
-                  }
-                  redirect("login/signup");
+                  } 
+                  
+                   redirect("login/signup");
 
                 }
             }
@@ -253,7 +252,7 @@ class Login extends App_Controller {
         {
             $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "","admin_name" =>"","admin_pwd"=>"","admin_con_pwd"=>"","company_name" =>"","phone_no" =>"","company_address" =>"","company_url" =>"","main_contact" =>"","main_contact_no" =>"","email_addr" =>"", "main_contact_address" =>"", "no_of_employees"=>"","plan_type" =>"","city"=>"","state"=>"","zip_code"=>"","city1"=>"","state1"=>"","zip_code1"=>"","promo_code"=>"");        
         }
-        $this->data['plan_data']      = $this->db->query("SELECT * FROM plan WHERE is_active=1 ORDER BY FIELD(plan_type, 'Enterprice Plan')")->result_array();     
+        $this->data['plan_data']      = $this->db->query("SELECT * FROM plan WHERE is_active=1 ORDER BY FIELD(plan_type, 'Enterprise')")->result_array();     
         $this->layout->view('signup','frontend');
         
     }
@@ -263,120 +262,122 @@ class Login extends App_Controller {
     
     
     public function logout()
-	{
-	   
-		$this->session->sess_destroy();		
-		$this->session->unset_userdata('user_detail');
-	
-		//$this->session->sess_create();
-		//$this->service_message->set_flash_message('logout_success');
-	
-		redirect();
-	}
+  {
+     
+    //$this->session->sess_destroy();   
+    //$this->session->unset_userdata();
+      $this->session->unset_userdata('billing_info');
+      $this->session->unset_userdata('shipping_info');
+        unset($_SESSION['user_id']);
+    //$this->session->sess_create();
+    //$this->service_message->set_flash_message('logout_success');
+  
+    redirect();
+  }
     
     function payment()
     {
-    	$ses_data = $this->session->userdata;
-    	$this->layout->view('payment','frontend');
+      $ses_data = $this->session->userdata;
+      $this->layout->view('payment','frontend');
     }
 
     function do_payment()
     {
 
-    	if($_POST)
-     	{
-     		$this->form_validation->set_rules($this->_auth_validation_rules);
-     		if($this->form_validation->run())
-	        {
-				$ins = $this->input->post();
-		        $ins['description'] = 'Plan - Silver';//$this->input->post('desc');
-		        $ins['amount'] = "50";//$this->input->post('amount');
-		       	/*$a = $this->create_auth_cust_profile( $ins );
-		      	$res['customer_id'] = $a['cus_id'];
-		      	$res['profileid'] = $a['profileid'];
-		        $res['paymentprofileid'] = $a['paymentprofileid'];
-		        $res['shippingprofileid'] = $a['shippingprofileid'];*/
-		        $res['profileid']=time();
-		        $res['paymentprofileid']=time();
-		        $res['shippingprofileid']=time();
-		        $res['customer_id']=time();
-		        $b =  $this->create_auth_subscription($res,$ins);
-		        $c = $this->create_auth_transaction($res,$ins);
-		        if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
-		        {
-		        	$usr_data['name']     = $this->session->userdata['admin_name'];
-	                $usr_data['email']    = $this->session->userdata['email'];
-	                $usr_data['role']	  = 2;
-	                $usr_data['password'] = md5($this->session->userdata['password']);
-	                $usr_data['created_date']  =  date("Y-m-d H:i:s");
-					$usr_data['is_active']  = 1;
-					$usr_data['language']  = 1;
-					$usr_data['created_id']  = 8;
-				 	$folder = $usr_data['name'];
-				 	$dir = '../../admin/views/repository/files/'.$folder;
-				 	if(!file_exists($dir))	
-		        		mkdir($dir, 0755,true);
-                	$userid = $this->login_model->insert("users",$usr_data);
-                	if(!empty($add_user)) 
-	                {
-	                    //$this->service_message->set_flash_message('signup_success');
-	                }    
-	                $url = base_url()."admin/client";
-	               /* $msg = "Your Backend Login link as client ".$url." <br>
-	                	<b>Client Username</b>: ".$this->session->userdata['name']."<br>
-						<b>Password</b>: ".$this->session->userdata['password']."<br><br>
-						Thanks you..";                
-	                $this->email->from('admin@gotsafety.com', 'Gotsafety');
-					$this->email->to( $usr_data['email'] );
-					$this->email->subject('Signup Successfully');
-					$this->email->message($msg);
-					$this->email->send();*/
-		            //Load Models
-		            $this->load->model('payment_model');
-		            //Create Subscription Table Fields 
-		            $ins_data['userid'] = $userid;
-		            $ins_data['subscription_id'] = $b['subs_id'];
-		            $ins_data['name'] = $ins['description'];
-		            $ins_data['startDate'] = date("Y-m-d");
-		            $ins_data['amount'] = $ins['amount'];
-		            $ins_data['invoice_no'] = $b['invoice_no'];
-		            $ins_data['description'] = $ins['description'];
-		            $ins_data['sub_status'] = 0;
-		            $ins_data['created_date'] = date('Y-m-d H:i:s');
-		            $ins_data['last_updated'] = date('Y-m-d H:i:s');
-		            $this->payment_model->insert("authorize_subscription",$ins_data);
-		            //Create Customer Profile Table Fields
+      if($_POST)
+      {
+        $this->form_validation->set_rules($this->_auth_validation_rules);
+        if($this->form_validation->run())
+          {
+        $ins = $this->input->post();
+            $ins['description'] = 'Plan - Silver';//$this->input->post('desc');
+            $ins['amount'] = "50";//$this->input->post('amount');
+            /*$a = $this->create_auth_cust_profile( $ins );
+            $res['customer_id'] = $a['cus_id'];
+            $res['profileid'] = $a['profileid'];
+            $res['paymentprofileid'] = $a['paymentprofileid'];
+            $res['shippingprofileid'] = $a['shippingprofileid'];*/
+            $res['profileid']=time();
+            $res['paymentprofileid']=time();
+            $res['shippingprofileid']=time();
+            $res['customer_id']=time();
+            $b =  $this->create_auth_subscription($res,$ins);
+            $c = $this->create_auth_transaction($res,$ins);
+            if($res['profileid']!='' && $b['subs_status']=="Success" && $c['trans_status']=="Success")
+            {
+              $usr_data['name']     = $this->session->userdata['name'];
+                  $usr_data['email']    = $this->session->userdata['email'];
+                  $usr_data['role']   = 2;
+                  $usr_data['password'] = md5($this->session->userdata['password']);
+                  $usr_data['created_date']  =  date("Y-m-d H:i:s");
+          $usr_data['is_active']  = 1;
+          $usr_data['language']  = 1;
+          $usr_data['created_id']  = 8;
+          $folder = $usr_data['name'];
+          $dir = '../../admin/views/repository/files/'.$folder;
+          if(!file_exists($dir))  
+                mkdir($dir, 0755,true);
+                  $userid = $this->login_model->insert("users",$usr_data);
+                  if(!empty($add_user)) 
+                  {
+                      //$this->service_message->set_flash_message('signup_success');
+                  }    
+                  $url = base_url()."admin/client";
+                 /* $msg = "Your Backend Login link as client ".$url." <br>
+                    <b>Client Username</b>: ".$this->session->userdata['name']."<br>
+            <b>Password</b>: ".$this->session->userdata['password']."<br><br>
+            Thanks you..";                
+                  $this->email->from('admin@gotsafety.com', 'Gotsafety');
+          $this->email->to( $usr_data['email'] );
+          $this->email->subject('Signup Successfully');
+          $this->email->message($msg);
+          $this->email->send();*/
+                //Load Models
+                $this->load->model('payment_model');
+                //Create Subscription Table Fields 
+                $ins_data['userid'] = $userid;
+                $ins_data['subscription_id'] = $b['subs_id'];
+                $ins_data['name'] = $ins['description'];
+                $ins_data['startDate'] = date("Y-m-d");
+                $ins_data['amount'] = $ins['amount'];
+                $ins_data['invoice_no'] = $b['invoice_no'];
+                $ins_data['description'] = $ins['description'];
+                $ins_data['sub_status'] = 0;
+                $ins_data['created_date'] = date('Y-m-d H:i:s');
+                $ins_data['last_updated'] = date('Y-m-d H:i:s');
+                $this->payment_model->insert("authorize_subscription",$ins_data);
+                //Create Customer Profile Table Fields
                     $up_data['userid'] = $userid;
-		            $up_data['customerid'] = $res['customer_id'];
-		            $up_data['profileid'] = $res['profileid'];
-		            $up_data['payment_pro_id'] = $res['paymentprofileid'];
-		            $up_data['ship_pro_id'] = $res['shippingprofileid'];
-		            $this->payment_model->insert("client_subscription",$up_data);
-		            //Create Auth Transaction Table Fields
-		            $trans_data['userid']= $userid;
-		            $trans_data['description']= $ins['description'];
-		            $trans_data['amount']=  $ins['amount'];
-		            $trans_data['trans_id']= $c['transid'];
-		            $trans_data['status']= $c['trans_status'];
-		            $trans_data['payment_mode']= "Authorize";
-		            $trans_data['date_inserted']= date("Y-m-d H:i:s");
-		            $this->payment_model->insert("payments",$trans_data);
-		            $this->session->set_flashdata("signup_succ","User Profile has been created sucessfully.",TRUE);
-		            $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-					redirect("login/signup");
-		        }
-		        else
-		        {
-		            $this->session->set_flashdata("signup_fail","Something went wrong. Please try again later.",TRUE);
-		         	$this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
-					redirect("login/signup");
-		        }
-	        }	
-	        else
-	        {
-	        	$this->layout->view('payment','frontend');
-	        }
-     	}
+                $up_data['customerid'] = $res['customer_id'];
+                $up_data['profileid'] = $res['profileid'];
+                $up_data['payment_pro_id'] = $res['paymentprofileid'];
+                $up_data['ship_pro_id'] = $res['shippingprofileid'];
+                $this->payment_model->insert("client_subscription",$up_data);
+                //Create Auth Transaction Table Fields
+                $trans_data['userid']= $userid;
+                $trans_data['description']= $ins['description'];
+                $trans_data['amount']=  $ins['amount'];
+                $trans_data['trans_id']= $c['transid'];
+                $trans_data['status']= $c['trans_status'];
+                $trans_data['payment_mode']= "Authorize";
+                $trans_data['date_inserted']= date("Y-m-d H:i:s");
+                $this->payment_model->insert("payments",$trans_data);
+                $this->session->set_flashdata("signup_succ","User Profile has been created sucessfully.",TRUE);
+                $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
+          redirect("login/signup");
+            }
+            else
+            {
+                $this->session->set_flashdata("signup_fail","Something went wrong. Please try again later.",TRUE);
+              $this->data['form_data'] = array("name" => "", "email" => "", "password" => "", "con_password" => "");        
+          redirect("login/signup");
+            }
+          } 
+          else
+          {
+            $this->layout->view('payment','frontend');
+          }
+      }
     }
 
 
@@ -521,12 +522,12 @@ class Login extends App_Controller {
         $this->authorizecimlib->set_data('customerProfileId', $this->data['profileid']);
         $this->authorizecimlib->set_data('customerPaymentProfileId', $this->data['paymentprofileid']);
         $this->authorizecimlib->set_data('customerShippingAddressId', $this->data['shippingprofileid']);
-        return $this->data;    	
+        return $this->data;     
     }
     
 
 
-	function name_unique_check($name,$edit_id)
+  function name_unique_check($name,$edit_id)
      {
         
         $get_data = $this->user_model->check_exists("users",array("name" => $name));
@@ -572,7 +573,6 @@ class Login extends App_Controller {
             }
         }
     } 
-  
    public function coupon_apply()
    {
     $code = $this->input->post('code');
@@ -587,7 +587,10 @@ class Login extends App_Controller {
       //$this->login_model->delete("coupon_applied",array("id"=>$id));
    }
    
-	
+  
+  
+   
+   
+  
 }
 ?>
-
