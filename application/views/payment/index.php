@@ -21,7 +21,7 @@
 								<input type="text" class="coupon_text form-control form-input">
 								<div class="coupon_div">
 									<?php
-									//print_r($_SESSION['coupon_details']['code']);
+									
 									if( (isset($_SESSION['signup_data']['promo_code'])) && ($_SESSION['signup_data']['promo_code']!='') || 
 										(isset($_SESSION['coupon_details']['code'])) && ($_SESSION['coupon_details']['code']) )
 									{

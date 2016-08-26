@@ -562,6 +562,7 @@ function coupon_apply($code,$plan)
         }
         else if($chk['discount_type'] =="2")
         {
+          $value = $chk['value'];
           $value = (($amt) / 100) * $value;
           $ans = $amt - ((($amt) / 100) * $value);
           $st="2";
@@ -571,8 +572,8 @@ function coupon_apply($code,$plan)
         $ins_data['coupon_id'] = $coupon_id;
         $ins_data['plan_id'] = $plan;
         $ins_data['org_amount'] = $amt;
-        $ins_data['discount_amount'] = $value;
-        $ins_data['total'] = $ans;
+        $ins_data['discount_amount'] = number_format($value,2);
+        $ins_data['total'] = number_format($ans,2);
         $CI->session->set_userdata("coupon_details",$ins_data);
         //$this->data['coupon'] = array("code"=>$code,"cid"=>$cid,"ans"=>$ans);
         echo "<span class='coupon_succ'><strong>$code - $$value

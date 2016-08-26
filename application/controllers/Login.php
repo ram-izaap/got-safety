@@ -156,6 +156,10 @@ class Login extends App_Controller {
                   $plan_details = $this->user_model->get_plans("plan",array("id" => $form['plan_type']));
                   $this->session->set_userdata("plan_details",$plan_details);
                   $this->session->set_userdata("signup_data",$form);
+                  if($form['promo_code']!='')
+                  {
+                    coupon_apply($form['promo_code'],$form['plan_type']);
+                  }
                   redirect("payment");
                 }
                 else
