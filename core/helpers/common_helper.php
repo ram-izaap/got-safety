@@ -564,7 +564,7 @@ function coupon_apply($code,$plan)
         {
           $value = $chk['value'];
           $value = (($amt) / 100) * $value;
-          $ans = $amt - ((($amt) / 100) * $value);
+          $ans = $amt - $value;
           $st="2";
         }
         $ins_data['user_id'] = session_id();
